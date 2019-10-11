@@ -1,8 +1,0 @@
-Lista tabelle: 
-Annunci {id_casa, titolo, descrizione, img_anteprima, indirizzo,citta, CAP, proprietario, disponibilita, max_ospiti, approvazione, prezzo_base, prezzo_persona}
-Utenti {id_utente, nome, cognome,user_name, mail, password, data_nascita, livello_utenza, nazionalita, img_profilo, telefono}
-Commento{id_commento, data_commento, prenotazione, titolo, commento, like, dislike, annuncio}
-Preferito{id_preferito, annuncio, utente, data}
-Segnalazione{id_segnalazione, segnalatore, annuncio, motivazione, titolo, data}
-Foto{id_foto, path, descrizione, annuncio}
-Prenotazione{id_prenotazione, prenotante, annuncio, data_inizio, data_fine, num_ospiti}
