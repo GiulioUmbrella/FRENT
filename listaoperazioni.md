@@ -1,32 +1,33 @@
-**AMMINISTRATORE**
+
+  > ## **Operazioni per _l'amministratore_**
+  [ ] 1. Rimozione utente (thanos mode)
+  [ ] 2. Rimozione case
+  [ ] 3. Rimozione commenti
+  [ ] 4. Approvazione annunci
+  [ ] 5. Gestione segnalazioni
+
+ 
 
 
-**AFFITTURARIO**
-1. *Ricerca annuncio*
-Un utente cerca una casa da affittare. Per farlo deve impostare necessariamente
-a. Un luogo geografico
-b. Una data di inizio 
-c. Una data di fine
 
-2. *Inserimento nuova prenotazione*
-Dopo aver fatto la ricerca l'utente puo' effettuare la prenotazione. Questo genera una indisponibilità dell'annuncio per il periodo indicato
-
-3. *Cancellamento prenotazione*
-L'utente cancella una prenotazione che ha effettuato.
-
-4. *Modifica di una prenotazione*
-L'utente modifica la prenotazione
-
-**PROPRIETARIO**
-
-1. *Inserimento annuncio*
-Un proprietario inserisce un nuovo annuncio per una casa
-
-2. *Modifica annuncio*
-Il proprietario modifica l'annuncio
-
-3. *Indisponibilità annuncio*
-Viene dichiarato un periodo di indisponibilità della casa
-
-4. *Cancellazione annuncio*
-Un annuncio viene rimosso
+> ## **Operazioni per l'utente _non registrato_**
+ [ ]  1. Ricerca e visualizzazione di annunci, con possibilità di inserire filtri su data inizio e di fine, sul numero di ospiti, sulla città, prezzo massimo e minimo (già calcolato come prezzo = prezzo_base + num_persone * prezzo_persona),
+ [ ]  2. Visualizzazione di un annuncio e foto correlate,
+ [ ]  3. Visualizzazione dei commenti di un annuncio.
+> 
+> ## **Operazioni per l'utente _registrato_ che affitta**
+ [ ]  1. Ricerca e visualizzazione di annunci, con possibilità di inserire filtri su data inizio e di fine, sul numero di ospiti, sulla città, prezzo massimo e minimo (già calcolato come prezzo = prezzo_base + num_persone * prezzo_persona) (N.B.: UGUALE A NUMERO 1 SOPRA),
+ [ ]  2. Creazione di una prenotazione (N.B.: UGUALE A NUMERO 2 SOPRA),
+ [ ]  3. Visualizzazione di un annuncio e foto correlate (N.B.: UGUALE A NUMERO 3 SOPRA),
+ [ ]  4. Visualizzazione dei commenti di un annuncio,
+ [ ]  5. Invio di una segnalazione (in totale, dovuto alla struttura del database),
+ [ ]  6. Pubblicazione di un commento (in totale, dovuto alla struttura del database),
+ [ ]  7. Visualizzazione delle prenotazioni effettuate,
+ [ ]  8. Aggiunta di un annuncio ai preferiti.
+> 
+> ## **Operazioni per l'utente _registrato_ locatario**
+ [ ]  1. Creazione di un annuncio (foto annesse),
+ [ ]  2. Visualizzazione delle prenotazioni ricevute ai propri annunci (per ogni annuncio, visione singola, o per tutti gli annunci, visione complessiva) in corso e passate,
+ [ ]  3. Visualizzazione di un annuncio (proprio) e foto correlate (N.B.: UGUALE A NUMERO 3 SOPRA),
+ [ ]  4. Visualizzazione dei commenti di un annuncio  (N.B.: UGUALE A NUMERO 4 SOPRA),
+ [ ]  5. Generazione di un periodo di indisponibilità di un (proprio) annuncio (N.B.: IN PARTE SIMILE A PUNTO 2 SOPRA).
