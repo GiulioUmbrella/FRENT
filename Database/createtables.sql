@@ -49,11 +49,12 @@ create table preferiti (
 );
  
 create table commenti (
-    id_prenotazione int primary  key auto_increment,
+    prenotazione int primary  key auto_increment,
     data_pubblicazione timestamp DEFAULT CURRENT_TIMESTAMP ,
     titolo varchar(64) not null,
     commento varchar (512) not null,
-    votazione enum('1','2','3','4','5')
+    votazione enum('1','2','3','4','5'),
+    foreign key(prenotazione) references prenotazioni(id_prenotazione)
 );
  
 create table indisponibilita (
