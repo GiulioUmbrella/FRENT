@@ -4,12 +4,54 @@ Termini utilizzati nella documentazione, nei commenti, nelle issue di questa rep
 
 ## Amministratore
 Figura interna all'organizzazione del sito con compiti di gestione degli _annunci_, moderazione dei _commenti_, gestione degli _utenti_. Non è considerato un _utente_ (dal punto di vista della struttura del database è un'entità distinta).
+1. Puo' rimuovere le prenotazioni 
+2. Puo' rimuovere gli annunci. 
+3. Puo' rimuovre le indisponibilita'
+4. Un amministratore puo' rimuovere i commenti
+5. Un amministratore puo' rimuovere un utente
+
+Politiche
+Per rimuovere un annuncio non ci devo essere indisponibilita'
+Per rimuovere un utente non ci devo essere annunci a lui collegati
+
 
 ## Utente
-Utilizzatore del sito. Può far parte di due diverse categorie: "proprietario" e "affittuario". Un _utente_ "proprietario" possiede almeno un _annuncio_. Un _utente_ "affittuario" effettua _prenotazioni_ in uno o più _annunci_ in periodi limitati di tempo. Vi è una sola registrazione (e quindi un'unica utenza) per entrambi i ruoli.
+Utilizzatore del sito. Non si fa distinzione fra proprietari di case e non. Vi è una sola registrazione (e quindi un'unica utenza) per entrambi i ruoli. Le pagine per la ricerca di una casa da affittare
+sono tenute separate.  
+1. Le operazioni di prenotazione e indisponibilita' hanno un
+orizzonte temporale limitato( x giorni a partire dalla data corrente) 
+2. Un utente puo' annullare la sua prenotazione quando vuole
+(per semplicita' non ci sono penali)
+3. Un utente puo' generare una indisponibilita' ma solo se nel
+periodo scelto non ci sono altre indisponibilita' che si accavallano
+o altre prenotazioni.
+4. Un utente puo' aggiungere un nuovo annuncio. Il controllo
+viene delegato all'amministratore. 
+
+Semplificazioni
+1. Prenotazioni: non simuliamo pagamenti/penali
+2. Controllo indirizzi: non controlliamo indirizzi immessi dagli utent
+3. Consideriamo solo case in italia (per via della struttura del form per inserire un annuncio)
+4. Un utente puo' togliere/inserire il suo annuncio per rimuovere 
+commenti negativi. Il controllo di queste prassi e' delegato all'amministratore. 
+
+Politiche
+Un utente puo' cancellarsi. Per farlo deve rimuovere tutti le sue 
+prenotazioni e i suoi annunci. Se e' presente una prenotazione 
+deve contattare un amministratore.
 
 ## Annuncio
-Un _annuncio_ riguarda la disponbilità di un singolo appartamento o casa e ne contiene tutte le caratteristiche (indirizzo, numero ospiti, ecc.). Ogni _annuncio_ deve avere un solo proprietario (_utente_). L'_annuncio_ non ha una data di scadenza. Se un proprietario (_utente_) non vuole rendere disponibile in uno o più determinati periodi un _annuncio_ di sua proprietà può creare un'_indisponibilità_.
+Un _annuncio_ riguarda la disponbilità di un singolo appartamento o casa e ne contiene tutte le caratteristiche (indirizzo, numero ospiti, ecc.). 
+1. Ogni _annuncio_ deve avere un solo proprietario (_utente_).
+2. L'_annuncio_ non ha una data di scadenza. 
+
+
+Politiche
+Non si possono rimuovere annunci che hanno prenotazioni.
+Non si possono modificare i proprietari di una casa.
+Se si rimuovere un annuncio tutte le informazioni in Commenti, Galleria, Indisponibilita' vengono perse. Nella lista 
+dei preferiti compare un messaggio che il link non e' presente.
+
 
 ## Prenotazione
 Per affittare un appartamento o casa relativo ad un _annuncio_ in un periodo limitato di tempo un _utente_ deve creare una _prenotazione_, a cui sarà collegato un periodo di _indisponibiltà_ (dell'_annuncio_ scelto).
@@ -21,10 +63,12 @@ Un periodo di _indisponibilità_ riguarda un unico _annuncio_ e un unico periodo
 
 ## Commento
 Un _utente_ può lasciare al massimo un _commento_ sull'_annuncio_, a partire dal giorno successivo all'ultimo giorno del suo soggiorno (periodo di _indisponibilità_ relativo alla _prenotazione_ effettuata dall'_utente_).
+Dobbiamo decidere se permettere la modifica dei commenti.
+
 
 ## Segnalazione
-~~Gli utenti possono fare segnalazioni per eventuali problemi.~~
-Gli _utenti_ possono inoltrare delle _segnalazioni_ all'_amministratore_ del sito tramite l'apertura del software di posta elettronica installato nel proprio dispositivo (tramite la pressione di un pulsante).
+Relazione rimossa, inseriamoun meccanismo per comunicare con 
+l'amministratore.
 
 ## Preferito
 Gli _utenti_ affittuari possono decidere di segnare un annuncio come preferito per salvarlo in una lista collegata allo stesso, facilmente raggiungibile grazie all'interfaccia del sito.
