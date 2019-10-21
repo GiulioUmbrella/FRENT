@@ -14,7 +14,6 @@ create  table utenti (
     password varchar (48) not null ,
     data_nascita date not null ,
     img_profilo varchar(48) default “user_image.png”,
--- aggiornarlo quando avremo accesso ai server
     telefono varchar(18) not null
 );
  
@@ -22,7 +21,7 @@ create  table  annunci (
     id_annuncio int primary key auto_increment,
     titolo varchar(32) not null ,
     descrizione varchar(512) not null ,
-    img_anteprima varchar(48) default "house_image.png", -- aggiornarlo quando avremo accesso al server
+    img_anteprima varchar(48) default "house_image.png", 
     indirizzo varchar (128) not null,
     citta varchar(128) not null,
     proprietario int foreign key not null,
@@ -40,13 +39,6 @@ create  table foto_annunci (
     foreign key (annuncio) references annunci(id_annuncio)
 );
  
-create table preferiti (
-    id_preferito int primary key auto_increment,
-    annuncio int not null ,
-    utente int not null,
-    foreign key(annuncio) references annunci(id_annuncio),
-    foreign key(utente) references utenti(id_utente)
-);
  
 create table commenti (
     prenotazione int primary  key auto_increment,
@@ -61,14 +53,15 @@ create table indisponibilita (
     id_indisponibilita int primary  key auto_increment,
     annuncio int not null,
     data_inizio date not null,
-    data_fine date not null
+    data_fine date not null,
+	prenotazione int, 
+	foreign key (annuncio) references annuncio(id_annuncio)
+	foreign key (prenotazione) references prenotazioni(id_prenotazione)
 );
  
 create table prenotazioni (
     id_prenotazione int primary key auto_increment,
     prenotante int not null,
-    periodo int not null ,
     num_ospiti int default 1,
     foreign key (prenotante) references utenti(id_utente),
-    foreign key (periodo) references indisponibilita(id_indisponibilita)
 );
