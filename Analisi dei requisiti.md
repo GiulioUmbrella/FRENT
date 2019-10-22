@@ -1,5 +1,4 @@
 # Analisi Requisiti
-<<<<<<< Updated upstream
 
 ## Glossario
 **CASA**: unità immobiliare che viene affittata. SINONIMI: appartamento.
@@ -64,79 +63,10 @@ Eredita le operazioni di utente generico. Segue la divisione logica imposta prim
 
 #### Annuncio
 Un annuncio riguarda una casa e ne contiene tutte le caratteristiche (indirizzo, numero ospiti, ecc.).
-=======
-## Glossario
-Termini utilizzati nella documentazione, nei commenti, nelle issue di questa progetto.
-- CASA: unità immobiliare che viene affittata. _Sinonimo_: appartamento.
-- UTENTE: utilizzatore del sito. Prima distinzione fra utente generico e utente loggato. Non si fa distinzione fra proprietari di case e non. Per esigenze di comprensibilità definiamo due figure, proprietario e affittuario:
-    - il proprietario (host): un proprietario ha postato almeno un annuncio,
-    - l’affittuario (guest): tutti gli utenti registrati sono affittuari.
-Vi è un solo processo di registrazione (e quindi un'unica utenza) per entrambi i ruoli.
-- ANNUNCIO: un annuncio riguarda la disponibilità di un singolo appartamento o casa e ne contiene tutte le caratteristiche (indirizzo, numero ospiti, ecc.). Un annuncio riguarda una e una sola casa. Un host è proprietario di almeno un annuncio.
-- AMMINISTRATORE: personale che gestisce il sito. Funzioni da definire.
-- INDISPONIBILITÀ: un periodo di indisponibilità riguarda un unico annuncio e un unico periodo temporale, con una data di inizio e una data di fine (in cui data di inizio < data di fine). In un tale periodo l'annuncio non può avere più periodi di indisponibilità sovrapposti.
-## Descrizione entità coinvolte
-**N.B.**: Per **Politiche** si intendono i vincoli di integrità referenziale.
-### Amministratore
-Figura interna all'organizzazione del sito con compiti di gestione degli annunci, moderazione dei commenti, gestione degli utenti. Non è considerato un utente (dal punto di vista della struttura del database è un'entità distinta).
-
-**Operazioni**
-1. Approva gli annunci pubblicati dagli host.
-
-**Politiche**
-1. Per rimuovere un annuncio non ci devono essere indisponibilità correnti o future.
-2. Per rimuovere un utente non ci devo essere annunci a lui collegati.
-
-### Utente
-#### Utente generico
-
-**Operazioni**
-1. Ricerca e visualizzazione di annunci. 
-2. Può registrarsi al sito.
-
-#### Utente loggato
-Eredita le operazioni che può compiere l’utente generico. Segue la divisione logica imposta nel [Glossario](##Glossario).
-
-**Operazioni (guest/host)**
-1. Eliminare il proprio account
-
-**Operazioni (guest)**
-1. Effettuare una prenotazione di un annuncio.
-2. Cancellare una prenotazione di un annuncio.
-3. Commentare gli annunci di prenotazioni passate.
-4. Visualizzare le prenotazioni proprie (passate, correnti e future). 
-5. Modificare i propri commenti.
-6. Cancellare i propri commenti.
-
-**Politiche (guest)**
-
-Un guest può lasciare la piattaforma (ovvero richiedere la rimozione del proprio account). Vengono attuate le politiche che seguono.
-1. Rimane lo storico delle prenotazioni effettuate passate (si perderà il riferimento all'utente).
-2. Rimane lo storico dei commenti agli annunci pubblicati.
-3. Vengono cancellate le prenotazioni future.
-4. In presenza di prenotazioni correnti, la rimozione del proprio profilo viene negata.
-
-**Operazioni (host)**
-1. Creare un annuncio (con aggiunta delle foto che faranno parte della galleria dell'annuncio).
-2. Modificare un annuncio (con modifiche alle foto collegate).
-3. Creare un indisponibilità relativa ad un annuncio generato dall’host stesso.
-4. Eliminare un indisponibilità.
-5. Bloccare un annuncio.
-6. Visualizzare le prenotazioni relative ai miei annunci.
-
-**Politiche (host)**
-Un host può lasciare la piattaforma (ovvero richiedere la rimozione del proprio account). Vengono attuate le politiche che seguono.
-1. In presenza di prenotazioni correnti e/o future relative ai suoi annunci, la rimozione del proprio profilo viene negata.
-2. Se non ci sono prenotazioni future gli annunci relativi al quel proprietario e tutto ciò che vi è collegato viene rimosso.
-
-### Annuncio
-Un annuncio riguarda una casa e ne contiene tutte le caratteristiche (indirizzo, numero ospiti, ecc.). 
->>>>>>> Stashed changes
 Ogni annuncio deve avere un host.
 
 Un annuncio può essere eliminato se e solo se non ha prenotazioni future collegate. Se un annuncio viene eliminato  tutte le informazioni in Prenotazioni passate, Galleria e Indisponibilità vengono eliminate. Nella lista dei preferiti compare un messaggio che il link non e' presente.
 
-<<<<<<< Updated upstream
 **Eliminazione**
 Se un annuncio viene cancellato si scantena un trigger che porta a due possibili esiti:
 1. Se non ci sono prenotazioni future collegate =>
@@ -152,37 +82,10 @@ Controllo indirizzi: non controlliamo indirizzi immessi dagli utenti
 Consideriamo solo case in italia (per via della struttura del form per inserire un annuncio)
 
 #### Indisponibilità
-=======
-Politiche di reazione (vincoli di integrità referenziale)
-Se un annuncio viene cancellato si scantena un trigger che porta a due possibili esiti:
-Se non ci sono prenotazioni future collegate =>
-Annuncio eliminabile
-Eliminazione delle foto collegate
-Eliminazione delle indisponibilità collegate
-I preferiti rimangono ma non sono più accessibili (l’accessibilità di un preferito è visto graficamente nel sito)
-Eliminazione delle prenotazioni collegate (non si può più calcolare la spesa, per cui non ha senso tenerlo)
-Se ci sono prenotazioni future collegate => L’annuncio non è eliminabile
-
-
-
-
-
-
-
-
-annunci.proprietario ON DELETE set null ON UPDATE cascade (vincolato dalla assenza di prenotazioni relative ai propri annunci (esecuzione dopo trigger))
-
-Semplificazioni
-Controllo indirizzi: non controlliamo indirizzi immessi dagli utenti
-Consideriamo solo case in italia (per via della struttura del form per inserire un annuncio)
-
-Indisponibilità
->>>>>>> Stashed changes
 Un periodo di indisponibilità riguarda un unico annuncio e un unico periodo di tempo, con una data di inizio e una data di fine (in cui data di inizio < data di fine). In un tale periodo l'annuncio non può avere più periodi di indisponibilità sovrapposti. Ad un periodo di indisponibilità valido può corrispondere al massimo una prenotazione, perchè:
 - se è relativo ad una prenotazione, in quel periodo la casa è occupata da un utente del sito.
 - se non è relativo ad una prenotazione, in quel periodo il proprietario (utente) dell'annuncio ha dichiarato che la casa o appartamento non è disponibile per prenotazioni.
 
-<<<<<<< Updated upstream
 **Eliminazione**
   - Eliminazione di un annuncio di cui sopra.
   - Eliminazione della prenotazione relativa ad un record di indisponibilità: lo si elimina.
@@ -217,35 +120,3 @@ Foto relativa ad un annuncio, presente nella galleria collegata a quest'ultimo. 
 **Eliminazione**
   - Dal proprietario di un annuncio
   - Quando un annuncio viene cancellato dall’host;
-=======
-Ci sono tre modi per eliminare un indisponibilità:
-Eliminazione di un annuncio di cui sopra. 
-Eliminazione della prenotazione relativa ad un record di indisponibilità: lo si elimina.
-Eliminazione di un record di indisponibilità inserito dall’host: lo si elimina. 
-L’host può generare una indisponibilità' ma solo se nel periodo scelto non ci sono altre indisponibilità' che si accavallano (causate da prenotazioni dei guest o da altre indisponibilità impostate dall’host)
-
-Prenotazione
-Per affittare un appartamento o casa relativo ad un annuncio in un periodo limitato di tempo un utente deve creare una prenotazione, a cui sarà collegato un periodo di indisponibilità (dell' annuncio scelto).
-
-1. Le operazioni di prenotazione e indisponibilità hanno un orizzonte temporale limitato( x giorni a partire dalla data corrente) 
-
-Semplificazioni
-1. Prenotazioni: non simuliamo pagamenti/penali
-
-Una prenotazione può sempre essere cancellata dal guest che l’ha creata. 
-
-Commento
-Un utente può lasciare al massimo un commento sull'annuncio. a partire dal giorno successivo all'ultimo giorno del suo soggiorno (periodo di indisponibilità relativo alla prenotazione effettuata dall' utente). I guest possono modificare i propri commenti
-
-Un commento può essere cancellato per due motivi
-Cancellazione da guest direttamente
-Cancellato se viene rimosso l’annuncio.
-
-Preferiti: funzionalità non verrà implementata perché se un utente vuole salvare un annuncio in preferito, si salva il link dell’annuncio come un link preferito. 
-
-Foto
-Foto relativa ad un annuncio, presente nella galleria collegata a quest'ultimo. La foto di anteprima dell'annuncio non rientra in questa categoria, in quanto parte dell'entità annuncio.
-Una foto può essere cancellata:
-Dal proprietario di un annuncio
-Quando un annuncio viene cancellato dall’host;
->>>>>>> Stashed changes
