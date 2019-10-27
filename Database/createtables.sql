@@ -29,6 +29,7 @@ create table annunci (
 	max_ospiti int(2) default 1, -- limite da 0 a 99 (almeno da db)
 	prezzo_notte float not null,
 	foreign key (proprietario) references utenti(id_utente)
+	on delete cascade
 );
  
 create table foto_annunci (
@@ -37,6 +38,7 @@ create table foto_annunci (
 	descrizione varchar(128) not null,
 	annuncio int not null,
 	foreign key (annuncio) references annunci(id_annuncio)
+	on delete cascade
 );
 
 create table prenotazioni (
@@ -44,6 +46,7 @@ create table prenotazioni (
 	prenotante int not null,
 	num_ospiti int(2) default 1, -- limite da 0 a 99 (almeno da db)
 	foreign key (prenotante) references utenti(id_utente)
+	on delete cascade
 );
 
 create table commenti (
@@ -53,6 +56,7 @@ create table commenti (
 	commento varchar(512) not null,
 	votazione tinyint(1), -- verificare via trigger che sia 0 < voto < 6
 	foreign key(prenotazione) references prenotazioni(id_prenotazione)
+	on delete cascade
 );
  
 create table indisponibilita (
@@ -62,5 +66,7 @@ create table indisponibilita (
 	data_fine date not null,
 	prenotazione int not null,
 	foreign key (annuncio) references annunci(id_annuncio),
+	on delete cascade
 	foreign key (prenotazione) references prenotazioni(id_prenotazione)
+	on delete cascade
 );
