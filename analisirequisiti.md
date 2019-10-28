@@ -21,14 +21,10 @@ Termini utilizzati nella documentazione, nei commenti, nel codice sorgente e nel
 **N.B.**: Per **Politiche** si intendono i vincoli di integrità referenziale, vincoli intrarelazionali e di dominio.
 ### Amministratore
 **Operazioni**
-1. Approva gli annunci pubblicati dagli host.
-2. Rimuove i commenti agli annunci considerati inopportuni.
-3. Rimuove gli annunci pubblicati dagli utenti, rispettando le politiche indicate successivamente.
-4. Rimuove gli utenti, rispettando le politiche indicate successivamente.
+1. Visualizza gli annunci pubblicati e modificati dagli host.
+2. Approva gli annunci pubblicati.
+3. Blocca gli annunci.
 
-**Politiche**
-1. Per rimuovere un annuncio non ci devono essere indisponibilità correnti o future.
-2. Per rimuovere un utente non ci devo essere annunci a lui collegati.
 
 ### Utente
 #### Utente generico
@@ -45,7 +41,7 @@ Eredita le operazioni che può compiere l’utente generico. Segue la divisione 
 
 **Operazioni (guest)**
 1. Effettuare una prenotazione ad un annuncio.
-2. Cancellare una prenotazione ad un annuncio, rispettando le politiche dell'entità Annuncio.
+2. Cancellare una prenotazione ad un annuncio.
 3. Commentare gli annunci di prenotazioni passate.
 4. Visualizzare le proprie prenotazioni (passate, correnti e future). 
 5. Modificare i propri commenti.
@@ -70,7 +66,7 @@ Un guest può lasciare la piattaforma (ovvero richiedere la rimozione del propri
 **Politiche (host)**
 Un host può lasciare la piattaforma (ovvero richiedere la rimozione del proprio account). Vengono attuate le politiche che seguono.
 1. In presenza di prenotazioni correnti e/o future relative ai suoi annunci, la rimozione del proprio profilo viene negata.
-2. Se non ci sono prenotazioni future gli annunci relativi al quel proprietario e tutto ciò che vi è collegato viene rimosso.
+2. Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario, le foto e i commenti vengono rimosse. Rimangono tutte le indisponibilità (campo annuncio settato null) e le prenotazioni per lasciare ai guest uno storico delle prenotazioni.
 
 ### Annuncio
 Ogni annuncio deve avere un host. Un annuncio può essere prenotabile solo se si trova nello stato VA, definito nelle politiche.
@@ -84,7 +80,8 @@ L'amministratore del portale non ha ancora visualizzato l'annuncio, quindi potr�
 - **NVA**: annuncio **N**on **V**isualizzato e **A**pprovato. Possibilità non contemplata.
 
 Un annuncio può essere eliminato se e solo se non ha prenotazioni correnti e future collegate. Vengono attuate le politiche che seguono.
-1. Tutte le prenotazioni, foto e indisponibilità vengono rimosse.
+1. Tutte le foto vengono rimosse.
+2. Tutti i commenti vengono eliminati.
 
 **Semplificazioni**
 1. Non viene controllata la correttezza (ovvero l'esistenza) degli indirizzi immessi dagli utenti, ma solo il formato (esempio: viene verificato che sia un testo e non un indirizzo email).
@@ -96,13 +93,12 @@ Ad un periodo di indisponibilità valido può corrispondere al massimo una preno
 - se non è relativo ad una prenotazione, in quel periodo l'host dell'annuncio ha dichiarato che la casa o appartamento non è disponibile per prenotazioni.
 
 **Politiche**
-Ci sono tre modi per eliminare un'indisponibilità:
-1. Eliminazione di un annuncio di cui sopra. 
-2. Eliminazione della prenotazione relativa ad un record di indisponibilità: eliminata di conseguenza.
-3. Eliminazione di un record di indisponibilità inserito dall’host: lo si elimina.
+Ci sono due modi per eliminare un'indisponibilità:
+1. Eliminazione della prenotazione relativa ad un record di indisponibilità: eliminata di conseguenza.
+2. Eliminazione di un record di indisponibilità inserito dall’host: lo si elimina.
 
 Creazione di periodi di indisponibilità:
-4. L’host può generare un'indisponibilità (temporanea) solo se nel periodo scelto non ci sono altre indisponibilità che si accavallano (causate da prenotazioni dei guest o da altre indisponibilità impostate dall’host).
+1. L’host può generare un'indisponibilità (temporanea) solo se nel periodo scelto non ci sono altre indisponibilità che si accavallano (causate da prenotazioni dei guest o da altre indisponibilità impostate dall’host).
 
 ### Prenotazione
 Per affittare una casa o un appartamento relativi ad un annuncio in un periodo limitato di tempo, un utente deve creare una prenotazione, a cui sarà collegato un periodo di indisponibilità (dell'annuncio scelto).
@@ -113,7 +109,7 @@ Per affittare una casa o un appartamento relativi ad un annuncio in un periodo l
 **Semplificazioni**
 1. Non vengono simulati pagamenti per le prenotazioni e nemmeno il pagamento delle penali per le cancellazioni.
 
-Una prenotazione può sempre essere cancellata dal guest che l’ha creata, fino al giorno prima del suo soggiorno.
+Una prenotazione può sempre essere cancellata dal guest che l’ha creata.
 
 ### Commento
 
