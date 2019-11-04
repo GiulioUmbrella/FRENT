@@ -1,5 +1,5 @@
 # Lista tabelle
-- **annunci** (**id_annuncio**, titolo, descrizione, img_anteprima, indirizzo, citta, _host_, stato_approvazione, max_ospiti, prezzo_notte)
+- **annunci** (**id_annuncio**, titolo, descrizione, img_anteprima, indirizzo, citta, _host_, stato_approvazione, bloccato, max_ospiti, prezzo_notte)
 - **utenti** (**id_utente**, nome, cognome, user_name, mail, password, data_nascita, img_profilo, telefono)
 - **commenti** (**_prenotazione_**, data_pubblicazione, titolo, commento, votazione)
 - **foto_annunci** (**id_foto**, file_path, descrizione, _annuncio_)

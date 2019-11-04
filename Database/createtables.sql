@@ -26,6 +26,7 @@ create table annunci (
 	citta varchar(128) not null,
 	host int not null,
 	stato_approvazione tinyint(1) not null default 0, -- 0 = NVNA / VA = 1 / VNA = 2 (per le sigle guardare analisirequisiti.md)
+	bloccato tinyint(1) not null default 0, -- 0 = non bloccato, 1 = bloccato
 	max_ospiti int(2) not null default 1, -- limite da 0 a 99 (almeno da db)
 	prezzo_notte float not null,
 	foreign key (host) references utenti(id_utente) on update cascade on delete cascade

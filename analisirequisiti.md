@@ -59,7 +59,7 @@ Un guest può lasciare la piattaforma (ovvero richiedere la rimozione del propri
 3. Creare un'occupazione relativo ad un annuncio di proprietà dell’host.
 4. Eliminare un'occupazione creato dall’host stesso.
 5. Visualizzare le prenotazioni (presenti, passate, future) relative ai propri annunci.
-6. ~~Bloccare un annuncio, corrispondente a una occupazione a tempo indeterminato, fino a quando viene sbloccato.~~
+6. Bloccare un annuncio, corrispondente a una occupazione a tempo indeterminato, fino a quando viene sbloccato.
 
 **Politiche (host)**
 Un host può lasciare la piattaforma (ovvero richiedere la rimozione del proprio account). Vengono attuate le politiche che seguono.
@@ -67,7 +67,7 @@ Un host può lasciare la piattaforma (ovvero richiedere la rimozione del proprio
 2. Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario, le foto e i commenti vengono rimosse. Rimangono tutte le occupazioni (perdendo il riferimento all'annuncio) per lasciare ai guest uno storico delle prenotazioni.
 
 ### Annuncio
-Ogni annuncio deve avere un host. Un annuncio può essere prenotabile solo se si trova nello stato di approvazione VA, definito nelle politiche che seguono.
+Ogni annuncio deve avere un host. Un annuncio può essere prenotabile se e solo se non e' bloccato e si trova nello stato di approvazione VA, definito nelle politiche che seguono.
 
 **Politiche**
 Un annuncio si può assumere diversi stati di approvazione:
