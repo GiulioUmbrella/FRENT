@@ -1,33 +1,27 @@
+## Funzioni e procedure (alto livello)
+- Login
+- Registrazione
+- Modifica dei dati personali dell'utente
+- Eliminazione della propria utenza
 
-  > ## **Operazioni per _l'amministratore_**
-   1. Rimozione utente (thanos mode)
-   2. Rimozione case
-   3. Rimozione commenti
-   4. Approvazione annunci
-   5. Gestione segnalazioni
+[-] Ricerca annunci con parametri
+- Ottenere i dettagli di un annuncio dato il suo ID
+- Ottenere le foto di un annuncio dato il suo ID
+- Ottenere i commenti di un annuncio dato il suo ID
 
- 
+- Effettuare la prenotazione di un annuncio sui parametri di ricerca
+- Eliminare una prenotazione dato il suo ID
+- Ottenere le prenotazioni effettuate da un guest
 
+- Pubblicare un commento dato l'ID di una prenotazione
+- Modificare un commento dato l'ID di una prenotazione
+- Eliminare un commento dato l'ID di una prenotazione
 
+- Ottenere gli annunci pubblicati da un host
+- Modificare un annuncio dato il suo ID
+- Eliminare un annuncio dato il suo ID
 
-> ## **Operazioni per l'utente _non registrato_**
-   1. Ricerca e visualizzazione di annunci, con possibilità di inserire filtri su data inizio e di fine, sul numero di ospiti, sulla città, prezzo massimo e minimo (già calcolato come prezzo = prezzo_base + num_persone * prezzo_persona),
-   2. Visualizzazione di un annuncio e foto correlate,
-   3. Visualizzazione dei commenti di un annuncio.
-> 
-> ## **Operazioni per l'utente _registrato_ che affitta**
-   1. Ricerca e visualizzazione di annunci, con possibilità di inserire filtri su data inizio e di fine, sul numero di ospiti, sulla città, prezzo massimo e minimo (già calcolato come prezzo = prezzo_base + num_persone * prezzo_persona) (N.B.: UGUALE A NUMERO 1 SOPRA),
-   2. Creazione di una prenotazione (N.B.: UGUALE A NUMERO 2 SOPRA),
-   3. Visualizzazione di un annuncio e foto correlate (N.B.: UGUALE A NUMERO 3 SOPRA),
-   4. Visualizzazione dei commenti di un annuncio,
-   5. Invio di una segnalazione (in totale, dovuto alla struttura del database),
-   6. Pubblicazione di un commento (in totale, dovuto alla struttura del database),
-   7. Visualizzazione delle prenotazioni effettuate,
-   8. Aggiunta di un annuncio ai preferiti.
-> 
-> ## **Operazioni per l'utente _registrato_ locatario**
-   1. Creazione di un annuncio (foto annesse),
-   2. Visualizzazione delle prenotazioni ricevute ai propri annunci (per ogni annuncio, visione singola, o per tutti gli annunci, visione complessiva) in corso e passate,
-   3. Visualizzazione di un annuncio (proprio) e foto correlate (N.B.: UGUALE A NUMERO 3 SOPRA),
-   4. Visualizzazione dei commenti di un annuncio  (N.B.: UGUALE A NUMERO 4 SOPRA),
-   5. Generazione di un periodo di indisponibilità di un (proprio) annuncio (N.B.: IN PARTE SIMILE A PUNTO 2 SOPRA).
+- Ottenere le occupazioni di un annuncio dato un ID di un annuncio
+
+- Aggiunta di una foto (e dei dettagli) ad un annuncio dato l'ID di un annuncio
+- Rimozione di una foto ad un annuncio dato l'ID di un annuncio
