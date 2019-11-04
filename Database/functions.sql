@@ -67,7 +67,7 @@ DELIMITER ;
 
 -- Ottenere i commenti di un annuncio dato il suo ID
 DELIMITER |
-CREATE PROCEDURE foto_annuncio(id int)
+CREATE PROCEDURE commenti_annuncio(id int)
 BEGIN
  SELECT C.* 
  FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
