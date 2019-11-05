@@ -195,4 +195,22 @@ BEGIN
   RETURN LAST_INSERT_ID();
 END |
 DELIMITER ;
+
+
 -- Rimozione di una foto ad un annuncio dato l'ID di un annuncio
+/*Cosa ritorna:
+0 in caso di successo
+-1 in caso ci sia stato un errore nell'eliminare la foto
+*/
+DELIMITER |
+CREATE FUNCTION rimozione_foto(_id_foto INT) RETURNS INT
+BEGIN
+  DELETE FROM foto_annunci WHERE id_foto = _id_foto;
+
+  IF ROW_COUNT() = 0 THEN
+    RETURN -1;
+  ELSE
+   	RETURN 0;
+  END IF;
+END |
+DELIMITER ;
