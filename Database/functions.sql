@@ -156,6 +156,14 @@ DELIMITER ;
 -- Eliminare un annuncio dato il suo ID
 
 -- Ottenere le occupazioni di un annuncio dato un ID di un annuncio
+DELIMITER |
+CREATE PROCEDURE occupazioni_annuncio(_id_annuncio int)
+BEGIN
+  SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizo, data_fine
+  FROM occupazioni
+  WHERE annuncio = _id_annuncio;
+END |
+DELIMITER ;
 
 -- Aggiunta di una foto (e dei dettagli) ad un annuncio dato l'ID di un annuncio
 /*Cosa ritorna:
