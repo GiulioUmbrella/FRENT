@@ -81,10 +81,46 @@ DELIMITER ;
 
 -- Pubblicare un commento dato l'ID di una prenotazione
 -- Modificare un commento dato l'ID di una prenotazione
+
+DELIMITER |
+CREATE PROCEDURE modifica_commento(_id int, _titolo varchar(64),_commento varchar(512), _valutazione tinyint(1))
+BEGIN
+    update commenti
+    set commenti.titolo = _titolo, commenti.commento= _commento, commenti.votazione= _valutazione
+    where  commenti.prenotazione= _id;
+END |
+DELIMITER ;
 -- Eliminare un commento dato l'ID di una prenotazione
+--
+DELIMITER |
+CREATE PROCEDURE elimina_commento_con_id(_id int)
+BEGIN
+    delete from commenti where prenotazione = _id;
+END |
+DELIMITER ;
 
 -- Ottenere gli annunci pubblicati da un host
+
+DELIMITER |
+CREATE procedure list_annunci_host(_id_host int)
+BEGIN
+    select *
+    from annunci
+        where _id_host= annunci.host;
+END |
 -- Modificare un annuncio dato il suo ID
+DELIMITER |
+CREATE PROCEDURE modifica_annuncio(_id int, _titolo varchar(32), _descrizione varchar(512),_img_anteprima varchar(48),
+     _indirizzo varchar(128), _citta varchar(128),_max_ospiti tinyint(2),_prezzo_notte float)
+BEGIN
+    update annunci
+    set annunci.titolo = _titolo, annunci.descrizione= _descrizione , annunci.indirizzo=_indirizzo,
+        annunci.img_anteprima= _img_anteprima, annunci.citta= _citta, annunci.max_ospiti= _max_ospiti,
+        annunci.prezzo_notte =_prezzo_notte, stato_approvazione = 0
+    where  annunci.id_annuncio= _id;
+END |
+DELIMITER ;
+
 -- Eliminare un annuncio dato il suo ID
 
 -- Ottenere le occupazioni di un annuncio dato un ID di un annuncio
