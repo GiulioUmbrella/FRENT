@@ -80,6 +80,38 @@ DELIMITER ;
 -- Ottenere le prenotazioni effettuate da un guest
 
 -- Pubblicare un commento dato l'ID di una prenotazione
+-- PRE: _prenotazione è l'ID di una prenotazione (occupazione di un guest), gli altri parametri sono validi
+-- POST: ritornato 1 se il commento è stato pubblicato con successo, 0 altrimenti (se si è verificato un errore o se ne era già presente uno)
+DELIMITER |
+CREATE FUNCTION pubblica_commento(_prenotazione int, _titolo varchar(64), _commento varchar(512), _votazione tinyint(1)) RETURNS tinyint(1)
+BEGIN
+    DECLARE commento_pubblicato tinyint(1);
+
+    IF NOT EXISTS(
+        SELECT prenotazione
+        FROM commenti
+        WHERE prenotazione = _prenotazione
+    ) THEN
+        INSERT INTO commenti(prenotazione, titolo, commento, votazione) VALUES
+        (_prenotazione, _titolo, _commento, _votazione);
+
+        -- verifico che il commento sia stato inserito
+        IF EXISTS(
+            SELECT prenotazione
+            FROM commenti
+            WHERE prenotazione = _prenotazione
+        ) THEN
+            SET commento_pubblicato = 1;
+        ELSE
+            SET commento_pubblicato = 0;
+        END IF;
+    ELSE
+        SET commento_pubblicato = 0;
+    END IF;
+
+    RETURN commento_pubblicato;
+END |
+DELIMITER ;
 -- Modificare un commento dato l'ID di una prenotazione
 -- Eliminare un commento dato l'ID di una prenotazione
 
