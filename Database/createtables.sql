@@ -2,7 +2,7 @@ create table amministratori (
 	id_amministratore int primary key auto_increment,
 	user_name varchar(32) not null,
 	password varchar(255) not null,
-	mail varchar(48) not null,
+	mail varchar(255) not null,
 	unique (mail)
 );
  
@@ -11,7 +11,7 @@ create  table  utenti (
 	nome varchar(32) not null,
 	cognome varchar(32) not null,
 	user_name varchar(32) not null,
-	mail varchar(32) not null ,
+	mail varchar(255) not null ,
 	password varchar(48) not null,
 	data_nascita date not null,
 	img_profilo varchar(48) not null default "user_image.png", -- modificare quando si conosce meglio il path
