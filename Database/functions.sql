@@ -153,7 +153,33 @@ BEGIN
 END |
 DELIMITER ;
 
+
 -- Eliminare un annuncio dato il suo ID
+/*Cosa ritorna
+0: l'annuncio è stato eliminato e con esso le cose a lui collegate (vedi analisi dei requisiti)
+-1: l'annuncio non è eliminabile perchè ci sono prenotazioni in corso o future
+-2: l'annucio non è stato eliminato ma foto e commenti potrebbero esserlo stati
+*/
+DELIMITER |
+CREATE FUNCTION elimina_annuncio(_id_annuncio INT) RETURNS INT
+BEGIN
+  DECLARE curdate DATE;
+
+  SET curdate = CURDATE();
+  IF _id_annuncio IN (SELECT annuncio FROM occupazioni WHERE (data_inizio < curdate AND data_fine > curdate) OR data_inizio > curdate) THEN
+    RETURN -1;
+  ELSE
+    DELETE FROM foto_annunci WHERE annuncio = _id_annuncio;
+    DELETE FROM commenti WHERE prenotazione IN (SELECT id_occupazione FROM occupazioni WHERE annuncio = _id_annuncio);
+    DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
+    IF ROW_COUNT() = 0 THEN
+      RETURN -2;
+    ELSE
+     	RETURN 0;
+    END IF;
+  END IF;
+END |
+DELIMITER ;
 
 -- Ottenere le occupazioni di un annuncio dato un ID di un annuncio
 DELIMITER |
