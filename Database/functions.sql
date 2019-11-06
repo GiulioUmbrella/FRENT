@@ -59,7 +59,7 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE foto_annuncio(id int)
 BEGIN
- SELECT *
+ SELECT * 
  FROM foto_annunci
  WHERE annuncio = id;
 END |
@@ -143,7 +143,7 @@ END |
 -- Modificare un annuncio dato il suo ID
 DELIMITER |
 CREATE PROCEDURE modifica_annuncio(_id int, _titolo varchar(32), _descrizione varchar(512),_img_anteprima varchar(48),
-     _indirizzo varchar(128), _citta varchar(128),_max_ospiti tinyint(2),_prezzo_notte float)
+     _indirizzo varchar(128), _citta varchar(128),_max_ospiti tinyint(2), _prezzo_notte float)
 BEGIN
     update annunci
     set annunci.titolo = _titolo, annunci.descrizione= _descrizione , annunci.indirizzo=_indirizzo,
