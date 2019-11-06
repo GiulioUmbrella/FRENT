@@ -2,23 +2,23 @@ create table amministratori (
 	id_amministratore int primary key auto_increment,
 	user_name varchar(32) not null,
 	password varchar(255) not null,
-	mail varchar(255) not null,
+	mail varchar(128) not null,
 	unique (mail)
 );
- 
+
 create  table  utenti (
 	id_utente int primary key auto_increment,
 	nome varchar(32) not null,
 	cognome varchar(32) not null,
 	user_name varchar(32) not null,
-	mail varchar(255) not null ,
+	mail varchar(128) not null ,
 	password varchar(48) not null,
 	data_nascita date not null,
 	img_profilo varchar(48) not null default "user_image.png", -- modificare quando si conosce meglio il path
 	telefono varchar(18) not null,
 	unique (mail)
 );
- 
+
 create table annunci (
 	id_annuncio int primary key auto_increment,
 	titolo varchar(32) not null,
@@ -33,7 +33,7 @@ create table annunci (
 	prezzo_notte float not null,
 	foreign key (host) references utenti(id_utente) on update cascade on delete cascade
 );
- 
+
 create table foto_annunci (
 	id_foto int primary key auto_increment,
 	file_path varchar(128) not null,
