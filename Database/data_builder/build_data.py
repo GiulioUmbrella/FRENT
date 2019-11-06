@@ -44,7 +44,7 @@ def generate_users():
         csv_data.append([str(i+1), names[i], surnames[i], emails[i], usernames[i], passwords[i], date_di_nascita[i], default_image, telefoni[i]])
 
     user_header = ["id_utente", "nome", "cognome", "user_name", "mail", "password", "data_nascita", "img_profilo", "telefono"]
-    write_on_csv(user_header, csv_data)
+    write_on_csv(user_header, csv_data, "utenti.csv")
     #print(csv_data)
 
 def generate_annunci():
