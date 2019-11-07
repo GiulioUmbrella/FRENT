@@ -77,8 +77,18 @@ DELIMITER ;
 
 -- Effettuare la prenotazione di un annuncio sui parametri di ricerca
 -- Eliminare una prenotazione dato il suo ID
--- Ottenere le prenotazioni effettuate da un guest
 
+-- Ottenere le prenotazioni effettuate da un guest
+-- PRE: id_utente corrisponde ad un utenti.id_utente
+DELIMITER |
+CREATE PROCEDURE prenotazioni_effettuate_guest(id_utente int)
+BEGIN
+    SELECT *
+    FROM occupazioni
+    WHERE utente = id_utente
+    AND prenotazione_guest = 1;
+END |
+DELIMITER ;
 -- Pubblicare un commento dato l'ID di una prenotazione
 -- PRE: _prenotazione è l'ID di una prenotazione (occupazione di un guest), gli altri parametri sono validi
 -- POST: ritornato 1 se il commento è stato pubblicato con successo, 0 altrimenti (se si è verificato un errore o se ne era già presente uno)
