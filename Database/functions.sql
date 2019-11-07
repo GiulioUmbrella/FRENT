@@ -23,6 +23,29 @@ DELIMITER ;
 -- Login
 -- Registrazione
 -- Modifica dei dati personali dell'utente
+-- PRE: _password è una stringa risultato dell'applicazione di una funzione di hash sulla stringa corrispondente alla password dell'utente
+DELIMITER |
+CREATE FUNCTION modifica_dati_utente(_idutente int, _nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(255), _password varchar(48), _datanascita date, _imgprofilo varchar(48), telefono varchar(18)) RETURNS tinyint(1)
+BEGIN
+    UPDATE utenti
+    SET nome = _nome,
+    cognome = _cognome,
+    username = _username,
+    mail = _mail,
+    password = _password,
+    data_nascita = _datanascita,
+    img_profilo = _imgprofilo,
+    telefono = _telefono
+    WHERE id_utente = _idutente;
+
+    IF ROW_COUNT() = 1 THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    END IF;
+END |
+DELIMITER ;
+
 -- Eliminazione della propria utenza
 
 -- Ricerca annunci con parametri
@@ -37,11 +60,13 @@ AND A.max_ospiti >= _num_ospiti
 AND A.id_annuncio NOT IN (
     SELECT annuncio
     FROM occupazioni
-    WHERE   (di > data_inizio AND di < data_fine)
-            OR (df > data_inizio AND df < data_fine)
-            OR (di < data_inizio AND df > data_fine)
-            OR (di > data_inizio AND df < data_fine)
-    );
+    WHERE (
+        (di > data_inizio AND di < data_fine) OR
+        (df > data_inizio AND df < data_fine) OR
+        (di < data_inizio AND df > data_fine) OR
+        (di > data_inizio AND df < data_fine)
+    )
+);
 END |
 DELIMITER ;
 
@@ -89,6 +114,7 @@ BEGIN
     AND prenotazione_guest = 1;
 END |
 DELIMITER ;
+
 -- Pubblicare un commento dato l'ID di una prenotazione
 -- PRE: _prenotazione è l'ID di una prenotazione (occupazione di un guest), gli altri parametri sono validi
 -- POST: ritornato 1 se il commento è stato pubblicato con successo, 0 altrimenti (se si è verificato un errore o se ne era già presente uno)
@@ -150,6 +176,8 @@ BEGIN
     from annunci
         where _id_host= annunci.host;
 END |
+DELIMITER ;
+
 -- Modificare un annuncio dato il suo ID
 DELIMITER |
 CREATE PROCEDURE modifica_annuncio(_id int, _titolo varchar(32), _descrizione varchar(512),_img_anteprima varchar(48),
@@ -182,7 +210,7 @@ ID della foto aggiunta se tutto è andata ok (ID >= 1).
 -2 in caso di _file_path o _descrizione non soddisfino una lunghezza minima
 */
 DELIMITER |
-CREATE FUNCTION aggiungi_foto(id_annuncio int, _file_path varchar, _descrizione varchar) RETURNS TINYINT
+CREATE FUNCTION aggiungi_foto(id_annuncio int, _file_path varchar(128), _descrizione varchar(128)) RETURNS INT
 BEGIN
   DECLARE min_file_path_length INT;
   DECLARE min_descrizione_length INT;
@@ -201,7 +229,7 @@ BEGIN
     RETURN -2;
   END IF;
 
-  INSERT INTO foto_annunci (file_path, descrizione, annuncio) 	VALUES (_file_path, _descrizione, id_annuncio);
+  INSERT INTO foto_annunci (file_path, descrizione, annuncio) VALUES (_file_path, _descrizione, id_annuncio);
   RETURN LAST_INSERT_ID();
 END |
 DELIMITER ;
