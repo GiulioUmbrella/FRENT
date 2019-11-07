@@ -1,5 +1,10 @@
 from sys import exit
 import csv
+import random
+
+
+user_data = []
+annunci_data = []
 
 def write_on_csv(header, csv_data, file_path="data.csv"):
     with open(file_path, 'w') as csv_file:
@@ -39,16 +44,47 @@ def generate_users():
     date_di_nascita = ["1998-01-01" for _ in names]
     telefoni = ["+390000000000" for _ in names]
 
-    csv_data = []
     for i in range(len(names)):
-        csv_data.append([str(i+1), names[i], surnames[i], emails[i], usernames[i], passwords[i], date_di_nascita[i], default_image, telefoni[i]])
+        user_data.append([str(i+1), names[i], surnames[i], emails[i], usernames[i], passwords[i], date_di_nascita[i], default_image, telefoni[i]])
 
     user_header = ["id_utente", "nome", "cognome", "user_name", "mail", "password", "data_nascita", "img_profilo", "telefono"]
-    write_on_csv(user_header, csv_data, "utenti.csv")
+    write_on_csv(user_header, user_data, "utenti.csv")
     #print(csv_data)
 
 def generate_annunci():
-    pass
+    #numero_annunci = 10
+    titoli = ["Casa {}".format(n) for n in ["Loreto","Agrippa","Celeste","Aquila","Amore"]]
+    titoli += ["Appartamento {}". format(n) for n in ["Aran","Flann","Glaucia","Nollaig","Amore"]]
+
+    descrizioni = ["defualt descirptio" for _ in titoli]
+    img_anteprima = ["images/annunci/anteprima_{}".format(t) for t in titoli]
+    with open("vie.csv", 'r') as vie_file:
+        random.seed(42)
+        readCSV = csv.reader(vie_file, delimiter=',')
+        indirizzi = [str(readCSV[random.randrange(1, 2000)][2]) for _ in titoli]
+        citta = [str(readCSV[random.randrange(1, 2000)][1]) for _ in titoli]
+    hosts = [str(user_data[random.randrange(0, len(user_data)-1)][0]) for _ in titoli]
+    stato_approvazione = [str(random.randrange(0, 2)) for _ in titoli]
+    bloccato = [str(random.randrange(0, 1)) for _ in titoli]
+    max_ospiti = [str(random.randrange(1, 7)) for _ in titoli]
+    prezzo_notte = [sttr(random.randrange(25, 150)) for _ in titoli]
+
+    for i in range(len(titoli)):
+        annunci_data.append([
+            str(i+1),
+            titoli[i],
+            descrizioni[i],
+            img_anteprima[i],
+            indirizzi[i],
+            citta[i],
+            hosts[i],
+            stato_approvazione[i],
+            bloccato[i],
+            prezzo_notte[i],
+        ])
+
+    annunci_header = ["id_annuncio", "titolo", "descrizione", "img_anteprima", "indirizzo", "citta", "host", "stato_approvazione", "bloccato", "max_ospiti", "prezzo_notte"]
+    write_on_csv(annunci_header, annunci_data, "annunci.csv")
 
 
 def generate_occupazioni():
@@ -56,3 +92,4 @@ def generate_occupazioni():
 
 
 generate_users()
+generate_annunci()
