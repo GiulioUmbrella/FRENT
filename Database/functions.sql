@@ -169,8 +169,9 @@ BEGIN
   IF _id_annuncio IN (SELECT annuncio FROM occupazioni WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
     RETURN -1;
   ELSE
-    DELETE FROM foto_annunci WHERE annuncio = _id_annuncio;
+    -- DELETE FROM foto_annunci WHERE annuncio = _id_annuncio;
     DELETE FROM commenti WHERE prenotazione IN (SELECT id_occupazione FROM occupazioni WHERE annuncio = _id_annuncio);
+    -- in occupazioni il campo annuncio viene messo a null dalla politica di reazione
     DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
     IF ROW_COUNT() = 0 THEN
       RETURN -2;
