@@ -59,7 +59,7 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE foto_annuncio(id int)
 BEGIN
- SELECT *
+ SELECT * 
  FROM foto_annunci
  WHERE annuncio = id;
 END |
@@ -153,7 +153,7 @@ END |
 -- Modificare un annuncio dato il suo ID
 DELIMITER |
 CREATE PROCEDURE modifica_annuncio(_id int, _titolo varchar(32), _descrizione varchar(512),_img_anteprima varchar(48),
-     _indirizzo varchar(128), _citta varchar(128),_max_ospiti tinyint(2),_prezzo_notte float)
+     _indirizzo varchar(128), _citta varchar(128),_max_ospiti tinyint(2), _prezzo_notte float)
 BEGIN
     update annunci
     set annunci.titolo = _titolo, annunci.descrizione= _descrizione , annunci.indirizzo=_indirizzo,
@@ -169,7 +169,7 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE occupazioni_annuncio(_id_annuncio int)
 BEGIN
-  SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizo, data_fine
+  SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizio, data_fine
   FROM occupazioni
   WHERE annuncio = _id_annuncio;
 END |
@@ -205,4 +205,22 @@ BEGIN
   RETURN LAST_INSERT_ID();
 END |
 DELIMITER ;
+
+
 -- Rimozione di una foto ad un annuncio dato l'ID di un annuncio
+/*Cosa ritorna:
+0 in caso di successo
+-1 in caso ci sia stato un errore nell'eliminare la foto
+*/
+DELIMITER |
+CREATE FUNCTION rimozione_foto(_id_foto INT) RETURNS INT
+BEGIN
+  DELETE FROM foto_annunci WHERE id_foto = _id_foto;
+
+  IF ROW_COUNT() = 0 THEN
+    RETURN -1;
+  ELSE
+   	RETURN 0;
+  END IF;
+END |
+DELIMITER ;
