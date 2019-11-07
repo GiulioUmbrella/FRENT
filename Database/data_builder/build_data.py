@@ -60,14 +60,14 @@ def generate_annunci():
     img_anteprima = ["images/annunci/anteprima_{}".format(t) for t in titoli]
     with open("vie.csv", 'r') as vie_file:
         random.seed(42)
-        readCSV = csv.reader(vie_file, delimiter=',')
-        indirizzi = [str(readCSV[random.randrange(1, 2000)][2]) for _ in titoli]
-        citta = [str(readCSV[random.randrange(1, 2000)][1]) for _ in titoli]
+        readCSV = [row for row in csv.reader(vie_file, delimiter=',')]
+        indirizzi = [str(readCSV[random.randrange(1, len(readCSV))][2]) for _ in titoli]
+        citta = [str(readCSV[random.randrange(1, len(readCSV))][1]) for _ in titoli]
     hosts = [str(user_data[random.randrange(0, len(user_data)-1)][0]) for _ in titoli]
     stato_approvazione = [str(random.randrange(0, 2)) for _ in titoli]
     bloccato = [str(random.randrange(0, 1)) for _ in titoli]
     max_ospiti = [str(random.randrange(1, 7)) for _ in titoli]
-    prezzo_notte = [sttr(random.randrange(25, 150)) for _ in titoli]
+    prezzo_notte = [str(random.randrange(25, 150)) for _ in titoli]
 
     for i in range(len(titoli)):
         annunci_data.append([
