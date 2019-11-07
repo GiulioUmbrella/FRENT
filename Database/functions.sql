@@ -21,7 +21,9 @@ DELIMITER ;
 
 
 -- Login
+
 -- Registrazione
+
 -- Modifica dei dati personali dell'utente
 -- PRE: _password è una stringa risultato dell'applicazione di una funzione di hash sulla stringa corrispondente alla password dell'utente
 DELIMITER |
@@ -49,34 +51,34 @@ DELIMITER ;
 -- Eliminazione della propria utenza
 
 -- Ricerca annunci con parametri
--- PRE: _citta e' esistente nel database
+-- PRE: _citta e' esistente nel database, di e df sono date valide e di < df
 DELIMITER |
 CREATE PROCEDURE ricerca_annunci(_citta varchar(128), _num_ospiti int(2), di date, df date)
 BEGIN
-SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
-FROM annunci A
-WHERE A.bloccato = 0 AND A.stato_approvazione = 1 AND A.citta = _citta
-AND A.max_ospiti >= _num_ospiti
-AND A.id_annuncio NOT IN (
-    SELECT annuncio
-    FROM occupazioni
-    WHERE (
-        (di > data_inizio AND di < data_fine) OR
-        (df > data_inizio AND df < data_fine) OR
-        (di < data_inizio AND df > data_fine) OR
-        (di > data_inizio AND df < data_fine)
-    )
-);
+    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
+    FROM annunci A
+    WHERE A.bloccato = 0 AND A.stato_approvazione = 1 AND A.citta = _citta
+    AND A.max_ospiti >= _num_ospiti
+    AND A.id_annuncio NOT IN (
+        SELECT annuncio
+        FROM occupazioni
+        WHERE (
+            (di > data_inizio AND di < data_fine) OR
+            (df > data_inizio AND df < data_fine) OR
+            (di < data_inizio AND df > data_fine) OR
+            (di > data_inizio AND df < data_fine)
+        )
+    );
 END |
 DELIMITER ;
 
--- Ottenere i dettagli (e anche foto e commenti) di un annuncio dato il suo ID
+-- Ottenere i dettagli di un annuncio dato il suo ID
 DELIMITER |
 CREATE PROCEDURE dettagli_annuncio(id int)
 BEGIN
- SELECT *
- FROM annunci
- WHERE id_annuncio = id;
+    SELECT *
+    FROM annunci
+    WHERE id_annuncio = id;
 END |
 DELIMITER ;
 
@@ -84,9 +86,9 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE foto_annuncio(id int)
 BEGIN
- SELECT * 
- FROM foto_annunci
- WHERE annuncio = id;
+    SELECT * 
+    FROM foto_annunci
+    WHERE annuncio = id;
 END |
 DELIMITER ;
 
@@ -94,13 +96,49 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE commenti_annuncio(id int)
 BEGIN
- SELECT C.*
- FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
- WHERE O.annuncio = id;
+    SELECT C.*
+    FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
+    WHERE O.annuncio = id;
 END |
 DELIMITER ;
 
 -- Effettuare la prenotazione di un annuncio sui parametri di ricerca
+DELIMITER |
+CREATE FUNCTION effettua_prenotazione(_utente int, _annuncio int, _numospiti int(2), di date, df date) RETURNS tinyint(1)
+BEGIN
+    DECLARE occupazione_generata tinyint(1);
+
+    IF DATEDIFF(df, di) <= 0 -- controllo correttezza delle date
+    THEN SET occupazione_generata = 0;
+    END IF;
+    
+    -- date corrette
+    IF EXISTS (
+        SELECT *
+        FROM occupazioni
+        WHERE annuncio = _annuncio AND (
+            (di > data_inizio AND di < data_fine) OR
+            (df > data_inizio AND df < data_fine) OR
+            (di < data_inizio AND df > data_fine) OR
+            (di > data_inizio AND df < data_fine)
+        )
+    ) THEN
+        SET occupazione_generata = 0;
+    ELSE
+        INSERT INTO occupazioni(utente, annuncio, prenotazione_guest, num_ospiti, data_inizio, data_fine)
+        VALUES (_utente, _annuncio, _numospiti, di, df);
+        
+        IF ROW_COUNT() = 0 THEN
+            SET occupazione_generata = 0;
+        ELSE
+            SET occupazione_generata = 1;
+        END IF;
+    END IF;
+
+    RETURN occupazione_generata;
+END |
+DELIMITER ;
+
 -- Eliminare una prenotazione dato il suo ID
 
 -- Ottenere le prenotazioni effettuate da un guest
@@ -123,33 +161,29 @@ CREATE FUNCTION pubblica_commento(_prenotazione int, _titolo varchar(64), _comme
 BEGIN
     DECLARE commento_pubblicato tinyint(1);
 
-    IF NOT EXISTS(
+    IF EXISTS(
         SELECT prenotazione
         FROM commenti
         WHERE prenotazione = _prenotazione
     ) THEN
+        SET commento_pubblicato = 0;
+    ELSE
         INSERT INTO commenti(prenotazione, titolo, commento, votazione) VALUES
         (_prenotazione, _titolo, _commento, _votazione);
 
         -- verifico che il commento sia stato inserito
-        IF EXISTS(
-            SELECT prenotazione
-            FROM commenti
-            WHERE prenotazione = _prenotazione
-        ) THEN
-            SET commento_pubblicato = 1;
-        ELSE
+        IF ROW_COUNT() = 0 THEN
             SET commento_pubblicato = 0;
+        ELSE
+            SET commento_pubblicato = 1;
         END IF;
-    ELSE
-        SET commento_pubblicato = 0;
     END IF;
 
     RETURN commento_pubblicato;
 END |
 DELIMITER ;
--- Modificare un commento dato l'ID di una prenotazione
 
+-- Modificare un commento dato l'ID di una prenotazione
 DELIMITER |
 CREATE PROCEDURE modifica_commento(_id int, _titolo varchar(64),_commento varchar(512), _valutazione tinyint(1))
 BEGIN
@@ -158,6 +192,7 @@ BEGIN
     where  commenti.prenotazione= _id;
 END |
 DELIMITER ;
+
 -- Eliminare un commento dato l'ID di una prenotazione
 --
 DELIMITER |
@@ -174,7 +209,7 @@ CREATE procedure list_annunci_host(_id_host int)
 BEGIN
     select *
     from annunci
-        where _id_host= annunci.host;
+    where _id_host= annunci.host;
 END |
 DELIMITER ;
 
@@ -197,9 +232,9 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE occupazioni_annuncio(_id_annuncio int)
 BEGIN
-  SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizio, data_fine
-  FROM occupazioni
-  WHERE annuncio = _id_annuncio;
+    SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizio, data_fine
+    FROM occupazioni
+    WHERE annuncio = _id_annuncio;
 END |
 DELIMITER ;
 
@@ -212,25 +247,25 @@ ID della foto aggiunta se tutto è andata ok (ID >= 1).
 DELIMITER |
 CREATE FUNCTION aggiungi_foto(id_annuncio int, _file_path varchar(128), _descrizione varchar(128)) RETURNS INT
 BEGIN
-  DECLARE min_file_path_length INT;
-  DECLARE min_descrizione_length INT;
+    DECLARE min_file_path_length INT;
+    DECLARE min_descrizione_length INT;
 
- -- Ritorna -1 in caso di annuncio inesistente
-  DECLARE EXIT HANDLER FOR 1452
+    -- Ritorna -1 in caso di annuncio inesistente
+    DECLARE EXIT HANDLER FOR 1452
     BEGIN
-      RETURN -1;
+        RETURN -1;
     END;
 
-  -- Ritorna -2 in caso _file_path o _descrizione non siano validi
-  SET min_file_path_length = 1;
-  SET min_descrizione_length = 1;
+    -- Ritorna -2 in caso _file_path o _descrizione non siano validi
+    SET min_file_path_length = 1;
+    SET min_descrizione_length = 1;
 
-  IF CHAR_LENGTH(_file_path) < min_file_path_length OR CHAR_LENGTH(_descrizione) < min_descrizione_length THEN
+    IF CHAR_LENGTH(_file_path) < min_file_path_length OR CHAR_LENGTH(_descrizione) < min_descrizione_length THEN
     RETURN -2;
-  END IF;
+    END IF;
 
-  INSERT INTO foto_annunci (file_path, descrizione, annuncio) VALUES (_file_path, _descrizione, id_annuncio);
-  RETURN LAST_INSERT_ID();
+    INSERT INTO foto_annunci (file_path, descrizione, annuncio) VALUES (_file_path, _descrizione, id_annuncio);
+    RETURN LAST_INSERT_ID();
 END |
 DELIMITER ;
 
@@ -243,12 +278,12 @@ DELIMITER ;
 DELIMITER |
 CREATE FUNCTION rimozione_foto(_id_foto INT) RETURNS INT
 BEGIN
-  DELETE FROM foto_annunci WHERE id_foto = _id_foto;
+    DELETE FROM foto_annunci WHERE id_foto = _id_foto;
 
-  IF ROW_COUNT() = 0 THEN
+    IF ROW_COUNT() = 0 THEN
     RETURN -1;
-  ELSE
-   	RETURN 0;
-  END IF;
+    ELSE
+    RETURN 0;
+    END IF;
 END |
 DELIMITER ;
