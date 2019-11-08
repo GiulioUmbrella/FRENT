@@ -5,7 +5,7 @@ create table amministratori (
 	mail varchar(191) not null,
 	unique(mail)
 );
- 
+
 create table utenti (
 	id_utente int primary key auto_increment,
 	nome varchar(32) not null,
@@ -18,7 +18,7 @@ create table utenti (
 	telefono varchar(18) not null,
 	unique(mail)
 );
- 
+
 create table annunci (
 	id_annuncio int primary key auto_increment,
 	titolo varchar(32) not null,
@@ -33,7 +33,7 @@ create table annunci (
 	prezzo_notte float not null,
 	foreign key (host) references utenti(id_utente) on update cascade on delete cascade
 );
- 
+
 create table foto_annunci (
 	id_foto int primary key auto_increment,
 	file_path varchar(128) not null,
