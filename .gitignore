@@ -1,2 +1,6 @@
 .DS_Store
 .idea/
+*.aux
+*.log
+*.pdf
+*.synctex.gz
