@@ -33,7 +33,19 @@ RETURN val;
 END |
 DELIMITER ;
 
--- Registrazione
+-- Registrazion
+/*
+ _password è la password hashata tramite la funzione PHP
+ Se il nuovo utente è stato inserito restituisce il suo ID 0 altrimenti
+ */
+DELIMITER |
+CREATE FUNCTION registrazione(_nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(191), _password varchar(48), _data date, _img_profilo varchar(48), _telefono varchar(18)) RETURNS INT
+BEGIN
+  INSERT INTO utenti(nome, cognome, username, mail, password, data, img_profilo, telefono) VALUES (_nome, _cognome, _username, _mail, _password, _data, _img_profilo, _telefono);
+
+  RETURN LAST_INSERT_ID();
+END |
+DELIMITER ;
 
 -- Modifica dei dati personali dell'utente
 -- PRE: _password è una stringa risultato dell'applicazione di una funzione di hash sulla stringa corrispondente alla password dell'utente
