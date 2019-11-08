@@ -28,7 +28,6 @@ BEGIN
     FROM utenti
     WHERE (username = _utente OR mail = _utente)
     AND password = _password;
-RETURN val;
 END |
 DELIMITER ;
 
