@@ -37,7 +37,7 @@ DELIMITER ;
 DELIMITER |
 CREATE FUNCTION registrazione(_nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(191), _password varchar(48), _data date, _img_profilo varchar(48), _telefono varchar(18)) RETURNS INT
 BEGIN
-  INSERT INTO utenti(nome, cognome, username, mail, password, data, img_profilo, telefono) VALUES (_nome, _cognome, _username, _mail, _password, _data, _img_profilo, _telefono);
+  INSERT INTO utenti(nome, cognome, user_name, mail, password, data_nascita, img_profilo, telefono) VALUES (_nome, _cognome, _username, _mail, _password, _data, _img_profilo, _telefono);
 
   RETURN LAST_INSERT_ID();
 END |
@@ -107,7 +107,7 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE foto_annuncio(id int)
 BEGIN
-    SELECT * 
+    SELECT *
     FROM foto_annunci
     WHERE annuncio = id;
 END |
@@ -133,7 +133,7 @@ BEGIN
     IF DATEDIFF(df, di) <= 0 -- controllo correttezza delle date
     THEN SET occupazione_generata = 0;
     END IF;
-    
+
     -- date corrette
     IF EXISTS (
         SELECT *
@@ -149,7 +149,7 @@ BEGIN
     ELSE
         INSERT INTO occupazioni(utente, annuncio, prenotazione_guest, num_ospiti, data_inizio, data_fine)
         VALUES (_utente, _annuncio, _numospiti, di, df);
-        
+
         IF ROW_COUNT() = 0 THEN
             SET occupazione_generata = 0;
         ELSE
