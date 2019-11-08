@@ -88,8 +88,32 @@ def generate_annunci():
 
 
 def generate_occupazioni():
-    pass
+    data_base = "2019-11-"
+
+    occupazioni_header = ["id_occupazione", "utente", "annuncio", "prenotazione_guest", "num_ospiti", "data_inizio", "data_fine"]
+    occupazioni = [
+        ["1", "1", "1", "0", "1", data_base+"2", data_base+"7"],
+        ["2", "2", "1", "0", "1", data_base+"11", data_base+"15"],
+        ["3", "3", "1", "0", "1", data_base+"21", data_base+"25"],
+        ["4", "9", "2", "1", "1", data_base+"14", data_base+"19"],
+        ["5", "5", "3", "0", "1", data_base+"7", data_base+"9"],
+        ["6", "6", "3", "0", "1", data_base+"14", data_base+"16"],
+        ["7", "6", "3", "0", "1", data_base+"28", data_base+"30"],
+        ["7", "7", "4", "0", "1", data_base+"4", data_base+"7"],
+        ["8", "8", "4", "0", "1", data_base+"19", data_base+"22"],
+        ["9", "4", "6", "1", "1", data_base+"1", data_base+"30"],
+        ["10", "9", "7", "0", "1", data_base+"4", data_base+"7"],
+        ["11", "10", "8", "0", "1", data_base+"10", data_base+"13"],
+        ["12", "11", "8", "1", "1", data_base+"19", data_base+"23"],
+        ["13", "12", "9", "1", "1", data_base+"6", data_base+"9"],
+        ["14", "13", "9", "0", "1", data_base+"19", data_base+"22"],
+        ["15", "12", "9", "1", "1", data_base+"24", data_base+"26"],
+        ["16", "14", "10", "0", "1", data_base+"2", data_base+"5"],
+        ["17", "14", "10", "0", "1", data_base+"13", data_base+"17"],
+    ]
+    write_on_csv(occupazioni_header, occupazioni, "occupazioni.csv")
 
 
 generate_users()
 generate_annunci()
+generate_occupazioni()
