@@ -24,10 +24,10 @@ DELIMITER ;
 DELIMITER |
 CREATE PROCEDURE login(_utente varchar(191), _password varchar(48))
 BEGIN
-    SELECT *
-    FROM utenti
-    WHERE (username = _utente OR mail = _utente)
-    AND password = _password;
+  SELECT *
+  FROM utenti u
+  WHERE (u.user_name = _utente OR u.mail = _utente)
+  AND u.password = _password;
 END |
 DELIMITER ;
 
