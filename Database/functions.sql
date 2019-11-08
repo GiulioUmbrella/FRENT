@@ -21,6 +21,17 @@ DELIMITER ;
 
 
 -- Login
+-- PRE: utente corrisponde a mail o username dell'utente
+DELIMITER |
+CREATE PROCEDURE login(_utente varchar(191), _password varchar(48))
+BEGIN
+    SELECT *
+    FROM utenti
+    WHERE (username = _utente OR mail = _utente)
+    AND password = _password;
+RETURN val;
+END |
+DELIMITER ;
 
 -- Registrazione
 
