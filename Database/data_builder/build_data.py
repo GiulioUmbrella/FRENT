@@ -80,6 +80,7 @@ def generate_annunci():
             hosts[i],
             stato_approvazione[i],
             bloccato[i],
+            max_ospiti[i],
             prezzo_notte[i],
         ])
 
@@ -99,17 +100,17 @@ def generate_occupazioni():
         ["5", "5", "3", "0", "1", data_base+"7", data_base+"9"],
         ["6", "6", "3", "0", "1", data_base+"14", data_base+"16"],
         ["7", "6", "3", "0", "1", data_base+"28", data_base+"30"],
-        ["7", "7", "4", "0", "1", data_base+"4", data_base+"7"],
-        ["8", "8", "4", "0", "1", data_base+"19", data_base+"22"],
-        ["9", "4", "6", "1", "1", data_base+"1", data_base+"30"],
-        ["10", "9", "7", "0", "1", data_base+"4", data_base+"7"],
-        ["11", "10", "8", "0", "1", data_base+"10", data_base+"13"],
-        ["12", "11", "8", "1", "1", data_base+"19", data_base+"23"],
-        ["13", "12", "9", "1", "1", data_base+"6", data_base+"9"],
-        ["14", "13", "9", "0", "1", data_base+"19", data_base+"22"],
-        ["15", "12", "9", "1", "1", data_base+"24", data_base+"26"],
-        ["16", "14", "10", "0", "1", data_base+"2", data_base+"5"],
-        ["17", "14", "10", "0", "1", data_base+"13", data_base+"17"],
+        ["8", "7", "4", "0", "1", data_base+"4", data_base+"7"],
+        ["9", "9", "4", "0", "1", data_base+"19", data_base+"22"],
+        ["10", "4", "6", "1", "1", data_base+"1", data_base+"30"],
+        ["11", "9", "7", "0", "1", data_base+"4", data_base+"7"],
+        ["12", "10", "8", "0", "1", data_base+"10", data_base+"13"],
+        ["13", "11", "8", "1", "1", data_base+"19", data_base+"23"],
+        ["14", "12", "9", "1", "1", data_base+"6", data_base+"9"],
+        ["15", "13", "9", "0", "1", data_base+"19", data_base+"22"],
+        ["16", "12", "9", "1", "1", data_base+"24", data_base+"26"],
+        ["17", "14", "10", "0", "1", data_base+"2", data_base+"5"],
+        ["18", "14", "10", "0", "1", data_base+"13", data_base+"17"],
     ]
     write_on_csv(occupazioni_header, occupazioni, "occupazioni.csv")
 
