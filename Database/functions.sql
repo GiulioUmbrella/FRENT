@@ -19,7 +19,6 @@ END |
 DELIMITER ;
 */
 
-
 -- Login
 -- PRE: utente corrisponde a mail o username dell'utente
 DELIMITER |
@@ -33,11 +32,9 @@ RETURN val;
 END |
 DELIMITER ;
 
--- Registrazion
-/*
- _password è la password hashata tramite la funzione PHP
- Se il nuovo utente è stato inserito restituisce il suo ID 0 altrimenti
- */
+-- Registrazione
+-- PRE: _password è la password hashata tramite la funzione PHP
+-- Se il nuovo utente è stato inserito restituisce il suo ID, 0 altrimenti
 DELIMITER |
 CREATE FUNCTION registrazione(_nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(191), _password varchar(48), _data date, _img_profilo varchar(48), _telefono varchar(18)) RETURNS INT
 BEGIN
@@ -96,6 +93,7 @@ END |
 DELIMITER ;
 
 -- Ottenere i dettagli di un annuncio dato il suo ID
+-- PRE: id è l'identificativo di un annuncio
 DELIMITER |
 CREATE PROCEDURE dettagli_annuncio(id int)
 BEGIN
@@ -106,6 +104,7 @@ END |
 DELIMITER ;
 
 -- Ottenere le foto di un annuncio dato il suo ID
+-- PRE: id è l'identificativo di un annuncio
 DELIMITER |
 CREATE PROCEDURE foto_annuncio(id int)
 BEGIN
@@ -116,6 +115,7 @@ END |
 DELIMITER ;
 
 -- Ottenere i commenti di un annuncio dato il suo ID
+-- PRE: id è l'identificativo di un annuncio
 DELIMITER |
 CREATE PROCEDURE commenti_annuncio(id int)
 BEGIN
@@ -185,7 +185,7 @@ BEGIN
     DECLARE commento_pubblicato tinyint(1);
 
     IF EXISTS(
-        SELECT prenotazione
+        SELECT *
         FROM commenti
         WHERE prenotazione = _prenotazione
     ) THEN
@@ -207,6 +207,7 @@ END |
 DELIMITER ;
 
 -- Modificare un commento dato l'ID di una prenotazione
+-- PRE: _id è l'ID di una prenotazione
 DELIMITER |
 CREATE PROCEDURE modifica_commento(_id int, _titolo varchar(64),_commento varchar(512), _valutazione tinyint(1))
 BEGIN
@@ -217,7 +218,7 @@ END |
 DELIMITER ;
 
 -- Eliminare un commento dato l'ID di una prenotazione
---
+-- PRE: _id è l'ID di una prenotazione
 DELIMITER |
 CREATE PROCEDURE elimina_commento_con_id(_id int)
 BEGIN
@@ -226,7 +227,6 @@ END |
 DELIMITER ;
 
 -- Ottenere gli annunci pubblicati da un host
-
 DELIMITER |
 CREATE procedure list_annunci_host(_id_host int)
 BEGIN
