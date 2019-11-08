@@ -22,7 +22,11 @@ DELIMITER ;
 
 -- Login
 
--- Registrazione
+-- Registrazion
+/*
+ _password è la password hashata tramite la funzione PHP
+ Se il nuovo utente è stato inserito restituisce il suo ID 0 altrimenti
+ */
 DELIMITER |
 CREATE FUNCTION registrazione(_nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(191), _password varchar(48), _data date, _img_profilo varchar(48), _telefono varchar(18)) RETURNS INT
 BEGIN
