@@ -6,6 +6,7 @@ create table amministratori (
 	unique(mail)
 );
 
+
 create table utenti (
 	id_utente int primary key auto_increment,
 	nome varchar(32) not null,
@@ -51,7 +52,7 @@ create table occupazioni (
 	data_inizio date not null,
 	data_fine date not null,
 	foreign key (utente) references utenti(id_utente) on update cascade on delete cascade,
-	foreign key (annuncio) references annunci(id_annuncio) on update cascade on delete cascade
+	foreign key (annuncio) references annunci(id_annuncio) on update cascade on delete set null
 );
 
 create table commenti (
