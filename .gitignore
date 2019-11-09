@@ -1,2 +1,3 @@
 .DS_Store
 .idea/
+Database/data_builder/*.csv
