@@ -218,10 +218,17 @@ DELIMITER ;
 
 -- Eliminare un commento dato l'ID di una prenotazione
 -- PRE: _id è l'ID di una prenotazione
+-- 0: non è stato eliminato nulla
+-- 1: è stato eliminato il commento
 DELIMITER |
-CREATE PROCEDURE elimina_commento_con_id(_id int)
+CREATE FUNCTION elimina_commento(_id int) RETURNS INT
 BEGIN
     delete from commenti where prenotazione = _id;
+    if (row_count() = 0) then
+        return 0;
+    else
+        return 1;
+    end if;
 END |
 DELIMITER ;
 
