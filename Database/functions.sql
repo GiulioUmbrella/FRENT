@@ -69,41 +69,41 @@ DELIMITER ;
 
 -- Eliminazione della propria utenza
 DELIMITER |
-CREATE FUNCTION eliminazione_utenza(_id_utente int)
+CREATE FUNCTION eliminazione_utenza(_id_utente int) RETURNS INT
 BEGIN
-DECLARE num_occupazioni_future_utente, num_occupazioni_future_annuncio int;
+DECLARE num_occupazioni_future_utente INT;
+DECLARE num_occupazioni_future_annuncio int;
 
 -- Controlla se ci sono occupazioni future
 SELECT count(*)
-INTO num_occupazioni_future
-FROM utenti I JOIN occupazioni O ON I.id_utente = =O.utente
-WHERE _id_utente = I.id_utente AND = O.data_inizio > CURDATE()
+INTO num_occupazioni_future_utente
+FROM utenti I JOIN occupazioni O ON I.id_utente = O.utente
+WHERE _id_utente = I.id_utente AND O.data_inizio > CURDATE();
 
 IF num_occupazioni_future_utente > 0 THEN
   RETURN 0;
-END IF
+END IF;
 
 -- Controlla se annunci hanno prenotazioni future
 SELECT count(*)
 INTO num_occupazioni_future_annuncio
-FROM occupazioni JOIN annunci ON annuncio == id_annuncio
+FROM occupazioni JOIN annunci ON annuncio = id_annuncio
 WHERE id_annuncio IN (
                     SELECT id_annuncio
                     FROM annunci
                     WHERE host = id_utente
-                    )
+                    );
 IF num_occupazioni_future_annuncio > 0 THEN
   RETURN 1;
-END IF
+END IF;
 
 
 -- Elimina utenza
-DELETE id_utente
-FROM utenti
-WHERE id_utente = _id_utente
+DELETE FROM utenti WHERE id_utente = _id_utente;
+RETURN 0;
 
 END |
-DELMITER ;
+DELIMITER ;
 
 
 -- Ricerca annunci con parametri
@@ -200,16 +200,16 @@ DELIMITER ;
 
 -- Eliminare una prenotazione dato il suo ID
 DELIMITER |
-CREATE FUNCTION eliminare_prenotazione( _id_occupazione int)
+CREATE FUNCTION eliminare_prenotazione( _id_occupazione int) RETURNS INT
 BEGIN
-DECLARE d_inzio date
-
-    SELECT data_inizio, data_fine
-    INTO d_inzio
+-- DECLARE d_inzio date;
+-- DECLARE d_fine date;
+SET @date_inizio := ( 
+    SELECT data_inizio
     FROM occupazioni
-    WHERE id_occupazione = _id_occupazione
+    WHERE id_occupazione = _id_occupazione);
 
-    IF CURDATE() < d_inizio  THEN
+    IF CURDATE() < (SELECT * FROM date_inizio)  THEN
       DELETE FROM occupazioni
       WHERE id_occupazione = _id_occupazione;
       RETURN 1;
@@ -217,7 +217,7 @@ DECLARE d_inzio date
       RETURN 0;
     END IF;
 END |
-DELIMITER;
+DELIMITER ;
 
 -- Ottenere le prenotazioni effettuate da un guest
 -- PRE: id_utente corrisponde ad un utenti.id_utente
