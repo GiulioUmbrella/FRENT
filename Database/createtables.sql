@@ -46,7 +46,7 @@ create table foto_annunci (
 create table occupazioni (
 	id_occupazione int primary key auto_increment,
 	utente int not null,
-	annuncio int not null,
+	annuncio int,
 	prenotazione_guest tinyint(1) not null default 1, -- 1 indica che è una prenotazione, 0 è settato dall'host
 	num_ospiti int(2) not null default 1, -- limite da 0 a 99 (almeno da db)
 	data_inizio date not null,
