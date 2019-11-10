@@ -68,6 +68,15 @@ END |
 DELIMITER ;
 
 -- Eliminazione della propria utenza
+DELIMITER |
+CREATE FUNCTION eliminazione_utenza(id_utente int)
+BEGIN
+
+SELECT id_annuncio
+
+END |
+DELMITER ;
+
 
 -- Ricerca annunci con parametri
 -- PRE: _citta e' esistente nel database, di e df sono date valide e di < df
@@ -162,6 +171,25 @@ END |
 DELIMITER ;
 
 -- Eliminare una prenotazione dato il suo ID
+DELIMITER |
+CREATE FUNCTION eliminare_prenotazione( _id_occupazione int)
+BEGIN
+DECLARE d_inzio date
+
+    SELECT data_inizio, data_fine
+    INTO d_inzio
+    FROM occupazioni
+    WHERE id_occupazione = _id_occupazione
+
+    IF CURDATE() < d_inizio  THEN
+      DELETE FROM occupazioni
+      WHERE id_occupazione = _id_occupazione;
+      RETURN 1;
+    ELSE
+      RETURN 0;
+    END IF;
+END |
+DELIMITER;
 
 -- Ottenere le prenotazioni effettuate da un guest
 -- PRE: id_utente corrisponde ad un utenti.id_utente
