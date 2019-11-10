@@ -23,6 +23,7 @@ DROP FUNCTION IF EXISTS eliminazione_utenza;
 DROP FUNCTION IF EXISTS effettua_prenotazione;
 DROP FUNCTION IF EXISTS eliminare_prenotazione;
 DROP FUNCTION IF EXISTS pubblica_commento;
+DROP FUNCTION IF EXISTS elimina_commento;
 DROP FUNCTION IF EXISTS elimina_annuncio;
 DROP FUNCTION IF EXISTS aggiungi_foto;
 DROP FUNCTION IF EXISTS rimozione_foto;
