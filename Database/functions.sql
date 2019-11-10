@@ -69,10 +69,38 @@ DELIMITER ;
 
 -- Eliminazione della propria utenza
 DELIMITER |
-CREATE FUNCTION eliminazione_utenza(id_utente int)
+CREATE FUNCTION eliminazione_utenza(_id_utente int)
 BEGIN
+DECLARE num_occupazioni_future_utente, num_occupazioni_future_annuncio int;
 
-SELECT id_annuncio
+-- Controlla se ci sono occupazioni future
+SELECT count(*)
+INTO num_occupazioni_future
+FROM utenti I JOIN occupazioni O ON I.id_utente = =O.utente
+WHERE _id_utente = I.id_utente AND = O.data_inizio > CURDATE()
+
+IF num_occupazioni_future_utente > 0 THEN
+  RETURN 0;
+END IF
+
+-- Controlla se annunci hanno prenotazioni future
+SELECT count(*)
+INTO num_occupazioni_future_annuncio
+FROM occupazioni JOIN annunci ON annuncio == id_annuncio
+WHERE id_annuncio IN (
+                    SELECT id_annuncio
+                    FROM annunci
+                    WHERE host = id_utente
+                    )
+IF num_occupazioni_future_annuncio > 0 THEN
+  RETURN 1;
+END IF
+
+
+-- Elimina utenza
+DELETE id_utente
+FROM utenti
+WHERE id_utente = _id_utente
 
 END |
 DELMITER ;
@@ -296,11 +324,16 @@ BEGIN
   DECLARE curdate DATE;
 
   SET curdate = CURDATE();
-  IF _id_annuncio IN (SELECT annuncio FROM occupazioni WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
+  IF _id_annuncio IN (SELECT annuncio
+                      FROM occupazioni
+                      WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
     RETURN -1;
   ELSE
     -- DELETE FROM foto_annunci WHERE annuncio = _id_annuncio;
-    DELETE FROM commenti WHERE prenotazione IN (SELECT id_occupazione FROM occupazioni WHERE annuncio = _id_annuncio);
+    DELETE FROM commenti
+    WHERE prenotazione IN (SELECT id_occupazione
+                           FROM occupazioni
+                           WHERE annuncio = _id_annuncio);
     -- in occupazioni il campo annuncio viene messo a null dalla politica di reazione
     DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
     IF ROW_COUNT() = 0 THEN
