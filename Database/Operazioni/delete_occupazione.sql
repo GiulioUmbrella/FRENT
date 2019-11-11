@@ -8,7 +8,7 @@ DROP FUNCTION IF EXISTS delete_occupazione;
 DELIMITER |
 CREATE FUNCTION delete_occupazione( _id_occupazione int) RETURNS INT
 BEGIN
-  DECLARE d_inzio date;
+  DECLARE d_inizio date;
 
   SELECT data_inizio INTO d_inizio
   FROM occupazioni
@@ -16,7 +16,7 @@ BEGIN
 
   IF CURDATE() >= d_inizio THEN
     RETURN -1;
-  END IF
+  END IF;
 
   DELETE FROM occupazioni
   WHERE id_occupazione = _id_occupazione;

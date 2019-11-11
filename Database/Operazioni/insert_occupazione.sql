@@ -30,7 +30,8 @@ BEGIN
       END IF;
 
       IF _utente = (SELECT host FROM annunci WHERE id_annuncio = _annuncio) THEN
-        _occupazione_guest = 0;
+       SET  _occupazione_guest = 0;
+     END IF;
 
       INSERT INTO occupazioni(utente, annuncio, prenotazione_guest, num_ospiti, data_inizio, data_fine)
       VALUES (_utente, _annuncio, _occupazione_guest, _numospiti, di, df);
