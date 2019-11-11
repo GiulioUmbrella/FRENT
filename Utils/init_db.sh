@@ -1,18 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 GREEN='\e[32m'
 RED='\e[31m'
 YELLOW='\e[33m'
 NC='\e[39m' # No Color
 
-cd ~
-
 cd ~/TECHWEB
-if git checkout Db_branch; then
-  echo echo "${YELLOW}Moving to Db_Branch${NC}"
-fi
 
-if [ $1 == '-u' ]; then
+#if git checkout Db_branch; then
+#  echo echo "${YELLOW}Moving to Db_Branch${NC}"
+#fi
+
+if [ "$1" == "-u" ]; then
   echo "Update del repository..."
   if git pull --all; then
     echo "${GREEN}DONE${NC}"
@@ -50,9 +49,10 @@ else
 fi
 
 echo "Creazione funzioni e procedure (functions.sql)... "
-for f in Operazioni/*.sql
+PATH_TO_OPERATIONS="Operazioni/*.sql"
+for f in $PATH_TO_OPERATIONS
 do
-  if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < f; then
+  if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < $f; then
     echo "${f}: ${GREEN}DONE${NC}"
   else
     echo "${f}: ${RED}FAILED${NC}"
