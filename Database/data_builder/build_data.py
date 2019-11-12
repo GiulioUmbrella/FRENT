@@ -1,4 +1,4 @@
-from sys import exit
+from sys import exit, argv
 import csv
 import random
 
@@ -58,16 +58,30 @@ def generate_annunci():
 
     descrizioni = ["defualt descirptio" for _ in titoli]
     img_anteprima = ["images/annunci/anteprima_{}".format(t) for t in titoli]
-    with open("vie.csv", 'r') as vie_file:
-        random.seed(42)
-        readCSV = [row for row in csv.reader(vie_file, delimiter=',')]
-        indirizzi = [str(readCSV[random.randrange(1, len(readCSV))][2]) for _ in titoli]
-        citta = [str(readCSV[random.randrange(1, len(readCSV))][1]) for _ in titoli]
-    hosts = [str(user_data[random.randrange(0, len(user_data)-1)][0]) for _ in titoli]
-    stato_approvazione = [str(random.randrange(0, 2)) for _ in titoli]
-    bloccato = [str(random.randrange(0, 1)) for _ in titoli]
-    max_ospiti = [str(random.randrange(1, 7)) for _ in titoli]
-    prezzo_notte = [str(random.randrange(25, 150)) for _ in titoli]
+
+    if len(argv) > 1:
+        if argv[1] == "--less-random":
+            with open("vie.csv", 'r') as vie_file:
+                random.seed(42)
+                readCSV = [row for row in csv.reader(vie_file, delimiter=',')]
+                indirizzi = [str(readCSV[random.randrange(1, len(readCSV))][2]) for _ in titoli]
+                citta = ["roma" for _ in titoli]
+            hosts = [str(user_data[random.randrange(0, len(user_data)-1)][0]) for _ in titoli]
+            stato_approvazione = ["1" for _ in titoli]
+            bloccato = ["0" for _ in titoli]
+            max_ospiti = [str(random.randrange(1, 7)) for _ in titoli]
+            prezzo_notte = [str(random.randrange(25, 150)) for _ in titoli]
+    else:
+        with open("vie.csv", 'r') as vie_file:
+            random.seed(42)
+            readCSV = [row for row in csv.reader(vie_file, delimiter=',')]
+            indirizzi = [str(readCSV[random.randrange(1, len(readCSV))][2]) for _ in titoli]
+            citta = [str(readCSV[random.randrange(1, len(readCSV))][1]) for _ in titoli]
+        hosts = [str(user_data[random.randrange(0, len(user_data)-1)][0]) for _ in titoli]
+        stato_approvazione = [str(random.randrange(0, 2)) for _ in titoli]
+        bloccato = [str(random.randrange(0, 1)) for _ in titoli]
+        max_ospiti = [str(random.randrange(1, 7)) for _ in titoli]
+        prezzo_notte = [str(random.randrange(25, 150)) for _ in titoli]
 
     for i in range(len(titoli)):
         annunci_data.append([
