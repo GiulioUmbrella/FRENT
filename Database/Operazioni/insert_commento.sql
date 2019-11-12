@@ -15,7 +15,7 @@ BEGIN
     -- Ritorna 0 in caso di prenotazione inesistente
     DECLARE EXIT HANDLER FOR 1452
     BEGIN
-      RETURN 0;
+      RETURN -1;
     END;
 
     -- Prenotazione già commentata
@@ -24,12 +24,12 @@ BEGIN
         FROM commenti
         WHERE prenotazione = _prenotazione
     ) THEN
-        RETURN 0;
+        RETURN -2;
     END IF;
 
     -- Host tenta di commentare un suo annucio
     IF (SELECT prenotazione_guest FROM occupazioni WHERE id_occupazione = _prenotazione) = 0 THEN
-      RETURN 0;
+      RETURN -3;
     END IF;
 
     INSERT INTO commenti(prenotazione, titolo, commento, votazione) VALUES
@@ -37,7 +37,7 @@ BEGIN
 
       -- verifico che il commento sia stato inserito
       IF ROW_COUNT() = 0 THEN
-          RETURN 0;
+          RETURN -4;
       ELSE
           RETURN LAST_INSERT_ID();
       END IF;

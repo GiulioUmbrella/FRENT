@@ -12,7 +12,7 @@ BEGIN
     DECLARE _occupazione_guest INT DEFAULT 1;
     -- controllo correttezza delle date
     IF DATEDIFF(df, di) <= 0 THEN
-      RETURN 0;
+      RETURN -1;
     END IF;
 
     -- Controllo presenza altre occupazioni
@@ -26,7 +26,7 @@ BEGIN
           (di >= data_inizio AND df <= data_fine)
         )
     ) THEN
-        RETURN 0;
+        RETURN -2;
       END IF;
 
       IF _utente = (SELECT host FROM annunci WHERE id_annuncio = _annuncio) THEN
@@ -37,7 +37,7 @@ BEGIN
       VALUES (_utente, _annuncio, _occupazione_guest, _numospiti, di, df);
 
       IF ROW_COUNT() = 0 THEN -- Modifica non effettuata
-          RETURN 0;
+          RETURN -3;
       ELSE
           RETURN LAST_INSERT_ID();
       END IF;

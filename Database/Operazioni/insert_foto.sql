@@ -4,6 +4,7 @@ Cosa restituisce:
   ID della foto aggiunta se tutto è andata ok (ID >= 1).
   -1 in caso di annuncio inesistente
   -2 in caso di _file_path o _descrizione non soddisfino una lunghezza minima
+  -3 l'inserimento è fallito 
 */
 DROP FUNCTION IF EXISTS insert_foto;
 DELIMITER |
@@ -27,6 +28,11 @@ BEGIN
     END IF;
 
     INSERT INTO foto_annunci (file_path, descrizione, annuncio) VALUES (_file_path, _descrizione, id_annuncio);
+    IF ROW_COUNT() = 0 THEN
+        RETURN -3;
+    ELSE
+        RETURN LAST_INSERT_ID();
+    END IF;
     RETURN LAST_INSERT_ID();
 END |
 DELIMITER ;
