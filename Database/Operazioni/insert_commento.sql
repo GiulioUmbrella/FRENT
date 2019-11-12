@@ -39,7 +39,7 @@ BEGIN
       IF ROW_COUNT() = 0 THEN
           RETURN -4;
       ELSE
-          RETURN LAST_INSERT_ID();
+          RETURN _prenotazione; 
       END IF;
 END |
 DELIMITER ;

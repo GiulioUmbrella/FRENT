@@ -56,7 +56,7 @@ create table occupazioni (
 );
 
 create table commenti (
-	prenotazione int primary key auto_increment, -- non è solo un occupazione, ha anche il flag prenotazione_guest = true
+	prenotazione int primary key, -- non è solo un occupazione, ha anche il flag prenotazione_guest = true
 	data_pubblicazione datetime DEFAULT CURRENT_TIMESTAMP,
 	titolo varchar(64) not null,
 	commento varchar(512) not null,
