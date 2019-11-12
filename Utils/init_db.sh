@@ -12,7 +12,7 @@ cd ~/TECHWEB
 #fi
 
 if [ "$1" == "-u" ]; then
-  echo "Update del repository..."
+  echo -n "Update del repository..."
   if git pull --all; then
     echo "${GREEN}DONE${NC}"
   else
@@ -32,7 +32,7 @@ fi
 
 cd .. #Torno alla cartella TECHWEB/Database
 
-echo "Pulizia database (clean.sql)... "
+echo -n "Pulizia database (clean.sql)... "
 if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < clean.sql; then
   echo "${GREEN}DONE${NC}"
 else
@@ -40,7 +40,7 @@ else
   exit 1
 fi
 
-echo "Creazione tabelle (createtables.sql)... "
+echo -n "Creazione tabelle (createtables.sql)... "
 if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < createtables.sql; then
   echo "${GREEN}DONE${NC}"
 else
@@ -59,7 +59,7 @@ do
   fi
 done
 
-echo "Caricamento dati (load_data.sql)... "
+echo -n "Caricamento dati (load_data.sql)... "
 if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < load_data.sql; then
   echo "${GREEN}DONE${NC}"
 else
