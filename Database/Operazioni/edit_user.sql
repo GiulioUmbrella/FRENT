@@ -4,8 +4,9 @@ Cosa restituisce:
   l'ID dell'utente modificato in caso di successo
   -1 altrimenti
 */
+DROP FUNCTION IF EXISTS edit_user;
 DELIMITER |
-CREATE FUNCTION modifica_dati_utente(_id_utente int, _nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(255), _password varchar(48), _datanascita date, _imgprofilo varchar(48), _telefono varchar(18)) RETURNS INT
+CREATE FUNCTION edit_user(_id_utente int, _nome varchar(32), _cognome varchar(32), _username varchar(32), _mail varchar(255), _password varchar(48), _datanascita date, _imgprofilo varchar(48), _telefono varchar(18)) RETURNS INT
 BEGIN
     UPDATE utenti
     SET utenti.nome = _nome,
