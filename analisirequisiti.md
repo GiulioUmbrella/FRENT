@@ -14,22 +14,23 @@ Termini utilizzati nella documentazione, nei commenti, nel codice sorgente e nel
 - **Annuncio**: un annuncio riguarda la disponibilità di una singola casa (o appartamento) e ne descrive tutte le caratteristiche (indirizzo, città, numero massimo di ospiti, ecc.). Un annuncio riguarda una e una sola casa.
 - **Amministratore**: soggetto facente parte del personale che gestisce il portale. Non è considerato un utente (dal punto di vista della struttura del database è un'entità distinta). Ha compiti di gestione e moderazione all'interno del portale.
 - **Occupazione**: un'occupazione rappresenta principalmente un periodo temporale in cui un annuncio non è prenotabile. Se generata da un guest, è una prenotazione. Se invece è generata da un host, è un periodo in cui l'annuncio non è disponibile.  Riguarda un unico annuncio e un unico periodo temporale, definito da una data di inizio e una data di fine. In uno stesso periodo l'annuncio non può avere occupazioni con intervalli temporali sovrapponibili. _Sinonimo_: prenotazione (solo nell'ambito della generazione da parte di un guest).
-Rispetto alla data corrente, distinguiamo dal punto di vista logico tre tipi di occupazioni (nel db questa distinzione non è presente)
-1. Passata: se la data di fine è maggiore di quella corrente
-2. Corrente: se la data di corrente è compresa fra la data di inzio e di fine.
-3. Futura: se la data di inzio è maggiore della data corrente
-Lo status di una occupazione quindi cambia di giorno in giorno. 
+
+    Rispetto alla data corrente, distinguiamo dal punto di vista logico tre tipi di occupazioni (nel db questa distinzione non è presente)
+    1. Passata: se la data di fine è maggiore di quella corrente
+    2. Corrente: se la data di corrente è compresa fra la data di inzio e di fine.
+    3. Futura: se la data di inzio è maggiore della data corrente
+    Lo status di una occupazione quindi cambia di giorno in giorno. 
 - **Commento**: recensione dell'utente sul suo soggiorno presso una casa offerta da un determinato annuncio. Un utente può lasciare un commento solo sull'annuncio (ed eventualmente modificarlo successivamente), a partire dal giorno successivo all'ultimo giorno del suo soggiorno (corrispondente all'intervallo temporale intercorso fra la data di inizio e di fine dell'occupazione).
 - **Foto annuncio**: foto relativa ad un annuncio, presente nella galleria collegata a quest'ultimo. La foto di anteprima dell'annuncio non rientra in questa categoria, in quanto parte dell'entità Annuncio.
 - **Effettuare una prenotazione**: indica l'azione che corrisponde a generare una occupazione di un annuncio da parte di un utente guest, fornendo tutte le informazioni richieste.
-
-**Ricerca**
-La ricerca è una attività effettuata da un utente qualsiasi fra gli annunci disponibili nel sito. Una ricerca è formata da almeno quattro campi. 
-1. Città
-2. Data di check in
-3. Data di check out
-4. Numero di ospiti
-Per risultato di ricerca si intende l'elenco completo di annunci compatibili con le preferenze dell'utente (può anche essere vuoto)
+- **Ricerca**
+La ricerca è una attività effettuata da un utente qualsiasi fra gli annunci disponibili nel sito. Una ricerca è formata da almeno quattro campi:
+    1. città,
+    2. data di check i,
+    3. data di check out,
+    4. numero di ospiti.
+    
+    Per risultato di ricerca si intende l'elenco completo di annunci compatibili con le preferenze dell'utente (può anche essere vuoto).
 
 ## Descrizione entità coinvolte
 **N.B.**: Per **Politiche** si intendono i vincoli di integrità referenziale, vincoli intrarelazionali e di dominio.
