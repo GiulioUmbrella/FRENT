@@ -2,3 +2,31 @@
     padding: 0em;
 	margin: 0em;
 }
+
+html, body {
+	max-width: 1024px;
+	margin: auto;
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 0.9em;
+
+}
+
+/* ESPERIMENTO
+* Grid layout per la pagina dei risultati
+*/
+.risultati {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a a a"
+        "b b b b"
+        "c d d d"
+        "c d d d"
+        ;
+}
+
+.risultati1 { grid-area: a; }
+.risultati2 { grid-area: b; }
+.risultati3 { grid-area: c; }
+.risultati4 { grid-area: d; }
