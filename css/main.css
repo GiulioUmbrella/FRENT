@@ -3,6 +3,7 @@
 	margin: 0em;
 }
 
+/* Layout per desktop*/
 html, body {
 	max-width: 1024px;
 	margin: auto;
@@ -10,6 +11,59 @@ html, body {
 	font-size: 0.9em;
 
 }
+
+/* ESPERIMENTO
+* Grid layout per la pagina home
+*/
+
+.index {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a a"
+        "b b b"
+        "c c c"
+        "d d d";
+}
+
+.index1 { grid-area: a; }
+.index2 { grid-area: b; }
+.index3 { grid-area: c; }
+.index4 { grid-area: d; }
+
+.citta{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a a b b b"
+        "c c d d e e";
+}
+
+.citta1 { grid-area: a; }
+.citta2 { grid-area: b; }
+.citta3 { grid-area: c; }
+.citta4 { grid-area: d; }
+.citta5 { grid-area: e; }
+
+.card{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a b b c c"
+        "d d e e f f";
+}
+
+.card1 { grid-area: a; }
+.card2 { grid-area: b; }
+.card3 { grid-area: c; }
+.card4 { grid-area: d; }
+.card5 { grid-area: e; }
+.card6 { grid-area: f; }
+
+
 
 /* ESPERIMENTO
 * Grid layout per la pagina dei risultati
