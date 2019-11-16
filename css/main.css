@@ -1,5 +1,5 @@
-* {
-    padding: 0em;
+*{
+  padding: 0em;
 	margin: 0em;
 }
 
@@ -85,45 +85,98 @@ html, body {
 .risultati3 { grid-area: c; }
 .risultati4 { grid-area: d; }
 
+/*
+* definizione del css per i tag definition list della classe .risultati
+*/
 
-#content dt {
+.risultati dt {
 
   margin-bottom:0.1em;
   clear:both; // per andare a capo
 }
 
-#content dt > a {
+.risultati dt > a {
   font-size: 2em;
   float:left;
 }
 
-#content dt > p {
+.risultati dt > p {
   font-size: 1em;
   float:right;
   margin-top:1em;
 }
 
-#content dd {
+.risultati dd {
   clear:both;
   border:1px solid #000;
   margin-bottom:1em;
   min-height: 14em;
 }
 
-#content dd > img {
+.risultati dd > img {
     float:left;
     padding:0.5em;
     width:12em;
     height:12em;
 }
 
-#content dd > p {
+.risultati dd > p {
   padding-top:0.5em;
   margin-left: 13em;
 }
 
-#content dd p + p  {
+.risultati dd p + p  {
   float:right;
   font-weight:bold;
   padding-right:0.5em;
+}
+
+/* FORM
+*  Impostazioni comuni per tutti i form
+*/
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 0.5em;
+  padding: 0.5em;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline input[type=submit] {
+
+  padding:1em;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+
+
+/* FORM VERTICALI
+* Impostazioni aggiuntive per inserire in verticale gli elementi del form
+* tramite CSS
+*/
+
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+
+.form-inline input {
+  margin: 10px 0;
+}
+
+.form-inline {
+  flex-direction: column;
+  align-items: stretch;
 }
