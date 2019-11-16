@@ -64,10 +64,10 @@ html, body {
 .card6 { grid-area: f; }
 
 
-
 /* ESPERIMENTO
 * Grid layout per la pagina dei risultati
 */
+
 .risultati {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -84,3 +84,46 @@ html, body {
 .risultati2 { grid-area: b; }
 .risultati3 { grid-area: c; }
 .risultati4 { grid-area: d; }
+
+
+#content dt {
+
+  margin-bottom:0.1em;
+  clear:both; // per andare a capo
+}
+
+#content dt > a {
+  font-size: 2em;
+  float:left;
+}
+
+#content dt > p {
+  font-size: 1em;
+  float:right;
+  margin-top:1em;
+}
+
+#content dd {
+  clear:both;
+  border:1px solid #000;
+  margin-bottom:1em;
+  min-height: 14em;
+}
+
+#content dd > img {
+    float:left;
+    padding:0.5em;
+    width:12em;
+    height:12em;
+}
+
+#content dd > p {
+  padding-top:0.5em;
+  margin-left: 13em;
+}
+
+#content dd p + p  {
+  float:right;
+  font-weight:bold;
+  padding-right:0.5em;
+}
