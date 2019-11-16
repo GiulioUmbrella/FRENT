@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="it">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
 
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
   <title>Login - Frent</title>
 
   <meta name="description" content="Login sul sito di Frent" />
@@ -26,7 +26,7 @@
         <li>Cerca annunci</li>
         <li>Accedi</li>
         <li><a href="registrazione.html" title="Vai alla pagina di registrazione">Registrazione</a></li>
-        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
+        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
         <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
       </ul>
     </div>
@@ -36,14 +36,16 @@
     <form action="" method="post">
       <fieldset>
         <label for="user"><span lang="en">E-mail</span> o nome utente</label>
-        <input type="text" name="user" id="user" placeholder="Esempio: nome.cognome@mail.it, nome_cognome26" />
+        <!-- <input type="text" name="user" id="user" placeholder="Esempio: nome.cognome@mail.it, nome_cognome26" /> -->
+        <input type="text" name="user" id="user" />
 
         <label for="password" lang="en">Password</label>
-        <input type="password" name="password" id="password" placeholder="Password" />
+        <!-- <input type="password" name="password" id="password" placeholder="Password" /> -->
+        <input type="password" name="password" id="password" />
 
         <label for="accedi">Accedi</label>
         <input type="submit" id="accedi" value="Accedi" />
-        <p>Non hai ancora un <span lang="en">account</span>? <a href="registrazione.html">Registrati</a>!</p>
+        <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html">Registrati</a>!</p>
       </fieldset>
     </form>
   </div>
