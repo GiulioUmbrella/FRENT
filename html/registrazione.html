@@ -9,20 +9,28 @@
   <meta name ="language" content="italian it" />
   <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
 
-  <link rel="stylesheet" type="text/css" href="/file.css" />
+  <link rel="stylesheet" type="text/css" href="../css/main.css" />
   <link rel="shortcuticon" href="/img.ico" />
 
 </head>
-  <body>
-    <div id="header">
+  <body class="layoutCentrale">
+    <div id="header" class="layoutCentrale1">
       <h1>Frent</h1>
       <span id="user-login">
       <a href="accedi.html">Accedi</a>
       </span>
     </div>
 
-    <form action="" method="post">
+    <div id="breadcrumb" class="layoutCentrale2">
+       <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Registrazione</p>
+    </div>
+
+
+    <div id="content" class="layoutCentrale3">
+    <form action="" method="post" class="form formVerticale">
+      <!--
       <fieldset>
+      -->
           <label for="nome">Nome</label>
           <input type="text" name="nome" id="nome" placeholder="Nome" />
 
@@ -46,9 +54,12 @@
 
           <label for="registrati">Registrati</label>
           <input type="submit" id="registrati" value="Registrati"/>
-      </fieldset>
+      <!-- </fieldset> -->
     </form>
 
     <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html">Registrati</a>
+    </div>
+
+
   </body>
 </html>

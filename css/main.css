@@ -71,19 +71,40 @@ html, body {
 .risultati {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 1em;
   grid-template-areas:
         "a a a a"
         "b b b b"
         "c d d d"
-        "c d d d"
-        ;
+        "c d d d";
 }
 
 .risultati1 { grid-area: a; }
 .risultati2 { grid-area: b; }
 .risultati3 { grid-area: c; }
 .risultati4 { grid-area: d; }
+
+/*
+* LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
+*/
+
+.layoutCentrale{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1em;
+  grid-template-areas:
+        "a a a a"
+        "b b b b"
+        ". c c ."
+        ". c c ."
+        "d d d d";
+}
+
+.layoutCentrale1 { grid-area:a ;}
+.layoutCentrale2 { grid-area:b ;}
+.layoutCentrale3 { grid-area:c ;}
+.layoutCentrale4 { grid-area:d ;}
+
 
 /*
 * definizione del css per i tag definition list della classe .risultati
@@ -142,11 +163,9 @@ html, body {
 /*
 * CSS PER I FORM
 */
-
 .form {
-  display: flex;
-  align-items: center;
-
+  display:flex;
+  align-items:center;
 }
 
 .form input {
@@ -173,21 +192,26 @@ html, body {
 }
 
 /*
+* IMPOSTA CERCA ORIZZONTALE
+*/
+.formOrizzontale input {
+  font-size:1em;
+}
+
+.formOrizzontale label {
+  font-size:1em;
+}
+
+
+/*
 * IMPOSTA CERCA VERTICALE
 */
 
-.form-inline {
+.formVerticale {
   flex-direction:column;
-  align-items: stretch;
+  align-items:stretch;
 }
 
-.form-inline input {
-font-size:1.5em;
-}
-.form-inline input[type=submit] {
-  font-size:1.5em;
-}
-
-.form-inline label {
-  font-size:1.5em;
+.formVerticale input, label {
+    font-size:1.5em;
 }
