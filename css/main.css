@@ -131,31 +131,6 @@ html, body {
   padding-right:0.5em;
 }
 
-/* FORM
-*  Impostazioni comuni per tutti i form
-*/
-
-.form-inline input {
-  vertical-align: middle;
-  margin: 0.5em;
-  padding: 0.5em;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-
-.form-inline input[type=submit] {
-
-  padding:1em;
-  background-color: dodgerblue;
-  border: 1px solid #ddd;
-  color: white;
-  cursor: pointer;
-
-}
-
-.form-inline label {
-  margin: 5px 10px 5px 0;
-}
 
 
 
@@ -164,19 +139,55 @@ html, body {
 * tramite CSS
 */
 
+/*
+* CSS PER I FORM
+*/
 
-.form-inline {
+.form {
   display: flex;
-  flex-flow: row wrap;
   align-items: center;
+
 }
 
+.form input {
+  vertical-align: middle;
+  margin: 0.5em 1em 0.5em 0;
+  padding: 0.5em;
+  background-color: #fff;
+  border: 0.1em solid #ddd;
+}
+
+.form input[type=submit] {
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form label {
+  margin: 0.5em 1em 0.5em 0;
+}
+
+.form input[type=submit]:hover {
+  background-color: royalblue;
+}
+
+/*
+* IMPOSTA CERCA VERTICALE
+*/
+
+.form-inline {
+  flex-direction:column;
+  align-items: stretch;
+}
 
 .form-inline input {
-  margin: 10px 0;
+font-size:1.5em;
+}
+.form-inline input[type=submit] {
+  font-size:1.5em;
 }
 
-.form-inline {
-  flex-direction: column;
-  align-items: stretch;
+.form-inline label {
+  font-size:1.5em;
 }

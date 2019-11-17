@@ -25,27 +25,26 @@
  </div>
 
 <!-- Il form di ricerca deve avere i parametri della ricerca -->
-<div class="risultati3 form-inline" >
-  <form action="">
-    <fieldset>
+  <form action="" class="risultati3 form form-inline">
+      <!--
+      <fieldset class="form-inline">
       <legend>Ricerca annuncio</legend>
-      <label for="citta">Città</label>
-      <input type="text" name="citta" id="citta"
-      placeholder="Città"/>
+      -->
+      <label for="citta">Città:</label>
+      <input type="text" name="citta" id="citta" placeholder="Città"/>
       <!--Chiarire cosa fare per Safari -->
       <label for="data_inizio">Data Inizio</label>
       <input type="date" name="data_inizio" id="data_inizio"
       placeholder="yyyy-mm-dd"/>
       <label for="data_fine">Data Fine</label>
-      <input type="date" name="data_fine" id="data_fine"
-      placeholder="yyyy-mm-dd"/>
+      <input type="date" name="data_fine" id="data_fine" placeholder="yyyy-mm-dd"/>
       <label for="num_ospiti">Num Ospiti</label>
-      <input type="number" name="num_ospiti" id="num_ospiti"
-      min="1" max="99" value="1"/>
+      <input type="number" name="num_ospiti" id="num_ospiti" min="1" max="99" value="1"/>
       <input type="submit" id="pulsante_cerca" value="Cerca">
+    <!--
     </fieldset>
+    -->
   </form>
-</div>
 
 
 <dl id="content" class="risultati4">
