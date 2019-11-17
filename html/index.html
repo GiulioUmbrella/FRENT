@@ -4,68 +4,88 @@
     <meta charset="utf-8">
     <title>Frent</title>
 
-    <meta name="title" content="Nome affito case" />
     <meta name="description" content="Home page del popolare sito di affitto case Frent" />
     <meta name="keyword" content="Casa,Appartamento,Affitto,Frent" />
     <meta name ="language" content="italian it" />
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
 
 
-    <link rel="stylesheet" type="text/css" href="/file.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
     <link rel="shortcuticon" href="/img.ico" />
   </head>
-  <body>
+  <body class="index">
 
-  <div id="header">
+  <div class="index1" id="header">
     <h1>Frent</h1>
     <span id=""
     <a href="">Registrati</a>
     <a href="">Accedi</a>
   </div>
 
-<form action="">
-  <fieldset>
-    <legend>Ricerca annuncio</legend>
-    <label for="citta">Città</label>
-    <input type="text" name="citta" id="citta"
-    placeholder="Città"/>
-    <!--Chiarire cosa fare per Safari -->
-    <label for="data_inizio">Data Inizio</label>
-    <input type="date" name="data_inizio" id="data_inizio"
-    placeholder="yyyy-mm-dd"/>
-    <label for="data_fine">Data Fine</label>
-    <input type="date" name="data_fine" id="data_fine"
-    placeholder="yyyy-mm-dd"/>
-    <label for="num_ospiti">Num Ospiti</label>
-    <input type="number" name="num_ospiti" id="num_ospiti"
-    min="1" max="99" value="1"/>
-    <label for="num_ospiti">Pulsante Ricerca</label>
-    <input type="submit" id="pulsante_cerca" value="Cerca"/>
-  </fieldset>
-</form>
-
-
- <div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span> </p>
- </div>
-
- <div id="esplora">
-   <h1>esplora</h1>
- </div>
-
-  <div id="piuvotati">
-    <h1>Piu Votati</h1>
+  <div class="index2" id="breadcrumb">
+     <p> Ti trovi in: <span xml:lang="en">Home</span> </p>
   </div>
 
-  <div id="novita">
-    <h1>Novità</h1>
-  </div>
+  <form class="index3 form formOrizzontale" action="">
+      <!--
+      <fieldset>
+      <legend>Ricerca annuncio</legend>
+      -->
+      <label for="citta">Città</label>
+      <input type="text" name="citta" id="citta"
+      placeholder="Città"/>
+      <!--Chiarire cosa fare per Safari -->
+      <label for="data_inizio">Data Inizio</label>
+      <input type="date" name="data_inizio" id="data_inizio"
+      placeholder="yyyy-mm-dd"/>
+      <label for="data_fine">Data Fine</label>
+      <input type="date" name="data_fine" id="data_fine"
+      placeholder="yyyy-mm-dd"/>
+      <label for="num_ospiti">Num Ospiti</label>
+      <input type="number" name="num_ospiti" id="num_ospiti"
+      min="1" max="99" value="1"/>
+      <label for="pulsante_cerca">Pulsante Ricerca</label>
+      <input type="submit" id="pulsante_cerca" value="Cerca">
+      <!--
+    </fieldset>
+  -->
+  </form>
+
+  <dl id="content" class="index4">
+      <dt >Esplora Città</dt>
+      <dd class ="citta" >
+        <div class="citta1" style="border:1px solid #000">  Roma </div>
+        <div class="citta2" style="border:1px solid #000">  Milano </div>
+        <div class="citta3" style="border:1px solid #000">  Firenze </div>
+        <div class="citta4" style="border:1px solid #000">  Venezia </div>
+        <div class="citta5" style="border:1px solid #000">  Napoli </div>
+      </dd>
+
+      <dt>I più votati</dt>
+      <dd class ="card" >
+        <div class="card1" style="border:1px solid #000">  Ann1 </div>
+        <div class="card2" style="border:1px solid #000">  Ann2 </div>
+        <div class="card3" style="border:1px solid #000">  Ann3 </div>
+        <div class="card4" style="border:1px solid #000">  Ann4 </div>
+        <div class="card5" style="border:1px solid #000">  Ann5 </div>
+        <div class="card6" style="border:1px solid #000">  Ann6 </div>
+
+      </dd>
+
+      <dt>Novità</dt>
+      <dd class ="card" >
+        <div class="card1" style="border:1px solid #000">  Ann1 </div>
+        <div class="card2" style="border:1px solid #000">  Ann2 </div>
+        <div class="card3" style="border:1px solid #000">  Ann3 </div>
+        <div class="card4" style="border:1px solid #000">  Ann4 </div>
+        <div class="card5" style="border:1px solid #000">  Ann5 </div>
+        <div class="card6" style="border:1px solid #000">  Ann6 </div>
+      </dd>
 
 
 
-  <div id="footer">
-    <p> Testo a fine pagina </p>
-  </div>
+  </dl>
 
-  </body>
+
+</body>
 </html>
