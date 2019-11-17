@@ -132,8 +132,9 @@ def generate_commnenti():
     comments_header = ["prenotazione", "data_pubblicazione", "titolo", "commento", "votazione"]
     next_data_base = "2019-12-01 09:21:00" #da modifcare in caso di cambiamenti
     for occupazione in occupazioni:
-        new_commento = [occupazione[0], next_data_base, "Titolo per l'occupazioni di id {}".format(occupazione[0]), "Commento molto molto ma vermanete molto lungo relativo all'occupazione di id {}".format(occupazione[0]), str(random.randrange(1, 5))]
-        commenti.append(new_commento)
+        if occupazione[3] == "1": #se è una prenotazione guest genero il commento
+            new_commento = [occupazione[0], next_data_base, "Titolo per l'occupazioni di id {}".format(occupazione[0]), "Commento molto molto ma vermanete molto lungo relativo all'occupazione di id {}".format(occupazione[0]), str(random.randrange(1, 5))]
+            commenti.append(new_commento)
     write_on_csv(comments_header, commenti, "commenti.csv")
 
 
