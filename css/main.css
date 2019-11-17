@@ -1,0 +1,217 @@
+*{
+  padding: 0em;
+	margin: 0em;
+}
+
+/* Layout per desktop*/
+html, body {
+	max-width: 1024px;
+	margin: auto;
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 0.9em;
+
+}
+
+/* ESPERIMENTO
+* Grid layout per la pagina home
+*/
+
+.index {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a a"
+        "b b b"
+        "c c c"
+        "d d d";
+}
+
+.index1 { grid-area: a; }
+.index2 { grid-area: b; }
+.index3 { grid-area: c; }
+.index4 { grid-area: d; }
+
+.citta{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a a b b b"
+        "c c d d e e";
+}
+
+.citta1 { grid-area: a; }
+.citta2 { grid-area: b; }
+.citta3 { grid-area: c; }
+.citta4 { grid-area: d; }
+.citta5 { grid-area: e; }
+
+.card{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+        "a a b b c c"
+        "d d e e f f";
+}
+
+.card1 { grid-area: a; }
+.card2 { grid-area: b; }
+.card3 { grid-area: c; }
+.card4 { grid-area: d; }
+.card5 { grid-area: e; }
+.card6 { grid-area: f; }
+
+
+/* ESPERIMENTO
+* Grid layout per la pagina dei risultati
+*/
+
+.risultati {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1em;
+  grid-template-areas:
+        "a a a a"
+        "b b b b"
+        "c d d d"
+        "c d d d";
+}
+
+.risultati1 { grid-area: a; }
+.risultati2 { grid-area: b; }
+.risultati3 { grid-area: c; }
+.risultati4 { grid-area: d; }
+
+/*
+* LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
+*/
+
+.layoutCentrale{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1em;
+  grid-template-areas:
+        "a a a a"
+        "b b b b"
+        ". c c ."
+        ". c c ."
+        "d d d d";
+}
+
+.layoutCentrale1 { grid-area:a ;}
+.layoutCentrale2 { grid-area:b ;}
+.layoutCentrale3 { grid-area:c ;}
+.layoutCentrale4 { grid-area:d ;}
+
+
+/*
+* definizione del css per i tag definition list della classe .risultati
+*/
+
+.risultati dt {
+
+  margin-bottom:0.1em;
+  clear:both; // per andare a capo
+}
+
+.risultati dt > a {
+  font-size: 2em;
+  float:left;
+}
+
+.risultati dt > p {
+  font-size: 1em;
+  float:right;
+  margin-top:1em;
+}
+
+.risultati dd {
+  clear:both;
+  border:1px solid #000;
+  margin-bottom:1em;
+  min-height: 14em;
+}
+
+.risultati dd > img {
+    float:left;
+    padding:0.5em;
+    width:12em;
+    height:12em;
+}
+
+.risultati dd > p {
+  padding-top:0.5em;
+  margin-left: 13em;
+}
+
+.risultati dd p + p  {
+  float:right;
+  font-weight:bold;
+  padding-right:0.5em;
+}
+
+
+
+
+/* FORM VERTICALI
+* Impostazioni aggiuntive per inserire in verticale gli elementi del form
+* tramite CSS
+*/
+
+/*
+* CSS PER I FORM
+*/
+.form {
+  display:flex;
+  align-items:center;
+}
+
+.form input {
+  vertical-align: middle;
+  margin: 0.5em 1em 0.5em 0;
+  padding: 0.5em;
+  background-color: #fff;
+  border: 0.1em solid #ddd;
+}
+
+.form input[type=submit] {
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form label {
+  margin: 0.5em 1em 0.5em 0;
+}
+
+.form input[type=submit]:hover {
+  background-color: royalblue;
+}
+
+/*
+* IMPOSTA CERCA ORIZZONTALE
+*/
+.formOrizzontale input {
+  font-size:1em;
+}
+
+.formOrizzontale label {
+  font-size:1em;
+}
+
+
+/*
+* IMPOSTA CERCA VERTICALE
+*/
+
+.formVerticale {
+  flex-direction:column;
+  align-items:stretch;
+}
+
+.formVerticale input, label {
+    font-size:1.5em;
+}

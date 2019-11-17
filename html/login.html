@@ -13,16 +13,21 @@
   <link rel="shortcuticon" href="/img.ico" />
 
 </head>
-  <body>
-    <div id="header">
+  <body class="layoutCentrale">
+    <div id="header" class="layoutCentrale1">
       <h1>Frent</h1>
       <span id="user-login">
       <a href="registrazione.html">Registrati</a>
       </span>
     </div>
 
-    <form action="" method="post">
-      <fieldset>
+  <div id="breadcrumb" class="layoutCentrale2">
+    <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Login</p>
+  </div>
+
+    <div id="content" class="layoutCentrale3">
+    <form action="" method="post" class="form formVerticale">
+      <!-- <fieldset> -->
           <label for="user" xml:lang="en">Email</label>
           <input type="text" name="user" id="user" placeholder="Indirizzo mail" />
 
@@ -31,9 +36,9 @@
 
           <label for="accedi">Accedi</label>
           <input type="submit" id="accedi" value="Accedi"/>
-      </fieldset>
+      <!-- </fieldset> -->
     </form>
-
     <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html">Registrati</a>
+    </div>
   </body>
 </html>

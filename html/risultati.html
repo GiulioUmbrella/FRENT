@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <title>Frent</title>
+
+    <meta name="description" content="Home page del popolare sito di affitto case Frent" />
+    <meta name="keyword" content="Casa,Appartamento,Affitto,Frent" />
+    <meta name ="language" content="italian it" />
+    <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
+
+
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+    <link rel="shortcuticon" href="/img.ico" />
+  </head>
+  <body class="risultati">
+
+  <div class="risultati1">
+    <h1>Frent</h1>
+  </div>
+
+
+ <div class="risultati2 "id="breadcrumb">
+    <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Risultati</p>
+ </div>
+
+<!-- Il form di ricerca deve avere i parametri della ricerca -->
+  <form action="" class="risultati3 form formVerticale">
+      <!--
+      <fieldset class="form-inline">
+      <legend>Ricerca annuncio</legend>
+      -->
+      <label for="citta">Città:</label>
+      <input type="text" name="citta" id="citta" placeholder="Città"/>
+      <!--Chiarire cosa fare per Safari -->
+      <label for="data_inizio">Data Inizio</label>
+      <input type="date" name="data_inizio" id="data_inizio"
+      placeholder="yyyy-mm-dd"/>
+      <label for="data_fine">Data Fine</label>
+      <input type="date" name="data_fine" id="data_fine" placeholder="yyyy-mm-dd"/>
+      <label for="num_ospiti">Num Ospiti</label>
+      <input type="number" name="num_ospiti" id="num_ospiti" min="1" max="99" value="1"/>
+      <input type="submit" id="pulsante_cerca" value="Cerca">
+    <!--
+    </fieldset>
+    -->
+  </form>
+
+
+<dl id="content" class="risultati4">
+   <dt>
+      <a href="">Titolo</a>
+      <p>Punteggio: Num Recensioni: </p>
+   </dt>
+   <dd>
+      <img src ="../immagini/img1.png" alt="Foto copertina della casa" />
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+      <p class="prezzototale">Prezzo totale</p>
+
+   </dd>
+
+   <dt>
+      <a href="">Titolo</a>
+      <p>Punteggio: Num Recensioni: </p>
+   </dt>
+   <dd>
+      <img src ="../immagini/img2.jpg" alt="Foto copertina della casa" />
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+      <p class="prezzototale">Prezzo totale</p>
+   </dd>
+
+   <dt>
+      <a href="">Titolo</a>
+      <p>Punteggio: Num Recensioni: </p>
+   </dt>
+   <dd>
+      <img src ="../immagini/img3.jpg" alt="Foto copertina della casa" />
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+      <p class="prezzototale">Prezzo totale</p>
+   </dd>
+
+</dl>
+
+
+</body>
+</html>
