@@ -5,6 +5,9 @@ import random
 
 user_data = []
 annunci_data = []
+occupazioni = []
+commenti = []
+data_base = "2019-11-"
 
 def write_on_csv(header, csv_data, file_path="data.csv"):
     with open(file_path, 'w') as csv_file:
@@ -103,32 +106,38 @@ def generate_annunci():
 
 
 def generate_occupazioni():
-    data_base = "2019-11-"
 
     occupazioni_header = ["id_occupazione", "utente", "annuncio", "prenotazione_guest", "num_ospiti", "data_inizio", "data_fine"]
-    occupazioni = [
-        ["1", "1", "1", "1", "1", data_base+"2", data_base+"7"],
-        ["2", "2", "1", "1", "1", data_base+"11", data_base+"15"],
-        ["3", "3", "1", "1", "1", data_base+"21", data_base+"25"],
-        ["4", "9", "2", "0", "1", data_base+"14", data_base+"19"],
-        ["5", "5", "3", "1", "1", data_base+"7", data_base+"9"],
-        ["6", "6", "3", "1", "1", data_base+"14", data_base+"16"],
-        ["7", "6", "3", "1", "1", data_base+"28", data_base+"30"],
-        ["8", "7", "4", "1", "1", data_base+"4", data_base+"7"],
-        ["9", "9", "4", "1", "1", data_base+"19", data_base+"22"],
-        ["10", "4", "6", "0", "1", data_base+"1", data_base+"30"],
-        ["11", "9", "7", "1", "1", data_base+"4", data_base+"7"],
-        ["12", "10", "8", "1", "1", data_base+"10", data_base+"13"],
-        ["13", "11", "8", "0", "1", data_base+"19", data_base+"23"],
-        ["14", "12", "9", "0", "1", data_base+"6", data_base+"9"],
-        ["15", "13", "9", "1", "1", data_base+"19", data_base+"22"],
-        ["16", "12", "9", "0", "1", data_base+"24", data_base+"26"],
-        ["17", "14", "10", "1", "1", data_base+"2", data_base+"5"],
-        ["18", "14", "10", "1", "1", data_base+"13", data_base+"17"],
-    ]
+    occupazioni.append(["1", "1", "1", "1", "1", data_base+"2", data_base+"7"])
+    occupazioni.append(["2", "2", "1", "1", "1", data_base+"11", data_base+"15"])
+    occupazioni.append(["3", "3", "1", "1", "1", data_base+"21", data_base+"25"])
+    occupazioni.append(["4", "9", "2", "0", "1", data_base+"14", data_base+"19"])
+    occupazioni.append(["5", "5", "3", "1", "1", data_base+"7", data_base+"9"])
+    occupazioni.append(["6", "6", "3", "1", "1", data_base+"14", data_base+"16"])
+    occupazioni.append(["7", "6", "3", "1", "1", data_base+"28", data_base+"30"])
+    occupazioni.append(["8", "7", "4", "1", "1", data_base+"4", data_base+"7"])
+    occupazioni.append(["9", "9", "4", "1", "1", data_base+"19", data_base+"22"])
+    occupazioni.append(["10", "4", "6", "0", "1", data_base+"1", data_base+"30"])
+    occupazioni.append(["11", "9", "7", "1", "1", data_base+"4", data_base+"7"])
+    occupazioni.append(["12", "10", "8", "1", "1", data_base+"10", data_base+"13"])
+    occupazioni.append(["13", "11", "8", "0", "1", data_base+"19", data_base+"23"])
+    occupazioni.append(["14", "12", "9", "0", "1", data_base+"6", data_base+"9"])
+    occupazioni.append(["15", "13", "9", "1", "1", data_base+"19", data_base+"22"])
+    occupazioni.append(["16", "12", "9", "0", "1", data_base+"24", data_base+"26"])
+    occupazioni.append(["17", "14", "10", "1", "1", data_base+"2", data_base+"5"])
+    occupazioni.append(["18", "14", "10", "1", "1", data_base+"13", data_base+"17"])
     write_on_csv(occupazioni_header, occupazioni, "occupazioni.csv")
+
+def generate_commnenti():
+    comments_header = ["prenotazione", "data_pubblicazione", "titolo", "commento", "votazione"]
+    next_data_base = "2019-12-01 09:21:00" #da modifcare in caso di cambiamenti
+    for occupazione in occupazioni:
+        new_commento = [occupazione[0], next_data_base, "Titolo per l'occupazioni di id {}".format(occupazione[0]), "Commento molto molto ma vermanete molto lungo relativo all'occupazione di id {}".format(occupazione[0]), str(random.randrange(1, 5))]
+        commenti.append(new_commento)
+    write_on_csv(comments_header, commenti, "commenti.csv")
 
 
 generate_users()
 generate_annunci()
 generate_occupazioni()
+generate_commnenti()
