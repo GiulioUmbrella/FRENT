@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nuovo annuncio</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+    <!--<script src="script.js"></script>
+  -->
+</head>
+<body>
+<div id="header">
+  <div id="logo">
+    <h1>Frent</h1>
+  </div>
+  <div id="nav">
+    <ul>
+      <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+      <li><a href="#" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
+      <li class="selected">I miei annunci</li>
+      <li><a href="mio_profilo.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+      <li><a href="#" title="Vai alla pagina delle FAQ"><abbr lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
+      <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+      <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumb">
+  <p> Ti trovi in: <span lang="en">Home:&gt;&gt;Miei Annunci</span> </p>
+</div>
+
+
+<div id="content" class="layoutCentrale3">
+  <h1>Inserisci un nuovo annuncio: </h1>
+  <form action="" method="post" class="form formVerticale">
+      <fieldset>
+        <legend>Nuovo Annuncio</legend>
+
+        <label for="titolo">Titolo:</label>
+        <input type="text" name="titolo" id="titolo" placeholder="Titolo annuncio:" maxlength="32"/>
+
+
+        <label for="citta">Citt&agrave;:</label>
+        <input type="text" name="citta" id="citta" placeholder="Citta" maxlength="128"/>
+
+        <label for="indirizzo">Descrizione:</label>
+        <input type="text" name="indirizzo" id="indirizzo" placeholder="Indirizzo" maxlength="128"/>
+
+        <label for="max_ospiti">Numero ospiti:</label>
+        <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1"  value="1" placeholder="Numero degli ospiti"/>
+
+        <label for="immagini">Immagini: la prima caricata verra utilizzata come anteprima</label>
+        <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" multiple/>
+
+        <label for="prezzoapersona">Prezzo a persona:</label>
+        <input type="number" id="prezzoapersona" name="prezzoapersona" placeholder="&euro; a persona"/>
+
+        <label for="descrizione">Descrizione:</label>
+        <textarea id="descrizione" name="descrizione" maxlength="512" placeholder="inserisci qui la descrizione"></textarea>
+
+
+        <input type="submit" value="Aggiungi">
+        <input type="reset">
+
+      </fieldset>
+
+  </form>
+</div>
+
+<div id="footer">
+  <p> Testo a fine pagina </p>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
