@@ -2,15 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
   <head>
     <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
-    <title>Miei Annunci</title>
+    <title>Dettaglio annuncio</title>
 
     <meta name="title" content="Nome affitto case" />
     <meta name="description" content="Home page del popolare sito di affitto case" />
     <meta name="keyword" content="Case,Affitto" />
     <meta name ="language" content="italian it" />
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
-    
-    
+
     
  
     <link rel="stylesheet" type="text/css" href="../css/main.css" />
@@ -26,7 +25,7 @@
       <ul>
         <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
         <li><a href="#" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-        <li class="selected">I miei annunci</li>
+        <li class="selected"><a href="miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a></li>
         <li><a href="mio_profilo_modifica.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
         <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
         <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
@@ -34,33 +33,43 @@
       </ul>
     </div>
   </div>
- <div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;Miei Annunci </p>
-</div>
- 
+  <div id="breadcrumb">
+    <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;
+      <a href="miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a>&gt;&gt;Titolo Annuncio</p>
+  </div>
 
   <div id="content" class="layoutCentrale3">
-    <h1>Miei Annunci:</h1>
-    <a href="aggiungi_annunci.html"> Aggiungi Annuncio</a>
+    <h1>Gestione annuncio</h1>
     <ul>
-      <li>
-        <div class="annuncio_lista_annuncio">
-            <h2 class="annuncio_id">titolo annuncio</h2>
-            <img src="" alt="anteprima annuncio">
-            <p class="prezzo_notte">Prezzo per notte</p>
-            <p class="numero_ospiti">Num. max ospiti: </p>
-            <p>indirizzo: città:</p>
-            <p>descrizione:</p>
-            <a accesskey="Modifica" href="dettaglio_annunci_host_visualizza.html">Dettagli</a>
-        </div>
-      </li>
+      <li><a href="dettaglio_annunci_host_modifica.html">Modifica Annuncio</a></li>
+      <li><a href="gestione_indisponibilita.html">Gestione Indisponibilit&agrave;</a></li>
+      <li><a href="#">Blocca l'annuncio</a></li>
+      <li><a href="storico_prenotazioni.html">Storico Prenotazioni</a></li>
+      <li><a href="#">Elimina Annuncio</a></li>
     </ul>
 
+
+    <h1>Dettaglio Annuncio:</h1>
+    <h2 >titolo annuncio</h2>
+    <img src="" alt="Immagini dell'annuncio"/>
+
+    <p >Prezzo per notte</p>
+    <p >Num. max ospiti: </p>
+    <p>indirizzo:</p>
+    <p>via trieste 26:</p>
+    <p>Citt&agrave;:</p>
+    <p>Padova:</p>
+    <p>descrizione:</p>
+    <p># Valutazione: </p>
+    <p>290</p>
+    <p>Media valutazione: </p>
+    <p>4.5</p>
+    <p>Commenti avuti ...</p>
   </div>
     
   <div id="footer">  
     <p> Testo a fine pagina </p>
-  </div>
+    </div>
     
   </body> 
 </html>

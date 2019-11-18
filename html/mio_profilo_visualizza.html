@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>title</title>
+  <title>Il mio profilo</title>
 
   <link rel="stylesheet" href="../css/main.css">
  <!--  <script src="script.js"></script>
@@ -27,48 +27,28 @@
   </div>
 </div>
 <div id="breadcrumb">
-  <p> Ti trovi in: <span lang="en">Home:&gt;&gt;Mio Profilo</span> </p>
+  <p> Ti trovi in: <span lang="en">Home</span>:&gt;&gt;Mio Profilo </p>
 </div>
-
+<!--div da mostrare quando la pagina è solamente visualizzabile. -->
 <div id="content" class="layoutCentrale3">
-  <h1>Il mio profilo: </h1>
-  <img src="default.png" alt="Immagine di profilo ">
-  <form action="" method="get" >
-<!--    cambiare l'immagine di profilo-->
-    <fieldset>
-      <legend>Modifica Immagine di profilo: </legend>
-      <input type="file" name="immagine_profilo" id="immagine_profilo"/>
-      <input type="submit" value="Invia">
-      <input type="reset" value="Annulla">
-    </fieldset>
+
+  <h1>Il tuo profilo: </h1>
+  <img src="default.png" id="immagine_profilo" alt="Immagine di profilo ">
+  <form method="post" action="">
+    <input type="file" accept="image/png, image/jpeg">
+    <input type="submit" value="Conferma">
+    <input type="reset" value="Annulla">
   </form>
 
+  <a href="mio_profilo_modifica.html">Modifica i dati</a>
+<!--  quando viene cliccato il link di cui sopra, viene generata attraverso php una la pagina mio_profilo_modifica-->
+  <p>Nome: Xiaowei</p>
+  <p>Cognome: Wen</p>
+  <p><span xml:lang="en">Username</span>: xwen</p>
+  <p><span xml:lang="en">Email</span>: Xiaowei.wen!997@gmail.com</p>
+  <p>Data di nascita: 14/06/1997</p>
   <form action="" method="get">
-    <!--      finto form, che viene triggerato quando viene cliccato i campi dati diventano editabile.-->
-    <fieldset>
-      <legend>Miei dati</legend>
-      <label for="nome">Nome:</label>
-      <input type="text" name="nome" id="nome" placeholder="Nome" maxlength="32" readonly value="Xiaowei"/>
-
-      <label for="cognome">Cognome:</label>
-      <input type="text" name="cognome" id="cognome" placeholder="cognome" maxlength="32" readonly value="Wen"/>
-
-      <label for="Username">Username:</label>
-      <input type="text" name="Username" id="Username" placeholder="Username" maxlength="32" readonly value="Username"/>
-
-      <label for="mail">Mail:</label>
-      <input type="email" name="mail" id="mail" placeholder="mail" maxlength="191" readonly value="xiaowei.wen1997@gmail.com"/>
-
-      <label for="birthday">Data di Nascita:</label>
-      <input type="date" name="birthday" id="birthday"  readonly value=""/>
-
-      <label for="telefono">Telefono: </label>
-      <input type="tel" name="telefono" id="telefono" placeholder="Telefono" readonly value="+39112312"/>
-      <input type="hidden" value="Conferma Modifica">
-    </fieldset>
-  </form>
-  <form action="" method="get">
-<!--    cambiare il password-->
+    <!--    cambiare il password-->
     <fieldset>
       <legend>Cambia Password:</legend>
 
@@ -87,6 +67,7 @@
       <input type="submit" value="Elimina">
     </fieldset>
   </form>
+</div>
 </div>
 
 <div id="footer">

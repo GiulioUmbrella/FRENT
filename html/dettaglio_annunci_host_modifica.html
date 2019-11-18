@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Modifica Annuncio</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <!--  <script src="script.js"></script>
+  -->
+</head>
+<body>
+
+<div id="header">
+  <div id="logo">
+    <h1>Frent</h1>
+  </div>
+  <div id="nav">
+    <ul>
+      <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+      <li><a href="#" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
+      <li><a href="miei_annunci.html" title="Vai alle miei annunci">I miei annunci</a></li>
+      <li><a href="mio_profilo_modifica.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+      <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
+      <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+      <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumb">
+  <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;
+    <a href="miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a>:&gt;&gt;
+    <a href="dettaglio_annunci_host_visualizza.html" title="Torna nei miei annunci">Titolo Annuncio</a>
+    &gt;&gt;Modifica Annuncio</p>
+</div>
+
+<div id="content" class="layoutCentrale3">
+  <h1>Modifica annuncio</h1>
+  <!--   todo fare il form per la modifica degli annunci, decidere se tutti devono poter essere modificati-->
+  <form action="" method="post" class="form formVerticale">
+    <fieldset>
+      <legend>Nuovo Annuncio</legend>
+
+      <label for="titolo">Titolo:</label>
+      <input type="text" name="titolo" id="titolo" placeholder="Titolo annuncio:" maxlength="32"/>
+
+
+
+
+      <label for="max_ospiti">Numero ospiti:</label>
+      <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1"  value="1" placeholder="Numero degli ospiti"/>
+
+      <label for="anteprima">Modifica anteprima: </label>
+      <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" />
+
+<!--      <ul>-->
+<!--        <li value="1">mostrare le varie foto <a href="scriptper eliminare la foto">Togli questa foto</a></li>-->
+<!--        <li></li>-->
+<!--      </ul>-->
+
+      <label for="immagini">Aggiungere immagini:</label>
+      <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" multiple/>
+
+
+      <label for="prezzo_a_persona">Prezzo a persona:</label>
+      <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" placeholder="&euro; a persona"/>
+
+      <label for="descrizione">Descrizione:</label>
+      <textarea id="descrizione" name="descrizione" maxlength="512" placeholder="inserisci qui la descrizione"></textarea>
+
+    </fieldset>
+    <fieldset>
+      <legend>Indirizzo</legend>
+      <label for="via">Via:</label>
+      <input type="text" name="via" id="via" placeholder="via" maxlength="128"/>
+      <label for="numero_civico">Numero Civico:</label>
+      <input type="text" name="numero_civico" id="numero_civico" placeholder="Numero civico"/>
+      <label for="citta">Citt&agrave;:</label>
+      <input type="text" name="citta" id="citta" placeholder="Citta" maxlength="128"/>
+
+    </fieldset>
+    <input type="submit" value="Aggiungi">
+    <input type="reset">
+  </form>
+</div>
+
+<div id="footer">
+  <p> Testo a fine pagina </p>
+</div>
+
+</body>
+</html>
+

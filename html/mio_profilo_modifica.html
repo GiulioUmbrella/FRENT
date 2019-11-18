@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Il mio profilo</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+ <!--  <script src="script.js"></script>
+  -->
+</head>
+<body>
+<div id="header">
+  <div id="logo">
+    <h1>Frent</h1>
+  </div>
+  <div id="nav">
+    <!-- Header loggato -->
+    <ul>
+      <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+      <li><a href="#" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
+      <li><a href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
+      <li><a href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+      <li><a href="#" title="Vai alla pagina delle FAQ"><abbr lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
+      <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+      <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumb">
+  <p> Ti trovi in: <span lang="en">Home</span>:&gt;&gt;Mio Profilo </p>
+</div>
+
+<div id="content" class="layoutCentrale3">
+  <h1>Il tuo profilo: </h1>
+
+  <form action="" method="get">
+    <!--      finto form, che viene triggerato quando viene cliccato i campi dati diventano editabile.-->
+    <fieldset>
+      <legend>Miei dati</legend>
+      <label for="nome">Nome:</label>
+      <input type="text" name="nome" id="nome" placeholder="Nome" maxlength="32"  value="Xiaowei"/>
+
+      <label for="cognome">Cognome:</label>
+      <input type="text" name="cognome" id="cognome" placeholder="cognome" maxlength="32"  value="Wen"/>
+
+      <label for="Username">Username:</label>
+      <input type="text" name="Username" id="Username" placeholder="Username" maxlength="32"  value="Username"/>
+
+      <label for="mail">Mail:</label>
+      <input type="email" name="mail" id="mail" placeholder="mail" maxlength="191"  value="xiaowei.wen1997@gmail.com"/>
+
+
+
+      <label for="telefono">Telefono: </label>
+      <input type="tel" name="telefono" id="telefono" placeholder="Telefono"  value="+39112312"/>
+      <input type="hidden" value="Conferma Modifica">
+    </fieldset>
+    <fieldset>
+      <legend>Data di nascita</legend>
+      <label for="birth_day">Giorno:</label>
+      <select id="birth_day">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <!--    eccetera che tanto si farà con un ciclo-->
+      </select>
+      <label for="birth_month">Mese:</label>
+      <select id="birth_month">
+        <option value="1">Gennaio</option>
+        <option value="2">Febbraio</option>
+        <option value="3">Marzo</option>
+        <option value="4">Aprile</option>
+        <!--    eccetera che tanto si farà con un ciclo-->
+      </select>
+      <label for="birth_year">Anno</label>
+      <select id="birth_year">
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <!--    eccetera che tanto si farà con un ciclo-->
+      </select>
+    </fieldset>
+    <input type="submit" value="Modifica">
+    <input type="reset" value="Annulla">
+  </form>
+
+</div>
+
+
+<div id="footer">
+  <p> Testo a fine pagina </p>
+</div>
+</body>
+</html>
+
+
+
