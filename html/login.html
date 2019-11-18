@@ -1,44 +1,61 @@
-<!DOCTYPE html>
-<html lang="it">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
+
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
   <title>Login - Frent</title>
 
   <meta name="description" content="Login sul sito di Frent" />
   <meta name="keyword" content="Casa,Appartamento,Affitto,Frent, Frent login" />
-  <meta name ="language" content="italian it" />
+  <meta name="language" content="italian it" />
   <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
 
-  <link rel="stylesheet" type="text/css" href="../css/main.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="shortcuticon" href="/img.ico" />
-
-</head>
+  
   <body class="layoutCentrale">
     <div id="header" class="layoutCentrale1">
+    <div id="logo">
       <h1>Frent</h1>
-      <span id="user-login">
-      <a href="registrazione.html">Registrati</a>
-      </span>
     </div>
+    <div id="nav">
+      <!-- Header non loggato -->
+      <ul>
+        <li>Cerca annunci</li>
+        <li>Accedi</li>
+        <li><a href="registrazione.html" title="Vai alla pagina di registrazione">Registrazione</a></li>
+        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
+        <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+      </ul>
+    </div>
+  </div>
 
   <div id="breadcrumb" class="layoutCentrale2">
     <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Login</p>
   </div>
 
-    <div id="content" class="layoutCentrale3">
+  <div id="content" class="layoutCentrale3">
     <form action="" method="post" class="form formVerticale">
       <!-- <fieldset> -->
-          <label for="user" xml:lang="en">Email</label>
-          <input type="text" name="user" id="user" placeholder="Indirizzo mail" />
+        <label for="user"><span lang="en">E-mail</span> o nome utente</label>
+        <!-- <input type="text" name="user" id="user" placeholder="Esempio: nome.cognome@mail.it, nome_cognome26" /> -->
+        <input type="text" name="user" id="user" />
 
-          <label for="password" xml:lang="en">Password</label>
-          <input type="password" name="password" id="password" placeholder="Password"/>
+        <label for="password" lang="en">Password</label>
+        <!-- <input type="password" name="password" id="password" placeholder="Password" /> -->
+        <input type="password" name="password" id="password" />
 
-          <label for="accedi">Accedi</label>
-          <input type="submit" id="accedi" value="Accedi"/>
+		<label for="accedi">Accedi</label>
+        <input type="submit" id="accedi" value="Accedi" />
+        <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html">Registrati</a>!</p>
       <!-- </fieldset> -->
     </form>
-    <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html">Registrati</a>
-    </div>
-  </body>
+  </div>
+
+  <div id="footer">
+    <p>Frent - Progetto di Tecnologie Web A.A. 2019/2020</p>
+  </div>
+
+</body>
+
 </html>
