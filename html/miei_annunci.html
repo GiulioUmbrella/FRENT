@@ -9,10 +9,6 @@
     <meta name="keyword" content="Case,Affitto" />
     <meta name ="language" content="italian it" />
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
-
-
-
-
     <link rel="stylesheet" type="text/css" href="../css/main.css" />
     <link rel="icon" href="../immagini/icona.ico" />
   </head>
@@ -24,24 +20,22 @@
     </div>
     <div id="nav">
       <ul>
-        <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
-        <li><a href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
+        <li><a href="../" tabindex="1" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+        <li><a href="mie_prenotazioni.html" tabindex="2" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
         <li class="selected">I miei annunci</li>
-        <li><a href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
-        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
-        <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
-        <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+        <li><a href="mio_profilo_visualizza.html" tabindex="3" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+        <li><a href="#" tabindex="4" title="Effettua la disconnessione">Esci</a></li>
       </ul>
     </div>
   </div>
  <div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;Miei Annunci </p>
+    <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="5"><span xml:lang="en">Home</span></a>:&gt;&gt;:&gt;&gt;Miei Annunci </p>
 </div>
  
 
   <div id="content" class="layoutCentrale3">
     <h1>Miei Annunci:</h1>
-    <a href="aggiungi_annunci.html"> Aggiungi Annuncio</a>
+    <a href="aggiungi_annunci.html" tabindex="6"> Aggiungi Annuncio</a>
     <ul>
       <li>
         <div class="annuncio_lista_annuncio">
@@ -51,7 +45,7 @@
             <p class="numero_ospiti">Num. max ospiti: </p>
             <p>indirizzo: città:</p>
             <p>descrizione:</p>
-            <a accesskey="Modifica" href="dettaglio_annunci_host_visualizza.html">Dettagli</a>
+            <a accesskey="Modifica" tabindex="7" href="dettaglio_annunci_host_visualizza.html">Dettagli</a>
         </div>
       </li>
     </ul>

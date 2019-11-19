@@ -17,19 +17,20 @@
     </div>
     <div id="nav">
         <ul>
-            <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
-            <li><a href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-            <li><a href="miei_annunci.html" title="vai alla pagina dei miei annunci">I miei annunci</a></li>
-            <li><a href="mio_profilo_modifica.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
-            <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
-            <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
-            <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+            <li><a  tabindex="1"  href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+            <li><a  tabindex="2"  href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie
+                prenotazioni</a></li>
+            <li><a  tabindex="3" href="miei_annunci.html" title="Vai alle miei annunci">I miei annunci</a></li>
+            <li><a  tabindex="4" href="mio_profilo_modifica.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+            <li><a href="#" tabindex="5"  title="Effettua la disconnessione">Esci</a></li>
         </ul>
     </div>
 </div>
 <div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;<a href="miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a>&gt;&gt;
-        <a href="dettaglio_annunci_host_visualizza.html" title="Torna al dettaglio Annuncio">Dettaglio Annuncio</a>&gt;&gt;
+
+    <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;
+        <a href="miei_annunci.html" tabindex="7" title="Torna nei miei annunci">Miei Annunci</a>&gt;&gt;
+        <a href="dettaglio_annunci_host_visualizza.html" tabindex="8"  title="Torna al dettaglio Annuncio">Dettaglio Annuncio</a>&gt;&gt;
         Gestione indisponibilit&agrave; </p>
 </div>
 
@@ -38,8 +39,12 @@
     <h1>Nome dell'annuncio</h1>
     <p>Questo annuncio risulta indisponibile nei seguenti periodi:</p>
     <ul>
-        <li> data inizio: 20/11/2019 a 22/11/2019 <a href="#" title="Modifica questa indisponibilit&agrave;">Modifica </a><a href="#" title="elimina questa indisponibilit&agrave;">Elimina</a></li>
-        <li> data inizio: 20/11/2019 a 22/11/2019 <a href="#" title="Modifica questa indisponibilit&agrave;">Modifica </a><a href="#" title="elimina questa indisponibilit&agrave;">Elimina</a></li>
+        <li> data inizio: 20/11/2019 a 22/11/2019
+            <a href="#" title="Modifica questa indisponibilit&agrave;" tabindex="9" >Modifica </a>
+            <a href="#" title="elimina questa indisponibilit&agrave;" tabindex="10" >Elimina</a></li>
+        <li> data inizio: 20/11/2019 a 22/11/2019
+            <a href="#" title="Modifica questa indisponibilit&agrave;" tabindex="11" >Modifica </a>
+            <a href="#" title="elimina questa indisponibilit&agrave;" tabindex="12" >Elimina</a></li>
     </ul>
 
 
@@ -49,12 +54,12 @@ si apre quando viene cliccato il link della modifica, e aggiungendo un pulsante/
         <fieldset>
             <legend>Inserire una nuova indisponibilit&agrave;</legend>
             <label for="data_inizio">Data Inizio</label>
-            <input type="date" id="data_inizio" name="data_inizio" placeholder="Data inizio nuova indisponibilit&agrave;" value="" />
+            <input type="date" id="data_inizio" tabindex="13" name="data_inizio" placeholder="Data inizio nuova indisponibilit&agrave;" value="" />
             <label for="data_fine">Data Fine</label>
-            <input type="date"  id="data_fine" name="data_fine" placeholder="Data fine nuova indisponibilit&agrave;" value="" />
+            <input type="date"  id="data_fine" name="data_fine" tabindex="14"  placeholder="Data fine nuova indisponibilit&agrave;" value="" />
         </fieldset>
-        <input type="submit" value="Aggiunti">
-        <input type="reset" value="Annulla">
+        <input type="submit" value="Aggiunti" tabindex="15">
+        <input type="reset" value="Annulla" tabindex="16">
     </form>
 </div>
 

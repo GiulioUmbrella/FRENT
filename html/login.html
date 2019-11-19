@@ -20,17 +20,15 @@
     <div id="nav">
       <!-- Header non loggato -->
       <ul>
-        <li>Cerca annunci</li>
-        <li>Accedi</li>
-        <li><a href="registrazione.html" title="Vai alla pagina di registrazione">Registrazione</a></li>
-        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
-        <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+        <li><a href="../" title="Vai alla pagina di ricerca annunci" tabindex="1">Cerca annunci</a></li>
+        <li><a href="login.html" title="Vai alla pagina di di login" tabindex="2">Accedi</a></li>
+        <li><a href="registrazione.html" title="Vai alla pagina di registrazione" tabindex="3">Registrazione</a></li>
       </ul>
     </div>
 
 
   <div id="breadcrumb" class="layoutCentraleBreadCrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Login</p>
+    <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;
   </div>
 
     <div id="content" class="layoutCentraleContent">
@@ -38,15 +36,15 @@
       <!-- <fieldset> -->
         <label for="user"><span lang="en">E-mail</span> o nome utente</label>
         <!-- <input type="text" name="user" id="user" placeholder="Esempio: nome.cognome@mail.it, nome_cognome26" /> -->
-        <input type="text" name="user" id="user" />
+        <input type="text" name="user" id="user"  tabindex="4"/>
 
         <label for="password" lang="en">Password</label>
         <!-- <input type="password" name="password" id="password" placeholder="Password" /> -->
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password" tabindex="5" />
 
 		<label for="accedi">Accedi</label>
-        <input type="submit" id="accedi" value="Accedi" />
-        <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html">Registrati</a>!</p>
+        <input type="submit" id="accedi" value="Accedi"  tabindex="6"/>
+        <p>Non hai ancora un <span xml:lang="en">account</span>? <a href="registrazione.html"  tabindex="7">Registrati</a>!</p>
       <!-- </fieldset> -->
     </form>
   </div>

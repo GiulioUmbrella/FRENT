@@ -2,60 +2,94 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
-  <title>Frent</title>
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
+    <title>Frent</title>
 
-  <meta name="title" content="Nome affito case" />
-  <meta name="description" content="Home page del popolare sito di affitto case Frent" />
-  <meta name="keyword" content="Casa,Appartamento,Affitto,Frent" />
-  <meta name="language" content="italian it" />
-  <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
+    <meta name="title" content="Nome affitto case"/>
+    <meta name="description" content="Home page del popolare sito di affitto case Frent"/>
+    <meta name="keyword" content="Casa,Appartamento,Affitto,Frent"/>
+    <meta name="language" content="italian it"/>
+    <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
 
-
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="shortcuticon" href="/img.ico" />
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="icon" href="immagini/icona.ico"/>
 </head>
+<body class="index">
 
-<body>
+<div class="index1" id="header">
+    <h1>Frent</h1>
 
-  <div id="header">
-    <div id="logo">
-      <h1>Frent</h1>
-    </div>
-    <div id="nav">
-      <!-- Header non loggato -->
-      <ul>
-        <li>Cerca annunci</li>
-        <li><a href="html/login.html" title="Vai alla pagina di accesso">Accedi</a></li>
-        <li><a href="html/registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
-        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
-        <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
-      </ul>
-    </div>
-  </div>
+    <a href="" tabindex="1">Registrati</a>
+    <a href="" tabindex="2">Accedi</a>
+</div>
 
-  <div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span> </p>
-  </div>
+<div class="index2" id="breadcrumb">
 
-  <div id="esplora">
-    <h1>esplora</h1>
-  </div>
+    <p> Ti trovi in: <a href="index.html" tabindex="3" title="Vai alla pagina delle ricerca annunci"><span
+            xml:lang="en">Home</span></a>:&gt;&gt;
+</div>
 
-  <div id="piuvotati">
-    <h1>Piu Votati</h1>
-  </div>
+<form class="index3 form formOrizzontale" action="">
+    <!--
+    <fieldset>
+    <legend>Ricerca annuncio</legend>
+    -->
+    <label for="citta">Città</label>
+    <input type="text" tabindex="4" name="citta" id="citta"
+           placeholder="Città"/>
+    <!--Chiarire cosa fare per Safari -->
+    <label for="data_inizio">Data Inizio</label>
+    <input type="date" tabindex="5" name="data_inizio" id="data_inizio" placeholder="yyyy-mm-dd"/>
+    <label for="data_fine">Data Fine</label>
+    <input type="date" tabindex="6" name="data_fine" id="data_fine"
+           placeholder="yyyy-mm-dd"/>
+    <label for="num_ospiti">Num Ospiti</label>
+    <input type="number" tabindex="7" name="num_ospiti" id="num_ospiti"
+           min="1" max="99" value="1"/>
+    <label for="pulsante_cerca">Pulsante Ricerca</label>
+    <input type="submit" tabindex="8" id="pulsante_cerca" value="Cerca">
+    <!--
+  </fieldset>
+-->
+</form>
 
-  <div id="novita">
-    <h1>Novità</h1>
-  </div>
+<dl id="content" class="index4">
+    <dt>Esplora Città</dt>
+    <dd class="citta">
+        <div class="citta1" style="border:1px solid #000"><a href="" tabindex="9">Roma</a></div>
+        <div class="citta2" style="border:1px solid #000"><a href="" tabindex="10">Milano</a></div>
+        <div class="citta3" style="border:1px solid #000"><a href="" tabindex="11">Firenze</a></div>
+        <div class="citta4" style="border:1px solid #000"><a href="" tabindex="12">Venezia</a></div>
+        <div class="citta5" style="border:1px solid #000"><a href="" tabindex="13">Napoli</a></div>
+    </dd>
+
+    <dt>I più votati</dt>
+    <dd class="card">
+        <div class="card1" style="border:1px solid #000"><a href="" tabindex="14">Ann1</a></div>
+        <div class="card2" style="border:1px solid #000"><a href="" tabindex="15">Ann2</a></div>
+        <div class="card3" style="border:1px solid #000"><a href="" tabindex="16">Ann3</a></div>
+        <div class="card4" style="border:1px solid #000"><a href="" tabindex="17">Ann4</a></div>
+        <div class="card5" style="border:1px solid #000"><a href="" tabindex="18">Ann5</a></div>
+        <div class="card6" style="border:1px solid #000"><a href="" tabindex="19">Ann6</a></div>
+
+    </dd>
+
+    <dt>Novità</dt>
+    <dd class="card">
+        <div class="card1" style="border:1px solid #000"><a href="" tabindex="20">Ann3</a></div>
+        <div class="card2" style="border:1px solid #000"><a href="" tabindex="21">Ann3</a></div>
+        <div class="card3" style="border:1px solid #000"><a href="" tabindex="22">Ann3</a></div>
+        <div class="card4" style="border:1px solid #000"><a href="" tabindex="23">Ann4</a></div>
+        <div class="card5" style="border:1px solid #000"><a href="" tabindex="24">Ann5</a></div>
+        <div class="card6" style="border:1px solid #000"><a href="" tabindex="25">Ann6</a></div>
+    </dd>
 
 
+</dl>
 
-  <div id="footer">
+<div id="footer">
     <p>Frent - Progetto di Tecnologie Web A.A. 2019/2020</p>
-  </div>
+</div>
 
 </body>
-
 </html>

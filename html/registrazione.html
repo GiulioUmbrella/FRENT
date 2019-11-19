@@ -19,12 +19,12 @@
     <div id="header" class="layoutCentraleHeader">
       <h1>Frent</h1>
       <span id="user-login">
-      <a href="login.html">Accedi</a>
+      <a href="login.html" tabindex="1">Accedi</a>
       </span>
     </div>
 
     <div id="breadcrumb" class="layoutCentraleBreadCrumb">
-       <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Registrazione</p>
+       <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="2"><span xml:lang="en">Home</span></a>:&gt;&gt;Registrazione</p>
     </div>
 
 
@@ -34,32 +34,32 @@
       <fieldset>
       -->
       <label for="nome">Nome</label>
-      <input type="text" name="nome" id="nome" placeholder="Nome" />
+      <input type="text" name="nome" id="nome" placeholder="Nome"  tabindex="3"/>
 
       <label for="cognome">Cognome</label>
-      <input type="text" name="cognome" id="cognome" placeholder="Cognome" />
+      <input type="text" name="cognome" id="cognome" placeholder="Cognome"  tabindex="4"/>
 
       <label for="data_nascita">Data di nascita</label>
-      <input type="date" name="data_nascita" id="data_nascita" />
+      <input type="date" name="data_nascita" id="data_nascita"  tabindex="5"/>
 
-      <label for="mail" lang="en"></label>
-      <input type="text" name="mail" id="mail" placeholder="nome.cognome@mail.it" />
+      <label for="mail" lang="en">Mail:</label>
+      <input type="text" name="mail" id="mail" placeholder="nome.cognome@mail.it" tabindex="6"/>
 
-      <label for="username" lang="en"></label>
-      <input type="text" name="username" id="username" placeholder="nome_cognome" />
+      <label for="username" lang="en">Username</label>
+      <input type="text" name="username" id="username" placeholder="username" xml:lang="en"  tabindex="7"/>
 
       <label for="password" lang="en">Password</label>
-      <input type="password" name="password" id="password" placeholder="Password" />
+      <input type="password" name="password" id="password" placeholder="Password"  tabindex="8"/>
 
-      <label for="ripeti_password" lang="en">Ripeti password</label>
-      <input type="password" name="ripeti_password" id="ripeti_password" placeholder="Password" />
+      <label for="ripeti_password" >Ripeti password</label>
+      <input type="password" name="ripeti_password" id="ripeti_password" placeholder="Password" tabindex="9" />
 
       <label for="telefono">Numero di telefono</label>
-      <input type="tel" name="telefono" id="telefono" placeholder="+391234567890" />
+      <input type="tel" name="telefono" id="telefono" placeholder="+391234567890" tabindex="10" />
 
       <label for="registrati">Registrati</label>
-      <input type="submit" id="registrati" value="Registrati" />
-      <p>Hai già un <span lang="en">account</span>? <a href="login.html">Accedi</a>!</p>
+      <input type="submit" id="registrati" value="Registrati"  tabindex="11"/>
+      <p>Hai già un <span lang="en">account</span>? <a href="login.html"  tabindex="12">Accedi</a>!</p>
       <!--</fieldset>-->
     </form>
   </div>
