@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gestisci indisponibili&agrave;</title>
+
+    <link rel="icon" href="../immagini/icona.ico" />
+    <link rel="stylesheet" href="../css/main.css">
+    <!--  <script src="script.js"></script>
+    -->
+</head>
+<body>
+
+<div id="header">
+    <div id="logo">
+        <h1>Frent</h1>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+            <li><a href="#" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
+            <li><a href="miei_annunci.html" title="vai alla pagina dei miei annunci">I miei annunci</a></li>
+            <li><a href="mio_profilo_modifica.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+            <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
+            <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+            <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+        </ul>
+    </div>
+</div>
+<div id="breadcrumb">
+    <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;<a href="miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a>&gt;&gt;
+        <a href="dettaglio_annunci_host_visualizza.html" title="Torna al dettaglio Annuncio">Dettaglio Annuncio</a>&gt;&gt;
+        Gestione indisponibilit&agrave; </p>
+</div>
+
+<div id="content" class="layoutCentrale3">
+    <h1>Gestione indisponibilit&agrave; annuncio:</h1>
+    <h1>Nome dell'annuncio</h1>
+    <p>Questo annuncio risulta indisponibile nei seguenti periodi:</p>
+    <ul>
+        <li> data inizio: 20/11/2019 a 22/11/2019 <a href="#" title="Modifica questa indisponibilit&agrave;">Modifica </a><a href="#" title="elimina questa indisponibilit&agrave;">Elimina</a></li>
+        <li> data inizio: 20/11/2019 a 22/11/2019 <a href="#" title="Modifica questa indisponibilit&agrave;">Modifica </a><a href="#" title="elimina questa indisponibilit&agrave;">Elimina</a></li>
+    </ul>
+
+
+<!-- questo form, che serve per aggiungere una nuova indisponibilita' può essere usato anche per la modifica se facciamo una finestrella che
+si apre quando viene cliccato il link della modifica, e aggiungendo un pulsante/link possiamo fare add riutilizzando il link -->
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Inserire una nuova indisponibilit&agrave;</legend>
+            <label for="data_inizio">Data Inizio</label>
+            <input type="date" id="data_inizio" name="data_inizio" placeholder="Data inizio nuova indisponibilit&agrave;" value="" />
+            <label for="data_fine">Data Fine</label>
+            <input type="date"  id="data_fine" name="data_fine" placeholder="Data fine nuova indisponibilit&agrave;" value="" />
+        </fieldset>
+        <input type="submit" value="Aggiunti">
+        <input type="reset" value="Annulla">
+    </form>
+</div>
+
+<div id="footer">
+    <p> Testo a fine pagina </p>
+</div>
+
+</body>
+</html>
+
