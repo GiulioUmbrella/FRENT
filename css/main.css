@@ -68,7 +68,7 @@ html, body {
 * Grid layout per la pagina dei risultati
 */
 
-.risultati {
+.layoutTrePannelli {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
@@ -76,13 +76,15 @@ html, body {
         "a a a a"
         "b b b b"
         "c d d d"
-        "c d d d";
+        "c d d d"
+        "e e e e";
 }
 
-.risultati1 { grid-area: a; }
-.risultati2 { grid-area: b; }
-.risultati3 { grid-area: c; }
-.risultati4 { grid-area: d; }
+.layoutTrePannelliHeader     { grid-area: a; }
+.layoutTrePannelliBreadCrumb { grid-area: b; }
+.layoutTrePannelliNav        { grid-area: c; }
+.layoutTrePannelliContent    { grid-area: d; }
+.layoutTrePannelliFooter     { grid-area: e; }
 
 /*
 * LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
@@ -100,10 +102,10 @@ html, body {
         "d d d d";
 }
 
-.layoutCentrale1 { grid-area:a ;}
-.layoutCentrale2 { grid-area:b ;}
-.layoutCentrale3 { grid-area:c ;}
-.layoutCentrale4 { grid-area:d ;}
+.layoutCentraleHeader     { grid-area:a ;}
+.layoutCentraleBreadCrumb { grid-area:b ;}
+.layoutCentraleContent    { grid-area:c ;}
+.layoutCentraleFooter     { grid-area:d ;}
 
 
 /*
@@ -113,7 +115,7 @@ html, body {
 .risultati dt {
 
   margin-bottom:0.1em;
-  clear:both; // per andare a capo
+  clear:both; /* per andare a capo */
 }
 
 .risultati dt > a {
@@ -214,4 +216,10 @@ html, body {
 
 .formVerticale input, label {
     font-size:1.5em;
+}
+
+
+/* Footer */
+#footer ul {
+  list-style-type: none;
 }
