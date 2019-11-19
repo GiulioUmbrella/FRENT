@@ -2,20 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
   <head>
     <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
-    <title>Dettaglio annuncio</title>
+    <title>Storico Prenotazione</title>
 
-    <meta name="title" content="Nome affito case" />
+    <meta name="title" content="Nome affitto case" />
     <meta name="description" content="Home page del popolare sito di affitto case" />
     <meta name="keyword" content="Case,Affitto" />
     <meta name ="language" content="italian it" />
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
-<!--TODO
-    creare il widget per mostare tutte le immagini dell'annuncio.
- -->
-    
- 
+
     <link rel="stylesheet" type="text/css" href="../css/main.css" />
-    <link rel="shortcuticon" href="/img.ico" /> 
+    <link rel="icon" href="../immagini/icona.ico" />
   </head>
   <body>
 
@@ -27,32 +23,45 @@
       <ul>
         <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
         <li><a href="#" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-        <li class="selected">I miei annunci</li>
-        <li><a href="mio_profilo.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+        <li><a href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
+        <li><a href="mio_profilo_modifica.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
         <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
         <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
         <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
       </ul>
     </div>
   </div>
-  <div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home:&gt;&gt;Miei Annunci</span> </p>
-  </div>
+ <div id="breadcrumb">
+    <p> Ti trovi in: <span xml:lang="en">Home</span>
+      &gt;&gt;<a href="miei_annunci.html" title="Miei annunci">Miei Annunci</a>
+      &gt;&gt;<a href="dettaglio_annunci_host_visualizza.html" title="Dettaglio Annuncio">Titolo Annuncio</a>
+      &gt;&gt; Storico prenotazione
+    </p>
+</div>
+ 
 
   <div id="content" class="layoutCentrale3">
-    <h1>Dettaglio Annuncio:</h1>
-    <h2 class="annuncio_id">titolo annuncio</h2>
-    <img src="" alt="Immagini dell'annuncio"/>
+    <h1>Storico Prenotazioni:</h1>
 
-    <p class="prezzo_notte">Prezzo per notte</p>
-    <p class="numero_ospiti">Num. max ospiti: </p>
-    <p>indirizzo: città:</p>
-    <p>descrzione:</p>
+    <ul>
+      <li>
+        <div class="storico_prenotazioni">
+          <h2>Titolo annuncio:</h2>
+          <p><span xml:lang="en">username: </span>Xwen</p>
+          <p><span>Numero ospiti:</span> 2</p>
+          <p><span>Data inizio:</span> 22/02/2019</p>
+          <p><span>Data fine:</span> 28/02/2019</p>
+          <p>Totale prenotazione: 200&euro;</p>
+          <p><span>Commento:</span> &egrave; stato un bellissimo soggiorno</p>
+        </div>
+      </li>
+    </ul>
+
   </div>
     
   <div id="footer">  
     <p> Testo a fine pagina </p>
-    </div>
+  </div>
     
   </body> 
 </html>
