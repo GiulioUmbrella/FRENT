@@ -17,8 +17,8 @@ ITALIC = '\033[3m'
 
 
 url = "https://validator.w3.org/check"
-_, columns = os.popen('stty size', 'r').read().split()
-divisore = "#"*int(columns)
+#_, columns = os.popen('stty size', 'r').read().split()
+divisore = "#"*10#int(columns)
 
 def download_w3c_response(file_to_validate):
     with open(file_to_validate, 'rb') as file:
@@ -73,12 +73,14 @@ def result_for(file):
 
 def main():
     value_to_return = 0
-    os.chdir("../html")
 
     if len(argv)>1 and argv[1] == "-f":
         for file in argv[2:]:
-            if os.path.exists(file) and result_for(file) != 0:
-                value_to_return = -1
+            if os.path.exists(file):
+                if result_for(file) != 0:
+                    value_to_return = -1
+            else:
+                print(file + " -> File non trovato, verra skippato")
     else:
         for file in os.listdir("./"):
             if result_for(file) != 0:
