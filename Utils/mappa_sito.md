@@ -1,5 +1,6 @@
 - Home  
 - Le mie prenotazioni
+-- Riepilogo prenotazione
 - Miei Annunci  
 -- Dettagli  
     - Modifica Annuncio  
