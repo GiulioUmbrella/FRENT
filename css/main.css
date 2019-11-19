@@ -115,7 +115,7 @@ html, body {
 .risultati dt {
 
   margin-bottom:0.1em;
-  clear:both; // per andare a capo
+  clear:both; /* per andare a capo */
 }
 
 .risultati dt > a {
@@ -216,4 +216,10 @@ html, body {
 
 .formVerticale input, label {
     font-size:1.5em;
+}
+
+
+/* Footer */
+#footer ul {
+  list-style-type: none;
 }
