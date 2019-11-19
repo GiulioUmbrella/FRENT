@@ -6,7 +6,7 @@
   <title>Riepilogo prenotazione #123 - Frent</title>
 
   <meta name="description" content="Riepilogo prenotazione effettuata" />
-  <meta name="keyword" content="Casa,Appartamento,Affitto,Frent, Frent registrazione" />
+  <meta name="keyword" content="casa, appartamento, affitto, frent, prenotazione, riepilogo" />
   <meta name="language" content="italian it" />
   <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
 
@@ -21,34 +21,42 @@
       <h1>Frent</h1>
     </div>
     <div id="nav">
-      <!-- Header loggato -->
       <ul>
-        <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+        <li><a href="index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+        <li><a href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>
+        <li><a href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
         <li><a href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
         <li><a href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
-        <li><a href="mio_profilo.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
-        <li><a href="#" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
-        <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
+        <li><a href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
         <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
       </ul>
     </div>
   </div>
   <div id="content">
-    <div id="breadcrumb">Home >> Riepilogo prenotazione #123</div>
+    <div id="breadcrumb">
+      <p>Home &gt;&gt; Le mie prenotazioni &gt;&gt; Riepilogo prenotazione #123</p>
+    </div>
+    <hr />
     <h1>Riepilogo prenotazione #123</h1> <!-- chiave primaria dell'occupazione -->
     <p>Grazie per aver prenotato il tuo soggiorno con Frent. Ecco a te le informazioni sulla tua prenotazione.</p>
     <h2>Presso</h2>
     <!-- Dati di esempio -->
     <img src="images/annunci/anteprima_Casa Loreto.jpg" alt="Immagine di anteprima di Casa Loreto" />
-    <p><a href="#" title="Vai al dettaglio dell'annuncio di Casa Loreto">Casa Loreto</a></p>
+    <p><a href="dettagli_annuncio.html" title="Vai al dettaglio dell'annuncio di Casa Loreto">Casa Loreto</a></p>
     <p>Indirizzo: <strong>Via dell'Accoglienza x, roma</strong></p>
     <h2>Dati prenotazione</h2>
-    <p>Numero ospiti: <strong>1</strong></p>
-    <p>Data arrivo: <strong>02/11/2019</strong></p>
-    <p>Data partenza: <strong>07/11/2019</strong></p>
+    <ul id="dati_prenotazione">
+      <li>Numero ospiti: <strong>1</strong></li>
+      <li>Data arrivo: <strong>02/11/2019</strong></li>
+      <li>Data partenza: <strong>07/11/2019</strong></li>
+    </ul>
   </div>
   <div id="footer">
-    <p>Frent - Progetto di Tecnologie Web A.A. 2019/2020</p>
+    <ul>
+      <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
+      <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di utilizzo</a></li>
+      <li><a href="faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a></li>
+    </ul>
   </div>
 </body>
 
