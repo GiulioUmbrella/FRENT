@@ -17,18 +17,16 @@
   <div id="nav">
     <!-- Header loggato -->
     <ul>
-      <li><a href="../" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
-      <li><a href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-      <li><a href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
-      <li><a href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
-      <li><a href="#" title="Vai alla pagina delle FAQ"><abbr lang="en" title="Frequently Answered Questions">FAQ</abbr></a></li>
-      <li><a href="#" title="Vai alla pagina delle condizioni di utilizzo">Condizioni di utilizzo</a></li>
-      <li><a href="#" title="Effettua la disconnessione">Esci</a></li>
+      <li><a href="../" title="Vai alla pagina di ricerca degli annunci" tabindex="1">Cerca annunci</a></li>
+      <li><a href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate" tabindex="2">Le mie prenotazioni</a></li>
+      <li><a href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti" tabindex="3">I miei annunci</a></li>
+      <li><a href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo" tabindex="4">Il mio profilo</a></li>
+      <li><a href="#" title="Effettua la disconnessione" tabindex="5">Esci</a></li>
     </ul>
   </div>
 </div>
 <div id="breadcrumb">
-  <p> Ti trovi in: <span lang="en">Home</span>:&gt;&gt;Mio Profilo </p>
+  <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;Mio Profilo </p>
 </div>
 
 <div id="content" class="layoutCentrale3">
@@ -39,27 +37,27 @@
     <fieldset>
       <legend>Miei dati</legend>
       <label for="nome">Nome:</label>
-      <input type="text" name="nome" id="nome" placeholder="Nome" maxlength="32"  value="Xiaowei"/>
+      <input type="text" name="nome" id="nome" placeholder="Nome" maxlength="32"  value="Xiaowei" tabindex="7"/>
 
       <label for="cognome">Cognome:</label>
-      <input type="text" name="cognome" id="cognome" placeholder="cognome" maxlength="32"  value="Wen"/>
+      <input type="text" name="cognome" id="cognome" placeholder="cognome" maxlength="32"  value="Wen" tabindex="7"/>
 
       <label for="Username">Username:</label>
-      <input type="text" name="Username" id="Username" placeholder="Username" maxlength="32"  value="Username"/>
+      <input type="text" name="Username" id="Username" placeholder="Username" maxlength="32"  value="Username" tabindex="8"/>
 
       <label for="mail">Mail:</label>
-      <input type="email" name="mail" id="mail" placeholder="mail" maxlength="191"  value="xiaowei.wen1997@gmail.com"/>
+      <input type="email" name="mail" id="mail" placeholder="mail" maxlength="191"  value="xiaowei.wen1997@gmail.com" tabindex="9"/>
 
 
 
       <label for="telefono">Telefono: </label>
-      <input type="tel" name="telefono" id="telefono" placeholder="Telefono"  value="+39112312"/>
+      <input type="tel" name="telefono" id="telefono" placeholder="Telefono"  value="+39112312" tabindex="10"/>
       <input type="hidden" value="Conferma Modifica">
     </fieldset>
     <fieldset>
       <legend>Data di nascita</legend>
       <label for="birth_day">Giorno:</label>
-      <select id="birth_day">
+      <select id="birth_day" tabindex="11">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -67,7 +65,7 @@
         <!--    eccetera che tanto si farà con un ciclo-->
       </select>
       <label for="birth_month">Mese:</label>
-      <select id="birth_month">
+      <select id="birth_month" tabindex="12">
         <option value="1">Gennaio</option>
         <option value="2">Febbraio</option>
         <option value="3">Marzo</option>
@@ -75,7 +73,7 @@
         <!--    eccetera che tanto si farà con un ciclo-->
       </select>
       <label for="birth_year">Anno</label>
-      <select id="birth_year">
+      <select id="birth_year" tabindex="13">
         <option value="2019">2019</option>
         <option value="2018">2018</option>
         <option value="2017">2017</option>
@@ -83,8 +81,8 @@
         <!--    eccetera che tanto si farà con un ciclo-->
       </select>
     </fieldset>
-    <input type="submit" value="Modifica">
-    <input type="reset" value="Annulla">
+    <input type="submit" value="Modifica"  tabindex="14">
+    <input type="reset" value="Annulla"  tabindex="15">
   </form>
 
 </div>

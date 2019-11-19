@@ -19,7 +19,7 @@
   </div>
 
  <div id="breadcrumb" class="layoutTrePannelliBreadCrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span> &gt; &gt; Risultati</p>
+    <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;Risultati</p>
  </div>
 
 <!-- Il form di ricerca deve avere i parametri della ricerca -->
@@ -30,16 +30,16 @@
       <legend>Ricerca annuncio</legend>
       -->
       <label for="citta">Città:</label>
-      <input type="text" name="citta" id="citta" placeholder="Città"/>
+      <input type="text" name="citta" id="citta" placeholder="Città" tabindex="7"/>
       <!--Chiarire cosa fare per Safari -->
       <label for="data_inizio">Data Inizio</label>
-      <input type="date" name="data_inizio" id="data_inizio"
+      <input type="date" name="data_inizio" id="data_inizio" tabindex="8"
       placeholder="yyyy-mm-dd"/>
       <label for="data_fine">Data Fine</label>
-      <input type="date" name="data_fine" id="data_fine" placeholder="yyyy-mm-dd"/>
+      <input type="date" name="data_fine" id="data_fine" placeholder="yyyy-mm-dd" tabindex="9"/>
       <label for="num_ospiti">Num Ospiti</label>
-      <input type="number" name="num_ospiti" id="num_ospiti" min="1" max="99" value="1"/>
-      <input type="submit" id="pulsante_cerca" value="Cerca">
+      <input type="number" name="num_ospiti" id="num_ospiti" min="1" max="99" value="1" tabindex="10"/>
+      <input type="submit" id="pulsante_cerca" value="Cerca" tabindex="11">
     <!--
     </fieldset>
     -->
@@ -49,7 +49,7 @@
 <div id="content" class="layoutTrePannelliContent">
 <dl>
    <dt>
-      <a href="">Titolo</a>
+      <a href=""  tabindex="12">Titolo</a>
       <p>Punteggio: Num Recensioni: </p>
    </dt>
    <dd>
@@ -59,10 +59,11 @@
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
       <p class="prezzototale">Prezzo totale</p>
+       <a href="dettagli_annuncio.html"  tabindex="13" title="Vai al dettaglio">Dettagli</a>
    </dd>
 
    <dt>
-      <a href="">Titolo</a>
+      <a href="" tabindex="14">Titolo</a>
       <p>Punteggio: Num Recensioni: </p>
    </dt>
    <dd>
@@ -72,20 +73,23 @@
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
       <p class="prezzototale">Prezzo totale</p>
+       <a href="dettagli_annuncio.html"  tabindex="15" title="Vai al dettaglio">Dettagli</a>
    </dd>
-
-   <dt>
-      <a href="">Titolo</a>
+    <dt>
+      <a href="" tabindex="116">Titolo</a>
       <p>Punteggio: Num Recensioni: </p>
    </dt>
    <dd>
-      <img src ="../immagini/img3.jpg" alt="Foto copertina della casa" />
+      <img src ="../immagini/img2.jpg" alt="Foto copertina della casa" />
       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
       <p class="prezzototale">Prezzo totale</p>
+       <a href="dettagli_annuncio.html"  tabindex="17" title="Vai al dettaglio">Dettagli</a>
    </dd>
+
+
 </dl>
 </div>
 
