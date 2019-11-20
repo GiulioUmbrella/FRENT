@@ -1,11 +1,14 @@
 *{
   padding: 0em;
 	margin: 0em;
+
 }
 
 /* Layout per desktop*/
 html, body {
-	max-width: 1024px;
+  height: 100%;
+  width:100%;
+  max-width: 1024px;
 	margin: auto;
 	font-family: Verdana, Helvetica, sans-serif;
 	font-size: 0.9em;
@@ -16,10 +19,16 @@ html, body {
 * Grid layout per la pagina home
 */
 
+/*
+* CAPIRE COSA FA IL VALORE auto!!!
+*/
+
+
 .layoutColonna {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-template-rows: auto auto 1fr auto;
+  grid-gap: 0.5em;
   grid-template-areas:
         "a a a"
         "b b b"
@@ -35,7 +44,7 @@ html, body {
 .citta{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 0.5em;
   grid-template-areas:
         "a a a b b b"
         "c c d d e e";
@@ -50,7 +59,7 @@ html, body {
 .card{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 0.5em;
   grid-template-areas:
         "a a b b c c"
         "d d e e f f";
@@ -228,12 +237,15 @@ text-align:center
     font-size:1.5em;
 }
 
+
+
+
+
 #footer {
-  flex: 1;
   text-align: center;
-    border: 1px solid #ddd;
-    
-  }
+  border: 1px solid #000;
+}
+
 
 
 /* Riepilogo prenotazione */
