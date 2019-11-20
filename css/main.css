@@ -16,7 +16,7 @@ html, body {
 * Grid layout per la pagina home
 */
 
-.index {
+.layoutColonna {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
@@ -27,10 +27,10 @@ html, body {
         "d d d";
 }
 
-.index1 { grid-area: a; }
-.index2 { grid-area: b; }
-.index3 { grid-area: c; }
-.index4 { grid-area: d; }
+.layoutColonnaHeader { grid-area: a; }
+.layoutColonnaBreadcrumb { grid-area: b; }
+.layoutColonnaContent { grid-area: c; }
+.layoutColonnaFooter { grid-area: d; }
 
 .citta{
   display: grid;
@@ -107,10 +107,20 @@ html, body {
 .layoutCentraleContent    { grid-area:c ;}
 .layoutCentraleFooter     { grid-area:d ;}
 
+#header ul{
+   list-style: none;
+   display:flex;
+   border:1px solid #000;
+   border-left:0;
+}
 
-/*
-* definizione del css per i tag definition list della classe .risultati
-*/
+#header li {
+flex: 1 1 0em;
+border-left:1px solid #000;
+text-align:center
+}
+
+
 
 .risultati dt {
 
@@ -217,6 +227,14 @@ html, body {
 .formVerticale input, label {
     font-size:1.5em;
 }
+
+#footer {
+  flex: 1;
+  text-align: center;
+    border: 1px solid #ddd;
+    
+  }
+
 
 /* Riepilogo prenotazione */
 #content ul#dati_prenotazione {
