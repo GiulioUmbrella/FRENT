@@ -6,7 +6,7 @@
 
     <meta name="description" content="Home page del popolare sito di affitto case Frent" />
     <meta name="keyword" content="Casa,Appartamento,Affitto,Frent" />
-    <meta name ="language" content="italian it" />
+    <meta name="language" content="italian it" />
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
 
       <link rel="stylesheet" type="text/css" href="../css/main.css" />
@@ -14,16 +14,29 @@
   </head>
   <body class="risultati layoutTrePannelli">
 
-  <div class="layoutTrePannelliHeader">
-    <h1>Frent</h1>
-  </div>
+  <div id="header" class="layoutTrePannelliHeader">
+    <div id="logo">
+        <h1>Frent</h1>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><a tabindex="1" href="../index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+            <li><a tabindex="2" href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>
+            <li><a tabindex="3" href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
+            <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
+            <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
+            <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+            <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
+        </ul>
+    </div>
+</div>
 
  <div id="breadcrumb" class="layoutTrePannelliBreadCrumb">
     <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;Risultati</p>
  </div>
 
 <!-- Il form di ricerca deve avere i parametri della ricerca -->
-<div id="nav" class="layoutTrePannelliNav">
+<div id="ricerca" class="layoutTrePannelliNav">
   <form action="" class="risultati3 form formVerticale">
       <!--
       <fieldset class="form-inline">
@@ -92,7 +105,7 @@
 
 </dl>
 </div>
-  <div id="footer">
+  <div id="footer" class="layoutTrePannelliFooter">
       <ul>
           <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
           <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di utilizzo</a></li>
