@@ -22,7 +22,11 @@ html, body {
 /*
 * CAPIRE COSA FA IL VALORE auto!!!
 */
-
+.aiuti_alla_navigazione{
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}
 
 .layoutColonna {
   display: grid;
