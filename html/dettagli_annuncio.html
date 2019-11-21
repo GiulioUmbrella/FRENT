@@ -1,30 +1,96 @@
-<!DOCTYPE html>
-<html lang="it">
-  <head>
-    <meta charset="utf-8">
-    <title>Frent</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+<head>
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
+    <title>NOME_ANNUNCIO_AGGIUNTO_CON_PHP - Frent</title> <!--TODO: PHP-->
 
-    <meta name="description" content="Home page del popolare sito di affitto case Frent" />
-    <meta name="keyword" content="Casa,Appartamento,Affitto,Frent" />
-    <meta name ="language" content="italian it" />
-    <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen" />
+    <meta name="description" content="DESCRIZIONE ANNUNCIO"/> <!--TODO: PHP-->
+    <meta name="keyword" content="Casa,Appartamento,Affitto,Frent"/>
+    <meta name="language" content="italian it"/>
+    <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
 
 
-    <link rel="stylesheet" type="text/css" href="../css/main.css" />
-    <link rel="icon" href="../immagini/icona.ico" />
-  </head>
-  <body>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="icon" href="../immagini/icona.ico"/>
+</head>
+<body>
 
-  <div class="index1" id="header">
-    <h1>Frent</h1>
+<div id="header">
+    <div id="logo">
+        <h1>Frent</h1>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><a tabindex="1" href="../index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
+            </li>
+            <li><a tabindex="2" href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>
+            <li><a tabindex="3" href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
+            <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le
+                mie prenotazioni</a></li>
+            <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
+                annunci</a></li>
+            <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
+                profilo</a></li>
+            <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
+        </ul>
+    </div>
+</div>
 
-    <a href="registrazione.html" title="Pagina di registrazione" tabindex="1">Registrati</a>
-    <a href="login.html" title="Pagina di per fare accesso"  tabindex="2">Accedi</a>
-  </div>
+<div id="breadcrumb">
+  <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;<a href="risultati.html">Ricerca</a> &gt;&gt; TITOLO ANNUNCIO</p> <!--TODO: PHP-->
+</div>
 
-  <div class="index2" id="breadcrumb">
-     <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="3"><span xml:lang="en">Home</span></a>:&gt;&gt;Dettagli annuncio </p>
-  </div>
+<div id="content"> <!--TODO: PHP-->
+    <h1>Titolo annuncio</h1>
+    <p>Descrizione estesa dell'annuncio</p>
+    <p>Valutazione media: </p>
+    <p>Numero totale di commenti: </p>
+    <img id="immagine_anteprima" src="../immagini/img1.png" alt="Descrizione immagine"/>
+    <!--TODO: PHP la descrizione dell'immagine verrà recuperata dal DB-->
+    <!--TODO: PHP aggiunte tutte le immagini recuperate dal DB-->
+    <img class="immagine" alt="Descrizione immagine" src="../immagini/img2.jpg"/>
+    <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+    <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+    <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+    <button id="immagine_precedente" onclick="">&lt;</button>
+    <!--TODO: JavaScript bottoni per cambiare le immagini verranno gestiti con JS, se JS è disabilitato si mostrano tutte-->
+    <button id="immagine_successiva" onclick="">&gt;</button>
+    <!--TODO: JavaScript bottoni per cambiare le immagini verranno gestiti con JS, se JS è disabilitato si mostrano tutte-->
+    <form action="#" method="post">
+        <fieldset>
+            <label for="conferma_prenotazione">Conferma prenotazione</label>
+            <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
+        </fieldset>
+    </form>
+    <div id="commenti">
+        <ul>
+            <li>
+                <h1>Titolo commento</h1>
+                <h2>Valutazione: </h2> <!--TODO: controllare correttezza del tag h2 semanticamente parlando-->
+                <p>Username utente</p>
+                <p>Commento dettagliato</p>
+                <p>Data pubblicazione commento</p>
+            </li>
+            <li>
+                <h1>Titolo commento 2</h1>
+                <h2>Valutazione 2: </h2> <!--TODO: controllare correttezza del tag h2 semanticamente parlando-->
+                <p>Username utente 2</p>
+                <p>Commento dettagliato 2</p>
+                <p>Data pubblicazione commento 2</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="footer">
+    <ul>
+        <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
+        <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
+            utilizzo</a></li>
+        <li><a href="faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a>
+        </li>
+    </ul>
+</div>
 
 
 </body>
