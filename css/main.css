@@ -272,11 +272,13 @@ text-align:center
     text-decoration: none;
 }
 #content .dettaglio_annuncio{
+    display: block;
     width: 80%;
 }
 #content .dettaglio_annuncio img{
     height: 50%;
     width: 50%;
+    float: right;
 }
 #content .dettaglio_annuncio p{
     font-size: 1.5em;
@@ -301,7 +303,15 @@ text-align:center
     margin: 2em;
     background: #dddddd;
 }
-
+/*CSS per lista annunci guest*/
+.annuncio_lista_annuncio{
+    min-height: 12em;
+    /*border: 3px solid red;*/
+}
+.annuncio_lista_annuncio img{
+    border: 3px solid red;
+    float: right;
+}
 
 /*CSS per lo storico delle prenotazioni*/
 #content .storico_prenotazioni h2{
@@ -317,20 +327,20 @@ text-align:center
     font-size: 1.5em;
 }
 
-
 /* CSS per le liste non ordinate */
 #content ul{
     list-style-type: none;
 }
-
-
 
 #footer {
   text-align: center;
   border: 1px solid #000;
 }
 
-
+/*rende il footer orizzontale*/
+#footer ul li {
+    display: inline;
+}
 
 /* Riepilogo prenotazione */
 #content ul#dati_prenotazione {
