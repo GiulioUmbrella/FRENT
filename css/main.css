@@ -342,9 +342,53 @@ text-align:center
     display: inline;
 }
 
-/* Riepilogo prenotazione */
-#content ul#dati_prenotazione {
+/* Riepilogo prenotazione e le mie prenotazioni */
+h1.titolo_content {
+  text-align: center;
+}
+
+h2.sottitolo_content {
+  line-height: 2em;
+}
+
+img.immagine_annuncio {
+  float: left;
+  max-width: 30%;
+  height: auto;
+}
+
+.dati_annuncio,
+.dati_prenotazione {
   list-style-type: none;
+}
+
+.dati_annuncio {
+  margin-left: 30%;
+}
+
+.dati_prenotazione {
+  clear: both;
+}
+
+ul#prenotazioni > li {
+  display: block;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1em 0 1em 0;
+  padding: 3%;
+}
+
+ul#prenotazioni > li img {
+  display: block;
+  float: left;
+  max-width: 30%;
+  height: auto;
+}
+
+ul#prenotazioni > li ul,
+ul#prenotazioni > li h2 {
+  list-style-type: none;
+  margin-left: 35%;
 }
 
 /* Footer */
