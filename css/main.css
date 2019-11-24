@@ -250,21 +250,21 @@ text-align:center
     font-size:1.5em;
 }
 /*CSS per il menu della gestione annuncio*/
-#content #menu_gestione_annuncio {
+#content .menu_gestione_annuncio {
     display: inline;
 }
-#menu_gestione_annuncio ul {
+.menu_gestione_annuncio ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-#menu_gestione_annuncio li {
+.menu_gestione_annuncio li {
     float: left;
 }
 
-#menu_gestione_annuncio li a {
+.menu_gestione_annuncio li a {
     display: block;
     color: black;
     text-align: center;
@@ -279,6 +279,7 @@ text-align:center
     height: 50%;
     width: 50%;
     float: right;
+    padding-top:5em;
 }
 #content .dettaglio_annuncio p{
     font-size: 1.5em;
