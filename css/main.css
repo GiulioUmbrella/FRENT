@@ -21,15 +21,21 @@ html, body {
 }
 
 .layoutColonna {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-gap: 1em;
+  grid-template-areas:
+        "h"
+        "b"
+        "c"
+        "f";
 }
 
-.layoutColonnaHeader     {  flex-grow: 0; }
-.layoutColonnaBreadcrumb {  flex-grow: 0; }
-.layoutColonnaContent    {  flex-grow: 1; }
-.layoutColonnaFooter     {  flex-grow: 0; }
+.layoutColonnaHeader     { grid-area: h; }
+.layoutColonnaBreadcrumb { grid-area: b; }
+.layoutColonnaContent    { grid-area: c; }
+.layoutColonnaFooter     { grid-area: f; }
 
 .citta{
   display: grid;
@@ -92,6 +98,7 @@ html, body {
 .layoutCentrale{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
   grid-template-areas:
         "h h h h"
