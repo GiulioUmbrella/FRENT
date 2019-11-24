@@ -199,7 +199,16 @@ text-align:center
   background-color: #fff;
   border: 0.1em solid #ddd;
 }
-
+.form textarea {
+    min-width: 90%;
+    min-height: 11em;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+.form input[type=file] {
+    width: 90%;
+    margin-left: 5%;
+}
 .form input[type=submit] {
   background-color: dodgerblue;
   border: 1px solid #ddd;
@@ -239,17 +248,99 @@ text-align:center
 .formVerticale input, label {
     font-size:1.5em;
 }
+/*CSS per il menu della gestione annuncio*/
+#content .menu_gestione_annuncio {
+    display: inline;
+}
+.menu_gestione_annuncio ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
+.menu_gestione_annuncio li {
+    float: left;
+}
 
+.menu_gestione_annuncio li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+#content .dettaglio_annuncio{
+    display: block;
+    width: 80%;
+}
+#content .dettaglio_annuncio img{
+    height: 50%;
+    width: 50%;
+    float: right;
+    padding-top:5em;
+}
+#content .dettaglio_annuncio p{
+    font-size: 1.5em;
+}
+#content .dettaglio_annuncio hr{
+    width: 100%;
+    color: black;
+    padding-top:2px;
 
+}
+/*CSS per pagina indisponibilita*/
+#content ul li {
+    font-size: 1.5em;
+}
+#content  .stile_indisponibilita_modifica{
+    text-decoration: none;
+    margin: 2em;
+}
+#content .stile_indisponibilita_elimina{
+    text-decoration: none;
+    color: red;
+    margin: 2em;
+    background: #dddddd;
+}
+/*CSS per lista annunci guest*/
+.annuncio_lista_annuncio{
+    min-height: 12em;
+    /*border: 3px solid red;*/
+}
+.annuncio_lista_annuncio img{
+    border: 3px solid red;
+    float: right;
+}
 
+/*CSS per lo storico delle prenotazioni*/
+#content .storico_prenotazioni h2{
+
+}
+#content .storico_prenotazioni {
+
+}
+
+#content .storico_prenotazioni .intestazione_campo{
+    color: black;
+    font-family:Arial, sans-serif;
+    font-size: 1.5em;
+}
+
+/* CSS per le liste non ordinate */
+#content ul{
+    list-style-type: none;
+}
 
 #footer {
   text-align: center;
   border: 1px solid #000;
 }
 
-
+/*rende il footer orizzontale*/
+#footer ul li {
+    display: inline;
+}
 
 /* Riepilogo prenotazione */
 #content ul#dati_prenotazione {
