@@ -27,7 +27,6 @@ html, body {
     overflow: hidden;
 }
 
-/*
 .layoutColonna {
   display: grid;
   grid-template-columns: 1fr;
@@ -44,21 +43,6 @@ html, body {
 .layoutColonnaBreadcrumb { grid-area: b; }
 .layoutColonnaContent    { grid-area: c; }
 .layoutColonnaFooter     { grid-area: f; }
-*/
-
-.layoutColonna {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.layoutColonnaHeader     {  flex-grow: 0; }
-.layoutColonnaBreadcrumb {  flex-grow: 0;}
-.layoutColonnaContent    {  flex-grow: 1; }
-.layoutColonnaFooter     {  flex-grow: 0; }
-
-
-
 
 .citta{
   display: grid;
