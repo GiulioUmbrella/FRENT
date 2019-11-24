@@ -14,37 +14,13 @@ html, body {
 
 }
 
-/* ESPERIMENTO
-* Grid layout per la pagina home
-*/
-
-/*
-* CAPIRE COSA FA IL VALORE auto!!!
-*/
 .aiuti_alla_navigazione{
     position: absolute;
     height: 0;
     overflow: hidden;
 }
 
-/*
-.layoutColonna {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr auto;
-  grid-gap: 0.5em;
-  grid-template-areas:
-        "h"
-        "b"
-        "c"
-        "f";
-}
 
-.layoutColonnaHeader     { grid-area: h; }
-.layoutColonnaBreadcrumb { grid-area: b; }
-.layoutColonnaContent    { grid-area: c; }
-.layoutColonnaFooter     { grid-area: f; }
-*/
 
 .layoutColonna {
   display: flex;
@@ -56,9 +32,6 @@ html, body {
 .layoutColonnaBreadcrumb {  flex-grow: 0;}
 .layoutColonnaContent    {  flex-grow: 1; }
 .layoutColonnaFooter     {  flex-grow: 0; }
-
-
-
 
 .citta{
   display: grid;
@@ -257,22 +230,26 @@ text-align:center
 }
 
 
-
-
-
 #footer {
   text-align: center;
   border: 1px solid #000;
 }
 
+/* Footer */
+#footer ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+#footer li {
+   flex-grow: 1;
+   align-self: center
+}
 
 
 /* Riepilogo prenotazione */
 #content ul#dati_prenotazione {
-  list-style-type: none;
-}
-
-/* Footer */
-#footer ul {
   list-style-type: none;
 }
