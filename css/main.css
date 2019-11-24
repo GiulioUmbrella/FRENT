@@ -20,8 +20,6 @@ html, body {
     overflow: hidden;
 }
 
-
-
 .layoutColonna {
   display: flex;
   flex-direction: column;
@@ -29,7 +27,7 @@ html, body {
 }
 
 .layoutColonnaHeader     {  flex-grow: 0; }
-.layoutColonnaBreadcrumb {  flex-grow: 0;}
+.layoutColonnaBreadcrumb {  flex-grow: 0; }
 .layoutColonnaContent    {  flex-grow: 1; }
 .layoutColonnaFooter     {  flex-grow: 0; }
 
