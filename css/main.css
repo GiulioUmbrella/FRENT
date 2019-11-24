@@ -1,7 +1,6 @@
 *{
   padding: 0em;
 	margin: 0em;
-
 }
 
 /* Layout per desktop*/
@@ -28,22 +27,38 @@ html, body {
     overflow: hidden;
 }
 
+/*
 .layoutColonna {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto 1fr auto;
   grid-gap: 0.5em;
   grid-template-areas:
-        "a a a"
-        "b b b"
-        "c c c"
-        "d d d";
+        "h"
+        "b"
+        "c"
+        "f";
 }
 
-.layoutColonnaHeader { grid-area: a; }
+.layoutColonnaHeader     { grid-area: h; }
 .layoutColonnaBreadcrumb { grid-area: b; }
-.layoutColonnaContent { grid-area: c; }
-.layoutColonnaFooter { grid-area: d; }
+.layoutColonnaContent    { grid-area: c; }
+.layoutColonnaFooter     { grid-area: f; }
+*/
+
+.layoutColonna {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.layoutColonnaHeader     {  flex-grow: 0; }
+.layoutColonnaBreadcrumb {  flex-grow: 0;}
+.layoutColonnaContent    {  flex-grow: 1; }
+.layoutColonnaFooter     {  flex-grow: 0; }
+
+
+
 
 .citta{
   display: grid;
@@ -86,18 +101,18 @@ html, body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
   grid-template-areas:
-        "a a a a"
+        "h h h h"
         "b b b b"
-        "c d d d"
-        "c d d d"
-        "e e e e";
+        "x c c c"
+        "x c c c"
+        "f f f f";
 }
 
-.layoutTrePannelliHeader     { grid-area: a; }
+.layoutTrePannelliHeader     { grid-area: h; }
 .layoutTrePannelliBreadCrumb { grid-area: b; }
-.layoutTrePannelliNav        { grid-area: c; }
-.layoutTrePannelliContent    { grid-area: d; }
-.layoutTrePannelliFooter     { grid-area: e; }
+.layoutTrePannelliLeftSide   { grid-area: x; }
+.layoutTrePannelliContent    { grid-area: c; }
+.layoutTrePannelliFooter     { grid-area: f; }
 
 /*
 * LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
@@ -108,17 +123,17 @@ html, body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
   grid-template-areas:
-        "a a a a"
+        "h h h h"
         "b b b b"
         ". c c ."
         ". c c ."
-        "d d d d";
+        "f f f f";
 }
 
-.layoutCentraleHeader     { grid-area:a ;}
+.layoutCentraleHeader     { grid-area:h ;}
 .layoutCentraleBreadCrumb { grid-area:b ;}
 .layoutCentraleContent    { grid-area:c ;}
-.layoutCentraleFooter     { grid-area:d ;}
+.layoutCentraleFooter     { grid-area:f ;}
 
 #header ul{
    list-style: none;
