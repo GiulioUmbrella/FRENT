@@ -127,6 +127,13 @@ border-left:1px solid #000;
 text-align:center
 }
 
+
+#header li a {
+  display : block;
+  width:100%;
+  height:100% ;
+}
+
 #content p {
   /* Inserisci interlinea qui*/
 }
