@@ -185,17 +185,34 @@ text-align:center
 /*
 * CSS PER I FORM
 */
+fieldset {
+  border: none;
+}
+
 .form{
   padding: 2em;
 }
 
-.form_verticale input, .form_verticale label{
+.form_verticale input, .form_verticale label, .form_verticale select{
   display: block;
-  height: 2em;
   width: 90%;
   margin-left: 5%;
+  margin-right: 5%;
+}
+
+.form_verticale input {
+  height: 3em;
+}
+
+.form_verticale label {
+  height: 1.5em;
   margin-top: 1em;
-  margin-bottom: 1em;
+}
+
+.form_verticale input[type="submit"] {
+  margin-top: 1.5em;
+  font-size: 1.5em;
+  height: 2em;
 }
 
 /*CSS per il menu della gestione annuncio*/

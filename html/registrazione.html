@@ -45,28 +45,10 @@
             <label for="cognome">Cognome</label>
             <input type="text" name="cognome" id="cognome"/>
 
-            <label for="giorno_data_nascita">Giorno data di nascita</label>
-            <select name="giorno_data_nascita" id="giorno_data_nascita">
-                <option value="01">1</option>
-                <option value="02">CONTINUA CON PHP</option>
-            </select>
-
-            <label for="mese_data_nascita">Giorno data di nascita</label>
-            <select name="mese_data_nascita" id="mese_data_nascita">
-                <option value="01">Gennaio</option>
-                <option value="02">CONTINUA CON PHP</option>
-            </select>
-
-            <label for="anno_data_nascita">Giorno data di nascita</label>
-            <select name="anno_data_nascita" id="anno_data_nascita">
-                <option value="1900">1900</option>
-                <option value="1901">CONTINUA CON PHP</option>
-            </select>
-
-            <label for="mail" lang="en"></label>
+            <label for="mail" lang="en">E-mail</label>
             <input type="text" name="mail" id="mail"/>
 
-            <label for="username" lang="en"></label>
+            <label for="username" lang="en">Username</label>
             <input type="text" name="username" id="username"/>
 
             <label for="password" lang="en">Password</label>
@@ -77,9 +59,30 @@
 
             <label for="telefono">Numero di telefono</label>
             <input type="text" name="telefono" id="telefono"/>
+        </fieldset>
+        <fieldset>
+          <legend>Data di nascita</legend>
+          <label for="giorno_data_nascita">Giorno data di nascita</label>
+          <select name="giorno_data_nascita" id="giorno_data_nascita">
+              <option value="01">1</option>
+              <option value="02">CONTINUA CON PHP</option>
+          </select>
 
-            <label for="registrati">Registrati</label>
-            <input type="submit" id="registrati" value="Registrati"/>
+          <label for="mese_data_nascita">Mese data di nascita</label>
+          <select name="mese_data_nascita" id="mese_data_nascita">
+              <option value="01">Gennaio</option>
+              <option value="02">CONTINUA CON PHP</option>
+          </select>
+
+          <label for="anno_data_nascita">Anno data di nascita</label>
+          <select name="anno_data_nascita" id="anno_data_nascita">
+              <option value="1900">1900</option>
+              <option value="1901">CONTINUA CON PHP</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label class="aiuti_alla_navigazione" for="registrati">Registrati</label>
+          <input type="submit" id="registrati" value="Registrati"/>
         </fieldset>
     </form>
     <p>Hai già un <span lang="en">account</span>? <a href="login.html">Accedi</a>!</p>
