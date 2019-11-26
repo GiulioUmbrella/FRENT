@@ -14,13 +14,6 @@ html, body {
 
 }
 
-/* ESPERIMENTO
-* Grid layout per la pagina home
-*/
-
-/*
-* CAPIRE COSA FA IL VALORE auto!!!
-*/
 .aiuti_alla_navigazione{
     position: absolute;
     height: 0;
@@ -43,42 +36,10 @@ html, body {
 .layoutColonnaBreadcrumb { grid-area: b; }
 .layoutColonnaContent    { grid-area: c; }
 .layoutColonnaFooter     { grid-area: f; }
+<<<<<<< HEAD
+=======
 
-.citta{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 0.5em;
-  grid-template-areas:
-        "a a a b b b"
-        "c c d d e e";
-}
-
-.citta1 { grid-area: a; }
-.citta2 { grid-area: b; }
-.citta3 { grid-area: c; }
-.citta4 { grid-area: d; }
-.citta5 { grid-area: e; }
-
-.card{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 0.5em;
-  grid-template-areas:
-        "a a b b c c"
-        "d d e e f f";
-}
-
-.card1 { grid-area: a; }
-.card2 { grid-area: b; }
-.card3 { grid-area: c; }
-.card4 { grid-area: d; }
-.card5 { grid-area: e; }
-.card6 { grid-area: f; }
-
-
-/* ESPERIMENTO
-* Grid layout per la pagina dei risultati
-*/
+>>>>>>> feature/fix_css
 
 .layoutTrePannelli {
   display: grid;
@@ -105,6 +66,7 @@ html, body {
 .layoutCentrale{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
   grid-template-areas:
         "h h h h"
@@ -119,6 +81,27 @@ html, body {
 .layoutCentraleContent    { grid-area:c ;}
 .layoutCentraleFooter     { grid-area:f ;}
 
+
+.cards{
+  list-style:none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards li{
+  background-color: #e5dbff;
+  border: 1px solid #d0bfff;
+
+}
+
+.a{
+  width: 40%;
+}
+.b{
+  width: 20%;
+}
+
+
 #header ul{
    list-style: none;
    display:flex;
@@ -132,6 +115,9 @@ border-left:1px solid #000;
 text-align:center
 }
 
+#content p {
+  /* Inserisci interlinea qui*/
+}
 
 
 .risultati dt {
@@ -241,22 +227,26 @@ text-align:center
 }
 
 
-
-
-
 #footer {
   text-align: center;
   border: 1px solid #000;
 }
 
+/* Footer */
+#footer ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+#footer li {
+   flex-grow: 1;
+   align-self: center
+}
 
 
 /* Riepilogo prenotazione */
 #content ul#dati_prenotazione {
-  list-style-type: none;
-}
-
-/* Footer */
-#footer ul {
   list-style-type: none;
 }
