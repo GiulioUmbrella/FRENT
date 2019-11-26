@@ -244,10 +244,11 @@ html, body {
 */
 fieldset {
     border: none;
+    margin-bottom: 1em;
 }
 
 .form {
-    padding: 2em;
+    padding: 2em 2em 0em;
 }
 
 .form_verticale input, .form_verticale label, .form_verticale select {
@@ -268,13 +269,34 @@ fieldset {
 
 .form_verticale input[type="submit"] {
     -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
-    margin-top: 1.5em;
+    margin-top: 0.5em;
     font-size: 1.5em;
     height: 3em;
     background-color: dodgerblue;
     border: 1px solid #ddd;
     color: white;
     cursor: pointer;
+}
+
+#data_di_nascita {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#data_di_nascita label{
+    margin: 0em;
+}
+
+#data_di_nascita select{
+    min-width: 10%;
+    margin: 0em;
+    margin-right: 1em;
+}
+
+.aligned_with_form {
+    margin-left: 10%;
 }
 
 /*CSS per il menu della gestione annuncio*/
