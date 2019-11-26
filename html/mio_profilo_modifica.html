@@ -1,101 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Il mio profilo</title>
+    <meta charset="utf-8">
+    <title>Il mio profilo</title>
 
-  <link rel="stylesheet" type="text/css" href="../css/main.css" />
-  <link rel="icon" href="../immagini/icona.ico" />
- <!--  <script src="script.js"></script>
-  -->
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="icon" href="../immagini/icona.ico"/>
+    <!--  <script src="script.js"></script>
+     -->
 </head>
 <body>
 <div id="header">
-  <div id="logo">
-    <h1>Frent</h1>
-  </div>
-  <div id="nav">
-    <!-- Header loggato -->
-    <ul>
-      <li><a tabindex="1" href="../index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
-      <li><a tabindex="2" href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>
-      <li><a tabindex="3" href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
-      <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-      <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
-      <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
-      <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
-    </ul>
-  </div>
+    <div id="logo">
+        <h1>Frent</h1>
+    </div>
+    <div id="nav">
+        <!-- Header loggato -->
+        <ul>
+            <li><a tabindex="1" href="../index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
+            </li>
+            <li><a tabindex="2" href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>
+            <li><a tabindex="3" href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
+            <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le
+                mie prenotazioni</a></li>
+            <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
+                annunci</a></li>
+            <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
+                profilo</a></li>
+            <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
+        </ul>
+    </div>
 </div>
-<div id="breadcrumb">
-  <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;Mio Profilo </p>
+<div id="breadcrumb" class="layoutCentraleBreadCrumb">
+    <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span
+            xml:lang="en">Home</span></a>:&gt;&gt;Mio Profilo </p>
 </div>
 
 <div id="content" class="layoutCentrale3">
-  <h1>Il tuo profilo: </h1>
+    <h1>Il tuo profilo: </h1>
 
-  <form action="" method="get">
-    <!--      finto form, che viene triggerato quando viene cliccato i campi dati diventano editabile.-->
-    <fieldset>
-      <legend>Miei dati</legend>
-      <label for="nome">Nome:</label>
-      <input type="text" name="nome" id="nome" placeholder="Nome" maxlength="32"  value="Xiaowei" tabindex="7"/>
+    <form action="" method="get" class="form formVerticale">
+        <!--      finto form, che viene triggerato quando viene cliccato i campi dati diventano editabile.-->
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Miei dati</legend>
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" placeholder="Nome" maxlength="32" value="Xiaowei"
+                       tabindex="7"/>
+            </div>
+            <div>
+                <label for="cognome">Cognome:</label>
+                <input type="text" name="cognome" id="cognome" placeholder="cognome" maxlength="32" value="Wen"
+                       tabindex="7"/>
 
-      <label for="cognome">Cognome:</label>
-      <input type="text" name="cognome" id="cognome" placeholder="cognome" maxlength="32"  value="Wen" tabindex="7"/>
+            </div>
+            <div>
+                <label for="Username">Username:</label>
+                <input type="text" name="Username" id="Username" placeholder="Username" maxlength="32" value="Username"
+                       tabindex="8"/>
+            </div>
 
-      <label for="Username">Username:</label>
-      <input type="text" name="Username" id="Username" placeholder="Username" maxlength="32"  value="Username" tabindex="8"/>
+            <div>
+                <label for="mail">Mail:</label>
+                <input type="email" name="mail" id="mail" placeholder="mail" maxlength="191"
+                       value="xiaowei.wen1997@gmail.com" tabindex="9"/>
 
-      <label for="mail">Mail:</label>
-      <input type="email" name="mail" id="mail" placeholder="mail" maxlength="191"  value="xiaowei.wen1997@gmail.com" tabindex="9"/>
+            </div>
+
+            <div>
+                <label for="telefono">Telefono: </label>
+                <input type="tel" name="telefono" id="telefono" placeholder="Telefono" value="+39112312" tabindex="10"/>
 
 
+            </div>
 
-      <label for="telefono">Telefono: </label>
-      <input type="tel" name="telefono" id="telefono" placeholder="Telefono"  value="+39112312" tabindex="10"/>
-      <input type="hidden" value="Conferma Modifica">
-    </fieldset>
-    <fieldset>
-      <legend>Data di nascita</legend>
-      <label for="birth_day">Giorno:</label>
-      <select id="birth_day" tabindex="11">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <!--    eccetera che tanto si farà con un ciclo-->
-      </select>
-      <label for="birth_month">Mese:</label>
-      <select id="birth_month" tabindex="12">
-        <option value="1">Gennaio</option>
-        <option value="2">Febbraio</option>
-        <option value="3">Marzo</option>
-        <option value="4">Aprile</option>
-        <!--    eccetera che tanto si farà con un ciclo-->
-      </select>
-      <label for="birth_year">Anno</label>
-      <select id="birth_year" tabindex="13">
-        <option value="2019">2019</option>
-        <option value="2018">2018</option>
-        <option value="2017">2017</option>
-        <option value="2016">2016</option>
-        <!--    eccetera che tanto si farà con un ciclo-->
-      </select>
-    </fieldset>
-    <input type="submit" value="Aggiorna"  tabindex="14">
-    <input type="reset" value="Annulla"  tabindex="15">
-  </form>
+
+        </fieldset>
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Data di nascita</legend>
+            <label for="birth_day">Giorno:</label>
+            <select id="birth_day" tabindex="11">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <!--    eccetera che tanto si farà con un ciclo-->
+            </select>
+            <label for="birth_month">Mese:</label>
+            <select id="birth_month" tabindex="12">
+                <option value="1">Gennaio</option>
+                <option value="2">Febbraio</option>
+                <option value="3">Marzo</option>
+                <option value="4">Aprile</option>
+                <!--    eccetera che tanto si farà con un ciclo-->
+            </select>
+            <label for="birth_year">Anno</label>
+            <select id="birth_year" tabindex="13">
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <!--    eccetera che tanto si farà con un ciclo-->
+            </select>
+        </fieldset>
+        <input type="submit" value="Aggiorna" tabindex="14">
+        <input type="reset" value="Annulla" tabindex="15">
+    </form>
 
 </div>
 
 
-<div id="footer">
-  <ul>
-    <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
-    <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di utilizzo</a></li>
-    <li><a href="faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a></li>
-  </ul>
+<div id="footer" class="layoutColonnaFooter">
+    <ul>
+        <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
+        <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
+            utilizzo</a></li>
+        <li><a href="faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>
