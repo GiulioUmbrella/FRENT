@@ -36,10 +36,41 @@ html, body {
 .layoutColonnaBreadcrumb { grid-area: b; }
 .layoutColonnaContent    { grid-area: c; }
 .layoutColonnaFooter     { grid-area: f; }
-<<<<<<< HEAD
-=======
 
->>>>>>> feature/fix_css
+.citta{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0.5em;
+  grid-template-areas:
+        "a a a b b b"
+        "c c d d e e";
+}
+
+.citta1 { grid-area: a; }
+.citta2 { grid-area: b; }
+.citta3 { grid-area: c; }
+.citta4 { grid-area: d; }
+.citta5 { grid-area: e; }
+
+.card{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0.5em;
+  grid-template-areas:
+        "a a b b c c"
+        "d d e e f f";
+}
+
+.card1 { grid-area: a; }
+.card2 { grid-area: b; }
+.card3 { grid-area: c; }
+.card4 { grid-area: d; }
+.card5 { grid-area: e; }
+.card6 { grid-area: f; }
+
+
+
+
 
 .layoutTrePannelli {
   display: grid;
@@ -81,25 +112,6 @@ html, body {
 .layoutCentraleContent    { grid-area:c ;}
 .layoutCentraleFooter     { grid-area:f ;}
 
-
-.cards{
-  list-style:none;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.cards li{
-  background-color: #e5dbff;
-  border: 1px solid #d0bfff;
-
-}
-
-.a{
-  width: 40%;
-}
-.b{
-  width: 20%;
-}
 
 
 #header ul{
