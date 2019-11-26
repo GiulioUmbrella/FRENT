@@ -14,12 +14,6 @@ html, body {
 
 }
 
-.aiuti_alla_navigazione{
-    position: absolute;
-    height: 0;
-    overflow: hidden;
-}
-
 .layoutColonna {
   display: grid;
   grid-template-columns: 1fr;
@@ -102,7 +96,6 @@ html, body {
   grid-template-areas:
         "h h h h"
         "b b b b"
-        ". c c ."
         ". c c ."
         "f f f f";
 }
@@ -192,69 +185,18 @@ text-align:center
 /*
 * CSS PER I FORM
 */
-.form {
-  display:flex;
-  align-items:center;
+.form{
+  padding: 2em;
 }
 
-.form input {
-  vertical-align: middle;
-  margin: 0.5em 1em 0.5em 0;
-  padding: 0.5em;
-  background-color: #fff;
-  border: 0.1em solid #ddd;
+.form_verticale input, .form_verticale label{
+  display: block;
+  height: 2em;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
-.form textarea {
-    min-width: 90%;
-    min-height: 11em;
-    margin-right: 5%;
-    margin-left: 5%;
-}
-.form input[type=file] {
-    width: 90%;
-    margin-left: 5%;
-}
-.form input[type=submit] {
-  background-color: dodgerblue;
-  border: 1px solid #ddd;
-  color: white;
-  cursor: pointer;
-}
-
-.form label {
-  margin: 0.5em 1em 0.5em 0;
-}
-
-.form input[type=submit]:hover {
-  background-color: royalblue;
-}
-
-/*
-* IMPOSTA CERCA ORIZZONTALE
-*/
-.formOrizzontale input {
-  flex:1;
-  font-size:1em;
-}
-
-.formOrizzontale label {
-  flex:1;
-  font-size:1em;
-}
-
-/*
-* IMPOSTA CERCA VERTICALE
-*/
-
-.formVerticale {
-  flex-direction:column;
-  align-items:stretch;
-}
-
-.formVerticale input, label {
-    font-size:1.5em;
-}
-
 
 /*CSS per il menu della gestione annuncio*/
 #content .menu_gestione_annuncio {
@@ -311,6 +253,13 @@ text-align:center
     margin: 2em;
     background: #dddddd;
 }
+
+/*
+#content input {
+    display: block;
+    width: 100%;
+}
+*/
 /*CSS per lista annunci guest*/
 .annuncio_lista_annuncio{
     min-height: 12em;
@@ -392,4 +341,12 @@ ul#prenotazioni > li h2 {
 /* Riepilogo prenotazione */
 #content ul#dati_prenotazione {
   list-style-type: none;
+}
+
+
+/*STA COSA DEVE STARE IN FONDO*/
+body .aiuti_alla_navigazione{
+    position: absolute;
+    height: 0;
+    overflow: hidden;
 }
