@@ -245,6 +245,7 @@ html, body {
 fieldset {
     border: none;
     margin-bottom: 1em;
+    width: 100%;
 }
 
 .form {
@@ -274,8 +275,49 @@ fieldset {
     height: 3em;
     background-color: dodgerblue;
     border: 1px solid #ddd;
-    color: white;
+    color: black;
     cursor: pointer;
+}
+
+.form_orizzontale {
+    padding-top: 0;
+    display: inline-block;
+}
+
+.form_orizzontale fieldset {
+    display: flex;
+}
+
+.form_orizzontale div {
+    display: inline-block;
+    margin-right: 1em;
+    min-width: 30%;
+}
+
+.form_orizzontale div input, .form_orizzontale div label{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.form_orizzontale input[type="submit"] {
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    margin-top: 1em;
+    font-size: 1.5em;
+    height: 2em;
+    background-color: dodgerblue;
+    border: 1px solid #ddd;
+    color: black;
+    cursor: pointer;
+}
+
+.form_orizzontale input {
+    height: 2em;
+}
+
+.form_orizzontale label {
+    height: 1.5em;
+    font-size: 1.2em;
 }
 
 #data_di_nascita {
