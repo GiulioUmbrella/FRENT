@@ -252,7 +252,27 @@ fieldset {
     padding: 2em 2em 0em;
 }
 
-.form_verticale input, .form_verticale label, .form_verticale select {
+.form input[type="submit"] {
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: dodgerblue;
+    border: 1px solid #ddd;
+    color: black;
+    cursor: pointer;
+}
+
+.form input[type="reset"] {
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: slategray;
+    border: 1px solid #ddd;
+    color: black;
+    cursor: pointer;
+}
+
+.form_verticale input, .form_verticale label, .form_verticale select, .form_verticale textarea {
     display: block;
     width: 90%;
     margin-left: 5%;
@@ -268,15 +288,12 @@ fieldset {
     margin-top: 1em;
 }
 
+.form_verticale textarea {
+    min-height: 5em;
+}
+
 .form_verticale input[type="submit"] {
-    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
-    margin-top: 0.5em;
-    font-size: 1.5em;
     height: 3em;
-    background-color: dodgerblue;
-    border: 1px solid #ddd;
-    color: black;
-    cursor: pointer;
 }
 
 .form_orizzontale {
@@ -301,14 +318,7 @@ fieldset {
 }
 
 .form_orizzontale input[type="submit"] {
-    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
-    margin-top: 1em;
-    font-size: 1.5em;
-    height: 2em;
-    background-color: dodgerblue;
-    border: 1px solid #ddd;
-    color: black;
-    cursor: pointer;
+    height: 3em;
 }
 
 .form_orizzontale input {
