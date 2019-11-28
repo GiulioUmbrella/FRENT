@@ -32,7 +32,7 @@
     </div>
 </div>
 <div id="breadcrumb" class="layoutCentraleBreadCrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span>:&gt;&gt;
+    <p> Ti trovi in:<a href="miei_annunci.html" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
         <a href="miei_annunci.html" tabindex="6" title="Torna nei miei annunci">Miei Annunci</a>:&gt;&gt;
         <a href="dettaglio_annunci_host_visualizza.html" tabindex="7" title="Torna nei miei annunci">Titolo Annuncio</a>
         &gt;&gt;Modifica Annuncio</p>
@@ -40,55 +40,49 @@
 
 <div id="content" class="layoutCentraleContent">
     <h1>Modifica annuncio</h1>
-    <form action="" method="post" class="form formVerticale">
+    <form action="" method="post" class="form form_verticale">
         <fieldset>
+            <!-- TODO: aggiungere i valori dell'annuncio da modificare con PHP -->
             <legend class="aiuti_alla_navigazione">Dati annuncio</legend>
-            <div>
-                <label for="max_ospiti">Numero ospiti:</label>
-                <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="1" tabindex="9"
-                       placeholder="Numero degli ospiti"/>
-            </div>
-            <div>
-                <label for="anteprima">Modifica anteprima: </label>
-                <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" tabindex="10"/>
-            </div>
 
-            <div>
-                <label for="prezzo_a_persona">Prezzo a persona:</label>
-                <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" tabindex="11"
-                       placeholder="&euro; a persona"/>
-            </div>
-            <div>
-                <label for="descrizione">Descrizione:</label>
-                <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="12"
-                          placeholder="inserisci qui la descrizione"></textarea>
-            </div>
+            <label for="max_ospiti">Numero ospiti:</label>
+            <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="1" tabindex="9"
+                   placeholder="Numero degli ospiti"/>
+
+            <label for="anteprima">Modifica anteprima: </label>
+            <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" tabindex="10"/>
+
+            <label for="prezzo_a_persona">Prezzo a persona:</label>
+            <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" tabindex="11"
+                   placeholder="&euro; a persona"/>
+
+            <label for="descrizione">Descrizione:</label>
+            <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="12"
+                      placeholder="inserisci qui la descrizione"></textarea>
 
         </fieldset>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Indirizzo</legend>
-            <div>
-                <label for="via">Via:</label>
-                <input type="text" name="via" id="via" placeholder="via" tabindex="13" maxlength="128"/>
-            </div>
-            <div>
-                <label for="numero_civico">Numero Civico:</label>
-                <input type="text" name="numero_civico" id="numero_civico" tabindex="14" placeholder="Numero civico"/>
-            </div>
-            <div>
-                <label for="citta">Citt&agrave;:</label>
-                <input type="text" name="citta" id="citta" placeholder="Citta" tabindex="15" maxlength="128"/>
-            </div>
+
+            <label for="via">Via:</label>
+            <input type="text" name="via" id="via" placeholder="via" tabindex="13" maxlength="128"/>
+
+            <label for="numero_civico">Numero Civico:</label>
+            <input type="text" name="numero_civico" id="numero_civico" tabindex="14" placeholder="Numero civico"/>
+
+            <label for="citta">Citt&agrave;:</label>
+            <input type="text" name="citta" id="citta" placeholder="Citta" tabindex="15" maxlength="128"/>
+
         </fieldset>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Immagini</legend>
             <label for="immagini">Aggiungere immagini:</label>
             <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" tabindex="16" multiple/>
             <ul>
-                <li><img src="../immagini/img1.png" width="50%" height="50%" alt="Immagine"> <a href="#" tabindex="17"
+                <li><img src="../immagini/img1.png" width="25%" height="25%" alt="Immagine"> <a href="#" tabindex="17"
                                                                                                 title="elimina la foto numero 1">Elimina</a>
                 </li>
-                <li><img src="../immagini/img1.png" width="50%" height="50%" alt="Immagine"> <a href="#" tabindex="18"
+                <li><img src="../immagini/img1.png" width="25%" height="25%" alt="Immagine"> <a href="#" tabindex="18"
                                                                                                 title="elimina la foto numero 2">Elimina</a>
                 </li>
             </ul>

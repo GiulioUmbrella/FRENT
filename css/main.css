@@ -296,6 +296,11 @@ fieldset {
     height: 3em;
 }
 
+.form_verticale ul {
+    list-style: none;
+    margin-left: 5%;
+}
+
 .form_orizzontale {
     padding-top: 0;
     display: inline-block;
