@@ -247,7 +247,9 @@ fieldset {
     margin-bottom: 1em;
     width: 100%;
 }
-
+.vertical_align_element {
+    display: flex;
+}
 .form {
     padding: 2em 2em 0em;
 }
@@ -335,6 +337,14 @@ fieldset {
     font-size: 1.2em;
 }
 
+.bottom_line {
+    border-bottom: 1px solid black;
+}
+
+.space_top {
+    margin-top: 1em;
+}
+
 #data_di_nascita {
     display: flex;
     flex-direction: row;
@@ -354,6 +364,25 @@ fieldset {
 
 .aligned_with_form {
     margin-left: 10%;
+}
+
+.only_element {
+    margin: 0em;
+    padding: 0em;
+}
+
+
+.add_margin_bottom {
+    margin-top: 1em;
+}
+
+.add_margin_bottom {
+    margin-bottom: 1em;
+}
+
+#immagine_profilo {
+    margin-top: 1em;
+    max-height: 20%;
 }
 
 /*CSS per il menu della gestione annuncio*/
@@ -416,7 +445,6 @@ fieldset {
 #content .stile_indisponibilita_elimina {
     text-decoration: none;
     color: red;
-    margin: 2em;
     background: #dddddd;
 }
 
