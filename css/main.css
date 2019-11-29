@@ -167,6 +167,10 @@ text-align:center
   padding-top:0.5em;
 
 }
+
+.list_comment dt{
+    margin-bottom:0.1em;
+}
 /*
 .listCard dd p + p  {
   float:right;
