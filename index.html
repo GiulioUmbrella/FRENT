@@ -40,27 +40,54 @@
 <div  id="content">
 <form class="form formOrizzontale" action="">
 
-    <fieldset>
-    <legend>Ricerca annuncio</legend>
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Ricerca annuncio</legend>
+            <div>
+                <label for="citta">Citt&agrave;</label>
+                <input type="text" tabindex="4" name="citta" id="citta"
+                       placeholder="Citt&agrave;"/>
+            </div>
+            <!--Chiarire cosa fare per Safari -->
+            <div>
+                <label for="data_inizio">Data Inizio</label>
+                <input type="date" tabindex="5" name="data_inizio" id="data_inizio" placeholder="yyyy-mm-dd"/>
+            </div>
+            <div>
+                <label for="data_fine">Data Fine</label>
+                <input type="date" tabindex="6" name="data_fine" id="data_fine"
+                       placeholder="yyyy-mm-dd"/>
+            </div>
+            <div>
+                <label for="num_ospiti">Num Ospiti</label>
+                <input type="number" tabindex="7" name="num_ospiti" id="num_ospiti"
+                       min="1" max="99" value="1"/>
+            </div>
+            <div>
+                <label for="pulsante_cerca" class="aiuti_alla_navigazione">Pulsante Ricerca</label>
+                <input type="submit" tabindex="8" id="pulsante_cerca" value="Cerca">
+            </div>
+        </fieldset>
 
-    <label for="citta">Citt&agrave;</label>
-    <input type="text" tabindex="4" name="citta" id="citta"
-           placeholder="Citt&agrave;"/>
-    <!--Chiarire cosa fare per Safari -->
-    <label for="data_inizio">Data Inizio</label>
-    <input type="date" tabindex="5" name="data_inizio" id="data_inizio" placeholder="yyyy-mm-dd"/>
-    <label for="data_fine">Data Fine</label>
-    <input type="date" tabindex="6" name="data_fine" id="data_fine"
-           placeholder="yyyy-mm-dd"/>
-    <label for="num_ospiti">Num Ospiti</label>
-    <input type="number" tabindex="7" name="num_ospiti" id="num_ospiti"
-           min="1" max="99" value="1"/>
-    <label for="pulsante_cerca" class="aiuti_alla_navigazione">Pulsante Ricerca</label>
-    <input type="submit" tabindex="8" id="pulsante_cerca" value="Cerca">
+    </form>
 
-  </fieldset>
+    <dl id="content" class="index4">
+        <dt>Esplora Citt&agrave;</dt>
+        <dd class="citta">
+            <div class="citta1" style="border:1px solid #000"><a href="" tabindex="9">Roma</a></div>
+            <div class="citta2" style="border:1px solid #000"><a href="" tabindex="10">Milano</a></div>
+            <div class="citta3" style="border:1px solid #000"><a href="" tabindex="11">Firenze</a></div>
+            <div class="citta4" style="border:1px solid #000"><a href="" tabindex="12">Venezia</a></div>
+            <div class="citta5" style="border:1px solid #000"><a href="" tabindex="13">Napoli</a></div>
+        </dd>
 
-</form>
+        <dt>I pi&ugrave; votati</dt>
+        <dd class="card">
+            <div class="card1" style="border:1px solid #000"><a href="" tabindex="14">Ann1</a></div>
+            <div class="card2" style="border:1px solid #000"><a href="" tabindex="15">Ann2</a></div>
+            <div class="card3" style="border:1px solid #000"><a href="" tabindex="16">Ann3</a></div>
+            <div class="card4" style="border:1px solid #000"><a href="" tabindex="17">Ann4</a></div>
+            <div class="card5" style="border:1px solid #000"><a href="" tabindex="18">Ann5</a></div>
+            <div class="card6" style="border:1px solid #000"><a href="" tabindex="19">Ann6</a></div>
 
 <dl>
     <dt>Esplora Citt&agrave;</dt>
@@ -72,29 +99,17 @@
         <div class="citta5" style="border:1px solid #000"><a href="" tabindex="13">Napoli</a></div>
     </dd>
 
-    <dt>I pi&ugrave; votati</dt>
-    <dd class="card">
-        <div class="card1" style="border:1px solid #000"><a href="" tabindex="14">Ann1</a></div>
-        <div class="card2" style="border:1px solid #000"><a href="" tabindex="15">Ann2</a></div>
-        <div class="card3" style="border:1px solid #000"><a href="" tabindex="16">Ann3</a></div>
-        <div class="card4" style="border:1px solid #000"><a href="" tabindex="17">Ann4</a></div>
-        <div class="card5" style="border:1px solid #000"><a href="" tabindex="18">Ann5</a></div>
-        <div class="card6" style="border:1px solid #000"><a href="" tabindex="19">Ann6</a></div>
-
-    </dd>
-
-    <dt>Novit&agrave;</dt>
-    <dd class="card">
-        <div class="card1" style="border:1px solid #000"><a href="" tabindex="20">Ann3</a></div>
-        <div class="card2" style="border:1px solid #000"><a href="" tabindex="21">Ann3</a></div>
-        <div class="card3" style="border:1px solid #000"><a href="" tabindex="22">Ann3</a></div>
-        <div class="card4" style="border:1px solid #000"><a href="" tabindex="23">Ann4</a></div>
-        <div class="card5" style="border:1px solid #000"><a href="" tabindex="24">Ann5</a></div>
-        <div class="card6" style="border:1px solid #000"><a href="" tabindex="25">Ann6</a></div>
-    </dd>
-</dl>
+        <dt>Novit&agrave;</dt>
+        <dd class="card">
+            <div class="card1" style="border:1px solid #000"><a href="" tabindex="20">Ann3</a></div>
+            <div class="card2" style="border:1px solid #000"><a href="" tabindex="21">Ann3</a></div>
+            <div class="card3" style="border:1px solid #000"><a href="" tabindex="22">Ann3</a></div>
+            <div class="card4" style="border:1px solid #000"><a href="" tabindex="23">Ann4</a></div>
+            <div class="card5" style="border:1px solid #000"><a href="" tabindex="24">Ann5</a></div>
+            <div class="card6" style="border:1px solid #000"><a href="" tabindex="25">Ann6</a></div>
+        </dd>
+    </dl>
 </div>
-
 
 
 </div>

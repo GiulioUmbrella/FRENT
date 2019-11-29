@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Il mio profilo</title>
+    <meta charset="utf-8">
+    <title>Il mio profilo</title>
 
-  <link rel="stylesheet" type="text/css" href="../css/main.css" />
-  <link rel="icon" href="../immagini/icona.ico" />
- <!--  <script src="script.js"></script>
-  -->
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="icon" href="../immagini/icona.ico"/>
+    <!--  <script src="script.js"></script>
+     -->
 </head>
 <body class="layout_colonna">
 <div id="header">
@@ -34,43 +34,51 @@
 <!--div da mostrare quando la pagina è solamente visualizzabile. -->
 <div id="content" >
 
-  <h1>Il tuo profilo: </h1>
-
-  <a href="mio_profilo_modifica.html"  tabindex="11">Modifica i dati</a>
-<!--  quando viene cliccato il link di cui sopra, viene generata attraverso php una la pagina mio_profilo_modifica-->
-  <p>Nome: Xiaowei</p>
-  <p>Cognome: Wen</p>
-  <p><span xml:lang="en">Username</span>: xwen</p>
-  <p><span xml:lang="en">Email</span>: Xiaowei.wen!997@gmail.com</p>
-  <p>Data di nascita: 14/06/1997</p>
-  <form action="#" method="get" class="form formOrizzontale">
-    <!--    cambiare il password-->
-    <fieldset >
-      <legend >Cambia Password:</legend>
-      <div>
-        <label for="password_one">Modifica Password:</label>
-        <input type="password" name="password_one" id="password_one" placeholder="Inserisci Password"  value=""/>
-      </div>
-      <div>
-        <label for="password_two">Conferma Password:</label>
-        <input type="password" name="password_two" id="password_two" placeholder="Reinserisci Password"  value=""/>
-      </div>
-
-      <input type="submit" value="Conferma" >
-    </fieldset>
-  </form>
-  <img src="../immagini/img3.jpg" id="immagine_profilo" alt="Immagine di profilo ">
-  <form method="post" action="#" class="formOrizzontale form ">
-    <input type="file" accept="image/png, image/jpeg" tabindex="8">
-    <input type="submit" value="Conferma" tabindex="9">
-    <input type="reset" value="Annulla" tabindex="10">
-  </form>
-  <form action="#" method="get" class="form formVerticale">
-    <fieldset>
-      <legend >ELIMINA MIO PROFILO</legend>
-      <input type="submit" class="stile_indisponibilita_elimina" value="Elimina">
-    </fieldset>
-  </form>
+    <a href="mio_profilo_modifica.html" tabindex="11">Modifica i dati</a>
+    <!--  quando viene cliccato il link di cui sopra, viene generata attraverso php una la pagina mio_profilo_modifica-->
+    <p>Nome: Xiaowei</p>
+    <p>Cognome: Wen</p>
+    <p><span xml:lang="en">Username</span>: xwen</p>
+    <p><span xml:lang="en">Email</span>: Xiaowei.wen!997@gmail.com</p>
+    <p>Data di nascita: 14/06/1997</p>
+    <form action="#" method="post" class="form form_orizzontale space_top">
+        <!--    cambiare il password-->
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Cambia Password</legend>
+            <div>
+                <label for="password_one">Modifica Password</label>
+                <input type="password" name="password_one" id="password_one" placeholder="Inserisci Password" value=""/>
+            </div>
+            <div>
+                <label for="password_two">Conferma Password</label>
+                <input type="password" name="password_two" id="password_two" placeholder="Reinserisci Password"
+                       value=""/>
+            </div>
+            <label for="conferma_button" class="aiuti_alla_navigazione">Conferma cambio password</label>
+            <input id="conferma_button" type="submit" value="Conferma"/>
+        </fieldset>
+    </form>
+    <hr/>
+    <div class="vertical_align_element add_margin_bottom add_margin_bottom">
+        <img src="../immagini/img3.jpg" id="immagine_profilo" alt="Immagine di profilo ">
+        <form method="post" action="#" class="form form_orizzontale add_margin_bottom">
+            <fieldset>
+                <legend>Cambia immagine profilo</legend>
+                <div>
+                    <input type="file" accept="image/png, image/jpeg" tabindex="8">
+                    <input type="submit" value="Conferma" tabindex="9">
+                    <input type="reset" value="Annulla" tabindex="10">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <hr/>
+    <form action="#" method="get" class="form form_verticale only_element">
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Elimina il mio profilo</legend>
+            <input type="submit" class="stile_indisponibilita_elimina" value="Elimina profilo">
+        </fieldset>
+    </form>
 </div>
 <div id="footer"  >
   <ul>

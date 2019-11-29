@@ -51,27 +51,22 @@ html, body {
         "c c d d e e";
 }
 
-.citta1 { grid-area: a; }
-.citta2 { grid-area: b; }
-.citta3 { grid-area: c; }
-.citta4 { grid-area: d; }
-.citta5 { grid-area: e; }
-
-.card{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 0.5em;
-  grid-template-areas:
-        "a a b b c c"
-        "d d e e f f";
+.layoutColonnaContent {
+    grid-area: c;
 }
 
-.card1 { grid-area: a; }
-.card2 { grid-area: b; }
-.card3 { grid-area: c; }
-.card4 { grid-area: d; }
-.card5 { grid-area: e; }
-.card6 { grid-area: f; }
+.layoutColonnaFooter {
+    grid-area: f;
+}
+
+.citta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 0.5em;
+    grid-template-areas:
+            "a a a b b b"
+            "c c d d e e";
+}
 
 .layout_tre_pannelli {
   display: grid;
@@ -90,6 +85,22 @@ html, body {
 .layout_tre_pannelli #ricerca    { grid-area: x; }
 .layout_tre_pannelli #content    { grid-area: c; }
 .layout_tre_pannelli #footer     { grid-area: f; }
+
+.layoutTrePannelliBreadCrumb {
+    grid-area: b;
+}
+
+.layoutTrePannelliLeftSide {
+    grid-area: x;
+}
+
+.layoutTrePannelliContent {
+    grid-area: c;
+}
+
+.layoutTrePannelliFooter {
+    grid-area: f;
+}
 
 /*
 * LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
@@ -119,6 +130,14 @@ html, body {
    display:flex;
    border:1px solid #000;
    border-left:0;
+}
+
+
+#header ul {
+    list-style: none;
+    display: flex;
+    border: 1px solid #000;
+    border-left: 0;
 }
 
 #header li {
@@ -208,20 +227,28 @@ text-align:center;
 .form{
   padding: 2em;
 }
+.vertical_align_element {
+    display: flex;
+}
+.form {
+    padding: 2em 2em 0em;
+}
 
-.form_verticale input, .form_verticale label{
-  display: block;
-  height: 2em;
-  width: 90%;
-  margin-left: 5%;
-  margin-top: 1em;
-  margin-bottom: 1em;
+.form input[type="submit"] {
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: dodgerblue;
+    border: 1px solid #ddd;
+    color: black;
+    cursor: pointer;
 }
 
 /* -----------------Gestione annuncio----------------- */
 #content .menu_gestione_annuncio {
     display: inline;
 }
+
 .menu_gestione_annuncio ul {
     list-style-type: none;
     margin: 0;
@@ -250,7 +277,7 @@ text-align:center;
     height: 50%;
     width: 50%;
     float: right;
-    padding-top:5em;
+    padding-top: 5em;
 }
 
 .dettaglio_annuncio p{
@@ -270,15 +297,15 @@ text-align:center;
     text-decoration: none;
     margin: 2em;
 }
-#content .stile_indisponibilita_elimina{
+
+#content .stile_indisponibilita_elimina {
     text-decoration: none;
     color: red;
-    margin: 2em;
     background: #dddddd;
 }
 
 /*STA COSA DEVE STARE IN FONDO*/
-body .aiuti_alla_navigazione{
+body .aiuti_alla_navigazione {
     position: absolute;
     height: 0;
     overflow: hidden;

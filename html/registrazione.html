@@ -21,12 +21,16 @@
     </div>
     <div id="nav">
         <ul>
-            <li><a tabindex="1" href="../index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a></li>
+            <li><a tabindex="1" href="../index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
+            </li>
             <li><a tabindex="2" href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>
             <li><a tabindex="3" href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
-            <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-            <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei annunci</a></li>
-            <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio profilo</a></li>
+            <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le
+                mie prenotazioni</a></li>
+            <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
+                annunci</a></li>
+            <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
+                profilo</a></li>
             <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
         </ul>
     </div>
@@ -39,34 +43,17 @@
 <div id="content" >
     <form action="" method="post" class="form form_verticale">
         <fieldset>
+            <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
             <label for="nome">Nome</label>
             <input type="text" name="nome" id="nome"/>
 
             <label for="cognome">Cognome</label>
             <input type="text" name="cognome" id="cognome"/>
 
-            <label for="giorno_data_nascita">Giorno data di nascita</label>
-            <select name="giorno_data_nascita" id="giorno_data_nascita">
-                <option value="01">1</option>
-                <option value="02">CONTINUA CON PHP</option>
-            </select>
-
-            <label for="mese_data_nascita">Giorno data di nascita</label>
-            <select name="mese_data_nascita" id="mese_data_nascita">
-                <option value="01">Gennaio</option>
-                <option value="02">CONTINUA CON PHP</option>
-            </select>
-
-            <label for="anno_data_nascita">Giorno data di nascita</label>
-            <select name="anno_data_nascita" id="anno_data_nascita">
-                <option value="1900">1900</option>
-                <option value="1901">CONTINUA CON PHP</option>
-            </select>
-
-            <label for="mail" lang="en"></label>
+            <label for="mail" lang="en">E-mail</label>
             <input type="text" name="mail" id="mail"/>
 
-            <label for="username" lang="en"></label>
+            <label for="username" lang="en">Username</label>
             <input type="text" name="username" id="username"/>
 
             <label for="password" lang="en">Password</label>
@@ -77,12 +64,43 @@
 
             <label for="telefono">Numero di telefono</label>
             <input type="text" name="telefono" id="telefono"/>
+        </fieldset>
+        <fieldset id="data_di_nascita">
+            <legend>Data di nascita</legend>
+            <label for="birth_day">Giorno:</label>
+            <select id="birth_day" tabindex="11">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <!--TODO: PHP-->
+            </select>
+            <label for="birth_month">Mese:</label>
+            <select id="birth_month" tabindex="12">
+                <option value="1">Gennaio</option>
+                <option value="2">Febbraio</option>
+                <option value="3">Marzo</option>
+                <option value="4">Aprile</option>
+                <!--TODO: PHP-->
+            </select>
+            <label for="birth_year">Anno:</label>
+            <select id="birth_year" tabindex="13">
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <!--TODO: PHP-->
+            </select>
 
-            <label for="registrati">Registrati</label>
+        </fieldset>
+        <fieldset>
+            <label class="aiuti_alla_navigazione" for="registrati">Registrati</label>
             <input type="submit" id="registrati" value="Registrati"/>
+            <label class="aiuti_alla_navigazione" for="resetta" xml:lang="en">Reset</label>
+            <input type="reset" id="resetta" value="Reset"/>
         </fieldset>
     </form>
-    <p>Hai già un <span lang="en">account</span>? <a href="login.html">Accedi</a>!</p>
+    <p class="aligned_with_form"> Hai già un <span lang="en">account</span>? <a href="login.html">Accedi</a>!</p>
 </div>
 
 <div  id="footer">
