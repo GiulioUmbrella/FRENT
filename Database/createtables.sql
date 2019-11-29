@@ -1,7 +1,7 @@
 create table amministratori (
 	id_amministratore int primary key auto_increment,
 	user_name varchar(32) not null,
-	password varchar(255) not null,
+	password varchar(48) not null,
 	mail varchar(191) not null,
 	unique(mail)
 );

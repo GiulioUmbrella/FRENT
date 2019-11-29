@@ -5,7 +5,7 @@ in caso non vada a buon fine, verrà restituito un empty set
 */
 DROP PROCEDURE IF EXISTS admin_login;
 DELIMITER |
-CREATE PROCEDURE admin_login(_admin varchar(191), _password varchar(255))
+CREATE PROCEDURE admin_login(_admin varchar(191), _password varchar(48))
 BEGIN
   SELECT *
   FROM amministratori a
