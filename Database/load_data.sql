@@ -30,7 +30,7 @@ LOAD DATA LOCAL INFILE 'data_builder/occupazioni.csv' INTO TABLE occupazioni
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data_builder/commnenti.csv' INTO TABLE commenti
+LOAD DATA LOCAL INFILE 'data_builder/commenti.csv' INTO TABLE commenti
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   ESCAPED BY '"'
