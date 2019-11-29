@@ -1,35 +1,46 @@
 *{
-  padding: 0em;
+    padding: 0em;
 	margin: 0em;
 }
 
 /* Layout per desktop*/
 html, body {
-  height: 100%;
-  width:100%;
-  max-width: 1024px;
+    height: 100%;
+    width:100%;
+    max-width: 1024px;
 	margin: auto;
 	font-family: Verdana, Helvetica, sans-serif;
 	font-size: 0.9em;
 
 }
 
-.layoutColonna {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr auto;
-  grid-gap: 1em;
-  grid-template-areas:
+.layout_colonna {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-gap: 1em;
+    grid-template-areas:
         "h"
         "b"
         "c"
         "f";
 }
 
-.layoutColonnaHeader     { grid-area: h; }
-.layoutColonnaBreadcrumb { grid-area: b; }
-.layoutColonnaContent    { grid-area: c; }
-.layoutColonnaFooter     { grid-area: f; }
+.layout_colonna #header {
+    grid-area: h;
+}
+
+.layout_colonna #breadcrumb {
+    grid-area: b;
+}
+
+.layout_colonna #content {
+    grid-area: c;
+}
+
+.layout_colonna #footer {
+    grid-area: f;
+}
 
 .citta{
   display: grid;
@@ -62,11 +73,7 @@ html, body {
 .card5 { grid-area: e; }
 .card6 { grid-area: f; }
 
-
-
-
-
-.layoutTrePannelli {
+.layout_tre_pannelli {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
@@ -78,17 +85,17 @@ html, body {
         "f f f f";
 }
 
-.layoutTrePannelliHeader     { grid-area: h; }
-.layoutTrePannelliBreadCrumb { grid-area: b; }
-.layoutTrePannelliLeftSide   { grid-area: x; }
-.layoutTrePannelliContent    { grid-area: c; }
-.layoutTrePannelliFooter     { grid-area: f; }
+.layout_tre_pannelli #header     { grid-area: h; }
+.layout_tre_pannelli #breadcrumb { grid-area: b; }
+.layout_tre_pannelli #ricerca    { grid-area: x; }
+.layout_tre_pannelli #content    { grid-area: c; }
+.layout_tre_pannelli #footer     { grid-area: f; }
 
 /*
 * LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
 */
 
-.layoutCentrale{
+.layout_centrale{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto auto 1fr auto;
@@ -100,12 +107,12 @@ html, body {
         "f f f f";
 }
 
-.layoutCentraleHeader     { grid-area:h ;}
-.layoutCentraleBreadCrumb { grid-area:b ;}
-.layoutCentraleContent    { grid-area:c ;}
-.layoutCentraleFooter     { grid-area:f ;}
+.layout_centrale #header     { grid-area:h ;}
+.layout_centrale #breadcrumb { grid-area:b ;}
+.layout_centrale #content    { grid-area:c ;}
+.layout_centrale #footer     { grid-area:f ;}
 
-
+/*-----------------Header-----------------*/
 
 #header ul{
    list-style: none;
@@ -117,52 +124,77 @@ html, body {
 #header li {
 flex: 1 1 0em;
 border-left:1px solid #000;
-text-align:center
+text-align:center;
 }
-
 
 #header li a {
   display : block;
   width:100%;
-  height:100% ;
+  height:100%;
 }
 
+/*-----------------Content-----------------*/
 #content p {
-  /* Inserisci interlinea qui*/
+  line-height: 1.5em;
 }
 
+#content h1 {
+    text-align: center;
+}
 
-.listCard dt {
+#content h2 {
+    line-height: 2em;
+}
+
+/* -----------------Footer----------------- */
+#footer {
+    text-align: center;
+    border: 1px solid #000;
+}
+
+#footer ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#footer li {
+    flex-grow: 1;
+    align-self: center
+}
+
+/* -----------------Liste----------------- */
+.list dt {
   margin-bottom:0.1em;
    /* per andare a capo */
 }
 
-.listCard dt > a {
+.list dt > a {
   font-size: 2em;
   float:left;
 }
 
-.listCard dt > p {
+.list dt > p {
   font-size: 1em;
   float:right;
   margin-top:1em;
 }
 
-.listCard dd {
+.list dd {
   clear:both;
   border:1px solid #000;
   margin-bottom:1em;
   min-height: 14em;
 }
 
-.listCard dd img {
+.list dd img {
     float:left;
     padding:1em;
     width:14em;
     max-height:12em;
 }
 
-.listCard dd div {
+.list dd div {
   margin-left: 16em;
   padding-top:0.5em;
 
@@ -171,24 +203,8 @@ text-align:center
 .list_comment dt{
     margin-bottom:0.1em;
 }
-/*
-.listCard dd p + p  {
-  float:right;
-  font-weight:bold;
-  padding-right:0.5em;
-}
-*/
 
-
-
-/* FORM VERTICALI
-* Impostazioni aggiuntive per inserire in verticale gli elementi del form
-* tramite CSS
-*/
-
-/*
-* CSS PER I FORM
-*/
+/* -----------------Form----------------- */
 .form{
   padding: 2em;
 }
@@ -202,7 +218,7 @@ text-align:center
   margin-bottom: 1em;
 }
 
-/*CSS per il menu della gestione annuncio*/
+/* -----------------Gestione annuncio----------------- */
 #content .menu_gestione_annuncio {
     display: inline;
 }
@@ -224,30 +240,33 @@ text-align:center
     padding: 16px;
     text-decoration: none;
 }
-#content .dettaglio_annuncio{
+
+.dettaglio_annuncio{
     display: block;
     width: 80%;
 }
-#content .dettaglio_annuncio img{
+
+.dettaglio_annuncio img{
     height: 50%;
     width: 50%;
     float: right;
     padding-top:5em;
 }
-#content .dettaglio_annuncio p{
+
+.dettaglio_annuncio p{
     font-size: 1.5em;
 }
-#content .dettaglio_annuncio hr{
+
+.dettaglio_annuncio hr{
     width: 100%;
     color: black;
     padding-top:2px;
-
 }
-/*CSS per pagina indisponibilita*/
+/*-----------------Indisponibilità-----------------*/
 #content ul li {
     font-size: 1.5em;
 }
-#content  .stile_indisponibilita_modifica{
+#content .stile_indisponibilita_modifica{
     text-decoration: none;
     margin: 2em;
 }
@@ -257,74 +276,6 @@ text-align:center
     margin: 2em;
     background: #dddddd;
 }
-
-/*
-#content input {
-    display: block;
-    width: 100%;
-}
-*/
-/*CSS per lista annunci guest*/
-.annuncio_lista_annuncio{
-    min-height: 12em;
-    /*border: 3px solid red;*/
-}
-.annuncio_lista_annuncio img{
-    border: 3px solid red;
-    float: right;
-}
-
-#footer {
-  text-align: center;
-  border: 1px solid #000;
-}
-
-/* Footer */
-#footer ul {
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-
-}
-
-#footer li {
-   flex-grow: 1;
-   align-self: center
-}
-/* Riepilogo prenotazione e le mie prenotazioni */
-h1.titolo_content {
-  text-align: center;
-}
-
-h2.sottitolo_content {
-  line-height: 2em;
-}
-
-img.immagine_annuncio {
-  float: left;
-  max-width: 30%;
-  height: auto;
-}
-
-.dati_annuncio,
-.dati_prenotazione {
-  list-style-type: none;
-}
-
-.dati_annuncio {
-  margin-left: 30%;
-}
-
-.dati_prenotazione {
-  clear: both;
-}
-
-
-/* Riepilogo prenotazione */
-#content ul#dati_prenotazione {
-  list-style-type: none;
-}
-
 
 /*STA COSA DEVE STARE IN FONDO*/
 body .aiuti_alla_navigazione{
