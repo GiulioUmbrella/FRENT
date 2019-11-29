@@ -8,7 +8,7 @@ DELIMITER |
 CREATE FUNCTION admin_cambia_stato_annuncio(_id int, _stato tinyint(1)) RETURNS INT
 BEGIN
     -- controllo validità
-    IF _stato >= 0 OR _stato <= 2 THEN
+    IF _stato < 0 OR _stato > 2 THEN
         RETURN -1;
     END IF;
 
