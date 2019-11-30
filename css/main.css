@@ -291,14 +291,26 @@ fieldset {
     margin-left: 5%;
 }
 
-.form_orizzontale div {
-    display: inline-block;
-    width: 19%;
+.form_orizzontale {
+    text-align: center;
 }
 
-.input_label_orizzontale label, .input_label_orizzontale input {
+.input_label_orizzontale {
+    display: inline-block;
+    height: 4em;
+    width: 17%;
+    margin-right: 2%;
+}
+
+.input_label_orizzontale label {
     display: block;
-    width: 90%;
+    width: 100%;
+}
+
+.input_label_orizzontale input {
+    display: inline;
+    width: 100%;
+    height: 2em;
 }
 
 .bottom_line {
