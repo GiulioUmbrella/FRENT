@@ -336,6 +336,14 @@ fieldset {
     color: black;
     padding-top:2px;
 }
+
+.aligned_with_form {
+  text-align: center;
+  font-size: 1.25em;
+}
+
+
+
 /*-----------------Indisponibilità-----------------*/
 #content ul li {
     font-size: 1.5em;
