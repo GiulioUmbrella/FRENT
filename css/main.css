@@ -86,22 +86,6 @@ html, body {
 .layout_tre_pannelli #content    { grid-area: c; }
 .layout_tre_pannelli #footer     { grid-area: f; }
 
-.layoutTrePannelliBreadCrumb {
-    grid-area: b;
-}
-
-.layoutTrePannelliLeftSide {
-    grid-area: x;
-}
-
-.layoutTrePannelliContent {
-    grid-area: c;
-}
-
-.layoutTrePannelliFooter {
-    grid-area: f;
-}
-
 /*
 * LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
 */
@@ -121,7 +105,7 @@ html, body {
 .layout_centrale #header     { grid-area:h ;}
 .layout_centrale #breadcrumb { grid-area:b ;}
 .layout_centrale #content    { grid-area:c ;}
-.layout_centrale     #footer     { grid-area:f ;}
+.layout_centrale #footer     { grid-area:f ;}
 
 /*-----------------Header-----------------*/
 
@@ -131,7 +115,6 @@ html, body {
    border:1px solid #000;
    border-left:0;
 }
-
 
 #header ul {
     list-style: none;
@@ -227,17 +210,21 @@ text-align:center;
 .form{
   padding: 2em;
 }
+
 .vertical_align_element {
     display: flex;
 }
+
 fieldset {
     border: none;
     margin-bottom: 1em;
     width: 100%;
 }
+
 .vertical_align_element {
     display: flex;
 }
+
 .form {
     padding: 1% 2.5% 1%;
 }
