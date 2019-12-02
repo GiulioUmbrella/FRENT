@@ -358,6 +358,15 @@ fieldset {
     color: red;
     background: #dddddd;
 }
+/**********************Lista FOTO********************/
+#content .form_orizzontale .commenti_foto img {
+    width: 10em;
+    height: 10em;
+    float: left;
+}
+#content .form_orizzontale .commenti_foto textarea{
+    float:right;
+}
 
 /*STA COSA DEVE STARE IN FONDO*/
 body .aiuti_alla_navigazione {
