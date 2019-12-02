@@ -358,14 +358,19 @@ fieldset {
     color: red;
     background: #dddddd;
 }
-/**********************Lista FOTO********************/
-#content .form_orizzontale .commenti_foto img {
+/**********************  Prove css per Lista FOTO********************/
+#content .form_orizzontale .commenti_foto img,
+#content .form_verticale .commenti_foto img {
     width: 10em;
     height: 10em;
     float: left;
 }
-#content .form_orizzontale .commenti_foto textarea{
+#content .form_orizzontale .commenti_foto textarea,
+#content .form_verticale .commenti_foto textarea{
     float:right;
+}
+.commenti_foto textarea{
+    width: 18em;
 }
 
 /*STA COSA DEVE STARE IN FONDO*/
