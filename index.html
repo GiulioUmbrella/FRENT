@@ -38,31 +38,30 @@
 </div>
 
 <div  id="content">
-<form class="form formOrizzontale" action="">
+<form class="form form_orizzontale" action="">
 
         <fieldset>
             <legend class="aiuti_alla_navigazione">Ricerca annuncio</legend>
-            <div>
+            <div class="input_label_orizzontale">
                 <label for="citta">Citt&agrave;</label>
                 <input type="text" tabindex="4" name="citta" id="citta"
                        placeholder="Citt&agrave;"/>
             </div>
             <!--Chiarire cosa fare per Safari -->
-            <div>
+            <div class="input_label_orizzontale">
                 <label for="data_inizio">Data Inizio</label>
-                <input type="date" tabindex="5" name="data_inizio" id="data_inizio" placeholder="yyyy-mm-dd"/>
+                <input type="date" tabindex="5" name="data_inizio" id="data_inizio"/>
             </div>
-            <div>
+            <div class="input_label_orizzontale">
                 <label for="data_fine">Data Fine</label>
-                <input type="date" tabindex="6" name="data_fine" id="data_fine"
-                       placeholder="yyyy-mm-dd"/>
+                <input type="date" tabindex="6" name="data_fine" id="data_fine"/>
             </div>
-            <div>
+            <div class="input_label_orizzontale">
                 <label for="num_ospiti">Num Ospiti</label>
                 <input type="number" tabindex="7" name="num_ospiti" id="num_ospiti"
                        min="1" max="99" value="1"/>
             </div>
-            <div>
+            <div class="input_label_orizzontale">
                 <label for="pulsante_cerca" class="aiuti_alla_navigazione">Pulsante Ricerca</label>
                 <input type="submit" tabindex="8" id="pulsante_cerca" value="Cerca">
             </div>
@@ -70,7 +69,7 @@
 
     </form>
 
-    <dl id="content" class="index4">
+    <dl>
         <dt>Esplora Citt&agrave;</dt>
         <dd class="citta">
             <div class="citta1" style="border:1px solid #000"><a href="" tabindex="9">Roma</a></div>
