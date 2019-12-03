@@ -86,22 +86,6 @@ html, body {
 .layout_tre_pannelli #content    { grid-area: c; }
 .layout_tre_pannelli #footer     { grid-area: f; }
 
-.layoutTrePannelliBreadCrumb {
-    grid-area: b;
-}
-
-.layoutTrePannelliLeftSide {
-    grid-area: x;
-}
-
-.layoutTrePannelliContent {
-    grid-area: c;
-}
-
-.layoutTrePannelliFooter {
-    grid-area: f;
-}
-
 /*
 * LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
 */
@@ -121,7 +105,7 @@ html, body {
 .layout_centrale #header     { grid-area:h ;}
 .layout_centrale #breadcrumb { grid-area:b ;}
 .layout_centrale #content    { grid-area:c ;}
-.layout_centrale     #footer     { grid-area:f ;}
+.layout_centrale #footer     { grid-area:f ;}
 
 /*-----------------Header-----------------*/
 
@@ -131,7 +115,6 @@ html, body {
    border:1px solid #000;
    border-left:0;
 }
-
 
 #header ul {
     list-style: none;
@@ -223,21 +206,85 @@ text-align:center;
     margin-bottom:0.1em;
 }
 
+.list_annunci_pendenti {
+  font-size: 1.5em;
+}
+
+.list_annunci_pendenti li{
+  display: flex;
+  padding: 1em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+}
+
+.list_annunci_pendenti li a {
+  flex: 4 0 0;
+  padding: 0.5em;
+}
+
+#content .link_gestione {
+  text-align: center;
+  flex: 1 0 0;
+  border-radius: 1em;
+  text-decoration: none;
+  color: black;
+}
+
+#content .link_approva {
+  border: 1px solid green;
+}
+
+#content .link_rigetta {
+  margin-left: 1em;
+  border: 1px solid red;
+}
+
+#content .link_rigetta:hover {
+  background-color: red;
+}
+
+#content .link_approva:hover {
+  background-color: green;
+}
+
+/* Liste per FAQ e condizioni di utilizzo*/
+
+.list_pagina_statica dt {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+
+.list_pagina_statica dd {
+  border: none;
+  min-height:auto;
+  font-size: 1.2em;
+}
+
+.list_pagina_statica ol {
+  margin-left: 1.2em;
+}
+
 /* -----------------Form----------------- */
 .form{
   padding: 2em;
 }
+
 .vertical_align_element {
     display: flex;
 }
+
 fieldset {
     border: none;
     margin-bottom: 1em;
     width: 100%;
 }
+
 .vertical_align_element {
     display: flex;
 }
+
 .form {
     padding: 1% 2.5% 1%;
 }
@@ -291,7 +338,76 @@ fieldset {
     margin-left: 5%;
 }
 
-/* -----------------Gestione annuncio----------------- */
+.form_orizzontale {
+    text-align: center;
+}
+
+.input_label_orizzontale {
+    display: inline-block;
+    height: 4em;
+    width: 17%;
+    margin-right: 2%;
+}
+
+.input_label_orizzontale label {
+    display: block;
+    width: 100%;
+}
+
+.input_label_orizzontale input {
+    width: 100%;
+    height: 2em;
+}
+
+.bottom_line {
+    border-bottom: 1px solid black;
+}
+
+.space_top {
+    margin-top: 1em;
+}
+
+#data_di_nascita {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#data_di_nascita label{
+    margin: 0em;
+}
+
+#data_di_nascita select{
+    min-width: 10%;
+    margin: 0em;
+    margin-right: 1em;
+}
+
+.aligned_with_form {
+    margin-left: 10%;
+}
+
+.only_element {
+    margin: 0em;
+    padding: 0em;
+}
+
+
+.add_margin_bottom {
+    margin-top: 1em;
+}
+
+.add_margin_bottom {
+    margin-bottom: 1em;
+}
+
+#immagine_profilo {
+    margin-top: 1em;
+    max-height: 20%;
+}
+
+/*CSS per il menu della gestione annuncio*/
 #content .menu_gestione_annuncio {
     display: inline;
 }
@@ -345,9 +461,6 @@ fieldset {
 
 
 /*-----------------Indisponibilità-----------------*/
-#content ul li {
-    font-size: 1.5em;
-}
 #content .stile_indisponibilita_modifica{
     text-decoration: none;
     margin: 2em;
