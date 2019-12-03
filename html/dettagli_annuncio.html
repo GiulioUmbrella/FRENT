@@ -15,7 +15,7 @@
 </head>
 <body class="layout_colonna">
 
-<div  id="header">
+<div id="header">
     <div id="logo">
         <h1>Frent</h1>
     </div>
@@ -36,91 +36,196 @@
     </div>
 </div>
 
-<div  id="breadcrumb">
+<div id="breadcrumb">
     <p> Ti trovi in: <a href="../index.html" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span
             xml:lang="en">Home</span></a>:&gt;&gt;<a href="risultati.html">Ricerca</a> &gt;&gt; TITOLO ANNUNCIO</p>
     <!--TODO: PHP-->
 </div>
 
-<div  id="content"> <!--TODO: PHP-->
-    <h1>Titolo annuncio</h1>
-    <p>Descrizione estesa dell'annuncio</p>
-    <p>Valutazione media: </p>
-    <p>Numero totale di commenti: </p>
-    <img id="immagine_anteprima" src="../immagini/img1.png" alt="Descrizione immagine"/>
-    <!--TODO: PHP la descrizione dell'immagine verrà recuperata dal DB-->
-    <!--TODO: PHP aggiunte tutte le immagini recuperate dal DB-->
-    <img class="immagine" alt="Descrizione immagine" src="../immagini/img2.jpg"/>
-    <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
-    <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
-    <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
-    <button id="immagine_precedente" onclick="">&lt;</button>
-    <!--TODO: JavaScript bottoni per cambiare le immagini verranno gestiti con JS, se JS è disabilitato si mostrano tutte-->
-    <button id="immagine_successiva" onclick="">&gt;</button>
-    <!--TODO: JavaScript bottoni per cambiare le immagini verranno gestiti con JS, se JS è disabilitato si mostrano tutte-->
-    <form action="#" method="post">
-        <fieldset>
-            <label for="conferma_prenotazione">Conferma prenotazione</label>
-            <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
-        </fieldset>
-    </form>
+<div id="content"> <!--TODO: PHP-->
+    <div class="informazioni_prenotazione">
+        <h1>Titolo annuncio</h1>
+        <h2>Valutazione media: </h2>
+        <h2>Numero totale di commenti: </h2>
+        <h2>Prezzo &euro;</h2>
+        <form action="#" method="post">
+            <fieldset>
+                <label class="aiuti_alla_navigazione" for="conferma_prenotazione">Conferma prenotazione</label>
+                <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="shower_immagine_anteprima">
+        <button id="immagine_precedente" class="pulsanti_navigazione_immagini" onclick="">&lt;</button>
+        <!--TODO: JavaScript bottoni per cambiare le immagini verranno gestiti con JS, se JS è disabilitato si mostrano tutte-->
+        <img id="immagine_anteprima" class="immagine_anteprima" src="../immagini/img1.png" alt="Descrizione immagine"/>
+        <!--TODO: PHP la descrizione dell'immagine verrà recuperata dal DB-->
+        <button id="immagine_successiva" class="pulsanti_navigazione_immagini" onclick="">&gt;</button>
+        <!--TODO: JavaScript bottoni per cambiare le immagini verranno gestiti con JS, se JS è disabilitato si mostrano tutte-->
+    </div>
+
+    <div class="image_picker">
+        <!--TODO: PHP aggiunte tutte le immagini recuperate dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img2.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+        <img class="immagine" alt="Descrizione immagine" src="../immagini/img3.jpg"/>
+        <!--TODO: PHP la descrizione (ALT o LONGDESC da decidere) dell'immagine verrà recuperata dal DB-->
+
+    </div>
+
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas urna at aliquam accumsan. Fusce ut
+        tellus nec sapien sagittis faucibus. Nunc efficitur, nisl et elementum gravida, justo nulla suscipit tellus, sit
+        amet lacinia nibh magna ac eros. Sed dignissim quam neque, ut iaculis felis scelerisque vel. Vivamus vel mauris
+        ut lacus consectetur tempor a quis diam. Sed risus elit, facilisis a justo sed, ullamcorper bibendum lectus.
+        Vestibulum eu aliquet tellus. Nam lorem neque, aliquam ac ornare vitae, semper in ligula. Nunc dictum lacus
+        eleifend, luctus purus ut, aliquam nibh. Proin vitae ligula ultrices, tincidunt sapien at, ultricies libero.
+        Morbi sagittis leo nisl, at scelerisque odio pharetra eu. Vivamus nec tincidunt lorem. Fusce ac lacus lectus.
+        Praesent viverra, velit lacinia porttitor rutrum, nunc eros fermentum diam, quis faucibus neque orci nec nibh.
+        Nulla in massa justo. Donec efficitur tellus sed nulla bibendum, id semper libero gravida. Nam dictum, dui at
+        rutrum vestibulum, nisi velit pharetra diam, id luctus nunc enim vitae mauris. Nam congue, ex vitae fermentum
+        efficitur, augue arcu consectetur eros, sed sodales velit ipsum ac leo. Cras est urna, iaculis id facilisis
+        eget, tempus eu eros. Phasellus posuere erat a augue porta molestie. Mauris vulputate vestibulum ante.
+        Pellentesque ac ullamcorper magna. Morbi laoreet auctor lacus, quis pharetra ex ullamcorper id. Nullam auctor
+        vehicula enim, eget dictum augue elementum vel. Integer scelerisque tortor lobortis risus vestibulum, ut dictum
+        erat sodales. Suspendisse nulla ipsum, viverra eu cursus et, congue sed nibh. Ut quis congue purus. Nullam
+        tortor nisi, ullamcorper sit amet urna eget, volutpat consectetur nibh. Etiam dui quam, dapibus eu iaculis sit
+        amet, efficitur facilisis libero. Phasellus dolor nunc, scelerisque sit amet tristique ut, ornare et nulla.
+        Integer dignissim at lectus sed ultrices. Quisque dapibus pretium lacus, ornare commodo nunc accumsan nec.
+        Praesent porttitor nibh ut tincidunt condimentum. Phasellus lobortis ullamcorper tortor, quis aliquet neque
+        iaculis nec. Proin quis imperdiet nisl. Pellentesque ac tortor in odio convallis elementum eget ac sem.
+        In ac dui magna. Nullam nisi lectus, maximus et arcu in, pretium accumsan odio. Vestibulum vitae suscipit
+        tortor, in faucibus sapien. Proin quis ante vitae lacus finibus consectetur. Donec lectus nulla, sagittis in
+        enim ac, sollicitudin sagittis nisi. Etiam eget augue quis nisl rutrum suscipit sit amet id massa. Quisque
+        placerat augue nisl, eget viverra turpis imperdiet vitae. Morbi eu tempus purus, eu posuere dui. Suspendisse
+        urna neque, blandit vel est eu, dapibus aliquam ligula. Praesent scelerisque libero at posuere vehicula. Aenean
+        ullamcorper fermentum quam sed pharetra.
+        Fusce fringilla risus eu condimentum ullamcorper. Vestibulum fringilla nisl vestibulum tincidunt rutrum. Sed eu
+        finibus justo, non vulputate turpis. Vestibulum sed gravida ante, non venenatis eros. Quisque in elit facilisis,
+        placerat eros id, sagittis mauris. In hac habitasse platea dictumst. Nulla a ligula in urna imperdiet aliquam a
+        id ligula. Aliquam ullamcorper orci mattis varius consectetur.
+    </p>
+
     <div id="commenti">
+        <h2>Commenti</h2>
         <ul>
-          <li>
-            <div class="intestazione_commento">
-                <!-- Chiedere se va bene img -->
-                <img src="../immagini/me.jpg" alt="" />
-                  <div>
-                    <p class="username_commento">UserNameUserNameUserNameUserName</p>
-                    <p class="data_commento">Data</p>
-                    <p class="totale_commenti_utente">Numero Commenti Totali</p>
-                  </div>
-            </div>
-            <div class="corpo_commento">
-                <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
-                <p>Votazione: 3/5</p>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                    est laborum."
-                </p>
-            </div>
-          </li>
-          <li>
-            <div class="intestazione_commento">
-                <!-- Chiedere se va bene img -->
-                <img src="../immagini/me.jpg" alt="" />
-                  <div>
-                    <p class="username_commento">UserNameUserNameUserNameUserName</p>
-                    <p class="data_commento">Data</p>
-                    <p class="totale_commenti_utente">Numero Commenti Totali</p>
-                  </div>
-            </div>
-            <div class="corpo_commento">
-                <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
-                <p>Votazione: 3/5</p>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                    est laborum."
-                </p>
-            </div>
-          </li>
+            <li>
+                <div class="intestazione_commento">
+                    <!-- Chiedere se va bene img -->
+                    <img src="../immagini/me.jpg" alt=""/>
+                    <div>
+                        <p class="username_commento">UserNameUserNameUserNameUserName</p>
+                        <p class="data_commento">Data</p>
+                        <p class="totale_commenti_utente">Numero Commenti Totali</p>
+                    </div>
+                </div>
+                <div class="corpo_commento">
+                    <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
+                    <p>Votazione: 3/5</p>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                        id
+                        est laborum."
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="intestazione_commento">
+                    <!-- Chiedere se va bene img -->
+                    <img src="../immagini/me.jpg" alt=""/>
+                    <div>
+                        <p class="username_commento">UserNameUserNameUserNameUserName</p>
+                        <p class="data_commento">Data</p>
+                        <p class="totale_commenti_utente">Numero Commenti Totali</p>
+                    </div>
+                </div>
+                <div class="corpo_commento">
+                    <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
+                    <p>Votazione: 3/5</p>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                        id
+                        est laborum."
+                    </p>
+                </div>
+            </li>
         </ul>
 
 
     </div>
 </div>
 
-<div  id="footer">
+<div id="footer">
     <ul>
         <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
         <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
