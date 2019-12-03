@@ -64,14 +64,21 @@
             <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
         </fieldset>
     </form>
-    <div id="commenti" class="list_comment">
-        <dl>
-            <dt>
-                <p>Titolo commento</p>
-                <p>Username utente</p>
-                <p>Valutazione</p>
-            </dt>
-            <dd>
+    <div id="commenti">
+        <ul>
+          <li>
+            <div class="intestazione_commento">
+                <!-- Chiedere se va bene img -->
+                <img src="../immagini/me.jpg" alt="" />
+                  <div>
+                    <p class="username_commento">UserNameUserNameUserNameUserName</p>
+                    <p class="data_commento">Data</p>
+                    <p class="totale_commenti_utente">Numero Commenti Totali</p>
+                  </div>
+            </div>
+            <div class="corpo_commento">
+                <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
+                <p>Votazione: 3/5</p>
                 <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -81,25 +88,35 @@
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
                     est laborum."
                 </p>
-                <p>Data pubblicazione commento</p>
-            </dd>
-        </dl>
-
-        <ul>
-            <li>
-                <h2>Valutazione: </h2> <!--TODO: controllare correttezza del tag h2 semanticamente parlando-->
-                <p>Username utente</p>
-                <p>Commento dettagliato</p>
-                <p>Data pubblicazione commento</p>
-            </li>
-            <li>
-                <h1>Titolo commento 2</h1>
-                <h2>Valutazione 2: </h2> <!--TODO: controllare correttezza del tag h2 semanticamente parlando-->
-                <p>Username utente 2</p>
-                <p>Commento dettagliato 2</p>
-                <p>Data pubblicazione commento 2</p>
-            </li>
+            </div>
+          </li>
+          <li>
+            <div class="intestazione_commento">
+                <!-- Chiedere se va bene img -->
+                <img src="../immagini/me.jpg" alt="" />
+                  <div>
+                    <p class="username_commento">UserNameUserNameUserNameUserName</p>
+                    <p class="data_commento">Data</p>
+                    <p class="totale_commenti_utente">Numero Commenti Totali</p>
+                  </div>
+            </div>
+            <div class="corpo_commento">
+                <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
+                <p>Votazione: 3/5</p>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                    est laborum."
+                </p>
+            </div>
+          </li>
         </ul>
+
+
     </div>
 </div>
 

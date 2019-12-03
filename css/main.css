@@ -140,11 +140,11 @@ text-align:center;
   line-height: 1.5em;
 }
 
-#content h1 {
+#content > h1 {
     text-align: center;
 }
 
-#content h2 {
+#content > h2 {
     line-height: 2em;
 }
 
@@ -166,45 +166,43 @@ text-align:center;
 }
 
 /* -----------------Liste----------------- */
-.list dt {
+.intestazione_lista {
   margin-bottom:0.1em;
    /* per andare a capo */
 }
 
-.list dt > a {
+.intestazione_lista > a {
   font-size: 2em;
   float:left;
 }
 
-.list dt > p {
+.intestazione_lista > p {
   font-size: 1em;
   float:right;
   margin-top:1em;
 }
 
-.list dd {
+.corpo_lista {
   clear:both;
   border:1px solid #000;
   margin-bottom:1em;
   min-height: 14em;
 }
 
-.list dd img {
+.corpo_lista img {
     float:left;
     padding:1em;
     width:14em;
     max-height:12em;
 }
 
-.list dd div {
+.corpo_lista div {
   margin-left: 16em;
   padding-top:0.5em;
 
 }
 
-.list_comment dt{
-    margin-bottom:0.1em;
-}
+/*ELENCO ANNUNCI DA VALIDARE */
 
 .list_annunci_pendenti {
   font-size: 1.5em;
@@ -247,6 +245,57 @@ text-align:center;
 #content .link_approva:hover {
   background-color: green;
 }
+
+/* LISTA COMMENTI */
+#commenti ul {
+  list-style:none;
+}
+
+#commenti li {
+  margin-bottom: 2em;
+}
+
+.intestazione_commento {
+  min-height: 6em;
+  border: 1px solid black;
+  margin-bottom: 0.1em;
+}
+
+.intestazione_commento img {
+  float:left;
+  padding:1em;
+  max-width: 4em;
+  max-height:4em;
+  border-radius: 50%;
+}
+
+.intestazione_commento div {
+  padding: 1em ;
+}
+
+.intestazione_commento .username_commento {
+    font-size: 1.1;
+    font-weight: bold;
+    float:left;
+    margin-right: 1em;
+}
+
+.intestazione_commento .data_commento {
+}
+
+.corpo_commento {
+    border: 1px solid black;
+}
+
+.corpo_commento h1 {
+  font-size: 1.2em;
+  float:left;
+  margin-right: 1em;
+}
+.corpo_commento h1 + p {
+  margin-top: 0.2em;
+}
+
 
 /* Liste per FAQ e condizioni di utilizzo*/
 
