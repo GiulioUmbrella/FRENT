@@ -3,9 +3,9 @@ Cosa restituisce:
   ID dell'annuncio modificato
   -1 in caso di errori
 */
-DROP FUNCTION IF EXISTS admin_edit_stato_annuncio;
+DROP FUNCTION IF EXISTS admin_edit_stato_approvazione_annuncio;
 DELIMITER |
-CREATE FUNCTION admin_edit_stato_annuncio(_id int, _stato tinyint(1)) RETURNS INT
+CREATE FUNCTION admin_edit_stato_approvazione_annuncio(_id int, _stato tinyint(1)) RETURNS INT
 BEGIN
     -- controllo validità
     IF _stato < 0 OR _stato > 2 THEN
