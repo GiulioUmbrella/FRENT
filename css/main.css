@@ -206,6 +206,7 @@ text-align:center;
     margin-bottom:0.1em;
 }
 
+<<<<<<< HEAD
 .list_annunci_pendenti {
   font-size: 1.5em;
 }
@@ -248,6 +249,8 @@ text-align:center;
   background-color: green;
 }
 
+=======
+>>>>>>> 82ec45e08e7f95e7ec46f528c912e82c0a43d50e
 /* Liste per FAQ e condizioni di utilizzo*/
 
 .list_pagina_statica dt {
@@ -266,6 +269,12 @@ text-align:center;
   margin-left: 1.2em;
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 82ec45e08e7f95e7ec46f528c912e82c0a43d50e
 /* -----------------Form----------------- */
 .form{
   padding: 2em;
