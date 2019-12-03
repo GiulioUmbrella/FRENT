@@ -166,6 +166,10 @@ text-align:center;
 }
 
 /* -----------------Liste----------------- */
+
+#content ul li{
+    list-style: none;
+}
 .intestazione_lista {
   margin-bottom:0.1em;
    /* per andare a capo */
