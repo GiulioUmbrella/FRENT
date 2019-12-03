@@ -206,6 +206,48 @@ text-align:center;
     margin-bottom:0.1em;
 }
 
+.list_annunci_pendenti {
+  font-size: 1.5em;
+}
+
+.list_annunci_pendenti li{
+  display: flex;
+  padding: 1em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+}
+
+.list_annunci_pendenti li a {
+  flex: 4 0 0;
+  padding: 0.5em;
+}
+
+#content .link_gestione {
+  text-align: center;
+  flex: 1 0 0;
+  border-radius: 1em;
+  text-decoration: none;
+  color: black;
+}
+
+#content .link_approva {
+  border: 1px solid green;
+}
+
+#content .link_rigetta {
+  margin-left: 1em;
+  border: 1px solid red;
+}
+
+#content .link_rigetta:hover {
+  background-color: red;
+}
+
+#content .link_approva:hover {
+  background-color: green;
+}
+
 /* -----------------Form----------------- */
 .form{
   padding: 2em;
@@ -401,9 +443,6 @@ fieldset {
 
 
 /*-----------------Indisponibilità-----------------*/
-#content ul li {
-    font-size: 1.5em;
-}
 #content .stile_indisponibilita_modifica{
     text-decoration: none;
     margin: 2em;
