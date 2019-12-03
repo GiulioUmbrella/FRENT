@@ -71,11 +71,11 @@ html, body {
 .layout_tre_pannelli {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
   grid-template-areas:
         "h h h h"
         "b b b b"
-        "x c c c"
         "x c c c"
         "f f f f";
 }
