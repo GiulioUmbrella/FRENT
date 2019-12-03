@@ -248,6 +248,24 @@ text-align:center;
   background-color: green;
 }
 
+/* Liste per FAQ e condizioni di utilizzo*/
+
+.list_pagina_statica dt {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+
+.list_pagina_statica dd {
+  border: none;
+  min-height:auto;
+  font-size: 1.2em;
+}
+
+.list_pagina_statica ol {
+  margin-left: 1.2em;
+}
+
 /* -----------------Form----------------- */
 .form{
   padding: 2em;
