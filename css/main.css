@@ -351,6 +351,7 @@ text-align:center;
 
 .image_picker img {
     width: 10%;
+	height: 10%;
     margin-right: 1em;
     margin-bottom: 1em;
 }
