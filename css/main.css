@@ -471,14 +471,27 @@ fieldset {
     align-items: center;
 }
 
+#data_di_nascita legend {
+    margin-left: 5%;
+}
+
 #data_di_nascita label{
     margin: 0em;
+    flex: 1 0 0;
 }
 
 #data_di_nascita select{
     min-width: 10%;
     margin: 0em;
     margin-right: 1em;
+}
+
+#data_di_nascita #birth_day_label {
+    margin-left: 5%;
+}
+
+#data_di_nascita #birth_year {
+    margin-right: 5%;
 }
 
 .modifica_immagine_profilo {
