@@ -51,14 +51,6 @@ html, body {
         "c c d d e e";
 }
 
-.layoutColonnaContent {
-    grid-area: c;
-}
-
-.layoutColonnaFooter {
-    grid-area: f;
-}
-
 .citta {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -92,7 +84,7 @@ html, body {
 
 .layout_centrale{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
   grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
   grid-template-areas:
@@ -384,18 +376,10 @@ text-align:center;
   padding: 2em;
 }
 
-.vertical_align_element {
-    display: flex;
-}
-
 fieldset {
     border: none;
     margin-bottom: 1em;
     width: 100%;
-}
-
-.vertical_align_element {
-    display: flex;
 }
 
 .form {
@@ -497,6 +481,24 @@ fieldset {
     margin-right: 1em;
 }
 
+.modifica_immagine_profilo {
+    border: 1px solid grey;
+    border-radius: 1em;
+    min-height: 12em;
+}
+
+.modifica_immagine_profilo img{
+    float: left;
+    max-height: 10em;
+    max-width: 10em;
+    border-radius: 50%;
+    margin: 1em;
+}
+
+.modifica_immagine_profilo form {
+    margin-left: 12em;
+}
+
 .aligned_with_form {
     margin-left: 10%;
 }
@@ -504,20 +506,6 @@ fieldset {
 .only_element {
     margin: 0em;
     padding: 0em;
-}
-
-
-.add_margin_bottom {
-    margin-top: 1em;
-}
-
-.add_margin_bottom {
-    margin-bottom: 1em;
-}
-
-#immagine_profilo {
-    margin-top: 1em;
-    max-height: 20%;
 }
 
 /*CSS per il menu della gestione annuncio*/
