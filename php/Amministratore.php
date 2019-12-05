@@ -24,14 +24,14 @@ class Amministratore{
         $this->mail = $mail;
     }
 
-    public function getIdAmministratore(){
+    public function getIdAmministratore():int{
         return $this->id_amministratore;
     }
 
-    public function getUserName(){
+    public function getUserName():string{
         return $this->user_name;
     }
-   public function getMail(): string{
+   public function getMail():string{
         return $this->mail;
     }
 }
