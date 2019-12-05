@@ -34,11 +34,7 @@ class Commento
 
     public function setTitolo($titolo): void
     {
-        if (is_string($titolo)){
             $this->titolo = htmlentities($titolo);
-        }else{
-            // lanciare l'eccezione
-        }
     }
 
     public function getCommento():string
@@ -52,6 +48,7 @@ class Commento
             $this->commento = htmlentities($commento);
         }else{
             // lanciare l'eccezione
+
         }
 
     }
@@ -65,9 +62,9 @@ class Commento
     {
         if ($votazione>=0 && $votazione <=5){
             $this->votazione = $votazione;
-        }
-        else{
+        }else{
 //            lanciare l'eccezione
+            throw new Eccezione("voto inserito non è valido");
         }
     }
 }
