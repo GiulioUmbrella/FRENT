@@ -30,6 +30,7 @@ class Utente
 
     public function setIdUtente($id_utente): void
     {
+        //controllare che id_utente sia numerico
         $this->id_utente = $id_utente;
     }
     public function getNome()
@@ -37,7 +38,7 @@ class Utente
         return $this->nome;
     }
     public function setNome($nome): void
-    {
+    {//controllare che il nome sia valida
         $this->nome = $nome;
     }
     public function getCognome()
@@ -46,6 +47,7 @@ class Utente
     }
     public function setCognome($cognome): void
     {
+        //controllare che cognome non abbia numeri dentro
         $this->cognome = $cognome;
     }
 
@@ -62,7 +64,7 @@ class Utente
         return $this->mail;
     }
     public function setMail($mail): void
-    {
+    {// controlalre che la mail sia valida
         $this->mail = $mail;
     }
 
@@ -73,6 +75,7 @@ class Utente
 
     public function setDataNascita($data_nascita): void
     {
+        //controlalre che data_nascita sia una data valida
         $this->data_nascita = $data_nascita;
     }
 
@@ -91,8 +94,8 @@ class Utente
         return $this->telefono;
     }
 
-    public function setTelefono($telefono): void
-    {
+    public function setTelefono($telefono): void{
+        // fare i controlli che il parametro contenga un numero di telefono
         $this->telefono = $telefono;
     }
 
