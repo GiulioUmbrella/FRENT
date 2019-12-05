@@ -41,7 +41,6 @@
     <h1>Il tuo profilo: </h1>
     <div class="modifica_immagine_profilo">
         <img src="../immagini/me.jpg" id="immagine_profilo" alt="Immagine di profilo " />
-
         <form method="post" action="#" class="form form_orizzontale add_margin_bottom">
             <fieldset>
                 <legend>Cambia immagine profilo</legend>
@@ -50,27 +49,23 @@
                     <input type="reset" value="Annulla" tabindex="10" />
             </fieldset>
         </form>
-
     </div>
 
-    <form style="border: 1px solid black" action="#" method="post" class="form form_orizzontale space_top">
+    <form action="#" method="post" class="form form_verticale form_modifica">
         <!--    cambiare il password-->
         <fieldset>
             <legend class="aiuti_alla_navigazione">Cambia Password</legend>
-            <div class="input_label_orizzontale">
                 <label for="password_one">Modifica Password</label>
                 <input type="password" name="password_one" id="password_one" placeholder="Inserisci Password" value=""/>
-            </div>
-            <div class="input_label_orizzontale">
                 <label for="password_two">Conferma Password</label>
                 <input type="password" name="password_two" id="password_two" placeholder="Reinserisci Password"
                        value=""/>
-            </div>
             <label for="conferma_button" class="aiuti_alla_navigazione">Conferma cambio password</label>
-            <input id="conferma_button" type="submit" value="Conferma"/>
+            <input id="conferma_button" type="submit" value="Conferma modifica password"/>
         </fieldset>
     </form>
-    <form style="border: 1px solid black" action="" method="post" class="form form_verticale">
+
+    <form style="border: 1px solid black" action="" method="post" class="form form_verticale form_modifica">
         <!--      finto form, che viene triggerato quando viene cliccato i campi dati diventano editabile.-->
         <!-- TODO: in PHP impostare i value con i dati dell'account -->
         <fieldset>
@@ -116,7 +111,6 @@
                 <option value="2016">2016</option>
                 <!--TODO: PHP-->
             </select>
-
         </fieldset>
         <fieldset>
             <label class="aiuti_alla_navigazione" for="registrati">Modifica</label>
@@ -124,12 +118,13 @@
         </fieldset>
     </form>
 
-    <form style="border: 1px solid black" action="#" method="get" class="form form_verticale only_element">
+    <form action="#" method="get" class="form form_verticale">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Elimina il mio profilo</legend>
-            <input type="submit" class="stile_indisponibilita_elimina" value="Elimina profilo">
+            <input type="submit" class="" value="Elimina profilo">
         </fieldset>
     </form>
+    <p class="aligned_with_form">Se elimini il tuo profilo perderai tutti i dati ad esso connessi, visita le <a href="condizioni_di_utilizzo.html">condizioni di utilizzo</a></p>
 </div>
 
 

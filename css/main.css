@@ -499,9 +499,12 @@ fieldset {
     margin-left: 12em;
 }
 
-.aligned_with_form {
-    margin-left: 10%;
+.form_modifica {
+    margin-top: 1em;
+    border: 1px solid grey;
+    border-radius: 1em;
 }
+
 
 .only_element {
     margin: 0em;
