@@ -406,6 +406,10 @@ fieldset {
     cursor: pointer;
 }
 
+.destroy_button input[type="submit"]  {
+    background-color: #d64161;
+}
+
 .form_verticale input, .form_verticale label, .form_verticale select, .form_verticale textarea {
     display: block;
     width: 90%;
