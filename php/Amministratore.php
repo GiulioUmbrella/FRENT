@@ -21,7 +21,12 @@ class Amministratore{
     }
 
     public function setMail($mail): void{
-        $this->mail = $mail;
+        if (is_string($mail) and  filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            $this->mail = htmlentities($mail);
+        }else{
+            //gestire l'eccezione
+            throw new Eccezione(htmlentities("La mail inserito non è valida"));
+        }
     }
 
     public function getIdAmministratore():int{

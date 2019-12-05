@@ -69,6 +69,7 @@ class Utente
             $this->mail = htmlentities($mail);
         }else{
             //gestire l'eccezione
+            throw new Eccezione(htmlentities("La mail inserito non è valida"));
         }
     }
 
