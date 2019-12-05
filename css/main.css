@@ -579,7 +579,29 @@ fieldset {
   font-size: 1.25em;
 }
 
+/*-----------------Visualizazione del profilo-----------------*/
+.informazioni_personali img{
+    float: left;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    padding-right: 1em;
+}
 
+.informazioni_personali p {
+    font-size: 1.3em;
+}
+
+.link_modifica {
+    border: 1px solid green;
+    text-align: center;
+    border-radius: 1em;
+    text-decoration: none;
+    color: black;
+    background: greenyellow;
+    padding: 0.5em;
+    float: right;
+}
 
 /*-----------------Indisponibilità-----------------*/
 #content .stile_indisponibilita_modifica{
