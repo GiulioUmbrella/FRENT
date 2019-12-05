@@ -1,5 +1,7 @@
 <?php
 
+$var = new Commento("titolo","Ciao mi paice ","21-10-11",2);
+echo $var->getDataPubblicazione();
 
 class Commento
 {
@@ -32,7 +34,7 @@ class Commento
     {
         //controllare che data_nascita sia una data valida
 
-        if (date("YYYY-mm-dd",$data_pubblicazione)){
+        if (date("Y-m-d",strtotime($data_pubblicazione))){
             $this->data_pubblicazione = $data_pubblicazione;
         }else{
             throw new Eccezione(htmlentities("La data di pubblicazione non è valida"));

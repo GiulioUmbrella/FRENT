@@ -1,4 +1,7 @@
 <?php
+require "CheckMethods.php";
+
+
 class Amministratore{
     private $id_amministratore;
     private $user_name;
@@ -21,12 +24,11 @@ class Amministratore{
     }
 
     public function setMail($mail): void{
-        if (is_string($mail) and  filter_var($mail, FILTER_VALIDATE_EMAIL)){
-            $this->mail = htmlentities($mail);
-        }else{
-            //gestire l'eccezione
-            throw new Eccezione(htmlentities("La mail inserito non è valida"));
-        }
+        if (checkMail($mail,192)){
+            $this->$mail = mail;
+        }else
+            throw new Eccezione("Email non corretta o troppo lunga!");
+
     }
 
     public function getIdAmministratore():int{
