@@ -35,7 +35,7 @@ class Commento
     public function setTitolo($titolo): void
     {
         if (is_string($titolo)){
-            $this->commento = $titolo;
+            $this->titolo = htmlentities($titolo);
         }else{
             // lanciare l'eccezione
         }
@@ -49,7 +49,7 @@ class Commento
     public function setCommento($commento): void
     {
         if (is_string($commento)){
-            $this->commento = $commento;
+            $this->commento = htmlentities($commento);
         }else{
             // lanciare l'eccezione
         }

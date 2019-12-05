@@ -49,7 +49,7 @@ class Foto
 
     public function setDescrizione($descrizione): void
     {
-        $this->descrizione = $descrizione;
+        $this->descrizione = htmlentities($descrizione);
     }
 
 }

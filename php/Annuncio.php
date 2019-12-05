@@ -27,14 +27,14 @@ class Annuncio
     }
     public function setTitolo($titolo): void
     {
-        $this->titolo = $titolo;
+        $this->titolo = htmlentities($titolo);
     }
     public function getDescrizione():string{
         return $this->descrizione;
     }
     public function setDescrizione($descrizione): void
     {
-        $this->descrizione = $descrizione;
+        $this->descrizione = htmlentities($descrizione);
     }
 
     public function getImgAnteprima():string{
@@ -42,7 +42,7 @@ class Annuncio
     }
     public function setImgAnteprima($img_anteprima): void
     {
-        $this->img_anteprima = $img_anteprima;
+        $this->img_anteprima = htmlentities($img_anteprima);
     }
 
     public function getIndirizzo():string{
@@ -51,7 +51,7 @@ class Annuncio
 
     public function setIndirizzo($indirizzo): void
     {
-        $this->indirizzo = $indirizzo;
+        $this->indirizzo = htmlentities($indirizzo);
     }
 
     public function getCitta():string{
@@ -60,7 +60,7 @@ class Annuncio
 
     public function setCitta($citta): void
     {
-        $this->citta = $citta;
+        $this->citta = htmlentities($citta);
     }
 
     public function getHost():int{

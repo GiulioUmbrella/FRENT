@@ -57,7 +57,7 @@ class Utente
     }
     public function setUserName($user_name): void
     {
-        $this->user_name = $user_name;
+        $this->user_name = htmlentities($user_name);
     }
     public function getMail()
     {
@@ -65,7 +65,11 @@ class Utente
     }
     public function setMail($mail): void
     {// controlalre che la mail sia valida
-        $this->mail = $mail;
+        if (is_string($mail) and  filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            $this->mail = htmlentities($mail);
+        }else{
+            //gestire l'eccezione
+        }
     }
 
     public function getDataNascita()
@@ -96,7 +100,11 @@ class Utente
 
     public function setTelefono($telefono): void{
         // fare i controlli che il parametro contenga un numero di telefono
-        $this->telefono = $telefono;
+        if (preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefono)){
+            $this->telefono = $telefono;
+        }else{
+            // gestore l'eccezione quando il numero di telefono non è valido.
+        }
     }
 
 }
