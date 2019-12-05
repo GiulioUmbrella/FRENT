@@ -8,20 +8,35 @@ class Commento
     private $commento;
     private $votazione;
 
+    public function __construct($tit, $commento,$data, $voto){
+        $this->setTitolo($tit);
+        $this->setCommento($commento);
+        $this->setDataPubblicazione($data);
+        $this->setVotazione($voto);
+    }
+
     /**
      * @return mixed
      */
-    public function getDataPubblicazione():DateTime
+    public function getDataPubblicazione():string
     {
         return $this->data_pubblicazione;
     }
 
+
     /**
-     * @param mixed $data_pubblicazione
+     * @param $data_pubblicazione string formato della date deve essere: aaaa/mm/gg oppure aa/mm/gg
+     * @throws Eccezione
      */
     public function setDataPubblicazione($data_pubblicazione): void
     {
-        $this->data_pubblicazione = $data_pubblicazione;
+        //controllare che data_nascita sia una data valida
+
+        if (date("YYYY-mm-dd",$data_pubblicazione)){
+            $this->data_pubblicazione = $data_pubblicazione;
+        }else{
+            throw new Eccezione(htmlentities("La data di pubblicazione non è valida"));
+        }
     }
 
     /**

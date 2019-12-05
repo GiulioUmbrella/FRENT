@@ -13,6 +13,9 @@ class Occupazione
 
     public function __construct($id, $utente,$annuncio,$prenotazione_guest, $num_ospiti, $dataI, $dataF)
     {
+        if ($dataI>$dataF){
+            throw new Eccezione(htmlentities("La data di inizio è maggiore della data di fine!"));
+        }
         $this->setIdOccupazione($id);
         $this->setUtente($utente);
         $this->setAnnuncio($annuncio);
@@ -72,6 +75,7 @@ class Occupazione
 
     public function setDataInizio($data_inizio): void
     {
+
         $this->data_inizio = $data_inizio;
     }
 

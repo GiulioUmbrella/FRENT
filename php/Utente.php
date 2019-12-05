@@ -23,6 +23,7 @@ class Utente
         $this->setTelefono($telefono);
     }
 
+
     public function getIdUtente()
     {
         return $this->id_utente;
@@ -78,11 +79,22 @@ class Utente
         return $this->data_nascita;
     }
 
+    /**
+     *
+     * @param $data_nascita il formato di quest stringa deve essere aaaa-mm-gg
+     * @throws Eccezione
+     */
     public function setDataNascita($data_nascita): void
     {
-        //controlalre che data_nascita sia una data valida
-        $this->data_nascita = $data_nascita;
+        //controllare che data_nascita sia una data valida
+        if (date("Y-m-d",$data_nascita)){
+            $this->data_nascita = $data_nascita;
+        }else{
+            throw new Eccezione("La data di nascita inserita non è valida!");
+        }
+
     }
+
 
     public function getImgProfilo()
     {
