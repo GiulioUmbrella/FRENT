@@ -326,12 +326,13 @@ text-align:center;
     float: right;
 }
 
-.immagine_anteprima {
-    width: 85%;
-}
-
 .shower_immagine_anteprima {
     display: flex;
+    width: 75%;
+}
+
+.immagine_anteprima {
+    width: 85%;
 }
 
 .pulsanti_navigazione_immagini {
@@ -346,14 +347,14 @@ text-align:center;
     display: flex;
     flex-wrap: wrap;
     margin-top: 1em;
-    width: 80%;
+    width: 74%;
 }
 
 .image_picker img {
-    width: 10%;
-	height: 10%;
-    margin-right: 1em;
-    margin-bottom: 1em;
+    max-width: 10%;
+	max-height: 10%;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .informazioni_prenotazione h2 {
@@ -372,6 +373,10 @@ text-align:center;
     color: black;
     cursor: pointer;
     width: 100%;
+}
+
+.informazioni_prenotazione input[type="submit"]:hover{
+    background-color: royalblue;
 }
 
 /* -----------------Form----------------- */
