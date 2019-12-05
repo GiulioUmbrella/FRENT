@@ -21,10 +21,10 @@ class Foto
     }
 
     public function setIdFoto($id_foto): void{
-        if (is_string($id_foto)) {
+        if (is_int($id_foto) and $id_foto>0) {
             $this->id_foto = $id_foto;
-        } else {
-//          gestire l'eccezione
+        } else{
+            throw new Eccezione(htmlentities("ID della foto non è valido"));
         }
     }
 
@@ -35,10 +35,12 @@ class Foto
 
     public function setFilePath($file_path): void
     {
-        if(is_string($file_path)){
+        if(is_string($file_path) and checkStringLen($file_path,128)){
+            $file_path= trim($file_path);
+            $file_path= str_replace(" ","_",$file_path);
             $this->file_path = $file_path;
         }else{
-            //gestire l'eccezione
+            throw new Eccezione(htmlentities("Path della foto non è valida!"));
         }
     }
 
@@ -49,7 +51,12 @@ class Foto
 
     public function setDescrizione($descrizione): void
     {
-        $this->descrizione = htmlentities($descrizione);
+
+        if(is_string($descrizione) and checkStringLen($descrizione,128)){
+            $this->$descrizione = $descrizione;
+        }else{
+            throw new Eccezione(htmlentities("Descrizione non è valida!"));
+        }
     }
 
 }

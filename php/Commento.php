@@ -26,20 +26,7 @@ class Commento
     }
 
 
-    /**
-     * @param $data_pubblicazione string formato della date deve essere: aaaa/mm/gg oppure aa/mm/gg
-     * @throws Eccezione
-     */
-    public function setDataPubblicazione($data_pubblicazione): void
-    {
-        //controllare che data_nascita sia una data valida
 
-        if (date("Y-m-d",strtotime($data_pubblicazione))){
-            $this->data_pubblicazione = $data_pubblicazione;
-        }else{
-            throw new Eccezione(htmlentities("La data di pubblicazione non è valida"));
-        }
-    }
 
     /**
      * @return mixed
@@ -49,30 +36,43 @@ class Commento
         return $this->titolo;
     }
 
-    public function setTitolo($titolo): void
-    {
-            $this->titolo = htmlentities($titolo);
-    }
 
     public function getCommento():string
     {
         return $this->commento;
     }
-
-    public function setCommento($commento): void
-    {
-        if (is_string($commento)){
-            $this->commento = htmlentities($commento);
-        }else{
-            // lanciare l'eccezione
-
-        }
-
-    }
-
     public function getVotazione():int
     {
         return $this->votazione;
+    }
+
+    /**
+     * @param $data_pubblicazione string formato della date deve essere: aaaa/mm/gg oppure aa/mm/gg
+     * @throws Eccezione
+     */
+    public function setDataPubblicazione($data_pubblicazione): void
+    {
+        if (checkValidDate($data_pubblicazione)){
+            $this->data_pubblicazione = $data_pubblicazione;
+        }else{
+            throw new Eccezione(htmlentities("La data di pubblicazione non è valida"));
+        }
+    }
+    public function setTitolo($titolo): void
+    { if (is_string($titolo) and checkStringLen($titolo,64)){
+        $this->$titolo = $titolo;
+    }else{
+        throw new Eccezione(htmlentities("Il titolo è troppo lungo!!"));
+    }
+        $this->titolo = htmlentities($titolo);
+    }
+    public function setCommento($commento): void
+    {
+        if (is_string($commento) and checkStringLen($commento,512)){
+            $this->commento = $commento;
+        }else{
+            throw new Eccezione(htmlentities("Il commento è troppo lungo!!"));
+        }
     }
 
     public function setVotazione($votazione): void

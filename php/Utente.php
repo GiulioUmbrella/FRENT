@@ -58,18 +58,19 @@ class Utente
     }
     public function setUserName($user_name): void
     {
-        $this->user_name = htmlentities($user_name);
+       if (checkStringContainsNoSpace($user_name)){
+           $this->user_name = htmlentities($user_name);
+       }
     }
     public function getMail()
     {
         return $this->mail;
     }
     public function setMail($mail): void
-    {// controlalre che la mail sia valida
-        if (is_string($mail) and  filter_var($mail, FILTER_VALIDATE_EMAIL)){
+    {
+        if (checkIsValidMail($mail)){
             $this->mail = htmlentities($mail);
         }else{
-            //gestire l'eccezione
             throw new Eccezione(htmlentities("La mail inserito non è valida"));
         }
     }
@@ -81,18 +82,17 @@ class Utente
 
     /**
      *
-     * @param $data_nascita il formato di quest stringa deve essere aaaa-mm-gg
+     * @param $data_nascita string il formato di quest stringa deve essere aaaa-mm-gg
      * @throws Eccezione
      */
     public function setDataNascita($data_nascita): void
     {
         //controllare che data_nascita sia una data valida
-        if (date("Y-m-d",$data_nascita)){
+        if (checkValidDate($data_nascita)){
             $this->data_nascita = $data_nascita;
         }else{
             throw new Eccezione("La data di nascita inserita non è valida!");
         }
-
     }
 
 
@@ -103,7 +103,12 @@ class Utente
 
     public function setImgProfilo($img_profilo): void
     {
-        $this->img_profilo = $img_profilo;
+       if(is_string($img_profilo) and checkStringLen($img_profilo,48)) {
+           $img_profilo= str_replace(" ","_",$img_profilo);
+           $this->img_profilo = $img_profilo;
+       } else{
+           throw new Eccezione("Il path dell'immagine di profilo non è valido. ");
+       }
     }
 
     public function getTelefono()
@@ -112,11 +117,10 @@ class Utente
     }
 
     public function setTelefono($telefono): void{
-        // fare i controlli che il parametro contenga un numero di telefono
-        if (preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefono)){
-            $this->telefono = $telefono;
+        if (checkPhoneNumber($telefono)){
+            $this->telefono= $telefono;
         }else{
-            // gestore l'eccezione quando il numero di telefono non è valido.
+            throw new Eccezione("Il numero di telefono non è valido!");
         }
     }
 
