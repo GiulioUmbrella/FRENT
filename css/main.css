@@ -180,7 +180,8 @@ text-align:center;
 
 .corpo_lista {
   clear:both;
-  border:1px solid #000;
+  border:1px solid gray;
+    border-radius: 1em;
   margin-bottom:1em;
   min-height: 14em;
 }
