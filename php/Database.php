@@ -23,7 +23,7 @@ class Database {
         if($this->db == null) {
             $this->db = new mysqli($this->host_name, $this->user_name, $this->password, $this->db_name);
             if($this->db->connect_errno > 0) {
-                throw Exception("C'è stato un errore nella connessione con il database. L'errore che si è verificato è il seguente: " . $this->db->connect_error);
+                throw new Eccezione("C'è stato un errore nella connessione con il database. L'errore che si è verificato è il seguente: " . $this->db->connect_error);
             }
         }
     }
