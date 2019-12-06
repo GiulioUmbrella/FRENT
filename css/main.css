@@ -217,6 +217,46 @@ text-align:center;
   padding: 0.5em;
 }
 
+/*ELENCO PRENOTAZIONI NON ANCORA COMMENTATE*/
+.list_commenti_manacanti {
+    margin-top: 15%;
+}
+
+.list_commenti_manacanti li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    border: 1px solid grey;
+    border-radius: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.list_commenti_manacanti p, .list_commenti_manacanti a{
+    font-size: 1.5em;
+}
+
+.titolo_annuncio_commenti_mancanti {
+    margin-left: 1em;
+}
+
+.data_prenotazione_commenti_mancanti {
+    margin-left: 1em;
+    flex: 1 0 0;
+}
+
+.link_commenta_commenti_mancanti {
+    text-align: right;
+    margin-right: 1em;
+    border: 1px solid blue;
+    border-radius: 1em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    text-decoration: none;
+}
+
+
 #content .link_gestione {
   text-align: center;
   flex: 1 0 0;
