@@ -165,8 +165,33 @@ text-align:center;
 .intestazione_lista {
   margin-bottom:0.1em;
    /* per andare a capo */
+    display: flex;
+    flex-direction: row;
 }
 
+.intestazione_lista a {
+    flex:1 0 0;
+}
+
+.intestazione_lista form fieldset {
+    margin-bottom: 0;
+}
+
+.intestazione_lista form {
+    flex-grow: 1;
+}
+
+.intestazione_lista form input[type="submit"]{
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    background-color: #d64161;
+    font-size: 1.5em;
+    margin-left: 1em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
 .intestazione_lista > a {
   font-size: 2em;
   float:left;
@@ -438,7 +463,7 @@ fieldset {
 }
 
 .form input[type="reset"] {
-    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    background-color: #d64161; /*Necessario per non usare il bottone di default in chrome e safari*/
     margin-top: 0.5em;
     font-size: 1.5em;
     background-color: slategray;
