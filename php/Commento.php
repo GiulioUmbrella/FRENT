@@ -1,8 +1,8 @@
 <?php
 
-$var = new Commento("titolo","Ciao mi paice ","21-10-11",2);
+require "CheckMethods.php";
+$var = new Commento("titolo", "Ciao mi paice ", "21-10-11", 2);
 echo $var->getDataPubblicazione();
-
 class Commento
 {
     private $data_pubblicazione;
@@ -10,7 +10,8 @@ class Commento
     private $commento;
     private $votazione;
 
-    public function __construct($tit, $commento,$data, $voto){
+    public function __construct($tit, $commento, $data, $voto)
+    {
         $this->setTitolo($tit);
         $this->setCommento($commento);
         $this->setDataPubblicazione($data);
@@ -20,12 +21,10 @@ class Commento
     /**
      * @return mixed
      */
-    public function getDataPubblicazione():string
+    public function getDataPubblicazione(): string
     {
         return $this->data_pubblicazione;
     }
-
-
 
 
     /**
@@ -37,11 +36,12 @@ class Commento
     }
 
 
-    public function getCommento():string
+    public function getCommento(): string
     {
         return $this->commento;
     }
-    public function getVotazione():int
+
+    public function getVotazione(): int
     {
         return $this->votazione;
     }
@@ -52,34 +52,37 @@ class Commento
      */
     public function setDataPubblicazione($data_pubblicazione): void
     {
-        if (checkValidDate($data_pubblicazione)){
+        if (checkIsValidDate($data_pubblicazione)) {
             $this->data_pubblicazione = $data_pubblicazione;
-        }else{
+        } else {
             throw new Eccezione(htmlentities("La data di pubblicazione non è valida"));
         }
     }
+
     public function setTitolo($titolo): void
-    { if (is_string($titolo) and checkStringLen($titolo,64)){
-        $this->$titolo = $titolo;
-    }else{
-        throw new Eccezione(htmlentities("Il titolo è troppo lungo!!"));
-    }
+    {
+        if (is_string($titolo) and checkStringLen($titolo, 64)) {
+            $this->$titolo = $titolo;
+        } else {
+            throw new Eccezione(htmlentities("Il titolo è troppo lungo!!"));
+        }
         $this->titolo = htmlentities($titolo);
     }
+
     public function setCommento($commento): void
     {
-        if (is_string($commento) and checkStringLen($commento,512)){
+        if (is_string($commento) and checkStringLen($commento, 512)) {
             $this->commento = $commento;
-        }else{
+        } else {
             throw new Eccezione(htmlentities("Il commento è troppo lungo!!"));
         }
     }
 
     public function setVotazione($votazione): void
     {
-        if ($votazione>=0 && $votazione <=5){
+        if ($votazione >= 0 && $votazione <= 5) {
             $this->votazione = $votazione;
-        }else{
+        } else {
 //            lanciare l'eccezione
             throw new Eccezione("voto inserito non è valido");
         }

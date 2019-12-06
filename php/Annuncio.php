@@ -1,5 +1,5 @@
 <?php
-
+require "CheckMethods.php";
 
 class Annuncio
 {

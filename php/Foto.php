@@ -1,5 +1,6 @@
 <?php
 
+require "CheckMethods.php";
 
 class Foto
 {

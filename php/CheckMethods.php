@@ -70,14 +70,14 @@ function checkStringNoNumber($str):bool {
     return is_string($str) and  preg_match('~^[\p{L}\p{Z}]+$~u', $str);
 }
 
-//todo da controllare se funziona questo confronto.
 /**
  * @param $dataI
  * @param $dataF
  * @return bool restuisce true sse la dataI è antecedente alla dataF
  */
 function checkDateBeginAndEnd($dataI, $dataF): bool {
-    return is_string($dataI) and is_string($dataF) and $dataI<= $dataF;
+    return is_string($dataI) and is_string($dataF) and checkIsValidDate($dataI)
+        and checkIsValidDate($dataF) and strtotime($dataI)<= strtotime($dataF);
 }
 //verificare il numero di telefono
 /**

@@ -1,5 +1,5 @@
 <?php
-
+require "CheckMethods.php";
 
 class Utente
 {
@@ -88,7 +88,7 @@ class Utente
     public function setDataNascita($data_nascita): void
     {
         //controllare che data_nascita sia una data valida
-        if (checkValidDate($data_nascita)){
+        if (checkIsValidDate($data_nascita)){
             $this->data_nascita = $data_nascita;
         }else{
             throw new Eccezione("La data di nascita inserita non è valida!");
