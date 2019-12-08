@@ -162,11 +162,14 @@ text-align:center;
 #content ul li{
     list-style: none;
 }
+
+
 .intestazione_lista {
   margin-bottom:0.1em;
    /* per andare a capo */
     display: flex;
     flex-direction: row;
+    clear: left;
 }
 
 .intestazione_lista form fieldset {
@@ -188,9 +191,11 @@ text-align:center;
     color: black;
     cursor: pointer;
 }
+
 .intestazione_lista > a {
   font-size: 2em;
   float:left;
+    flex: 1 0 0;
 }
 
 .intestazione_lista > p {
@@ -661,6 +666,34 @@ fieldset {
     color: black;
     background: greenyellow;
     padding: 0.5em;
+    float: right;
+}
+
+/*-----------------I miei annunci-----------------*/
+.link_aggiungi_annuncio {
+    border: 1px solid dodgerblue;
+    border-radius: 1em;
+    background-color: dodgerblue;
+    padding: 0.5em;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    margin-bottom: 1em;
+    float: left;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.link_gestisci_annuncio {
+    border: 1px solid dodgerblue;
+    border-radius: 1em;
+    background-color: dodgerblue;
+    padding: 0.5em 1em 0.5em 1em ;
+    text-decoration: none;
+    color: black;
+    vertical-align: center;
+    margin-top: 1em;
     float: right;
 }
 
