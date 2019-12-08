@@ -594,7 +594,7 @@ fieldset {
     padding: 0em;
 }
 
-/*CSS per il menu della gestione annuncio*/
+/*-----------------Dettaglio annuncio host visualizza-----------------*/
 #content .menu_gestione_annuncio {
     display: inline;
 }
@@ -617,7 +617,7 @@ fieldset {
     padding: 16px;
     text-decoration: none;
 }
-
+/*
 .dettaglio_annuncio{
     display: block;
     width: 80%;
@@ -639,7 +639,7 @@ fieldset {
     color: black;
     padding-top:2px;
 }
-
+*/
 .aligned_with_form {
   text-align: center;
   font-size: 1.25em;

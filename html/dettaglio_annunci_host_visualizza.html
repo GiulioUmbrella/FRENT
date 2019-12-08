@@ -14,7 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css"/>
     <link rel="icon" href="../immagini/icona.ico"/>
 </head>
-<body>
+
+<body class="layout_colonna">
 
 <div id="header">
     <div id="logo">
@@ -36,30 +37,29 @@
         </ul>
     </div>
 </div>
-<div id="breadcrumb" >
+<div id="breadcrumb">
     <p> Ti trovi in:<a href="miei_annunci.html" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
         <a href="miei_annunci.html" title="Torna nei miei annunci" tabindex="7">Miei Annunci</a>&gt;&gt;Titolo Annuncio
     </p>
 </div>
 
-<div id="content" >
-    <h1>Gestione annuncio</h1>
+<div id="content">
+    <h1>Gestione annuncio TITOLO ANNUNCIO</h1> <!--TODO: PHP-->
     <div class="menu_gestione_annuncio">
-        <ul >
-            <li><a href="dettaglio_annunci_host_modifica.html" title="Modificare l'annuncio" tabindex="8">Modifica</a></li>
+        <ul>
+            <li><a href="dettaglio_annunci_host_modifica.html" title="Modificare l'annuncio" tabindex="8">Modifica</a>
+            </li>
             <li><a href="gestione_indisponibilita.html"
                    tabindex="9" title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;
                     relative a questo annuncio">Gestione Indisponibilit&agrave;</a></li>
             <li><a href="storico_prenotazioni.html" tabindex="10"
                    title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
 
-          <li><a href="#" tabindex="11" title="Permette di rendere l'annuncio non prenotabile">Blocca</a></li>
-          <li><a href="#" tabindex="12">Elimina Annuncio</a></li>
+            <li><a href="#" tabindex="11" title="Permette di rendere l'annuncio non prenotabile">Blocca</a></li>
+            <li><a href="#" tabindex="12">Elimina Annuncio</a></li>
         </ul>
-
-      <ul  class="menu_gestione_annuncio">
-      </ul>
     </div>
+
     <div class="dettaglio_annuncio">
         <img src="../immagini/img1.png" alt="Immagini dell'annuncio"/>
 
@@ -77,22 +77,72 @@
         <p>290</p>
         <p>Media valutazione: </p>
         <p>4.5</p>
-        <p>Commenti: </p>
-        <hr/>
-        <ul>
-            <li><a href="mailto:mail@gmail.com" title="scrivi all'utente">Username:</a>
-                <p>Molto bello</p></li>
-            <li><a href="mailto:mail@gmail.com">Username:</a>
-                <p>Molto bello</p></li>
-            <li><a href="mailto:mail@gmail.com">Username:</a>
-                <p>Molto bello</p></li>
-        </ul>
-    </div>
 
+        <div id="commenti">
+            <h2>Commenti</h2>
+            <ul>
+                <li>
+                    <div class="intestazione_commento">
+                        <!-- Chiedere se va bene img -->
+                        <img src="../immagini/me.jpg" alt=""/>
+                        <div>
+                            <p class="username_commento">UserNameUserNameUserNameUserName</p>
+                            <p class="data_commento">Data</p>
+                        </div>
+                        <p class="totale_commenti_utente">Numero Commenti Totali</p>
+                    </div>
+                    <div class="corpo_commento">
+                        <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
+                        <p>Votazione: 3/5</p>
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore
+                            et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo
+                            consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                            anim
+                            id
+                            est laborum."
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="intestazione_commento">
+                        <!-- Chiedere se va bene img -->
+                        <img src="../immagini/me.jpg" alt=""/>
+                        <div>
+                            <p class="username_commento">UserNameUserNameUserNameUserName</p>
+                            <p class="data_commento">Data</p>
 
+                        </div>
+                        <p class="totale_commenti_utente">Numero Commenti Totali</p>
+                    </div>
+                    <div class="corpo_commento">
+                        <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>
+                        <p>Votazione: 3/5</p>
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore
+                            et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo
+                            consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                            anim
+                            id
+                            est laborum."
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
 </div>
-
-<div id="footer" >
+</div>
+<div id="footer">
     <ul>
         <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
         <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
