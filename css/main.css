@@ -169,10 +169,6 @@ text-align:center;
     flex-direction: row;
 }
 
-.intestazione_lista a {
-    flex:1 0 0;
-}
-
 .intestazione_lista form fieldset {
     margin-bottom: 0;
 }
@@ -397,7 +393,6 @@ text-align:center;
     font-size: 5em;
     border: none;
     background: lightgray;
-    box-shadow: black;
     border-radius: 0px;
 }
 
