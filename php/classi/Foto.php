@@ -1,6 +1,6 @@
 <?php
 
-require "CheckMethods.php";
+require_once "../CheckMethods.php";
 
 class Foto
 {

@@ -1,8 +1,7 @@
 <?php
 
-require "CheckMethods.php";
-$var = new Commento("titolo", "Ciao mi paice ", "21-10-11", 2);
-echo $var->getDataPubblicazione();
+require_once "../CheckMethods.php";
+
 class Commento
 {
     private $data_pubblicazione;
