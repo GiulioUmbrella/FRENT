@@ -19,6 +19,16 @@ class Annuncio
     private $max_ospiti;
     private $prezzo_notte;
 
+    public function __construct($id_annuncio, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $prezzo_notte) {
+        $this->setIdAnnuncio($id_annuncio);
+        $this->setTitolo($titolo);
+        $this->setDescrizione($descrizione);
+        $this->setImgAnteprima($img_anteprima);
+        $this->setIndirizzo($indirizzo);
+        $this->setCitta($citta);
+        $this->setPrezzoNotte($prezzo_notte);
+    }
+
     public function getIdAnnuncio():int{
         return $this->id_annuncio;
     }
