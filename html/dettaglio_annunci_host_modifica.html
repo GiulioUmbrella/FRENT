@@ -9,7 +9,7 @@
     <!--  <script src="script.js"></script>
     -->
 </head>
-<body>
+<body class="layout_tre_pannelli">
 
 <div id="header">
     <div id="logo">
@@ -31,15 +31,27 @@
         </ul>
     </div>
 </div>
-<div id="breadcrumb" >
+<div id="breadcrumb">
     <p> Ti trovi in:<a href="miei_annunci.html" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
-        <a href="miei_annunci.html" tabindex="6" title="Torna nei miei annunci">Miei Annunci</a>:&gt;&gt;
-        <a href="dettaglio_annunci_host_visualizza.html" tabindex="7" title="Torna nei miei annunci">Titolo Annuncio</a>
-        &gt;&gt;Modifica Annuncio</p>
+        <a href="miei_annunci.html" title="Torna nei miei annunci" tabindex="7">Miei Annunci</a>&gt;&gt;Titolo Annuncio
+    </p>
 </div>
 
-<div id="content" >
-    <h1>Modifica annuncio</h1>
+<div id="laterale">
+    <ul class="menu_gestione_annuncio">
+        <li><a href="gestione_indisponibilita.html"
+               tabindex="9" title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;
+                    relative a questo annuncio">Gestione Indisponibilit&agrave;</a></li>
+        <li>Modifica</li>
+        <li><a href="visualizza_commenti.html"> Visualizza commenti</a></li>
+        <li><a href="prenotazioni_annuncio.html" tabindex="10"
+               title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
+        <li><a href="#" tabindex="12">Elimina Annuncio</a></li>
+    </ul>
+</div>
+
+<div id="content">
+    <h1 class="titolo_gestione_annuncio">Gestione annuncio TITOLO ANNUNCIO</h1> <!--TODO: PHP-->
     <form action="" method="post" class="form form_verticale">
         <fieldset>
             <!-- TODO: aggiungere i valori dell'annuncio da modificare con PHP -->
@@ -93,7 +105,7 @@
         <input type="reset" value="Annulla Modifiche" tabindex="20">
     </form>
 </div>
-<div id="footer" >
+<div id="footer">
     <ul>
         <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
         <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
