@@ -74,7 +74,7 @@ html, body {
 
 .layout_tre_pannelli #header     { grid-area: h; }
 .layout_tre_pannelli #breadcrumb { grid-area: b; }
-.layout_tre_pannelli #ricerca    { grid-area: x; }
+.layout_tre_pannelli #laterale    { grid-area: x; }
 .layout_tre_pannelli #content    { grid-area: c; }
 .layout_tre_pannelli #footer     { grid-area: f; }
 
