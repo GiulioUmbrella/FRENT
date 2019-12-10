@@ -746,6 +746,22 @@ fieldset {
     font-size: 1.2em;
 }
 
+.sei_pannelli {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sei_pannelli li{
+    width: 33%;
+    height: 20em;
+}
+
+.sei_pannelli li a {
+    display: block;
+    height: 20em;
+    background-repeat: no-repeat;
+    background-size: 10em 10em ;
+}
 /*-----------------Indisponibilità-----------------*/
 #content .stile_indisponibilita_modifica{
     text-decoration: none;
@@ -764,3 +780,30 @@ body .aiuti_alla_navigazione {
     height: 0;
     overflow: hidden;
 }
+
+
+#link_roma {
+    flex-grow: 3;
+    background-image: url("../immagini/roma.jpg");
+}
+#link_padova {
+    flex-grow: 3;
+    background-image: url("../immagini/padova.jpg");
+}
+#link_monselice {
+    flex-grow: 1;
+    background-image: url("../immagini/monselice.jpg");
+}
+#link_limena {
+    flex-grow: 1;
+    background-image: url("../immagini/limena.jpeg");
+}
+#link_vicenza {
+    flex-grow: 1;
+    background-image: url("../immagini/vicenza.jpg");
+}
+#link_borgoricco {
+    flex-grow: 1;
+     background-image: url("../immagini/borgoricco.jpg");
+ }
+
