@@ -650,8 +650,12 @@ fieldset {
 
 .menu_gestione_annuncio li {
     padding: 0.5em;
-    border: 1px solid black;
     margin: 0.5em;
+}
+
+.menu_gestione_annuncio a{
+    display: block;
+    text-decoration: none;
 }
 /*
 .dettaglio_annuncio{
