@@ -512,6 +512,13 @@ fieldset {
     cursor: pointer;
 }
 
+.legend_evidenziata {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    margin-left: -1em;
+}
+
 .destroy_button input[type="submit"]  {
     background-color: #d64161;
 }
@@ -635,27 +642,16 @@ fieldset {
 }
 
 /*-----------------Dettaglio annuncio host visualizza-----------------*/
-#content .menu_gestione_annuncio {
-    display: inline;
-}
-
-.menu_gestione_annuncio ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+.menu_gestione_annuncio {
+    list-style: none;
+    font-size: 1.2em;
+    margin-top: 25%;
 }
 
 .menu_gestione_annuncio li {
-    float: left;
-}
-
-.menu_gestione_annuncio li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
+    padding: 0.5em;
+    border: 1px solid black;
+    margin: 0.5em;
 }
 /*
 .dettaglio_annuncio{
@@ -735,6 +731,15 @@ fieldset {
     vertical-align: center;
     margin-top: 1em;
     float: right;
+}
+
+.titolo_gestione_annuncio {
+    margin-bottom: 0.5em;
+}
+
+.lista_storico_prenotazioni li{
+    padding: 0.30em;
+    font-size: 1.2em;
 }
 
 /*-----------------Indisponibilità-----------------*/
