@@ -7,7 +7,7 @@ $nome = $_POST["user"];
 $password = $_POST["password"];
 //try {
     $db->connect();
-    $res = $db->queryProcedure("admin_login($nome, $password.);");
+    $res = $db->queryProcedure('admin_login("'.$nome.'","'.$password.'");');
     if (count($res) != 0) {
         session_start();
         $_SESSION["db"] = $db;

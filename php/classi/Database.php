@@ -103,10 +103,10 @@ class Database {
      * @throws Eccezione se la query non è andata a buon fine.
      * @return array di hash/array associativi.
      */
-    public function queryProcedure($procedure_name_and_parametres) {
+    public function queryProcedure($procedure) {
         if(!($this->is_connected)) throw new Eccezione("Non è attiva una connessione con il database.");
         /// viene interrogato il database, essendo una procedure di MySQL viene usato l'operatore CALL
-        $procedure_result = $this->db->query("CALL " . $procedure_name_and_parametres);
+        $procedure_result = $this->db->query("CALL $procedure");
 
         /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if($procedure_result && $procedure_result->num_rows >= 0) {
@@ -115,10 +115,9 @@ class Database {
             while($row = $procedure_result->fetch_array(MYSQLI_ASSOC)){
                 $returned_array[] = $row;
             }
-
             return $returned_array;
         } else {
-            throw new Eccezione("Errore nell'esecuzione della procedura $procedure_name_and_parametres.");
+            throw new Eccezione("Errore nell'esecuzione della procedura $procedure.");
         }
     }
 
