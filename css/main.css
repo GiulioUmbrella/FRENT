@@ -180,18 +180,6 @@ text-align:center;
     flex-grow: 1;
 }
 
-.intestazione_lista form input[type="submit"]{
-    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
-    background-color: #d64161;
-    font-size: 1.5em;
-    margin-left: 1em;
-    padding: 0.25em 0.75em 0.25em 0.75em;
-    border: 1px solid #ddd;
-    border-radius: 1em;
-    color: black;
-    cursor: pointer;
-}
-
 .intestazione_lista > a {
   font-size: 2em;
   float:left;
@@ -209,7 +197,7 @@ text-align:center;
   border:1px solid gray;
     border-radius: 1em;
   margin-bottom:1em;
-  min-height: 14em;
+  min-height: 12em;
 }
 
 .corpo_lista img {
@@ -225,6 +213,58 @@ text-align:center;
 
 }
 
+.lista_flex{
+    display: flex;
+}
+
+.lista_flex .dettagli_prenotazione {
+    margin-left: 0em;
+    flex: 5 0 0;
+    border-right: 1px solid gray;
+}
+
+.lista_flex .dettagli_prenotazione img+p {
+    font-size: 1.2em;
+    padding-top: 0.5em;
+}
+
+.lista_flex .opzioni_prenotazione {
+    padding: 0em;
+    margin-left: 0em;
+    flex: 1 0 0;
+    text-align: center;
+}
+
+.lista_flex .opzioni_prenotazione p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 25%;
+}
+
+.lista_flex .opzioni_prenotazione form input[type="submit"]{
+    -webkit-appearance: none;
+    background-color: #d64161;
+    font-size: 1.5em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
+
+.lista_flex .opzioni_prenotazione a{
+    -webkit-appearance: none;
+    display: block;
+    text-decoration: none;
+    background-color: greenyellow;
+    font-size: 1.2em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    margin: 0em 0.5em 0em 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
 /*ELENCO ANNUNCI DA VALIDARE */
 
 .list_annunci_pendenti {
