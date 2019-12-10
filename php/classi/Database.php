@@ -46,9 +46,9 @@ class Database {
 
     /**
      * Costruisce un'istanza del gestore del database, memorizzando le credenziali, senza connettersi.
-     * @param $host_name Hostname per la connessione al database MySQL
-     * @param $user_name Username per la connessione al database MySQL
-     * @param $password Password per la connessione al database MySQL
+     * @param $host_name string Hostname per la connessione al database MySQL
+     * @param $user_name string Username per la connessione al database MySQL
+     * @param $password string Password per la connessione al database MySQL
      * @param $db_name Database MySQL in cui sono presenti le tabelle da interrogare
      */
     public function __construct($host_name, $user_name, $password, $db_name) {
@@ -62,12 +62,13 @@ class Database {
     /**
      * Effettua la connessione al database, se presenti delle credenziali corrette.
      * Lancia un'eccezione se si sono verificati errori nell'apertura della connessione
+     * @throws Eccezione
      */
     public function connect() {
         if($this->db == null) {
             $this->db = new mysqli($this->host_name, $this->user_name, $this->password, $this->db_name);
             if($this->db->connect_errno > 0) {
-                throw Eccezione("C'è stato un errore nella connessione con il database. L'errore che si è verificato è il seguente: " . $this->db->connect_error);
+                throw new Eccezione("C'è stato un errore nella connessione con il database. L'errore che si è verificato è il seguente: " . $this->db->connect_error);
             } else {
                 $this->is_connected = TRUE;
             }
@@ -103,21 +104,21 @@ class Database {
      * @return array di hash/array associativi.
      */
     public function queryProcedure($procedure_name_and_parametres) {
-        if(!($this->is_connected)) throw Eccezione("Non è attiva una connessione con il database.");
+        if(!($this->is_connected)) throw new Eccezione("Non è attiva una connessione con il database.");
         /// viene interrogato il database, essendo una procedure di MySQL viene usato l'operatore CALL
         $procedure_result = $this->db->query("CALL " . $procedure_name_and_parametres);
 
         /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if($procedure_result && $procedure_result->num_rows >= 0) {
             // NOTA BENE: verificare che con un record set di 0 righe $procedure_result sia comunque TRUE
+            $returned_array =array();
             while($row = $procedure_result->fetch_array(MYSQLI_ASSOC)){
-                print_r($procedure_result->fetch_array());
                 $returned_array[] = $row;
             }
 
             return $returned_array;
         } else {
-            throw Eccezione("Errore nell'esecuzione della procedura $procedure_name_and_parametres.");
+            throw new Eccezione("Errore nell'esecuzione della procedura $procedure_name_and_parametres.");
         }
     }
 
@@ -129,7 +130,7 @@ class Database {
      * @return risultato dell'interrogazione sotto forma di variabile e non di array.
      */
     public function queryFunction($function_name_and_parametres) {
-        if(!($this->is_connected)) throw Eccezione("Non è attiva una connessione con il database.");
+        if(!($this->is_connected)) throw new Eccezione("Non è attiva una connessione con il database.");
         // viene interrogato il database, essendo una function di MySQL viene usato l'operatore SELECT, come le interrogazioni di selezione/proiezione
         $function_result = $this->db->query("SELECT " . $function_name_and_parametres);
         
@@ -138,7 +139,7 @@ class Database {
             $returned_value = $function_result->fetch_array(MYSQLI_NUM);
             return $returned_value[0][0];
         } else {
-            throw Eccezione("Errore nell'esecuzione della funzione $function_name_and_parametres.");
+            throw new Eccezione("Errore nell'esecuzione della funzione $function_name_and_parametres.");
         }
     }
 }
