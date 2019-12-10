@@ -110,9 +110,11 @@ class Database {
         /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if($procedure_result && $procedure_result->num_rows >= 0) {
             // NOTA BENE: verificare che con un record set di 0 righe $procedure_result sia comunque TRUE
-            while($row = $procedure_result->fetch_array(MYSQLI_ASSOC))
+            while($row = $procedure_result->fetch_array(MYSQLI_ASSOC)){
+                print_r($procedure_result->fetch_array());
                 $returned_array[] = $row;
-            
+            }
+
             return $returned_array;
         } else {
             throw Eccezione("Errore nell'esecuzione della procedura $procedure_name_and_parametres.");
