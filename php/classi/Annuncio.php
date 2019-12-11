@@ -1,5 +1,6 @@
 <?php
 require_once "../CheckMethods.php";
+require_once "DataConstraints.php";
 
 class Annuncio {
     
@@ -65,7 +66,7 @@ class Annuncio {
     }
     
     public function setBloccato($bloccato): void {
-        if (is_bool($bloccato)) {
+        if (is_bool($bloccato) ) {
             $this->bloccato = $bloccato;
         } else {
             throw new Exception();
@@ -90,7 +91,7 @@ class Annuncio {
     }
     
     public function setTitolo($titolo): void {
-        if (checkStringLen($titolo, 32)) {
+        if (checkStringMaxLen($titolo, DataConstraints::annunci["titolo"])) {
             $this->titolo = htmlentities($titolo);
         } else {
             throw new Eccezione(htmlentities("Il titolo inserito è troppo lungo."));
@@ -98,7 +99,7 @@ class Annuncio {
     }
     
     public function setDescrizione($descrizione): void {
-        if (checkStringLen($descrizione, 512)) {
+        if (checkStringMaxLen($descrizione, DataConstraints::annunci["descrizione"])) {
             $this->descrizione = htmlentities($descrizione);
         } else {
             throw new Eccezione(htmlentities("La descrizione è troppo lunga!"));
@@ -106,7 +107,11 @@ class Annuncio {
     }
     
     public function setImgAnteprima($img_anteprima): void {
-        $this->img_anteprima = htmlentities($img_anteprima);
+        if (checkStringMaxLen(trim($img_anteprima),DataConstraints::annunci["img_anteprima"]))
+            $this->img_anteprima = htmlentities($img_anteprima);
+        else {
+            throw new Eccezione(htmlentities("Il nome del file non è valido!"));
+        }
     }
     
     public function setIndirizzo($indirizzo): void {
@@ -114,7 +119,8 @@ class Annuncio {
     }
     
     public function setCitta($citta): void {
-        if (checkStringNoNumber($citta)) {
+        if (checkStringNoNumber($citta) and checkStringMaxLen(trim($citta),DataConstraints::annunci["citta"])
+        and strlen(trim($citta))>0) {
             $this->citta = htmlentities($citta);
         } else {
             throw new Eccezione(htmlentities("Il nome della città non è valido!"));

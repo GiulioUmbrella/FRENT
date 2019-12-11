@@ -31,7 +31,7 @@ class Foto {
     }
     
     public function setFilePath($file_path): void {
-        if (is_string($file_path) and checkStringLen($file_path, 128)) {
+        if (is_string($file_path) and checkStringMaxLen($file_path, DataConstraints::foto_annunci["file_path"])) {
             $file_path = trim($file_path);
             $file_path = str_replace(" ", "_", $file_path);
             $this->file_path = $file_path;
@@ -46,7 +46,7 @@ class Foto {
     
     public function setDescrizione($descrizione): void {
         
-        if (is_string($descrizione) and checkStringLen($descrizione, 128)) {
+        if (is_string($descrizione) and checkStringMaxLen($descrizione, DataConstraints::foto_annunci["descrizione"])) {
             $this->$descrizione = $descrizione;
         } else {
             throw new Eccezione(htmlentities("Descrizione non è valida!"));

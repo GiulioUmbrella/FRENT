@@ -52,7 +52,7 @@ class Commento {
     }
     
     public function setTitolo($titolo): void {
-        if (is_string($titolo) and checkStringLen($titolo, 64)) {
+        if (is_string($titolo) and checkStringMaxLen($titolo, DataConstraints::commenti["titolo"])) {
             $this->$titolo = $titolo;
         } else {
             throw new Eccezione(htmlentities("Il titolo è troppo lungo!!"));
@@ -61,7 +61,7 @@ class Commento {
     }
     
     public function setCommento($commento): void {
-        if (is_string($commento) and checkStringLen($commento, 512)) {
+        if (is_string($commento) and checkStringMaxLen($commento, DataConstraints::commenti["commento"])) {
             $this->commento = $commento;
         } else {
             throw new Eccezione(htmlentities("Il commento è troppo lungo!!"));

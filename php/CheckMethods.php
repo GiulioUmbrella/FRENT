@@ -44,9 +44,19 @@ function checkStringContainsNoSpace($str): bool {
  * @param $len int indica la lunghezza massima che la stringa può avere.
  * @return bool se str è stringa e len è un intero e la stringa ha la lunghezza <= a int, altrimenti false;
  */
-function checkStringLen($str, $len): bool{
+function checkStringMaxLen($str, $len): bool{
     return is_string($str) and is_int($len) and strlen($str) <= $len;
 }
+/**
+ * Controlla se il valore passato è una stringa e se è di lunghezza >= a $len
+ * @param $str string stringa da controllare
+ * @param $len int indica la lunghezza massima che la stringa può avere.
+ * @return bool se str è stringa e len è un intero e la stringa ha la lunghezza <= a int, altrimenti false;
+ */
+function checkStringMinLen($str, $len): bool{
+    return is_string($str) and is_int($len) and strlen($str) >= $len;
+}
+
 
 
 /**
@@ -86,5 +96,5 @@ function checkDateBeginAndEnd($dataI, $dataF): bool {
  * @return bool
  */
 function checkPhoneNumber($telefono): bool {
-    return is_string($telefono) and preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $telefono);
+    return is_string($telefono) and preg_match("/^[0-9]{3}[0-9]{4}-[0-9]{4}$/", $telefono);
 }

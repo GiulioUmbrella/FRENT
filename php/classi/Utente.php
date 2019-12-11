@@ -37,7 +37,11 @@ class Utente {
     }
     
     public function setNome($nome): void {//controllare che il nome sia valida
-        $this->nome = $nome;
+        if (checkStringNoNumber($nome) and checkStringMaxLen(trim($nome),DataConstraints::utenti["nome"]) and strlen(trim($nome)) > 0)
+            $this->$nome = $nome;
+        else{
+            throw new Eccezione("Il nome inserito non è valido!");
+        }
     }
     
     public function getCognome() {
@@ -46,7 +50,11 @@ class Utente {
     
     public function setCognome($cognome): void {
         //controllare che cognome non abbia numeri dentro
-        $this->cognome = $cognome;
+        if (checkStringNoNumber($cognome) and checkStringMaxLen(trim($cognome),DataConstraints::utenti["cognome"]) and strlen(trim($cognome)) > 0)
+            $this->cognome = $cognome;
+        else{
+            throw new Eccezione("Il cognome inserito non è valido!");
+        }
     }
     
     public function getUserName() {
@@ -54,8 +62,11 @@ class Utente {
     }
     
     public function setUserName($user_name): void {
-        if (checkStringContainsNoSpace($user_name)) {
-            $this->user_name = htmlentities($user_name);
+      
+        if (checkStringContainsNoSpace($user_name) and checkStringMaxLen(trim($user_name),DataConstraints::utenti["user_name"]) and strlen(trim($user_name)) > 0)
+            $this->$user_name = $user_name;
+        else{
+            throw new Eccezione("Il username inserito non è valido!");
         }
     }
     
@@ -64,7 +75,8 @@ class Utente {
     }
     
     public function setMail($mail): void {
-        if (checkIsValidMail($mail)) {
+        if (checkIsValidMail($mail) and checkStringMaxLen(trim($mail),DataConstraints::utenti["mail"])
+            and strlen(trim($mail))>6) {//6 perché a@a.aa, e aa perché non ci sono TLD con una lettera.
             $this->mail = htmlentities($mail);
         } else {
             throw new Eccezione(htmlentities("La mail inserito non è valida"));
@@ -95,7 +107,8 @@ class Utente {
     }
     
     public function setImgProfilo($img_profilo): void {
-        if (is_string($img_profilo) and checkStringLen($img_profilo, 48)) {
+        if (is_string($img_profilo) and checkStringMaxLen($img_profilo, DataConstraints::utenti["img_profilo"])
+        and checkStringMinLen(trim($img_profilo),DataConstraints::utenti["img_profilo"])) {
             $img_profilo = str_replace(" ", "_", $img_profilo);
             $this->img_profilo = $img_profilo;
         } else {
