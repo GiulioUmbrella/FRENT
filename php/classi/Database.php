@@ -107,15 +107,15 @@ class Database {
         if (!($this->is_connected)) {
             throw new Eccezione("Non è attiva una connessione con il database.");
         }
-        /// viene interrogato il database, essendo una procedure di MySQL viene usato l'operatore CALL
+        // viene interrogato il database, essendo una procedure di MySQL viene usato l'operatore CALL
         $procedure_result = $this->db->query("CALL $procedure;");
 
-        /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
+        // se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($procedure_result && $procedure_result->num_rows >= 0) {
             // NOTA BENE: verificare che con un record set di 0 righe $procedure_result sia comunque TRUE
             $returned_array = array();
             while ($row = $procedure_result->fetch_array(MYSQLI_ASSOC)) {
-                $returned_array[] = $row;
+                array_push($returned_array, $row);
             }
             return $returned_array;
         } else {
@@ -133,13 +133,9 @@ class Database {
     public function queryFunction($function) {
         if (!($this->is_connected)) throw new Eccezione("Non è attiva una connessione con il database.");
         // viene interrogato il database, essendo una function di MySQL viene usato l'operatore SELECT, come le interrogazioni di selezione/proiezione
-        echo "SELECT " . $function . ";";
-
-        //fixme query non funziona da errore:  mysqli::query(): Couldn't fetch mysqli
         $function_result = $this->db->query("SELECT $function;");
-//        $function_result=mysqli_query($this->db,"SELECT $function;" );
 
-        /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
+        // se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($function_result && $function_result->num_rows == 1) {
             $returned_value = $function_result->fetch_array(MYSQLI_NUM);
             return $returned_value[0][0];
