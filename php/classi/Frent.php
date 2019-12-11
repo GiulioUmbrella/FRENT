@@ -145,11 +145,22 @@ class Frent {
         }
     }
 
-    public function insertOccupazione(/*$utente,*/ $annuncio, $numospiti, $data_inizio, $data_fine) {
+    public function insertOccupazione(/*$utente,*/ $annuncio, $numospiti, $data_inizio, $data_fine): int {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("L'inserimento di un'occupazione può essere svolto solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "insert_occupazione(" . $auth_user->getIdUtente() . ", $annuncio, $numospiti, \'$data_inizio\', \'$data_fine\')";
+        $risutalto = $this->db_instance->queryFunction($function_name_and_params);
+
+        /**
+         * ID dell'occupazione appena inserita se tutto è andato a buon fine
+         * -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
+         * -2 se ci sono altre occupazioni nel range di date passate in input
+         * -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
+         */
+
+        return $risultato > 0;
     }
 
     public function insertFoto($id_annuncio, $file_path, $descrizione) {
