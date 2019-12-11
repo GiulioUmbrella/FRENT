@@ -74,7 +74,7 @@ html, body {
 
 .layout_tre_pannelli #header     { grid-area: h; }
 .layout_tre_pannelli #breadcrumb { grid-area: b; }
-.layout_tre_pannelli #ricerca    { grid-area: x; }
+.layout_tre_pannelli #laterale    { grid-area: x; }
 .layout_tre_pannelli #content    { grid-area: c; }
 .layout_tre_pannelli #footer     { grid-area: f; }
 
@@ -162,14 +162,28 @@ text-align:center;
 #content ul li{
     list-style: none;
 }
+
+
 .intestazione_lista {
   margin-bottom:0.1em;
    /* per andare a capo */
+    display: flex;
+    flex-direction: row;
+    clear: left;
+}
+
+.intestazione_lista form fieldset {
+    margin-bottom: 0;
+}
+
+.intestazione_lista form {
+    flex-grow: 1;
 }
 
 .intestazione_lista > a {
   font-size: 2em;
   float:left;
+    flex: 1 0 0;
 }
 
 .intestazione_lista > p {
@@ -180,9 +194,10 @@ text-align:center;
 
 .corpo_lista {
   clear:both;
-  border:1px solid #000;
+  border:1px solid gray;
+    border-radius: 1em;
   margin-bottom:1em;
-  min-height: 14em;
+  min-height: 12em;
 }
 
 .corpo_lista img {
@@ -198,6 +213,58 @@ text-align:center;
 
 }
 
+.lista_flex{
+    display: flex;
+}
+
+.lista_flex .dettagli_prenotazione {
+    margin-left: 0em;
+    flex: 5 0 0;
+    border-right: 1px solid gray;
+}
+
+.lista_flex .dettagli_prenotazione img+p {
+    font-size: 1.2em;
+    padding-top: 0.5em;
+}
+
+.lista_flex .opzioni_prenotazione {
+    padding: 0em;
+    margin-left: 0em;
+    flex: 1 0 0;
+    text-align: center;
+}
+
+.lista_flex .opzioni_prenotazione p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 25%;
+}
+
+.lista_flex .opzioni_prenotazione form input[type="submit"]{
+    -webkit-appearance: none;
+    background-color: #d64161;
+    font-size: 1.5em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
+
+.lista_flex .opzioni_prenotazione a{
+    -webkit-appearance: none;
+    display: block;
+    text-decoration: none;
+    background-color: greenyellow;
+    font-size: 1.2em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    margin: 0em 0.5em 0em 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
 /*ELENCO ANNUNCI DA VALIDARE */
 
 .list_annunci_pendenti {
@@ -216,6 +283,46 @@ text-align:center;
   flex: 4 0 0;
   padding: 0.5em;
 }
+
+/*ELENCO PRENOTAZIONI NON ANCORA COMMENTATE*/
+.list_commenti_manacanti {
+    margin-top: 15%;
+}
+
+.list_commenti_manacanti li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    border: 1px solid grey;
+    border-radius: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.list_commenti_manacanti p, .list_commenti_manacanti a{
+    font-size: 1.5em;
+}
+
+.titolo_annuncio_commenti_mancanti {
+    margin-left: 1em;
+}
+
+.data_prenotazione_commenti_mancanti {
+    margin-left: 1em;
+    flex: 1 0 0;
+}
+
+.link_commenta_commenti_mancanti {
+    text-align: right;
+    margin-right: 1em;
+    border: 1px solid blue;
+    border-radius: 1em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    text-decoration: none;
+}
+
 
 #content .link_gestione {
   text-align: center;
@@ -331,7 +438,6 @@ text-align:center;
     font-size: 5em;
     border: none;
     background: lightgray;
-    box-shadow: black;
     border-radius: 0px;
 }
 
@@ -397,13 +503,20 @@ fieldset {
 }
 
 .form input[type="reset"] {
-    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    background-color: #d64161; /*Necessario per non usare il bottone di default in chrome e safari*/
     margin-top: 0.5em;
     font-size: 1.5em;
     background-color: slategray;
     border: 1px solid #ddd;
     color: black;
     cursor: pointer;
+}
+
+.legend_evidenziata {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    margin-left: -1em;
 }
 
 .destroy_button input[type="submit"]  {
@@ -528,30 +641,23 @@ fieldset {
     padding: 0em;
 }
 
-/*CSS per il menu della gestione annuncio*/
-#content .menu_gestione_annuncio {
-    display: inline;
-}
-
-.menu_gestione_annuncio ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+/*-----------------Dettaglio annuncio host visualizza-----------------*/
+.menu_gestione_annuncio {
+    list-style: none;
+    font-size: 1.2em;
+    margin-top: 25%;
 }
 
 .menu_gestione_annuncio li {
-    float: left;
+    padding: 0.5em;
+    margin: 0.5em;
 }
 
-.menu_gestione_annuncio li a {
+.menu_gestione_annuncio a{
     display: block;
-    color: black;
-    text-align: center;
-    padding: 16px;
     text-decoration: none;
 }
-
+/*
 .dettaglio_annuncio{
     display: block;
     width: 80%;
@@ -573,7 +679,7 @@ fieldset {
     color: black;
     padding-top:2px;
 }
-
+*/
 .aligned_with_form {
   text-align: center;
   font-size: 1.25em;
@@ -603,6 +709,59 @@ fieldset {
     float: right;
 }
 
+/*-----------------I miei annunci-----------------*/
+.link_aggiungi_annuncio {
+    border: 1px solid dodgerblue;
+    border-radius: 1em;
+    background-color: dodgerblue;
+    padding: 0.5em;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    margin-bottom: 1em;
+    float: left;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.link_gestisci_annuncio {
+    border: 1px solid dodgerblue;
+    border-radius: 1em;
+    background-color: dodgerblue;
+    padding: 0.5em 1em 0.5em 1em ;
+    text-decoration: none;
+    color: black;
+    vertical-align: center;
+    margin-top: 1em;
+    float: right;
+}
+
+.titolo_gestione_annuncio {
+    margin-bottom: 0.5em;
+}
+
+.lista_storico_prenotazioni li{
+    padding: 0.30em;
+    font-size: 1.2em;
+}
+
+.sei_pannelli {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sei_pannelli li{
+    width: 33%;
+    height: 20em;
+}
+
+.sei_pannelli li a {
+    display: block;
+    height: 20em;
+    background-repeat: no-repeat;
+    background-size: 10em 10em ;
+}
 /*-----------------Indisponibilità-----------------*/
 #content .stile_indisponibilita_modifica{
     text-decoration: none;
@@ -621,3 +780,30 @@ body .aiuti_alla_navigazione {
     height: 0;
     overflow: hidden;
 }
+
+
+#link_roma {
+    flex-grow: 3;
+    background-image: url("../immagini/roma.jpg");
+}
+#link_padova {
+    flex-grow: 3;
+    background-image: url("../immagini/padova.jpg");
+}
+#link_monselice {
+    flex-grow: 1;
+    background-image: url("../immagini/monselice.jpg");
+}
+#link_limena {
+    flex-grow: 1;
+    background-image: url("../immagini/limena.jpeg");
+}
+#link_vicenza {
+    flex-grow: 1;
+    background-image: url("../immagini/vicenza.jpg");
+}
+#link_borgoricco {
+    flex-grow: 1;
+     background-image: url("../immagini/borgoricco.jpg");
+ }
+
