@@ -49,7 +49,7 @@ class Database {
      * @param $host_name string Hostname per la connessione al database MySQL
      * @param $user_name string Username per la connessione al database MySQL
      * @param $password string Password per la connessione al database MySQL
-     * @param $db_name Database MySQL in cui sono presenti le tabelle da interrogare
+     * @param $db_name string MySQL in cui sono presenti le tabelle da interrogare
      */
     public function __construct($host_name, $user_name, $password, $db_name) {
         $this->host_name = $host_name;

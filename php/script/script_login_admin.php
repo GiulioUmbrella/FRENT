@@ -1,25 +1,26 @@
 <?php
-require "../php/classi/Database.php";
-
-$db = new Database("localhost", "root", "", "frentdb");
-
+require_once "../classi/Database.php";
+require_once "../classi/Frent.php";
 $nome = $_POST["user"];
 $password = $_POST["password"];
-//try {
-    $db->connect();
-    $res = $db->queryProcedure('admin_login("'.$nome.'","'.$password.'");');
-    if (count($res) != 0) {
+try {
+    $db = new Database("localhost", "root", "","frentdb");
+
+    $frent = new Frent($db);
+    
+    $admin=$frent->adminLogin($nome,$password);
+    
+    if ($admin != null) {
         session_start();
-        $_SESSION["db"] = $db;
-        echo "Logged in successfully";
-        header("Location: ../html/approvazione_annunci.html");
+        $_SESSION["admin_obj"] = $admin;
+        header("Location: ../pagine_php/approvazione_annunci.php");
     } else {
         echo "password errato!.";
     }
 
-//} catch (Eccezione $e) {
-//    echo $e->getMessage();
-//}
+} catch (Eccezione $e) {
+    echo $e->getMessage();
+}
 
 
 
