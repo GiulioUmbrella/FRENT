@@ -12,7 +12,7 @@ try {
     echo "p2";
     
     $pagina = file_get_contents("../../html/approvazione_annunci.html");
-    $content = "<div id=\"content\" class=\"list_annunci_pendenti\"><h1 >Approvazione annunci</h1>
+    $content = "<div id=\"content\" class=\"list_annunci_pendenti\">
     <h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
     echo "p3";
     
@@ -32,5 +32,5 @@ try {
     
 } catch (Eccezione $ex) {
   
-    echo "eccezione";
+    echo "eccezione". $ex->getMessage();
 }

@@ -19,14 +19,36 @@ class Annuncio {
     private $max_ospiti;
     private $prezzo_notte;
     
-    public function __construct($id_annuncio, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $prezzo_notte) {
+    /**
+     * Annuncio constructor.
+     * @param $id_annuncio int
+     * @param null $titolo
+     * @param int $stato_approvazione
+     * @param null $descrizione
+     * @param null $img_anteprima
+     * @param null $indirizzo
+     * @param null $citta
+     * @param int $prezzo_notte
+     * @throws Eccezione
+     */
+    public function __construct($id_annuncio, $titolo = NULL, $stato_approvazione = 0, $descrizione = NULL, $img_anteprima = NULL, $indirizzo = NULL, $citta = NULL, $prezzo_notte = 0.0) {
+        echo "inizio costruttore annunci";
         $this->setIdAnnuncio($id_annuncio);
+        echo "costruttore 1";
         $this->setTitolo($titolo);
+        echo "costruttore 2";
         $this->setDescrizione($descrizione);
+        echo "costruttore 3";
         $this->setImgAnteprima($img_anteprima);
+        echo "costruttore 4";
+        $this->setStatoApprovazione($stato_approvazione);
+        echo "costruttore 5";
         $this->setIndirizzo($indirizzo);
+        echo "costruttore 6";
         $this->setCitta($citta);
+        echo "costruttore 7";
         $this->setPrezzoNotte($prezzo_notte);
+        echo "fine costruttore annunci";
     }
     
     public function getIdAnnuncio(): int {
@@ -66,7 +88,7 @@ class Annuncio {
     }
     
     public function setBloccato($bloccato): void {
-        if (is_bool($bloccato) ) {
+        if (is_bool($bloccato)) {
             $this->bloccato = $bloccato;
         } else {
             throw new Exception();
@@ -82,7 +104,15 @@ class Annuncio {
         return $this->prezzo_notte;
     }
     
+    /**
+     * @param $id_annuncio int
+     * @throws Eccezione
+     */
     public function setIdAnnuncio($id_annuncio): void {
+        $id_annuncio=1;
+//        echo "ID =".trim($id_annuncio);
+//        if (!is_int($id_annuncio))
+//            echo "its NOT int";
         if (is_int($id_annuncio) and $id_annuncio > 0) {
             $this->id_annuncio = $id_annuncio;
         } else {
@@ -99,7 +129,7 @@ class Annuncio {
     }
     
     public function setDescrizione($descrizione): void {
-        if (checkStringMaxLen($descrizione, DataConstraints::annunci["descrizione"])) {
+        if ((checkStringMaxLen($descrizione, DataConstraints::annunci["descrizione"]) or $descrizione==NULL) ) {
             $this->descrizione = htmlentities($descrizione);
         } else {
             throw new Eccezione(htmlentities("La descrizione è troppo lunga!"));
@@ -107,7 +137,7 @@ class Annuncio {
     }
     
     public function setImgAnteprima($img_anteprima): void {
-        if (checkStringMaxLen(trim($img_anteprima),DataConstraints::annunci["img_anteprima"]))
+        if (checkStringMaxLen(trim($img_anteprima), DataConstraints::annunci["img_anteprima"]))
             $this->img_anteprima = htmlentities($img_anteprima);
         else {
             throw new Eccezione(htmlentities("Il nome del file non è valido!"));
@@ -119,8 +149,9 @@ class Annuncio {
     }
     
     public function setCitta($citta): void {
-        if (checkStringNoNumber($citta) and checkStringMaxLen(trim($citta),DataConstraints::annunci["citta"])
-        and strlen(trim($citta))>0) {
+        
+        if ($citta==NULL or (checkStringNoNumber($citta) and checkStringMaxLen(trim($citta), DataConstraints::annunci["citta"]))
+            and strlen(trim($citta)) > 0) {
             $this->citta = htmlentities($citta);
         } else {
             throw new Eccezione(htmlentities("Il nome della città non è valido!"));
@@ -155,7 +186,7 @@ class Annuncio {
     }
     
     public function setPrezzoNotte($prezzo_notte): void {
-        if (is_float($prezzo_notte) and $prezzo_notte > 0) {
+        if (is_float($prezzo_notte) and $prezzo_notte >= 0) {
             $this->prezzo_notte = $prezzo_notte;
         } else {
             throw new Eccezione(htmlentities("Il prezzo non è valido!"));

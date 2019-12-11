@@ -6,6 +6,7 @@ DELIMITER |
 CREATE PROCEDURE admin_get_annunci()
 BEGIN
     SELECT id_annuncio, titolo, stato_approvazione
+
     FROM annunci
     WHERE stato_approvazione = 0
     OR stato_approvazione = 2;

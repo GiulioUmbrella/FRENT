@@ -338,26 +338,23 @@ class Frent {
      * @throws Eccezione
      */
     public function adminGetAnnunci(): array {
-        echo get_class($this->auth_user) ;
+        
         if(get_class($this->auth_user) !== "Amministratore") {
             throw Eccezione("Il reperimento degli annunci da approvare può essere svolto solo da un amministratore.");
         }
+        echo "p2";
         $this->db_instance->connect();
-        echo "connesso";
-        $lista_annunci = $this->db_instance->queryProcedure("admin_get_annunci()");
-        echo "quering";
+        $lista_annunci = $this->db_instance->queryProcedure("admin_get_annunci();");
     
+        echo "p3";
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
                 $assoc_annuncio['id_annuncio'],
                 $assoc_annuncio['titolo'],
-                $assoc_annuncio['descrizione'],
-                $assoc_annuncio['img_anteprima'],
-                $assoc_annuncio['indirizzo'],
-                $assoc_annuncio['citta'],
-                $assoc_annuncio['prezzo_notte']
-            );
+                (int)$assoc_annuncio['stato_approvazione']);
+            echo "generazione annunci dopo";
         }
+        echo "p4";
 
         return $lista_annunci;
     }
