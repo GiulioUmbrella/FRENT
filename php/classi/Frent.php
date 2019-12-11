@@ -13,6 +13,7 @@ class Frent {
     private $db_instance;
     private $auth_user;
 
+    
     public function __construct($db, $auth_user = NULL) {
         $db_instance = $db;
         if($auth_user !== NULL && (get_class($auth_user) == "Amministratore" || get_class($auth_user) == "Utente")) {
@@ -37,7 +38,6 @@ class Frent {
                 $assoc_annuncio['prezzo_notte']
             );
         }
-
         return $lista_annunci;
     }
 
