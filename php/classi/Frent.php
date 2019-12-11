@@ -13,6 +13,7 @@ class Frent {
     private $db_instance;
     private $auth_user;
 
+    
     public function __construct($db, $auth_user = NULL) {
         $db_instance = $db;
         if($auth_user !== NULL && (get_class($auth_user) == "Amministratore" || get_class($auth_user) == "Utente")) {
@@ -23,9 +24,9 @@ class Frent {
     // funzionalità per utenti non autenticati
 
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $procedure_name_and_params = "ricerca_annunci(\'$citta\', $numOspiti, \'$dataInizio\', \'$dataFine\')";
-        $lista_annunci = $db_instance->queryProcedure($procedure_name_and_params);
+        $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
         
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
@@ -38,22 +39,21 @@ class Frent {
                 $assoc_annuncio['prezzo_notte']
             );
         }
-
         return $lista_annunci;
     }
 
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): boolean {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $function_name_and_params = "registrazione(\'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$dataNascita\', \'$imgProfilo\', \'$numTelefono\')";
-        $risultato = $db_instance->queryFunction($function_name_and_params);
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
         return $risultato != -1;
     }
 
     public function login($username_or_mail, $password): Utente {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $procedure_name_and_params = "login(\'$username_or_mail\', \'$password\')";
-        $utente = $db_instance->queryProcedure($procedure_name_and_params);
+        $utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         if(count($utente) == 1) {
             return new Utente(
@@ -72,9 +72,9 @@ class Frent {
     }
 
     public function getOccupazioniAnnuncio($id_annuncio): array {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $procedure_name_and_params = "get_occupazioni_annuncio($id_annuncio)";
-        $lista_occupazioni = $db_instance->queryProcedure($procedure_name_and_params);
+        $lista_occupazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         foreach($lista_occupazioni as $i => $assoc_occupazione) {
             $lista_annunci[$i] = new Occupazione(
@@ -92,9 +92,9 @@ class Frent {
     }
 
     public function getFotoAnnuncio($id_annuncio): array {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $procedure_name_and_params = "get_foto_annuncio($id_annuncio)";
-        $lista_foto = $db_instance->queryProcedure($procedure_name_and_params);
+        $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         foreach($lista_foto as $i => $assoc_foto) {
             $lista_foto[$i] = new Foto(
@@ -109,9 +109,9 @@ class Frent {
     }
 
     public function getCommentiAnnuncio($id_annuncio): array {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $procedure_name_and_params = "get_commenti_annuncio($id_annuncio)";
-        $lista_commenti = $db_instance->queryProcedure($procedure_name_and_params);
+        $lista_commenti = $this->db_instance->queryProcedure($procedure_name_and_params);
         
         foreach($lista_commenti as $i => $assoc_commento) {
             $lista_commenti[$i] = new Commento(
@@ -126,9 +126,9 @@ class Frent {
     }
 
     public function getAnnuncio($id_annuncio): Annuncio {
-        $db_instance->connect();
+        $this->db_instance->connect();
         $procedure_name_and_params = "get_annuncio($id_annuncio)";
-        $annuncio = $db_instance->queryProcedure($procedure_name_and_params);
+        $annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         if(count($annuncio) == 1) {
             return new Annuncio(
@@ -149,108 +149,108 @@ class Frent {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("L'inserimento di un'occupazione può essere svolto solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function insertFoto($id_annuncio, $file_path, $descrizione) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("L'inserimento di una foto di un annuncio può essere svolto solo da un utente registrato.");
         } 
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function insertCommento($prenotazione, $titolo, $commento, $votazione) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("L'inserimento di un commento può essere svolto solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function deleteAnnuncio($id_annuncio) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione di un annuncio può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function deleteCommento($id_prenotazione) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione di un commento può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function deleteFoto($id_foto) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function deleteOccupazione($id_occupazione) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione di un'occupazione di un annuncio può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function deleteUser(/*$id_utente*/) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione della propria utenza può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function editCommento($id, $titolo, $commento, $valutazione) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function editUser(/*$id_utente, */$nome, $cognome, $username, $mail, $password, $datanascita, $imgprofilo, $telefono) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La modifica dei dati della propria utenza può essere svolta solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function getAnnunciHost(/*$id_host*/) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("Il reperimento della lista degli annunci di un host può essere svolto solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function getPrenotazioniGuest(/*$id_utente*/) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("Il reperimento della lista delle prenotazioni di un guest può essere svolto solo da un utente registrato.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function adminEditStatoApprovazioneAnnuncio($id_annuncio, $stato_approvazione) {
         if(get_class($this->auth_user) === "Amministratore") {
             throw Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function adminGetAnnunci() {
         if(get_class($this->auth_user) === "Amministratore") {
             throw Eccezione("Il reperimento degli annunci da approvare può essere svolto solo da un amministratore.");
         }
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 
     public function adminLogin($username_or_mail, $password) {
-        $db_instance->connect();
+        $this->db_instance->connect();
     }
 }
