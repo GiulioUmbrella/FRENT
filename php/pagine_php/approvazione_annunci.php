@@ -10,17 +10,18 @@ try {
     $annunci = $manager->adminGetAnnunci();
     
     $pagina = file_get_contents("../../html/approvazione_annunci.html");
-    $content = "<div id=\"content\" class=\"list_annunci_pendenti\"><h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
+    $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
     
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
+        $titolo= $annuncio->getTitolo();
         $content .= "<li>";
-        $content .= "<a href=\"dettagli_annuncio.php?id=$id\">ID Titolo annuncio</a>";
+        $content .= "<a href=\"dettagli_annuncio.php?id=$id\">$titolo</a>";
         // todo
         $content .= "<a href=\"approvazione_annuncio.php?idAnnuncio=$id&approvato=true\" class=\"link_gestione link_approva\">Approva</a>";
         $content .= "<a href=\"?idAnnuncio=$id&approvato=true\" class=\"link_gestione link_rigetta\">Non approva</a></li>";
     }
-    $content .= "  </ul></div>";
+    $content .= "  </ul>";
     
     $pagina = str_replace("<Flag1/>", $content, $pagina);
     echo $pagina;

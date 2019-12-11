@@ -28,27 +28,18 @@ class Annuncio {
      * @param null $img_anteprima
      * @param null $indirizzo
      * @param null $citta
-     * @param int $prezzo_notte
+     * @param float $prezzo_notte
      * @throws Eccezione
      */
     public function __construct($id_annuncio, $titolo = NULL, $stato_approvazione = 0, $descrizione = NULL, $img_anteprima = NULL, $indirizzo = NULL, $citta = NULL, $prezzo_notte = 0.0) {
-        echo "inizio costruttore annunci";
         $this->setIdAnnuncio($id_annuncio);
-        echo "costruttore 1";
         $this->setTitolo($titolo);
-        echo "costruttore 2";
         $this->setDescrizione($descrizione);
-        echo "costruttore 3";
         $this->setImgAnteprima($img_anteprima);
-        echo "costruttore 4";
         $this->setStatoApprovazione($stato_approvazione);
-        echo "costruttore 5";
         $this->setIndirizzo($indirizzo);
-        echo "costruttore 6";
         $this->setCitta($citta);
-        echo "costruttore 7";
         $this->setPrezzoNotte($prezzo_notte);
-        echo "fine costruttore annunci";
     }
     
     public function getIdAnnuncio(): int {
