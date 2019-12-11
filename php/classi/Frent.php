@@ -24,7 +24,8 @@ class Frent {
 
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         $db_instance->connect();
-        $lista_annunci = $db_instance->queryProcedure("ricerca_annunci(\'$citta\', $numOspiti, \'$dataInizio\', \'$dataFine\')");
+        $procedure_name_and_params = "ricerca_annunci(\'$citta\', $numOspiti, \'$dataInizio\', \'$dataFine\')";
+        $lista_annunci = $db_instance->queryProcedure($procedure_name_and_params);
         
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
@@ -43,14 +44,16 @@ class Frent {
 
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): boolean {
         $db_instance->connect();
-        $risultato = $db_instance->queryFunction("registrazione(\'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$dataNascita\', \'$imgProfilo\', \'$numTelefono\')");
+        $function_name_and_params = "registrazione(\'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$dataNascita\', \'$imgProfilo\', \'$numTelefono\')";
+        $risultato = $db_instance->queryFunction($function_name_and_params);
 
         return $risultato != -1;
     }
 
     public function login($username_or_mail, $password): Utente {
         $db_instance->connect();
-        $utente = $db_instance->queryProcedure("login(\'$username_or_mail\', \'$password\')");
+        $procedure_name_and_params = "login(\'$username_or_mail\', \'$password\')";
+        $utente = $db_instance->queryProcedure($procedure_name_and_params);
 
         if(count($utente) == 1) {
             return new Utente(
@@ -68,20 +71,78 @@ class Frent {
         }
     }
 
-    public function getOccupazioniAnnuncio($id_annuncio) {
+    public function getOccupazioniAnnuncio($id_annuncio): array {
         $db_instance->connect();
+        $procedure_name_and_params = "get_occupazioni_annuncio($id_annuncio)";
+        $lista_occupazioni = $db_instance->queryProcedure($procedure_name_and_params);
+
+        foreach($lista_occupazioni as $i => $assoc_occupazione) {
+            $lista_annunci[$i] = new Occupazione(
+                $assoc_occupazione['id_occupazione'],
+                $assoc_occupazione['utente'],
+                $id_annuncio,
+                $assoc_occupazione['prenotazione_guest'],
+                $assoc_occupazione['num_ospiti'],
+                $assoc_occupazione['data_inizio'],
+                $assoc_occupazione['data_fine']
+            );
+        }
+
+        return $lista_occupazioni;
     }
 
-    public function getFotoAnnuncio($id_annuncio) {
+    public function getFotoAnnuncio($id_annuncio): array {
         $db_instance->connect();
+        $procedure_name_and_params = "get_foto_annuncio($id_annuncio)";
+        $lista_foto = $db_instance->queryProcedure($procedure_name_and_params);
+
+        foreach($lista_foto as $i => $assoc_foto) {
+            $lista_foto[$i] = new Foto(
+                $assoc_occupazione['id_foto'],
+                $assoc_occupazione['descrizione'],
+                $assoc_foto['file_path']/*,*/
+                // $id_annuncio NON ESISTENTE NEL COSTRUTTORE
+            );
+        }
+
+        return $lista_foto;
     }
 
-    public function getCommentiAnnuncio($id_annuncio) {
+    public function getCommentiAnnuncio($id_annuncio): array {
         $db_instance->connect();
+        $procedure_name_and_params = "get_commenti_annuncio($id_annuncio)";
+        $lista_commenti = $db_instance->queryProcedure($procedure_name_and_params);
+        
+        foreach($lista_commenti as $i => $assoc_commento) {
+            $lista_commenti[$i] = new Commento(
+                $assoc_commento['titolo'],
+                $assoc_commento['commento'],
+                $assoc_commento['data_pubblicazione'],
+                $assoc_commento['votazione']
+            );
+        }
+
+        return $lista_commenti;   
     }
 
-    public function getAnnuncio($id_annuncio) {
+    public function getAnnuncio($id_annuncio): Annuncio {
         $db_instance->connect();
+        $procedure_name_and_params = "get_annuncio($id_annuncio)";
+        $annuncio = $db_instance->queryProcedure($procedure_name_and_params);
+
+        if(count($annuncio) == 1) {
+            return new Annuncio(
+                $annuncio['id_annuncio'],
+                $annuncio['titolo'],
+                $annuncio['descrizione'],
+                $annuncio['img_anteprima'],
+                $annuncio['indirizzo'],
+                $annuncio['citta'],
+                $annuncio['prezzo_notte']
+            );
+        } else {
+            return null;
+        }
     }
 
     public function insertOccupazione(/*$utente,*/ $annuncio, $numospiti, $data_inizio, $data_fine) {

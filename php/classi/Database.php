@@ -111,9 +111,9 @@ class Database {
         /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if($procedure_result && $procedure_result->num_rows >= 0) {
             // NOTA BENE: verificare che con un record set di 0 righe $procedure_result sia comunque TRUE
-            $returned_array =array();
+            $returned_array = array();
             while($row = $procedure_result->fetch_array(MYSQLI_ASSOC)){
-                $returned_array[] = $row;
+                array_push($returned_array, $row);
             }
             return $returned_array;
         } else {
