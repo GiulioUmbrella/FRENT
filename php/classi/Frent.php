@@ -12,8 +12,7 @@ require_once "Utente.php";
 class Frent {
     private $db_instance;
     private $auth_user;
-    
-    
+
     /**
      * Frent constructor.
      * @param Database $db
@@ -326,11 +325,11 @@ class Frent {
 
     public function adminEditStatoApprovazioneAnnuncio($id_annuncio, $stato_approvazione): int {
         if(get_class($this->auth_user) !== "Amministratore") {
-            throw Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
+            throw new Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
         }
         $this->db_instance->connect();
-        $function_name_and_params = "admin_edit_stato_approvazione_annuncio($id_annuncio, $stato_approvazione)";
-        return $this->db_instance->queryFunction($function_name_and_params);
+        $function = "admin_edit_stato_approvazione_annuncio($id_annuncio, $stato_approvazione)";
+        return $this->db_instance->queryFunction($function);
     }
     
     /**
@@ -343,8 +342,8 @@ class Frent {
             throw Eccezione("Il reperimento degli annunci da approvare può essere svolto solo da un amministratore.");
         }
         $this->db_instance->connect();
-        $lista_annunci = $this->db_instance->queryProcedure("admin_get_annunci();");
-    
+        $lista_annunci = $this->db_instance->queryProcedure("admin_get_annunci()");
+
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
                 $assoc_annuncio['id_annuncio'],
@@ -356,7 +355,7 @@ class Frent {
 
     public function adminLogin($username_or_mail, $password): Amministratore {
         $this->db_instance->connect();
-        $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
+        $procedure_name_and_params = " admin_login(\"$username_or_mail\", \"$password\")";
         $admin = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         if(count($admin) == 1) {

@@ -100,11 +100,8 @@ class Annuncio {
      * @throws Eccezione
      */
     public function setIdAnnuncio($id_annuncio): void {
-        $id_annuncio=1;
-//        echo "ID =".trim($id_annuncio);
-//        if (!is_int($id_annuncio))
-//            echo "its NOT int";
-        if (is_int($id_annuncio) and $id_annuncio > 0) {
+
+        if (is_int((int)(trim($id_annuncio))) and $id_annuncio > 0) {
             $this->id_annuncio = $id_annuncio;
         } else {
             throw new Eccezione(htmlentities("Id annuncio non valido"));
