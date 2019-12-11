@@ -1,6 +1,6 @@
 <?php
 require_once "../CheckMethods.php";
-
+require_once "DataConstraints.php";
 
 class Amministratore {
     private $id_amministratore;
@@ -21,7 +21,8 @@ class Amministratore {
     }
     
     public function setUserName($username): void {
-        if (checkStringContainsNoSpace(trim($username))) {
+        if (checkStringContainsNoSpace(trim($username)) and
+            checkStringMaxLen(trim($username),DataConstraints::amministratori["user_name"])) {
             $this->user_name = $username;
         } else {
             throw new Eccezione("Username Non valida");
@@ -30,7 +31,7 @@ class Amministratore {
     }
     
     public function setMail($mail): void {
-        if (checkIsValidMail($mail, 191)) {
+        if (checkIsValidMail($mail, DataConstraints::amministratori["mail"])) {
             $this->$mail = $mail;
         } else {
             throw new Eccezione("Email non corretta o troppo lunga!");

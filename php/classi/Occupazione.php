@@ -12,16 +12,15 @@ class Occupazione {
     private $data_fine;
     
     public function __construct($id, $utente, $annuncio, $prenotazione_guest, $num_ospiti, $dataI, $dataF) {
-        if ($dataI > $dataF) {
-            throw new Eccezione(htmlentities("La data di inizio è maggiore della data di fine!"));
-        }
+       
         $this->setIdOccupazione($id);
         $this->setUtente($utente);
         $this->setAnnuncio($annuncio);
         $this->setPrenotazioneGuest($prenotazione_guest);
         $this->setNumOspiti($num_ospiti);
         
-        if (checkValidDate($dataI) and checkValidDate($dataF) and checkDateBeginAndEnd($dataI, $dataF)) {
+        if (checkIsValidDate($dataI) and checkIsValidDate($dataF) and checkDateBeginAndEnd($dataI, $dataF)) {
+            
             $this->setDataInizio($dataI);
             $this->setDataFine($dataF);
         } else {
