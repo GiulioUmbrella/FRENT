@@ -47,7 +47,7 @@ class Frent {
         $function_name_and_params = "registrazione(\'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$dataNascita\', \'$imgProfilo\', \'$numTelefono\')";
         $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato != -1;
+        return $risultato;
     }
 
     public function login($username_or_mail, $password): Utente {
@@ -151,7 +151,7 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "insert_occupazione(" . $auth_user->getIdUtente() . ", $annuncio, $numospiti, \'$data_inizio\', \'$data_fine\')";
-        $risutalto = $this->db_instance->queryFunction($function_name_and_params);
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
         /**
          * ID dell'occupazione appena inserita se tutto è andato a buon fine
@@ -160,7 +160,7 @@ class Frent {
          * -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
          */
 
-        return $risultato > 0;
+        return $risultato;
     }
 
     public function insertFoto($id_annuncio, $file_path, $descrizione) {
@@ -168,6 +168,10 @@ class Frent {
             throw Eccezione("L'inserimento di una foto di un annuncio può essere svolto solo da un utente registrato.");
         } 
         $this->db_instance->connect();
+        $function_name_and_params = "insert_foto($id_annuncio, \'$file_path\', \'$descrizione\')";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function insertCommento($prenotazione, $titolo, $commento, $votazione) {
@@ -175,6 +179,10 @@ class Frent {
             throw Eccezione("L'inserimento di un commento può essere svolto solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "insert_commento($prenotazione, $titolo, $commento, $votazione)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function deleteAnnuncio($id_annuncio) {
@@ -182,6 +190,10 @@ class Frent {
             throw Eccezione("La cancellazione di un annuncio può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "delete_annuncio($id_annuncio)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function deleteCommento($id_prenotazione) {
@@ -189,6 +201,10 @@ class Frent {
             throw Eccezione("La cancellazione di un commento può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "delete_commento($id_prenotazione)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function deleteFoto($id_foto) {
@@ -196,6 +212,10 @@ class Frent {
             throw Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "delete_foto($id_foto)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function deleteOccupazione($id_occupazione) {
@@ -203,13 +223,21 @@ class Frent {
             throw Eccezione("La cancellazione di un'occupazione di un annuncio può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "delete_occupazione($id_occupazione)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
-    public function deleteUser(/*$id_utente*/) {
+    public function deleteUser() {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La cancellazione della propria utenza può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "delete_user(" . $auth_user->getIdUtente() . ")";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte) {
@@ -217,6 +245,10 @@ class Frent {
             throw Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "edit_annuncio($id, \'$titolo\', \'$descrizione\', \'$img_anteprima\', \'$indirizzo\', \'$citta\', $max_ospiti, $prezzo_notte)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function editCommento($id, $titolo, $commento, $valutazione) {
@@ -224,13 +256,21 @@ class Frent {
             throw Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "edit_commento($id, \'$titolo\', \'$commento\', $valutazione)";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
-    public function editUser(/*$id_utente, */$nome, $cognome, $username, $mail, $password, $datanascita, $imgprofilo, $telefono) {
+    public function editUser($nome, $cognome, $username, $mail, $password, $datanascita, $imgprofilo, $telefono) {
         if(get_class($this->auth_user) === "Utente") {
             throw Eccezione("La modifica dei dati della propria utenza può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
+        $function_name_and_params = "edit_user(" . $auth_user->getIdUtente() . ", \'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$datanascita\', \'$imgprofilo\', \'$telefono\'";
+        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+
+        return $risultato;
     }
 
     public function getAnnunciHost(/*$id_host*/) {
