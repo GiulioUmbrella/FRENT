@@ -20,6 +20,7 @@ class Frent {
      */
     public function __construct($db, $auth_user = NULL) {
         $this->db_instance = $db;
+        $this->db_instance->setCharset("utf8");
         if($auth_user !== NULL && (get_class($auth_user) == "Amministratore" || get_class($auth_user) == "Utente")) {
             $this->auth_user = $auth_user;
         }
@@ -34,13 +35,13 @@ class Frent {
         
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
-                $assoc_annuncio['id_annuncio'],
+                intval($assoc_annuncio['id_annuncio']),
                 $assoc_annuncio['titolo'],
                 $assoc_annuncio['descrizione'],
                 $assoc_annuncio['img_anteprima'],
                 $assoc_annuncio['indirizzo'],
                 $citta,
-                $assoc_annuncio['prezzo_notte']
+                floatval($assoc_annuncio['prezzo_notte'])
             );
         }
         return $lista_annunci;
@@ -48,20 +49,19 @@ class Frent {
 
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): boolean {
         $this->db_instance->connect();
-        $function_name_and_params = "registrazione(\'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$dataNascita\', \'$imgProfilo\', \'$numTelefono\')";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+        $function_name_and_params = "registrazione(\"$nome\", \"$cognome\", \"$username\", \"$mail\", \"$password\", \"$dataNascita\", \"$imgProfilo\", \"$numTelefono\")";
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function login($username_or_mail, $password): Utente {
         $this->db_instance->connect();
-        $procedure_name_and_params = "login(\'$username_or_mail\', \'$password\')";
+        $procedure_name_and_params = "login(\"$username_or_mail\", \"$password\")";
         $utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         if(count($utente) == 1) {
             return new Utente(
-                $utente[0]['id_utente'],
+                intval($utente[0]['id_utente']),
                 $utente[0]['nome'],
                 $utente[0]['cognome'],
                 $utente[0]['user_name'],
@@ -84,9 +84,9 @@ class Frent {
             $lista_occupazioni[$i] = new Occupazione(
                 $assoc_occupazione['id_occupazione'],
                 $assoc_occupazione['utente'],
-                $id_annuncio,
-                $assoc_occupazione['prenotazione_guest'],
-                $assoc_occupazione['num_ospiti'],
+                id_annuncio,
+                intval($assoc_occupazione['prenotazione_guest']),
+                intval($assoc_occupazione['num_ospiti']),
                 $assoc_occupazione['data_inizio'],
                 $assoc_occupazione['data_fine']
             );
@@ -102,8 +102,7 @@ class Frent {
 
         foreach($lista_foto as $i => $assoc_foto) {
             $lista_foto[$i] = new Foto(
-                $assoc_occupazione['id_foto'],
-                $assoc_occupazione['descrizione'],
+                intval($assoc_foto['id_foto']),
                 $assoc_foto['file_path']/*,*/
                 // $id_annuncio NON ESISTENTE NEL COSTRUTTORE
             );
@@ -122,7 +121,7 @@ class Frent {
                 $assoc_commento['titolo'],
                 $assoc_commento['commento'],
                 $assoc_commento['data_pubblicazione'],
-                $assoc_commento['votazione']
+                intval($assoc_commento['votazione'])
             );
         }
 
@@ -136,13 +135,13 @@ class Frent {
 
         if(count($annuncio) == 1) {
             return new Annuncio(
-                $annuncio['id_annuncio'],
+                intval($annuncio['id_annuncio']),
                 $annuncio['titolo'],
                 $annuncio['descrizione'],
                 $annuncio['img_anteprima'],
                 $annuncio['indirizzo'],
                 $annuncio['citta'],
-                $annuncio['prezzo_notte']
+                floatval($annuncio['prezzo_notte'])
             );
         } else {
             return null;
@@ -154,9 +153,7 @@ class Frent {
             throw Eccezione("L'inserimento di un'occupazione può essere svolto solo da un utente registrato.");
         }
         $this->db_instance->connect();
-        $function_name_and_params = "insert_occupazione(" . $this->auth_user->getIdUtente() . ", $annuncio, $numospiti, \'$data_inizio\', \'$data_fine\')";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
-
+        $function_name_and_params = "insert_occupazione(" . $this->auth_user->getIdUtente() . ", $annuncio, $numospiti, \"$data_inizio\", \"$data_fine\")";
         /**
          * ID dell'occupazione appena inserita se tutto è andato a buon fine
          * -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
@@ -164,7 +161,7 @@ class Frent {
          * -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
          */
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function insertFoto($id_annuncio, $file_path, $descrizione): int {
@@ -172,10 +169,9 @@ class Frent {
             throw Eccezione("L'inserimento di una foto di un annuncio può essere svolto solo da un utente registrato.");
         } 
         $this->db_instance->connect();
-        $function_name_and_params = "insert_foto($id_annuncio, \'$file_path\', \'$descrizione\')";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+        $function_name_and_params = "insert_foto($id_annuncio, \"$file_path\", \"$descrizione\")";
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function insertCommento($prenotazione, $titolo, $commento, $votazione): int {
@@ -184,9 +180,8 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "insert_commento($prenotazione, $titolo, $commento, $votazione)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function deleteAnnuncio($id_annuncio) {
@@ -195,9 +190,8 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "delete_annuncio($id_annuncio)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function deleteCommento($id_prenotazione): int {
@@ -206,9 +200,8 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "delete_commento($id_prenotazione)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function deleteFoto($id_foto): int {
@@ -217,9 +210,8 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "delete_foto($id_foto)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function deleteOccupazione($id_occupazione): int {
@@ -228,9 +220,8 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "delete_occupazione($id_occupazione)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function deleteUser(): int {
@@ -239,9 +230,8 @@ class Frent {
         }
         $this->db_instance->connect();
         $function_name_and_params = "delete_user(" . $this->auth_user->getIdUtente() . ")";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
@@ -249,10 +239,9 @@ class Frent {
             throw Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
-        $function_name_and_params = "edit_annuncio($id, \'$titolo\', \'$descrizione\', \'$img_anteprima\', \'$indirizzo\', \'$citta\', $max_ospiti, $prezzo_notte)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+        $function_name_and_params = "edit_annuncio($id, \"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", $max_ospiti, $prezzo_notte)";
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function editCommento($id, $titolo, $commento, $valutazione): int {
@@ -260,10 +249,9 @@ class Frent {
             throw Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
-        $function_name_and_params = "edit_commento($id, \'$titolo\', \'$commento\', $valutazione)";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+        $function_name_and_params = "edit_commento($id, \"$titolo\", \"$commento\", $valutazione)";
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function editUser($nome, $cognome, $username, $mail, $password, $datanascita, $imgprofilo, $telefono): int {
@@ -271,10 +259,9 @@ class Frent {
             throw Eccezione("La modifica dei dati della propria utenza può essere svolta solo da un utente registrato.");
         }
         $this->db_instance->connect();
-        $function_name_and_params = "edit_user(" . $this->auth_user->getIdUtente() . ", \'$nome\', \'$cognome\', \'$username\', \'$mail\', \'$password\', \'$datanascita\', \'$imgprofilo\', \'$telefono\'";
-        $risultato = $this->db_instance->queryFunction($function_name_and_params);
+        $function_name_and_params = "edit_user(" . $this->auth_user->getIdUtente() . ", \"$nome\", \"$cognome\", \"$username\", \"$mail\", \"$password\", \"$datanascita\", \"$imgprofilo\", \"$telefono\"";
 
-        return $risultato;
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     public function getAnnunciHost(): array {
@@ -287,13 +274,13 @@ class Frent {
         
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
-                $assoc_annuncio['id_annuncio'],
+                intval($assoc_annuncio['id_annuncio']),
                 $assoc_annuncio['titolo'],
                 $assoc_annuncio['descrizione'],
                 $assoc_annuncio['img_anteprima'],
                 $assoc_annuncio['indirizzo'],
                 $assoc_annuncio['citta'],
-                $assoc_annuncio['prezzo_notte']
+                floatval($assoc_annuncio['prezzo_notte'])
             );
         }
         
@@ -310,11 +297,11 @@ class Frent {
 
         foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
             $lista_prenotazioni[$i] = new Occupazione(
-                $assoc_prenotazione['id_occupazione'],
-                $assoc_prenotazione['utente'],
-                $assoc_prenotazione['annuncio'],
-                $assoc_prenotazione['prenotazione_guest'],
-                $assoc_prenotazione['num_ospiti'],
+                intval($assoc_prenotazione['id_occupazione']),
+                intval($assoc_prenotazione['utente']),
+                intval($assoc_prenotazione['annuncio']),
+                intval($assoc_prenotazione['prenotazione_guest']),
+                intval($assoc_prenotazione['num_ospiti']),
                 $assoc_prenotazione['data_inizio'],
                 $assoc_prenotazione['data_fine']
             );
@@ -328,8 +315,9 @@ class Frent {
             throw new Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
         }
         $this->db_instance->connect();
-        $function = "admin_edit_stato_approvazione_annuncio($id_annuncio, $stato_approvazione)";
-        return $this->db_instance->queryFunction($function);
+        $function_name_and_params = "admin_edit_stato_approvazione_annuncio($id_annuncio, $stato_approvazione)";
+
+        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
     
     /**
@@ -337,35 +325,36 @@ class Frent {
      * @throws Eccezione
      */
     public function adminGetAnnunci(): array {
-        
         if(get_class($this->auth_user) !== "Amministratore") {
             throw Eccezione("Il reperimento degli annunci da approvare può essere svolto solo da un amministratore.");
         }
         $this->db_instance->connect();
-        $lista_annunci = $this->db_instance->queryProcedure("admin_get_annunci()");
+        $procedure_name_and_params = "admin_get_annunci()";
+        $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
-                $assoc_annuncio['id_annuncio'],
+                intval($assoc_annuncio['id_annuncio']),
                 $assoc_annuncio['titolo'],
-                (int)$assoc_annuncio['stato_approvazione']);
+                    intval($assoc_annuncio['stato_approvazione'])
+            );
         }
         return $lista_annunci;
     }
 
     public function adminLogin($username_or_mail, $password): Amministratore {
         $this->db_instance->connect();
-        $procedure_name_and_params = " admin_login(\"$username_or_mail\", \"$password\")";
+        $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
         $admin = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         if(count($admin) == 1) {
             return new Amministratore(
-                $admin[0]['id_amministratore'],
+                intval($admin[0]['id_amministratore']),
                 $admin[0]['user_name'],
                 $admin[0]['mail']
             );
         } else {
-            return null;
+            return NULL;
         }
     }
 }
