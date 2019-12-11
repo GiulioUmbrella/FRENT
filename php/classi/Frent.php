@@ -12,8 +12,13 @@ require_once "Utente.php";
 class Frent {
     private $db_instance;
     private $auth_user;
-
     
+    
+    /**
+     * Frent constructor.
+     * @param Database $db
+     * @param null $auth_user
+     */
     public function __construct($db, $auth_user = NULL) {
         $this->db_instance = $db;
         if($auth_user !== NULL && (get_class($auth_user) == "Amministratore" || get_class($auth_user) == "Utente")) {
@@ -330,21 +335,27 @@ class Frent {
     
     /**
      * @return array
+     * @throws Eccezione
      */
     public function adminGetAnnunci(): array {
-        echo get_class($this->auth_user);
+        echo get_class($this->auth_user) ;
         if(get_class($this->auth_user) !== "Amministratore") {
             throw Eccezione("Il reperimento degli annunci da approvare può essere svolto solo da un amministratore.");
         }
         $this->db_instance->connect();
-        $procedure_name_and_params = "admin_get_annunci()";
-        $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
-        
+        echo "connesso";
+        $lista_annunci = $this->db_instance->queryProcedure("admin_get_annunci()");
+        echo "quering";
+    
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
                 $assoc_annuncio['id_annuncio'],
                 $assoc_annuncio['titolo'],
-                $assoc_annuncio['stato_approvazione']
+                $assoc_annuncio['descrizione'],
+                $assoc_annuncio['img_anteprima'],
+                $assoc_annuncio['indirizzo'],
+                $assoc_annuncio['citta'],
+                $assoc_annuncio['prezzo_notte']
             );
         }
 

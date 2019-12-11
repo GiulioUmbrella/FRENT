@@ -98,16 +98,21 @@ class Database {
     
     /**
      * Esegue una query nel database a cui si è connessi richiamando una procedura MySQL.
-     * @param $procedure_name_and_parametres nome della procedura e relativi parametri, se presenti.
+     * @param $procedure string della procedura e relativi parametri, se presenti.
      * Per esempio: nome_procedura('p1', 2 ,'p3').
      * @return array di hash/array associativi.
      * @throws Eccezione se la query non è andata a buon fine.
      */
     public function queryProcedure($procedure) {
-        if (!($this->is_connected)) throw new Eccezione("Non è attiva una connessione con il database.");
+        if (!($this->is_connected)){
+            throw new Eccezione("Non è attiva una connessione con il database.");
+        }
         /// viene interrogato il database, essendo una procedure di MySQL viene usato l'operatore CALL
-        $procedure_result = $this->db->query("CALL $procedure");
-        
+        $procedure_result = $this->db->query("CALL $procedure;");
+    
+        if ($procedure_result == NULL)
+            echo "lancio eccezione0";
+
         /// se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($procedure_result && $procedure_result->num_rows >= 0) {
             // NOTA BENE: verificare che con un record set di 0 righe $procedure_result sia comunque TRUE
@@ -117,6 +122,8 @@ class Database {
             }
             return $returned_array;
         } else {
+    
+            echo "lancio eccezione";
             throw new Eccezione("Errore nell'esecuzione della procedura $procedure.");
         }
     }

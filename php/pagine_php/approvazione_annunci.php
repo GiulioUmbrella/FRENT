@@ -7,12 +7,14 @@ $connessione = new Database("localhost", "root", "", "frentdb");
 try {
     session_start();
     $manager = new Frent($connessione,$_SESSION["admin_obj"]);
-    
+    echo "p1";
     $annunci = $manager->adminGetAnnunci();
+    echo "p2";
     
     $pagina = file_get_contents("../../html/approvazione_annunci.html");
     $content = "<div id=\"content\" class=\"list_annunci_pendenti\"><h1 >Approvazione annunci</h1>
     <h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
+    echo "p3";
     
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
@@ -29,5 +31,6 @@ try {
     echo $pagina;
     
 } catch (Eccezione $ex) {
-
+  
+    echo "eccezione";
 }
