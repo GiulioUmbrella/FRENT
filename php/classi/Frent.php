@@ -38,7 +38,9 @@ class Frent {
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
             $this->db_instance->connect();
-            // if(!is_int($numOspiti) && ) throw new Eccezione("Formato parametro errato");
+            if(!is_int($numOspiti) || !checkIsValidDate($dataInizio) || !checkIsValidDate($dataFine) || !checkDateBeginAndEnd($dataInizio, $dataFine)) {
+                throw new Eccezione("Parametri di invocazione di ricercaAnnunci errati.");
+            }
             $procedure_name_and_params = "ricerca_annunci(\"$citta\", $numOspiti, \"$dataInizio\", \"$dataFine\")";
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
         } catch(Eccezione $exc) {
