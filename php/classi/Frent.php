@@ -111,15 +111,23 @@ class Frent {
     }
 
     public function getFotoAnnuncio($id_annuncio): array {
-        $this->db_instance->connect();
-        $procedure_name_and_params = "get_foto_annuncio($id_annuncio)";
-        $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
+        try {
+            $this->db_instance->connect();
+            if(!is_int($id_annuncio)) {
+                throw new Eccezione("Parametri di invocazione di getFotoAnnuncio errati.");
+            }
+            $procedure_name_and_params = "get_foto_annuncio($id_annuncio)";
+            $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
 
         foreach($lista_foto as $i => $assoc_foto) {
             $lista_foto[$i] = new Foto(
                 intval($assoc_foto['id_foto']),
-                $assoc_foto['file_path']/*,*/
-                // $id_annuncio NON ESISTENTE NEL COSTRUTTORE
+                $assoc_foto['descrizione'],
+                $assoc_foto['file_path'],
+                $id_annuncio
             );
         }
 
