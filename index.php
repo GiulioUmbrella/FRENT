@@ -1,7 +1,9 @@
 <?php
 require "./php/CheckMethods.php";
-require_once "./php/classi/Frent.php";
 require_once "./php/CheckMethods.php";
+require_once "./php/classi/Frent.php";
+require_once "php/CredenzialiDB.php";
+
 //require_once "./php/classi/Annuncio.php";
 try {
     session_start();
@@ -11,8 +13,8 @@ try {
     }else{
         $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_no_logged.html"),$pagina);
     }
-    
-    $frent = new Frent(new Database("localhost", "root", "", "frentdb"));
+    $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME));
     
     $annunci_recenti = $frent->getAnnuncio(1);
     $titolo = $annunci_recenti->getTitolo();
@@ -29,7 +31,7 @@ try {
     $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     
-    $pagina= str_replace("<RECENTI/>",$content,$pagina);
+    $pagina = str_replace("<RECENTI/>",$content,$pagina);
     echo $pagina;
     
 } catch (Eccezione $ex) {
