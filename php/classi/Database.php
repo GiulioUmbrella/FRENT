@@ -46,10 +46,10 @@ class Database {
 
     /**
      * Costruisce un'istanza del gestore del database, memorizzando le credenziali, senza connettersi.
-     * @param $host_name string Hostname per la connessione al database MySQL
-     * @param $user_name string Username per la connessione al database MySQL
-     * @param $password string Password per la connessione al database MySQL
-     * @param $db_name string MySQL in cui sono presenti le tabelle da interrogare
+     * @param string $host_name string Hostname per la connessione al database MySQL
+     * @param string $user_name string Username per la connessione al database MySQL
+     * @param string $password string Password per la connessione al database MySQL
+     * @param string $db_name string MySQL in cui sono presenti le tabelle da interrogare
      */
     public function __construct($host_name, $user_name, $password, $db_name) {
         $this->host_name = $host_name;
@@ -87,7 +87,7 @@ class Database {
     /**
      * Imposta un set di caratteri da utilizzare durante l'invio delle richieste e la ricezione delle risposte con MySQL.
      * Ha valenza dal momento dell'invocazione del metodo (se c'è una connessione aperta). fino alla chiusura della connessione della connessione mediante il metodo disconnect.
-     * @param $charset set di caratteri da utilizzare nella connessione
+     * @param string $charset set di caratteri da utilizzare nella connessione
      * @return TRUE se il set di caratteri è stato impostato, FALSE altrimenti
      */
     public function setCharset($charset) {
@@ -98,7 +98,7 @@ class Database {
 
     /**
      * Esegue una query nel database a cui si è connessi richiamando una procedura MySQL.
-     * @param $procedure string della procedura e relativi parametri, se presenti.
+     * @param string $procedure nome della procedura e relativi parametri, se presenti.
      * Per esempio: nome_procedura('p1', 2 ,'p3').
      * @return array di hash/array associativi.
      * @throws Eccezione se la query non è andata a buon fine.
@@ -125,7 +125,7 @@ class Database {
 
     /**
      * Esegue una query nel database a cui si è connessi richiamando una funzione.
-     * @param $function string della funzione e relativi parametri, se presenti.
+     * @param string $function string della funzione e relativi parametri, se presenti.
      * Per esempio: nome_funzione('p1', 2 ,'p3').
      * @return string risultato dell'interrogazione sotto forma di variabile e non di array.
      * @throws Eccezione se la query non è andata a buon fine.
