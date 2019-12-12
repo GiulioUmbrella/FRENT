@@ -7,8 +7,8 @@ try {
         $_SESSION["admin"]);
     $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
+    $commenti = $manager->getCommentiAnnuncio($id);
     $foto = $manager->getFotoAnnuncio($id);
-    $commeni = $manager->getCommentiAnnuncio($id);
     $pagina = file_get_contents("../../html/dettagli_annunci.html");
     $pagina = str_replace("<TITOLO_ANNUNCIO/>",$annuncio->getTitolo(),$pagina);
     //todo calcolare la media dei commenti
