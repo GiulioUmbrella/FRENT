@@ -8,7 +8,6 @@ try {
     $manager = new Frent(new Database("localhost", "root", "", "frentdb"),
         $_SESSION["admin"]);
     $annunci = $manager->adminGetAnnunci();
-    
     $pagina = file_get_contents("../../html/approvazione_annunci.html");
     $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
     
