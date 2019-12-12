@@ -5,6 +5,9 @@ require_once "../classi/Database.php";
 
 try {
     session_start();
+    if (!isset($_SESSION["admin"])){
+        header("Location: ../../html/login_admin.html");
+    }
     $manager = new Frent(new Database("localhost", "root", "", "frentdb"),
         $_SESSION["admin"]);
     $annunci = $manager->adminGetAnnunci();
