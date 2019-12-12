@@ -5,7 +5,7 @@ try {
     session_start();
     $manager = new Frent(new Database("localhost", "root", "", "frentdb"),
         $_SESSION["admin"]);
-    $id = $_GET["id"];
+    $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
     $foto = $manager->getFotoAnnuncio($id);
     $commeni = $manager->getCommentiAnnuncio($id);
