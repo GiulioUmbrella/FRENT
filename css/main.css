@@ -512,6 +512,24 @@ fieldset {
     cursor: pointer;
 }
 
+.form_logout {
+    position: fixed;
+    top: 0em;
+    right: 0em;
+    padding: 1em;
+}
+
+.logout_button {
+    -webkit-appearance: none;
+    font-size: 1.2em;
+    padding: 0.25em 0.75em 0.25em 0.75em ;
+    background-color: dodgerblue;
+    border-radius: 1em;
+    border: 1px solid dodgerblue;
+    color: black;
+    cursor: pointer;
+}
+
 .legend_evidenziata {
     font-size: 1.6em;
     font-weight: bold;
