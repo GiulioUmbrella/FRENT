@@ -110,6 +110,11 @@ class Frent {
         return $lista_occupazioni;
     }
 
+    /**
+     * Restituisce le foto di annuncio, dato il suo id
+     * @param int $id_annuncio id dell'annuncio
+     * @return array di oggetti di tipo Foto
+     */
     public function getFotoAnnuncio($id_annuncio): array {
         try {
             $this->db_instance->connect();
@@ -134,17 +139,30 @@ class Frent {
         return $lista_foto;
     }
 
+    /**
+     * Restituisce i commenti di un annuncio, dato il suo id
+     * @param int $id_annuncio id dell'annuncio
+     * @return array di oggetti di tipo Commento
+     */
     public function getCommentiAnnuncio($id_annuncio): array {
-        $this->db_instance->connect();
-        $procedure_name_and_params = "get_commenti_annuncio($id_annuncio)";
-        $lista_commenti = $this->db_instance->queryProcedure($procedure_name_and_params);
+        try {
+            $this->db_instance->connect();
+            if(!is_int($id_annuncio)) {
+                throw new Eccezione("Parametri di invocazione di getFotoAnnuncio errati.");
+            }
+            $procedure_name_and_params = "get_commenti_annuncio($id_annuncio)";
+            $lista_commenti = $this->db_instance->queryProcedure($procedure_name_and_params);
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
         
         foreach($lista_commenti as $i => $assoc_commento) {
             $lista_commenti[$i] = new Commento(
                 $assoc_commento['titolo'],
                 $assoc_commento['commento'],
                 $assoc_commento['data_pubblicazione'],
-                intval($assoc_commento['votazione'])
+                intval($assoc_commento['votazione']),
+                intval($assoc_commento['prenotazione'])
             );
         }
 
