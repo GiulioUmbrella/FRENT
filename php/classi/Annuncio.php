@@ -1,5 +1,6 @@
 <?php
-require_once "../CheckMethods.php";
+
+require_once ($_SERVER["DOCUMENT_ROOT"])."/TECHWEB/php/CheckMethods.php";
 require_once "DataConstraints.php";
 
 class Annuncio {

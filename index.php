@@ -1,6 +1,5 @@
 <?php
-require "./php/CheckMethods.php";
-require_once "./php/CheckMethods.php";
+require ($_SERVER["DOCUMENT_ROOT"])."/TECHWEB/php/CheckMethods.php";
 require_once "./php/classi/Frent.php";
 require_once "php/CredenzialiDB.php";
 
@@ -18,8 +17,11 @@ try {
     
     $annunci_recenti = $frent->getAnnuncio(1);
     $titolo = $annunci_recenti->getTitolo();
-    $path = $annunci_recenti->getImgAnteprima();
+    $path = "./immagini/borgoricco.jpg";
+//    $path = $annunci_recenti->getImgAnteprima();
     $content="";
+    $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
