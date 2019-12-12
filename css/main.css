@@ -782,28 +782,47 @@ body .aiuti_alla_navigazione {
 }
 
 
-#link_roma {
+#primo_pannello_piu_vistate {
     flex-grow: 3;
     background-image: url("../immagini/roma.jpg");
 }
-#link_padova {
+#secondo_pannello_piu_visitate {
     flex-grow: 3;
     background-image: url("../immagini/padova.jpg");
 }
-#link_monselice {
+#terzo_pannello_piu_visitate {
     flex-grow: 1;
     background-image: url("../immagini/monselice.jpg");
 }
-#link_limena {
+#quarto_pannello_piu_visitate {
     flex-grow: 1;
     background-image: url("../immagini/limena.jpeg");
 }
-#link_vicenza {
+#quinto_pannello_piu_visitate {
     flex-grow: 1;
     background-image: url("../immagini/vicenza.jpg");
 }
-#link_borgoricco {
+#sesto_pannello_piu_visitate {
     flex-grow: 1;
      background-image: url("../immagini/borgoricco.jpg");
  }
 
+.elemento_sei_pannelli {
+    flex-grow: 1;
+    margin-bottom: 1.5em;
+    border: 1px solid white;
+    background-repeat: no-repeat;
+}
+
+.elemento_sei_pannelli img{
+    margin-top: -1em;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+.elemento_sei_pannelli a:hover {
+    z-index: 4;
+    font-size: 3em;
+}
+*/
