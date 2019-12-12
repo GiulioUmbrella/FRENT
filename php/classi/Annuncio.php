@@ -22,7 +22,7 @@ class Annuncio {
     /**
      * Annuncio constructor.
      * @param $id_annuncio int
-     * @param null $titolo
+     * @param int $titolo
      * @param int $stato_approvazione
      * @param null $descrizione
      * @param null $img_anteprima
@@ -155,6 +155,7 @@ class Annuncio {
     }
     
     public function setStatoApprovazione($stato_approvazione): void {
+        $stato_approvazione= intval($stato_approvazione);
         if (is_int($stato_approvazione) and (
                 $stato_approvazione == 0 or $stato_approvazione == 1 or $stato_approvazione == 2
             )) {
