@@ -62,6 +62,18 @@ class Frent {
         }
     }
 
+    /**
+     * Registra un nuovo utente nel sito
+     * @param string $nome nome dell'utente che si sta registrando
+     * @param string $cognome cognome dell'utente che si sta registrando
+     * @param string $username nome utente scelto dall'utente che si sta registrando
+     * @param string $mail indirizzo mail dell'utente che si sta registrando
+     * @param string $dataNascita data di nascita dell'utente che si sta registrando
+     * @param string $imgProfilo nome del file dell'immagine di profilo caricata dall'utente che si sta registrando
+     * @param string $numTelefono numero di telefono dell'utente che si sta registrando
+     * @return int -1 se si è verificato un errore
+     * @return int ID assegnato all'utente se il processo è andato a buon fine
+     */
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): int {
         try {
             if(!checkIsValidDate($dataNascita) || !checkPhoneNumber($numTelefono)) {
