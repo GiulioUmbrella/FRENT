@@ -291,20 +291,31 @@ class Frent {
     }
 
     /**
-     * @param $id_annuncio
-     * @param $file_path
-     * @param $descrizione
-     * @return int
-     * @throws Eccezione
+     * Inserisce una nuova foto all'interno legata ad un annuncio, dato il suo ID.
+     * @param int $id_annuncio id dell'annuncio a cui sarà collegata la foto
+     * @param string $file_path percorso in cui sarà presente la foto
+     * @param string $descrizione descrizione della foto per la galleria
+     * @return int ID della foto aggiunta se tutto è andato bene
+     * @return int -1 in caso di annuncio inesistente
+     * @return int -2 in caso di file_path o descrizione non soddisfino una lunghezza minima (= 1)
+     * @return int -3 l'inserimento è fallito
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function insertFoto($id_annuncio, $file_path, $descrizione): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("L'inserimento di una foto di un annuncio può essere svolto solo da un utente registrato.");
-        } 
-        $this->db_instance->connect();
-        $function_name_and_params = "insert_foto($id_annuncio, \"$file_path\", \"$descrizione\")";
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("L'inserimento di una foto di un annuncio può essere svolto solo da un utente registrato.");
+            }
+            if(!is_int($id_annuncio)) {
+                throw new Eccezione("Parametri di invocazione di insertFoto errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "insert_foto($id_annuncio, \"$file_path\", \"$descrizione\")";
 
-        return intval($this->db_instance->queryFunction($function_name_and_params));
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
     }
 
     /**
