@@ -117,6 +117,7 @@ class Database {
             while ($row = $procedure_result->fetch_array(MYSQLI_ASSOC)) {
                 array_push($returned_array, $row);
             }
+            $procedure_result->free();
             return $returned_array;
         } else {
             throw new Eccezione("Errore nell'esecuzione della procedura $procedure.");
@@ -138,6 +139,7 @@ class Database {
         // se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($function_result && $function_result->num_rows == 1) {
             $returned_value = $function_result->fetch_array(MYSQLI_NUM);
+            $function_result->free();
             return $returned_value[0][0];
         } else {
             throw new Eccezione("Errore nell'esecuzione della funzione $function.");
