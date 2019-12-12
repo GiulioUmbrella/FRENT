@@ -180,11 +180,12 @@ class Frent {
             return new Annuncio(
                 intval($annuncio[0]['id_annuncio']),
                 $annuncio[0]['titolo'],
-                $annuncio[0]['stato_approvazione'],
+                intval($annuncio[0]['stato_approvazione']),
                 $annuncio[0]['descrizione'],
                 $annuncio[0]['img_anteprima'],
                 $annuncio[0]['indirizzo'],
                 $annuncio[0]['citta'],
+                intval($annuncio[0]["host"]),
                 floatval($annuncio[0]['prezzo_notte'])
             );
         } else {
