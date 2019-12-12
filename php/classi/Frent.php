@@ -109,11 +109,12 @@ class Frent {
 
         return $lista_occupazioni;
     }
-
+    
     /**
      * Restituisce le foto di annuncio, dato il suo id
      * @param int $id_annuncio id dell'annuncio
      * @return array di oggetti di tipo Foto
+     * @throws Eccezione
      */
     public function getFotoAnnuncio($id_annuncio): array {
         try {
@@ -138,11 +139,12 @@ class Frent {
 
         return $lista_foto;
     }
-
+    
     /**
      * Restituisce i commenti di un annuncio, dato il suo id
      * @param int $id_annuncio id dell'annuncio
      * @return array di oggetti di tipo Commento
+     * @throws Eccezione
      */
     public function getCommentiAnnuncio($id_annuncio): array {
         try {
