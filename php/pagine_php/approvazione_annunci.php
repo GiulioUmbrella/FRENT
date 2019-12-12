@@ -14,7 +14,7 @@ try {
 
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
-        echo $id." ";
+//        echo $id." ";
         $titolo = $annuncio->getTitolo();
         $content .= "<li>";
         $content .= "<a href=\"dettagli_annuncio.php?id=$id\">".$titolo."</a>";
@@ -22,7 +22,7 @@ try {
         $content .= "<a href=\"../script/script_approvazione_annunci.php?idAnnuncio=$id&approvato=true\" class=\"link_gestione link_rigetta\">Non approva</a></li>";
     }
     $content .= "</ul>";
-    $_SESSION["frent"]=$manager;
+    $_SESSION["manager"]=$manager;
     $pagina = str_replace("<Flag1/>", $content, $pagina);
     echo $pagina;
 
