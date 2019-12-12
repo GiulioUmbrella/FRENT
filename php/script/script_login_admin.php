@@ -4,7 +4,8 @@ require_once "../classi/Frent.php";
 $nome = $_POST["user"];
 $password = $_POST["password"];
 try {
-    $db = new Database("localhost", "root", "","frentdb");
+    $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME);
 
     $frent = new Frent($db);
     

@@ -3,8 +3,8 @@ require_once "../classi/Frent.php";
 
 try {
     session_start();
-    $manager = new Frent(new Database("localhost", "root", "", "frentdb"),
-        $_SESSION["admin"]);
+    $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME),$_SESSION["admin"]);
     $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
     $commenti = $manager->getCommentiAnnuncio($id);

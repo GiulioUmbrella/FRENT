@@ -5,10 +5,11 @@ require_once "../classi/Database.php";
 
 try {
     session_start();
-    if (!isset($_SESSION["admin"])){
+    if (!isset($_SESSION["admin"])) {
         header("Location: ../../html/login_admin.html");
     }
-    $manager = new Frent(new Database("localhost", "root", "", "frentdb"),
+    $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME),
         $_SESSION["admin"]);
     $annunci = $manager->adminGetAnnunci();
     $pagina = file_get_contents("../../html/approvazione_annunci.html");

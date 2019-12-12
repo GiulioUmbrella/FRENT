@@ -11,7 +11,8 @@ if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
     $admin = $_SESSION["admin"];
 
     try {
-        $db = new Database("localhost", "root", "","frentdb");
+        $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+            CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME);
     
         $frent = new Frent($db, $admin);
         
