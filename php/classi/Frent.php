@@ -28,12 +28,13 @@ class Frent {
     }
 
     /**
-     * Ricerca degli annunci data i parametri in ingresso
+     * Ricerca degli annunci data i parametri in ingresso.
      * @param string $citta città in cui cercare gli annunci
      * @param int $numOspiti numero di ospiti per cui cercare fra gli annunci
      * @param string $dataInizio data di inizio del soggiorno cercato
      * @param string $dataFine data di fine del soggiorno cercato
      * @return array di oggetti di tipo Annuncio che corrispondono alle richieste passate come parametro
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione di oggetti Annuncio
      */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
@@ -63,7 +64,7 @@ class Frent {
     }
 
     /**
-     * Registra un nuovo utente nel sito
+     * Registra un nuovo utente nel sito.
      * @param string $nome nome dell'utente che si sta registrando
      * @param string $cognome cognome dell'utente che si sta registrando
      * @param string $username nome utente scelto dall'utente che si sta registrando
@@ -73,6 +74,7 @@ class Frent {
      * @param string $numTelefono numero di telefono dell'utente che si sta registrando
      * @return int -1 se si è verificato un errore
      * @return int ID assegnato all'utente se il processo è andato a buon fine
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): int {
         try {
@@ -87,6 +89,13 @@ class Frent {
         }      
     }
 
+    /**
+     * Verifica se l'utente è registrato nel sito.
+     * @param string $username_or_mail nome utente oppure indirizzo e-mail dell'utente
+     * @param string $password password dell'utente collegata al nome utente o indirizzo e-mail
+     * @return Utente oggetto di classe Utente se è stato effettuato il login (ovvero le credenziali sono corrette e legate ad un profilo utente)
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Utente, restituzioni != 1 record dal DB
+     */
     public function login($username_or_mail, $password): Utente {
         try {
             $this->db_instance->connect();
@@ -140,7 +149,7 @@ class Frent {
     }
     
     /**
-     * Restituisce le foto di annuncio, dato il suo id
+     * Restituisce le foto della galleria di annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio
      * @return array di oggetti di tipo Foto
      * @throws Eccezione
@@ -171,7 +180,7 @@ class Frent {
     }
     
     /**
-     * Restituisce i commenti di un annuncio, dato il suo id
+     * Restituisce i commenti di un annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio
      * @return array di oggetti di tipo Commento
      * @throws Eccezione
