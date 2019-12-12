@@ -131,13 +131,16 @@ class Database {
      * @throws Eccezione se la query non è andata a buon fine.
      */
     public function queryFunction($function) {
-        if (!($this->is_connected)) throw new Eccezione("Non è attiva una connessione con il database.");
+        if (!($this->is_connected)) {
+            throw new Eccezione("Non è attiva una connessione con il database.");
+        }
         // viene interrogato il database, essendo una function di MySQL viene usato l'operatore SELECT, come le interrogazioni di selezione/proiezione
         $function_result = $this->db->query("SELECT $function;");
-
+        
         // se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($function_result && $function_result->num_rows == 1) {
             $returned_value = $function_result->fetch_array(MYSQLI_NUM);
+
             return $returned_value[0][0];
         } else {
             throw new Eccezione("Errore nell'esecuzione della funzione $function.");

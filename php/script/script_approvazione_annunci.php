@@ -5,12 +5,17 @@ session_start();
 
 if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
     
-    $id = $_GET["idAnnuncio"];
-    $status = $_GET["approvato"];
+    $id = intval($_GET["idAnnuncio"]);
+    $status = intval($_GET["approvato"]);
+    
+    $admin = $_SESSION["admin"];
 
     try {
+        $db = new Database("localhost", "root", "","frentdb");
+    
+        $frent = new Frent($db, $admin);
         
-        $res = $_SESSION["manager"]->adminEditStatoApprovazioneAnnuncio($id,boolval($status));
+        $res = $frent->adminEditStatoApprovazioneAnnuncio($id, $status);
 
         header("Location: ../pagine_php/approvazione_annunci.php");
     }catch(Eccezione $ex) {
