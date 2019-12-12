@@ -262,27 +262,27 @@ class Frent {
     }
 
     /**
-     * Inserisce una nuova occupazione per un annuncio, verificando la possibilità prima di effettuare l'operazione.
-     * @param $annuncio
-     * @param $numospiti
-     * @param $data_inizio
-     * @param $data_fine
+     * Inserisce una nuova occupazione per un annuncio, verificando la possibilità prima di effettuare l'operazione e marchiandola come prenotazione se fatta da un guest e non dall'host.
+     * @param int $id_annuncio id dell'annuncio
+     * @param int $numospiti numero di ospiti per cui è stata richiesta l'occupazione
+     * @param string $data_inizio
+     * @param string $data_fine
      * @return int ID dell'occupazione appena inserita se tutto è andato a buon fine
      * @return int -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
      * @return int -2 se ci sono altre occupazioni nel range di date passate in input
      * @return int -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function insertOccupazione($annuncio, $numospiti, $data_inizio, $data_fine): int {
+    public function insertOccupazione($id_annuncio, $numospiti, $data_inizio, $data_fine): int {
         try {
             if(get_class($this->auth_user) === "Utente") {
                 throw new Eccezione(htmlentities("L'inserimento di un'occupazione può essere svolto solo da un utente registrato."));
             }
-            if(!is_int($annuncio) || !is_int($numospiti) || !checkIsValidDate($data_inizio) || !checkIsValidDate($data_fine)) {
+            if(!is_int($id_annuncio) || !is_int($numospiti) || !checkIsValidDate($data_inizio) || !checkIsValidDate($data_fine)) {
                 throw new Eccezione(htmlentities("Parametri di invocazione di insertOccupazione errati."));
             }
             $this->db_instance->connect();
-            $function_name_and_params = "insert_occupazione(" . $this->auth_user->getIdUtente() . ", $annuncio, $numospiti, \"$data_inizio\", \"$data_fine\")";
+            $function_name_and_params = "insert_occupazione(" . $this->auth_user->getIdUtente() . ", $id_annuncio, $numospiti, \"$data_inizio\", \"$data_fine\")";
         
             return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
