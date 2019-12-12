@@ -155,6 +155,7 @@ class Annuncio {
     }
     
     public function setStatoApprovazione($stato_approvazione): void {
+        $stato_approvazione= intval($stato_approvazione);
         if (is_int($stato_approvazione) and (
                 $stato_approvazione == 0 or $stato_approvazione == 1 or $stato_approvazione == 2
             )) {
