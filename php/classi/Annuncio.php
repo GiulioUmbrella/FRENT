@@ -172,10 +172,10 @@ class Annuncio {
     }
     
     public function setStatoApprovazione($stato_approvazione): void {
-        if (is_int($host) and $host >= 0 && $host <= 2) {
-            $this->host = $host;
+        if (is_int($stato_approvazione) and $stato_approvazione >= 0 && $stato_approvazione <= 2) {
+            $this->stato_approvazione = $stato_approvazione;
         } else {
-            throw new Eccezione(htmlentities("L'ID dell'host non è valido."));
+            throw new Eccezione(htmlentities("Lo stato di approvazione non è valido."));
         }
     }
     

@@ -12,27 +12,23 @@ class Occupazione {
     private $data_fine;
     
     public function __construct($id, $utente, $annuncio, $prenotazione_guest, $num_ospiti, $dataI, $dataF) {
-       
+        if (!checkDateBeginAndEnd($dataI, $dataF)) {        
+            throw new Eccezione(htmlentities("Le date di inizio e di fine non sono valide."));
+        }
         $this->setIdOccupazione($id);
         $this->setUtente($utente);
         $this->setAnnuncio($annuncio);
         $this->setPrenotazioneGuest($prenotazione_guest);
         $this->setNumOspiti($num_ospiti);
-        
-        if (checkIsValidDate($dataI) and checkIsValidDate($dataF) and checkDateBeginAndEnd($dataI, $dataF)) {
-            
-            $this->setDataInizio($dataI);
-            $this->setDataFine($dataF);
-        } else {
-            throw new Eccezione(htmlentities("Le date di inizio e di fine non sono valide!!"));
-        }
+        $this->setDataInizio($dataI);
+        $this->setDataFine($dataF);
     }
     
     public function setIdOccupazione($id_occupazione): void {
         if (is_int($id_occupazione) and $id_occupazione > 0) {
             $this->id_occupazione = $id_occupazione;
         } else {
-            throw new Eccezione(htmlentities("ID dell'occupazione non è valido!"));
+            throw new Eccezione(htmlentities("L'ID dell'occupazione non è valido."));
         }
     }
     
@@ -40,7 +36,7 @@ class Occupazione {
         if (is_int($utente) and $utente > 0) {
             $this->utente = $utente;
         } else {
-            throw new Eccezione(htmlentities("ID dell'utente non è valido!"));
+            throw new Eccezione(htmlentities("L'ID dell'utente non è valido."));
         }
     }
     
@@ -48,40 +44,47 @@ class Occupazione {
         if (is_int($annuncio) and $annuncio > 0) {
             $this->annuncio = $annuncio;
         } else {
-            throw new Eccezione(htmlentities("ID dell'annuncio non è valido!"));
+            throw new Eccezione(htmlentities("L'ID dell'annuncio non è valido!"));
         }
     }
     
     public function setPrenotazioneGuest($prenotazione_guest): void {
-        if (is_int($prenotazione_guest) and ($prenotazione_guest == 0 or $prenotazione_guest == 1)) {
-            $this->$prenotazione_guest = $prenotazione_guest;
+        if (is_bool($prenotazione_guest)) {
+            $this->prenotazione_guest = $prenotazione_guest;
         } else {
-            throw new Eccezione(htmlentities("Lo stato della prenotazione non è valido!"));
+            throw new Eccezione(htmlentities("Il flag di controllo se è prenotazione non è valido."));
         }
     }
     
     public function setNumOspiti($num_ospiti): void {
-        if (is_int($num_ospiti) and $num_ospiti > 0 and $num_ospiti < 99) {
+        if (is_int($num_ospiti) and $num_ospiti <= DataConstraints::occupazioni["num_ospiti"]) {
             $this->num_ospiti = $num_ospiti;
         } else {
-            throw new Eccezione(htmlentities("Il numero degli ospiti non è valido!"));
+            throw new Eccezione(htmlentities("Il numero degli ospiti non è valido."));
         }
     }
     
-    // non hanno bisogno di controllo perchè è stato fatto nel main
     public function setDataInizio($data_inizio): void {
-        $this->data_inizio = $data_inizio;
+        if(is_string($data_inizio) && checkIsValidDate($data_inizio)) {
+            $this->data_inizio = $data_inizio;
+        } else {
+            throw new Eccezione(htmlentities("La data di inizio non è valida."));
+        }
     }
     
     public function setDataFine($data_fine): void {
-        $this->data_fine = $data_fine;
+        if(is_string($data_fine) && checkIsValidDate($data_fine)) {
+            $this->data_fine = $data_fine;
+        } else {
+            throw new Eccezione(htmlentities("La data di fine non è valida."));
+        }
     }
     
     public function getIdOccupazione(): int {
         return $this->id_occupazione;
     }
     
-    public function getUtente() {
+    public function getUtente(): int {
         return $this->utente;
     }
     
@@ -97,11 +100,11 @@ class Occupazione {
         return $this->num_ospiti;
     }
     
-    public function getDataInizio(): DateTime {
+    public function getDataInizio(): string {
         return $this->data_inizio;
     }
     
-    public function getDataFine(): DateTime {
+    public function getDataFine(): string {
         return $this->data_fine;
     }
     
