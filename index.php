@@ -8,7 +8,7 @@ try {
     session_start();
     $pagina = file_get_contents("./html/index.html");
     if (isset($_SESSION["user"])){
-        $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_logged.html"),$pagina);
+        $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_logged_index.html"),$pagina);
     }else{
         $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_no_logged.html"),$pagina);
     }
