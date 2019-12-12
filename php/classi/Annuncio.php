@@ -28,6 +28,8 @@ class Annuncio {
      * @param string $img_anteprima
      * @param string $indirizzo
      * @param string $citta
+     * @param int $host
+     * @param int $bloccato
      * @param int $max_ospiti
      * @param float $prezzo_notte
      * @throws Eccezione
