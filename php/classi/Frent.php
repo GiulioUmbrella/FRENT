@@ -309,7 +309,13 @@ class Frent {
 
         return $lista_prenotazioni;
     }
-
+    
+    /**
+     * @param $id_annuncio int id dell'annuncio il quale stato di approvazione deve essere modificato;
+     * @param $stato_approvazione int il nuovo stato dell'annuncio
+     * @return int restituisce
+     * @throws Eccezione
+     */
     public function adminEditStatoApprovazioneAnnuncio($id_annuncio, $stato_approvazione): int {
         if(get_class($this->auth_user) !== "Amministratore") {
             throw new Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
@@ -321,7 +327,7 @@ class Frent {
     }
     
     /**
-     * @return array
+     * @return array restituisce un array di istanze della classe Annuncio che devono essere approvati
      * @throws Eccezione
      */
     public function adminGetAnnunci(): array {
@@ -341,7 +347,13 @@ class Frent {
         }
         return $lista_annunci;
     }
-
+    
+    /**
+     * @param $username_or_mail string username o la mail con il quale amministratore si è autenticato
+     * @param $password string password dell'amministratore
+     * @return Amministratore l'istanza della classe Amministratore con i dati dell'amministratore
+     * @throws Eccezione
+     */
     public function adminLogin($username_or_mail, $password): Amministratore {
         $this->db_instance->connect();
         $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
