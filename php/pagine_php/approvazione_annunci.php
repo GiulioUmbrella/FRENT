@@ -2,6 +2,7 @@
 require_once "../classi/Annuncio.php";
 require_once "../classi/Frent.php";
 require_once "../classi/Database.php";
+require_once "../CredenzialiDB.php";
 
 try {
     session_start();

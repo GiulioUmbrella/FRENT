@@ -1,6 +1,6 @@
 <?php
 require_once "../classi/Frent.php";
-
+require_once "../CredenzialiDB.php";
 try {
     session_start();
     $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,

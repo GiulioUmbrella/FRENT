@@ -1,6 +1,8 @@
 <?php
 require_once "../classi/Database.php";
 require_once "../classi/Frent.php";
+
+require_once "../CredenzialiDB.php";
 $nome = $_POST["user"];
 $password = $_POST["password"];
 try {
