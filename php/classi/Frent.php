@@ -65,15 +65,16 @@ class Frent {
 
     /**
      * Registra un nuovo utente nel sito.
-     * @param string $nome nome dell'utente che si sta registrando
-     * @param string $cognome cognome dell'utente che si sta registrando
-     * @param string $username nome utente scelto dall'utente che si sta registrando
-     * @param string $mail indirizzo mail dell'utente che si sta registrando
-     * @param string $dataNascita data di nascita dell'utente che si sta registrando
-     * @param string $imgProfilo nome del file dell'immagine di profilo caricata dall'utente che si sta registrando
-     * @param string $numTelefono numero di telefono dell'utente che si sta registrando
+     * @param string $nome nome dell'utente
+     * @param string $cognome cognome dell'utente
+     * @param string $username nome utente scelto dall'utente
+     * @param string $mail indirizzo mail dell'utente
+     * @param string $password password scelta dall'utente
+     * @param string $dataNascita data di nascita dell'utente
+     * @param string $imgProfilo nome del file dell'immagine di profilo caricata dall'utente
+     * @param string $numTelefono numero di telefono dell'utente
+     * @return int ID del nuovo utente registrato se il processo è andato a buon fine
      * @return int -1 se si è verificato un errore
-     * @return int ID assegnato all'utente se il processo è andato a buon fine
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): int {
@@ -121,6 +122,13 @@ class Frent {
         }
     }
 
+
+    /**
+     * Restituisce le occupazioni di un annuncio, dato il suo ID.
+     * @param $id_annuncio id dell'annuncio
+     * @return array di oggetti di tipo Occupazione
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione degli oggetti Occupazione
+     */
     public function getOccupazioniAnnuncio($id_annuncio): array {
         try {
             if(!is_int($id_annuncio)) {
@@ -134,7 +142,7 @@ class Frent {
                 $lista_occupazioni[$i] = new Occupazione(
                     intval($assoc_occupazione['id_occupazione']),
                     intval($assoc_occupazione['utente']),
-                    $id_annuncio,
+                    $id_annuncio, // già int, non serve fare il parsing
                     intval($assoc_occupazione['prenotazione_guest']),
                     intval($assoc_occupazione['num_ospiti']),
                     $assoc_occupazione['data_inizio'],
