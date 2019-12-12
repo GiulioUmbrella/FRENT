@@ -8,6 +8,7 @@ require_once "Eccezione.php";
 require_once "Foto.php";
 require_once "Occupazione.php";
 require_once "Utente.php";
+require_once "../CheckMethods.php";
 
 class Frent {
     private $db_instance;
@@ -26,12 +27,23 @@ class Frent {
         }
     }
 
-    // funzionalità per utenti non autenticati
-
+    /**
+     * Ricerca degli annunci data i parametri in ingresso
+     * @param string $citta città in cui cercare gli annunci
+     * @param int $numOspiti numero di ospiti per cui cercare fra gli annunci
+     * @param string $dataInizio data di inizio del soggiorno cercato
+     * @param string $dataFine data di fine del soggiorno cercato
+     * @return array di oggetti di tipo Annuncio che corrispondono alle richieste passate come parametro
+     */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
-        $this->db_instance->connect();
-        $procedure_name_and_params = "ricerca_annunci(\"$citta\", $numOspiti, \"$dataInizio\", \"$dataFine\")";
-        $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
+        try {
+            $this->db_instance->connect();
+            // if(!is_int($numOspiti) && ) throw new Eccezione("Formato parametro errato");
+            $procedure_name_and_params = "ricerca_annunci(\"$citta\", $numOspiti, \"$dataInizio\", \"$dataFine\")";
+            $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
         
         foreach($lista_annunci as $i => $assoc_annuncio) {
             $lista_annunci[$i] = new Annuncio(
@@ -44,6 +56,7 @@ class Frent {
                 floatval($assoc_annuncio['prezzo_notte'])
             );
         }
+
         return $lista_annunci;
     }
 
@@ -135,12 +148,12 @@ class Frent {
 
         if(count($annuncio) == 1) {
             return new Annuncio(
-                intval($annuncio['id_annuncio']),
-                $annuncio['titolo'],
-                $annuncio['descrizione'],
-                $annuncio['img_anteprima'],
-                $annuncio['indirizzo'],
-                $annuncio['citta'],
+                intval($annuncio[0]['id_annuncio']),
+                $annuncio[0]['titolo'],
+                $annuncio[0]['descrizione'],
+                $annuncio[0]['img_anteprima'],
+                $annuncio[0]['indirizzo'],
+                $annuncio[0]['citta'],
                 floatval($annuncio['prezzo_notte'])
             );
         } else {
