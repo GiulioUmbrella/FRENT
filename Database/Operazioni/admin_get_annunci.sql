@@ -8,7 +8,6 @@ BEGIN
     SELECT id_annuncio, titolo, stato_approvazione
 
     FROM annunci
-    WHERE stato_approvazione = 0
-    OR stato_approvazione = 2;
+    WHERE stato_approvazione = 0;
 END |
 DELIMITER ;

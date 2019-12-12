@@ -15,28 +15,7 @@
     <link rel="icon" href="immagini/icona.ico"/>
 </head>
 <body class="layout_colonna">
-
-<div id="header">
-    <div id="logo">
-        <h1>Frent</h1>
-    </div>
-    <div id="nav">
-        <ul>
-            <li><a tabindex="1" href="index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
-            </li>
-            <li><a tabindex="2" href="./html/login.html" title="Vai alla pagina di accesso">Accedi</a></li>
-            <li><a tabindex="3" href="./html/registrazione.html" title="Vai alla pagina di registrazione">Registrati</a>
-            </li>
-            <li><a tabindex="4" href="./html/mie_prenotazioni.html"
-                   title="Vai alla pagina delle prenotazioni effettuate">Le mie prenotazioni</a></li>
-            <li><a tabindex="5" href="./html/miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
-                annunci</a></li>
-            <li><a tabindex="6" href="./html/mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
-                profilo</a></li>
-            <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
-        </ul>
-    </div>
-</div>
+<HEADER/>
 
 <div id="breadcrumb">
     <p> Ti trovi in: <span xml:lang="en">Home</span></p>

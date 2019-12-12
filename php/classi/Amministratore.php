@@ -15,26 +15,29 @@ class Amministratore {
     }
     
     public function setIdAmministratore($id): void {
-        if ($id > 0) $this->id_amministratore = $id;
-        else
-            throw new Eccezione(htmlentities("ID inserito non è valido!!"));
+        if (is_int($id) and $id > 0) {
+            $this->id_amministratore = $id;
+        } else {
+            throw new Eccezione(htmlentities("L'ID inserito non è valido."));
+        }
     }
     
     public function setUserName($username): void {
-        if (checkStringContainsNoSpace(trim($username)) and
-            checkStringMaxLen(trim($username),DataConstraints::amministratori["user_name"])) {
-            $this->user_name = $username;
+        if (is_string($username) &&
+            checkStringContainsNoSpace(trim($username)) &&
+            checkStringMaxLen(trim($username), DataConstraints::amministratori["user_name"])
+        ) {
+            $this->user_name = trim($username);
         } else {
-            throw new Eccezione("Username Non valida");
-            
+            throw new Eccezione(htmlentities("L'username inserito non è valido."));
         }
     }
     
     public function setMail($mail): void {
-        if (checkIsValidMail($mail, DataConstraints::amministratori["mail"])) {
-            $this->$mail = $mail;
+        if (is_string($mail) && checkIsValidMail(trim($mail), DataConstraints::amministratori["mail"])) {
+            $this->mail = trim($mail);
         } else {
-            throw new Eccezione("Email non corretta o troppo lunga!");
+            throw new Eccezione(htmlentities("L'email inserita non è valida."));
         }
         
     }

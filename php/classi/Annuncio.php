@@ -20,35 +20,43 @@ class Annuncio {
     private $prezzo_notte;
     
     /**
-     * Annuncio constructor.
-     * @param $id_annuncio int
-     * @param null $titolo
+     * Costruttore di annuncio
+     * @param int $id_annuncio
+     * @param string $titolo
      * @param int $stato_approvazione
-     * @param null $descrizione
-     * @param null $img_anteprima
-     * @param null $indirizzo
-     * @param null $citta
-     * @param int $prezzo_notte
+     * @param string $descrizione
+     * @param string $img_anteprima
+     * @param string $indirizzo
+     * @param string $citta
+     * @param int $host
+     * @param int $bloccato
+     * @param int $max_ospiti
+     * @param float $prezzo_notte
      * @throws Eccezione
      */
-    public function __construct($id_annuncio, $titolo = NULL, $stato_approvazione = 0, $descrizione = NULL, $img_anteprima = NULL, $indirizzo = NULL, $citta = NULL, $prezzo_notte = 0.0) {
-        echo "inizio costruttore annunci";
+    public function __construct(
+        $id_annuncio,
+        $titolo,
+        $stato_approvazione,
+        $descrizione = "",
+        $img_anteprima = "house_image.png",
+        $indirizzo = "",
+        $citta = "",
+        $host = 0,
+        $bloccato = 0,
+        $max_ospiti = 1,
+        $prezzo_notte = 0.0
+    ) {
         $this->setIdAnnuncio($id_annuncio);
-        echo "costruttore 1";
         $this->setTitolo($titolo);
-        echo "costruttore 2";
         $this->setDescrizione($descrizione);
-        echo "costruttore 3";
         $this->setImgAnteprima($img_anteprima);
-        echo "costruttore 4";
         $this->setStatoApprovazione($stato_approvazione);
-        echo "costruttore 5";
         $this->setIndirizzo($indirizzo);
-        echo "costruttore 6";
         $this->setCitta($citta);
-        echo "costruttore 7";
+        $this->setHost($host);
+        $this->setMaxOspiti($max_ospiti);
         $this->setPrezzoNotte($prezzo_notte);
-        echo "fine costruttore annunci";
     }
     
     public function getIdAnnuncio(): int {
@@ -87,15 +95,6 @@ class Annuncio {
         return $this->bloccato;
     }
     
-    public function setBloccato($bloccato): void {
-        if (is_bool($bloccato)) {
-            $this->bloccato = $bloccato;
-        } else {
-            throw new Exception();
-        }
-    }
-    
-    /** @noinspection PhpUnhandledExceptionInspection */
     public function getMaxOspiti(): int {
         return $this->max_ospiti;
     }
@@ -104,75 +103,81 @@ class Annuncio {
         return $this->prezzo_notte;
     }
     
+    public function setBloccato($bloccato): void {
+        if (is_bool($bloccato)) {
+            $this->bloccato = $bloccato;
+        } else {
+            throw new Exception(htmlentities("Il valore di bloccato non è valido."));
+        }
+    }
+    
     /**
      * @param $id_annuncio int
      * @throws Eccezione
      */
     public function setIdAnnuncio($id_annuncio): void {
-        $id_annuncio=1;
-//        echo "ID =".trim($id_annuncio);
-//        if (!is_int($id_annuncio))
-//            echo "its NOT int";
         if (is_int($id_annuncio) and $id_annuncio > 0) {
             $this->id_annuncio = $id_annuncio;
         } else {
-            throw new Eccezione(htmlentities("Id annuncio non valido"));
+            throw new Eccezione(htmlentities("L'ID annuncio non è valido"));
         }
     }
     
     public function setTitolo($titolo): void {
-        if (checkStringMaxLen($titolo, DataConstraints::annunci["titolo"])) {
-            $this->titolo = htmlentities($titolo);
+        if (is_string($titolo) && checkStringMaxLen(trim($titolo), DataConstraints::annunci["titolo"])) {
+            $this->titolo = trim($titolo);
         } else {
-            throw new Eccezione(htmlentities("Il titolo inserito è troppo lungo."));
+            throw new Eccezione(htmlentities("Il titolo non è valido."));
         }
     }
     
     public function setDescrizione($descrizione): void {
-        if ((checkStringMaxLen($descrizione, DataConstraints::annunci["descrizione"]) or $descrizione==NULL) ) {
-            $this->descrizione = htmlentities($descrizione);
+        if (is_string($descrizione) && checkStringMaxLen(trim($descrizione), DataConstraints::annunci["descrizione"]) ) {
+            $this->descrizione = trim($descrizione);
         } else {
-            throw new Eccezione(htmlentities("La descrizione è troppo lunga!"));
+            throw new Eccezione(htmlentities("La descrizione non è valida."));
         }
     }
     
     public function setImgAnteprima($img_anteprima): void {
-        if (checkStringMaxLen(trim($img_anteprima), DataConstraints::annunci["img_anteprima"]))
-            $this->img_anteprima = htmlentities($img_anteprima);
+        if (is_string($img_anteprima) && checkStringMaxLen(trim($img_anteprima), DataConstraints::annunci["img_anteprima"]))
+            $this->img_anteprima = trim($img_anteprima);
         else {
-            throw new Eccezione(htmlentities("Il nome del file non è valido!"));
+            throw new Eccezione(htmlentities("Il nome dell'immagine di anteprima non è valido."));
         }
     }
     
     public function setIndirizzo($indirizzo): void {
-        $this->indirizzo = htmlentities($indirizzo);
+        if (is_string($indirizzo) && checkStringMaxLen(trim($indirizzo), DataConstraints::annunci["indirizzo"]))
+            $this->indirizzo = trim($indirizzo);
+        else {
+            throw new Eccezione(htmlentities("L'indirizzo non è valido."));
+        }
     }
     
     public function setCitta($citta): void {
-        
-        if ($citta==NULL or (checkStringNoNumber($citta) and checkStringMaxLen(trim($citta), DataConstraints::annunci["citta"]))
-            and strlen(trim($citta)) > 0) {
-            $this->citta = htmlentities($citta);
+        if (is_string($citta) ||
+        (checkStringNoNumber($citta) and checkStringMaxLen(trim($citta), DataConstraints::annunci["citta"]))
+        ) {
+            $this->citta = trim($citta);
         } else {
-            throw new Eccezione(htmlentities("Il nome della città non è valido!"));
+            throw new Eccezione(htmlentities("Il nome della città non è valido."));
         }
     }
     
     public function setHost($host): void {
-        if ($host > 0) {
+        if (is_int($host) and $host >= 0) {
             $this->host = $host;
         } else {
-            throw new Eccezione(htmlentities("Id host non valido!"));
+            throw new Eccezione(htmlentities("L'ID dell'host non è valido."));
         }
     }
     
     public function setStatoApprovazione($stato_approvazione): void {
-        if (is_int($stato_approvazione) and (
-                $stato_approvazione == 0 or $stato_approvazione == 1 or $stato_approvazione == 2
-            )) {
+        if (is_int($stato_approvazione) and $stato_approvazione >= 0 && $stato_approvazione <= 2) {
             $this->stato_approvazione = $stato_approvazione;
         } else {
-            throw new Eccezione(htmlentities("Lo stato che stai tentando di inserire non va bene!!"));
+            throw new Eccezione(htmlentities("Lo stato di approvazione non è valido."));
         }
     }
     
@@ -186,12 +191,10 @@ class Annuncio {
     }
     
     public function setPrezzoNotte($prezzo_notte): void {
-        if (is_float($prezzo_notte) and $prezzo_notte >= 0) {
+        if (is_float($prezzo_notte) and $prezzo_notte >= 0.0) {
             $this->prezzo_notte = $prezzo_notte;
         } else {
             throw new Eccezione(htmlentities("Il prezzo non è valido!"));
         }
     }
-    
-    
 }

@@ -12,7 +12,7 @@ try {
     
     if ($admin != null) {
         session_start();
-        $_SESSION["admin_obj"] = $admin;
+        $_SESSION["admin"] = $admin;
         header("Location: ../pagine_php/approvazione_annunci.php");
     } else {
         echo "password errato!.";
