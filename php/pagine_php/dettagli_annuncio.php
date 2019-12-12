@@ -12,6 +12,14 @@ try {
     $pagina = file_get_contents("../../html/dettagli_annunci.html");
     $pagina = str_replace("<TITOLO_ANNUNCIO/>",$annuncio->getTitolo(),$pagina);
     //todo calcolare la media dei commenti
+    $totale=0;
+    $str_commenti="";
+    foreach ($commenti as $commento){
+        $totale +=intval( $commenti->getVotazione());
+        
+        $str_commenti.="";
+        
+    }
     //
     $mediaCommenti=0;
     $pagina = str_replace("<Valutazione/>",$mediaCommenti,$pagina);
