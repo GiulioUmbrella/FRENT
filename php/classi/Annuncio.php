@@ -146,10 +146,10 @@ class Annuncio {
     }
     
     public function setIndirizzo($indirizzo): void {
-        if (is_string($indirizzo) && checkStringMaxLen(trim($img_anteprima), DataConstraints::annunci["indirizzo"]))
+        if (is_string($indirizzo) && checkStringMaxLen(trim($indirizzo), DataConstraints::annunci["indirizzo"]))
             $this->indirizzo = trim($indirizzo);
         else {
-            throw new Eccezione(htmlentities("Il n non è valido."));
+            throw new Eccezione(htmlentities("L'indirizzo non è valido."));
         }
     }
     
