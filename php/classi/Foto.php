@@ -47,7 +47,7 @@ class Foto {
     
     public function setDescrizione($descrizione): void {
         if (is_string($descrizione) and checkStringMaxLen(trim($descrizione), DataConstraints::foto_annunci["descrizione"])) {
-            $this->$descrizione = trim($descrizione);
+            $this->descrizione = trim($descrizione);
         } else {
             throw new Eccezione(htmlentities("La descrizione non è valida!"));
         }
@@ -59,7 +59,7 @@ class Foto {
 
     public function setIdAnnuncio($id): void {
         if (is_int($id) and $id > 0) {
-            $this->id_foto = $id;
+            $this->id_annuncio = $id;
         } else {
             throw new Eccezione(htmlentities("L'ID dell'annuncio non è valido."));
         }

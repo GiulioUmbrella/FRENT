@@ -20,8 +20,8 @@ class Annuncio {
     private $prezzo_notte;
     
     /**
-     * Annuncio constructor.
-     * @param $id_annuncio int
+     * Costruttore di annuncio
+     * @param int $id_annuncio
      * @param null $titolo
      * @param int $stato_approvazione
      * @param null $descrizione
