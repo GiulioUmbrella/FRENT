@@ -1,5 +1,5 @@
 <?php
-require_once "../CheckMethods.php";
+require_once "./../CheckMethods.php";
 require_once "DataConstraints.php";
 
 class Amministratore {

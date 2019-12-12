@@ -1,111 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
-    <title>Frent</title>
-
-    <meta name="title" content="Nome affitto case"/>
-    <meta name="description" content="Home page del popolare sito di affitto case Frent"/>
-    <meta name="keyword" content="Casa,Appartamento,Affitto,Frent"/>
-    <meta name="language" content="italian it"/>
-    <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
-
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <link rel="icon" href="immagini/icona.ico"/>
-</head>
-<body class="layout_colonna">
-<HEADER/>
-
-<div id="breadcrumb">
-    <p> Ti trovi in: <span xml:lang="en">Home</span></p>
-</div>
-
-<div id="content">
-    <form class="form form_orizzontale" action="">
-
-        <fieldset>
-            <legend class="aiuti_alla_navigazione">Ricerca annuncio</legend>
-            <div class="input_label_orizzontale">
-                <label for="citta">Citt&agrave;</label>
-                <input type="text" tabindex="4" name="citta" id="citta"
-                       placeholder="Citt&agrave;"/>
-            </div>
-            <!--Chiarire cosa fare per Safari -->
-            <div class="input_label_orizzontale">
-                <label for="data_inizio">Data Inizio</label>
-                <input type="date" tabindex="5" name="data_inizio" id="data_inizio"/>
-            </div>
-            <div class="input_label_orizzontale">
-                <label for="data_fine">Data Fine</label>
-                <input type="date" tabindex="6" name="data_fine" id="data_fine"/>
-            </div>
-            <div class="input_label_orizzontale">
-                <label for="num_ospiti">Num Ospiti</label>
-                <input type="number" tabindex="7" name="num_ospiti" id="num_ospiti"
-                       min="1" max="99" value="1"/>
-            </div>
-            <div class="input_label_orizzontale">
-                <label for="pulsante_cerca" class="aiuti_alla_navigazione">Pulsante Ricerca</label>
-                <input type="submit" tabindex="8" id="pulsante_cerca" value="Cerca">
-            </div>
-        </fieldset>
-
-    </form>
-
-    <h1>Ultimi annunci pubblicati</h1>
-    <ul class="sei_pannelli">
-        <li class="elemento_sei_pannelli">
-            <a>
-                ANNUNCIO PIU RECENTE 1
-                <img src="immagini/img1.png" alt="descrizione immagine di antemprima annuncio"/>
-            </a>
-        </li>
-        <li class="elemento_sei_pannelli">
-            <a>
-                ANNUNCIO PIU RECENTE 2
-                <img src="immagini/img1.png" alt="descrizione immagine di anteprima annuncio"/>
-            </a>
-        </li>
-        <li class="elemento_sei_pannelli">
-            <a>
-                ANNUNCIO PIU RECENTE 3
-                <img src="immagini/img1.png" alt="descrizione immagine di anteprima annuncio"/>
-            </a>
-        </li>
-        <li class="elemento_sei_pannelli">
-            <a>ANNUNCIO PIU RECENTE 4
-                <img src="immagini/img1.png" alt="descrizione immagine di anteprima annuncio"/>
-            </a>
-        </li>
-        <li class="elemento_sei_pannelli">
-            <a>
-                ANNUNCIO PIU RECENTE 5
-                <img src="immagini/img1.png" alt="descrizione immagine di anteprima annuncio"/>
-            </a>
-        </li>
-        <li class="elemento_sei_pannelli">
-            <a>
-                ANNUNCIO PIU RECENTE 6
-                <img src="immagini/img1.png" alt="descrizione immagine di anteprima annuncio"/>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-<div id="footer">
-    <ul>
-        <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
-        <li><a href="./html/condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
-            utilizzo</a></li>
-        <li><a href="./html/faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en"
-                                                                              title="Frequently Asked Questions">FAQ</abbr></a>
-        </li>
-        <li><a href="./html/login_admin.html" title="Vai alla pagina per l'amministratore">Accesso amministratore</a>
-        </li>
-    </ul>
-</div>
-
-</body>
-</html>
+<?php
+require "./php/CheckMethods.php";
+require_once "./php/classi/Frent.php";
+require_once "./php/CheckMethods.php";
+//require_once "./php/classi/Annuncio.php";
+try {
+    session_start();
+    $pagina = file_get_contents("./html/index.html");
+    if (isset($_SESSION["user"])){
+        $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_logged.html"),$pagina);
+    }else{
+        $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_no_logged.html"),$pagina);
+    }
+    
+    $frent = new Frent(new Database("localhost", "root", "", "frentdb"));
+    
+    $annunci_recenti = $frent->getAnnuncio(1);
+    $titolo = $annunci_recenti->getTitolo();
+    $path = $annunci_recenti->getImgAnteprima();
+    $content="";
+    $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+    $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+    $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+    $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+    $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+    
+    $pagina= str_replace("<RECENTI/>",$content,$pagina);
+    echo $pagina;
+    
+} catch (Eccezione $ex) {
+    echo "eccezione " . $ex->getMessage();
+}

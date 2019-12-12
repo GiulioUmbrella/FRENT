@@ -8,7 +8,7 @@ require_once "Eccezione.php";
 require_once "Foto.php";
 require_once "Occupazione.php";
 require_once "Utente.php";
-require_once "../CheckMethods.php";
+//require_once "../CheckMethods.php";
 
 class Frent {
     private $db_instance;
@@ -26,7 +26,7 @@ class Frent {
             $this->auth_user = $auth_user;
         }
     }
-
+    
     /**
      * Ricerca degli annunci data i parametri in ingresso
      * @param string $citta città in cui cercare gli annunci
@@ -34,6 +34,7 @@ class Frent {
      * @param string $dataInizio data di inizio del soggiorno cercato
      * @param string $dataFine data di fine del soggiorno cercato
      * @return array di oggetti di tipo Annuncio che corrispondono alle richieste passate come parametro
+     * @throws Eccezione
      */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
