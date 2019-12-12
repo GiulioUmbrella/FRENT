@@ -156,7 +156,7 @@ class Frent {
                 $annuncio[0]['img_anteprima'],
                 $annuncio[0]['indirizzo'],
                 $annuncio[0]['citta'],
-                floatval($annuncio['prezzo_notte'])
+                floatval($annuncio[0]['prezzo_notte'])
             );
         } else {
             return null;
