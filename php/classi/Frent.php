@@ -14,8 +14,8 @@ class Frent {
     private $auth_user;
 
     /**
-     * Frent constructor.
-     * @param $db Database
+     * Costruttore della classe Frent.
+     * @param Database $db
      * @param null $auth_user
      */
     public function __construct($db, $auth_user = NULL) {
@@ -30,7 +30,7 @@ class Frent {
 
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         $this->db_instance->connect();
-        $procedure_name_and_params = "ricerca_annunci(\'$citta\', $numOspiti, \'$dataInizio\', \'$dataFine\')";
+        $procedure_name_and_params = "ricerca_annunci(\"$citta\", $numOspiti, \"$dataInizio\", \"$dataFine\")";
         $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
         
         foreach($lista_annunci as $i => $assoc_annuncio) {
