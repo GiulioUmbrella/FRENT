@@ -663,24 +663,29 @@ class Frent {
     }
     
     /**
-     * @param $username_or_mail string username o la mail con il quale amministratore si è autenticato
-     * @param $password string password dell'amministratore
-     * @return Amministratore l'istanza della classe Amministratore con i dati dell'amministratore
-     * @throws Eccezione
+     * Verifica se l'amministratore ha un profilo nel sito.
+     * @param string $username_or_mail nome utente oppure indirizzo e-mail dell'amministratore
+     * @param string $password password dell'amministratore collegata al nome utente o indirizzo e-mail
+     * @return Amministratore oggetto di classe Amministratore se è stato effettuato il login (ovvero le credenziali sono corrette e legate ad un profilo amministratore)
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Amministratore, restituzioni != 1 record dal DB
      */
     public function adminLogin($username_or_mail, $password): Amministratore {
-        $this->db_instance->connect();
-        $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
-        $admin = $this->db_instance->queryProcedure($procedure_name_and_params);
+        try {
+            $this->db_instance->connect();
+            $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
+            $admin = $this->db_instance->queryProcedure($procedure_name_and_params);
+            
+            if(count($admin) !== 1) {
+                throw new Eccezione(htmlentities("Non è stato trovato nessun amministratore con queste credenziali."));
+            }
 
-        if(count($admin) == 1) {
             return new Amministratore(
                 intval($admin[0]['id_amministratore']),
                 $admin[0]['user_name'],
                 $admin[0]['mail']
             );
-        } else {
-            return NULL;
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
     }
 }
