@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER["DOCUMENT_ROOT"])."/TECHWEB/php/CheckMethods.php";
+require ($_SERVER["DOCUMENT_ROOT"])."/php/CheckMethods.php";
 require_once "./php/classi/Frent.php";
 require_once "php/CredenzialiDB.php";
 
