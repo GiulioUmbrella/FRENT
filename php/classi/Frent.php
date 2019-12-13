@@ -336,8 +336,10 @@ class Frent {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("L'inserimento di un commento può essere svolto solo da un utente registrato.");
             }
-            if(!is_int($prenotazione) || !is_int($votazione) || $votazione <= 0 || $votazione > 5)
-                $this->db_instance->connect();
+            if(!is_int($prenotazione) || !is_int($votazione) || $votazione <= 0 || $votazione > 5) {
+                throw new Eccezione("Parametri di invocazione di insertCommento errati.");
+            }
+            $this->db_instance->connect();
             $function_name_and_params = "insert_commento($prenotazione, $titolo, $commento, $votazione)";
 
             return intval($this->db_instance->queryFunction($function_name_and_params));
@@ -351,14 +353,26 @@ class Frent {
      * @return int
      * @throws Eccezione
      */
+    /*
+      0 l'annuncio è stato eliminato e con esso le foto e i commenti
+  -1 l'annuncio non è eliminabile perchè ci sono prenotazioni in corso o future
+  -2 l'annuncio, i commenti e le foto non sono stati eliminati (per esempio per errori nelle chiavi esterne)
+    */
     public function deleteAnnuncio($id_annuncio) {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La cancellazione di un annuncio può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La cancellazione di un annuncio può essere svolta solo da un utente registrato.");
+            }
+            if(!is_int($id_annuncio)) {
+                throw new Eccezione("Parametri di invocazione di deleteAnnuncio errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "delete_annuncio($id_annuncio)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "delete_annuncio($id_annuncio)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
@@ -367,13 +381,20 @@ class Frent {
      * @throws Eccezione
      */
     public function deleteCommento($id_prenotazione): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La cancellazione di un commento può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La cancellazione di un commento può essere svolta solo da un utente registrato.");
+            }
+            if(!is_int($id_prenotazione)) {
+                throw new Eccezione("Parametri di invocazione di deleteCommento errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "delete_commento($id_prenotazione)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "delete_commento($id_prenotazione)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
@@ -381,14 +402,25 @@ class Frent {
      * @return int
      * @throws Eccezione
      */
+     /*
+       0 in caso l'eliminazione sia avventua con successo
+  -1 altrimenti
+     */
     public function deleteFoto($id_foto): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
+            }
+            if(!is_int($id_foto)) {
+                throw new Eccezione("Parametri di invocazione di deleteFoto errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "delete_foto($id_foto)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "delete_foto($id_foto)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
@@ -396,28 +428,50 @@ class Frent {
      * @return int
      * @throws Eccezione
      */
+    /*
+      0 se l'occupazione è stata correttamente eliminata
+  -1 se l'occupazione non è eliminabile in quanto prenotazione presente o passata
+  -2 in caso l'occupazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
+    */
     public function deleteOccupazione($id_occupazione): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La cancellazione di un'occupazione di un annuncio può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La cancellazione di un'occupazione di un annuncio può essere svolta solo da un utente registrato.");
+            }
+            if(!is_int($id_occupazione)) {
+                throw new Eccezione("Parametri di invocazione di deleteOccupazione errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "delete_occupazione($id_occupazione)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "delete_occupazione($id_occupazione)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
      * @return int
      * @throws Eccezione
      */
+    /*
+      0 in caso di successo altrimenti:
+  -1 in caso ci siano occupazioni correnti
+  -2 in caso ci siano annuci con occupazioni correnti o future
+  -3 in caso l'operazione di delete abbia fallito (per esempio gli è stato passato un id non valido)
+    */
     public function deleteUser(): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La cancellazione della propria utenza può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La cancellazione della propria utenza può essere svolta solo da un utente registrato.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "delete_user(" . $this->auth_user->getIdUtente() . ")";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "delete_user(" . $this->auth_user->getIdUtente() . ")";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
@@ -432,14 +486,25 @@ class Frent {
      * @return int
      * @throws Eccezione
      */
+    /*
+      ID dell'annuncio modificato
+  -1 in caso di errori
+    */
     public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
-        }
-        $this->db_instance->connect();
-        $function_name_and_params = "edit_annuncio($id, \"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", $max_ospiti, $prezzo_notte)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
+            }
+            if(!is_int($id) || !is_int($max_ospiti) || !is_float($prezzo_notte)) {
+                throw new Eccezione("Parametri di invocazione di editAnnuncio errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "edit_annuncio($id, \"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", $max_ospiti, $prezzo_notte)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
+        } 
     }
 
     /**
@@ -450,14 +515,25 @@ class Frent {
      * @return int
      * @throws Eccezione
      */
+    /*
+      ID della prenotazione (e quindi del commento) modificato in caso di successo
+  -1 in caso ci siano stati problemi durante l'update (per esempio qualche errore con le chiavi esterne)
+    */
     public function editCommento($id, $titolo, $commento, $valutazione): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
+            }
+            if(!is_int($id) || !is_int($valutazione)) {
+                throw new Eccezione("Parametri di invocazione di editCommento errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "edit_commento($id, \"$titolo\", \"$commento\", $valutazione)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "edit_commento($id, \"$titolo\", \"$commento\", $valutazione)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
@@ -472,14 +548,22 @@ class Frent {
      * @return int
      * @throws Eccezione
      */
+    /*
+      l'ID dell'utente modificato in caso di successo
+  -1 altrimenti
+    */
     public function editUser($nome, $cognome, $username, $mail, $password, $datanascita, $imgprofilo, $telefono): int {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("La modifica dei dati della propria utenza può essere svolta solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("La modifica dei dati della propria utenza può essere svolta solo da un utente registrato.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "edit_user(" . $this->auth_user->getIdUtente() . ", \"$nome\", \"$cognome\", \"$username\", \"$mail\", \"$password\", \"$datanascita\", \"$imgprofilo\", \"$telefono\"";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "edit_user(" . $this->auth_user->getIdUtente() . ", \"$nome\", \"$cognome\", \"$username\", \"$mail\", \"$password\", \"$datanascita\", \"$imgprofilo\", \"$telefono\"";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
 
     /**
@@ -487,26 +571,30 @@ class Frent {
      * @throws Eccezione
      */
     public function getAnnunciHost(): array {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("Il reperimento della lista degli annunci di un host può essere svolto solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("Il reperimento della lista degli annunci di un host può essere svolto solo da un utente registrato.");
+            }
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_annunci_host(" . $this->auth_user->getIdUtente() . ")";
+            $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
+            
+            foreach($lista_annunci as $i => $assoc_annuncio) {
+                $lista_annunci[$i] = new Annuncio(
+                    intval($assoc_annuncio['id_annuncio']),
+                    $assoc_annuncio['titolo'],
+                    $assoc_annuncio['descrizione'],
+                    $assoc_annuncio['img_anteprima'],
+                    $assoc_annuncio['indirizzo'],
+                    $assoc_annuncio['citta'],
+                    floatval($assoc_annuncio['prezzo_notte'])
+                );
+            }
+            
+            return $lista_annunci;
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $procedure_name_and_params = "get_annunci_host(" . $this->auth_user->getIdUtente() . ")";
-        $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
-        
-        foreach($lista_annunci as $i => $assoc_annuncio) {
-            $lista_annunci[$i] = new Annuncio(
-                intval($assoc_annuncio['id_annuncio']),
-                $assoc_annuncio['titolo'],
-                $assoc_annuncio['descrizione'],
-                $assoc_annuncio['img_anteprima'],
-                $assoc_annuncio['indirizzo'],
-                $assoc_annuncio['citta'],
-                floatval($assoc_annuncio['prezzo_notte'])
-            );
-        }
-        
-        return $lista_annunci;
     }
 
     /**
