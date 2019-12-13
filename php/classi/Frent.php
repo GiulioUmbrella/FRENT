@@ -349,7 +349,7 @@ class Frent {
     }
 
     /**
-     * @param $id_annuncio
+     * @param int $id_annuncio
      * @return int
      * @throws Eccezione
      */
