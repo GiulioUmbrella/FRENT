@@ -36,6 +36,7 @@ try {
     $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     
+    
     $pagina = str_replace("<RECENTI/>",$content,$pagina);
     echo $pagina;
     

@@ -6,4 +6,5 @@ if(isset($_GET["error_code"])){
         "<p id=\"credenziali_errate\">Credenziali errate!</p>", $pagina);
 }
 
+$pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
 echo $pagina;

@@ -31,6 +31,8 @@ try {
     $content .= "</ul>";
     $_SESSION["manager"] = $manager;
     $pagina = str_replace("<Flag1/>", $content, $pagina);
+    $pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
+    
     echo $pagina;
     
 } catch (Eccezione $ex) {
