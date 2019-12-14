@@ -223,9 +223,9 @@ class Frent {
                 );
             }
 
-            return $lista_commenti; 
+            return $lista_commenti;
         } catch(Eccezione $exc) {
-            throw $exc;
+            echo $exc->getMessage();
         }
     }
 

@@ -9,7 +9,8 @@ try {
     $annuncio = $manager->getAnnuncio($id);
 //    $foto = $manager->getFotoAnnuncio($id);
     $pagina = file_get_contents("../components/dettagli_annuncio.html");
-    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
+//    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
+    $pagina = str_replace("<TITOLO_ANNUNCIO/>", "Appartamento Amore", $pagina);
     //todo calcolare la media dei commenti
 //    $totale = 0;
 //    $str_foto = "";
@@ -21,12 +22,11 @@ try {
 //    }
 //    //
     
-    $str_commenti = "<div id=\"commenti\"><h2>Commenti</h2>";
+    $str_commenti = "";
     try {
         $mediaCommenti = 0;
         $commenti = $manager->getCommentiAnnuncio($id);
-    
-    
+//        $commenti = array();
         $str_commenti .= "<ul>";
         foreach ($commenti as $commento) {
             $totale += intval($commenti->getVotazione());
@@ -43,11 +43,11 @@ try {
                 <p>$testo_commento</p></div></li>";
         }
     
-        $pagina .= "</ul>";
+        $str_commenti .= "</ul>";
         $pagina = str_replace("<Commenti/>", $str_commenti, $pagina);
         $pagina = str_replace("<Valutazione/>", $mediaCommenti, $pagina);
     }catch(Eccezione $e){
-        $pagina = str_replace("<Commenti/>","<p>Non ci sono commenti!</p>", $pagina);
+        $pagina = str_replace("<Commenti/>","<p>Ancora non ci sono commenti!</p>", $pagina);
     
     }
     echo $pagina;

@@ -10,26 +10,24 @@ try {
         header("Location: login_admin.php");
     }
     $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME),
-        $_SESSION["admin"]);
+        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME), $_SESSION["admin"]);
+    $_SESSION["manager"] = $manager;
+    
     $annunci = $manager->adminGetAnnunci();
     $pagina = file_get_contents("../components/approvazione_annunci.html");
+    $msg = "Bentornato " . $_SESSION["admin"]->getUserName() . "!";
+    $pagina = str_replace("<SALUTO/>", $msg, $pagina);
     $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
     
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
-//        echo $id." ";
         $titolo = $annuncio->getTitolo();
-        if ($annuncio->getStatoApprovazione() != 2) {
-            $content .= "<li>";
-            $content .= "<a href=\"dettagli_annuncio.php?id=$id\">" . $titolo . "</a>";
-            $content .= "<a href=\"../script/script_approvazione_annunci.php?idAnnuncio=$id&approvato=1\"  class=\"link_gestione link_approva\">Approva</a>";
-            $content .= "<a href=\"../script/script_approvazione_annunci.php?idAnnuncio=$id&approvato=2\" class=\"link_gestione link_rigetta\">Non approva</a></li>";
-            
-        }
+        $content .= "<li>";
+        $content .= "<a href=\"dettagli_annuncio.php?id=$id\">" . $titolo . "</a>";
+        $content .= "<a href=\"../script/script_approvazione_annunci.php?idAnnuncio=$id&approvato=1\"  class=\"link_gestione link_approva\">Approva</a>";
+        $content .= "<a href=\"../script/script_approvazione_annunci.php?idAnnuncio=$id&approvato=2\" class=\"link_gestione link_rigetta\">Non approva</a></li>";
     }
     $content .= "</ul>";
-    $_SESSION["manager"] = $manager;
     $pagina = str_replace("<Flag1/>", $content, $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
     
