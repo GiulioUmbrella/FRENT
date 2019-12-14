@@ -6,7 +6,7 @@ require_once "php/CredenzialiDB.php";
 //require_once "./php/classi/Annuncio.php";
 try {
     session_start();
-    $pagina = file_get_contents("./html/index.html");
+    $pagina = file_get_contents("php/components/index.html");
     if (isset($_SESSION["user"])){
         $pagina =  str_replace("<HEADER/>",file_get_contents("./php/components/header_logged_index.html"),$pagina);
     }else{

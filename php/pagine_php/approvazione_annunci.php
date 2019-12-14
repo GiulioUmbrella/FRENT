@@ -7,13 +7,13 @@ require_once "../CredenzialiDB.php";
 try {
     session_start();
     if (!isset($_SESSION["admin"])) {
-        header("Location: ../../html/login_admin.html");
+        header("Location: login_admin.php");
     }
     $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME),
         $_SESSION["admin"]);
     $annunci = $manager->adminGetAnnunci();
-    $pagina = file_get_contents("../../html/approvazione_annunci.html");
+    $pagina = file_get_contents("../components/approvazione_annunci.html");
     $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
     
     foreach ($annunci as $annuncio) {

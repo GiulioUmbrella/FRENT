@@ -19,10 +19,9 @@ try {
     
     
 } catch (Eccezione $e) {
-    $msg= $e->getMessage();
+    header("Location: ../pagine_php/login_admin.php?error_code=1");
     
-    
-    echo $msg;
+    echo $pagina;
 }
 
 
