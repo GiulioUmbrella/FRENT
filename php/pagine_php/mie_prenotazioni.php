@@ -1,5 +1,5 @@
 <?php
-
+//todo
 $pagina = file_get_contents("../components/mie_prenotazioni.html");
 session_start();
 if (isset($_SESSION["user"])){

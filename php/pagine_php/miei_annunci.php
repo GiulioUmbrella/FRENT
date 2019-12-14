@@ -1,5 +1,5 @@
 <?php
-
+//todo
 $pagina = file_get_contents("../components/miei_annunci.html");
 session_start();
 if (isset($_SESSION["user"])){
