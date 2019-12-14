@@ -7,22 +7,22 @@ $nome = $_POST["user"];
 $password = $_POST["password"];
 try {
     $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME);
-
+        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME);
+    
     $frent = new Frent($db);
     
-    $admin=$frent->adminLogin($nome,$password);
+    $admin = $frent->adminLogin($nome, $password);
     
-    if ($admin != null) {
-        session_start();
-        $_SESSION["admin"] = $admin;
-        header("Location: ../pagine_php/approvazione_annunci.php");
-    } else {
-        echo "password errato!.";
-    }
-
+    session_start();
+    $_SESSION["admin"] = $admin;
+    header("Location: ../pagine_php/approvazione_annunci.php");
+    
+    
 } catch (Eccezione $e) {
-    echo $e->getMessage();
+    $msg= $e->getMessage();
+    
+    
+    echo $msg;
 }
 
 

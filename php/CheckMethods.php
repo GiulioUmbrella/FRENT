@@ -96,5 +96,6 @@ function checkDateBeginAndEnd($dataI, $dataF): bool {
  * @return bool
  */
 function checkPhoneNumber($telefono): bool {
-    return is_string($telefono) and preg_match("/^[0-9]{3}[0-9]{4}-[0-9]{4}$/", $telefono);
+    return true;
+//    return is_string($telefono) and preg_match("/^[+][0-9]{3}[0-9]{4}-[0-9]{4}$/", $telefono);
 }

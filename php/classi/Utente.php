@@ -110,7 +110,7 @@ class Utente {
     
     public function setImgProfilo($img_profilo): void {
         if (is_string($img_profilo) and checkStringMaxLen($img_profilo, DataConstraints::utenti["img_profilo"])
-        and checkStringMinLen(trim($img_profilo),DataConstraints::utenti["img_profilo"])) {
+        and checkStringMaxLen(trim($img_profilo),DataConstraints::utenti["img_profilo"])) {
             $img_profilo = str_replace(" ", "_", trim($img_profilo));
             $this->img_profilo = $img_profilo;
         } else {

@@ -1,7 +1,7 @@
 <?php
-require_once ($_SERVER["DOCUMENT_ROOT"])."/TECHWEB/php/classi/Database.php";
-require_once ($_SERVER["DOCUMENT_ROOT"])."/TECHWEB/php/classi/Frent.php";
-require_once ($_SERVER["DOCUMENT_ROOT"])."/TECHWEB/php/CredenzialiDB.php";
+require_once ($_SERVER["DOCUMENT_ROOT"])."/php/classi/Database.php";
+require_once ($_SERVER["DOCUMENT_ROOT"])."/php/classi/Frent.php";
+require_once ($_SERVER["DOCUMENT_ROOT"])."/php/CredenzialiDB.php";
 
 $nome = $_POST["user"];
 $password = $_POST["password"];
@@ -16,7 +16,7 @@ try {
     if ($user != null) {
         session_start();
         $_SESSION["user"] = $user;
-        header("Location: ../index.php");
+        header("Location: ../html/mio");
     } else {
         echo "password errato!.";
     }

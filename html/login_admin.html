@@ -10,7 +10,7 @@
   <meta name="language" content="italian it"/>
   <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
 
-  <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
   <link rel="icon" href="../immagini/icona.ico"/>
 </head>
 <body class="layout_centrale">
@@ -36,7 +36,7 @@
 </div>
 
 <div id="content" >
-  <form action="../php/script/script_login_admin.php" method="post" class="form form_verticale">
+  <form action="../script/script_login_admin.php" method="post" class="form form_verticale">
     <fieldset>
       <legend class="aiuti_alla_navigazione" >Modulo di accesso</legend>
       <label for="user"><span lang="en">E-mail</span></label>
@@ -44,7 +44,7 @@
 
       <label for="password" lang="en">Password</label>
       <input type="password" name="password" id="password"/>
-
+      <p id="credenziali_errate"></p>
       <label class="aiuti_alla_navigazione" for="accedi">Accedi</label>
       <input type="submit" id="accedi" value="Accedi"/>
 
