@@ -8,7 +8,7 @@ try {
     session_start();
     $pagina = file_get_contents(($_SERVER["DOCUMENT_ROOT"]) . "/php/components/index.html");
     if (isset($_SESSION["user"])){
-        $pagina =  str_replace("<HEADER/>",file_get_contents(($_SERVER["DOCUMENT_ROOT"]) . "/php/components/header_logged_index.html"),$pagina);
+        $pagina =  str_replace("<HEADER/>",file_get_contents(($_SERVER["DOCUMENT_ROOT"]) . "/php/components/header_logged.html"),$pagina);
         $pagina = str_replace("<ADMINLINK/>","",$pagina);
     }else{
         $pagina = str_replace("<ADMINLINK/>","<li><a href=\"../pagine_php/login_admin.php\" title=\"Vai alla pagina per l'amministratore\">Accesso amministratore</a>
