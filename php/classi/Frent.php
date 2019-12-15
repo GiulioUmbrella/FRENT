@@ -134,7 +134,6 @@ class Frent {
         }
     }
 
-
     /**
      * Restituisce le occupazioni di un annuncio, dato il suo ID.
      * @param $id_annuncio id dell'annuncio
@@ -228,7 +227,6 @@ class Frent {
             echo $exc->getMessage();
         }
     }
-
 
     /**
      * Restituisce un annuncio, dato il suo ID.
@@ -349,15 +347,13 @@ class Frent {
     }
 
     /**
-     * @param int $id_annuncio
-     * @return int
-     * @throws Eccezione
+     * Rimuove un annuncio, dato il suo ID.
+     * @param int $id_annuncio id dell'annuncio da rimuovere
+     * @return int 0 l'annuncio è stato eliminato e con esso le foto e i commenti
+     * @return int -1 l'annuncio non è eliminabile perchè ci sono prenotazioni in corso o future
+     * @return int -2 l'annuncio, i commenti e le foto non sono stati eliminati (per esempio per errori nelle chiavi esterne)
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    /*
-      0 l'annuncio è stato eliminato e con esso le foto e i commenti
-  -1 l'annuncio non è eliminabile perchè ci sono prenotazioni in corso o future
-  -2 l'annuncio, i commenti e le foto non sono stati eliminati (per esempio per errori nelle chiavi esterne)
-    */
     public function deleteAnnuncio($id_annuncio) {
         try {
             if(get_class($this->auth_user) !== "Utente") {
@@ -376,9 +372,11 @@ class Frent {
     }
 
     /**
-     * @param $id_prenotazione
-     * @return int
-     * @throws Eccezione
+     * * Rimuove un commento legato ad una prenotazione, dato l'ID della prenotazione (che corrisponde a quello del commento).
+     * @param int $id_prenotazione id del commento da rimuovere
+     * @return int 0 in caso il commento venga eliminato correttamente
+     * @return int -1 l'annuncio non è stato eliminato
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function deleteCommento($id_prenotazione): int {
         try {
@@ -398,13 +396,11 @@ class Frent {
     }
 
     /**
-     * @param $id_foto
-     * @return int
-     * @throws Eccezione
-     */
-     /*
-       0 in caso l'eliminazione sia avventua con successo
-  -1 altrimenti
+     * Rimuove una foto di un annuncio, dato il suo ID:
+     * @param int $id_foto id della foto da rimuovere
+     * @return int 0 in caso la foto venga eliminato correttamente
+     * @return int -1 la foto non è stato eliminata
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function deleteFoto($id_foto): int {
         try {
@@ -424,15 +420,13 @@ class Frent {
     }
 
     /**
-     * @param $id_occupazione
-     * @return int
-     * @throws Eccezione
+     * Rimuove un'occupazione da un'annuncio (liberandone la disponibilità), dato il suo ID:
+     * @param int $id_occupazione id dell'occupazione di un annuncio
+     * @return int 0 se l'occupazione è stata correttamente eliminata
+     * @return int -1 se l'occupazione non è eliminabile in quanto prenotazione presente o passata
+     * @return int -2 in caso l'occupazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    /*
-      0 se l'occupazione è stata correttamente eliminata
-  -1 se l'occupazione non è eliminabile in quanto prenotazione presente o passata
-  -2 in caso l'occupazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
-    */
     public function deleteOccupazione($id_occupazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
@@ -451,15 +445,13 @@ class Frent {
     }
 
     /**
-     * @return int
-     * @throws Eccezione
+     * Rimuove dal database l'utente collegato, se possibile. E' compito del chiamante occuparsi del logout dell'utente dopo la rimozione effettiva.
+     * @return int 0 in caso di rimozione avvenuta con successo
+     * @return int -1 in caso ci siano occupazioni correnti
+     * @return int -2 in caso ci siano annunci di cui è guest con occupazioni correnti o future
+     * @return int -3 in caso l'operazione di delete abbia fallito (per esempio gli è stato passato un id non valido)
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    /*
-      0 in caso di successo altrimenti:
-  -1 in caso ci siano occupazioni correnti
-  -2 in caso ci siano annuci con occupazioni correnti o future
-  -3 in caso l'operazione di delete abbia fallito (per esempio gli è stato passato un id non valido)
-    */
     public function deleteUser(): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
@@ -475,21 +467,19 @@ class Frent {
     }
 
     /**
-     * @param $id
-     * @param $titolo
-     * @param $descrizione
-     * @param $img_anteprima
-     * @param $indirizzo
-     * @param $citta
-     * @param $max_ospiti
-     * @param $prezzo_notte
-     * @return int
-     * @throws Eccezione
+     * Effettua la modifica dei dati di un annuncio, dato il suo ID.
+     * @param int $id ID dell'annuncio da modificare
+     * @param string $titolo nuovo titolo (può essere invariato rispetto all'attuale)
+     * @param string $descrizione nuova descrizione  (può essere invariata rispetto all'attuale)
+     * @param string $img_anteprima nuovo path all'immagine di anteprima  (può essere invariato rispetto all'attuale)
+     * @param string $indirizzo nuovo indirizzo (può essere invariato rispetto all'attuale)
+     * @param string $citta nuova città (può essere invariata rispetto all'attuale)
+     * @param int $max_ospiti nuovo massimo numero di ospiti (può essere invariato rispetto all'attuale)
+     * @param float $prezzo_notte nuovo prezzo per notte (può essere invariato rispetto all'attuale)
+     * @return int ID dell'annuncio modificato
+     * @return int -1 in caso di errori nella modifica
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    /*
-      ID dell'annuncio modificato
-  -1 in caso di errori
-    */
     public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
@@ -508,17 +498,15 @@ class Frent {
     }
 
     /**
-     * @param $id
-     * @param $titolo
-     * @param $commento
-     * @param $valutazione
-     * @return int
-     * @throws Eccezione
+     * Effettua la modifica di un commento legato ad una prenotazione, dato l'ID della prenotazione (che corrisponde a quello del commento).
+     * @param int $id ID del commento da modificare
+     * @param string $titolo nuovo titolo (può essere invariato rispetto all'attuale)
+     * @param string $commento nuovo commento (può essere invariato rispetto all'attuale)
+     * @param int $valutazione nuova valutazione (può essere invariata rispetto all'attuale)
+     * @return int ID della prenotazione (e quindi del commento) modificato in caso di successo
+     * @return int -1 in caso ci siano stati problemi durante l'update (per esempio qualche errore con le chiavi esterne)
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    /*
-      ID della prenotazione (e quindi del commento) modificato in caso di successo
-  -1 in caso ci siano stati problemi durante l'update (per esempio qualche errore con le chiavi esterne)
-    */
     public function editCommento($id, $titolo, $commento, $valutazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
@@ -537,21 +525,19 @@ class Frent {
     }
 
     /**
-     * @param $nome
-     * @param $cognome
-     * @param $username
-     * @param $mail
-     * @param $password
-     * @param $datanascita
-     * @param $imgprofilo
-     * @param $telefono
-     * @return int
-     * @throws Eccezione
+     * Effettua la modifica dei dati collegati all'utente connesso attualmente al sistema.
+     * @param string $nome nuovo nome (può essere invariato rispetto all'attuale)
+     * @param string $cognome nuovo cognome (può essere invariato rispetto all'attuale)
+     * @param string $username nuovo nome utente (può essere invariato rispetto all'attuale)
+     * @param string $mail nuova mail (può essere invariata rispetto all'attuale)
+     * @param string $password nuova password (può essere invariata rispetto all'attuale)
+     * @param string $datanascita nuova data di nascita (può essere invariata rispetto all'attuale)
+     * @param string $imgprofilo nuovo path all'immagine di profilo (può essere invariato rispetto all'attuale)
+     * @param string $telefono nuovo numero di telefono (può essere invariato rispetto all'attuale)
+     * @return int l'ID dell'utente modificato in caso di successo
+     * @return int -1 in aso ci siano stati problemi durante l'aggiornamento dei dati
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    /*
-      l'ID dell'utente modificato in caso di successo
-  -1 altrimenti
-    */
     public function editUser($nome, $cognome, $username, $mail, $password, $datanascita, $imgprofilo, $telefono): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
@@ -567,8 +553,9 @@ class Frent {
     }
 
     /**
-     * @return array
-     * @throws Eccezione
+     * Restituisce la lista degli annunci posseduti dall'host attualmente collegato al sistema.
+     * @return array di oggetti di tipo Annuncio
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Annuncio
      */
     public function getAnnunciHost(): array {
         try {
@@ -598,51 +585,66 @@ class Frent {
     }
 
     /**
-     * @return array
-     * @throws Eccezione
+     * Restituisce la lista delle prenotazione presenti, passate e future, effettuate dall'utente collegato al sistema
+     * @return array di oggetti di tipo Occupazione
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Occupazione
      */
     public function getPrenotazioniGuest(): array {
-        if(get_class($this->auth_user) !== "Utente") {
-            throw new Eccezione("Il reperimento della lista delle prenotazioni di un guest può essere svolto solo da un utente registrato.");
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("Il reperimento della lista delle prenotazioni di un guest può essere svolto solo da un utente registrato.");
+            }
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_prenotazioni_guest(" . $this->auth_user->getIdUtente() . ")";
+            $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
+    
+            foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
+                $lista_prenotazioni[$i] = new Occupazione(
+                    intval($assoc_prenotazione['id_occupazione']),
+                    intval($assoc_prenotazione['utente']),
+                    intval($assoc_prenotazione['annuncio']),
+                    intval($assoc_prenotazione['prenotazione_guest']),
+                    intval($assoc_prenotazione['num_ospiti']),
+                    $assoc_prenotazione['data_inizio'],
+                    $assoc_prenotazione['data_fine']
+                );
+            }
+    
+            return $lista_prenotazioni;
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $procedure_name_and_params = "get_prenotazioni_guest(" . $this->auth_user->getIdUtente() . ")";
-        $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
-
-        foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
-            $lista_prenotazioni[$i] = new Occupazione(
-                intval($assoc_prenotazione['id_occupazione']),
-                intval($assoc_prenotazione['utente']),
-                intval($assoc_prenotazione['annuncio']),
-                intval($assoc_prenotazione['prenotazione_guest']),
-                intval($assoc_prenotazione['num_ospiti']),
-                $assoc_prenotazione['data_inizio'],
-                $assoc_prenotazione['data_fine']
-            );
-        }
-
-        return $lista_prenotazioni;
     }
     
     /**
-     * @param $id_annuncio int id dell'annuncio il quale stato di approvazione deve essere modificato;
-     * @param $stato_approvazione int il nuovo stato dell'annuncio
-     * @return int restituisce
-     * @throws Eccezione
+     * Effettua la modifica dello stato di approvazione di un annuncio.
+     * @param int $id_annuncio int id dell'annuncio il quale stato di approvazione deve essere modificato;
+     * @param int $stato_approvazione int il nuovo stato dell'annuncio
+     * @return int ID dell'annuncio modificato con successo
+     * @return int -1 se ci sono stati problemi nella modifica dell'annuncio
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function adminEditStatoApprovazioneAnnuncio($id_annuncio, $stato_approvazione): int {
-        if(get_class($this->auth_user) !== "Amministratore") {
-            throw new Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
+        try {
+            if(get_class($this->auth_user) !== "Amministratore") {
+                throw new Eccezione("La modifica dello stato di approvazione di un annuncio può essere svolto solo da un amministratore.");
+            }
+            if(!is_int($id_annuncio) || !is_int($stato_approvazione)) {
+                throw new Eccezione("Parametri di invocazione di adminEditStatoApprovazioneAnnuncio errati.");
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "admin_edit_stato_approvazione_annuncio($id_annuncio, $stato_approvazione)";
+    
+            return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
-        $this->db_instance->connect();
-        $function_name_and_params = "admin_edit_stato_approvazione_annuncio($id_annuncio, $stato_approvazione)";
-
-        return intval($this->db_instance->queryFunction($function_name_and_params));
     }
     
     /**
+     * Restituisce la lista degli annunci ancora da approvare da parte di un amministratore.
      * @return array restituisce un array di istanze della classe Annuncio che devono essere approvati
-     * @throws Eccezione
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Occupazione
      */
     public function adminGetAnnunci(): array {
         if(get_class($this->auth_user) !== "Amministratore") {
