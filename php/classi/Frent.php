@@ -242,7 +242,7 @@ class Frent {
             $this->db_instance->connect();
             $procedure_name_and_params = "get_annuncio($id_annuncio)";
             $annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
-
+    
             return new Annuncio(
                 intval($annuncio[0]['id_annuncio']),
                 $annuncio[0]['titolo'],
