@@ -32,10 +32,15 @@ class Frent {
      * @param Utente $auth_user oppure di tipo Amministratore oppure NULL
      */
     public function __construct($db, $auth_user = NULL) {
-        $this->db_instance = $db;
-        $this->db_instance->setCharset("utf8");
-        if($auth_user !== NULL && (get_class($auth_user) == "Amministratore" || get_class($auth_user) == "Utente")) {
-            $this->auth_user = $auth_user;
+        try {
+            if(get_class($db) !== "Database" || ($auth_user !== NULL && (get_class($auth_user) !== "Amministratore" && get_class($auth_user) !== "Utente"))) {
+                throw new Eccezione("Parametri di invocazione del costruttore di Frent errati.");
+            }
+            $this->db_instance = $db;
+            $this->db_instance->setCharset("utf8");
+            $this->auth_user = $auth_user;     
+        } catch(Eccezione $exc) {
+            throw $exc;
         }
     }
     
@@ -50,7 +55,7 @@ class Frent {
      */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
-            if(!is_int($numOspiti) || !checkIsValidDate($dataInizio) || !checkIsValidDate($dataFine) || !checkDateBeginAndEnd($dataInizio, $dataFine)) {
+            if(!is_int($numOspiti) || !checkDateBeginAndEnd($dataInizio, $dataFine)) {
                 throw new Eccezione("Parametri di invocazione di ricercaAnnunci errati.");
             }
             $this->db_instance->connect();
@@ -91,7 +96,7 @@ class Frent {
      */
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): int {
         try {
-            if(!checkIsValidDate($dataNascita) || !checkPhoneNumber($numTelefono)) {
+            if(!checkIsValidDate($dataNascita) || !checkIsValidMail($mail) || !checkPhoneNumber($numTelefono)) {
                 throw new Eccezione("Parametri di invocazione di registrazione errati.");
             }
             $this->db_instance->connect();
@@ -206,7 +211,7 @@ class Frent {
     public function getCommentiAnnuncio($id_annuncio): array {
         try {
             if(!is_int($id_annuncio)) {
-                throw new Eccezione("Parametri di invocazione di getFotoAnnuncio errati.");
+                throw new Eccezione("Parametri di invocazione di getCommentiAnnuncio errati.");
             }
             $this->db_instance->connect();
             $procedure_name_and_params = "get_commenti_annuncio($id_annuncio)";
