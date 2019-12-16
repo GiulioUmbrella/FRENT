@@ -4,7 +4,9 @@ require_once "../CredenzialiDB.php";
 try {
     session_start();
     $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME),$_SESSION["admin"]);
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME),
+//        $_SESSION["admin"]
+    );
     $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
 //    $foto = $manager->getFotoAnnuncio($id);

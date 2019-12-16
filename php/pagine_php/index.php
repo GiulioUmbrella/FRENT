@@ -22,15 +22,28 @@ try {
     $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
     
-    for ($i = 3; $i < 7; $i = $i + 1) {
-        $annunci_recenti = $frent->getAnnuncio(intval($i));
-        $titolo = $annunci_recenti->getTitolo();
-        $path = $annunci_recenti->getImgAnteprima();
-//        $path = "../../immagini/borgoricco.jpg";
-        
-        $content .= "<li class=\"elemento_sei_pannelli\"><a>$titolo<img src=\"$path\"
+    $content = "";
+//    for ($i = 3; $i < 7; $i = $i + 1) {
+    $annunci_recenti = $frent->getAnnuncio(intval(1));
+    $titolo = $annunci_recenti->getTitolo();
+    $id=1;
+    $path = $annunci_recenti->getImgAnteprima();
+        $path = "../../immagini/borgoricco.jpg";
+    
+    $content .= "<li class=\"elemento_sei_pannelli\"><a href='dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
-    }
+$content .= "<li class=\"elemento_sei_pannelli\"><a href='dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+$content .= "<li class=\"elemento_sei_pannelli\"><a href='dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+$content .= "<li class=\"elemento_sei_pannelli\"><a href='dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+$content .= "<li class=\"elemento_sei_pannelli\"><a href='dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+$content .= "<li class=\"elemento_sei_pannelli\"><a href='dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
+                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+   
+//    }
     
     
     $pagina = str_replace("<RECENTI/>", $content, $pagina);
