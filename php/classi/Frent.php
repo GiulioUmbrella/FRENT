@@ -124,16 +124,17 @@ class Frent {
                 throw new Eccezione(htmlentities("Non è stato trovato nessun utente con queste credenziali."));
             }
 
-            return new Utente(
-                intval($utente[0]['id_utente']),
-                $utente[0]['nome'],
-                $utente[0]['cognome'],
-                $utente[0]['user_name'],
-                $utente[0]['mail'],
-                $utente[0]['data_nascita'],
-                $utente[0]['img_profilo'],
-                $utente[0]['telefono']
-            );
+            $utente = Utente::build();
+            $utente->setIdUtente(intval($utente[0]['id_utente']));
+            $utente->setNome($utente[0]['nome']);
+            $utente->setCognome($utente[0]['cognome']);
+            $utente->setUserName($utente[0]['user_name']);
+            $utente->setMail($utente[0]['mail']);
+            $utente->setDataNascita($utente[0]['data_nascita']);
+            $utente->setImgProfilo($utente[0]['img_profilo']);
+            $utente->setTelefono($utente[0]['telefono']);
+            
+            return $utente;
         } catch(Eccezione $exc) {
             throw $exc;
         }
