@@ -98,10 +98,8 @@ class Utente {
      */
     public function setMail($mail): void {
         $trim_mail = trim($mail);
-        if (checkIsValidMail($trim_mail) and
-            checkStringMaxLen($trim_mail, DataConstraints::utenti["mail"]) and
-            strlen($trim_mail > 6)
-        ) { // 6 perché a@a.aa, e aa perché non ci sono TLD con una lettera
+        if (checkIsValidMail($trim_mail, DataConstraints::utenti["mail"]) and strlen($trim_mail)  > 6) {
+            // 6 perché a@a.aa, e aa perché non ci sono TLD con una lettera
             $this->mail = $trim_mail;
         } else {
             throw new Eccezione(htmlentities("La mail inserita non è valida."));
