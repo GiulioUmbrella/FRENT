@@ -12,7 +12,14 @@ try {
 //    $foto = $manager->getFotoAnnuncio($id);
     $pagina = file_get_contents("../components/dettagli_annuncio.html");
     
-    $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_admin_logged.html"),$pagina);
+    if (isset($_SESSION["user"])){
+        $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_logged.html"),$pagina);
+    }else if (isset($_SESSION["admin"])){
+        $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_admin_logged.html"),$pagina);
+    }else{
+        $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_no_logged.html"),$pagina);
+    
+    }
 //    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     //todo calcolare la media dei commenti

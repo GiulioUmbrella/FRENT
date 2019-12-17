@@ -18,8 +18,8 @@ if (isset($_POST["accedi"])) {
         $frent = new Frent($db);
         $utente = $frent->login($nome, $password);
         
-        $_SESSION["utente"] = $utente;
-        header("Location: ../pagine_php/approvazione_annunci.php");
+        $_SESSION["user"] = $utente;
+        header("Location: ../pagine_php/index.php");
         
     } catch (Eccezione $e) {
         

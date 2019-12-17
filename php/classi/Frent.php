@@ -124,23 +124,14 @@ class Frent {
             }
             
             $utente = Utente::build();
-            echo "1";
             $utente->setIdUtente(intval($res_utente[0]['id_utente']));
-            echo "1";
             $utente->setNome($res_utente[0]['nome']);
-            echo "1";
             $utente->setCognome($res_utente[0]['cognome']);
-            echo "1";
             $utente->setUserName($res_utente[0]['user_name']);
-            echo "1";
             $utente->setMail($res_utente[0]['mail']);
-            echo "1";
             $utente->setDataNascita($res_utente[0]['data_nascita']);
-            echo "1";
             $utente->setImgProfilo($res_utente[0]['img_profilo']);
-            echo "1";
             $utente->setTelefono($res_utente[0]['telefono']);
-            echo "1";
     
             return $utente;
         } catch(Eccezione $exc) {
