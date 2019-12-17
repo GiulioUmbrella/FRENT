@@ -8,7 +8,6 @@ require_once "Eccezione.php";
 require_once "Foto.php";
 require_once "Occupazione.php";
 require_once "Utente.php";
-//require_once "../CheckMethods.php";
 
 /**
  * Class Frent
@@ -109,30 +108,26 @@ class Frent {
 
     /**
      * Verifica se l'utente è registrato nel sito.
-     * @param string $username_or_mail nome utente oppure indirizzo e-mail dell'utente
+     * @param string $mail indirizzo e-mail dell'utente
      * @param string $password password dell'utente collegata al nome utente o indirizzo e-mail
      * @return Utente oggetto di classe Utente se è stato effettuato il login (ovvero le credenziali sono corrette e legate ad un profilo utente)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Utente, restituzioni != 1 record dal DB
      */
-    public function login($username_or_mail, $password): Utente {
+    public function login($mail, $password): Utente {
         try {
             $this->db_instance->connect();
-            $procedure_name_and_params = "login(\"$username_or_mail\", \"$password\")";
-            $utente = $this->db_instance->queryProcedure($procedure_name_and_params);
-            
-            if(count($utente) !== 1) {
-                throw new Eccezione(htmlentities("Non è stato trovato nessun utente con queste credenziali."));
-            }
+            $procedure_name_and_params = "login(\"$mail\", \"$password\")";
+            $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             $utente = Utente::build();
-            $utente->setIdUtente(intval($utente[0]['id_utente']));
-            $utente->setNome($utente[0]['nome']);
-            $utente->setCognome($utente[0]['cognome']);
-            $utente->setUserName($utente[0]['user_name']);
-            $utente->setMail($utente[0]['mail']);
-            $utente->setDataNascita($utente[0]['data_nascita']);
-            $utente->setImgProfilo($utente[0]['img_profilo']);
-            $utente->setTelefono($utente[0]['telefono']);
+            $utente->setIdUtente(intval($res_utente[0]['id_utente']));
+            $utente->setNome($res_utente[0]['nome']);
+            $utente->setCognome($res_utente[0]['cognome']);
+            $utente->setUserName($res_utente[0]['user_name']);
+            $utente->setMail($res_utente[0]['mail']);
+            $utente->setDataNascita($res_utente[0]['data_nascita']);
+            $utente->setImgProfilo($res_utente[0]['img_profilo']);
+            $utente->setTelefono($res_utente[0]['telefono']);
             
             return $utente;
         } catch(Eccezione $exc) {
@@ -702,25 +697,21 @@ class Frent {
     
     /**
      * Verifica se l'amministratore ha un profilo nel sito.
-     * @param string $username_or_mail nome utente oppure indirizzo e-mail dell'amministratore
+     * @param string $mail indirizzo e-mail dell'amministratore
      * @param string $password password dell'amministratore collegata al nome utente o indirizzo e-mail
      * @return Amministratore oggetto di classe Amministratore se è stato effettuato il login (ovvero le credenziali sono corrette e legate ad un profilo amministratore)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Amministratore, restituzioni != 1 record dal DB
      */
-    public function adminLogin($username_or_mail, $password): Amministratore {
+    public function adminLogin($mail, $password): Amministratore {
         try {
             $this->db_instance->connect();
-            $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
-            $admin = $this->db_instance->queryProcedure($procedure_name_and_params);
-            
-            if(count($admin) !== 1) {
-                throw new Eccezione(htmlentities("Non è stato trovato nessun amministratore con queste credenziali."));
-            }
+            $procedure_name_and_params = "admin_login(\"$mail\", \"$password\")";
+            $res_admin = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             $admin = Amministratore::build();
-            $admin->setIdAmministratore(intval($admin[0]['id_amministratore']));
-            $admin->setUserName($admin[0]['user_name']);
-            $admin->setMail($admin[0]['mail']);
+            $admin->setIdAmministratore(intval($res_admin[0]['id_amministratore']));
+            $admin->setUserName($res_admin[0]['user_name']);
+            $admin->setMail($res_admin[0]['mail']);
 
             return $admin;
         } catch(Eccezione $exc) {

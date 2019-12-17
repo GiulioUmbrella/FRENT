@@ -12,16 +12,6 @@ class Utente {
     private $img_profilo;
     private $telefono;
     
-    // public function __construct($id, $n, $cog, $username, $mail, $data, $img, $telefono) {
-    //     $this->setUserName($username);
-    //     $this->setIdUtente($id);
-    //     $this->setNome($n);
-    //     $this->setCognome($cog);
-    //     $this->setMail($mail);
-    //     $this->setDataNascita($data);
-    //     $this->setImgProfilo($img);
-    //     $this->setTelefono($telefono);
-    // }
     private function __construct() {}
 
     public static function build(): Utente {
