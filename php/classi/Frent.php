@@ -686,11 +686,12 @@ class Frent {
                 throw new Eccezione(htmlentities("Non è stato trovato nessun amministratore con queste credenziali."));
             }
 
-            return new Amministratore(
-                intval($admin[0]['id_amministratore']),
-                $admin[0]['user_name'],
-                $admin[0]['mail']
-            );
+            $admin = Amministratore::build();
+            $admin->setIdAmministratore(intval($admin[0]['id_amministratore']));
+            $admin->setUserName($admin[0]['user_name']);
+            $admin->setMail($admin[0]['mail']);
+
+            return $admin;
         } catch(Eccezione $exc) {
             throw $exc;
         }

@@ -6,14 +6,13 @@ class Amministratore {
     private $id_amministratore;
     private $user_name;
     private $mail;
-    
-    
-    public function __construct($id, $un, $mail) {
-        $this->setUserName($un);
-        $this->setIdAmministratore($id);
-        $this->setMail($mail);
+
+    private function __construct() {}
+
+    public static function build(): Amministratore {
+        return new Amministratore();
     }
-    
+
     public function setIdAmministratore($id): void {
         if (is_int($id) and $id > 0) {
             $this->id_amministratore = $id;
@@ -23,19 +22,20 @@ class Amministratore {
     }
     
     public function setUserName($username): void {
-        if (is_string($username) &&
-            checkStringContainsNoSpace(trim($username)) &&
-            checkStringMaxLen(trim($username), DataConstraints::amministratori["user_name"])
+        $trim_un = trim($username);
+        if (checkStringContainsNoSpace($trim_un) &&
+            checkStringMaxLen($trim_un, DataConstraints::amministratori["user_name"])
         ) {
-            $this->user_name = trim($username);
+            $this->user_name = $trim_un;
         } else {
             throw new Eccezione(htmlentities("L'username inserito non è valido."));
         }
     }
     
     public function setMail($mail): void {
-        if (is_string($mail) && checkIsValidMail(trim($mail), DataConstraints::amministratori["mail"])) {
-            $this->mail = trim($mail);
+        $trim_mail = trim($mail);
+        if (checkIsValidMail($trim_mail, DataConstraints::amministratori["mail"])) {
+            $this->mail = $trim_mail;
         } else {
             throw new Eccezione(htmlentities("L'email inserita non è valida."));
         }
