@@ -230,7 +230,7 @@ class Frent {
 
             return $lista_commenti;
         } catch(Eccezione $exc) {
-            echo $exc->getMessage();
+            throw $exc;
         }
     }
 
@@ -536,9 +536,18 @@ class Frent {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
             }
-            if(!is_int($id) || !is_int($max_ospiti) || !is_float($prezzo_notte)) {
-                throw new Eccezione("Parametri di invocazione di editAnnuncio errati.");
-            }
+            
+            // provo a creare un oggetto così ho implicitamente un controllo sui dati passati
+            $annuncio = Annuncio::build();
+            $annuncio->setIdAnnuncio($id);
+            $annuncio->setTitolo($titolo);
+            $annuncio->setDescrizione($descrizione);
+            $annuncio->setImgAnteprima($img_anteprima);
+            $annuncio->setIndirizzo($indirizzo);
+            $annuncio->setCitta($citta);
+            $annuncio->setMaxOspiti($max_ospiti);
+            $annuncio->setPrezzoNotte($prezzo_notte);
+
             $this->db_instance->connect();
             $function_name_and_params = "edit_annuncio($id, \"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", $max_ospiti, $prezzo_notte)";
     
