@@ -3,6 +3,10 @@
 	margin: 0em;
 }
 
+a {
+    color: #1B3409;
+}
+
 /* Layout per desktop*/
 html, body {
     height: 100%;
@@ -101,30 +105,53 @@ html, body {
 
 /*-----------------Header-----------------*/
 
+#header {
+    background-color: #FFFFFF;
+}
+
 #header ul{
    list-style: none;
    display:flex;
-   border:1px solid #000;
+   /*border:1px solid #000;*/
    border-left:0;
 }
 
 #header ul {
     list-style: none;
     display: flex;
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     border-left: 0;
 }
 
 #header li {
 flex: 1 1 0em;
-border-left:1px solid #000;
+/*border-left:1px solid #000;*/
 text-align:center;
+vertical-align: middle;
 }
 
 #header li a {
   display : block;
   width:100%;
   height:100%;
+    text-decoration: none;
+    color: #223C11;
+    font-weight: bold;
+}
+
+#header li:hover {
+    background-color: #B1E092;
+    border: 1px solid #223C11;
+}
+
+#header .menu_selected {
+    background-color: #B1E092;
+}
+
+#logo {
+    font-size: 2em;
+    background-color: #e3eaa7;
+    color: #405d27;
 }
 
 /*-----------------Content-----------------*/
@@ -134,16 +161,19 @@ text-align:center;
 
 #content > h1 {
     text-align: center;
+    color: #405d27;
 }
 
 #content > h2 {
     line-height: 2em;
+    color: #4b593f;
 }
 
 /* -----------------Footer----------------- */
 #footer {
     text-align: center;
     border: 1px solid #000;
+    background-color: #b6da81;
 }
 
 #footer ul {
@@ -155,6 +185,11 @@ text-align:center;
 #footer li {
     flex-grow: 1;
     align-self: center
+}
+
+#breadcrumb {
+    background-color: #D5E1DF;
+    margin-top: -1em;
 }
 
 /* -----------------Liste----------------- */
@@ -266,7 +301,7 @@ text-align:center;
     -webkit-appearance: none;
     display: block;
     text-decoration: none;
-    background-color: greenyellow;
+    background-color: #4CAF50;
     font-size: 1.2em;
     padding: 0.25em 0.75em 0.25em 0.75em;
     margin: 0em 0.5em 0em 0.5em;
@@ -274,6 +309,10 @@ text-align:center;
     border-radius: 1em;
     color: black;
     cursor: pointer;
+}
+
+.lista_flex .opzioni_prenotazione a:hover {
+    background-color: #12a507;
 }
 /*ELENCO ANNUNCI DA VALIDARE */
 
@@ -356,7 +395,7 @@ text-align:center;
 }
 
 #content .link_approva:hover {
-  background-color: green;
+  background-color: #12a507;
 }
 
 /* LISTA COMMENTI */
@@ -476,7 +515,7 @@ text-align:center;
     padding: 0.5em 1em 0.5em 1em;
     margin-top: 0.5em;
     font-size: 1.5em;
-    background-color: dodgerblue;
+    background-color: #4CAF50;
     border: 1px solid #ddd;
     border-radius: 0.5em;
     color: black;
@@ -485,7 +524,7 @@ text-align:center;
 }
 
 .informazioni_prenotazione input[type="submit"]:hover{
-    background-color: royalblue;
+    background-color: #12a507;
 }
 
 /* -----------------Form----------------- */
@@ -507,7 +546,7 @@ fieldset {
     -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
     margin-top: 0.5em;
     font-size: 1.5em;
-    background-color: dodgerblue;
+    background-color: #4CAF50;
     border: 1px solid #ddd;
     color: black;
     cursor: pointer;
@@ -534,7 +573,7 @@ fieldset {
     -webkit-appearance: none;
     font-size: 1.2em;
     padding: 0.25em 0.75em 0.25em 0.75em ;
-    background-color: dodgerblue;
+    background-color: #4CAF50;
     border-radius: 1em;
     border: 1px solid dodgerblue;
     color: black;
@@ -686,29 +725,6 @@ fieldset {
     display: block;
     text-decoration: none;
 }
-/*
-.dettaglio_annuncio{
-    display: block;
-    width: 80%;
-}
-
-.dettaglio_annuncio img{
-    height: 50%;
-    width: 50%;
-    float: right;
-    padding-top: 5em;
-}
-
-.dettaglio_annuncio p{
-    font-size: 1.5em;
-}
-
-.dettaglio_annuncio hr{
-    width: 100%;
-    color: black;
-    padding-top:2px;
-}
-*/
 .aligned_with_form {
   text-align: center;
   font-size: 1.25em;
@@ -733,16 +749,20 @@ fieldset {
     border-radius: 1em;
     text-decoration: none;
     color: black;
-    background: greenyellow;
+    background: #4CAF50;
     padding: 0.5em;
     float: right;
 }
 
+.link_modifica:hover {
+    background: #12a507;
+}
+
 /*-----------------I miei annunci-----------------*/
 .link_aggiungi_annuncio {
-    border: 1px solid dodgerblue;
+    border: 1px solid #4CAF50;
     border-radius: 1em;
-    background-color: dodgerblue;
+    background-color: #4CAF50;
     padding: 0.5em;
     text-decoration: none;
     color: black;
@@ -755,9 +775,9 @@ fieldset {
 }
 
 .link_gestisci_annuncio {
-    border: 1px solid dodgerblue;
+    border: 1px solid #4CAF50;
     border-radius: 1em;
-    background-color: dodgerblue;
+    background-color: #4CAF50;
     padding: 0.5em 1em 0.5em 1em ;
     text-decoration: none;
     color: black;
