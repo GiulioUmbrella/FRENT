@@ -7,15 +7,13 @@ class Commento {
     private $commento;
     private $votazione;
     private $id_prenotazione;
-    
-    public function __construct($tit, $commento, $data, $voto, $prenot) {
-        $this->setTitolo($tit);
-        $this->setCommento($commento);
-        $this->setDataPubblicazione($data);
-        $this->setVotazione($voto);
-        $this->setIdPrenotazione($prenot);
+
+    private function __construct() {}
+
+    public static function build() {
+        return new Commento();
     }
-    
+
     public function getDataPubblicazione(): string {
         return $this->data_pubblicazione;
     }
@@ -34,7 +32,7 @@ class Commento {
     
     /**
      * @param string $data_pubblicazione formato della date deve essere: aaaa/mm/gg oppure aa/mm/gg
-     * @throws Eccezione
+     * @throws Eccezione se $data_pubblicazione non è nel formato
      */
     public function setDataPubblicazione($data_pubblicazione): void {
         if (checkIsValidDate($data_pubblicazione)) {
@@ -44,23 +42,36 @@ class Commento {
         }
     }
     
+    /**
+     * @param string $titolo
+     * @throws Eccezione se $titolo supera la lunghezza massima consentita
+     */
     public function setTitolo($titolo): void {
-        if (is_string($titolo) and checkStringMaxLen(trim($titolo), DataConstraints::commenti["titolo"])) {
-            $this->titolo = trim($titolo);
+        $trim_title = trim(htmlentities($titolo));
+        if (checkStringMaxLen($trim_title, DataConstraints::commenti["titolo"])) {
+            $this->titolo = $trim_title;
         } else {
             throw new Eccezione(htmlentities("La lunghezza del titolo supera il limite consentito."));
         }
-        $this->titolo = htmlentities($titolo);
     }
     
+    /**
+     * @param string $commento
+     * @throws Eccezione se $commento supera la lunghezz massima consentita
+     */
     public function setCommento($commento): void {
-        if (is_string($commento) and checkStringMaxLen(trim($commento), DataConstraints::commenti["commento"])) {
-            $this->commento = trim($commento);
+        $trim_com = trim(htmlentities($commento));
+        if (checkStringMaxLen($trim_com, DataConstraints::commenti["commento"])) {
+            $this->commento = $trim_com;
         } else {
             throw new Eccezione(htmlentities("La lunghezza del commento supera il limite consentito."));
         }
     }
     
+    /**
+     * @param string $votazione
+     * @throws Eccezione se $votazione non è un intero e non è compreso fra 0 e 5, estremi inclusi
+     */
     public function setVotazione($votazione): void {
         if (is_int($votazione) and $votazione >= 0 and $votazione <= 5) {
             $this->votazione = $votazione;
@@ -73,6 +84,10 @@ class Commento {
         return $this->id_prenotazione;
     }
 
+    /**
+     * @param int $id
+     * @throws Eccezione se $id non è un intero positivo
+     */
     public function setIdPrenotazione($id): void {
         if (is_int($id) and $id > 0) {
             $this->id_prenotazione = $id;
