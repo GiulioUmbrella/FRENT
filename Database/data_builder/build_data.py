@@ -48,9 +48,9 @@ def generate_users():
     telefoni = ["+390000000000" for _ in names]
 
     for i in range(len(names)):
-        user_data.append([str(i+1), names[i], surnames[i], emails[i], usernames[i], passwords[i], date_di_nascita[i], default_image, telefoni[i]])
+        user_data.append([str(i+1), names[i], surnames[i], usernames[i], emails[i], passwords[i], date_di_nascita[i], default_image, telefoni[i]])
 
-    user_header = ["id_utente", "nome", "cognome", "user_name", "mail", "password", "data_nascita", "img_profilo", "telefono"]
+    user_header = ["id_utente", "nome", "cognome", "mail", "user_name", "password", "data_nascita", "img_profilo", "telefono"]
     write_on_csv(user_header, user_data, "utenti.csv")
     #print(csv_data)
 
