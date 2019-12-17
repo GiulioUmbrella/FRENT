@@ -235,6 +235,35 @@ class Frent {
     }
 
     /**
+     * Restituisce una lista di annunci approvati per ultimi
+     * @return array di oggetti di tipo Annuncio
+     * @throws Eccezione in caso di errori nella connessione al database, errore nella creazione dell'oggeto di Annuncio
+     */
+    public function getUltimiAnnunciApprovati() {
+        try {
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_ultimi_annunci_approvati()";
+            $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            foreach($lista_annunci as $i => $assoc_annuncio) {
+                $annuncio = Annuncio::build();
+                $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+                $annuncio->setTitolo($assoc_annuncio['titolo']);
+                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+                $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+                $annuncio->setCitta($assoc_annuncio['citta']);
+                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+                $lista_annunci[$i] = $annuncio; // sostituzione in-place
+            }
+
+            return $lista_annunci;
+        } catch(Eccezione $exc) {
+            throw $exc;
+        } 
+    }
+
+    /**
      * Restituisce un annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio
      * @return Annuncio oggetto di tipo Annuncio se è stato trovato un annuncio con l'ID passato per parametro
