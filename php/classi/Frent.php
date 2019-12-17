@@ -119,6 +119,10 @@ class Frent {
             $procedure_name_and_params = "login(\"$mail\", \"$password\")";
             $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
+            if(count($res_utente) === 0) {
+                throw new Eccezione("Non ci sono utenti collegati alle credenziali fornite.");
+            }
+            
             $utente = Utente::build();
             echo "1";
             $utente->setIdUtente(intval($res_utente[0]['id_utente']));
@@ -323,6 +327,21 @@ class Frent {
             $function_name_and_params = "insert_occupazione(" . $this->auth_user->getIdUtente() . ", $id_annuncio, $numospiti, \"$data_inizio\", \"$data_fine\")";
         
             return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
+    }
+
+    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+        try {
+            if(get_class($this->auth_user) === "Utente") {
+                throw new Eccezione(htmlentities("L'inserimento di un'annuncio può essere svolto solo da un utente registrato."));
+            }
+            if(!is_int($max_ospiti) || !floatval($prezzo_notte)) {
+                throw new Eccezione(htmlentities("Parametri di invocazione di insertAnnuncio errati."));
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "insert_annuncio(\"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", " . $utente->getIdUtente() . ", $max_ospiti, $prezzo_notte)";
         } catch(Eccezione $exc) {
             throw $exc;
         }
@@ -716,6 +735,10 @@ class Frent {
             $this->db_instance->connect();
             $procedure_name_and_params = "admin_login(\"$mail\", \"$password\")";
             $res_admin = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            if(count($res_admin) === 0) {
+                throw new Eccezione("Non ci sono amministratori collegati alle credenziali fornite.");
+            }
 
             $admin = Amministratore::build();
             $admin->setIdAmministratore(intval($res_admin[0]['id_amministratore']));
