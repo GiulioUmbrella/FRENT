@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
+    <meta charset="utf-8">
     <title>NOME_ANNUNCIO_AGGIUNTO_CON_PHP - Frent</title> <!--TODO: PHP-->
 
     <meta name="description" content="DESCRIZIONE ANNUNCIO"/> <!--TODO: PHP-->
@@ -49,8 +49,13 @@
         <h2>Valutazione media: <Valutazione/></h2>
         <h2>Numero totale di commenti: </h2>
         <h2>Prezzo &euro;</h2>
-        <form action="../../html/riepilogo_prenotazione.html" method="post">
+        <p>Numero ospiti massimo:</p>
+        <form action="../../html/conferma_prenotazione.html" method="post" class="form form_verticale">
             <fieldset>
+                <label for="data_inizio">Data inizio</label>
+                <input id="data_inizio" name="data_inizio" type="date">
+                <label for="data_fine">Data fine</label>
+                <input id="data_fine" name="data_fine" type="date">
                 <label class="aiuti_alla_navigazione" for="conferma_prenotazione">Conferma prenotazione</label>
                 <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
             </fieldset>
