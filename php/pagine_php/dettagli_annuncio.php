@@ -37,10 +37,10 @@ try {
     try {
         $mediaCommenti = 0;
         $commenti = $manager->getCommentiAnnuncio($id);
-        $commenti = array();
+        //$commenti = array();
         $str_commenti .= "<ul>";
         foreach ($commenti as $commento) {
-            $totale += intval($commenti->getVotazione());
+            $totale += intval($commento->getVotazione());
             $immagine_profilo = "";
             $testo_commento = $commento->getCommento();
             $votazione = $commento->getVotazione();

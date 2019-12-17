@@ -24,11 +24,12 @@ class Frent {
      * @var Amministratore amministratore del sito web
      */
     private $auth_user;
-
+    
     /**
      * Costruttore della classe Frent.
      * @param Database $db riferimento a un oggetto che permette la connessione con il database del sito
      * @param Utente $auth_user oppure di tipo Amministratore oppure NULL
+     * @throws Eccezione
      */
     public function __construct($db, $auth_user = NULL) {
         try {
