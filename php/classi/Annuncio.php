@@ -20,45 +20,6 @@ class Annuncio {
     private $max_ospiti;
     private $prezzo_notte;
     
-    /**
-     * Costruttore di annuncio
-     * @param int $id_annuncio
-     * @param string $titolo
-     * @param int $stato_approvazione
-     * @param string $descrizione
-     * @param string $img_anteprima
-     * @param string $indirizzo
-     * @param string $citta
-     * @param int $host
-     * @param int $bloccato
-     * @param int $max_ospiti
-     * @param float $prezzo_notte
-     * @throws Eccezione
-     */
-    // public function __construct(
-    //     $id_annuncio,
-    //     $titolo,
-    //     $stato_approvazione,
-    //     $descrizione = "",
-    //     $img_anteprima = "house_image.png",
-    //     $indirizzo = "",
-    //     $citta = "",
-    //     $host = 0,
-    //     $bloccato = 0,
-    //     $max_ospiti = 1,
-    //     $prezzo_notte = 0.0
-    // ) {
-    //     $this->setIdAnnuncio($id_annuncio);
-    //     $this->setTitolo($titolo);
-    //     $this->setDescrizione($descrizione);
-    //     $this->setImgAnteprima($img_anteprima);
-    //     $this->setStatoApprovazione($stato_approvazione);
-    //     $this->setIndirizzo($indirizzo);
-    //     $this->setCitta($citta);
-    //     $this->setHost($host);
-    //     $this->setMaxOspiti($max_ospiti);
-    //     $this->setPrezzoNotte($prezzo_notte);
-    // }
     private function __construct() {}
 
     public static function build(): Annuncio {
