@@ -10,19 +10,7 @@ class Occupazione {
     private $num_ospiti;
     private $data_inizio;
     private $data_fine;
-    
-    // public function __construct($id, $utente, $annuncio, $prenotazione_guest, $num_ospiti, $dataI, $dataF) {
-    //     if (!checkDateBeginAndEnd($dataI, $dataF)) {        
-    //         throw new Eccezione(htmlentities("Le date di inizio e di fine non sono valide."));
-    //     }
-    //     $this->setIdOccupazione($id);
-    //     $this->setUtente($utente);
-    //     $this->setAnnuncio($annuncio);
-    //     $this->setPrenotazioneGuest($prenotazione_guest);
-    //     $this->setNumOspiti($num_ospiti);
-    //     $this->setDataInizio($dataI);
-    //     $this->setDataFine($dataF);
-    // }
+
     private function __construct() {}
 
     public static function build(): Occupazione {
