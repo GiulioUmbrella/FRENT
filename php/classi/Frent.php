@@ -651,13 +651,13 @@ class Frent {
     
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
                 $occupazione = Occupazione::build();
-                $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
-                $occupazione->setUtente(intval($assoc_occupazione['utente']));
+                $occupazione->setIdOccupazione(intval($assoc_prenotazione['id_occupazione']));
+                $occupazione->setUtente(intval($assoc_prenotazione['utente']));
                 $occupazione->setAnnuncio(intval($assoc_prenotazione['annuncio']));
-                $occupazione->setPrenotazioneGuestintval($assoc_occupazione['prenotazione_guest']);
-                $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
-                $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
-                $occupazione->setDataFine($assoc_occupazione['data_fine']);
+                $occupazione->setPrenotazioneGuest(boolval($assoc_prenotazione['prenotazione_guest']));
+                $occupazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
+                $occupazione->setDataInizio($assoc_prenotazione['data_inizio']);
+                $occupazione->setDataFine($assoc_prenotazione['data_fine']);
                 $lista_occupazioni[$i] = $occupazione;
             }
     
