@@ -1,10 +1,39 @@
 <?php
+require_once "../classi/Database.php";
+require_once "../classi/Frent.php";
 
+
+require_once "../CredenzialiDB.php";
 $pagina = file_get_contents("../components/login.html");
-if(isset($_GET["error_code"])){
-    $pagina = str_replace("<p id=\"credenziali_errate\"></p>",
-        "<p id=\"credenziali_errate\">Credenziali Errate! Riprova</p>",$pagina);
+$pagina = str_replace("<FORM/>", file_get_contents("../components/login_form.html"), $pagina);
+$pagina = str_replace("<PAGE/>", "./login.php", $pagina);
+if (isset($_POST["accedi"])) {
+    
+    $nome = $_POST["user"];
+    $password = $_POST["password"];
+    try {
+        $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+            CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME);
+    
+        session_start();
+        $frent = new Frent($db);
+        $user = $frent->login($nome, $password);
+        
+        $_SESSION["$user"] = $user;
+        header("Location: ../pagine_php/approvazione_annunci.php");
+        
+    } catch (Eccezione $e) {
+        
+        $pagina = str_replace("<div id=\"credenziali_errate\"></div>",
+            "<div id=\"credenziali_errate\"><p>Credenziali errate!</p></div>", $pagina);
+        $pagina = str_replace("<VALUEUSERNAME>", "value=\"$nome\"", $pagina);
+        $pagina = str_replace("<VALUEPASSWORD>", "value=\"$password\"", $pagina);
+    }
+    
+} else {
+    $pagina = str_replace("<VALUEUSERNAME>", " ", $pagina);
+    $pagina = str_replace("<VALUEPASSWORD>", " ", $pagina);
 }
+$pagina= str_replace("<FOOTER/>",file_get_contents("../components/footer.html"),$pagina);
 
-$pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
 echo $pagina;
