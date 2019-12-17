@@ -91,11 +91,20 @@
             <label for="immagini">Aggiungere immagini:</label>
             <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" tabindex="16" multiple/>
             <ul>
-                <li><img src="../immagini/img1.png" width="25%" height="25%" alt="Immagine"> <a href="#" tabindex="17"
-                                                                                                title="elimina la foto numero 1">Elimina</a>
-                </li>
-                <li><img src="../immagini/img1.png" width="25%" height="25%" alt="Immagine"> <a href="#" tabindex="18"
-                                                                                                title="elimina la foto numero 2">Elimina</a>
+                <li>
+                    <fieldset>
+                        <div class="commenti_foto">
+                            <img src="../immagini/img1.png" alt="Immagine che hai deciso di caricare.">
+                            <label for="commento1">
+                            <textarea id="commento1" maxlength="512" rows="8" cols="30"
+                                      placeholder="Inserisci la descrizione della foto con nome.png"></textarea>
+                                <a href="#" tabindex="17"
+                                   title="elimina la foto numero 1">Elimina</a>
+                            </label>
+                        </div>
+
+                    </fieldset>
+
                 </li>
             </ul>
         </fieldset>
