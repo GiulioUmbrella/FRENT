@@ -119,6 +119,10 @@ class Frent {
             $procedure_name_and_params = "login(\"$mail\", \"$password\")";
             $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
+            if(count($res_utente) === 0) {
+                throw new Eccezione("Non ci sono utenti collegati alle credenziali fornite.");
+            }
+            
             $utente = Utente::build();
             $utente->setIdUtente(intval($res_utente[0]['id_utente']));
             $utente->setNome($res_utente[0]['nome']);
@@ -722,6 +726,10 @@ class Frent {
             $this->db_instance->connect();
             $procedure_name_and_params = "admin_login(\"$mail\", \"$password\")";
             $res_admin = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            if(count($res_admin) === 0) {
+                throw new Eccezione("Non ci sono amministratori collegati alle credenziali fornite.");
+            }
 
             $admin = Amministratore::build();
             $admin->setIdAmministratore(intval($res_admin[0]['id_amministratore']));
