@@ -775,6 +775,7 @@ fieldset {
 }
 
 .link_gestisci_annuncio {
+    display: inline-block;
     border: 1px solid #4CAF50;
     border-radius: 1em;
     background-color: #4CAF50;
@@ -783,7 +784,7 @@ fieldset {
     color: black;
     vertical-align: center;
     margin-top: 1em;
-    float: right;
+    margin-right: 90%;
 }
 
 .titolo_gestione_annuncio {
