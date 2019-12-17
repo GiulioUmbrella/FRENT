@@ -20,46 +20,12 @@ class Annuncio {
     private $max_ospiti;
     private $prezzo_notte;
     
-    /**
-     * Costruttore di annuncio
-     * @param int $id_annuncio
-     * @param string $titolo
-     * @param int $stato_approvazione
-     * @param string $descrizione
-     * @param string $img_anteprima
-     * @param string $indirizzo
-     * @param string $citta
-     * @param int $host
-     * @param int $bloccato
-     * @param int $max_ospiti
-     * @param float $prezzo_notte
-     * @throws Eccezione
-     */
-    public function __construct(
-        $id_annuncio,
-        $titolo,
-        $stato_approvazione,
-        $descrizione = "",
-        $img_anteprima = "house_image.png",
-        $indirizzo = "",
-        $citta = "",
-        $host = 0,
-        $bloccato = 0,
-        $max_ospiti = 1,
-        $prezzo_notte = 0.0
-    ) {
-        $this->setIdAnnuncio($id_annuncio);
-        $this->setTitolo($titolo);
-        $this->setDescrizione($descrizione);
-        $this->setImgAnteprima($img_anteprima);
-        $this->setStatoApprovazione($stato_approvazione);
-        $this->setIndirizzo($indirizzo);
-        $this->setCitta($citta);
-        $this->setHost($host);
-        $this->setMaxOspiti($max_ospiti);
-        $this->setPrezzoNotte($prezzo_notte);
+    private function __construct() {}
+
+    public static function build(): Annuncio {
+        return new Annuncio();
     }
-    
+
     public function getIdAnnuncio(): int {
         return $this->id_annuncio;
     }
@@ -104,6 +70,10 @@ class Annuncio {
         return $this->prezzo_notte;
     }
     
+    /**
+     * @param boolean $bloccato
+     * @throws Eccezione se $bloccato non è TRUE o FALSE
+     */
     public function setBloccato($bloccato): void {
         if (is_bool($bloccato)) {
             $this->bloccato = $bloccato;
@@ -113,8 +83,8 @@ class Annuncio {
     }
     
     /**
-     * @param $id_annuncio int
-     * @throws Eccezione
+     * @param int $id_annuncio
+     * @throws Eccezione se $id_annuncio non è un intero positivo
      */
     public function setIdAnnuncio($id_annuncio): void {
         if (is_int($id_annuncio) and $id_annuncio > 0) {
@@ -124,48 +94,70 @@ class Annuncio {
         }
     }
     
+    /**
+     * @param string $titolo
+     * @throws Eccezione se $titolo supera la lunghezza consentita
+     */
     public function setTitolo($titolo): void {
-        if (is_string($titolo) && checkStringMaxLen(trim($titolo), DataConstraints::annunci["titolo"])) {
+        if (checkStringMaxLen(trim($titolo), DataConstraints::annunci["titolo"])) {
             $this->titolo = trim($titolo);
         } else {
             throw new Eccezione(htmlentities("Il titolo non è valido."));
         }
     }
     
+    /**
+     * @param string $descrizione
+     * @throws Eccezione se $descrizione supera la lunghezza consentita
+     */
     public function setDescrizione($descrizione): void {
-        if (is_string($descrizione) && checkStringMaxLen(trim($descrizione), DataConstraints::annunci["descrizione"]) ) {
+        if (checkStringMaxLen(trim($descrizione), DataConstraints::annunci["descrizione"])) {
             $this->descrizione = trim($descrizione);
         } else {
             throw new Eccezione(htmlentities("La descrizione non è valida."));
         }
     }
     
+    /**
+     * @param string $img_anteprima
+     * @throws Eccezione se $img_anteprima supera la lunghezza consentita
+     */
     public function setImgAnteprima($img_anteprima): void {
-        if (is_string($img_anteprima) && checkStringMaxLen(trim($img_anteprima), DataConstraints::annunci["img_anteprima"]))
+        if (checkStringMaxLen(trim($img_anteprima), DataConstraints::annunci["img_anteprima"]))
             $this->img_anteprima = trim($img_anteprima);
         else {
             throw new Eccezione(htmlentities("Il nome dell'immagine di anteprima non è valido."));
         }
     }
     
+    /**
+     * @param string $indirizzo
+     * @throws Eccezione se $indirizzo supera la lunghezza consentita
+     */
     public function setIndirizzo($indirizzo): void {
-        if (is_string($indirizzo) && checkStringMaxLen(trim($indirizzo), DataConstraints::annunci["indirizzo"]))
+        if (checkStringMaxLen(trim($indirizzo), DataConstraints::annunci["indirizzo"]))
             $this->indirizzo = trim($indirizzo);
         else {
             throw new Eccezione(htmlentities("L'indirizzo non è valido."));
         }
     }
     
+    /**
+     * @param string $citta
+     * @throws Eccezione se $citta contiene numeri o $citta supera la lunghezza consentita
+     */
     public function setCitta($citta): void {
-        if (is_string($citta) ||
-        (checkStringNoNumber($citta) and checkStringMaxLen(trim($citta), DataConstraints::annunci["citta"]))
-        ) {
+        if (checkStringNoNumber($citta) && checkStringMaxLen(trim($citta), DataConstraints::annunci["citta"])) {
             $this->citta = trim($citta);
         } else {
             throw new Eccezione(htmlentities("Il nome della città non è valido."));
         }
     }
     
+    /**
+     * @param int $host
+     * @throws Eccezione se $host non è un intero positivo
+     */
     public function setHost($host): void {
         if (is_int($host) and $host >= 0) {
             $this->host = $host;
@@ -174,6 +166,10 @@ class Annuncio {
         }
     }
     
+    /**
+     * @param int $stato_approvazione
+     * @throws Eccezione se $stato_approvazione non è un intero e non è 0, 1, o 2
+     */
     public function setStatoApprovazione($stato_approvazione): void {
         if (is_int($stato_approvazione) and $stato_approvazione >= 0 && $stato_approvazione <= 2) {
             $this->stato_approvazione = $stato_approvazione;
@@ -182,7 +178,10 @@ class Annuncio {
         }
     }
     
-    
+    /**
+     * @param int $max_ospiti
+     * @throws Eccezione se $max_ospiti non è un intero da 0 o 100
+     */
     public function setMaxOspiti($max_ospiti): void {
         if (is_int($max_ospiti) and $max_ospiti > 0 and $max_ospiti < 100) {
             $this->max_ospiti = $max_ospiti;
@@ -191,6 +190,10 @@ class Annuncio {
         }
     }
     
+    /**
+     * @param int $prezzo_notte
+     * @throws Eccezione se $prezzo_notte non è numero floating point positivo
+     */
     public function setPrezzoNotte($prezzo_notte): void {
         if (is_float($prezzo_notte) and $prezzo_notte >= 0.0) {
             $this->prezzo_notte = $prezzo_notte;

@@ -213,6 +213,16 @@ text-align:center;
 
 }
 
+.corpo_lista .descrizione_annuncio {
+
+}
+
+.corpo_lista .prezzototale {
+    font-size: 2em;
+    text-align: right;
+    margin-right: 1em;
+}
+
 .lista_flex{
     display: flex;
 }
