@@ -14,7 +14,7 @@ try {
     
     $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_admin_logged.html"),$pagina);
 //    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
-    $pagina = str_replace("<TITOLO_ANNUNCIO/>", "Appartamento Amore", $pagina);
+    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     //todo calcolare la media dei commenti
 //    $totale = 0;
 //    $str_foto = "";
