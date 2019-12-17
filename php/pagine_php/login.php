@@ -7,7 +7,7 @@ require_once "../classi/Utente.php";
 require_once "../CredenzialiDB.php";
 $pagina = file_get_contents("../components/login.html");
 $pagina = str_replace("<FORM/>", file_get_contents("../components/login_form.html"), $pagina);
-$pagina = str_replace("<PAGE/>", "./", $pagina);
+$pagina = str_replace("<PAGE/>", "./login.php", $pagina);
 if (isset($_POST["accedi"])) {
     
     $nome = $_POST["user"];
@@ -18,12 +18,11 @@ if (isset($_POST["accedi"])) {
     
         $frent = new Frent($db);
         $user = $frent->login($nome, $password);
-    
         echo $user->getCognome();
     
         session_start();
         $_SESSION["user"] = $user;
-        header("Location: ../pagine_php/index.php");
+//        header("Location: ../pagine_php/index.php");
         
     } catch (Eccezione $e) {
         
