@@ -63,15 +63,15 @@ class Frent {
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_annunci as $i => $assoc_annuncio) {
-                $lista_annunci[$i] = new Annuncio(
-                    intval($assoc_annuncio['id_annuncio']),
-                    $assoc_annuncio['titolo'],
-                    $assoc_annuncio['descrizione'],
-                    $assoc_annuncio['img_anteprima'],
-                    $assoc_annuncio['indirizzo'],
-                    $citta,
-                    floatval($assoc_annuncio['prezzo_notte'])
-                );
+                $annuncio = Annuncio::build();
+                $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+                $annuncio->setTitolo($assoc_annuncio['titolo']);
+                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+                $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+                $annuncio->setCitta($citta);
+                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+                $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
 
             return $lista_annunci;
@@ -246,19 +246,20 @@ class Frent {
             }
             $this->db_instance->connect();
             $procedure_name_and_params = "get_annuncio($id_annuncio)";
-            $annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
-    
-            return new Annuncio(
-                intval($annuncio[0]['id_annuncio']),
-                $annuncio[0]['titolo'],
-                intval($annuncio[0]['stato_approvazione']),
-                $annuncio[0]['descrizione'],
-                $annuncio[0]['img_anteprima'],
-                $annuncio[0]['indirizzo'],
-                $annuncio[0]['citta'],
-                intval($annuncio[0]["host"]),
-                floatval($annuncio[0]['prezzo_notte'])
-            );
+            $res_annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
+            
+            $annuncio = Annuncio::build();
+            $annuncio->setIdAnnuncio(intval($res_annuncio[0]['id_annuncio']));
+            $annuncio->setTitolo($res_annuncio[0]['titolo']);
+            $annuncio->setStatoApprovazione(intval($res_annuncio[0]['stato_approvazione']));
+            $annuncio->setDescrizione($res_annuncio[0]['descrizione']);
+            $annuncio->setImgAnteprima($res_annuncio[0]['img_anteprima']);
+            $annuncio->setIndirizzo($res_annuncio[0]['indirizzo']);
+            $annuncio->setCitta($res_annuncio[0]['citta']);
+            $annuncio->setHost(intval($res_annuncio[0]["host"]));
+            $annuncio->setPrezzoNotte(floatval($res_annuncio[0]['prezzo_notte']));
+
+            return $annuncio;
         } catch(Eccezione $exc) {
             throw $exc;
         }
@@ -572,15 +573,15 @@ class Frent {
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
             
             foreach($lista_annunci as $i => $assoc_annuncio) {
-                $lista_annunci[$i] = new Annuncio(
-                    intval($assoc_annuncio['id_annuncio']),
-                    $assoc_annuncio['titolo'],
-                    $assoc_annuncio['descrizione'],
-                    $assoc_annuncio['img_anteprima'],
-                    $assoc_annuncio['indirizzo'],
-                    $assoc_annuncio['citta'],
-                    floatval($assoc_annuncio['prezzo_notte'])
-                );
+                $annuncio = Annuncio::build();
+                $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+                $annuncio->setTitolo($assoc_annuncio['titolo']);
+                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+                $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+                $annuncio->setCitta($assoc_annuncio['citta']);
+                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+                $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
             
             return $lista_annunci;
@@ -660,11 +661,11 @@ class Frent {
         $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         foreach($lista_annunci as $i => $assoc_annuncio) {
-            $lista_annunci[$i] = new Annuncio(
-                intval($assoc_annuncio['id_annuncio']),
-                $assoc_annuncio['titolo'],
-                    intval($assoc_annuncio['stato_approvazione'])
-            );
+            $annuncio = Annuncio::build();
+            $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+            $annuncio->setTitolo($assoc_annuncio['titolo']);
+            $annuncio->setStatoApprovazione(intval($assoc_annuncio['stato_approvazione']));
+            $lista_annunci[$i] = $annuncio; // sostituzione in-place
         }
         return $lista_annunci;
     }
