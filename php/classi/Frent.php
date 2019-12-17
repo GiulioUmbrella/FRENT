@@ -333,7 +333,9 @@ class Frent {
                 throw new Eccezione(htmlentities("Parametri di invocazione di insertAnnuncio errati."));
             }
             $this->db_instance->connect();
-            $function_name_and_params = "insert_annuncio(\"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", " . $utente->getIdUtente() . ", $max_ospiti, $prezzo_notte)";
+            $function_name_and_params = "insert_annuncio(\"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", " . $this->utente->getIdUtente() . ", $max_ospiti, $prezzo_notte)";
+
+            return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
             throw $exc;
         }

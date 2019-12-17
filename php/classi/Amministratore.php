@@ -13,7 +13,7 @@ class Amministratore {
         return new Amministratore();
     }
 
-    public function setIdAmministratore($id): void {
+    public function setIdAmministratore($id) {
         if (is_int($id) and $id > 0) {
             $this->id_amministratore = $id;
         } else {
@@ -21,7 +21,7 @@ class Amministratore {
         }
     }
     
-    public function setUserName($username): void {
+    public function setUserName($username) {
         $trim_un = trim($username);
         if (checkStringContainsNoSpace($trim_un) &&
             checkStringMaxLen($trim_un, DataConstraints::amministratori["user_name"])
@@ -32,7 +32,7 @@ class Amministratore {
         }
     }
     
-    public function setMail($mail): void {
+    public function setMail($mail) {
         $trim_mail = trim($mail);
         if (checkIsValidMail($trim_mail, DataConstraints::amministratori["mail"])) {
             $this->mail = $trim_mail;

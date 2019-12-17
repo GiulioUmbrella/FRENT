@@ -21,7 +21,7 @@ class Occupazione {
      * @param int $id_occupazione
      * @throws Eccezione se $id_occupazione non è un intero positivo
      */
-    public function setIdOccupazione($id_occupazione): void {
+    public function setIdOccupazione($id_occupazione) {
         if (is_int($id_occupazione) and $id_occupazione > 0) {
             $this->id_occupazione = $id_occupazione;
         } else {
@@ -33,7 +33,7 @@ class Occupazione {
      * @param int $utente
      * @throws Eccezione se $utente non è un intero positivo
      */
-    public function setUtente($utente): void {
+    public function setUtente($utente) {
         if (is_int($utente) and $utente > 0) {
             $this->utente = $utente;
         } else {
@@ -45,7 +45,7 @@ class Occupazione {
      * @param int $annuncio
      * @throws Eccezione se $annuncio non è un intero positivo
      */
-    public function setAnnuncio($annuncio): void {
+    public function setAnnuncio($annuncio) {
         if (is_int($annuncio) and $annuncio > 0) {
             $this->annuncio = $annuncio;
         } else {
@@ -57,7 +57,7 @@ class Occupazione {
      * @param boolean $prenotazione_guest
      * @throws Eccezione se $prenotazione_guest non è TRUE o FALSE
      */
-    public function setPrenotazioneGuest($prenotazione_guest): void {
+    public function setPrenotazioneGuest($prenotazione_guest) {
         if (is_bool($prenotazione_guest)) {
             $this->prenotazione_guest = $prenotazione_guest;
         } else {
@@ -69,7 +69,7 @@ class Occupazione {
      * @param int $num_ospiti
      * @throws Eccezione se $num_ospiti non è un intero oppure supera il massimo consentito
      */
-    public function setNumOspiti($num_ospiti): void {
+    public function setNumOspiti($num_ospiti) {
         if (is_int($num_ospiti) and $num_ospiti <= DataConstraints::occupazioni["num_ospiti"]) {
             $this->num_ospiti = $num_ospiti;
         } else {
@@ -81,7 +81,7 @@ class Occupazione {
      * @param string $data_inizio
      * @throws Eccezione se $data_inizio non è una stringa rappresentante una data valida
      */
-    public function setDataInizio($data_inizio): void {
+    public function setDataInizio($data_inizio) {
         if(checkIsValidDate($data_inizio)) {
             $this->data_inizio = $data_inizio;
         } else {
@@ -93,7 +93,7 @@ class Occupazione {
      * @param string $data_fine
      * @throws Eccezione se $data_fine non è una stringa rappresentante una data valida
      */
-    public function setDataFine($data_fine): void {
+    public function setDataFine($data_fine) {
         if(checkIsValidDate($data_fine)) {
             $this->data_fine = $data_fine;
         } else {
