@@ -817,6 +817,15 @@ fieldset {
     width: 18em;
 }
 
+
+/*-----------------Riepilogo prenotazione-----------------*/
+.riepilogo_annucio {
+    border: 1px solid gray;
+    border-radius: 1em;
+    padding: 0.5em;
+    font-size: 1.1em;
+}
+
 /*STA COSA DEVE STARE IN FONDO*/
 body .aiuti_alla_navigazione {
     position: absolute;
