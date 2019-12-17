@@ -218,13 +218,13 @@ class Frent {
             $lista_commenti = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_commenti as $i => $assoc_commento) {
-                $lista_commenti[$i] = new Commento(
-                    $assoc_commento['titolo'],
-                    $assoc_commento['commento'],
-                    $assoc_commento['data_pubblicazione'],
-                    intval($assoc_commento['votazione']),
-                    intval($assoc_commento['prenotazione'])
-                );
+                $commento = Commento::build();
+                $commento->setTitolo($assoc_commento['titolo']);
+                $commento->setCommento($assoc_commento['commento']);
+                $commento->setDataPubblicazione($assoc_commento['data_pubblicazione']);
+                $commento->setVotazione(intval($assoc_commento['votazione']));
+                $commento->setIdPrenotazione(intval($assoc_commento['prenotazione']));
+                $lista_commenti[$i] = $commento;
             }
 
             return $lista_commenti;
