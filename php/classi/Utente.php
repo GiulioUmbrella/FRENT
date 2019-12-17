@@ -27,9 +27,12 @@ class Utente {
      * @throws Eccezione se $id_utente non è un intero positivo
      */
     public function setIdUtente($id_utente): void {
+        echo "Checking id";
         if (is_int($id_utente) and $id_utente > 0) {
             $this->id_utente = $id_utente;
+            echo "ID CHECKED";
         } else {
+            echo "ECCezione";
             throw new Eccezione(htmlentities("L'ID dell'utente non è valido."));
         }
     }
