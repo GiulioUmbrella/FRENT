@@ -8,7 +8,6 @@ require_once "Eccezione.php";
 require_once "Foto.php";
 require_once "Occupazione.php";
 require_once "Utente.php";
-//require_once "../CheckMethods.php";
 
 /**
  * Class Frent
@@ -63,15 +62,15 @@ class Frent {
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_annunci as $i => $assoc_annuncio) {
-                $lista_annunci[$i] = new Annuncio(
-                    intval($assoc_annuncio['id_annuncio']),
-                    $assoc_annuncio['titolo'],
-                    $assoc_annuncio['descrizione'],
-                    $assoc_annuncio['img_anteprima'],
-                    $assoc_annuncio['indirizzo'],
-                    $citta,
-                    floatval($assoc_annuncio['prezzo_notte'])
-                );
+                $annuncio = Annuncio::build();
+                $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+                $annuncio->setTitolo($assoc_annuncio['titolo']);
+                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+                $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+                $annuncio->setCitta($citta);
+                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+                $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
 
             return $lista_annunci;
@@ -109,31 +108,41 @@ class Frent {
 
     /**
      * Verifica se l'utente è registrato nel sito.
-     * @param string $username_or_mail nome utente oppure indirizzo e-mail dell'utente
+     * @param string $mail indirizzo e-mail dell'utente
      * @param string $password password dell'utente collegata al nome utente o indirizzo e-mail
      * @return Utente oggetto di classe Utente se è stato effettuato il login (ovvero le credenziali sono corrette e legate ad un profilo utente)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Utente, restituzioni != 1 record dal DB
      */
-    public function login($username_or_mail, $password): Utente {
+    public function login($mail, $password): Utente {
         try {
             $this->db_instance->connect();
-            $procedure_name_and_params = "login(\"$username_or_mail\", \"$password\")";
-            $utente = $this->db_instance->queryProcedure($procedure_name_and_params);
-            
-            if(count($utente) !== 1) {
-                throw new Eccezione(htmlentities("Non è stato trovato nessun utente con queste credenziali."));
-            }
+            $procedure_name_and_params = "login(\"$mail\", \"$password\")";
+            $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
-            return new Utente(
-                intval($utente[0]['id_utente']),
-                $utente[0]['nome'],
-                $utente[0]['cognome'],
-                $utente[0]['user_name'],
-                $utente[0]['mail'],
-                $utente[0]['data_nascita'],
-                $utente[0]['img_profilo'],
-                $utente[0]['telefono']
-            );
+            if(count($res_utente) === 0) {
+                throw new Eccezione("Non ci sono utenti collegati alle credenziali fornite.");
+            }
+            
+            $utente = Utente::build();
+            echo "1";
+            $utente->setIdUtente(intval($res_utente[0]['id_utente']));
+            echo "1";
+            $utente->setNome($res_utente[0]['nome']);
+            echo "1";
+            $utente->setCognome($res_utente[0]['cognome']);
+            echo "1";
+            $utente->setUserName($res_utente[0]['user_name']);
+            echo "1";
+            $utente->setMail($res_utente[0]['mail']);
+            echo "1";
+            $utente->setDataNascita($res_utente[0]['data_nascita']);
+            echo "1";
+            $utente->setImgProfilo($res_utente[0]['img_profilo']);
+            echo "1";
+            $utente->setTelefono($res_utente[0]['telefono']);
+            echo "1";
+    
+            return $utente;
         } catch(Eccezione $exc) {
             throw $exc;
         }
@@ -155,15 +164,15 @@ class Frent {
             $lista_occupazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
             foreach($lista_occupazioni as $i => $assoc_occupazione) {
-                $lista_occupazioni[$i] = new Occupazione(
-                    intval($assoc_occupazione['id_occupazione']),
-                    intval($assoc_occupazione['utente']),
-                    $id_annuncio, // già int, non serve fare il parsing
-                    intval($assoc_occupazione['prenotazione_guest']),
-                    intval($assoc_occupazione['num_ospiti']),
-                    $assoc_occupazione['data_inizio'],
-                    $assoc_occupazione['data_fine']
-                );
+                $occupazione = Occupazione::build();
+                $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
+                $occupazione->setUtente(intval($assoc_occupazione['utente']));
+                $occupazione->setAnnuncio($id_annuncio);
+                $occupazione->setPrenotazioneGuestintval($assoc_occupazione['prenotazione_guest'])();
+                $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
+                $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
+                $occupazione->setDataFine($assoc_occupazione['data_fine']);
+                $lista_occupazioni[$i] = $occupazione;
             }
     
             return $lista_occupazioni;
@@ -188,12 +197,12 @@ class Frent {
             $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_foto as $i => $assoc_foto) {
-                $lista_foto[$i] = new Foto(
-                    intval($assoc_foto['id_foto']),
-                    $assoc_foto['descrizione'],
-                    $assoc_foto['file_path'],
-                    $id_annuncio // già int, non serve fare il parsing
-                );
+                $foto = Foto::build();
+                $foto->setIdFoto(intval($assoc_foto['id_foto']));
+                $foto->setFilePath($assoc_foto['file_path']);
+                $foto->setIdAnnuncio($id_annuncio);
+                $foto->setDescrizione($assoc_foto['descrizione']);
+                $lista_foto[$i] = $foto;
             }
     
             return $lista_foto;
@@ -218,19 +227,48 @@ class Frent {
             $lista_commenti = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_commenti as $i => $assoc_commento) {
-                $lista_commenti[$i] = new Commento(
-                    $assoc_commento['titolo'],
-                    $assoc_commento['commento'],
-                    $assoc_commento['data_pubblicazione'],
-                    intval($assoc_commento['votazione']),
-                    intval($assoc_commento['prenotazione'])
-                );
+                $commento = Commento::build();
+                $commento->setTitolo($assoc_commento['titolo']);
+                $commento->setCommento($assoc_commento['commento']);
+                $commento->setDataPubblicazione($assoc_commento['data_pubblicazione']);
+                $commento->setVotazione(intval($assoc_commento['votazione']));
+                $commento->setIdPrenotazione(intval($assoc_commento['prenotazione']));
+                $lista_commenti[$i] = $commento;
             }
 
             return $lista_commenti;
         } catch(Eccezione $exc) {
             echo $exc->getMessage();
         }
+    }
+
+    /**
+     * Restituisce una lista di annunci approvati per ultimi
+     * @return array di oggetti di tipo Annuncio
+     * @throws Eccezione in caso di errori nella connessione al database, errore nella creazione dell'oggeto di Annuncio
+     */
+    public function getUltimiAnnunciApprovati() {
+        try {
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_ultimi_annunci_approvati()";
+            $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            foreach($lista_annunci as $i => $assoc_annuncio) {
+                $annuncio = Annuncio::build();
+                $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+                $annuncio->setTitolo($assoc_annuncio['titolo']);
+                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+                $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+                $annuncio->setCitta($assoc_annuncio['citta']);
+                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+                $lista_annunci[$i] = $annuncio; // sostituzione in-place
+            }
+
+            return $lista_annunci;
+        } catch(Eccezione $exc) {
+            throw $exc;
+        } 
     }
 
     /**
@@ -246,19 +284,20 @@ class Frent {
             }
             $this->db_instance->connect();
             $procedure_name_and_params = "get_annuncio($id_annuncio)";
-            $annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
-    
-            return new Annuncio(
-                intval($annuncio[0]['id_annuncio']),
-                $annuncio[0]['titolo'],
-                intval($annuncio[0]['stato_approvazione']),
-                $annuncio[0]['descrizione'],
-                $annuncio[0]['img_anteprima'],
-                $annuncio[0]['indirizzo'],
-                $annuncio[0]['citta'],
-                intval($annuncio[0]["host"]),
-                floatval($annuncio[0]['prezzo_notte'])
-            );
+            $res_annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
+            
+            $annuncio = Annuncio::build();
+            $annuncio->setIdAnnuncio(intval($res_annuncio[0]['id_annuncio']));
+            $annuncio->setTitolo($res_annuncio[0]['titolo']);
+            $annuncio->setStatoApprovazione(intval($res_annuncio[0]['stato_approvazione']));
+            $annuncio->setDescrizione($res_annuncio[0]['descrizione']);
+            $annuncio->setImgAnteprima($res_annuncio[0]['img_anteprima']);
+            $annuncio->setIndirizzo($res_annuncio[0]['indirizzo']);
+            $annuncio->setCitta($res_annuncio[0]['citta']);
+            $annuncio->setHost(intval($res_annuncio[0]["host"]));
+            $annuncio->setPrezzoNotte(floatval($res_annuncio[0]['prezzo_notte']));
+
+            return $annuncio;
         } catch(Eccezione $exc) {
             throw $exc;
         }
@@ -288,6 +327,21 @@ class Frent {
             $function_name_and_params = "insert_occupazione(" . $this->auth_user->getIdUtente() . ", $id_annuncio, $numospiti, \"$data_inizio\", \"$data_fine\")";
         
             return intval($this->db_instance->queryFunction($function_name_and_params));
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
+    }
+
+    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+        try {
+            if(get_class($this->auth_user) === "Utente") {
+                throw new Eccezione(htmlentities("L'inserimento di un'annuncio può essere svolto solo da un utente registrato."));
+            }
+            if(!is_int($max_ospiti) || !floatval($prezzo_notte)) {
+                throw new Eccezione(htmlentities("Parametri di invocazione di insertAnnuncio errati."));
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "insert_annuncio(\"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", " . $utente->getIdUtente() . ", $max_ospiti, $prezzo_notte)";
         } catch(Eccezione $exc) {
             throw $exc;
         }
@@ -572,15 +626,15 @@ class Frent {
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
             
             foreach($lista_annunci as $i => $assoc_annuncio) {
-                $lista_annunci[$i] = new Annuncio(
-                    intval($assoc_annuncio['id_annuncio']),
-                    $assoc_annuncio['titolo'],
-                    $assoc_annuncio['descrizione'],
-                    $assoc_annuncio['img_anteprima'],
-                    $assoc_annuncio['indirizzo'],
-                    $assoc_annuncio['citta'],
-                    floatval($assoc_annuncio['prezzo_notte'])
-                );
+                $annuncio = Annuncio::build();
+                $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+                $annuncio->setTitolo($assoc_annuncio['titolo']);
+                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+                $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+                $annuncio->setCitta($assoc_annuncio['citta']);
+                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+                $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
             
             return $lista_annunci;
@@ -604,15 +658,15 @@ class Frent {
             $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
-                $lista_prenotazioni[$i] = new Occupazione(
-                    intval($assoc_prenotazione['id_occupazione']),
-                    intval($assoc_prenotazione['utente']),
-                    intval($assoc_prenotazione['annuncio']),
-                    intval($assoc_prenotazione['prenotazione_guest']),
-                    intval($assoc_prenotazione['num_ospiti']),
-                    $assoc_prenotazione['data_inizio'],
-                    $assoc_prenotazione['data_fine']
-                );
+                $occupazione = Occupazione::build();
+                $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
+                $occupazione->setUtente(intval($assoc_occupazione['utente']));
+                $occupazione->setAnnuncio(intval($assoc_prenotazione['annuncio']));
+                $occupazione->setPrenotazioneGuestintval($assoc_occupazione['prenotazione_guest']);
+                $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
+                $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
+                $occupazione->setDataFine($assoc_occupazione['data_fine']);
+                $lista_occupazioni[$i] = $occupazione;
             }
     
             return $lista_prenotazioni;
@@ -660,37 +714,38 @@ class Frent {
         $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 
         foreach($lista_annunci as $i => $assoc_annuncio) {
-            $lista_annunci[$i] = new Annuncio(
-                intval($assoc_annuncio['id_annuncio']),
-                $assoc_annuncio['titolo'],
-                    intval($assoc_annuncio['stato_approvazione'])
-            );
+            $annuncio = Annuncio::build();
+            $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
+            $annuncio->setTitolo($assoc_annuncio['titolo']);
+            $annuncio->setStatoApprovazione(intval($assoc_annuncio['stato_approvazione']));
+            $lista_annunci[$i] = $annuncio; // sostituzione in-place
         }
         return $lista_annunci;
     }
     
     /**
      * Verifica se l'amministratore ha un profilo nel sito.
-     * @param string $username_or_mail nome utente oppure indirizzo e-mail dell'amministratore
+     * @param string $mail indirizzo e-mail dell'amministratore
      * @param string $password password dell'amministratore collegata al nome utente o indirizzo e-mail
      * @return Amministratore oggetto di classe Amministratore se è stato effettuato il login (ovvero le credenziali sono corrette e legate ad un profilo amministratore)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Amministratore, restituzioni != 1 record dal DB
      */
-    public function adminLogin($username_or_mail, $password): Amministratore {
+    public function adminLogin($mail, $password): Amministratore {
         try {
             $this->db_instance->connect();
-            $procedure_name_and_params = "admin_login(\"$username_or_mail\", \"$password\")";
-            $admin = $this->db_instance->queryProcedure($procedure_name_and_params);
-            
-            if(count($admin) !== 1) {
-                throw new Eccezione(htmlentities("Non è stato trovato nessun amministratore con queste credenziali."));
+            $procedure_name_and_params = "admin_login(\"$mail\", \"$password\")";
+            $res_admin = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            if(count($res_admin) === 0) {
+                throw new Eccezione("Non ci sono amministratori collegati alle credenziali fornite.");
             }
 
-            return new Amministratore(
-                intval($admin[0]['id_amministratore']),
-                $admin[0]['user_name'],
-                $admin[0]['mail']
-            );
+            $admin = Amministratore::build();
+            $admin->setIdAmministratore(intval($res_admin[0]['id_amministratore']));
+            $admin->setUserName($res_admin[0]['user_name']);
+            $admin->setMail($res_admin[0]['mail']);
+
+            return $admin;
         } catch(Eccezione $exc) {
             throw $exc;
         }

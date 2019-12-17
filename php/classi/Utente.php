@@ -12,26 +12,27 @@ class Utente {
     private $img_profilo;
     private $telefono;
     
-    public function __construct($id, $n, $cog, $username, $mail, $data, $img, $telefono) {
-        $this->setUserName($username);
-        $this->setIdUtente($id);
-        $this->setNome($n);
-        $this->setCognome($cog);
-        $this->setMail($mail);
-        $this->setDataNascita($data);
-        $this->setImgProfilo($img);
-        $this->setTelefono($telefono);
+    private function __construct() {}
+
+    public static function build(): Utente {
+        return new Utente();
     }
-    
     
     public function getIdUtente() {
         return $this->id_utente;
     }
     
+    /**
+     * @param int $id_utente
+     * @throws Eccezione se $id_utente non è un intero positivo
+     */
     public function setIdUtente($id_utente): void {
+        echo "Checking id";
         if (is_int($id_utente) and $id_utente > 0) {
             $this->id_utente = $id_utente;
+            echo "ID CHECKED";
         } else {
+            echo "ECCezione";
             throw new Eccezione(htmlentities("L'ID dell'utente non è valido."));
         }
     }
@@ -40,11 +41,16 @@ class Utente {
         return $this->nome;
     }
     
+    /**
+     * @param string $nome
+     * @throws Eccezione se $nome contiene numeri o supera la lunghezza massima
+     */
     public function setNome($nome): void {
-        if (checkStringNoNumber($nome) and checkStringMaxLen(trim($nome), DataConstraints::utenti["nome"]) and strlen(trim($nome)) > 0)
-            $this->nome = trim($nome);
+        $trim_nome = trim($nome);
+        if (checkStringNoNumber($trim_nome) and checkStringMaxLen($trim_nome, DataConstraints::utenti["nome"]))
+            $this->nome = $trim_nome;
         else{
-            throw new Eccezione("Il nome inserito non è valido.");
+            throw new Eccezione(htmlentities("Il nome inserito non è valido."));
         }
     }
     
@@ -52,11 +58,16 @@ class Utente {
         return $this->cognome;
     }
     
+    /**
+     * @param string $cognome
+     * @throws Eccezione se $cognome contiene numeri o supera la lunghezza massima
+     */
     public function setCognome($cognome): void {
-        if (checkStringNoNumber($cognome) and checkStringMaxLen(trim($cognome), DataConstraints::utenti["cognome"]) and strlen(trim($cognome)) > 0)
-            $this->cognome = trim($cognome);
+        $trim_cognome = trim($cognome);
+        if (checkStringNoNumber($trim_cognome) and checkStringMaxLen($trim_cognome, DataConstraints::utenti["cognome"]))
+            $this->cognome = $trim_cognome;
         else{
-            throw new Eccezione("Il cognome inserito non è valido.");
+            throw new Eccezione(htmlentities("Il cognome inserito non è valido."));
         }
     }
     
@@ -64,11 +75,16 @@ class Utente {
         return $this->user_name;
     }
     
+    /**
+     * @param string $user_name
+     * @throws Eccezione se $user_name contiene spazi e la lunghezza supera il massimo consentito
+     */
     public function setUserName($user_name): void {
-        if (checkStringContainsNoSpace($user_name) and checkStringMaxLen(trim($user_name), DataConstraints::utenti["user_name"]) and strlen(trim($user_name)) > 0)
-            $this->user_name = trim($user_name);
+        $trim_un = trim($user_name);
+        if (checkStringContainsNoSpace($trim_un) and checkStringMaxLen($trim_un, DataConstraints::utenti["user_name"]))
+            $this->user_name = $trim_un;
         else{
-            throw new Eccezione("Il nome utente inserito non è valido.");
+            throw new Eccezione(htmlentities("Il nome utente inserito non è valido."));
         }
     }
     
@@ -76,10 +92,15 @@ class Utente {
         return $this->mail;
     }
     
+    /**
+     * @param string $mail
+     * @throws Eccezione se $mail non rappresenta un indirizzo mail valido oppure supera la lunghezza massima consentita
+     */
     public function setMail($mail): void {
-        if (checkIsValidMail($mail) and checkStringMaxLen(trim($mail),DataConstraints::utenti["mail"])
-            and strlen(trim($mail))>6) {//6 perché a@a.aa, e aa perché non ci sono TLD con una lettera.
-            $this->mail = trim($mail);
+        $trim_mail = trim($mail);
+        if (checkIsValidMail($trim_mail, DataConstraints::utenti["mail"]) and strlen($trim_mail)  > 6) {
+            // 6 perché a@a.aa, e aa perché non ci sono TLD con una lettera
+            $this->mail = $trim_mail;
         } else {
             throw new Eccezione(htmlentities("La mail inserita non è valida."));
         }
@@ -90,16 +111,14 @@ class Utente {
     }
     
     /**
-     *
-     * @param $data_nascita string il formato di quest stringa deve essere aaaa-mm-gg
-     * @throws Eccezione
+     * @param string $data_nascita il formato di quest stringa deve essere aaaa-mm-gg
+     * @throws Eccezione se $data_nascita non è una stringa rappresentante una data valida
      */
     public function setDataNascita($data_nascita): void {
-        //controllare che data_nascita sia una data valida
         if (checkIsValidDate($data_nascita)) {
             $this->data_nascita = $data_nascita;
         } else {
-            throw new Eccezione("La data di nascita inserita non è valida!");
+            throw new Eccezione(htmlentities("La data di nascita inserita non è valida."));
         }
     }
     
@@ -108,13 +127,16 @@ class Utente {
         return $this->img_profilo;
     }
     
+    /**
+     * @param string $img_profilo
+     * @throws Eccezione se $img_profilo supera la lunghezza massima consentita
+     */
     public function setImgProfilo($img_profilo): void {
-        if (is_string($img_profilo) and checkStringMaxLen($img_profilo, DataConstraints::utenti["img_profilo"])
-        and checkStringMaxLen(trim($img_profilo),DataConstraints::utenti["img_profilo"])) {
-            $img_profilo = str_replace(" ", "_", trim($img_profilo));
-            $this->img_profilo = $img_profilo;
+        $trim_img = trim($img_profilo);
+        if (checkStringMaxLen($trim_img, DataConstraints::utenti["img_profilo"])) {
+            $this->img_profilo = str_replace(" ", "_", $trim_img);
         } else {
-            throw new Eccezione("Il path dell'immagine di profilo non è valido.");
+            throw new Eccezione(htmlentities("Il path dell'immagine di profilo non è valido."));
         }
     }
     
@@ -122,9 +144,14 @@ class Utente {
         return $this->telefono;
     }
     
+    /**
+     * @param string $telefono
+     * @throws Eccezione se $telefono non è un numero di telefono nuovo
+     */
     public function setTelefono($telefono): void {
-        if (checkPhoneNumber($telefono)) {
-            $this->telefono = $telefono;
+        $trim_tel = trim($telefono);
+        if (checkPhoneNumber($trim_tel)) {
+            $this->telefono = $trim_tel;
         } else {
             throw new Eccezione("Il numero di telefono non è valido.");
         }

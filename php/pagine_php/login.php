@@ -2,11 +2,11 @@
 require_once "../classi/Database.php";
 require_once "../classi/Frent.php";
 
-
 require_once "../CredenzialiDB.php";
 $pagina = file_get_contents("../components/login.html");
 $pagina = str_replace("<FORM/>", file_get_contents("../components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login.php", $pagina);
+session_start();
 if (isset($_POST["accedi"])) {
     
     $nome = $_POST["user"];
@@ -14,12 +14,11 @@ if (isset($_POST["accedi"])) {
     try {
         $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
             CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME);
-    
-        session_start();
-        $frent = new Frent($db);
-        $user = $frent->login($nome, $password);
         
-        $_SESSION["$user"] = $user;
+        $frent = new Frent($db);
+        $utente = $frent->login($nome, $password);
+        
+        $_SESSION["utente"] = $utente;
         header("Location: ../pagine_php/approvazione_annunci.php");
         
     } catch (Eccezione $e) {
