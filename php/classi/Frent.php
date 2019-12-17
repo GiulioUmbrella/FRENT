@@ -319,6 +319,21 @@ class Frent {
         }
     }
 
+    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+        try {
+            if(get_class($this->auth_user) === "Utente") {
+                throw new Eccezione(htmlentities("L'inserimento di un'annuncio può essere svolto solo da un utente registrato."));
+            }
+            if(!is_int($max_ospiti) || !floatval($prezzo_notte)) {
+                throw new Eccezione(htmlentities("Parametri di invocazione di insertAnnuncio errati."));
+            }
+            $this->db_instance->connect();
+            $function_name_and_params = "insert_annuncio(\"$titolo\", \"$descrizione\", \"$img_anteprima\", \"$indirizzo\", \"$citta\", " . $utente->getIdUtente() . ", $max_ospiti, $prezzo_notte)";
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
+    }
+
     /**
      * Inserisce una nuova foto all'interno legata ad un annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio a cui sarà collegata la foto
