@@ -188,12 +188,12 @@ class Frent {
             $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_foto as $i => $assoc_foto) {
-                $lista_foto[$i] = new Foto(
-                    intval($assoc_foto['id_foto']),
-                    $assoc_foto['descrizione'],
-                    $assoc_foto['file_path'],
-                    $id_annuncio // già int, non serve fare il parsing
-                );
+                $foto = Foto::build();
+                $foto->setIdFoto(intval($assoc_foto['id_foto']));
+                $foto->setFilePath($assoc_foto['file_path']);
+                $foto->setIdAnnuncio($id_annuncio);
+                $foto->setDescrizione($assoc_foto['descrizione']);
+                $lista_foto[$i] = $foto;
             }
     
             return $lista_foto;
