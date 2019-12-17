@@ -423,6 +423,7 @@ text-align:center;
 /* -----------------Dettaglio Annuncio----------------- */
 .informazioni_prenotazione {
     float: right;
+    max-width: 25%;
 }
 
 .shower_immagine_anteprima {
