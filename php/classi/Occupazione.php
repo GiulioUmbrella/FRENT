@@ -11,19 +11,28 @@ class Occupazione {
     private $data_inizio;
     private $data_fine;
     
-    public function __construct($id, $utente, $annuncio, $prenotazione_guest, $num_ospiti, $dataI, $dataF) {
-        if (!checkDateBeginAndEnd($dataI, $dataF)) {        
-            throw new Eccezione(htmlentities("Le date di inizio e di fine non sono valide."));
-        }
-        $this->setIdOccupazione($id);
-        $this->setUtente($utente);
-        $this->setAnnuncio($annuncio);
-        $this->setPrenotazioneGuest($prenotazione_guest);
-        $this->setNumOspiti($num_ospiti);
-        $this->setDataInizio($dataI);
-        $this->setDataFine($dataF);
+    // public function __construct($id, $utente, $annuncio, $prenotazione_guest, $num_ospiti, $dataI, $dataF) {
+    //     if (!checkDateBeginAndEnd($dataI, $dataF)) {        
+    //         throw new Eccezione(htmlentities("Le date di inizio e di fine non sono valide."));
+    //     }
+    //     $this->setIdOccupazione($id);
+    //     $this->setUtente($utente);
+    //     $this->setAnnuncio($annuncio);
+    //     $this->setPrenotazioneGuest($prenotazione_guest);
+    //     $this->setNumOspiti($num_ospiti);
+    //     $this->setDataInizio($dataI);
+    //     $this->setDataFine($dataF);
+    // }
+    private function __construct() {}
+
+    public static function build(): Occupazione {
+        return new Occupazione();
     }
     
+    /**
+     * @param int $id_occupazione
+     * @throws Eccezione se $id_occupazione non è un intero positivo
+     */
     public function setIdOccupazione($id_occupazione): void {
         if (is_int($id_occupazione) and $id_occupazione > 0) {
             $this->id_occupazione = $id_occupazione;
@@ -32,6 +41,10 @@ class Occupazione {
         }
     }
     
+    /**
+     * @param int $utente
+     * @throws Eccezione se $utente non è un intero positivo
+     */
     public function setUtente($utente): void {
         if (is_int($utente) and $utente > 0) {
             $this->utente = $utente;
@@ -40,6 +53,10 @@ class Occupazione {
         }
     }
     
+    /**
+     * @param int $annuncio
+     * @throws Eccezione se $annuncio non è un intero positivo
+     */
     public function setAnnuncio($annuncio): void {
         if (is_int($annuncio) and $annuncio > 0) {
             $this->annuncio = $annuncio;
@@ -48,14 +65,22 @@ class Occupazione {
         }
     }
     
+    /**
+     * @param boolean $prenotazione_guest
+     * @throws Eccezione se $prenotazione_guest non è TRUE o FALSE
+     */
     public function setPrenotazioneGuest($prenotazione_guest): void {
         if (is_bool($prenotazione_guest)) {
             $this->prenotazione_guest = $prenotazione_guest;
         } else {
-            throw new Eccezione(htmlentities("Il flag di controllo se è prenotazione non è valido."));
+            throw new Eccezione(htmlentities("Il flag di controllo se l'occupazione è una prenotazione non è valido."));
         }
     }
     
+    /**
+     * @param int $num_ospiti
+     * @throws Eccezione se $num_ospiti non è un intero oppure supera il massimo consentito
+     */
     public function setNumOspiti($num_ospiti): void {
         if (is_int($num_ospiti) and $num_ospiti <= DataConstraints::occupazioni["num_ospiti"]) {
             $this->num_ospiti = $num_ospiti;
@@ -64,16 +89,24 @@ class Occupazione {
         }
     }
     
+    /**
+     * @param string $data_inizio
+     * @throws Eccezione se $data_inizio non è una stringa rappresentante una data valida
+     */
     public function setDataInizio($data_inizio): void {
-        if(is_string($data_inizio) && checkIsValidDate($data_inizio)) {
+        if(checkIsValidDate($data_inizio)) {
             $this->data_inizio = $data_inizio;
         } else {
             throw new Eccezione(htmlentities("La data di inizio non è valida."));
         }
     }
     
+    /**
+     * @param string $data_fine
+     * @throws Eccezione se $data_fine non è una stringa rappresentante una data valida
+     */
     public function setDataFine($data_fine): void {
-        if(is_string($data_fine) && checkIsValidDate($data_fine)) {
+        if(checkIsValidDate($data_fine)) {
             $this->data_fine = $data_fine;
         } else {
             throw new Eccezione(htmlentities("La data di fine non è valida."));

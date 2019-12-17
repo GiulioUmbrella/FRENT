@@ -155,15 +155,15 @@ class Frent {
             $lista_occupazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
             foreach($lista_occupazioni as $i => $assoc_occupazione) {
-                $lista_occupazioni[$i] = new Occupazione(
-                    intval($assoc_occupazione['id_occupazione']),
-                    intval($assoc_occupazione['utente']),
-                    $id_annuncio, // già int, non serve fare il parsing
-                    intval($assoc_occupazione['prenotazione_guest']),
-                    intval($assoc_occupazione['num_ospiti']),
-                    $assoc_occupazione['data_inizio'],
-                    $assoc_occupazione['data_fine']
-                );
+                $occupazione = Occupazione::build();
+                $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
+                $occupazione->setUtente(intval($assoc_occupazione['utente']));
+                $occupazione->setAnnuncio($id_annuncio);
+                $occupazione->setPrenotazioneGuestintval($assoc_occupazione['prenotazione_guest'])();
+                $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
+                $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
+                $occupazione->setDataFine($assoc_occupazione['data_fine']);
+                $lista_occupazioni[$i] = $occupazione;
             }
     
             return $lista_occupazioni;
@@ -605,15 +605,15 @@ class Frent {
             $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
-                $lista_prenotazioni[$i] = new Occupazione(
-                    intval($assoc_prenotazione['id_occupazione']),
-                    intval($assoc_prenotazione['utente']),
-                    intval($assoc_prenotazione['annuncio']),
-                    intval($assoc_prenotazione['prenotazione_guest']),
-                    intval($assoc_prenotazione['num_ospiti']),
-                    $assoc_prenotazione['data_inizio'],
-                    $assoc_prenotazione['data_fine']
-                );
+                $occupazione = Occupazione::build();
+                $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
+                $occupazione->setUtente(intval($assoc_occupazione['utente']));
+                $occupazione->setAnnuncio(intval($assoc_prenotazione['annuncio']));
+                $occupazione->setPrenotazioneGuestintval($assoc_occupazione['prenotazione_guest']);
+                $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
+                $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
+                $occupazione->setDataFine($assoc_occupazione['data_fine']);
+                $lista_occupazioni[$i] = $occupazione;
             }
     
             return $lista_prenotazioni;
