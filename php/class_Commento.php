@@ -1,6 +1,6 @@
 <?php
 require_once "./CheckMethods.php";
-require_once "./Utente.class.php";
+require_once "./class_Utente.php";
 
 class Commento {
     private $data_pubblicazione;

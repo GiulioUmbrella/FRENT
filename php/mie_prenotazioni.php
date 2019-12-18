@@ -1,8 +1,8 @@
 <?php
-require_once "./Database.class.php";
-require_once "./Frent.class.php";
-require_once "./Occupazione.class.php";
-require_once "./CredenzialiDB.class.php";
+require_once "./class_Database.php";
+require_once "./class_Frent.php";
+require_once "./class_Occupazione.php";
+require_once "./class_CredenzialiDB.php";
 //todo da rifare il modo di distiguere i 3 tipi di prenotazioni: utilizzare una funzione che trova la data corrente,
 // e quindi suddividerli, altrimenti è codice ripetuto.
 $pagina = file_get_contents("./components/mie_prenotazioni.html");

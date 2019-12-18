@@ -1,8 +1,8 @@
 <?php
-require_once "./Database.class.php";
-require_once "./Frent.class.php";
+require_once "./class_Database.php";
+require_once "./class_Frent.php";
 
-require_once "./CredenzialiDB.class.php";
+require_once "./class_CredenzialiDB.php";
 $pagina = file_get_contents("./components/login.html");
 $pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login.php", $pagina);

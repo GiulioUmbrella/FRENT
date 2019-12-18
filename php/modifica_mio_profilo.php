@@ -1,8 +1,8 @@
 <?php
 
-require_once "Frent.class.php";
-require_once "Utente.class.php";
-require_once "CredenzialiDB.class.php";
+require_once "class_Frent.php";
+require_once "class_Utente.php";
+require_once "class_CredenzialiDB.php";
 
 session_start();
 if (isset($_SESSION["user"])){

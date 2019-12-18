@@ -1,7 +1,7 @@
 <?php
 
 require_once "./CheckMethods.php";
-require_once "./DataConstraints.class.php";
+require_once "./class_DataConstraints.php";
 
 class Annuncio {
     
