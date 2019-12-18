@@ -266,11 +266,11 @@ class Frent {
                 $annuncio = Annuncio::build();
                 $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
-                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
+//                $annuncio->setDescrizione($assoc_annuncio['descrizione']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
-                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
-                $annuncio->setCitta($assoc_annuncio['citta']);
-                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
+//                $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
+//                $annuncio->setCitta($assoc_annuncio['citta']);
+//                $annuncio->setPrezzoNotte($assoc_annuncio['prezzo_notte']);
                 $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
 
