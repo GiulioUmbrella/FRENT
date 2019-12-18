@@ -6,8 +6,8 @@ require_once "./class_CredenzialiDB.php";
 
 */
 
-require_once "./Frent.php";
-require_once "./CredenzialiDB.php";
+require_once "./class_Frent.php";
+require_once "./class_CredenzialiDB.php";
 try {
     /*
      * quando annuncio non è stato approvato, fare dei controlli che non può essere visualizzato,

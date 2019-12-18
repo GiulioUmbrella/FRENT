@@ -1,8 +1,8 @@
 <?php
 //todo nell'elenco visualizzare lo stato di approvazione degli annunci!
-require_once "Database.php";
-require_once "Frent.php";
-require_once "CredenzialiDB.php";
+require_once "class_Database.php";
+require_once "class_Frent.php";
+require_once "class_CredenzialiDB.php";
 $pagina = file_get_contents("./components/miei_annunci.html");
 session_start();
 if (isset($_SESSION["user"])) {
