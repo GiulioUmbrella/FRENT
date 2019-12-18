@@ -5,7 +5,7 @@ RED='\e[31m'
 YELLOW='\e[33m'
 NC='\e[39m' # No Color
 
-cd ~/TECHWEB
+cd ~/public_html/TECHWEB
 
 #if git checkout Db_branch; then
 #  echo echo "${YELLOW}Moving to Db_Branch${NC}"
