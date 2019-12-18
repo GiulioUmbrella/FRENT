@@ -17,7 +17,8 @@ function checkIsValidMail($mail, $lunghezza=191): bool{
  * @return bool restituisce true sse la stringa non contiene nessun spazio
  */
 function checkStringContainsNoSpace($str): bool {
-    return is_string($str) and !preg_match("/^\S{6,}\z/",trim($str));
+    // return is_string($str) and !preg_match("/^\S{6,}\z/",trim($str));
+    return is_string($str) and !strpos(trim($str), " ");
 }
 
 /**
