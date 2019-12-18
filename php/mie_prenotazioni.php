@@ -4,7 +4,7 @@ require_once "./Frent.php";
 require_once "./Occupazione.php";
 require_once "./CredenzialiDB.php";
 //todo da rifare il modo di distiguere i 3 tipi di prenotazioni: utilizzare una funzione che trova la data corrente,
-// e quindi suddividerli, altrimenti è codice ripetuto. 
+// e quindi suddividerli, altrimenti è codice ripetuto.
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
 session_start();
 if (isset($_SESSION["user"])) {
