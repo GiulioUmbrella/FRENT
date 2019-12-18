@@ -1,6 +1,6 @@
 <?php
 require_once("./CheckMethods.php");
-require_once "./DataConstraints.php";
+require_once "./DataConstraints.class.php";
 
 class Amministratore {
     private $id_amministratore;

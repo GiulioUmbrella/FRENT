@@ -1,6 +1,6 @@
 <?php
-require_once "./Frent.php";
-require_once "./CredenzialiDB.php";
+require_once "./Frent.class.php";
+require_once "./CredenzialiDB.class.php";
 try {
     /*
      * quando annuncio non è stato approvato, fare dei controlli che non può essere visualizzato,

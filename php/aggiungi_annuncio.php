@@ -1,7 +1,7 @@
 <?php
-require_once "./Frent.php";
-require_once "./Database.php";
-require_once "./CredenzialiDB.php";
+require_once "./Frent.class.php";
+require_once "./Database.class.php";
+require_once "./CredenzialiDB.class.php";
 session_start();
 
 if ($_SESSION["user"]) {
