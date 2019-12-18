@@ -68,10 +68,10 @@ try {
         $str_commenti .= "<ul>";
         $totale = 0;
         foreach ($commenti as $commento) {
-            $totale += intval($commento->getVotazione());
+            $totale += intval($commento->getValutazione());
             $immagine_profilo = "";
             $testo_commento = $commento->getCommento();
-            $votazione = $commento->getVotazione();
+            $votazione = $commento->getValutazione();
             $user_name = "";
             $data_commento = $commento->getDataPubblicazione();
             $titolo_commento = $commento->getTitolo();

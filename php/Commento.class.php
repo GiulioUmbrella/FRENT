@@ -1,5 +1,6 @@
 <?php
 require_once "./CheckMethods.php";
+require_once "./Utente.class.php";
 
 class Commento {
     private $data_pubblicazione;
@@ -7,6 +8,7 @@ class Commento {
     private $commento;
     private $votazione;
     private $id_prenotazione;
+    private $utente; // istanza di Utente che ha pubblicato l'account
 
     private function __construct() {}
 
@@ -26,7 +28,7 @@ class Commento {
         return $this->commento;
     }
     
-    public function getVotazione(): int {
+    public function getValutazione(): int {
         return $this->votazione;
     }
     
@@ -72,11 +74,11 @@ class Commento {
      * @param string $votazione
      * @throws Eccezione se $votazione non è un intero e non è compreso fra 0 e 5, estremi inclusi
      */
-    public function setVotazione($votazione) {
+    public function setValutazione($votazione) {
         if (is_int($votazione) and $votazione >= 0 and $votazione <= 5) {
             $this->votazione = $votazione;
         } else {
-            throw new Eccezione("Il voto inserito non è valido.");
+            throw new Eccezione("Il voto inserito non è nel formato valido.");
         }
     }
 
@@ -92,7 +94,23 @@ class Commento {
         if (is_int($id) and $id > 0) {
             $this->id_prenotazione = $id;
         } else {
-            throw new Eccezione("L'ID della prenotazione non è valido.");
+            throw new Eccezione("L'ID della prenotazione non è nel formato valido.");
         }
+    }
+
+    /**
+     * @param Utente $utente
+     * @throws Eccezione se $utente non è un'istanza di classe Utente e se i suoi campi username e img_profilo sono vuoti
+     */
+    public function setUtente($utente) {
+        if(get_class($utente) === "Utente" && strlen($utente->getImgProfilo()) > 0 && strlen($utente->getUserName())) {
+            $this->utente = $utente;
+        } else {
+            throw new Eccezione("L'istanza di utente non è nel formato valido.");
+        }
+    }
+
+    public function getUtente(): Utente {
+        return $this->utente;
     }
 }

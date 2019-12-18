@@ -248,10 +248,14 @@ class Frent {
 
             foreach($lista_commenti as $i => $assoc_commento) {
                 $commento = Commento::build();
+                $utente = Utente::build();
+                $utente->setImgProfilo($assoc_commento["img_profilo"]);
+                $utente->setUserName($assoc_commento["user_name"]);
+                $commento->setUtente($utente);
                 $commento->setTitolo($assoc_commento['titolo']);
                 $commento->setCommento($assoc_commento['commento']);
                 $commento->setDataPubblicazione($assoc_commento['data_pubblicazione']);
-                $commento->setVotazione(intval($assoc_commento['votazione']));
+                $commento->setValutazione(intval($assoc_commento['votazione']));
                 $commento->setIdPrenotazione(intval($assoc_commento['prenotazione']));
                 $lista_commenti[$i] = $commento;
             }
@@ -454,14 +458,14 @@ class Frent {
             $cmt->setIdPrenotazione($prenotazione);
             $cmt->setTitolo($titolo);
             $cmt->setCommento($commento);
-            $cmt->setVotazione($votazione);
+            $cmt->setValutazione($votazione);
 
             $this->db_instance->connect();
             $function_name_and_params = "insert_commento(
                 " . $cmt->getIdPrenotazione() . ",
                 \"" . $cmt->getTitolo() . "\",
                 \"" . $cmt->getCommento() . "\",
-                " . $cmt->getVotazione() . "
+                " . $cmt->getValutazione() . "
             )";
 
             return intval($this->db_instance->queryFunction($function_name_and_params));
@@ -649,12 +653,12 @@ class Frent {
      * @param int $id ID del commento da modificare
      * @param string $titolo nuovo titolo (può essere invariato rispetto all'attuale)
      * @param string $commento nuovo commento (può essere invariato rispetto all'attuale)
-     * @param int $votazione nuova votazione (può essere invariata rispetto all'attuale)
+     * @param int $valutazione nuova votazione (può essere invariata rispetto all'attuale)
      * @return int ID della prenotazione (e quindi del commento) modificato in caso di successo
      * @return int -1 in caso ci siano stati problemi durante l'update (per esempio qualche errore con le chiavi esterne)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function editCommento($id, $titolo, $commento, $votazione): int {
+    public function editCommento($id, $titolo, $commento, $valutazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
@@ -664,14 +668,14 @@ class Frent {
             $cmt->setIdPrenotazione($id);
             $cmt->setTitolo($titolo);
             $cmt->setCommento($commento);
-            $cmt->setVotazione($votazione);
+            $cmt->setValutazione($valutazione);
 
             $this->db_instance->connect();
             $function_name_and_params = "edit_commento(
                 " . $cmt->getIdPrenotazione() . ",
                 \"" . $cmt->getTitolo() . "\",
                 \"" . $cmt->getCommento() . "\",
-                " . $cmt->getVotazione() . "
+                " . $cmt->getValutazione() . "
             )";
     
             return intval($this->db_instance->queryFunction($function_name_and_params));

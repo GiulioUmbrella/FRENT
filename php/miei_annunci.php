@@ -25,7 +25,7 @@ if (isset($_SESSION["user"])) {
         $punteggio=0;
         if ($numeroRecensione!=0){
             foreach ($recensioni as $recensione)
-                $punteggio=$recensione->getVotazione()+$punteggio;
+                $punteggio=$recensione->getValutazione()+$punteggio;
             $punteggio=$punteggio/$numeroRecensione;
         }
 //        $content .= "<li><div class=\"intestazione_lista\">
