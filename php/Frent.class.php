@@ -785,7 +785,7 @@ class Frent {
                 $occupazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_prenotazione['data_inizio']);
                 $occupazione->setDataFine($assoc_prenotazione['data_fine']);
-                $lista_occupazioni[$i] = $occupazione; // sostituzione in-place
+                $lista_prenotazioni[$i] = $occupazione; // sostituzione in-place
             }
     
             return $lista_prenotazioni;
