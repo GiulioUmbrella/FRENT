@@ -53,7 +53,7 @@ try {
             $punteggio=$punteggio/$numeroRecensione;
         }
         $content .= "<li><div class=\"intestazione_lista\">
-      <a href=\"dettagli_annuncio.php?id=$id\"  tabindex=\"12\">$Titolo</a>
+      <a href=\"dettagli_annuncio.php?id=$id&dataInizio=$dataInizio&dataFine=$dataFine\"  tabindex=\"12\">$Titolo</a>
       <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p></div><div class=\"corpo_lista\">
       <img src =\"$path\" alt=\"Foto copertina della casa\" /><div class=\"descrizione_annuncio\">
       <p>$descrizione</p><p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p></div></div></li>";
