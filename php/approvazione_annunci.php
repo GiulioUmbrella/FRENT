@@ -1,8 +1,8 @@
 <?php
-require_once "./Annuncio.php";
-require_once "./Frent.php";
-require_once "./Database.php";
-require_once "./CredenzialiDB.php";
+require_once "./Annuncio.class.php";
+require_once "./Frent.class.php";
+require_once "./Database.class.php";
+require_once "./CredenzialiDB.class.php";
 
 try {
     session_start();

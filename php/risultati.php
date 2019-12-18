@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "Frent.php";
-require_once "./CredenzialiDB.php";
+require_once "Frent.class.php";
+require_once "./CredenzialiDB.class.php";
 $pagina = file_get_contents("./components/risultati.html");
 if (isset($_SESSION["admin"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);

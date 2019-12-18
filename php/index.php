@@ -1,9 +1,9 @@
 <?php
 //echo phpinfo();
 require_once "./CheckMethods.php";
-require_once "./Frent.php";
-require_once "./CredenzialiDB.php";
-require_once "./Annuncio.php";
+require_once "./Frent.class.php";
+require_once "./CredenzialiDB.class.php";
+require_once "./Annuncio.class.php";
 try {
     session_start();
     $pagina = file_get_contents("./components/index.html");
