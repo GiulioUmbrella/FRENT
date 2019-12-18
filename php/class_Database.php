@@ -1,5 +1,5 @@
 <?php
-require_once("Eccezione.class.php");
+require_once("class_Eccezione.php");
 
 /**
  * Class Database
