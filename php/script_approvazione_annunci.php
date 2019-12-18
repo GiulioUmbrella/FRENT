@@ -1,8 +1,8 @@
 <?php
-require_once "../classi/Frent.php";
-require_once "../classi/Amministratore.php";
+require_once "./Frent.php";
+require_once "./Amministratore.php";
 
-require_once "../CredenzialiDB.php";
+require_once "./CredenzialiDB.php";
 session_start();
 
 if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
@@ -20,12 +20,12 @@ if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
         
         $res = $frent->adminEditStatoApprovazioneAnnuncio($id, $status);
 
-        header("Location: ../pagine_php/approvazione_annunci.php");
+        header("Location: ./approvazione_annunci.php");
     }catch(Eccezione $ex) {
         echo $ex->getMessage();
     }
 }else{
-    header("Location: ../../html/pag404.html");
+    header("Location: ./404.php");
 //    echo "Session missing";
 }
 

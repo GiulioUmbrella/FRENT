@@ -1,10 +1,10 @@
 <?php
-require_once "../classi/Database.php";
-require_once "../classi/Frent.php";
+require_once "./Database.php";
+require_once "./Frent.php";
 
-require_once "../CredenzialiDB.php";
-$pagina = file_get_contents("../components/login_admin.html");
-$pagina = str_replace("<FORM/>", file_get_contents("../components/login_form.html"), $pagina);
+require_once "./CredenzialiDB.php";
+$pagina = file_get_contents("./components/login_admin.html");
+$pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login_admin.php", $pagina);
 session_start();
 if (isset($_POST["accedi"])) {
@@ -19,7 +19,7 @@ if (isset($_POST["accedi"])) {
         $admin = $frent->adminLogin($nome, $password);
     
         $_SESSION["admin"] = $admin;
-        header("Location: ../pagine_php/approvazione_annunci.php");
+        header("Location: ./approvazione_annunci.php");
         
     } catch (Eccezione $e) {
         

@@ -1,6 +1,6 @@
 <?php
-//require_once ($_SERVER["DOCUMENT_ROOT"]) . "/php/classi/Database.php";
-//require_once ($_SERVER["DOCUMENT_ROOT"]) . "/php/classi/Frent.php";
+//require_once "./Database.php";
+//require_once "./Frent.php";
 //require_once ($_SERVER["DOCUMENT_ROOT"]) . "/php/CredenzialiDB.php";
 //
 //$nome = $_POST["user"];

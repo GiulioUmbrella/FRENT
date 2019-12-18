@@ -1,10 +1,10 @@
 <?php
-require_once "../classi/Database.php";
-require_once "../classi/Frent.php";
+require_once "./Database.php";
+require_once "./Frent.php";
 
-require_once "../CredenzialiDB.php";
-$pagina = file_get_contents("../components/login.html");
-$pagina = str_replace("<FORM/>", file_get_contents("../components/login_form.html"), $pagina);
+require_once "./CredenzialiDB.php";
+$pagina = file_get_contents("./components/login.html");
+$pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login.php", $pagina);
 session_start();
 if (isset($_POST["accedi"])) {
@@ -19,7 +19,7 @@ if (isset($_POST["accedi"])) {
         $utente = $frent->login($nome, $password);
         
         $_SESSION["user"] = $utente;
-        header("Location: ../pagine_php/index.php");
+        header("Location: ./index.php");
         
     } catch (Eccezione $e) {
         
@@ -33,6 +33,6 @@ if (isset($_POST["accedi"])) {
     $pagina = str_replace("<VALUEUSERNAME>", " ", $pagina);
     $pagina = str_replace("<VALUEPASSWORD>", " ", $pagina);
 }
-$pagina= str_replace("<FOOTER/>",file_get_contents("../components/footer.html"),$pagina);
+$pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
 
 echo $pagina;

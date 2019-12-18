@@ -1,6 +1,6 @@
 <?php
-require_once "../classi/Frent.php";
-require_once "../CredenzialiDB.php";
+require_once "./Frent.php";
+require_once "./CredenzialiDB.php";
 try {
     /*
      * quando annuncio non è stato approvato, fare dei controlli che non può essere visualizzato,
@@ -13,12 +13,12 @@ try {
     if (!isset($_SESSION["admin"])){
         $annuncio= $manager->getAnnuncio(intval($_GET["id"]));
         if ($annuncio->getStatoApprovazione() != 1){
-            header("Location: 404.php");
+            header("Location: ./404.php");
         }
     }
     
     if (!isset($_GET["id"])){
-        header("Location: 404.php");
+        header("Location: ./404.php");
     }
     $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
@@ -26,16 +26,16 @@ try {
     $ospitiMassimo= $annuncio->getMaxOspiti();
     $foto = $manager->getFotoAnnuncio($id);
 
-    $pagina = file_get_contents("../components/dettagli_annuncio.html");
+    $pagina = file_get_contents("./components/dettagli_annuncio.html");
     $pagina= str_replace("<DESCRIZIONE/>",$annuncio->getDescrizione(),$pagina);
     //todo stampar le foto
     
     if (isset($_SESSION["user"])){
-        $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_logged.html"),$pagina);
+        $pagina = str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
     }else if (isset($_SESSION["admin"])){
-        $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_admin_logged.html"),$pagina);
+        $pagina = str_replace("<HEADER/>",file_get_contents("./components/header_admin_logged.html"),$pagina);
     }else{
-        $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_no_logged.html"),$pagina);
+        $pagina = str_replace("<HEADER/>",file_get_contents("./components/header_no_logged.html"),$pagina);
     
     }
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);

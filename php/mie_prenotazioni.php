@@ -1,13 +1,13 @@
 <?php
-require_once "../classi/Database.php";
-require_once "../classi/Frent.php";
-require_once "../classi/Occupazione.php";
-require_once "../CredenzialiDB.php";
-$pagina = file_get_contents("../components/mie_prenotazioni.html");
+require_once "./Database.php";
+require_once "./Frent.php";
+require_once "./Occupazione.php";
+require_once "./CredenzialiDB.php";
+$pagina = file_get_contents("./components/mie_prenotazioni.html");
 session_start();
 if (isset($_SESSION["user"])) {
-    $pagina = str_replace("<HEADER/>", file_get_contents("../components/header_logged.html"), $pagina);
-    $pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
+    $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
     $content = "";
     // pescare le prenotazioni correnti
@@ -50,7 +50,7 @@ if (isset($_SESSION["user"])) {
         $dataInizio="2019-12-11";
         $dataFine="2019-12-20";
         $content .= "<li><div id=\"ID_PRENOTAZIONE_3\" class=\"intestazione_lista\">
-                <a href=\"/riepilogo_prenotazione.php\" tabindex=\"$i\"
+                <a href=\"./riepilogo_prenotazione.php\" tabindex=\"$i\"
                    title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#123] Soggiorno presso Casa
                            Loreto</a>
             </div><div class=\"corpo_lista lista_flex\">

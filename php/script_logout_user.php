@@ -4,5 +4,5 @@ session_start();
 
 if (isset($_SESSION["user"])) {
     session_destroy();
-    header("Location: ../pagine_php/index.php");
+    header("Location: ./index.php");
 }
