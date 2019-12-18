@@ -34,7 +34,7 @@ class Commento {
      * @param string $data_pubblicazione formato della date deve essere: aaaa/mm/gg oppure aa/mm/gg
      * @throws Eccezione se $data_pubblicazione non è nel formato
      */
-    public function setDataPubblicazione($data_pubblicazione): void {
+    public function setDataPubblicazione($data_pubblicazione) {
         if (checkIsValidDate($data_pubblicazione)) {
             $this->data_pubblicazione = $data_pubblicazione;
         } else {
@@ -46,7 +46,7 @@ class Commento {
      * @param string $titolo
      * @throws Eccezione se $titolo supera la lunghezza massima consentita
      */
-    public function setTitolo($titolo): void {
+    public function setTitolo($titolo) {
         $trim_title = trim(htmlentities($titolo));
         if (checkStringMaxLen($trim_title, DataConstraints::commenti["titolo"])) {
             $this->titolo = $trim_title;
@@ -59,7 +59,7 @@ class Commento {
      * @param string $commento
      * @throws Eccezione se $commento supera la lunghezz massima consentita
      */
-    public function setCommento($commento): void {
+    public function setCommento($commento) {
         $trim_com = trim(htmlentities($commento));
         if (checkStringMaxLen($trim_com, DataConstraints::commenti["commento"])) {
             $this->commento = $trim_com;
@@ -72,7 +72,7 @@ class Commento {
      * @param string $votazione
      * @throws Eccezione se $votazione non è un intero e non è compreso fra 0 e 5, estremi inclusi
      */
-    public function setVotazione($votazione): void {
+    public function setVotazione($votazione) {
         if (is_int($votazione) and $votazione >= 0 and $votazione <= 5) {
             $this->votazione = $votazione;
         } else {
@@ -88,7 +88,7 @@ class Commento {
      * @param int $id
      * @throws Eccezione se $id non è un intero positivo
      */
-    public function setIdPrenotazione($id): void {
+    public function setIdPrenotazione($id) {
         if (is_int($id) and $id > 0) {
             $this->id_prenotazione = $id;
         } else {

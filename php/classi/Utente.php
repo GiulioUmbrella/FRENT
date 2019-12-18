@@ -26,7 +26,7 @@ class Utente {
      * @param int $id_utente
      * @throws Eccezione se $id_utente non è un intero positivo
      */
-    public function setIdUtente($id_utente): void {
+    public function setIdUtente($id_utente) {
         echo "Checking id";
         if (is_int($id_utente) and $id_utente > 0) {
             $this->id_utente = $id_utente;
@@ -45,7 +45,7 @@ class Utente {
      * @param string $nome
      * @throws Eccezione se $nome contiene numeri o supera la lunghezza massima
      */
-    public function setNome($nome): void {
+    public function setNome($nome) {
         $trim_nome = trim($nome);
         if (checkStringNoNumber($trim_nome) and checkStringMaxLen($trim_nome, DataConstraints::utenti["nome"]))
             $this->nome = $trim_nome;
@@ -62,7 +62,7 @@ class Utente {
      * @param string $cognome
      * @throws Eccezione se $cognome contiene numeri o supera la lunghezza massima
      */
-    public function setCognome($cognome): void {
+    public function setCognome($cognome) {
         $trim_cognome = trim($cognome);
         if (checkStringNoNumber($trim_cognome) and checkStringMaxLen($trim_cognome, DataConstraints::utenti["cognome"]))
             $this->cognome = $trim_cognome;
@@ -79,7 +79,7 @@ class Utente {
      * @param string $user_name
      * @throws Eccezione se $user_name contiene spazi e la lunghezza supera il massimo consentito
      */
-    public function setUserName($user_name): void {
+    public function setUserName($user_name) {
         $trim_un = trim($user_name);
         if (checkStringContainsNoSpace($trim_un) and checkStringMaxLen($trim_un, DataConstraints::utenti["user_name"]))
             $this->user_name = $trim_un;
@@ -96,7 +96,7 @@ class Utente {
      * @param string $mail
      * @throws Eccezione se $mail non rappresenta un indirizzo mail valido oppure supera la lunghezza massima consentita
      */
-    public function setMail($mail): void {
+    public function setMail($mail) {
         $trim_mail = trim($mail);
         if (checkIsValidMail($trim_mail, DataConstraints::utenti["mail"]) and strlen($trim_mail)  > 6) {
             // 6 perché a@a.aa, e aa perché non ci sono TLD con una lettera
@@ -114,7 +114,7 @@ class Utente {
      * @param string $data_nascita il formato di quest stringa deve essere aaaa-mm-gg
      * @throws Eccezione se $data_nascita non è una stringa rappresentante una data valida
      */
-    public function setDataNascita($data_nascita): void {
+    public function setDataNascita($data_nascita) {
         if (checkIsValidDate($data_nascita)) {
             $this->data_nascita = $data_nascita;
         } else {
@@ -131,7 +131,7 @@ class Utente {
      * @param string $img_profilo
      * @throws Eccezione se $img_profilo supera la lunghezza massima consentita
      */
-    public function setImgProfilo($img_profilo): void {
+    public function setImgProfilo($img_profilo) {
         $trim_img = trim($img_profilo);
         if (checkStringMaxLen($trim_img, DataConstraints::utenti["img_profilo"])) {
             $this->img_profilo = str_replace(" ", "_", $trim_img);
@@ -148,7 +148,7 @@ class Utente {
      * @param string $telefono
      * @throws Eccezione se $telefono non è un numero di telefono nuovo
      */
-    public function setTelefono($telefono): void {
+    public function setTelefono($telefono) {
         $trim_tel = trim($telefono);
         if (checkPhoneNumber($trim_tel)) {
             $this->telefono = $trim_tel;

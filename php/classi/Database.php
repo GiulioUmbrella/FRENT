@@ -108,16 +108,26 @@ class Database {
             throw new Eccezione("Non è attiva una connessione con il database.");
         }
         // viene interrogato il database, essendo una procedure di MySQL viene usato l'operatore CALL
-        $procedure_result = $this->db->query("CALL $procedure;");
-
+        $procedure_result = $this->db->query("CALL $procedure;", MYSQLI_STORE_RESULT);
+        
         // se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($procedure_result && $procedure_result->num_rows >= 0) {
             // NOTA BENE: verificare che con un record set di 0 righe $procedure_result sia comunque TRUE
             $returned_array = array();
+
             while ($row = $procedure_result->fetch_array(MYSQLI_ASSOC)) {
                 array_push($returned_array, $row);
             }
+
+            // va pulito tutto il result set rimasto inusato
+            while($this->db->next_result()){
+                if($a = $this->db->store_result()){
+                    $a->free();
+                }
+            }
+
             $procedure_result->free();
+
             return $returned_array;
         } else {
             throw new Eccezione("Errore nell'esecuzione della procedura $procedure.");

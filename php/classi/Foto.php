@@ -22,7 +22,7 @@ class Foto {
      * @param int $id_foto
      * @throws Eccezione se $id_foto non è un intero positivo
      */
-    public function setIdFoto($id_foto): void {
+    public function setIdFoto($id_foto) {
         if (is_int($id_foto) and $id_foto > 0) {
             $this->id_foto = $id_foto;
         } else {
@@ -38,9 +38,9 @@ class Foto {
      * @param string $file_path
      * @throws Eccezione se $file_path supera la lungehezza massima
      */
-    public function setFilePath($file_path): void {
+    public function setFilePath($file_path) {
         $trim_file_path = trim($file_path);
-        if (checkStringMaxLen(trim_file_path, DataConstraints::foto_annunci["file_path"])) {
+        if (checkStringMaxLen($trim_file_path, DataConstraints::foto_annunci["file_path"])) {
             $this->file_path = str_replace(" ", "_", $trim_file_path);
         } else {
             throw new Eccezione(htmlentities("Il path della foto non è valido."));
@@ -55,7 +55,7 @@ class Foto {
      * @param string $descrizione
      * @throws Eccezione se $descrizione supera la lunghezza massima consentita
      */
-    public function setDescrizione($descrizione): void {
+    public function setDescrizione($descrizione) {
         if (checkStringMaxLen(trim($descrizione), DataConstraints::foto_annunci["descrizione"])) {
             $this->descrizione = trim($descrizione);
         } else {
@@ -71,7 +71,7 @@ class Foto {
      * @param int $id
      * @throws Eccezione se $id non è un intero positivo
      */
-    public function setIdAnnuncio($id): void {
+    public function setIdAnnuncio($id) {
         if (is_int($id) and $id > 0) {
             $this->id_annuncio = $id;
         } else {
