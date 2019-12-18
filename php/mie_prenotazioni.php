@@ -17,6 +17,7 @@ if (isset($_SESSION["user"])) {
     $occupazioni = $frent->getPrenotazioniGuest();
     $i = 5;
     foreach ($occupazioni as $prenotazione) {
+        var_dump($prenotazione);
         $id_prenotazione = $prenotazione->getIdOccupazione();
         $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
         $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
@@ -42,6 +43,7 @@ if (isset($_SESSION["user"])) {
     $content = "";
     
     foreach ($occupazioni as $prenotazione){
+        $idAnnuncio = $prenotazione->getAnnuncio();
         $titoloAnnuncio="";
         $id_prenotazione=1;
         $path="";
@@ -51,8 +53,7 @@ if (isset($_SESSION["user"])) {
         $dataFine="2019-12-20";
         $content .= "<li><div id=\"ID_PRENOTAZIONE_3\" class=\"intestazione_lista\">
                 <a href=\"./riepilogo_prenotazione.php\" tabindex=\"$i\"
-                   title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#123] Soggiorno presso Casa
-                           Loreto</a>
+                   title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $titoloAnnuncio</a>
             </div><div class=\"corpo_lista lista_flex\">
                 <div class=\"dettagli_prenotazione\">
                     <img src=\"$path\" alt=\"$descrizionefoto\"/>

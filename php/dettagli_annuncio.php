@@ -11,15 +11,16 @@ try {
     $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
     if (!isset($_SESSION["admin"])) {
+    
+        if (!isset($_GET["id"])) {
+            header("Location: ./404.php");
+        }
         $annuncio = $manager->getAnnuncio(intval($_GET["id"]));
         if ($annuncio->getStatoApprovazione() != 1) {
             header("Location: ./404.php");
         }
     }
     
-    if (!isset($_GET["id"])) {
-        header("Location: ./404.php");
-    }
     $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
     $prezzoAnnuncio = $annuncio->getPrezzoNotte();
