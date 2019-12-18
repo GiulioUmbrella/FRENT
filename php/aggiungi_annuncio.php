@@ -5,18 +5,20 @@ require_once "./CredenzialiDB.php";
 session_start();
 
 if ($_SESSION["user"]) {
-    if (!isset($POST["avanti"])) {
+    if (!isset($_POST["avanti"])) {
         $pagina = file_get_contents("./components/aggiungi_annunci_passaggio_1.html");
-        echo $_SERVER['PHP_SELF'];
+//        echo $_SERVER['PHP_SELF'];
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
         $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
         $pagina = str_replace("<SELF/>", "./aggiungi_annuncio.php", $pagina);
         echo $pagina;
-    } else if (isset($POST["avanti"])) {
+    } else if (isset($_POST["avanti"])) {
         $pagina = file_get_contents("./components/aggiungi_annunci_passaggio_2.html");
-        
+    
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
         $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
+    
+        $pagina = str_replace("<SELF/>", "./script_aggiungi_annuncio.php", $pagina);
         echo $pagina;
         
     } else {
