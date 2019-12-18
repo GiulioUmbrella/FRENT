@@ -1,6 +1,13 @@
 <?php
-require_once "./Frent.class.php";
 require_once "./CredenzialiDB.class.php";
+/* todo quando l'annuncio non approvato è visualizzato dal proprietario, il pulsante prenota deve sparire, e deve
+    essere visualizza il pulsante modifica, reindirizzandolo verso la pagina della modifica dell'annunciom
+    e quindi sparisce anche i due form di data.
+
+*/
+
+require_once "./Frent.php";
+require_once "./CredenzialiDB.php";
 try {
     /*
      * quando annuncio non è stato approvato, fare dei controlli che non può essere visualizzato,
