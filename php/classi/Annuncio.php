@@ -62,7 +62,7 @@ class Annuncio {
         return $this->bloccato;
     }
     
-    public function getMaxOspiti(): int {
+    public function getMaxOspiti() {
         return $this->max_ospiti;
     }
     

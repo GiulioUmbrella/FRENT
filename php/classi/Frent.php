@@ -286,6 +286,7 @@ class Frent {
             $annuncio->setImgAnteprima($res_annuncio[0]['img_anteprima']);
             $annuncio->setIndirizzo($res_annuncio[0]['indirizzo']);
             $annuncio->setCitta($res_annuncio[0]['citta']);
+            $annuncio->setMaxOspiti(intval($res_annuncio[0]['max_ospiti']));
             $annuncio->setHost(intval($res_annuncio[0]["host"]));
             $annuncio->setPrezzoNotte(floatval($res_annuncio[0]['prezzo_notte']));
 
