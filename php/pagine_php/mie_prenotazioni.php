@@ -14,9 +14,9 @@ if (isset($_SESSION["user"])) {
     $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
             CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME)
         , $_SESSION["user"]);
-    $prenotazioni = $frent->getPrenotazioniGuest();
+    $occupazioni = $frent->getPrenotazioniGuest();
     $i = 5;
-    foreach ($prenotazioni as $prenotazione) {
+    foreach ($occupazioni as $prenotazione) {
         $id_prenotazione = $prenotazione->getIdOccupazione();
         $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
         $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
@@ -41,14 +41,14 @@ if (isset($_SESSION["user"])) {
     
     $content = "";
     
-    foreach ($prenotazioni as $prenotazione){
+    foreach ($occupazioni as $prenotazione){
         $titoloAnnuncio="";
-        $id_prenotazione;
+        $id_prenotazione=1;
         $path="";
         $prezzo="";
-        $luogoAlloggio;
-        $dataInizio;
-        $dataFine;
+        $luogoAlloggio="Padova";
+        $dataInizio="2019-12-11";
+        $dataFine="2019-12-20";
         $content .= "<li><div id=\"ID_PRENOTAZIONE_3\" class=\"intestazione_lista\">
                 <a href=\"/riepilogo_prenotazione.php\" tabindex=\"$i\"
                    title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#123] Soggiorno presso Casa
@@ -69,12 +69,12 @@ if (isset($_SESSION["user"])) {
     }
     $pagina = str_replace("<PRENOTAZIONICORRENTI/>", $content, $pagina);
     
-    $prenotazioni = "";
+    $occupazioni = "";
     
     
     
 //    $prenotazioni = $frent->
-    foreach ($prenotazioni as $prenotazioni_passate){
+    foreach ($occupazioni as $prenotazioni_passate){
         $content.="<li>
             <div id=\"ID_PRENOTAZIONE_1\" class=\"intestazione_lista\">
                 <a href=\"../../html/riepilogo_prenotazione.html\" tabindex=\"$i\"
