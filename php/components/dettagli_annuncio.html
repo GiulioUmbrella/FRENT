@@ -43,12 +43,13 @@
 
 <div id="content">
     <div class="informazioni_prenotazione">
-        <h1 class="titolo_annuncio">TITOLO LUNGHISSSSSIIIIIMOOOO</h1>
+        <h1 class="titolo_annuncio"><TITOLO_ANNUNCIO/></h1>
 <!--        <h1 class="titolo_annuncio"><TITOLO_ANNUNCIO/></h1>-->
-        <h2>Valutazione media: <Valutazione/></h2>
+        <h2>Valutazione media: <VALUTAZIONE/></h2>
         <h2>Numero commenti ricevuti:<NUMEROCOMMENTI/> </h2>
         <h2>Prezzo <PREZZO/>&euro;</h2>
         <p>Numero ospiti massimo: <OSPITIMASSIMO/></p>
+
         <form action="./conferma_prenotazione.php" method="post" class="form form_verticale">
             <fieldset>
                 <label for="data_inizio">Data inizio</label>
@@ -59,6 +60,21 @@
                 <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
             </fieldset>
         </form>
+
+        <form action="./script_approvazione_annunci.php" method="post" class="form form_verticale">
+            <fieldset>
+                <label class="aiuti_alla_navigazione" for="approva">Approva</label>
+                <input id="approva" name="approva" type="submit" value="Approva"/>
+            </fieldset>
+        </form>
+        <form action="./modifica_annuncio.php" method="post" class="form form_verticale">
+            <fieldset>
+                <input value="<ID/>" type="hidden" name="id" id="id">
+                <label class="aiuti_alla_navigazione" for="modifica">Modifica</label>
+                <input id="modifica" name="modifica" type="submit" value="Modifica"/>
+            </fieldset>
+        </form>
+
     </div>
 
    <IMMAGINE/>

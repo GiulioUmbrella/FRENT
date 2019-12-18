@@ -756,6 +756,7 @@ class Frent {
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
                 $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
                 $annuncio->setCitta($assoc_annuncio['citta']);
+                $annuncio->setStatoApprovazione(intval($assoc_annuncio["stato_approvazione"]));
                 $annuncio->setPrezzoNotte(floatval($assoc_annuncio['prezzo_notte']));
                 $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }

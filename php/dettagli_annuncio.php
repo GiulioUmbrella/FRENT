@@ -17,18 +17,22 @@ try {
     session_start();
     $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
-    if (!isset($_SESSION["admin"])) {
     
-        if (!isset($_GET["id"])) {
-            header("Location: ./404.php");
-        }
-        $annuncio = $manager->getAnnuncio(intval($_GET["id"]));
-        if ($annuncio->getStatoApprovazione() != 1) {
-            header("Location: ./404.php");
-        }
+    if (!isset($_GET["id"])) {
+        header("Location: ./404.php");
     }
     
     $id = intval($_GET["id"]);
+    $annuncio= $manager->getAnnuncio($id);
+    // se non sono ne admin ne user e annuncio non è stato approvato, non posso vederlo.
+    // se sono user ma non sono host e annuncio non è stato approvato, non posso veder.
+    if ((!isset($_SESSION["admin"]) and !isset($_SESSION["user"]) and  $annuncio->getStatoApprovazione()!=1)or
+        (isset($_SESSION["user"] ) and $_SESSION["user"]->getIdUtente() != $annuncio->getIdHost()
+            and $annuncio->getStatoApprovazione()!=1)) {
+        header("Location: ./404.php");
+    }
+
+    
     $annuncio = $manager->getAnnuncio($id);
     $prezzoAnnuncio = $annuncio->getPrezzoNotte();
     $ospitiMassimo = $annuncio->getMaxOspiti();
@@ -36,8 +40,7 @@ try {
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
-    //todo stampar le foto
-    
+
     if (isset($_SESSION["user"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     } else if (isset($_SESSION["admin"])) {
@@ -81,10 +84,12 @@ try {
                 </div><div class=\"corpo_commento\"><h1>$titolo_commento</h1><p>Votazione: $votazione</p>
                 <p>$testo_commento</p></div></li>";
         }
+        if (count($commenti)!=0)
+            $mediaCommenti=$totale/count($commenti);
 //        $totale = $totale/count($commenti);
         $str_commenti .= "</ul>";
         $pagina = str_replace("<Commenti/>", $str_commenti, $pagina);
-        $pagina = str_replace("<Valutazione/>", $mediaCommenti, $pagina);
+        $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
         $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
         $pagina = str_replace("<PREZZO/>", $prezzoAnnuncio, $pagina);
         $pagina = str_replace("<OSPITIMASSIMO/>", $mediaCommenti, $pagina);
@@ -111,8 +116,6 @@ try {
     } else {
         $content .= "<img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>";
     }
-    
-    
     $content .= "</div>";
     
     

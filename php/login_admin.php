@@ -33,6 +33,6 @@ if (isset($_POST["accedi"])) {
     $pagina = str_replace("<VALUEUSERNAME>", " ", $pagina);
     $pagina = str_replace("<VALUEPASSWORD>", " ", $pagina);
 }
-$pagina= str_replace("<FOOTER/>",file_get_contents("../components/footer.html"),$pagina);
+$pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
 
 echo $pagina;

@@ -82,6 +82,8 @@ class Utente {
      */
     public function setUserName($user_name) {
         $trim_un = trim($user_name);
+        if (checkStringContainsNoSpace($trim_un))
+            echo "checkStringContainsNoSpace($trim_un)";
         if (checkStringContainsNoSpace($trim_un) and checkStringMaxLen($trim_un, DataConstraints::utenti["user_name"]))
             $this->user_name = $trim_un;
         else{
