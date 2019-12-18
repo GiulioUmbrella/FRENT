@@ -28,11 +28,18 @@ if (isset($_SESSION["user"])) {
                 $punteggio=$recensione->getVotazione()+$punteggio;
             $punteggio=$punteggio/$numeroRecensione;
         }
-        $content .= "<li><div class=\"intestazione_lista\">
-      <a href=\"dettagli_annuncio.php?id=$id\"  tabindex=\"12\">$Titolo</a>
-      <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p></div><div class=\"corpo_lista\">
-      <img src =\"$path\" alt=\"Foto copertina della casa\" /><div class=\"descrizione_annuncio\">
-      <p>$descrizione</p><p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p></div></div></li>";
+//        $content .= "<li><div class=\"intestazione_lista\">
+//      <a href=\"dettagli_annuncio.php?id=$id\"  tabindex=\"12\">$Titolo</a>
+//      <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p></div><div class=\"corpo_lista\">
+//      <img src =\"$path\" alt=\"Foto copertina della casa\" /><div class=\"descrizione_annuncio\">
+//      <p>$descrizione</p><p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p></div></div></li>";
+//
+//
+        $content.= " <li><div class=\"intestazione_lista\">
+                <a href=\"\" tabindex=\"12\">$Titolo</a>
+                <p>Punteggio: $numeroRecensione: </p></div><div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
+                <div><p>$descrizione</p><a class=\"link_gestisci_annuncio\" href=\"./gestione_indisponibilita.php\" tabindex=\"13\" title=\"Vai alla gestione dell'annuncio\">Gestisci</a>
+                </div></div></li>";
     }
     $pagina= str_replace("<LISTAANNUNCI/>",$content,$pagina);
     echo $pagina;
