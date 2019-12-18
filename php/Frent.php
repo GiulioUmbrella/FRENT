@@ -28,8 +28,8 @@ class Frent {
     /**
      * Costruttore della classe Frent.
      * @param Database $db riferimento a un oggetto che permette la connessione con il database del sito
-     * @param Utente $auth_user oppure di tipo Amministratore oppure NULL
-     * @throws Eccezione
+     * @param Utente|Amministratore|NULL $auth_user oggetto che gestisce l'utenza collegata al sistema
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function __construct($db, $auth_user = NULL) {
         try {
@@ -98,9 +98,6 @@ class Frent {
      */
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): int {
         try {
-            if(!checkIsValidDate($dataNascita) || !checkIsValidMail($mail) || !checkPhoneNumber($numTelefono)) {
-                throw new Eccezione("Parametri di invocazione di registrazione errati.");
-            }
             $utente = Utente::build();
             $utente->setNome($nome);
             $utente->setCognome($cognome);
@@ -161,7 +158,7 @@ class Frent {
 
     /**
      * Restituisce le occupazioni di un annuncio, dato il suo ID.
-     * @param $id_annuncio id dell'annuncio
+     * @param int $id_annuncio id dell'annuncio
      * @return array di oggetti di tipo Occupazione
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione degli oggetti Occupazione
      */
@@ -177,8 +174,8 @@ class Frent {
             foreach($lista_occupazioni as $i => $assoc_occupazione) {
                 $occupazione = Occupazione::build();
                 $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
-                $occupazione->setUtente(intval($assoc_occupazione['utente']));
-                $occupazione->setAnnuncio($id_annuncio);
+                $occupazione->setIdUtente(intval($assoc_occupazione['utente']));
+                $occupazione->setIdAnnuncio($id_annuncio);
                 $occupazione->setPrenotazioneGuest(intval($assoc_occupazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
@@ -306,7 +303,7 @@ class Frent {
             $annuncio->setIndirizzo($res_annuncio[0]['indirizzo']);
             $annuncio->setCitta($res_annuncio[0]['citta']);
             $annuncio->setMaxOspiti(intval($res_annuncio[0]['max_ospiti']));
-            $annuncio->setHost(intval($res_annuncio[0]["host"]));
+            $annuncio->setIdHost(intval($res_annuncio[0]["host"]));
             $annuncio->setPrezzoNotte(floatval($res_annuncio[0]['prezzo_notte']));
 
             return $annuncio;
@@ -330,23 +327,23 @@ class Frent {
     public function insertOccupazione($id_annuncio, $numospiti, $data_inizio, $data_fine): int {
         try {
             if(get_class($this->auth_user) === "Utente") {
-                throw new Eccezione(htmlentities("L'inserimento di un'occupazione può essere svolto solo da un utente registrato."));
+                throw new Eccezione("L'inserimento di un'occupazione può essere svolto solo da un utente registrato.");
             }
 
             $occupazione = Occupazione::build();
-            $occupazione->setAnnuncio($id_annuncio);
+            $occupazione->setIdAnnuncio($id_annuncio);
             $occupazione->setNumOspiti($numospiti);
             $occupazione->setDataInizio($data_inizio);
             $occupazione->setDataFine($data_fine);
 
             if(checkDateBeginAndEnd($occupazione->getDataInizio(), $occupazione->getDataFine())) {
-                throw new Eccezione(htmlentities("Non è possibile inserire una data di fine antecedente o uguale alla data di inizio"));
+                throw new Eccezione("Non è possibile inserire una data di fine antecedente o uguale alla data di inizio");
             }
 
             $this->db_instance->connect();
             $function_name_and_params = "insert_occupazione(
                 " . $this->auth_user->getIdUtente() . ",
-                " . $occupazione->getAnnuncio() . ",
+                " . $occupazione->getIdAnnuncio() . ",
                 " . $occupazione->getNumOspiti() . ",
                 " . $occupazione->getDataInizio() . ",
                 " . $occupazione->getDataFine() . ",
@@ -361,7 +358,7 @@ class Frent {
     public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) === "Utente") {
-                throw new Eccezione(htmlentities("L'inserimento di un'annuncio può essere svolto solo da un utente registrato."));
+                throw new Eccezione("L'inserimento di un'annuncio può essere svolto solo da un utente registrato.");
             }
 
             $annuncio = Annuncio::build();
@@ -380,7 +377,7 @@ class Frent {
                 \"" . $annuncio->getImgAnteprima() . "\",
                 \"" . $annuncio->getIndirizzo() . "\",
                 \"" . $annuncio->getCitta() . "\",
-                " . $this->utente->getIdUtente() . ",
+                " . $this->auth_user->getIdUtente() . ",
                 " . $annuncio->getMaxOspiti() . ",
                 " . $annuncio->getPrezzoNotte() . ",
             )";
@@ -767,8 +764,8 @@ class Frent {
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
                 $occupazione = Occupazione::build();
                 $occupazione->setIdOccupazione(intval($assoc_prenotazione['id_occupazione']));
-                $occupazione->setUtente(intval($assoc_prenotazione['utente']));
-                $occupazione->setAnnuncio(intval($assoc_prenotazione['annuncio']));
+                $occupazione->setIdUtente(intval($assoc_prenotazione['utente']));
+                $occupazione->setIdAnnuncio(intval($assoc_prenotazione['annuncio']));
                 $occupazione->setPrenotazioneGuest(boolval($assoc_prenotazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_prenotazione['data_inizio']);
@@ -849,7 +846,7 @@ class Frent {
 
             $admin = Amministratore::build();
             $admin->setIdAmministratore(intval($res_admin[0]['id_amministratore']));
-            $admin->setUserName($res_admin[0]['user_name']);
+            $admin->setUsername($res_admin[0]['user_name']);
             $admin->setMail($res_admin[0]['mail']);
 
             return $admin;

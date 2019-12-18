@@ -38,7 +38,7 @@ class Commento {
         if (checkIsValidDate($data_pubblicazione)) {
             $this->data_pubblicazione = $data_pubblicazione;
         } else {
-            throw new Eccezione(htmlentities("La data di pubblicazione non è valida."));
+            throw new Eccezione("La data di pubblicazione non è nel formato valido.");
         }
     }
     
@@ -51,7 +51,7 @@ class Commento {
         if (checkStringMaxLen($trim_title, DataConstraints::commenti["titolo"])) {
             $this->titolo = $trim_title;
         } else {
-            throw new Eccezione(htmlentities("La lunghezza del titolo supera il limite consentito."));
+            throw new Eccezione("La lunghezza del titolo supera il limite consentito.");
         }
     }
     
@@ -64,7 +64,7 @@ class Commento {
         if (checkStringMaxLen($trim_com, DataConstraints::commenti["commento"])) {
             $this->commento = $trim_com;
         } else {
-            throw new Eccezione(htmlentities("La lunghezza del commento supera il limite consentito."));
+            throw new Eccezione("La lunghezza del commento supera il limite consentito.");
         }
     }
     
@@ -76,7 +76,7 @@ class Commento {
         if (is_int($votazione) and $votazione >= 0 and $votazione <= 5) {
             $this->votazione = $votazione;
         } else {
-            throw new Eccezione(htmlentities("Il voto inserito non è valido."));
+            throw new Eccezione("Il voto inserito non è valido.");
         }
     }
 
@@ -92,7 +92,7 @@ class Commento {
         if (is_int($id) and $id > 0) {
             $this->id_prenotazione = $id;
         } else {
-            throw new Eccezione(htmlentities("L'ID della prenotazione non è valido."));
+            throw new Eccezione("L'ID della prenotazione non è valido.");
         }
     }
 }

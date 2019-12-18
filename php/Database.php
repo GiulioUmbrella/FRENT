@@ -2,7 +2,8 @@
 require_once("Eccezione.php");
 
 /**
- * Classe che permette di interfacciarsi con un database MySQL.
+ * Class Database
+ * Classe che permette di in con un database MySQL.
  */
 class Database {
     /**
