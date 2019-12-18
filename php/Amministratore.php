@@ -1,6 +1,6 @@
 <?php
-require_once ($_SERVER["DOCUMENT_ROOT"])."/php/CheckMethods.php";
-require_once "DataConstraints.php";
+require_once("./CheckMethods.php");
+require_once "./DataConstraints.php";
 
 class Amministratore {
     private $id_amministratore;

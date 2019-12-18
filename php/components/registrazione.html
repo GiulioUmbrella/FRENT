@@ -10,8 +10,8 @@
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
 
 
-    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
-    <link rel="icon" href="../../immagini/icona.ico"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="icon" href="../immagini/icona.ico"/>
 
 </head>
 <body class="layout_centrale">
@@ -23,7 +23,7 @@
 
 <div id="content" >
   <h1>Registrati</h1>
-    <form action="../script/script_registrazione.php" method="post" class="form form_verticale">
+    <form action="../pagine_php/registrazione.php" method="post" class="form form_verticale">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
             <label for="nome">Nome</label>
@@ -54,33 +54,21 @@
             <legend>Data di nascita</legend>
             <label for="birth_day">Giorno:</label>
             <select id="birth_day" tabindex="11">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <!--TODO: PHP-->
+                <GIORNO/>
             </select>
             <label for="birth_month">Mese:</label>
             <select id="birth_month" tabindex="12">
-                <option value="1">Gennaio</option>
-                <option value="2">Febbraio</option>
-                <option value="3">Marzo</option>
-                <option value="4">Aprile</option>
-                <!--TODO: PHP-->
+                <MESE/>
             </select>
             <label for="birth_year">Anno:</label>
             <select id="birth_year" tabindex="13">
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <!--TODO: PHP-->
+                <ANNO/>
             </select>
 
         </fieldset>
         <fieldset>
             <label class="aiuti_alla_navigazione" for="registrati">Registrati</label>
-            <input type="submit" id="registrati" value="Registrati"/>
+            <input type="submit" id="registrati" name="registrati" value="Registrati"/>
             <label class="aiuti_alla_navigazione" for="resetta" xml:lang="en">Reset</label>
             <input type="reset" id="resetta" value="Reset"/>
         </fieldset>

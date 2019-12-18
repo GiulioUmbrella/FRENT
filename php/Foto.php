@@ -1,6 +1,6 @@
 <?php
 
-require_once ($_SERVER["DOCUMENT_ROOT"])."/php/CheckMethods.php";
+require_once "./CheckMethods.php";
 
 class Foto {
     private $id_foto;

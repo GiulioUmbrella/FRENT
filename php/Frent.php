@@ -1,13 +1,13 @@
 <?php
 
-require_once "Amministratore.php";
-require_once "Annuncio.php";
-require_once "Commento.php";
-require_once "Database.php";
-require_once "Eccezione.php";
-require_once "Foto.php";
-require_once "Occupazione.php";
-require_once "Utente.php";
+require_once "./Amministratore.php";
+require_once "./Annuncio.php";
+require_once "./Commento.php";
+require_once "./Database.php";
+require_once "./Eccezione.php";
+require_once "./Foto.php";
+require_once "./Occupazione.php";
+require_once "./Utente.php";
 
 /**
  * Class Frent

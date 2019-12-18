@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER["DOCUMENT_ROOT"])."/php/CheckMethods.php";
+require_once "./CheckMethods.php";
 
 class Commento {
     private $data_pubblicazione;
