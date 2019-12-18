@@ -8,24 +8,27 @@ try {
      * può visualizzare, se è utente o null allora possono visualizzare solo gli annunci nello stato di approvazione= 1
      */
     session_start();
+    $manager =  new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME));
     if (!isset($_SESSION["admin"])){
-        $manager =  new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-            CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME));
         $annuncio= $manager->getAnnuncio(intval($_GET["id"]));
         if ($annuncio->getStatoApprovazione() != 1){
             header("Location: 404.php");
         }
     }
-    $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME)
-//        , $_SESSION["admin"]
-    );
+    
+    if (!isset($_GET["id"])){
+        header("Location: 404.php");
+    }
     $id = intval($_GET["id"]);
     $annuncio = $manager->getAnnuncio($id);
     $prezzoAnnuncio = $annuncio->getPrezzoNotte();
     $ospitiMassimo= $annuncio->getMaxOspiti();
-//    $foto = $manager->getFotoAnnuncio($id);
+    $foto = $manager->getFotoAnnuncio($id);
+
     $pagina = file_get_contents("../components/dettagli_annuncio.html");
+    $pagina= str_replace("<DESCRIZIONE/>",$annuncio->getDescrizione(),$pagina);
+    //todo stampar le foto
     
     if (isset($_SESSION["user"])){
         $pagina = str_replace("<HEADER/>",file_get_contents("../components/header_logged.html"),$pagina);
@@ -36,23 +39,13 @@ try {
     
     }
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
-//    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
-
-//    $totale = 0;
-//    $str_foto = "";
-//    foreach ($foto as $f) {
-//
-//
-//        $str_commenti .= "";
-//
-//    }
-//    //
+    
+    
     
     $str_commenti = "";
     try {
-        $mediaCommenti = 0;
         $commenti = $manager->getCommentiAnnuncio($id);
-        //$commenti = array();
+        $mediaCommenti = 0;
         $str_commenti .= "<ul>";
         $totale= 0;
         foreach ($commenti as $commento) {
@@ -69,7 +62,7 @@ try {
                 </div><div class=\"corpo_commento\"><h1>$titolo_commento</h1><p>Votazione: $votazione</p>
                 <p>$testo_commento</p></div></li>";
         }
-        $totale = $totale/count($commenti);
+//        $totale = $totale/count($commenti);
         $str_commenti .= "</ul>";
         $pagina = str_replace("<Commenti/>", $str_commenti, $pagina);
         $pagina = str_replace("<Valutazione/>", $mediaCommenti, $pagina);
@@ -77,10 +70,34 @@ try {
         $pagina = str_replace("<PREZZO/>", $prezzoAnnuncio , $pagina);
         $pagina = str_replace("<OSPITIMASSIMO/>", $mediaCommenti, $pagina);
         $pagina = str_replace("<Valutazione/>", $mediaCommenti, $pagina);
+        
     }catch(Eccezione $e){
         $pagina = str_replace("<Commenti/>","<p>Ancora non ci sono commenti!</p>", $pagina);
-
     }
+
+//    $img= $annuncio->getImgAnteprima();
+    $img="../../immagini/borgoricco.jpg";
+   $photos = $manager->getFotoAnnuncio($annuncio->getIdAnnuncio());
+    
+    $content="<div class=\"shower_immagine_anteprima\">";
+    if (count($photos)!=0){
+        $content.="<button id=\"immagine_precedente\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&lt;</button>
+        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
+        <button id=\"immagine_successiva\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&gt;</button></div><div class=\"image_picker\">";;
+        foreach ($photos as $foto){
+            $path = $foto->getFilePath();
+            $content.="<img class=\"immagine\" alt=\"Descrizione immagine\" src=\"$path\"/>";
+        
+        }
+    }else{
+        $content.="<img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>";
+    }
+    
+
+    $content.="</div>";
+    
+    
+    $pagina = str_replace("<IMMAGINE/>",$content,$pagina);
     echo $pagina;
     
 } catch (Eccezione $ex) {
