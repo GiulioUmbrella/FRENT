@@ -55,6 +55,8 @@ class Frent {
      */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
+            if (!is_int($numOspiti))
+                echo "num wrong;";
             if(!is_int($numOspiti) || !checkDateBeginAndEnd($dataInizio, $dataFine)) {
                 throw new Eccezione("Parametri di invocazione di ricercaAnnunci errati.");
             }

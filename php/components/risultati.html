@@ -17,26 +17,25 @@
 <HEADER/>
 
  <div id="breadcrumb" >
-    <p> Ti trovi in: <a href="index.php" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt;Risultati</p>
+    <p> Ti trovi in: <a href="index.php" title="Vai alla pagina delle ricerca annunci" tabindex="6" xml:lang="en" lang="en">Home</a>:&gt;&gt;Risultati</p>
  </div>
 
 <!-- Il form di ricerca deve avere i parametri della ricerca -->
 <div id="laterale" >
-  <form action="" class="form form_verticale">
+  <form action="./risultati.php" class="form form_verticale">
 
       <fieldset class="formVerticale">
       <legend>Ricerca annuncio</legend>
 
       <label for="citta">Città:</label>
-      <input type="text" name="citta" id="citta" placeholder="Città" <VALUECITTA/> tabindex="7"/>
+      <input type="text" name="citta" id="citta" placeholder="Città" value="<VALUECITTA/>" tabindex="7"/>
       <!--Chiarire cosa fare per Safari -->
-      <label for="data_inizio">Data Inizio</label>
-      <input type="date" name="data_inizio" id="data_inizio" tabindex="8" <VALUEDATAINIZIO/>
-      placeholder="yyyy-mm-dd"/>
-      <label for="data_fine">Data Fine</label>
-      <input type="date" name="data_fine" id="data_fine" placeholder="yyyy-mm-dd" <VALUEDATAFINE/> tabindex="9"/>
-      <label for="num_ospiti">Num Ospiti</label>
-      <input type="number" name="num_ospiti" id="num_ospiti" min="1" max="99" value="1" <VALUENUMERO/> tabindex="10"/>
+      <label for="dataInizio">Data Inizio</label>
+      <input type="date" name="dataInizio" id="dataInizio" tabindex="8" value="<VALUEINIZIO/>"/>
+      <label for="dataFine">Data Fine</label>
+      <input type="date" name="dataFine" id="dataFine" value="<VALUEFINE/>"  tabindex="9"/>
+      <label for="numOspiti">Num Ospiti</label>
+      <input type="number" name="numOspiti" id="numOspiti" min="1" max="99" value="<VALUENUMERO/>" tabindex="10"/>
       <input type="submit" id="pulsante_cerca" value="Cerca" tabindex="11">
 
     </fieldset>
@@ -47,24 +46,25 @@
 <div id="content" class="list">
 <ul>
     <RISULTATI/>
-  <li>
-   <div class="intestazione_lista">
-      <a href="dettagli_annuncio.html"  tabindex="12">Titolo</a>
-      <p>Punteggio: Num Recensioni: </p>
-   </div>
-   <div class="corpo_lista">
-      <img src ="../../immagini/img1.png" alt="Foto copertina della casa" />
-      <div class="descrizione_annuncio">
+<!--  <li>-->
+<!--   <div class="intestazione_lista">-->
+<!--      <a href="./dettagli_annuncio.php?id=1"  tabindex="12">Titolo</a>-->
+<!--      <p>Punteggio: Num Recensioni: </p>-->
+<!--   </div>-->
+<!--   <div class="corpo_lista">-->
+<!--      <img src ="../../immagini/img1.png" alt="Foto copertina della casa" />-->
+<!--      <div class="descrizione_annuncio">-->
 
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui offi</p>
-          <p class="prezzototale">Prezzo totale</p>
-     </div>
-   </div>
- </li>
+<!--        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
+<!--        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.-->
+<!--        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.-->
+<!--        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui offi</p>-->
+<!--          <p class="prezzototale">55.5 &euro; persona/notte</p>-->
+<!--     </div>-->
+<!--   </div>-->
+<!-- </li>-->
 </ul>
+</div>
 <FOOTER/>
 
 </body>

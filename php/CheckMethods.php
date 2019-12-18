@@ -47,7 +47,8 @@ function checkStringMinLen($str, $len): bool{
  * @return bool restituisce true sse $date è una data valida rispetto al formato specificato.
  */
 function checkIsValidDate($date, $format="Y-m-d"){
-    return is_string($date) and date("Y-m-d",strtotime($date));
+//    return is_string($date) and checkdate($format,strtotime($date));
+    return is_string($date) and date($format,strtotime($date));
 }
 
 /**

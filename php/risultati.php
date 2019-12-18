@@ -13,27 +13,58 @@ if (isset($_SESSION["admin"])) {
 $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
     CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
 
-$citta = "Padova";
-$numOspiti = 1;
-$dataInizio = "2019/12/11";
-$dataFine = "2019/12/12";
-$risultati = $frent->ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine);
-$content = "";
-foreach ($risultati as $annuncio) {
-    $id = $annuncio->getIdAnnuncio();
-    $Titolo = $annuncio->getTitolo();
-    $punteggio= 0;
-    $descrizione=$annuncio->getDescrizione();
-    $prezzoTotale=$annuncio->getPrezzoNotte();
-    $path= $annuncio->getImgAnteprima();
-    $content .= "<li><div class=\"intestazione_lista\">
-      <a href=\"dettagli_annuncio.php?id=$id\"  tabindex=\"12\">$Titolo</a>
-      <p>Punteggio: Num Recensioni:$punteggio </p></div><div class=\"corpo_lista\">
-      <img src =\"$path\" alt=\"Foto copertina della casa\" /><div class=\"descrizione_annuncio\">
-      <p>$descrizione</p><p class=\"prezzototale\">Prezzo: $prezzoTotale persona/notte</p></div></div></li>";
+$citta="";
+$numOspiti =intval(1);
+$dataInizio ="";
+$dataFine ="";
+if (isset($_GET["citta"])){
+    $citta =$_GET["citta"];
+    $pagina=str_replace("<VALUECITTA/>",$citta,$pagina);
 }
+if (isset($_GET["numOspiti"])){
+    $pagina=str_replace("<VALUENUMERO/>",$numOspiti,$pagina);
+    $numOspiti =intval($_GET["numOspiti"]);
+}
+if (isset($_GET["dataInizio"])){
+    $dataInizio =$_GET["dataInizio"];
+    $pagina=str_replace("<VALUEINIZIO/>",$dataInizio,$pagina);
+    
+}
+if (isset($_GET["dataFine"])){
+    $dataFine =$_GET["dataFine"];
+    $pagina=str_replace("<VALUEFINE/>",$dataFine,$pagina);
+    
+}
+$content = "";
+try {
+    $risultati = $frent->ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine);
+    foreach ($risultati as $annuncio) {
+        $id = $annuncio->getIdAnnuncio();
+        $Titolo = $annuncio->getTitolo();
+        $descrizione=$annuncio->getDescrizione();
+        $prezzoTotale=$annuncio->getPrezzoNotte();
+        $path= $annuncio->getImgAnteprima();
+        $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
+        $numeroRecensione= count($recensioni);
+        $punteggio=0;
+        if ($numeroRecensione!=0){
+            foreach ($recensioni as $recensione)
+                $punteggio=$recensione->getVotazione()+$punteggio;
+            $punteggio=$punteggio/$numeroRecensione;
+        }
+        $content .= "<li><div class=\"intestazione_lista\">
+      <a href=\"dettagli_annuncio.php?id=$id\"  tabindex=\"12\">$Titolo</a>
+      <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p></div><div class=\"corpo_lista\">
+      <img src =\"$path\" alt=\"Foto copertina della casa\" /><div class=\"descrizione_annuncio\">
+      <p>$descrizione</p><p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p></div></div></li>";
+    }
+} catch (Eccezione $e) {
+    $content=$e->getMessage();
+}
+//$risultati=array();
 
 
-$pagina = str_replace("<RISULTATI/>", $risultati, $pagina);
+
+$pagina = str_replace("<RISULTATI/>", $content, $pagina);
 $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
 echo $pagina;
