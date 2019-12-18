@@ -23,8 +23,8 @@ if (isset($_SESSION["user"])) {
         
         
         $id_prenotazione = $prenotazione->getIdOccupazione();
-        $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
-        $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
+        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
+        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
         $mail = "";
         $nomeAnnuncio = "";
         $descrizionefoto = "";
@@ -49,7 +49,7 @@ if (isset($_SESSION["user"])) {
     $content = "";
     
     foreach ($occupazioni as $prenotazione){
-        $idAnnuncio = $prenotazione->getAnnuncio();
+        $idAnnuncio = $prenotazione->getIdAnnuncio();
         $titoloAnnuncio="";
         $id_prenotazione=1;
         $path="";

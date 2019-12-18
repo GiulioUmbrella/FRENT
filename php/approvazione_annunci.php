@@ -31,7 +31,7 @@ try {
     }
     $content .= "</ul>";
     $pagina = str_replace("<Flag1/>", $content, $pagina);
-    $pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
+    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
     echo $pagina;
     

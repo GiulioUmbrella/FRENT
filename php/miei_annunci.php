@@ -20,7 +20,7 @@ if (isset($_SESSION["user"])) {
         $descrizione=$annuncio->getDescrizione();
         $prezzoTotale=$annuncio->getPrezzoNotte();
         $path= $annuncio->getImgAnteprima();
-        $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
+        $recensioni=$frent->getCommentiAnnuncio(intval($annuncio->getIdAnnuncio()));
         $numeroRecensione= count($recensioni);
         $punteggio=0;
         if ($numeroRecensione!=0){
@@ -28,16 +28,16 @@ if (isset($_SESSION["user"])) {
                 $punteggio=$recensione->getValutazione()+$punteggio;
             $punteggio=$punteggio/$numeroRecensione;
         }
-//        $content .= "<li><div class=\"intestazione_lista\">
-//      <a href=\"dettagli_annuncio.php?id=$id\"  tabindex=\"12\">$Titolo</a>
-//      <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p></div><div class=\"corpo_lista\">
-//      <img src =\"$path\" alt=\"Foto copertina della casa\" /><div class=\"descrizione_annuncio\">
-//      <p>$descrizione</p><p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p></div></div></li>";
-//
-//
+        $stato="Approvato";
+        if ($annuncio->getStatoApprovazione()==0){
+            $stato="NVNA";
+        }else if ($annuncio->getStatoApprovazione()==2){
+            $stato="VNA";
+        }
+
         $content.= " <li><div class=\"intestazione_lista\">
-                <a href=\"\" tabindex=\"12\">$Titolo</a>
-                <p>Punteggio: $numeroRecensione: </p></div><div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
+                <a href=\"dettagli_annuncio.php?id=$id\" tabindex=\"12\">$Titolo</a>
+                <p>Stato Approvazione: $stato - Punteggio: $numeroRecensione: </p></div><div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
                 <div><p>$descrizione</p><a class=\"link_gestisci_annuncio\" href=\"./gestione_indisponibilita.php\" tabindex=\"13\" title=\"Vai alla gestione dell'annuncio\">Gestisci</a>
                 </div></div></li>";
     }
