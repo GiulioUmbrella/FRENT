@@ -28,12 +28,12 @@ class Utente {
      * @throws Eccezione se $id_utente non è un intero positivo
      */
     public function setIdUtente($id_utente) {
-        echo "Checking id";
+
         if (is_int($id_utente) and $id_utente > 0) {
             $this->id_utente = $id_utente;
-            echo "ID CHECKED";
+
         } else {
-            echo "ECCezione";
+
             throw new Eccezione("L'ID dell'utente non è nel formato valido.");
         }
     }
@@ -82,8 +82,6 @@ class Utente {
      */
     public function setUserName($user_name) {
         $trim_un = trim($user_name);
-        if (checkStringContainsNoSpace($trim_un))
-            echo "checkStringContainsNoSpace($trim_un)";
         if (checkStringContainsNoSpace($trim_un) and checkStringMaxLen($trim_un, DataConstraints::utenti["user_name"]))
             $this->user_name = $trim_un;
         else{
