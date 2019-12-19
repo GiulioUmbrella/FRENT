@@ -29,26 +29,30 @@ class ImageManager {
      * @param string $img_name_attr valore dell'attributo name dell'elemento <input type="file" ..></file>
      * nel form da cui si sta recuperando l'immagine
      * @param string $fileName nome da assegnare al file una volta caricato (se non assegnato viene preso il nome del file caricato)
-     * @return string nome del file con estensione
      * @throws Eccezione se il file caricato non è un'immagine, se il file supera la dimensione massima specificata nella costruzione e se l'estensione non è valida.
      */
-    public function setFile($img_name_attr, $fileName = ""): string {
+    public function setFile($img_name_attr, $fileName = "") {
         $file = $_FILES[$img_name_attr];
         $this->tempFile = $file["tmp_name"];
+        $extension = pathinfo($file["name"], PATHINFO_EXTENSION);
 
         if (getimagesize($this->tempFile) === false) {
             throw new Eccezione("Il file caricato non è un'immagine.");
         }
 
-        if ($this->fileExtension() != "jpg" && $this->fileExtension() != "png" && $this->fileExtension() != "jpeg") {
+        if ($extension != "jpg" && $extension != "png" && $extension != "jpeg") {
             throw new Eccezione("Il file caricato non ha un'estensione valida.");
         }
 
         if ($file["size"] > $this->maxFileSize * MB) {
             throw new Eccezione("Il file caricato supera la dimensione massima di " . $this->maxFileSize . "MB.");
         }
-
-        return $this->targetFolder . basename($fileName === "" ? $_SERVER[$img_name_attr]["name"] : $fileName . "." . $this->fileExtension());
+        
+        if($fileName === "") {
+            $this->targetFile = $this->targetFolder . basename($_SERVER[$img_name_attr]["name"]);
+        } else {
+            $this->targetFile = $this->targetFolder . basename("$fileName.$extension");
+        }
     }
 
     /**
@@ -80,6 +84,7 @@ class ImageManager {
     /**
      * Sposta il file caricato nella posizione richiesta durante la creazione dell'istanza di ImageManager.
      * @return bool TRUE se è stato salvato nella posizzione corretta il file, FALSE altrimenti
+     * @throws Eccezione se il file non è stato ancora impostato
      */
     public function saveFile(): bool {
         if (strlen($this->targetFile) === 0) {
