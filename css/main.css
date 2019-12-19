@@ -868,38 +868,26 @@ body .aiuti_alla_navigazione {
 }
 
 /*-----------------Riepilogo prenotazione-----------------*/
-@media (max-device-width: 800px) 
-  {
+@media (max-device-width: 800px) {
+
+html {
+  zoom: 3;
+}
+
 .layout_colonna {
-        grid-template-rows: auto auto auto auto;
+      grid-template-rows: auto auto auto auto;
       grid-template-areas:
       "l"
       "c"
       "m"
       "f";
-  }
-
-  .layout_colonna #logo { grid-area: l;}
-  .layout_colonna #nav { grid-area: m;}
-  .layout_colonna #breadcrumb { display: none}
-  .layout_colonna#content { grid-area: c; }
-  .layout_colonna #footer { grid-area: f; }
-
-  /*.layout_colonna #breadcrumb {display: none; }*/
-  .form_variabile {
-
-  }
-
-  .input_label_orizzontale {
-    display: block;
-    width: 100%
-  }
-html {
-	font-size: 5em;
 }
-  .input_label_orizzontale label {
-    /*position: absolute;
-    height: 0;
-    overflow: hidden;*/
-  }
+
+.layout_colonna #breadcrumb { display: none}
+
+.input_label_orizzontale {
+  display: block;
+   width: 100%
+}
+
 }
