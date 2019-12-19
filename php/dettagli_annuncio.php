@@ -1,5 +1,6 @@
 <?php
 require_once "./class_CredenzialiDB.php";
+require_once "./CheckMethods.php";
 /* todo quando l'annuncio non approvato è visualizzato dal proprietario, il pulsante prenota deve sparire, e deve
     essere visualizza il pulsante modifica, reindirizzandolo verso la pagina della modifica dell'annunciom
     e quindi sparisce anche i due form di data.
@@ -53,7 +54,6 @@ try {
         $pagina= str_replace("<FLAG/>",file_get_contents("./components/dettaglio_annuncio_admin.html"),$pagina);
         $params_si="?idAnnuncio=".$annuncio->getIdAnnuncio()."&approvato=1";
         $params_no="?idAnnuncio=".$annuncio->getIdAnnuncio()."&approvato=0";
-    
         $pagina = str_replace("<PARAMS_SI/>",$params_si,$pagina);
         $pagina = str_replace("<PARAMS_NO/>",$params_no,$pagina);
     } else {
@@ -75,16 +75,29 @@ try {
     } else {
         $pagina = str_replace("<VALUEFINE/>", "", $pagina);
     }
-    if (isset($_GET[""]))
-    
-    $pagina = str_replace("<SELF/>",$_SERVER["PHP_SELF"]."?id=$id",$pagina);
-    if (isset($_POST["conferma_prenotazione"]) and $_POST["conferma_prenotazione"]=="Prenota" and
-        !isset($_POST["data_inizio"]) and !isset($_POST["data_fine"]) and !isset($_POST["numOspiti"]) and
-        intval($_POST["numOspiti"])!=0){
-        $pagina= str_replace("<div id=\"credenziali_errate\"></div>","<div id=\"credenziali_errate\"><p>Devi inserire tutti i dati!</p></div>",$pagina);
-    }else{
-        echo "tutti i dati sono inseriti";
+    if (isset($_GET["numOspiti"])){
+        $pagina= str_replace("<VALUENUMERO/>", intval($_GET["numOspiti"]),$pagina);
+
     }
+    
+//    $pagina = str_replace("<SELF/>","./riepilogo_prenotazione.php",$pagina);
+    $pagina = str_replace("<SELF/>",$_SERVER["PHP_SELF"]."?id=$id",$pagina);
+    // todo da rifare la logica dei controlli sui dati.
+    if (isset($_POST["conferma_prenotazione"]) and $_POST["conferma_prenotazione"]=="Prenota"){
+        
+        if (!(isset($_POST["data_inizio"]) and checkIsValidDate($_POST["data_inizio"]))){
+            $pagina= str_replace("<div id=\"credenziali_errate\"></div>","<div id=\"credenziali_errate\"><p>Data inizio non valida!</p></div>",$pagina);
+        }elseif (!(isset($_POST["data_fine"]) and checkIsValidDate($_POST["data_fine"]))){
+           echo $_POST["data_inizio"];
+            $pagina= str_replace("<div id=\"credenziali_errate\"></div>","<div id=\"credenziali_errate\"><p>Data fine non valida!</p></div>",$pagina);
+        }elseif (!(isset($_POST["numOspiti"]) and is_int($_POST["numOspiti"]) and intval($_POST["numOspiti"])>0 and intval($_POST["numOspiti"])<$annuncio->getMaxOspiti())){
+            $pagina= str_replace("<div id=\"credenziali_errate\"></div>","<div id=\"credenziali_errate\"><p>Numero ospiti non valido!</p></div>",$pagina);
+        }
+        //else{
+//            $pagina= str_replace($_SERVER["PHP_SELF"];
+//        }
+    }
+
     $str_commenti = "";
     try {
         $commenti = $manager->getCommentiAnnuncio($id);
