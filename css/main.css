@@ -21,16 +21,18 @@ html, body {
 .layout_colonna {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto auto 1fr auto;
     grid-gap: 1em;
     grid-template-areas:
-        "h"
+        "l"
+        "m"
         "b"
         "c"
         "f";
 }
 
-.layout_colonna #header { grid-area: h;}
+.layout_colonna #logo { grid-area: l;}
+.layout_colonna #nav { grid-area: m;}
 .layout_colonna #breadcrumb {grid-area: b;}
 .layout_colonna #content { grid-area: c; }
 .layout_colonna #footer { grid-area: f; }
@@ -81,14 +83,14 @@ html, body {
     background-color: #e3eaa7;
 }
 
-#header ul {
+#nav ul {
     list-style: none;
     display: flex;
     /*border: 1px solid #000;*/
     border-left: 0;
 }
 
-#header li {
+#nav li {
 flex: 1 1 0em;
 /*border-left:1px solid #000;*/
 text-align:center;
@@ -96,7 +98,7 @@ vertical-align: middle;
   font-size: 2em;
 }
 
-#header li a {
+#nav li a {
   display : block;
   width:100%;
   height:100%;
@@ -105,11 +107,11 @@ vertical-align: middle;
     font-weight: bold;
 }
 
-#header li:hover {
+#nav li:hover {
     background-color: #B1E092;
 }
 
-#header .menu_selected {
+#nav .menu_selected {
     background-color: #B1E092;
 }
 
@@ -123,7 +125,7 @@ vertical-align: middle;
 /*-----------------Content-----------------*/
 #content {
   margin-left: 1em;
-  margin-right: 1em;	
+  margin-right: 1em;
 }
 
 
@@ -591,7 +593,7 @@ fieldset {
     margin-left: 5%;
 }
 
-.form_orizzontale {
+.form_variabile {
     text-align: center;
 }
 
@@ -795,13 +797,13 @@ fieldset {
     background: #dddddd;
 }
 /**********************  Prove css per Lista FOTO********************/
-#content .form_orizzontale .commenti_foto img,
+#content .form_variabile .commenti_foto img,
 #content .form_verticale .commenti_foto img {
     width: 10em;
     height: 10em;
     float: left;
 }
-#content .form_orizzontale .commenti_foto textarea,
+#content .form_variabile .commenti_foto textarea,
 #content .form_verticale .commenti_foto textarea{
     float:right;
 }
@@ -863,4 +865,38 @@ body .aiuti_alla_navigazione {
     margin-top: -1.5em;
     width: 98%;
     height: 98%;
+}
+
+/*-----------------Riepilogo prenotazione-----------------*/
+@media screen and (max-width: 768px){
+.layout_colonna {
+        grid-template-rows: auto auto auto auto;
+      grid-template-areas:
+      "l"
+      "c"
+      "m"
+      "f";
+  }
+
+  .layout_colonna #logo { grid-area: l;}
+  .layout_colonna #nav { grid-area: m;}
+  .layout_colonna #breadcrumb { display: none}
+  .layout_colonna#content { grid-area: c; }
+  .layout_colonna #footer { grid-area: f; }
+
+  /*.layout_colonna #breadcrumb {display: none; }*/
+  .form_variabile {
+
+  }
+
+  .input_label_orizzontale {
+    display: block;
+    width: 100%
+  }
+
+  .input_label_orizzontale label {
+    /*position: absolute;
+    height: 0;
+    overflow: hidden;*/
+  }
 }
