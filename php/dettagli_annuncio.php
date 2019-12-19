@@ -34,13 +34,13 @@ try {
 
     
     $annuncio = $manager->getAnnuncio($id);
+    $_SESSION["annuncio"]= $annuncio;
     $prezzoAnnuncio = $annuncio->getPrezzoNotte();
     $ospitiMassimo = $annuncio->getMaxOspiti();
     $foto = $manager->getFotoAnnuncio($id);
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
-
     if (isset($_SESSION["user"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
         if ($annuncio->getIdHost()==$_SESSION["user"]->getIdUtente()){
@@ -53,7 +53,7 @@ try {
         $pagina= str_replace("<FLAG/>",file_get_contents("./components/dettaglio_annuncio_admin.html"),$pagina);
         $params_si="?idAnnuncio=".$annuncio->getIdAnnuncio()."&approvato=1";
         $params_no="?idAnnuncio=".$annuncio->getIdAnnuncio()."&approvato=0";
-        
+    
         $pagina = str_replace("<PARAMS_SI/>",$params_si,$pagina);
         $pagina = str_replace("<PARAMS_NO/>",$params_no,$pagina);
     } else {
@@ -75,7 +75,16 @@ try {
     } else {
         $pagina = str_replace("<VALUEFINE/>", "", $pagina);
     }
+    if (isset($_GET[""]))
     
+    $pagina = str_replace("<SELF/>",$_SERVER["PHP_SELF"]."?id=$id",$pagina);
+    if (isset($_POST["conferma_prenotazione"]) and $_POST["conferma_prenotazione"]=="Prenota" and
+        !isset($_POST["data_inizio"]) and !isset($_POST["data_fine"]) and !isset($_POST["numOspiti"]) and
+        intval($_POST["numOspiti"])!=0){
+        $pagina= str_replace("<div id=\"credenziali_errate\"></div>","<div id=\"credenziali_errate\"><p>Devi inserire tutti i dati!</p></div>",$pagina);
+    }else{
+        echo "tutti i dati sono inseriti";
+    }
     $str_commenti = "";
     try {
         $commenti = $manager->getCommentiAnnuncio($id);
@@ -112,14 +121,14 @@ try {
     }
     
     $img = $annuncio->getImgAnteprima();
-//    $img="../../immagini/borgoricco.jpg";
     $photos = $manager->getFotoAnnuncio($annuncio->getIdAnnuncio());
     
     $content = "<div class=\"shower_immagine_anteprima\">";
     if (count($photos) != 0) {
-        $content .= "<button id=\"immagine_precedente\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&lt;</button>
-        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
-        <button id=\"immagine_successiva\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&gt;</button></div><div class=\"image_picker\">";
+        $content .= "
+            <button id=\"immagine_precedente\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&lt;</button>
+            <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
+            <button id=\"immagine_successiva\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&gt;</button></div><div class=\"image_picker\">";
         foreach ($photos as $foto) {
             $path = $foto->getFilePath();
             $content .= "<img class=\"immagine\" alt=\"Descrizione immagine\" src=\"$path\"/>";
