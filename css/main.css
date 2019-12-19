@@ -21,16 +21,18 @@ html, body {
 .layout_colonna {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto auto 1fr auto;
     grid-gap: 1em;
     grid-template-areas:
-        "h"
+        "l"
+        "n"
         "b"
         "c"
         "f";
 }
 
-.layout_colonna #header { grid-area: h;}
+.layout_colonna #logo { grid-area: l;}
+.layout_colonna #nav { grid-area: n;}
 .layout_colonna #breadcrumb {grid-area: b;}
 .layout_colonna #content { grid-area: c; }
 .layout_colonna #footer { grid-area: f; }
@@ -39,16 +41,18 @@ html, body {
 .layout_tre_pannelli {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto auto 1fr auto;
   grid-gap: 1em;
   grid-template-areas:
-        "h h h h"
+        "l l l l"
+        "n n n n"
         "b b b b"
         "x c c c"
         "f f f f";
 }
 
-.layout_tre_pannelli #header     { grid-area: h; }
+.layout_tre_pannelli #logo     { grid-area: l; }
+.layout_tre_pannelli #nav     { grid-area: n; }
 .layout_tre_pannelli #breadcrumb { grid-area: b; }
 .layout_tre_pannelli #laterale    { grid-area: x; }
 .layout_tre_pannelli #content    { grid-area: c; }
@@ -61,34 +65,37 @@ html, body {
 .layout_centrale{
   display: grid;
   grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto  auto 1fr auto;
   grid-gap: 1em;
   grid-template-areas:
-        "h h h h"
+        "l l l l"
+        "n n n n"
         "b b b b"
         ". c c ."
         "f f f f";
 }
 
-.layout_centrale #header     { grid-area:h ;}
+.layout_centrale #logo      { grid-area: l ;}
+.layout_centrale #nav       { grid-area: n ;}
 .layout_centrale #breadcrumb { grid-area:b ;}
 .layout_centrale #content    { grid-area:c ;}
 .layout_centrale #footer     { grid-area:f ;}
 
 /*-----------------Header-----------------*/
 
-#header {
+#nav {
+	margin-top: -1em;
     background-color: #e3eaa7;
 }
 
-#header ul {
+#nav ul {
     list-style: none;
     display: flex;
     /*border: 1px solid #000;*/
     border-left: 0;
 }
 
-#header li {
+#nav li {
 flex: 1 1 0em;
 /*border-left:1px solid #000;*/
 text-align:center;
@@ -96,7 +103,7 @@ vertical-align: middle;
   font-size: 2em;
 }
 
-#header li a {
+#nav li a {
   display : block;
   width:100%;
   height:100%;
@@ -105,25 +112,29 @@ vertical-align: middle;
     font-weight: bold;
 }
 
-#header li:hover {
+#nav li:hover {
     background-color: #B1E092;
 }
 
-#header .menu_selected {
+#nav .menu_selected {
     background-color: #B1E092;
 }
 
 #logo {
-	display: inline-block;
+    display: inline-block;
     font-size: 2em;
     background-color: #e3eaa7;
     color: #405d27;
 }
 
+#logo h1 {
+    display: inline-block;
+}
+
 /*-----------------Content-----------------*/
 #content {
   margin-left: 1em;
-  margin-right: 1em;	
+  margin-right: 1em;
 }
 
 
@@ -537,7 +548,12 @@ fieldset {
 
 .form_logout {
     float: right;
-    padding: 1em;
+    padding-right: 1em;
+    padding-top: 0.15em;
+}
+
+.form_logout fieldset {
+    margin-bottom: 0em;
 }
 
 .logout_button {
@@ -591,7 +607,7 @@ fieldset {
     margin-left: 5%;
 }
 
-.form_orizzontale {
+.form_variabile {
     text-align: center;
 }
 
@@ -795,13 +811,13 @@ fieldset {
     background: #dddddd;
 }
 /**********************  Prove css per Lista FOTO********************/
-#content .form_orizzontale .commenti_foto img,
+#content .form_variabile .commenti_foto img,
 #content .form_verticale .commenti_foto img {
     width: 10em;
     height: 10em;
     float: left;
 }
-#content .form_orizzontale .commenti_foto textarea,
+#content .form_variabile .commenti_foto textarea,
 #content .form_verticale .commenti_foto textarea{
     float:right;
 }
@@ -863,4 +879,48 @@ body .aiuti_alla_navigazione {
     margin-top: -1.5em;
     width: 98%;
     height: 98%;
+}
+
+/*-----------------Riepilogo prenotazione-----------------*/
+@media (max-device-width: 800px) {
+
+html {
+  zoom: 3;
+}
+
+#breadcrumb { display: none;}
+
+.layout_colonna {
+      grid-template-rows: auto 1fr auto auto;
+      grid-template-areas:
+      "l"
+      "c"
+      "n"
+      "f";
+}
+
+
+.layout_tre_pannelli {
+     grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+    "l l l l"
+    "c c c c"
+    "n n n n"
+    "f f f f";
+}
+
+.layout_centrale {
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+    "l l l l"
+    "c c c c"
+    "n n n n"
+    "f f f f";
+}
+
+.input_label_orizzontale {
+  display: block;
+   width: 100%
+}
+
 }
