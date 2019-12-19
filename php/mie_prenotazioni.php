@@ -24,7 +24,6 @@ if (isset($_SESSION["user"])) {
         
         $id_prenotazione = $prenotazione->getIdOccupazione();
         $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
-        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
         $mail = "";
         $nomeAnnuncio = "";
         $descrizionefoto = "";
@@ -76,7 +75,7 @@ if (isset($_SESSION["user"])) {
     }
     $pagina = str_replace("<PRENOTAZIONICORRENTI/>", $content, $pagina);
     
-    $occupazioni = "";
+    ;
     
     
     
