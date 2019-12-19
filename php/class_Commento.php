@@ -59,7 +59,7 @@ class Commento {
     
     /**
      * @param string $commento
-     * @throws Eccezione se $commento supera la lunghezz massima consentita
+     * @throws Eccezione se $commento supera la lunghezza massima consentita
      */
     public function setCommento($commento) {
         $trim_com = trim(htmlentities($commento));

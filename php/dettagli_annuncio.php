@@ -107,7 +107,7 @@ try {
     if (count($photos) != 0) {
         $content .= "<button id=\"immagine_precedente\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&lt;</button>
         <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
-        <button id=\"immagine_successiva\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&gt;</button></div><div class=\"image_picker\">";;
+        <button id=\"immagine_successiva\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&gt;</button></div><div class=\"image_picker\">";
         foreach ($photos as $foto) {
             $path = $foto->getFilePath();
             $content .= "<img class=\"immagine\" alt=\"Descrizione immagine\" src=\"$path\"/>";
