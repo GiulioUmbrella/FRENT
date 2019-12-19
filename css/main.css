@@ -121,6 +121,13 @@ vertical-align: middle;
 }
 
 /*-----------------Content-----------------*/
+#content {
+  margin-left:1em;
+  margin-right:1em;	
+}
+
+
+
 #content p {
   line-height: 1.5em;
 }
