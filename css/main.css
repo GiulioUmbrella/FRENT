@@ -879,8 +879,10 @@ html {
   zoom: 3;
 }
 
+#breadcrumb { display: none;}
+
 .layout_colonna {
-      grid-template-rows: auto auto auto auto;
+      grid-template-rows: auto 1fr auto auto;
       grid-template-areas:
       "l"
       "c"
@@ -888,18 +890,18 @@ html {
       "f";
 }
 
-.layout_colonna #breadcrumb { display: none;}
 
 .layout_tre_pannelli {
+     grid-template-rows: auto 1fr auto auto;
     grid-template-areas:
     "l l l l"
     "c c c c"
     "n n n n"
     "f f f f";
 }
-.layout_tre_pannelli #breadcrumb {display: none;}
 
 .layout_centrale {
+    grid-template-rows: auto 1fr auto auto;
     grid-template-areas:
     "l l l l"
     "c c c c"
