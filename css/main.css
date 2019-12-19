@@ -121,10 +121,14 @@ vertical-align: middle;
 }
 
 #logo {
-	display: inline-block;
+    display: inline-block;
     font-size: 2em;
     background-color: #e3eaa7;
     color: #405d27;
+}
+
+#logo h1 {
+    display: inline-block;
 }
 
 /*-----------------Content-----------------*/
@@ -544,7 +548,12 @@ fieldset {
 
 .form_logout {
     float: right;
-    padding: 1em;
+    padding-right: 1em;
+    padding-top: 0.15em;
+}
+
+.form_logout fieldset {
+    margin-bottom: 0em;
 }
 
 .logout_button {
