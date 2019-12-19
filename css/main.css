@@ -106,7 +106,7 @@ html, body {
 /*-----------------Header-----------------*/
 
 #header {
-    background-color: #FFFFFF;
+    background-color: #e3eaa7;
 }
 
 #header ul{
@@ -150,6 +150,7 @@ vertical-align: middle;
 }
 
 #logo {
+	display: inline-block;
     font-size: 2em;
     background-color: #e3eaa7;
     color: #405d27;
@@ -564,9 +565,7 @@ fieldset {
 }
 
 .form_logout {
-    position: fixed;
-    top: 0em;
-    right: 0em;
+    float: right;
     padding: 1em;
 }
 
