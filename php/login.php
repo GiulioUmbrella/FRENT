@@ -24,7 +24,7 @@ if (isset($_POST["accedi"])) {
     } catch (Eccezione $e) {
         
         $pagina = str_replace("<div id=\"credenziali_errate\"></div>",
-            "<div id=\"credenziali_errate\"><p>Credenziali errate!</p></div>", $pagina);
+            "<div id=\"credenziali_errate\" class=\"aligned_with_form\"><p>Credenziali errate!</p></div>", $pagina);
         $pagina = str_replace("<VALUEUSERNAME>", "value=\"$nome\"", $pagina);
         $pagina = str_replace("<VALUEPASSWORD>", "value=\"$password\"", $pagina);
     }
