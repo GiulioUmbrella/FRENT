@@ -17,7 +17,8 @@ function checkIsValidMail($mail, $lunghezza=191): bool{
  * @return bool restituisce true sse la stringa non contiene nessun spazio
  */
 function checkStringContainsNoSpace($str): bool {
-    return is_string($str) and !preg_match("/^\S{6,}\z/",trim($str));
+    // return is_string($str) and !strpos(trim($str), " "); // funziona, eventualmente
+    return is_string($str) and !preg_match("/\\s/",trim($str));
 }
 
 /**
@@ -47,7 +48,8 @@ function checkStringMinLen($str, $len): bool{
  * @return bool restituisce true sse $date è una data valida rispetto al formato specificato.
  */
 function checkIsValidDate($date, $format="Y-m-d"){
-    return is_string($date) and date("Y-m-d",strtotime($date));
+//    return is_string($date) and checkdate($format,strtotime($date));
+    return is_string($date) and date($format,strtotime($date));
 }
 
 /**

@@ -1,8 +1,10 @@
 <?php
-require_once "./Database.php";
-require_once "./Frent.php";
-require_once "./Occupazione.php";
-require_once "./CredenzialiDB.php";
+require_once "./class_Database.php";
+require_once "./class_Frent.php";
+require_once "./class_Occupazione.php";
+require_once "./class_CredenzialiDB.php";
+//todo da rifare il modo di distiguere i 3 tipi di prenotazioni: utilizzare una funzione che trova la data corrente,
+// e quindi suddividerli, altrimenti è codice ripetuto.
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
 session_start();
 if (isset($_SESSION["user"])) {
@@ -17,9 +19,11 @@ if (isset($_SESSION["user"])) {
     $occupazioni = $frent->getPrenotazioniGuest();
     $i = 5;
     foreach ($occupazioni as $prenotazione) {
+        var_dump($prenotazione);
+        
+        
         $id_prenotazione = $prenotazione->getIdOccupazione();
-        $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
-        $annuncio = $frent->getAnnuncio($prenotazione->getAnnuncio());
+        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
         $mail = "";
         $nomeAnnuncio = "";
         $descrizionefoto = "";
@@ -27,6 +31,8 @@ if (isset($_SESSION["user"])) {
         $dataInizio = "";
         $dataFine = "";
         $totalePrenotazione = 0.0;
+        $path="";
+        
         $content .= "<li><div id=\"ID_PRENOTAZIONE_2\" class=\"intestazione_lista\"><a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"$i\"
         title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a>
          </div><div class=\"corpo_lista lista_flex\"><div class=\"dettagli_prenotazione\"><img src=\"$path\" alt=\"$descrizionefoto\"/>";
@@ -42,6 +48,7 @@ if (isset($_SESSION["user"])) {
     $content = "";
     
     foreach ($occupazioni as $prenotazione){
+        $idAnnuncio = $prenotazione->getIdAnnuncio();
         $titoloAnnuncio="";
         $id_prenotazione=1;
         $path="";
@@ -51,8 +58,7 @@ if (isset($_SESSION["user"])) {
         $dataFine="2019-12-20";
         $content .= "<li><div id=\"ID_PRENOTAZIONE_3\" class=\"intestazione_lista\">
                 <a href=\"./riepilogo_prenotazione.php\" tabindex=\"$i\"
-                   title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#123] Soggiorno presso Casa
-                           Loreto</a>
+                   title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $titoloAnnuncio</a>
             </div><div class=\"corpo_lista lista_flex\">
                 <div class=\"dettagli_prenotazione\">
                     <img src=\"$path\" alt=\"$descrizionefoto\"/>
@@ -69,7 +75,7 @@ if (isset($_SESSION["user"])) {
     }
     $pagina = str_replace("<PRENOTAZIONICORRENTI/>", $content, $pagina);
     
-    $occupazioni = "";
+    ;
     
     
     

@@ -1,8 +1,8 @@
 <?php
-require_once "./Frent.php";
-require_once "./Amministratore.php";
+require_once "./class_Frent.php";
+require_once "./class_Amministratore.php";
 
-require_once "./CredenzialiDB.php";
+require_once "./class_CredenzialiDB.php";
 session_start();
 
 if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){

@@ -6,7 +6,7 @@ require_once "class_CredenzialiDB.php";
 
 session_start();
 if (isset($_SESSION["user"])){
-    $pagina = file_get_contents("./components/mio_profilo_visualizza.html");
+    $pagina = file_get_contents("./components/mio_profilo_modifica.html");
     $pagina= str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
     $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
     
@@ -14,17 +14,8 @@ if (isset($_SESSION["user"])){
     $manager= new Frent(new Database(CredenzialiDB::DB_ADDRESS,CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME),);
     
-    $path=$user->getImgProfilo();
-    $pagina= str_replace("<PATH/>",$path,$pagina);
-    
-    $username= $user->getUsername();
-    $pagina = str_replace("<USERNAME/>",$username,$pagina);
-    
-    $mail= $user->getMail();
-    $pagina = str_replace("<MAIL/>",$mail,$pagina);
+    $pagina = str_replace("<PATH/>",$user->getImgProfilo(),$pagina);
     echo $pagina;
 }else{
     header("Location: login.php");
 }
-
-

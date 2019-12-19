@@ -1,7 +1,7 @@
 <?php
-//require_once "./Database.php";
-//require_once "./Frent.php";
-//require_once ($_SERVER["DOCUMENT_ROOT"]) . "/php/CredenzialiDB.php";
+//require_once "./class_Database.php";
+//require_once "./class_Frent.php";
+//require_once ($_SERVER["DOCUMENT_ROOT"]) . "/php/class_CredenzialiDB.php";
 //
 //$nome = $_POST["user"];
 //$password = $_POST["password"];

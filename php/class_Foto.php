@@ -26,7 +26,7 @@ class Foto {
         if (is_int($id_foto) and $id_foto > 0) {
             $this->id_foto = $id_foto;
         } else {
-            throw new Eccezione(htmlentities("L'ID della foto non è valido."));
+            throw new Eccezione("L'ID della foto non è nel formato valido.");
         }
     }
     
@@ -43,7 +43,7 @@ class Foto {
         if (checkStringMaxLen($trim_file_path, DataConstraints::foto_annunci["file_path"])) {
             $this->file_path = str_replace(" ", "_", $trim_file_path);
         } else {
-            throw new Eccezione(htmlentities("Il path della foto non è valido."));
+            throw new Eccezione("Il path della foto supera la lunghezza consentita.");
         }
     }
     
@@ -59,7 +59,7 @@ class Foto {
         if (checkStringMaxLen(trim($descrizione), DataConstraints::foto_annunci["descrizione"])) {
             $this->descrizione = trim($descrizione);
         } else {
-            throw new Eccezione(htmlentities("La descrizione non è valida!"));
+            throw new Eccezione("La descrizione supera la lunghezza consentita.");
         }
     }
 
@@ -75,7 +75,7 @@ class Foto {
         if (is_int($id) and $id > 0) {
             $this->id_annuncio = $id;
         } else {
-            throw new Eccezione(htmlentities("L'ID dell'annuncio non è valido."));
+            throw new Eccezione("L'ID dell'annuncio supera la lunghezza consentita.");
         }
     }
     

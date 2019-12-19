@@ -1,8 +1,8 @@
 <?php
-require_once "./Annuncio.php";
-require_once "./Frent.php";
-require_once "./Database.php";
-require_once "./CredenzialiDB.php";
+require_once "./class_Annuncio.php";
+require_once "./class_Frent.php";
+require_once "./class_Database.php";
+require_once "./class_CredenzialiDB.php";
 
 try {
     session_start();
@@ -31,7 +31,7 @@ try {
     }
     $content .= "</ul>";
     $pagina = str_replace("<Flag1/>", $content, $pagina);
-    $pagina = str_replace("<FOOTER/>", file_get_contents("../components/footer.html"), $pagina);
+    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
     echo $pagina;
     

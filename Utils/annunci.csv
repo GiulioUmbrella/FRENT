@@ -1,0 +1,11 @@
+id_annuncio,titolo,descrizione,img_anteprima,indirizzo,citta,host,stato_approvazione,bloccato,max_ospiti,prezzo_notte
+1,Casa Loreto,defualt descirptio,images/annunci/anteprima_Casa Loreto,Via dell'Accoglienza x,roma,11,1,0,2,78
+2,Casa Agrippa,defualt descirptio,images/annunci/anteprima_Casa Agrippa,Via Galaverna n.8 (indirizzo del comune),roma,12,1,0,5,53
+3,Casa Celeste,defualt descirptio,images/annunci/anteprima_Casa Celeste,"Via Comune Catanzaro (civico 1 per i senza tetto, civico 2 per i senza fissa dimora)",roma,9,1,0,5,82
+4,Casa Aquila,defualt descirptio,images/annunci/anteprima_Casa Aquila,Via Casa Comunale,roma,2,1,0,1,100
+5,Casa Amore,defualt descirptio,images/annunci/anteprima_Casa Amore,Via dell'Olmo 1,roma,10,1,0,5,60
+6,Appartamento Aran,defualt descirptio,images/annunci/anteprima_Appartamento Aran,Via del Palazzo Comunale ,roma,7,1,0,2,128
+7,Appartamento Flann,defualt descirptio,images/annunci/anteprima_Appartamento Flann,Via del Palazzo Comunale ,roma,1,1,0,6,136
+8,Appartamento Glaucia,defualt descirptio,images/annunci/anteprima_Appartamento Glaucia,Via del Comune,roma,1,1,0,6,25
+9,Appartamento Nollaig,defualt descirptio,images/annunci/anteprima_Appartamento Nollaig,Via dell'Orologio,roma,2,1,0,6,122
+10,Appartamento Amore,defualt descirptio,images/annunci/anteprima_Appartamento Amore,Via del Domicilio,roma,4,1,0,5,128

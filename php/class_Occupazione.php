@@ -4,8 +4,8 @@ require_once "./CheckMethods.php";
 
 class Occupazione {
     private $id_occupazione;
-    private $utente; //indica il guest che ha la prenotazione, quindi contiene il suo ID
-    private $annuncio; // è il primary key dell'annuncio.
+    private $id_utente; //indica il guest che ha la prenotazione, quindi contiene il suo ID
+    private $id_annuncio; // è il primary key dell'annuncio.
     private $prenotazione_guest; // 1 indica che è una prenotazione, 0 è settato dall'host
     private $num_ospiti;
     private $data_inizio;
@@ -25,31 +25,31 @@ class Occupazione {
         if (is_int($id_occupazione) and $id_occupazione > 0) {
             $this->id_occupazione = $id_occupazione;
         } else {
-            throw new Eccezione(htmlentities("L'ID dell'occupazione non è valido."));
+            throw new Eccezione("L'ID dell'occupazione non è nel formato valido.");
         }
     }
     
     /**
-     * @param int $utente
+     * @param int $id_utente
      * @throws Eccezione se $utente non è un intero positivo
      */
-    public function setUtente($utente) {
-        if (is_int($utente) and $utente > 0) {
-            $this->utente = $utente;
+    public function setIdUtente($id_utente) {
+        if (is_int($id_utente) and $id_utente > 0) {
+            $this->id_utente = $id_utente;
         } else {
-            throw new Eccezione(htmlentities("L'ID dell'utente non è valido."));
+            throw new Eccezione("L'ID dell'utente non è nel formato valido.");
         }
     }
     
     /**
-     * @param int $annuncio
+     * @param int $id_annuncio
      * @throws Eccezione se $annuncio non è un intero positivo
      */
-    public function setAnnuncio($annuncio) {
-        if (is_int($annuncio) and $annuncio > 0) {
-            $this->annuncio = $annuncio;
+    public function setIdAnnuncio($id_annuncio) {
+        if (is_int($id_annuncio) and $id_annuncio > 0) {
+            $this->id_annuncio = $id_annuncio;
         } else {
-            throw new Eccezione(htmlentities("L'ID dell'annuncio non è valido!"));
+            throw new Eccezione("L'ID dell'annuncio non è nel formato valido.");
         }
     }
     
@@ -61,7 +61,7 @@ class Occupazione {
         if (is_bool($prenotazione_guest)) {
             $this->prenotazione_guest = $prenotazione_guest;
         } else {
-            throw new Eccezione(htmlentities("Il flag di controllo se l'occupazione è una prenotazione non è valido."));
+            throw new Eccezione("Il flag di controllo se l'occupazione è una prenotazione non è nel formato valido.");
         }
     }
     
@@ -73,7 +73,7 @@ class Occupazione {
         if (is_int($num_ospiti) and $num_ospiti <= DataConstraints::occupazioni["num_ospiti"]) {
             $this->num_ospiti = $num_ospiti;
         } else {
-            throw new Eccezione(htmlentities("Il numero degli ospiti non è valido."));
+            throw new Eccezione("Il numero degli ospiti non è valido.");
         }
     }
     
@@ -85,7 +85,7 @@ class Occupazione {
         if(checkIsValidDate($data_inizio)) {
             $this->data_inizio = $data_inizio;
         } else {
-            throw new Eccezione(htmlentities("La data di inizio non è valida."));
+            throw new Eccezione("La data di inizio non è valida.");
         }
     }
     
@@ -97,7 +97,7 @@ class Occupazione {
         if(checkIsValidDate($data_fine)) {
             $this->data_fine = $data_fine;
         } else {
-            throw new Eccezione(htmlentities("La data di fine non è valida."));
+            throw new Eccezione("La data di fine non è valida.");
         }
     }
     
@@ -105,12 +105,12 @@ class Occupazione {
         return $this->id_occupazione;
     }
     
-    public function getUtente(): int {
-        return $this->utente;
+    public function getIdUtente(): int {
+        return $this->id_utente;
     }
     
-    public function getAnnuncio(): int {
-        return $this->annuncio;
+    public function getIdAnnuncio(): int {
+        return $this->id_annuncio;
     }
     
     public function getPrenotazioneGuest(): bool {
@@ -128,5 +128,4 @@ class Occupazione {
     public function getDataFine(): string {
         return $this->data_fine;
     }
-    
 }
