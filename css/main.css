@@ -84,6 +84,7 @@ html, body {
 /*-----------------Header-----------------*/
 
 #nav {
+	margin-top: -1em;
     background-color: #e3eaa7;
 }
 
@@ -883,7 +884,7 @@ html {
       grid-template-areas:
       "l"
       "c"
-      "m"
+      "n"
       "f";
 }
 
