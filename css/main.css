@@ -888,7 +888,24 @@ html {
       "f";
 }
 
-.layout_colonna #breadcrumb { display: none}
+.layout_colonna #breadcrumb { display: none;}
+
+.layout_tre_pannelli {
+    grid-template-areas:
+    "l l l l"
+    "c c c c"
+    "n n n n"
+    "f f f f";
+}
+.layout_tre_pannelli #breadcrumb {display: none;}
+
+.layout_centrale {
+    grid-template-areas:
+    "l l l l"
+    "c c c c"
+    "n n n n"
+    "f f f f";
+}
 
 .input_label_orizzontale {
   display: block;
