@@ -1,14 +1,13 @@
 <?php
 
-require_once("./Eccezione.php");
-
+require_once("Eccezione.php");
+define("MB", 1048576);
 /**
  * Class ImageManager
  * Classe che si occupa di gestire il caricamento delle immagini sul server,
  * di nominarle secondo un formato predefinito e di reperirli su richiesta.
  */
 class ImageManager {
-    private const MB = 1048576;
     private $targetFolder;
     private $targetFile;
     private $tempFile;
@@ -45,7 +44,7 @@ class ImageManager {
             throw new Eccezione("Il file caricato non ha un'estensione valida.");
         }
 
-        if ($file["size"] > $this->maxFileSize * $this->MB) {
+        if ($file["size"] > $this->maxFileSize * MB) {
             throw new Eccezione("Il file caricato supera la dimensione massima di " . $this->maxFileSize . "MB.");
         }
 
