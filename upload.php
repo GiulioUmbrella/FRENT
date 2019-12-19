@@ -56,4 +56,6 @@ if(isset($_POST['submit'])) {
     echo "File name: " . $imageManager->fileName() . PHP_EOL . "File extension: " . $imageManager->fileExtension() . PHP_EOL;
 
     echo $imageManager->saveFile() ? "File has been saved correctly." : "File has not been saved correctly.";
+} else {
+    echo "There was a problem.";
 }
