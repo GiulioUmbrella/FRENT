@@ -1,0 +1,13 @@
+<form action="./conferma_prenotazione.php" method="post" class="form form_verticale">
+    <fieldset>
+        <label for="data_inizio">Data inizio</label>
+        <input id="data_inizio" name="data_inizio" value="<VALUEINIZIO/>"type="date">
+        <label for="data_fine">Data fine</label>
+        <input id="data_fine" name="data_fine" value="<VALUEFINE/>" type="date">
+        <label for="numOspiti">Num Ospiti</label>
+        <input type="number" name="numOspiti" id="numOspiti" min="1" max="99" value="<VALUENUMERO/>" tabindex="10"/>
+        <label class="aiuti_alla_navigazione" for="conferma_prenotazione">Conferma prenotazione</label>
+        <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
+    </fieldset>
+</form>
+

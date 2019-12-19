@@ -43,11 +43,23 @@ try {
 
     if (isset($_SESSION["user"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+        if ($annuncio->getIdHost()==$_SESSION["user"]->getIdUtente()){
+            $pagina= str_replace("<FLAG/>",file_get_contents("./components/dettaglio_annuncio_host.html"),$pagina);
+        }else{
+            $pagina= str_replace("<FLAG/>",file_get_contents("./components/dettaglio_annuncio_visitatore.html"),$pagina);
+        }
     } else if (isset($_SESSION["admin"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
+        $pagina= str_replace("<FLAG/>",file_get_contents("./components/dettaglio_annuncio_admin.html"),$pagina);
+        $params_si="?idAnnuncio=".$annuncio->getIdAnnuncio()."&approvato=1";
+        $params_no="?idAnnuncio=".$annuncio->getIdAnnuncio()."&approvato=0";
+        
+        $pagina = str_replace("<PARAMS_SI/>",$params_si,$pagina);
+        $pagina = str_replace("<PARAMS_NO/>",$params_no,$pagina);
     } else {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
-        
+        $pagina= str_replace("<FLAG/>",file_get_contents("./components/dettaglio_annuncio_visitatore.html"),$pagina);
+    
     }
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     
