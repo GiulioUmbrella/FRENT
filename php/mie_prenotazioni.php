@@ -33,7 +33,7 @@ if (isset($_SESSION["user"])) {
         $mail = ""; //todo manca la funzione per ottenere info dell'host
         $nomeAnnuncio = $annuncio->getTitolo();
         $descrizionefoto = "";
-        $luogoAlloggio = "via: ". $annuncio->getIndirizzo()." citt&agrave;: ".$annuncio->getCitta();
+        $luogoAlloggio = $annuncio->getIndirizzo()." citt&agrave;: ".$annuncio->getCitta();
         $dataInizio = $prenotazione->getDataInizio();
         $dataFine = $prenotazione->getDataFine();
         $totalePrenotazione = 0.0;
@@ -44,42 +44,71 @@ if (isset($_SESSION["user"])) {
         if ($prenotazione->getDataFine() < $data_corrente) { // prenotazioni passate
             
             $numPrenotazioniPassate++;
-            $prenotazioni_passate .= "<li>
-            <div class=\"intestazione_lista\">
-            <a href=\"./riepilogo_prenotazione.php\" tabindex=\"<TABINDEX$i>\"
-            title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a></div>
-            <div class=\"corpo_lista lista_flex\">
-                <div class=\"dettagli_prenotazione\">
-                    <img src=\"$path\" alt=\"Immagine di anteprima di Casa Loreto\"/>
-                    <p>Luogo: $luogoAlloggio</p><p>Periodo: $dataInizio - $dataFine</p></div><div class=\"opzioni_prenotazione\">
-                    <p>Prezzo: $prezzo&euro;</p><a href=\"Commenta\" title=\"Contatta il proprietario per posta elettronica\">Commenta</a>
-                </div></div></li>";// todo da decidere come far commentare
+            $prenotazioni_passate .= "
+                    <li>
+                        <div class=\"intestazione_lista\">
+                            <a href=\"./riepilogo_prenotazione.php\" tabindex=\"<TABINDEX$i++>\"
+                                title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a></div>
+                            <div class=\"corpo_lista lista_flex\">
+                            <div class=\"dettagli_prenotazione\">
+                                <img src=\"$path\" alt=\"Immagine di anteprima di Casa Loreto\"/>
+                                <p>Luogo: $luogoAlloggio</p>
+                                <p>Periodo: $dataInizio - $dataFine</p>
+                            </div>
+                            <div class=\"opzioni_prenotazione\">
+                                <p>Prezzo: $prezzo&euro;</p><a href=\"Commenta\" tabindex=\"<<TABINDEX$i++>>\" title=\"Contatta il proprietario per posta elettronica\">Commenta</a>
+                            </div>
+                        </div>
+                    </li>";// todo da decidere come far commentare
         } elseif ($data_corrente <= $prenotazione->getDataFine() and $data_corrente >= $prenotazione->getDataInizio()) { //prenotazioni correnti
             
             $numPrenotazioniCorrenti++;
-            $prenotazioni_correnti .= "<li><div class=\"intestazione_lista\"><a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
-        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a>
-         </div><div class=\"corpo_lista lista_flex\"><div class=\"dettagli_prenotazione\"><img src=\"$path\" alt=\"$descrizionefoto\"/><p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio- $dataFine</p></div><div class=\"opzioni_prenotazione\"><p>Prezzo: $prezzo&euro;</p>
-        <a href=\"mailto:$mail\" title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a></div></div></li>";
+            $prenotazioni_correnti .= "
+                <li>
+                    <div class=\"intestazione_lista\">
+                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i++>\"
+                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a>
+                    </div>
+                    <div class=\"corpo_lista lista_flex\">
+                        <div class=\"dettagli_prenotazione\">
+                            <img src=\"$path\" alt=\"$descrizionefoto\"/>
+                                <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio- $dataFine</p>
+                        </div>
+                            <div class=\"opzioni_prenotazione\">
+                            <p>Prezzo: $prezzo&euro;</p>
+                            <a href=\"mailto:$mail\" tabindex=\"<TABINDEX$i++>\"
+                                    title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a>
+                        </div>
+                    </div>
+                </li>";
         
         } else if ($data_corrente < $prenotazione->getDataInizio()) { //prenotazioni future
             
             $numPrenotazioniFuture++;
-            $prenotazioni_future .= "<li><div class=\"intestazione_lista\">
-                <a href=\"./riepilogo_prenotazione.php\" tabindex=\"<TABINDEX$i>\"
-                   title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
-            </div><div class=\"corpo_lista lista_flex\">
-                <div class=\"dettagli_prenotazione\">
-                    <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                    <p>Luogo: $luogoAlloggio</p>
-                    <p>Periodo: $dataInizio - $dataFine</p></div>
-                <div class=\"opzioni_prenotazione\"><p>Prezzo: $prezzo&euro;</p>
-            <form action=\"../script/elimina_prenotazione.php\" method=\"post\">
-                <fieldset>
-                    <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
-                    <input type=\"hidden\" value=\"$id_prenotazione\"/>
-                    <input type=\"submit\" value=\"Elimina\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
-                </fieldset></form></div></div></li>";
+            $prenotazioni_future .= "
+                <li>
+                    <div class=\"intestazione_lista\">
+                        <a href=\"./riepilogo_prenotazione.php\" tabindex=\"<TABINDEX$i++>\"
+                        title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
+                    </div>
+                    <div class=\"corpo_lista lista_flex\">
+                        <div class=\"dettagli_prenotazione\">
+                            <img src=\"$path\" alt=\"$descrizionefoto\"/>
+                            <p>Luogo: $luogoAlloggio</p>
+                            <p>Periodo: $dataInizio - $dataFine</p>
+                        </div>
+                        <div class=\"opzioni_prenotazione\">
+                            <p>Prezzo: $prezzo&euro;</p>
+                            <form action=\"../script/elimina_prenotazione.php\" method=\"post\">
+                                <fieldset>
+                                    <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
+                                    <input type=\"hidden\" value=\"$id_prenotazione\"/>
+                                    <input type=\"submit\" value=\"Elimina\" tabindex=\"<TABINDEX$i++>\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </li>";
         }
         $i = $i + 1;
     }
