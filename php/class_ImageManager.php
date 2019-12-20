@@ -20,7 +20,7 @@ class ImageManager {
      * @param string $targetFolder path della cartella destinazione radice in cui caricare i file
      * @param int $maxFileSize dimensione massima di un file caricato
      */
-    public function ImageManager($targetFolder, $maxFileSize = 2) {
+    public function __construct($targetFolder, $maxFileSize = 2) {
         // valori costanti una volta inizializzati
         $this->targetFolder = $targetFolder;
         $this->maxFileSize = $maxFileSize;
