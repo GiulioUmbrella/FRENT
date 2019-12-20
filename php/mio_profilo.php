@@ -12,7 +12,7 @@ if (isset($_SESSION["user"])){
     
     $user= $_SESSION["user"];
     $manager= new Frent(new Database(CredenzialiDB::DB_ADDRESS,CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME),);
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME));
     
     $path=$user->getImgProfilo();
     $pagina= str_replace("<PATH/>",$path,$pagina);
