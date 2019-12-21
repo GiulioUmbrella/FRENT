@@ -1,4 +1,10 @@
 <?php
+session_start();
 $pagina = file_get_contents("./components/riepilogo_prenotazione.html");
 
-echo $pagina;
+if (isset($_SESSION["user"])){
+    
+    echo $pagina;
+}else{
+    header("Location: ./login.php");
+}

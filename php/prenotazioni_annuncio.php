@@ -14,5 +14,5 @@ if (isset($_SESSION["user"])) {
     
     echo $pagina;
 } else {
-    header("Location: login.php");
+    header("Location: ./login.php");
 }

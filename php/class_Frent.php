@@ -188,7 +188,7 @@ class Frent {
                 $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
                 $occupazione->setIdUtente(intval($assoc_occupazione['utente']));
                 $occupazione->setIdAnnuncio($id_annuncio);
-                $occupazione->setPrenotazioneGuest(intval($assoc_occupazione['prenotazione_guest']));
+                $occupazione->setPrenotazioneGuest(boolval($assoc_occupazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
                 $occupazione->setDataFine($assoc_occupazione['data_fine']);

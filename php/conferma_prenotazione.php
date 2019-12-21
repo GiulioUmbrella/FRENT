@@ -11,8 +11,6 @@ if (!$_SESSION["user"]) {
 }
 if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
     and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"])) {
-//    $pagina = str_replace("<LINK/>", "id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
-//        . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"], $pagina);
 //    $pagina = str_replace("<IDANNUNCIO/>", $_SESSION["annuncio"]->getIdAnnuncio(), $pagina);
 //
     $pagina = str_replace("<TITOLO/>", $_SESSION["annuncio"]->getTitolo(), $pagina);
@@ -26,8 +24,11 @@ if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
     $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo() . " a " . $annuncio->getCitta(), $pagina);
     $pagina = str_replace("<NUMOSPITI/>", $_SESSION["numOspiti"], $pagina);
     $pagina = str_replace("<TOTALE/>", intval($_SESSION["numOspiti"]) * $annuncio->getPrezzoNotte() . "&euro;", $pagina);
+    
+    $pagina = str_replace("<LINK/>", "id=" . $annuncio->getIdAnnuncio() . "&dataInizio=" . $_SESSION["dataInizio"]
+        . "&dataFine=" . $_SESSION["dataFine"] . "&numOspiti=" . $_SESSION["numOspiti"], $pagina);
 }else{
-
+    header("Location: ./404.php");
 }
 
 $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);

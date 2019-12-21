@@ -19,7 +19,7 @@ if (!isset($_POST["registrati"])) {
     $pagina = str_replace("<MESE/>", $GG, $pagina);
     $GG = "";
     for ($i = 2019; $i > 1919; $i = $i - 1) {
-        $GG .= "<option value=\"($i-i)\">$i</option>";
+        $GG .= "<option value=\"($i)\">$i</option>";
     }
     $pagina= str_replace("<ANNO/>",$GG,$pagina);
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
