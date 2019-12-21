@@ -35,7 +35,7 @@ class Database {
 
     /**
      * Flag per verificare se c'è una connessione aperta con il database.
-     * Tipo: boolean
+     * Tipo: bool
      */
     private $is_connected;
 
