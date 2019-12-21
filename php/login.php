@@ -12,9 +12,9 @@ if (isset($_POST["accedi"])) {
     $nome = $_POST["user"];
     $password = $_POST["password"];
     try {
-       
-        require_once "components/connessione_anonimo.php";
-        $utente = $manager->login($nome, $password);
+    
+        require_once "./load_Frent.php";
+        $utente = $frent->login($nome, $password);
         
         $_SESSION["user"] = $utente;
         header("Location: ./index.php");

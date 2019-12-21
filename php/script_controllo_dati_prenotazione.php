@@ -33,10 +33,10 @@ if (isset($_POST["conferma_prenotazione"])) {
             $_SESSION["dataInizio"] = $_POST["dataInizio"];
             $_SESSION["numOspiti"] = $_POST["numOspiti"];
             $_SESSION["occupazione"] = $occupazione;
+    
+            require_once "./load_Frent.php";
         
-            require_once "components/connessione_utente.php";
-        
-            $occupazioni = $manager->getOccupazioniAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
+            $occupazioni = $frent->getOccupazioniAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
         
             $occupazioneIsFit = true;
             if ($_SESSION["dataFine"] < $occupazioni[0]->getDataInizio()) {

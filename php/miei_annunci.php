@@ -9,8 +9,9 @@ if (isset($_SESSION["user"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     $user = $_SESSION["user"];
-    require_once "components/connessione_utente.php";
-    $annunci =$manager->getAnnunciHost();
+    
+    require_once "./load_Frent.php";
+    $annunci =$frent->getAnnunciHost();
     $content="";
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
@@ -18,7 +19,7 @@ if (isset($_SESSION["user"])) {
         $descrizione=$annuncio->getDescrizione();
         $prezzoTotale=$annuncio->getPrezzoNotte();
         $path= $annuncio->getImgAnteprima();
-        $recensioni=$manager->getCommentiAnnuncio(intval($annuncio->getIdAnnuncio()));
+        $recensioni=$frent->getCommentiAnnuncio(intval($annuncio->getIdAnnuncio()));
         $numeroRecensione= count($recensioni);
         $punteggio=0;
         if ($numeroRecensione!=0){

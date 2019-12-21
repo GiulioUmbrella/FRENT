@@ -13,8 +13,9 @@ if (isset($_SESSION["user"])) {
     
     $content = "";
     // pescare le prenotazioni correnti
-    require_once "components/connessione_utente.php";
-    $occupazioni = $manager->getPrenotazioniGuest();
+    
+    require_once "./load_Frent.php";
+    $occupazioni = $frent->getPrenotazioniGuest();
 //    $occupazioni = array();
     $i = 5;
     $prenotazioni_future = " <h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
@@ -27,7 +28,7 @@ if (isset($_SESSION["user"])) {
     $numPrenotazioniFuture = 0;
     foreach ($occupazioni as $prenotazione) {
         $id_prenotazione = $prenotazione->getIdOccupazione();
-        $annuncio = $manager->getAnnuncio($prenotazione->getIdAnnuncio());
+        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
         $mail = ""; //todo manca la funzione per ottenere info dell'host
         $nomeAnnuncio = $annuncio->getTitolo();
         $descrizionefoto = "";

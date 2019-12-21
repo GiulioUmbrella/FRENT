@@ -17,7 +17,8 @@ try {
      * può visualizzare, se è utente o null allora possono visualizzare solo gli annunci nello stato di approvazione= 1
      */
     session_start();
-    require_once "./components/connessione_anonimo.php";
+    
+    require_once "./load_Frent.php";
     
     if (!isset($_GET["id"])) {
         header("Location: ./404.php");
@@ -25,7 +26,7 @@ try {
     
     $id = intval($_GET["id"]);
     $_SESSION["id"] = $id;
-    $annuncio = $manager->getAnnuncio($id);
+    $annuncio = $frent->getAnnuncio($id);
     // se non sono ne admin ne user e annuncio non è stato approvato, non posso vederlo.
     // se sono user ma non sono host e annuncio non è stato approvato, non posso veder.
     if ((!isset($_SESSION["admin"]) and !isset($_SESSION["user"]) and $annuncio->getStatoApprovazione() != 1) or
@@ -37,7 +38,7 @@ try {
     $_SESSION["annuncio"] = $annuncio;
     $prezzoAnnuncio = $annuncio->getPrezzoNotte();
     $ospitiMassimo = $annuncio->getMaxOspiti();
-    $foto = $manager->getFotoAnnuncio($id);
+    $foto = $frent->getFotoAnnuncio($id);
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
@@ -97,7 +98,7 @@ try {
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     $str_commenti = "";
     try {
-        $commenti = $manager->getCommentiAnnuncio($id);
+        $commenti = $frent->getCommentiAnnuncio($id);
         $mediaCommenti = 0;
         if (count($commenti)!= 0){
             $str_commenti .= "<ul>";
@@ -146,7 +147,7 @@ try {
     }
     
     $img = $annuncio->getImgAnteprima();
-    $photos = $manager->getFotoAnnuncio($annuncio->getIdAnnuncio());
+    $photos = $frent->getFotoAnnuncio($annuncio->getIdAnnuncio());
     
     $content = "<div class=\"shower_immagine_anteprima\">";
     if (count($photos) != 0) {

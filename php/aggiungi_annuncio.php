@@ -2,7 +2,6 @@
 require_once "./class_Frent.php";
 require_once "./class_Database.php";
 require_once "./class_CredenzialiDB.php";
-session_start();
 
 if ($_SESSION["user"]) {
     if (!isset($_POST["avanti"])) {

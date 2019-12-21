@@ -5,14 +5,12 @@ require_once "./class_Database.php";
 require_once "./class_CredenzialiDB.php";
 
 try {
-    session_start();
+    require_once "./load_Frent.php";
     if (!isset($_SESSION["admin"])) {
         header("Location: ./login_admin.php");
     }
-    require_once "./components/connessione_admin.php";
-    $_SESSION["manager"] = $manager;
     
-    $annunci = $manager->adminGetAnnunci();
+    $annunci = $frent->adminGetAnnunci();
     $pagina = file_get_contents("./components/approvazione_annunci.html");
     $msg = "Bentornato " . $_SESSION["admin"]->getUserName() . "!";
     $pagina = str_replace("<SALUTO/>", $msg, $pagina);

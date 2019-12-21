@@ -13,8 +13,8 @@ if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
     $admin = $_SESSION["admin"];
 
     try {
-        require_once "components/connessione_admin.php";
-        $res = $manager->adminEditStatoApprovazioneAnnuncio($id, $status);
+        require_once "load_Frent.php";
+        $res = $frent->adminEditStatoApprovazioneAnnuncio($id, $status);
 
         header("Location: ./approvazione_annunci.php");
     }catch(Eccezione $ex) {

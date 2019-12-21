@@ -2,7 +2,8 @@
 require_once "./class_Annuncio.php";
 require_once "./class_Utente.php";
 session_start();
-require_once "components/connessione_utente.php";
+
+require_once "./load_Frent.php";
 $pagina = file_get_contents("./components/conferma_prenotazione.html");
 $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
 
@@ -16,7 +17,7 @@ if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
     $pagina = str_replace("<TITOLO/>", $_SESSION["annuncio"]->getTitolo(), $pagina);
 //
     $annuncio = $_SESSION["annuncio"];
-    $utente = $manager->getUser(intval($annuncio->getIdHost()));
+    $utente = $frent->getUser(intval($annuncio->getIdHost()));
     $pagina = str_replace("<TITOLO/>", $annuncio->getTitolo(), $pagina);
     $pagina = str_replace("<DATAINIZIO/>", $_SESSION["dataInizio"], $pagina);
     $pagina = str_replace("<DATAFINE/>", $_SESSION["dataFine"], $pagina);

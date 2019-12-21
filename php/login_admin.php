@@ -12,8 +12,9 @@ if (isset($_POST["accedi"])) {
     $nome = $_POST["user"];
     $password = $_POST["password"];
     try {
-        require_once "components/connessione_anonimo.php";
-        $admin = $manager->adminLogin($nome, $password);
+    
+        require_once "./load_Frent.php";
+        $admin = $frent->adminLogin($nome, $password);
     
         $_SESSION["admin"] = $admin;
         header("Location: ./approvazione_annunci.php");
