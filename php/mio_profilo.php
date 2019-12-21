@@ -12,6 +12,8 @@ if (isset($_SESSION["user"])){
     $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
     
     $user= $_SESSION["user"];
+    $manager= new Frent(new Database(CredenzialiDB::DB_ADDRESS,CredenzialiDB::DB_USER,
+        CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME));
     
     $path=$user->getImgProfilo();
     $pagina= str_replace("<PATH/>",$path,$pagina);
