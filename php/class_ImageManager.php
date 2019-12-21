@@ -131,6 +131,16 @@ class ImageManager {
     }
 
     /**
+     * Rimuove un file immagine dato un nome di file (comprensivo di path).
+     * @param string $fileName nome del file immagine da rimuovere comprensivo di path.
+     * @return bool TRUE se il file è stato rimosso, FALSE se ci sono stati problemi o l'estensione del file non è accettata.
+     */
+    public static function deleteFile($fileName): bool {
+        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        return ($fileExtension === "jpg" || $fileExtension === "png" || $fileExtension === "jpeg") ? unlink($fileName) : FALSE;
+    }
+
+    /**
      * Verifica che il file sia stato impostato. Se lo è stato non fa nulla, altrimenti lancia un'eccezione.
      * @throws Eccezione se il file non è stato ancora impostato
      */
