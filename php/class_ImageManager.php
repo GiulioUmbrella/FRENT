@@ -38,7 +38,7 @@ class ImageManager {
      * @param string $fileName nome da assegnare al file una volta caricato, senza estensione (se non assegnato viene preso il nome del file caricato)
      * @throws Eccezione se il file caricato non è un'immagine, se il file supera la dimensione massima specificata nella costruzione e se l'estensione non è valida.
      */
-    public function setFile($img_name_attr, $fileIndex = 0, $outFileName = "") {
+    public function setFile($img_name_attr, $outFileName = "", $fileIndex = 0) {
         // mi assicuro che i campi dati del file siano azzerati
         $this->unsetFile();
 
