@@ -10,13 +10,13 @@ todo quando l'annuncio non approvato è visualizzato dal proprietario, il pulsan
 
 require_once "./class_Frent.php";
 require_once "./class_CredenzialiDB.php";
+require_once "load_Frent.php";
 try {
     /*
      * quando annuncio non è stato approvato, fare dei controlli che non può essere visualizzato,
      * il controllo avviene attraverso il controllo dell'auth presente in session, se è admin allora
      * può visualizzare, se è utente o null allora possono visualizzare solo gli annunci nello stato di approvazione= 1
      */
-    session_start();
     
     require_once "./load_Frent.php";
     

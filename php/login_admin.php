@@ -6,7 +6,8 @@ require_once "./class_CredenzialiDB.php";
 $pagina = file_get_contents("./components/login_admin.html");
 $pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login_admin.php", $pagina);
-session_start();
+
+require_once "./load_Frent.php";
 if (isset($_POST["accedi"])) {
     
     $nome = $_POST["user"];

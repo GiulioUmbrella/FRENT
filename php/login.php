@@ -1,12 +1,11 @@
 <?php
 require_once "./class_Database.php";
 require_once "./class_Frent.php";
-
 require_once "./class_CredenzialiDB.php";
+require_once "load_Frent.php";
 $pagina = file_get_contents("./components/login.html");
 $pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login.php", $pagina);
-session_start();
 if (isset($_POST["accedi"])) {
     
     $nome = $_POST["user"];

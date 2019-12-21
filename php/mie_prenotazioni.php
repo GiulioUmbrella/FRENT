@@ -5,8 +5,8 @@ require_once "./class_Occupazione.php";
 require_once "./class_CredenzialiDB.php";
 //todo da rifare il modo di distiguere i 3 tipi di prenotazioni: utilizzare una funzione che trova la data corrente,
 // e quindi suddividerli, altrimenti è codice ripetuto.
+require_once "load_Frent.php";
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
-session_start();
 if (isset($_SESSION["user"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
@@ -14,7 +14,6 @@ if (isset($_SESSION["user"])) {
     $content = "";
     // pescare le prenotazioni correnti
     
-    require_once "./load_Frent.php";
     $occupazioni = $frent->getPrenotazioniGuest();
 //    $occupazioni = array();
     $i = 5;

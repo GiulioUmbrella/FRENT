@@ -1,6 +1,6 @@
 <?php
 require_once "./class_Frent.php";
-session_start();
+require_once "load_Frent.php";
 if (isset($_SESSION["user"])) {
     header("Location: index.php");
 }

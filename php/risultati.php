@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "load_Frent.php";
 require_once "class_Frent.php";
 require_once "./class_CredenzialiDB.php";
 $pagina = file_get_contents("./components/risultati.html");

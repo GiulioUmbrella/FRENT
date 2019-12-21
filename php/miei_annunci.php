@@ -2,15 +2,14 @@
 //todo nell'elenco visualizzare lo stato di approvazione degli annunci!
 require_once "class_Database.php";
 require_once "class_Frent.php";
-require_once "class_CredenzialiDB.php";
+require_once "./load_Frent.php";
 $pagina = file_get_contents("./components/miei_annunci.html");
-session_start();
+
 if (isset($_SESSION["user"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     $user = $_SESSION["user"];
     
-    require_once "./load_Frent.php";
     $annunci =$frent->getAnnunciHost();
     $content="";
     foreach ($annunci as $annuncio) {
@@ -33,7 +32,7 @@ if (isset($_SESSION["user"])) {
         }else if ($annuncio->getStatoApprovazione()==2){
             $stato="VNA";
         }
-
+        
         $content.= " <li><div class=\"intestazione_lista\">
                 <a href=\"dettagli_annuncio.php?id=$id\" tabindex=\"12\">$Titolo</a>
                 <p>Stato Approvazione: $stato - Punteggio: $numeroRecensione: </p></div><div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
@@ -45,3 +44,4 @@ if (isset($_SESSION["user"])) {
 } else {
     header("Location: login.php");
 }
+require_once "class_CredenzialiDB.php";

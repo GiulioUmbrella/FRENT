@@ -1,9 +1,8 @@
 <?php
 require_once "./class_Annuncio.php";
 require_once "./class_Utente.php";
-session_start();
-
 require_once "./load_Frent.php";
+
 $pagina = file_get_contents("./components/conferma_prenotazione.html");
 $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
 
