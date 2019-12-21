@@ -14,6 +14,7 @@ $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USE
     CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
 
 $citta="";
+require_once "./components/setMinMaxDates.php";
 $numOspiti =intval(1);
 $dataInizio ="";
 $dataFine ="";
@@ -68,7 +69,7 @@ try {
                 </li>";
     }
 } catch (Eccezione $e) {
-    $content=$e->getMessage();
+    $content="<h1>Non ci sono annunci che soddisfano i parametri di ricerca!</h1>";
 }
 //$risultati=array();
 
