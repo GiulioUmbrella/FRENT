@@ -13,12 +13,8 @@ if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
     $admin = $_SESSION["admin"];
 
     try {
-        $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-            CredenzialiDB::DB_PASSWORD,CredenzialiDB::DB_NAME);
-    
-        $frent = new Frent($db, $admin);
-        
-        $res = $frent->adminEditStatoApprovazioneAnnuncio($id, $status);
+        require_once "components/connessione_admin.php";
+        $res = $manager->adminEditStatoApprovazioneAnnuncio($id, $status);
 
         header("Location: ./approvazione_annunci.php");
     }catch(Eccezione $ex) {

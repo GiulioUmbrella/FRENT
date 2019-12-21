@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Conferma prenotazione - Frent</title>
+
+    <link rel="icon" href="../immagini/icona.ico"/>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="layout_centrale">
+   <HEADER/>
+   <div id="breadcrumb">
+       <p> Ti trovi in:<a href="./index.php" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en" lang="en">Home</a>
+           &gt;&gt;<a href="./dettagli_annuncio.php?<LINK/>" tabindex="6" title="Torna nei miei annunci"><TITOLO/></a>
+           &gt;&gt;Conferma prenotazione</p>
+   </div>
+
+
+    <div id="content">
+        <h1>Conferma Prenotazione</h1>
+        <ul class="riepilogo_annucio">
+            <li>Titolo Annuncio: <TITOLO/></li>
+            <li>Data arrivo: <DATAINIZIO/></li>
+            <li>Data partenza: <DATAFINE/></li>
+            <li>Proprietario: <PROPRIETARIO/></li>
+            <li>Indirizzo: <INDIRIZZO/></li>
+            <li>Numero ospiti: <NUMOSPITI/></li>
+            <li>Prezzo totale: <TOTALE/></li>
+        </ul>
+
+        <form class="form form_verticale" action="./riepilogo_prenotazione.php" method="post">
+            <fieldset>
+                <legend class="aiuti_alla_navigazione">Conferma prenotazione</legend>
+                <label for="button_conferma_prenotazione" class="aiuti_alla_navigazione">Conferma prenotazione</label>
+                <input id="button_conferma_prenotazione" value="Conferma prenotazione" type="submit"/>
+            </fieldset>
+        </form>
+    </div>
+
+ <FOOTER/>
+</body>
+</html>

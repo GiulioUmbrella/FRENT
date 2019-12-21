@@ -22,8 +22,8 @@ try {
     $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
     
+    require_once "./components/setMinMaxDates.php";
     $content = "";
-    
     $annunci= $frent->getUltimiAnnunciApprovati();
     foreach ($annunci as $annuncio){
         $titolo=  $annuncio->getTitolo();

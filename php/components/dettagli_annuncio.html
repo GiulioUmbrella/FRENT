@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>NOME_ANNUNCIO_AGGIUNTO_CON_PHP - Frent</title> <!--TODO: PHP-->
+    <title><TITOLO_ANNUNCIO/> - Frent</title> <!--TODO: PHP-->
 
     <meta name="description" content="DESCRIZIONE ANNUNCIO"/> <!--TODO: PHP-->
     <meta name="keyword" content="Casa,Appartamento,Affitto,Frent"/>
@@ -15,65 +15,21 @@
 </head>
 <body class="layout_colonna">
 <HEADER/>
-<!--<div id="header">-->
-<!--    <div id="logo">-->
-<!--        <h1>Frent</h1>-->
-<!--    </div>-->
-<!--    <div id="nav">-->
-<!--        <ul>-->
-<!--            <li><a tabindex="1" href="index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>-->
-<!--            </li>-->
-<!--            <li><a tabindex="2" href="login.html" title="Vai alla pagina di accesso">Accedi</a></li>-->
-<!--            <li><a tabindex="3" href="registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>-->
-<!--            <li><a tabindex="4" href="mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le-->
-<!--                mie prenotazioni</a></li>-->
-<!--            <li><a tabindex="5" href="miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei-->
-<!--                annunci</a></li>-->
-<!--            <li><a tabindex="6" href="mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio-->
-<!--                profilo</a></li>-->
-<!--            <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
 
 <div id="breadcrumb">
     <p> Ti trovi in: <a href="./index.php" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span
-            xml:lang="en">Home</span></a>:&gt;&gt;<a href="./risultati.php">Ricerca</a> &gt;&gt; <TITOLO_ANNUNCIO/></p>
+            xml:lang="en" lang="en">Home</span></a>:&gt;&gt;<a href="./risultati.php">Ricerca</a> &gt;&gt; <TITOLO_ANNUNCIO/></p>
 </div>
 
 <div id="content">
     <div class="informazioni_prenotazione">
         <h1 class="titolo_annuncio"><TITOLO_ANNUNCIO/></h1>
-<!--        <h1 class="titolo_annuncio"><TITOLO_ANNUNCIO/></h1>-->
         <h2>Valutazione media: <VALUTAZIONE/></h2>
         <h2>Numero commenti ricevuti:<NUMEROCOMMENTI/> </h2>
         <h2>Prezzo <PREZZO/>&euro;</h2>
         <p>Numero ospiti massimo: <OSPITIMASSIMO/></p>
 
-        <form action="./conferma_prenotazione.php" method="post" class="form form_verticale">
-            <fieldset>
-                <label for="data_inizio">Data inizio</label>
-                <input id="data_inizio" name="data_inizio" value="<VALUEINIZIO/>"type="date">
-                <label for="data_fine">Data fine</label>
-                <input id="data_fine" name="data_fine" value="<VALUEFINE/>" type="date">
-                <label class="aiuti_alla_navigazione" for="conferma_prenotazione">Conferma prenotazione</label>
-                <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
-            </fieldset>
-        </form>
-
-        <form action="./script_approvazione_annunci.php" method="post" class="form form_verticale">
-            <fieldset>
-                <label class="aiuti_alla_navigazione" for="approva">Approva</label>
-                <input id="approva" name="approva" type="submit" value="Approva"/>
-            </fieldset>
-        </form>
-        <form action="./modifica_annuncio.php" method="post" class="form form_verticale">
-            <fieldset>
-                <input value="<ID/>" type="hidden" name="id" id="id">
-                <label class="aiuti_alla_navigazione" for="modifica">Modifica</label>
-                <input id="modifica" name="modifica" type="submit" value="Modifica"/>
-            </fieldset>
-        </form>
+       <FLAG/>
 
     </div>
 
@@ -120,15 +76,7 @@
     </div>
 </div>
 
-<div id="footer">
-    <ul>
-        <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
-        <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
-            utilizzo</a></li>
-        <li><a href="../../html/faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a>
-        </li>
-    </ul>
-</div>
+<FOOTER/>
 
 
 </body>
