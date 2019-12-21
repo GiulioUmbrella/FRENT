@@ -34,24 +34,31 @@ class ImageManager {
      * Recupera il file da caricare sul server da $_SERVER. Il file deve avere una delle seguenti estensioni: jpg, png, jpeg.
      * @param string $img_name_attr valore dell'attributo name dell'elemento <input type="file" ..></file>
      * nel form da cui si sta recuperando l'immagine
-     * @param int $fileIndex indice del file nell'array $_FILES
-     * @param string $fileName nome da assegnare al file una volta caricato, senza estensione (se non assegnato viene preso il nome del file caricato)
+     * @param string $outFileName nome da assegnare al file una volta caricato, senza estensione (se non assegnato viene preso il nome del file caricato) (default: "")
+     * @param int $fileIndex indice del file nell'array $_FILES (default: -1)
      * @throws Eccezione se il file caricato non è un'immagine, se il file supera la dimensione massima specificata nella costruzione e se l'estensione non è valida.
      */
-    public function setFile($img_name_attr, $outFileName = "", $fileIndex = 0) {
+    public function setFile($img_name_attr, $outFileName = "", $fileIndex = -1) {
         // mi assicuro che i campi dati del file siano azzerati
         $this->unsetFile();
 
+        /**
+         * Se $fileIndex === -1 l'utente ha richiesto il caricamento di un file singolo, ovvero ha utilizzato un tag:
+         * <input type="file" ... />.
+         * Se $fileIndex >= 0 l'utente ha richiesto il caricamento di più file, ovvero ha utilizzato un tag:
+         * <input type="file" ... multiple />
+         */
+
         // verifico che l'indice del file chiesto sia nei limiti
-        if($fileIndex > $this->countFiles($img_name_attr)) {
+        if($fileIndex !== -1 && $fileIndex > $this->countFiles($img_name_attr)) {
             throw new Eccezione("È stato richiesto di accedere ad un file non caricato.");
         }
 
         // recupero il nome del file caricato
-        $name = $_FILES[$img_name_attr]["name"][$fileIndex];
+        $name = $fileIndex !== -1 ? $_FILES[$img_name_attr]["name"][$fileIndex] : $_FILES[$img_name_attr]["name"];
         
         // file size
-        $size = $_FILES[$img_name_attr]["size"][$fileIndex];
+        $size = $fileIndex !== -1 ? $_FILES[$img_name_attr]["size"][$fileIndex] : $_FILES[$img_name_attr]["size"];
         
         // recupero l'estensione del file
         $this->targetFileExtension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -60,7 +67,7 @@ class ImageManager {
         $this->targetFileName = $this->targetFolder . ($outFileName === "" ? $name : $outFileName . "." . $this->targetFileExtension);
         
         // directory in cui è salvato il file temporaneo
-        $this->tempFile = $_FILES[$img_name_attr]["tmp_name"][$fileIndex];
+        $this->tempFileName = $fileIndex !== -1 ? $_FILES[$img_name_attr]["tmp_name"][$fileIndex] : $_FILES[$img_name_attr]["tmp_name"];
         
         // verifico che l'estensione sia corretta
         if ($this->targetFileExtension != "jpg" &&
@@ -71,7 +78,7 @@ class ImageManager {
         }
         
         // verifico che il file caricato sia effetivamente un file imamgine (verifica i metadati)
-        if (getimagesize($this->tempFile) === false) {
+        if (getimagesize($this->tempFileName) === false) {
             throw new Eccezione("Il file caricato non è un'immagine.");
         }
         
@@ -110,14 +117,14 @@ class ImageManager {
      */
     public function saveFile(): bool {
         $this->verifyFilePresence();
-
+        echo "<p>Temp file name: ". $this->tempFileName . "</p><p>Target file name: " . $this->targetFileName . "</p>";
         return move_uploaded_file($this->tempFileName, $this->targetFileName);
     }
 
     /**
-     * Restituisce il numero dei file caricati tramite il form.
+     * Restituisce il numero dei file caricati tramite il form. Il metodo deve venire invocato se è stato abilitato il caricamento multiplo.
      * @param string $img_name_attr valore dell'attributo name dell'elemento <input type="file" ..></file>
-     * nel form da cui si sta recuperando l'immagine
+     * nel form da cui si sta recuperando l'immagine.
      */
     public function countFiles($img_name_attr): int {
         return count($_FILES[$img_name_attr]["name"]);
