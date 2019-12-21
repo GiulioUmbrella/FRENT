@@ -71,7 +71,7 @@ class Annuncio {
     }
     
     /**
-     * @param boolean $bloccato
+     * @param bool $bloccato
      * @throws Eccezione se $bloccato non è TRUE o FALSE
      */
     public function setBloccato($bloccato) {

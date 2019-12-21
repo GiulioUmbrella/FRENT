@@ -54,7 +54,7 @@ class Occupazione {
     }
     
     /**
-     * @param boolean $prenotazione_guest
+     * @param bool $prenotazione_guest
      * @throws Eccezione se $prenotazione_guest non è TRUE o FALSE
      */
     public function setPrenotazioneGuest($prenotazione_guest) {
