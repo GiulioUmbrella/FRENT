@@ -22,24 +22,19 @@ if (isset($_POST["conferma_prenotazione"])) {
         intval($_POST["numOspiti"]) <= $_SESSION["annuncio"]->getMaxOspiti() and
         checkDateBeginAndEnd($_POST["dataInizio"],$_POST["dataFine"])
     ) {
-
-        $pagina = str_replace("<LINK/>", "id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
-            . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"], $pagina);
-        $pagina = str_replace("<IDANNUNCIO/>", $_SESSION["annuncio"]->getIdAnnuncio(), $pagina);
-
-        $pagina = str_replace("<TITOLO/>", $_SESSION["annuncio"]->getTitolo(), $pagina);
-        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
-    
         $occupazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
         $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
         $occupazione->setDataInizio($_POST["dataInizio"]);
         $occupazione->setDataFine($_POST["dataFine"]);
-        $occupazione->setPrenotazioneGuest(1);
+        $occupazione->setPrenotazioneGuest(true);
         $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
+        $_SESSION["dataFine"]= $_POST["dataFine"];
+        $_SESSION["dataInizio"]= $_POST["dataInizio"];
+        $_SESSION["numOspiti"]= $_POST["numOspiti"];
         
         require_once "components/connessione_utente.php";
         $_SESSION["occupazione"]= $occupazione;
-        echo $pagina;
+        header("Location: ./conferma_prenotazione.php");
 
 
     } else {

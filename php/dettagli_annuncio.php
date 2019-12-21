@@ -60,7 +60,7 @@ try {
         $pagina = str_replace("<PARAMS_NO/>", $params_no, $pagina);
     } else {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
-        $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore.html"), $pagina);
+        $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_non_autenticato.html"), $pagina);
         $pagina = str_replace("<LINK/>","./login.php",$pagina);
     }
     require_once "./components/setMinMaxDates.php";

@@ -1,9 +1,9 @@
 <?php
 
+require_once "./class_Database.php";
 require_once "./class_Amministratore.php";
 require_once "./class_Annuncio.php";
 require_once "./class_Commento.php";
-require_once "./class_Database.php";
 require_once "./class_Eccezione.php";
 require_once "./class_Foto.php";
 require_once "./class_Occupazione.php";
@@ -319,6 +319,35 @@ class Frent {
             $annuncio->setPrezzoNotte(floatval($res_annuncio[0]['prezzo_notte']));
 
             return $annuncio;
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
+    }
+    
+    /**
+     * Restituisce le informazioni di un utente, dato il suo ID.
+     * @param int id_utente id dell'utente
+     * @return Utente oggetto di tipo utente se è stato trovato un annuncio con l'ID passato per parametro
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione dell'oggeto di Utente
+     */
+    public function getUser($id_utente): Utente {
+        try {
+            if(!is_int($id_utente)) {
+                throw new Eccezione("Parametri di invocazione di get utente errati.");
+            }
+      
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_user($id_utente)";
+            $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
+            $utente = Utente::build();
+            $utente->setIdUtente(intval($res_utente[0]['id_utente']));
+            $utente->setCognome($res_utente[0]['cognome']);
+            $utente->setNome($res_utente[0]['nome']);
+            $utente->setUserName($res_utente[0]['user_name']);
+            $utente->setImgProfilo($res_utente[0]['img_profilo']);
+            $utente->setImgProfilo($res_utente[0]['telefono']);
+
+            return $utente;
         } catch(Eccezione $exc) {
             throw $exc;
         }

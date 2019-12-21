@@ -1,5 +1,5 @@
 <?php
-$pagina = file_get_contents("./components/dettaglio_annunci_host_modifica.html");
+$pagina = file_get_contents("./components/dettaglio_annuncio_host_modifica.html");
 session_start();
 if (isset($_SESSION["user"])){
     $pagina= str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
