@@ -16,13 +16,14 @@ $pagina = file_get_contents("./components/conferma_prenotazione.html");
 $occupazione = Occupazione::build();
 if (isset($_POST["conferma_prenotazione"])) {
     try {
-    
+        
         if (isset($_POST["dataInizio"]) and checkIsValidDate($_POST["dataInizio"]) and
             isset($_POST["dataFine"]) and checkIsValidDate($_POST["dataFine"]) and
             isset($_POST["numOspiti"]) and is_int(intval($_POST["numOspiti"])) and intval($_POST["numOspiti"]) > 0 and
             intval($_POST["numOspiti"]) <= $_SESSION["annuncio"]->getMaxOspiti() and
             checkDateBeginAndEnd($_POST["dataInizio"], $_POST["dataFine"])
         ) {
+            echo "dati ok!";
             $occupazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
             $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
             $occupazione->setDataInizio($_POST["dataInizio"]);
@@ -33,11 +34,11 @@ if (isset($_POST["conferma_prenotazione"])) {
             $_SESSION["dataInizio"] = $_POST["dataInizio"];
             $_SESSION["numOspiti"] = $_POST["numOspiti"];
             $_SESSION["occupazione"] = $occupazione;
-    
+            
             require_once "./load_Frent.php";
-        
+            
             $occupazioni = $frent->getOccupazioniAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
-        
+            
             $occupazioneIsFit = true;
             if ($_SESSION["dataFine"] < $occupazioni[0]->getDataInizio()) {
                 $occupazioneIsFit = false;
@@ -50,16 +51,16 @@ if (isset($_POST["conferma_prenotazione"])) {
             }
             if (!$occupazioneIsFit and $occupazioni[count($occupazioni) - 1]->getDataFine() < $_SESSION["dataInizio"])
                 $occupazioneIsFit = false;
-    
-            if ($occupazioneIsFit){
-    
+            
+            if ($occupazioneIsFit) {
+                
                 $_SESSION["dati_errati"] = "false";
                 header("Location: ./conferma_prenotazione.php");
+            } else {
+                echo "Date scelte non disponibili!";
+//            throw new Eccezione("Date scelte non sono disponibili!");
             }
-        else
-            throw new Eccezione("Date scelte non sono disponibili!");
-    
-    
+            
         } else {
             try {
                 $occupazione = Occupazione::build();
@@ -67,15 +68,17 @@ if (isset($_POST["conferma_prenotazione"])) {
                 $occupazione->setDataInizio($_POST["dataInizio"]);
                 $occupazione->setDataFine($_POST["dataInizio"]);
             } catch (Eccezione $ex) {
-                throw $ex;
+                echo $ex->getMessage();
+//                throw $ex;
             }
         }
-    }catch (Eccezione $ex){
-    
+    } catch (Eccezione $ex) {
+        
         $_SESSION["dati_errati"] = "true";
         $_SESSION["msg"] = $ex->getMessage();
+        
     }
+    
     header("Location: ./dettagli_annuncio.php?id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
         . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"]);
-    
 }

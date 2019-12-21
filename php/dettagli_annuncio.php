@@ -40,8 +40,9 @@ try {
     $ospitiMassimo = $annuncio->getMaxOspiti();
     $foto = $frent->getFotoAnnuncio($id);
     
+    
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
-    $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
+    $pagina = str_replace("<OSPITIMASSIMO/>",$ospitiMassimo, $pagina);
     
     // impostazione della pagina in base al tipo di utenza
     if (isset($_SESSION["user"])) {
@@ -50,7 +51,7 @@ try {
             $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_host.html"), $pagina);
         } else {
             $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore.html"), $pagina);
-            $pagina= str_replace("<LINK/>","./script_controllo_dati_prenotazione.php",$pagina);
+            $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
         }
     } else if (isset($_SESSION["admin"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
@@ -62,7 +63,7 @@ try {
     } else {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
         $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_non_autenticato.html"), $pagina);
-        $pagina = str_replace("<LINK/>","./login.php",$pagina);
+        $pagina = str_replace("<LINK/>", "./login.php", $pagina);
     }
     require_once "./components/setMinMaxDates.php";
     
@@ -87,20 +88,19 @@ try {
         $pagina = str_replace("<VALUENUMERO/>", 1, $pagina);
     }
     
-    if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"] == "true") {
-        $pagina = str_replace("<MSG/>",$_SESSION["msg"] , $pagina);
-    }else{
+    if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"] === "true") {
+        $pagina = str_replace("<MSG/>", $_SESSION["msg"], $pagina);
+    } else {
         $pagina = str_replace("<MSG/>", "", $pagina);
-    
+        
     }
     
     
-    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     $str_commenti = "";
     try {
         $commenti = $frent->getCommentiAnnuncio($id);
         $mediaCommenti = 0;
-        if (count($commenti)!= 0){
+        if (count($commenti) != 0) {
             $str_commenti .= "<ul>";
             $totale = 0;
             foreach ($commenti as $commento) {
@@ -128,19 +128,17 @@ try {
                             </div>
                         </li>";
             }
+            $mediaCommenti= $totale/(count($commenti));
             $str_commenti .= "</ul>";
-            $pagina = str_replace("<Commenti/>", $str_commenti, $pagina);
-        }else{
+            $pagina = str_replace("<COMMENTI/>", $str_commenti, $pagina);
+    
+            $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
+    
+        } else {
             $pagina = str_replace("<Commenti/>", "<h2>Non ci sono commenti!</h2>", $pagina);
-    
+            
         }
-    
-        $pagina = str_replace("<Commenti/>", $str_commenti, $pagina);
-        $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
-        $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
-        $pagina = str_replace("<PREZZO/>", $prezzoAnnuncio, $pagina);
-        $pagina = str_replace("<OSPITIMASSIMO/>", $mediaCommenti, $pagina);
-        $pagina = str_replace("<Valutazione/>", $mediaCommenti, $pagina);
+        
         
     } catch (Eccezione $e) {
         $pagina = str_replace("<Commenti/>", "<p>Ancora non ci sono commenti!</p>", $pagina);
@@ -165,9 +163,13 @@ try {
     }
     $content .= "</div>";
     
+    $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
+    $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
+    $pagina = str_replace("<PREZZO/>", $prezzoAnnuncio, $pagina);
+    $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
     
     $pagina = str_replace("<IMMAGINE/>", $content, $pagina);
-    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"),$pagina);
+    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     echo $pagina;
     
 } catch (Eccezione $ex) {
