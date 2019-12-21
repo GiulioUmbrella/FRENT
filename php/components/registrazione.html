@@ -23,7 +23,8 @@
 
 <div id="content" >
   <h1>Registrati</h1>
-    <form action="../pagine_php/registrazione.php" method="post" class="form form_verticale">
+    <form action="./registrazione.php" method="post" class="form form_verticale">
+        <div id="credenziali_errate"></div>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
             <label for="nome">Nome</label>
@@ -52,16 +53,16 @@
         </fieldset>
         <fieldset id="data_di_nascita">
             <legend>Data di nascita</legend>
-            <label for="birth_day">Giorno:</label>
-            <select id="birth_day" tabindex="11">
+            <label for="birth_day">Giorno</label>
+            <select id="birth_day" name="birth_day" tabindex="11">
                 <GIORNO/>
             </select>
-            <label for="birth_month">Mese:</label>
-            <select id="birth_month" tabindex="12">
+            <label for="birth_month">Mese</label>
+            <select id="birth_month" name="birth_month" tabindex="12">
                 <MESE/>
             </select>
-            <label for="birth_year">Anno:</label>
-            <select id="birth_year" tabindex="13">
+            <label for="birth_year">Anno</label>
+            <select id="birth_year" name="birth_year" tabindex="13">
                 <ANNO/>
             </select>
 
@@ -73,7 +74,7 @@
             <input type="reset" id="resetta" value="Reset"/>
         </fieldset>
     </form>
-    <p class="aligned_with_form"> Hai già un <span lang="en">account</span>? <a href="../pagine_php/login.php">Accedi</a>!</p>
+    <p class="aligned_with_form"> Hai già un <span lang="en">account</span>? <a href="./login.php">Accedi</a>!</p>
 </div>
 
 <div  id="footer">
