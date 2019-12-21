@@ -17,8 +17,7 @@ try {
      * può visualizzare, se è utente o null allora possono visualizzare solo gli annunci nello stato di approvazione= 1
      */
     session_start();
-    $manager = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
+    require_once "./components/connessione_anonimo.php";
     
     if (!isset($_GET["id"])) {
         header("Location: ./404.php");
@@ -50,6 +49,7 @@ try {
             $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_host.html"), $pagina);
         } else {
             $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore.html"), $pagina);
+            $pagina= str_replace("<LINK/>","./script_controllo_dati_prenotazione.php",$pagina);
         }
     } else if (isset($_SESSION["admin"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
@@ -61,12 +61,12 @@ try {
     } else {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
         $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore.html"), $pagina);
-       require_once "./components/setMinMaxDates.php";
+        $pagina = str_replace("<LINK/>","./login.php",$pagina);
     }
+    require_once "./components/setMinMaxDates.php";
     
     if (isset($_GET["dataInizio"])) {
         $dataInizio = $_GET["dataInizio"];
-        $_SESSION["dataInizio"] = $dataInizio;
         $pagina = str_replace("<VALUEINIZIO/>", $dataInizio, $pagina);
     } else {
         $pagina = str_replace("<VALUEINIZIO/>", "", $pagina);
@@ -74,7 +74,6 @@ try {
     
     if (isset($_GET["dataFine"])) {
         $dataFine = $_GET["dataFine"];
-        $_SESSION["dataFine"] = $dataFine;
         $pagina = str_replace("<VALUEFINE/>", $dataFine, $pagina);
     } else {
         $pagina = str_replace("<VALUEFINE/>", "", $pagina);
@@ -82,14 +81,16 @@ try {
     
     if (isset($_GET["numOspiti"])) {
         $numOspiti = $_GET["numOspiti"];
-        $_SESSION["numOspiti"] = $numOspiti;
         $pagina = str_replace("<VALUENUMERO/>", intval($_GET["numOspiti"]), $pagina);
     } else {
         $pagina = str_replace("<VALUENUMERO/>", 1, $pagina);
     }
     
     if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"] == "true") {
-        $pagina = str_replace("<MSG/>", "<p>Dati inseriti per la prenotazione non sono validi</p>", $pagina);
+        $pagina = str_replace("<MSG/>",$_SESSION["msg"] , $pagina);
+    }else{
+        $pagina = str_replace("<MSG/>", "", $pagina);
+    
     }
     
     
@@ -165,6 +166,7 @@ try {
     
     
     $pagina = str_replace("<IMMAGINE/>", $content, $pagina);
+    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"),$pagina);
     echo $pagina;
     
 } catch (Eccezione $ex) {

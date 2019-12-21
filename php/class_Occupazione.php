@@ -95,7 +95,10 @@ class Occupazione {
      */
     public function setDataFine($data_fine) {
         if(checkIsValidDate($data_fine)) {
-            $this->data_fine = $data_fine;
+            if (checkDateBeginAndEnd($this->data_inizio,$data_fine))
+                $this->data_fine = $data_fine;
+            else
+                throw new Eccezione("La data di fine è prima dell'inizio!");
         } else {
             throw new Eccezione("La data di fine non è valida.");
         }

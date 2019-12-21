@@ -3,6 +3,7 @@ require_once "./CheckMethods.php";
 require_once "class_Annuncio.php";
 require_once "class_Occupazione.php";
 require_once "class_Utente.php";
+require_once "class_Eccezione.php";
 
 session_start();
 if (!isset($_SESSION["user"])) {
@@ -12,29 +13,48 @@ if (!isset($_SESSION["annuncio"])) {
     header("Location: ./index.php");
 }
 $pagina = file_get_contents("./components/conferma_prenotazione.html");
+$occupazione = Occupazione::build();
 if (isset($_POST["conferma_prenotazione"])) {
+
+    if (isset($_POST["dataInizio"]) and checkIsValidDate($_POST["dataInizio"]) and
+        isset($_POST["dataFine"]) and checkIsValidDate($_POST["dataFine"]) and
+        isset($_POST["numOspiti"]) and is_int(intval($_POST["numOspiti"])) and intval($_POST["numOspiti"]) > 0 and
+        intval($_POST["numOspiti"]) <= $_SESSION["annuncio"]->getMaxOspiti() and
+        checkDateBeginAndEnd($_POST["dataInizio"],$_POST["dataFine"])
+    ) {
+
+        $pagina = str_replace("<LINK/>", "id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
+            . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"], $pagina);
+        $pagina = str_replace("<IDANNUNCIO/>", $_SESSION["annuncio"]->getIdAnnuncio(), $pagina);
+
+        $pagina = str_replace("<TITOLO/>", $_SESSION["annuncio"]->getTitolo(), $pagina);
+        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     
-    if (!(isset($_SESSION["dataInizio"]) and checkIsValidDate(strtotime($_SESSION["dataInizio"])))) {
-        $_SESSION["dati_errati"] = "true";
-        echo "Data inizio non valido!";
-    } elseif (!(isset($_SESSION["dataFine"]) and checkIsValidDate(strtotime($_SESSION["dataFine"])))) {
-        $_SESSION["dati_errati"] = "true";
-        echo "Data fine non valido!";
-    } elseif (!(isset($_SESSION["numOspiti"]) and is_int($_SESSION["numOspiti"]) and intval($_SESSION["numOspiti"]) > 0
-        and intval($_SESSION["numOspiti"]) < $annuncio->getMaxOspiti())) {
-        echo "numero ospiti non valido!";
-        $_SESSION["dati_errati"] = "true";
+        $occupazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
+        $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
+        $occupazione->setDataInizio($_POST["dataInizio"]);
+        $occupazione->setDataFine($_POST["dataFine"]);
+        $occupazione->setPrenotazioneGuest(1);
+        $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
+        
+        require_once "components/connessione_utente.php";
+        $_SESSION["occupazione"]= $occupazione;
+        echo $pagina;
+
+
     } else {
-        $_SESSION["dati_errati"] = "false";
+        $_SESSION["dati_errati"] = "true";
+        try {
+                $occupazione = Occupazione::build();
+            $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
+            $occupazione->setDataInizio($_POST["dataInizio"]);
+            $occupazione->setDataFine($_POST["dataInizio"]);
+        }catch (Eccezione $ex){
+            $_SESSION["msg"] = $ex->getMessage();
+        }
+        header("Location: ./dettagli_annuncio.php?id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
+            . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"]);
     }
     
-    $pagina = str_replace("<LINK/>", "id=" . $_SESSION["id"] . "&dataInizio=" . $_SESSION["dataInizio"]
-        . "&dataFine=" . $_SESSION["dataFine"] . "&numOspiti=" . $_SESSION["numOspiti"], $pagina);
-    $pagina = str_replace("<IDANNUNCIO/>", $_SESSION["annuncio"]->getIdAnnuncio(), $pagina);
     
-    $pagina = str_replace("<TITOLO/>", $_SESSION["annuncio"]->getTitolo(), $pagina);
-    $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
-    
-    echo $pagina;
 }
-header("Location: ./dettagli_annuncio.php?id=".$_SESSION["id"]);

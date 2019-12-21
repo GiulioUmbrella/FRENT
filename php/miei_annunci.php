@@ -9,10 +9,8 @@ if (isset($_SESSION["user"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     $user = $_SESSION["user"];
-    $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME), $user);
-    
-    $annunci =$frent->getAnnunciHost();
+    require_once "components/connessione_utente.php";
+    $annunci =$manager->getAnnunciHost();
     $content="";
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
@@ -20,7 +18,7 @@ if (isset($_SESSION["user"])) {
         $descrizione=$annuncio->getDescrizione();
         $prezzoTotale=$annuncio->getPrezzoNotte();
         $path= $annuncio->getImgAnteprima();
-        $recensioni=$frent->getCommentiAnnuncio(intval($annuncio->getIdAnnuncio()));
+        $recensioni=$manager->getCommentiAnnuncio(intval($annuncio->getIdAnnuncio()));
         $numeroRecensione= count($recensioni);
         $punteggio=0;
         if ($numeroRecensione!=0){

@@ -5,14 +5,14 @@ require_once "./class_CredenzialiDB.php";
 $pagina = file_get_contents("./components/risultati.html");
 if (isset($_SESSION["admin"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
+    require_once "components/connessione_admin.php";
 } elseif (isset($_SESSION["user"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+    require_once "components/connessione_utente.php";
 } else {
+    require_once "components/connessione_anonimo.php";
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
 }
-$frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-    CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
-
 $citta="";
 require_once "./components/setMinMaxDates.php";
 $numOspiti =intval(1);
@@ -37,14 +37,14 @@ if (isset($_GET["dataFine"])){
 }
 $content = "";
 try {
-    $risultati = $frent->ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine);
+    $risultati = $manager->ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine);
     foreach ($risultati as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
         $Titolo = $annuncio->getTitolo();
         $descrizione=$annuncio->getDescrizione();
         $prezzoTotale=$annuncio->getPrezzoNotte();
         $path= $annuncio->getImgAnteprima();
-        $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
+        $recensioni=$manager->getCommentiAnnuncio($annuncio->getIdAnnuncio());
         $numeroRecensione= count($recensioni);
         $punteggio=0;
         if ($numeroRecensione!=0){
