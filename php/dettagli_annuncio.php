@@ -42,7 +42,6 @@ try {
     
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
-    $pagina = str_replace("<OSPITIMASSIMO/>",$ospitiMassimo, $pagina);
     
     // impostazione della pagina in base al tipo di utenza
     if (isset($_SESSION["user"])) {
@@ -67,6 +66,7 @@ try {
     }
     require_once "./components/setMinMaxDates.php";
     
+    $pagina = str_replace("<OSPITIMASSIMO/>",$ospitiMassimo, $pagina);
     if (isset($_GET["dataInizio"])) {
         $dataInizio = $_GET["dataInizio"];
         $pagina = str_replace("<VALUEINIZIO/>", $dataInizio, $pagina);
@@ -88,11 +88,12 @@ try {
         $pagina = str_replace("<VALUENUMERO/>", 1, $pagina);
     }
     
-    if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"] === "true") {
+    if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"] == "true") {
         $pagina = str_replace("<MSG/>", $_SESSION["msg"], $pagina);
+        unset($_SESSION["dati_errati"]);
     } else {
+        echo "no error";
         $pagina = str_replace("<MSG/>", "", $pagina);
-        
     }
     
     

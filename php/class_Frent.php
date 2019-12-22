@@ -377,6 +377,7 @@ class Frent {
             $occupazione->setDataInizio($data_inizio);
             $occupazione->setDataFine($data_fine);
 
+            // controllo in teoria inutile perché lo faccio già prima!
             if(checkDateBeginAndEnd($occupazione->getDataInizio(), $occupazione->getDataFine())) {
                 throw new Eccezione("Non è possibile inserire una data di fine antecedente o uguale alla data di inizio");
             }

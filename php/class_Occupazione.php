@@ -55,7 +55,7 @@ class Occupazione {
     
     /**
      * @param bool $prenotazione_guest
-     * @throws Eccezione se $prenotazione_guest non è TRUE o FALSE
+     * @throws Eccezione se $prenotazione_guest non è un valore booleano
      */
     public function setPrenotazioneGuest($prenotazione_guest) {
         if (is_bool($prenotazione_guest)) {
@@ -70,7 +70,7 @@ class Occupazione {
      * @throws Eccezione se $num_ospiti non è un intero oppure supera il massimo consentito
      */
     public function setNumOspiti($num_ospiti) {
-        if (is_int($num_ospiti) and $num_ospiti <= DataConstraints::occupazioni["num_ospiti"]) {
+        if (is_int($num_ospiti) and $num_ospiti <= intval(DataConstraints::occupazioni["num_ospiti"])) {
             $this->num_ospiti = $num_ospiti;
         } else {
             throw new Eccezione("Il numero degli ospiti non è valido.");

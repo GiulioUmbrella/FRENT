@@ -24,12 +24,7 @@ if (isset($_POST["conferma_prenotazione"])) {
             checkDateBeginAndEnd($_POST["dataInizio"], $_POST["dataFine"])
         ) {
             echo "dati ok!";
-            $occupazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
-            $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
-            $occupazione->setDataInizio($_POST["dataInizio"]);
-            $occupazione->setDataFine($_POST["dataFine"]);
-            $occupazione->setPrenotazioneGuest(true);
-            $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
+            
             $_SESSION["dataFine"] = $_POST["dataFine"];
             $_SESSION["dataInizio"] = $_POST["dataInizio"];
             $_SESSION["numOspiti"] = $_POST["numOspiti"];
@@ -51,34 +46,56 @@ if (isset($_POST["conferma_prenotazione"])) {
             }
             if (!$occupazioneIsFit and $occupazioni[count($occupazioni) - 1]->getDataFine() < $_SESSION["dataInizio"])
                 $occupazioneIsFit = false;
-            
+    
             if ($occupazioneIsFit) {
-                
                 $_SESSION["dati_errati"] = "false";
+                $occupazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
+                $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
+                $occupazione->setDataInizio($_POST["dataInizio"]);
+                $occupazione->setDataFine($_POST["dataFine"]);
+                $occupazione->setPrenotazioneGuest(true);
+                $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
+                $_SESSION["prenotazione"] = $occupazione;
                 header("Location: ./conferma_prenotazione.php");
             } else {
-                echo "Date scelte non disponibili!";
-//            throw new Eccezione("Date scelte non sono disponibili!");
+            
+//                echo "Date scelte non disponibili!";
+            throw new Eccezione("Date scelte non sono disponibili!");
             }
             
         } else {
-            try {
-                $occupazione = Occupazione::build();
-                $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
-                $occupazione->setDataInizio($_POST["dataInizio"]);
-                $occupazione->setDataFine($_POST["dataInizio"]);
-            } catch (Eccezione $ex) {
-                echo $ex->getMessage();
-//                throw $ex;
+            
+                $_SESSION["dati_errati"] = "true";
+//                $_SESSION["msg"] = $ex->getMessage();
+//
+            if(isset($_POST["dataInizio"]) and checkIsValidDate($_POST["dataInizio"])){
+                $_SESSION["msg"]="Data inizio non valida";
+    
+            }else if (isset($_POST["dataFine"]) and checkIsValidDate($_POST["dataFine"])){
+                $_SESSION["msg"]="Data Fine non valida";
+    
+            }else if(isset($_POST["numOspiti"]) and is_int(intval($_POST["numOspiti"])) and intval($_POST["numOspiti"]) > 0 and
+            intval($_POST["numOspiti"]) <= $_SESSION["annuncio"]->getMaxOspiti()){
+                $_SESSION["msg"]="Numero dei ospiti non valido!";
             }
+//            else if ( checkDateBeginAndEnd($_POST["dataInizio"], $_POST["dataFine"])){
+//                $_SESSION["msg"]="Le date non sono valide!";
+//
+//            }
+    
+    
+            header("Location: ./dettagli_annuncio.php?id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
+                . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"]);
+    //                echo $ex->getMessage();
+//                throw $ex;
         }
     } catch (Eccezione $ex) {
         
         $_SESSION["dati_errati"] = "true";
         $_SESSION["msg"] = $ex->getMessage();
         
+        header("Location: ./dettagli_annuncio.php?id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
+            . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"]);
     }
     
-    header("Location: ./dettagli_annuncio.php?id=" . $_SESSION["id"] . "&dataInizio=" . $_POST["dataInizio"]
-        . "&dataFine=" . $_POST["dataFine"] . "&numOspiti=" . $_POST["numOspiti"]);
 }
