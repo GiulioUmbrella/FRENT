@@ -27,8 +27,14 @@
             <legend class="aiuti_alla_navigazione">Ricerca annuncio</legend>
             <div class="input_label_orizzontale">
                 <label for="citta">Citt&agrave;</label>
-                <input type="text" tabindex="4" name="citta" id="citta"
+                <input list="cities" tabindex="4" name="citta" id="citta"
                        placeholder="Citt&agrave;"/>
+                <datalist id="cities">
+                    <option value="Citta uno" />
+                    <option value="Citta due" />
+                    <option value="Citta tre" />
+                    <option value="Citta quattro" />
+                </datalist>
             </div>
             <!--Chiarire cosa fare per Safari -->
             <div class="input_label_orizzontale">
