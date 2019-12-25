@@ -12,11 +12,8 @@ if (isset($_POST["accedi"])) {
     $nome = $_POST["user"];
     $password = $_POST["password"];
     try {
-        $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-            CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME);
-    
-        $frent = new Frent($db);
-        $admin = $frent->adminLogin($nome, $password);
+        require_once "components/connessione_anonimo.php";
+        $admin = $manager->adminLogin($nome, $password);
     
         $_SESSION["admin"] = $admin;
         header("Location: ./approvazione_annunci.php");

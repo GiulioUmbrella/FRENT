@@ -47,9 +47,11 @@ function checkStringMinLen($str, $len): bool{
  * @param string $format il formato in cui è rappresentato la data.
  * @return bool restituisce true sse $date è una data valida rispetto al formato specificato.
  */
-function checkIsValidDate($date, $format="Y-m-d"){
-//    return is_string($date) and checkdate($format,strtotime($date));
-    return is_string($date) and date($format,strtotime($date));
+function checkIsValidDate($date, $format="Y-m-d"):bool {
+    $str = explode("-",$date);
+    if (count($str)!=3)
+        return false;
+    return checkdate(intval($str[1]),intval($str[2]),intval($str[0]));
 }
 
 /**
@@ -68,7 +70,7 @@ function checkStringNoNumber($str):bool {
  * @return bool restuisce true sse la dataI è antecedente alla dataF
  */
 function checkDateBeginAndEnd($dataI, $dataF): bool {
-    return checkIsValidDate($dataI) and checkIsValidDate($dataF) and strtotime($dataI) < strtotime($dataF);
+    return checkIsValidDate($dataI) and checkIsValidDate($dataF) and strtotime($dataI) <= strtotime($dataF);
 }
 
 /**

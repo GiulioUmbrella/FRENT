@@ -12,11 +12,9 @@ if (isset($_POST["accedi"])) {
     $nome = $_POST["user"];
     $password = $_POST["password"];
     try {
-        $db = new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-            CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME);
-        
-        $frent = new Frent($db);
-        $utente = $frent->login($nome, $password);
+       
+        require_once "components/connessione_anonimo.php";
+        $utente = $manager->login($nome, $password);
         
         $_SESSION["user"] = $utente;
         header("Location: ./index.php");

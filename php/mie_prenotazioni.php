@@ -13,10 +13,8 @@ if (isset($_SESSION["user"])) {
     
     $content = "";
     // pescare le prenotazioni correnti
-    $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-            CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME)
-        , $_SESSION["user"]);
-    $occupazioni = $frent->getPrenotazioniGuest();
+    require_once "components/connessione_utente.php";
+    $occupazioni = $manager->getPrenotazioniGuest();
 //    $occupazioni = array();
     $i = 5;
     $prenotazioni_future = " <h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
@@ -29,7 +27,7 @@ if (isset($_SESSION["user"])) {
     $numPrenotazioniFuture = 0;
     foreach ($occupazioni as $prenotazione) {
         $id_prenotazione = $prenotazione->getIdOccupazione();
-        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
+        $annuncio = $manager->getAnnuncio($prenotazione->getIdAnnuncio());
         $mail = ""; //todo manca la funzione per ottenere info dell'host
         $nomeAnnuncio = $annuncio->getTitolo();
         $descrizionefoto = "";
