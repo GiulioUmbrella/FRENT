@@ -1,8 +1,8 @@
 <?php
-require_once("php/class_ImageManager.php");
+require_once("./class_ImageManager.php");
 
 if(isset($_POST['submit'])) {
-    $imageManager = new ImageManager("uploads/");
+    $imageManager = new ImageManager("../uploads/");
     try {
         // caricamento singolo
         $imageManager->setFile("uploadSingolo", "test");
