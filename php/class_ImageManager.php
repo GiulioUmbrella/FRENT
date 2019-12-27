@@ -1,6 +1,6 @@
 <?php
 
-require_once("Eccezione.php");
+require_once("./class_Eccezione.php");
 define("MB", 1048576);
 
 /**
@@ -36,7 +36,7 @@ class ImageManager {
      * nel form da cui si sta recuperando l'immagine
      * @param string $outFileName nome da assegnare al file una volta caricato, senza estensione (se non assegnato viene preso il nome del file caricato) (default: "")
      * @param int $fileIndex indice del file nell'array $_FILES (default: -1)
-     * @throws Eccezione se il file caricato non è un'immagine, se il file supera la dimensione massima specificata nella costruzione e se l'estensione non è valida.
+     * @throws Eccezione se il file caricato non è un'immagine, se il file supera la dimensione massima specificata nella costruzione e se l'estensione non è valida; se il file non è stato caricato
      */
     public function setFile($img_name_attr, $outFileName = "", $fileIndex = -1) {
         // mi assicuro che i campi dati del file siano azzerati
@@ -49,6 +49,11 @@ class ImageManager {
          * <input type="file" ... multiple />
          */
 
+        // verifico che sia stato caricato un file o più
+        if(!isset($_FILES[$img_name_attr]) || $_FILES[$img_name_attr]["error"] === 4 || $_FILES[$img_name_attr]["error"][0] === 4) {
+            throw new Eccezione("Non è stato caricato alcun file." . print_r($_FILES, TRUE));   
+        }
+        
         // verifico che l'indice del file chiesto sia nei limiti
         if($fileIndex !== -1 && $fileIndex > $this->countFiles($img_name_attr)) {
             throw new Eccezione("È stato richiesto di accedere ad un file non caricato.");
@@ -96,7 +101,7 @@ class ImageManager {
     public function fileName(): string {
         $this->verifyFilePresence();
 
-        return $this->targetFileName;
+        return pathinfo($this->targetFileName, PATHINFO_BASENAME);
     }
 
     /**
@@ -117,7 +122,6 @@ class ImageManager {
      */
     public function saveFile(): bool {
         $this->verifyFilePresence();
-        echo "<p>Temp file name: ". $this->tempFileName . "</p><p>Target file name: " . $this->targetFileName . "</p>";
         return move_uploaded_file($this->tempFileName, $this->targetFileName);
     }
 
