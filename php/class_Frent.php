@@ -354,6 +354,26 @@ class Frent {
     }
 
     /**
+     * Restituisce la lista delle città in cui sono presenti annunci prenotabili.
+     * @return array di string, come array a posizioni intere (non associativo) in cui ogni elemento è una città diversa
+     * @throws Eccezione in caso di errori nella connessione al database
+     */
+    public function getCittaAnnunci(): array {
+        try {
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_citta_annunci()";
+            $lista_citta = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            foreach($lista_citta as $i => $citta) {
+                $lista_citta[$i] = $citta['citta']; // sostituzione in-place
+            }
+
+            return $lista_citta;
+        } catch(Eccezione $exc) {
+            throw $exc;
+        } 
+    }
+    /**
      * Inserisce una nuova occupazione per un annuncio, verificando la possibilità prima di effettuare l'operazione e marchiandola come prenotazione se fatta da un guest e non dall'host.
      * @param int $id_annuncio id dell'annuncio
      * @param int $numospiti numero di ospiti per cui è stata richiesta l'occupazione

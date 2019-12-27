@@ -21,6 +21,15 @@ try {
     }
     $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
+
+    $content = "";
+
+    $citta_ricercabili = $frent->getCittaAnnunci();
+    $lista_citta_ricercabili = "";
+    foreach ($citta_ricercabili as $citta_ricercabile){
+        $lista_citta_ricercabili = $lista_citta_ricercabili . "<option value=\"$citta_ricercabile\"> \n";
+    }
+    $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
     
     require_once "./components/setMinMaxDates.php";
     $content = "";
