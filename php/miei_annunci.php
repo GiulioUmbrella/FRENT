@@ -33,11 +33,19 @@ if (isset($_SESSION["user"])) {
             $stato="VNA";
         }
         
-        $content.= " <li><div class=\"intestazione_lista\">
+        $content.= "
+             <li><div class=\"intestazione_lista\">
                 <a href=\"dettagli_annuncio.php?id=$id\" tabindex=\"12\">$Titolo</a>
-                <p>Stato Approvazione: $stato - Punteggio: $numeroRecensione: </p></div><div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
-                <div><p>$descrizione</p><a class=\"link_gestisci_annuncio\" href=\"./gestione_indisponibilita.php\" tabindex=\"13\" title=\"Vai alla gestione dell'annuncio\">Gestisci</a>
-                </div></div></li>";
+                <p>Stato Approvazione: $stato - Punteggio: $numeroRecensione:</p>
+                </div>
+                    <div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
+                    <div>
+                        <p>$descrizione</p>
+                        <a class=\"link_gestisci_annuncio\" href=\"./gestione_indisponibilita.php\" tabindex=\"13\"
+                        title=\"Vai alla gestione dell'annuncio\">Gestisci</a>
+                    </div>
+                </div>
+                </li>";
     }
     $pagina= str_replace("<LISTAANNUNCI/>",$content,$pagina);
     echo $pagina;

@@ -10,11 +10,12 @@ if (isset($_SESSION["user"])){
             $prenotazione = $_SESSION["prenotazione"];
             $id_prenotazione = $frent->insertOccupazione($prenotazione->getIdAnnuncio(),$prenotazione->getNumOspiti() ,
                 $prenotazione->getDataInizio(),
-                $prenotazione->getDataFine());
+                $prenotazione->getDataFine()
+            );
             
         }else{
             $id_prenotazione = $_GET["idOccupazione"];
-            $frent->get
+//            $frent->get
         }
         
         $prenotazione = $frent->getPrenotazioniGuest(intval($id_prenotazione));

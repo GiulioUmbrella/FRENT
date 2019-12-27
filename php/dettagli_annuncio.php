@@ -44,21 +44,32 @@ try {
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
     
     // impostazione della pagina in base al tipo di utenza
-    if (isset($_SESSION["user"])) {
-        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
-        if ($annuncio->getIdHost() == $_SESSION["user"]->getIdUtente()) {
-            $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_host.html"), $pagina);
-        } else {
-            $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore.html"), $pagina);
-            $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
+    if (isset($_SESSION["user"]) or isset($_SESSION["admin"])) {
+        if (isset($_SESSION["user"])) {
+            $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+            if ($annuncio->getIdHost() == $_SESSION["user"]->getIdUtente()) {
+                $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_host.html"), $pagina);
+                $pagina = str_replace("<ID/>", $annuncio->getIdAnnuncio(), $pagina);
+            } else {
+                if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))){
+                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_no_dati.html"), $pagina);
+                    $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
+    
+                }else{
+                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_con_dati.html"),$pagina);
+                    $pagina = str_replace("<LINK/>", "./conferma_prenotazione.php",$pagina);
+                }
+            }
         }
-    } else if (isset($_SESSION["admin"])) {
-        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
-        $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_admin.html"), $pagina);
-        $params_si = "?idAnnuncio=" . $annuncio->getIdAnnuncio() . "&approvato=1";
-        $params_no = "?idAnnuncio=" . $annuncio->getIdAnnuncio() . "&approvato=0";
-        $pagina = str_replace("<PARAMS_SI/>", $params_si, $pagina);
-        $pagina = str_replace("<PARAMS_NO/>", $params_no, $pagina);
+        
+        if (isset($_SESSION["admin"])) { // visualizzazione da parte di un amministratore
+            $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
+            $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_admin.html"), $pagina);
+            $params_si = "?idAnnuncio=" . $annuncio->getIdAnnuncio() . "&approvato=1";
+            $params_no = "?idAnnuncio=" . $annuncio->getIdAnnuncio() . "&approvato=0";
+            $pagina = str_replace("<PARAMS_SI/>", $params_si, $pagina);
+            $pagina = str_replace("<PARAMS_NO/>", $params_no, $pagina);
+        }
     } else {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
         $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_non_autenticato.html"), $pagina);
@@ -66,7 +77,7 @@ try {
     }
     require_once "./components/setMinMaxDates.php";
     
-    $pagina = str_replace("<OSPITIMASSIMO/>",$ospitiMassimo, $pagina);
+    $pagina = str_replace("<OSPITIMASSIMO/>", $ospitiMassimo, $pagina);
     if (isset($_GET["dataInizio"])) {
         $dataInizio = $_GET["dataInizio"];
         $pagina = str_replace("<VALUEINIZIO/>", $dataInizio, $pagina);
@@ -92,7 +103,7 @@ try {
         $pagina = str_replace("<MSG/>", $_SESSION["msg"], $pagina);
         unset($_SESSION["dati_errati"]);
     } else {
-        echo "no error";
+//        echo "no error";
         $pagina = str_replace("<MSG/>", "", $pagina);
     }
     
@@ -129,12 +140,12 @@ try {
                             </div>
                         </li>";
             }
-            $mediaCommenti= $totale/(count($commenti));
+            $mediaCommenti = $totale / (count($commenti));
             $str_commenti .= "</ul>";
             $pagina = str_replace("<COMMENTI/>", $str_commenti, $pagina);
-    
+            
             $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
-    
+            
         } else {
             $pagina = str_replace("<Commenti/>", "<h2>Non ci sono commenti!</h2>", $pagina);
             

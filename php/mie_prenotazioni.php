@@ -104,7 +104,7 @@ if (isset($_SESSION["user"])) {
                         </div>
                         <div class=\"opzioni_prenotazione\">
                             <p>Prezzo: $prezzo&euro;</p>
-                            <form action=\"../script/elimina_prenotazione.php\" method=\"post\">
+                            <form action=\"./script_elimina_prenotazione.php\" method=\"post\">
                                 <fieldset>
                                     <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
                                     <input type=\"hidden\" value=\"$id_prenotazione\"/>

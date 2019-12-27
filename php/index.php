@@ -21,15 +21,21 @@ try {
     }
     $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
         CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
-
+    
     $content = "";
-
+    
     $citta_ricercabili = $frent->getCittaAnnunci();
     $lista_citta_ricercabili = "";
-    foreach ($citta_ricercabili as $citta_ricercabile){
-        $lista_citta_ricercabili = $lista_citta_ricercabili . "<option value=\"$citta_ricercabile\"> \n";
+    foreach ($citta_ricercabili as $citta_ricercabile) {
+        
+        if (isset($_SESSION["citta"]) and $citta_ricercabile == $_SESSION["citta"]) {
+            echo "trovato!";
+            $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected>$citta_ricercabile</option>";
+        } else {
+            $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\">$citta_ricercabile</option>";
+        }
+        
     }
-    $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
     
     require_once "./components/setMinMaxDates.php";
     $content = "";
@@ -41,7 +47,37 @@ try {
         $content .= "<li class=\"elemento_sei_pannelli\"><a href='./dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     }
+    $numOspiti = 1;
+    $dataInizio = "";
+    $dataFine = "";
     
+    if (isset($_SESSION["datiRicercaMancanti"])) {
+        $pagina = str_replace("<DATIMANCANTI/>", "<p>" . $_SESSION["datiRicercaMancanti"] . "</p>", $pagina);
+        if (isset($_SESSION["numOspiti"])){
+            $numOspiti = $_SESSION["numOspiti"];
+            unset($_SESSION["numOspiti"]);
+        }
+        if (isset($_SESSION["dataInizio"])){
+            echo $_SESSION["dataInizio"];
+            $dataInizio = $_SESSION["dataInizio"];
+    
+            unset($_SESSION["dataInizio"]);
+        }
+        if (isset($_SESSION["dataFine"]))
+        {
+            $dataFine = $_SESSION["dataFine"];
+            unset($_SESSION["dataFine"]);
+        }
+//        if (isset($_SESSION["citta"]))
+//            $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected='true'>";
+//
+    } else {
+        $pagina = str_replace("<DATIMANCANTI/>", "", $pagina);
+    }
+    $pagina = str_replace("<DATAINIZIO/>", $dataInizio, $pagina);
+    $pagina = str_replace("<DATAFINE/>", $dataInizio, $pagina);
+    
+    $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
     
     $pagina = str_replace("<RECENTI/>", $content, $pagina);
     echo $pagina;
