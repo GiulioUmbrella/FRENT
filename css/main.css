@@ -658,11 +658,11 @@ fieldset {
     margin: 1em 1em 0em 0em;
 }
 
-#data_di_nascita #birth_day_label {
+#data_di_nascita #giorno_nascita_label {
     margin-left: 5%;
 }
 
-#data_di_nascita #birth_year {
+#data_di_nascita #anno_nascita {
     margin-right: 5%;
 }
 

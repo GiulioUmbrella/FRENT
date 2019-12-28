@@ -151,9 +151,9 @@ class Database {
         
         // se la query è andata a buon fine $procedure_result vale TRUE, altrimenti FALSE
         if ($function_result && $function_result->num_rows == 1) {
-            $returned_value = $function_result->fetch_array(MYSQLI_NUM);
+            $returned_value = $function_result->fetch_array(MYSQLI_NUM); // array a una posizione, contenente una stringa
             $function_result->free();
-            return $returned_value[0][0];
+            return $returned_value[0];
         } else {
             throw new Eccezione("Errore nell'esecuzione della funzione $function.");
         }
