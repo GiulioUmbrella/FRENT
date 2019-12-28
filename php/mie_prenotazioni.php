@@ -42,7 +42,7 @@ if (isset($_SESSION["user"])) {
         $path = $annuncio->getImgAnteprima();
         $numeroOspiti = $prenotazione->getNumOspiti();
         if ($prenotazione->getDataFine() < $data_corrente) { // prenotazioni passate
-            
+
             $numPrenotazioniPassate++;
             $prenotazioni_passate .= "
                     <li>
@@ -111,8 +111,8 @@ if (isset($_SESSION["user"])) {
                             <form action=\"./script_elimina_prenotazione.php\" method=\"post\">
                                 <fieldset>
                                     <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
-                                    <input type=\"hidden\" value=\"$id_prenotazione\"/>
-                                    <input type=\"submit\" value=\"Elimina\" tabindex=\"<TABINDEX$i>\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
+                                    <input type=\"hidden\" id=\"id_$id_prenotazione\" value=\"$id_prenotazione\"/>
+                                    <input type=\"submit\" id=\"elimina\" value=\"elimina\" tabindex=\"<TABINDEX$i>\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
                                 </fieldset>
                             </form>
                         </div>

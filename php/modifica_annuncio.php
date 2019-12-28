@@ -1,14 +1,15 @@
 <?php
 $pagina = file_get_contents("./components/dettaglio_annuncio_host_modifica.html");
 require_once "load_Frent.php";
-if (isset($_SESSION["user"])){
-    if (isset($_SESSION["id_annuncio"])){
+if (isset($_SESSION["user"]) ){
+    if (isset($_SESSION["id"])){
+        $annuncio = $frent->getAnnuncio(intval($_SESSION["id"]));
+        if ($annuncio->getIdHost()!= $_SESSION["user"]->getIdUtente())
+            header("Location: ./404.php");
         try {
             $pagina= str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
             $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
-    
-            $annuncio = $frent->getAnnuncio(intval($_SESSION["id_annuncio"]));
-    
+            
             $pagina = str_replace("<NUMOSPITIMAX/>",$annuncio->getMaxOspiti(),$pagina);
             $pagina = str_replace("<PrAPERSONA/>",$annuncio->getPrezzoNotte(),$pagina);
             $pagina = str_replace("<DESCRIZIONE/>",$annuncio->getDescrizione(),$pagina);
