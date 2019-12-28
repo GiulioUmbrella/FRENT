@@ -158,6 +158,7 @@ class Frent {
             $utente->setCognome($res_utente[0]['cognome']);
             $utente->setUserName($res_utente[0]['user_name']);
             $utente->setMail($res_utente[0]['mail']);
+            $utente->setPassword($res_utente[0]['password']);
             $utente->setDataNascita($res_utente[0]['data_nascita']);
             $utente->setImgProfilo($res_utente[0]['img_profilo']);
             $utente->setTelefono($res_utente[0]['telefono']);
