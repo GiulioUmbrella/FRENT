@@ -2,8 +2,8 @@
 require_once "./class_Frent.php";
 require_once "./class_Database.php";
 require_once "./class_CredenzialiDB.php";
-
-if ($_SESSION["user"]) {
+require_once "load_Frent.php";
+if (isset($_SESSION["user"])) {
     if (!isset($_POST["avanti"])) {
         $pagina = file_get_contents("./components/aggiungi_annunci_passaggio_1.html");
 //        echo $_SERVER['PHP_SELF'];

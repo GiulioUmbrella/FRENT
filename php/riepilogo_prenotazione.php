@@ -4,7 +4,7 @@ require_once "load_Frent.php";
 if (isset($_SESSION["user"])){
     $pagina= str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"),$pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"),$pagina);
-    
+//    todo sisteamre il nodo per arrivare al riepilogo prenotazione
     if (isset($_SESSION["prenotazione"]) or isset($_GET["idOccupazione"])){
         if (isset($_SESSION["prenotazione"])){
             $prenotazione = $_SESSION["prenotazione"];

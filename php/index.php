@@ -71,6 +71,7 @@ try {
 //        if (isset($_SESSION["citta"]))
 //            $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected='true'>";
 //
+        unset($_SESSION["datiRicercaMancanti"]);
     } else {
         $pagina = str_replace("<DATIMANCANTI/>", "", $pagina);
     }

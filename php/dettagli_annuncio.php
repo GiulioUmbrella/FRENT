@@ -50,6 +50,7 @@ try {
             if ($annuncio->getIdHost() == $_SESSION["user"]->getIdUtente()) {
                 $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_host.html"), $pagina);
                 $pagina = str_replace("<ID/>", $annuncio->getIdAnnuncio(), $pagina);
+                $_SESSION["id_annuncio"] = $annuncio->getIdAnnuncio();
             } else {
                 if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))){
                     $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_no_dati.html"), $pagina);

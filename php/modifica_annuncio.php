@@ -2,22 +2,24 @@
 $pagina = file_get_contents("./components/dettaglio_annuncio_host_modifica.html");
 require_once "load_Frent.php";
 if (isset($_SESSION["user"])){
-    if (isset($_POST["id"]))
-    $pagina= str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
-    $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
+    if (isset($_SESSION["id_annuncio"])){
+        try {
+            $pagina= str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
+            $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
     
-    $annuncio = $frent->getAnnuncio(intval($_POST["id"]));
+            $annuncio = $frent->getAnnuncio(intval($_SESSION["id_annuncio"]));
     
-    $pagina = str_replace("<NUMOSPITIMAX/>",$annuncio->getMaxOspiti(),$pagina);
-    $pagina = str_replace("<PrAPERSONA/>",$annuncio->getPrezzoNotte(),$pagina);
-    $pagina = str_replace("<DESCRIZIONE/>",$annuncio->getDescrizione(),$pagina);
-    $pagina = str_replace("<VIA/>",$annuncio->getIndirizzo(),$pagina);
-    $pagina = str_replace("<CITTA/>",$annuncio->getCitta(),$pagina);
+            $pagina = str_replace("<NUMOSPITIMAX/>",$annuncio->getMaxOspiti(),$pagina);
+            $pagina = str_replace("<PrAPERSONA/>",$annuncio->getPrezzoNotte(),$pagina);
+            $pagina = str_replace("<DESCRIZIONE/>",$annuncio->getDescrizione(),$pagina);
+            $pagina = str_replace("<VIA/>",$annuncio->getIndirizzo(),$pagina);
+            $pagina = str_replace("<CITTA/>",$annuncio->getCitta(),$pagina);
     
-    $foto = $frent->getFotoAnnuncio(intval($_POST["id"]));
-    $path=$annuncio->getImgAnteprima();
-    $descrizione= $annuncio->getDescrizione();
-    $content="
+            $foto = $frent->getFotoAnnuncio(intval($annuncio->getIdAnnuncio()));
+            $path=$annuncio->getImgAnteprima();
+            $descrizione= $annuncio->getDescrizione();
+            $pagina = str_replace("<TITOLO/>",$annuncio->getTitolo(),$pagina);
+            $content="
             <li>
                     <fieldset>
                         <div class=\"commenti_foto\">
@@ -31,11 +33,11 @@ if (isset($_SESSION["user"])){
 
                 </li>";
     
-    foreach ($foto as $f){
-        $descrizione=$f->getDescrizione();
-        $path = $f->getFilePath();
-        $id= $f->getIdFoto();
-        $content.="
+            foreach ($foto as $f){
+                $descrizione=$f->getDescrizione();
+                $path = $f->getFilePath();
+                $id= $f->getIdFoto();
+                $content.="
             <li>
                     <fieldset>
                         <div class=\"commenti_foto\">
@@ -50,10 +52,14 @@ if (isset($_SESSION["user"])){
                     </fieldset>
 
                 </li>";
+            }
+    
+            $pagina = str_replace("<IMMAGINI/>",$content,$pagina);
+            echo $pagina;
+        }catch (Eccezione $ex){
+            header("Location: ./404.php");
+        }
     }
-
-    $pagina = str_replace("<IMMAGINI/>",$content,$pagina);
-    echo $pagina;
 }else{
     header("Location: login.php");
 }

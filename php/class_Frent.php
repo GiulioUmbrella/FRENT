@@ -406,10 +406,12 @@ class Frent {
                 " . $this->auth_user->getIdUtente() . ",
                 " . $occupazione->getIdAnnuncio() . ",
                 " . $occupazione->getNumOspiti() . ",
-                \"" . $occupazione->getDataInizio() . "\",
-                \"" . $occupazione->getDataFine() . "\"
+                date('" . $occupazione->getDataInizio() . "'),
+                date('" . $occupazione->getDataFine() . "')
             )";
         
+            $res = $this->db_instance->queryFunction($function_name_and_params);
+            echo $res;
             return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
             throw $exc;

@@ -15,41 +15,41 @@
 <div id="breadcrumb">
     <p> Ti trovi in:<a href="./miei_annunci.html" tabindex="5" title="Vai alla pagina di ricerca"
                        xml:lang="en">Home</a>&gt;&gt;
-        <a href="./miei_annunci.php" title="Torna nei miei annunci" tabindex="7">Miei Annunci</a>&gt;&gt;Titolo
-        Annuncio
-    </p>
+        <a href="./miei_annunci.php" title="Torna nei miei annunci" tabindex="7">Miei Annunci</a>&gt;&gt;<TITOLO/>
+        &gt;&gt;Gestione Indisponibilit&agrave;</p>
 </div>
 
 <div id="laterale">
     <ul class="menu_gestione_annuncio">
-        <li>Gestione Indisponibilit&agrave;</li>
         <li><a href="./modifica_annuncio.php" title="Modificare l'annuncio" tabindex="8">Modifica</a>
         </li>
-        <li><a href="./prenotazioni_annuncio.php" tabindex="10"
+        <li>Gestione Indisponibilit&agrave;</li>
+        <li><a href="./storico_prenotazioni.php" tabindex="10"
                title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
         <li><a href="../script_elimina_annuncio.php" tabindex="12">Elimina Annuncio</a></li>
     </ul>
 </div>
 
 <div id="content">
-    <h1 class="titolo_gestione_annuncio">Gestione annuncio TITOLO ANNUNCIO</h1> <!--TODO: PHP-->
+    <h1 class="titolo_gestione_annuncio">Gestione annuncio <TITOLO/></h1> <!--TODO: PHP-->
 
-    <form action="gestione_indisponibilita.html" method="post" class="form form_orizzontale">
+    <form action="./script_gestione_occupazione.php" method="post" class="form form_orizzontale">
+        <div class="credenziali_errate"><p>asdasd</p></div>
         <fieldset>
+            <input type="hidden" id="id_annuncio" name="id_annuncio" value="<IDANNUNCIO/>">
             <legend class="legend_evidenziata">Inserire una nuova indisponibilit&agrave;</legend>
             <div class="input_label_orizzontale">
-                <label for="data_inizio">Data Inizio</label>
-                <input type="date" id="data_inizio" tabindex="13" name="data_inizio"
-                       placeholder="Data inizio nuova indisponibilit&agrave;" value=""/>
+                <label for="dataInizio">Data Inizio</label>
+                <input type="date" id="dataInizio" tabindex="13" name="dataInizio"
+                      value=""/>
             </div>
             <div class="input_label_orizzontale">
-                <label for="data_fine">Data Fine</label>
-                <input type="date" id="data_fine" name="data_fine" tabindex="14"
-                       placeholder="Data fine nuova indisponibilit&agrave;" value=""/>
+                <label for="dataFine">Data Fine</label>
+                <input type="date" id="dataFine" name="dataFine" tabindex="14" value=""/>
             </div>
             <div class="input_label_orizzontale">
                 <label for="aggiungi" class="aiuti_alla_navigazione">Aggiungi</label>
-                <input id="aggiungi" type="submit" value="Aggiungi" tabindex="15">
+                <input id="aggiungi"  name="aggiungi" type="submit" value="Aggiungi" tabindex="15">
             </div>
 
             <div class="input_label_orizzontale">
@@ -62,31 +62,32 @@
     <h2>Questo annuncio risulta indisponibile nei seguenti periodi:</h2>
     <ul class="lista_indisponibilita">
         <li>
-            <form class="form form_orizzontale" method="post" action="gestione_indisponibilita.html">
-                <fieldset>
-                    <legend class="aiuti_alla_navigazione">Modifica indisponibilit&agrave;</legend>
-                    <div class="input_label_orizzontale">
-                        <label for="data_inizio_ID_INDISPONIBILITA">Data inizio</label>
-                        <input id="data_inizio_ID_INDISPONIBILITA" name="data_inizio" type="date"/>
-                    </div>
-                    <div class="input_label_orizzontale">
-                        <label for="data_fine_ID_INDISPONIBILITA">Data fine</label>
-                        <input id="data_fine_ID_INDISPONIBILITA" name="data_fine" type="date"/>
-                    </div>
-                    <div class="input_label_orizzontale">
-                        <label class="aiuti_alla_navigazione" for="modifica_button_ID_INDISPONIBLITA">Modifica
-                            idisponibilit&agrave;</label>
-                        <input id="modifica_button_ID_INDISPONIBLITA" name="modifica_indisponibilita" type="submit"
-                               value="Modifica"/>
-                    </div>
-                    <div class="input_label_orizzontale">
-                        <label class="aiuti_alla_navigazione" for="rimuovi_button_ID_INDISPONIBLITA">Rimuovi
-                            idisponibilit&agrave;</label>
-                        <input id="rimuovi_button_ID_INDISPONIBLITA" name="rimuovi_indisponibilita" type="submit"
-                               value="Elimina"/>
-                    </div>
-                </fieldset>
-            </form>
+            <OCCUPAZIONI/>
+<!--            <form class="form form_orizzontale" method="post" action="gestione_indisponibilita.html">-->
+<!--                <fieldset>-->
+<!--                    <legend class="aiuti_alla_navigazione">Modifica indisponibilit&agrave;</legend>-->
+<!--                    <div class="input_label_orizzontale">-->
+<!--                        <label for="data_inizio_ID_INDISPONIBILITA">Data inizio</label>-->
+<!--                        <input id="data_inizio_ID_INDISPONIBILITA" name="data_inizio" type="date"/>-->
+<!--                    </div>-->
+<!--                    <div class="input_label_orizzontale">-->
+<!--                        <label for="data_fine_ID_INDISPONIBILITA">Data fine</label>-->
+<!--                        <input id="data_fine_ID_INDISPONIBILITA" name="data_fine" type="date"/>-->
+<!--                    </div>-->
+<!--                    <div class="input_label_orizzontale">-->
+<!--                        <label class="aiuti_alla_navigazione" for="modifica_button_ID_INDISPONIBLITA">Modifica-->
+<!--                            idisponibilit&agrave;</label>-->
+<!--                        <input id="modifica_button_ID_INDISPONIBLITA" name="modifica_indisponibilita" type="submit"-->
+<!--                               value="Modifica"/>-->
+<!--                    </div>-->
+<!--                    <div class="input_label_orizzontale">-->
+<!--                        <label class="aiuti_alla_navigazione" for="rimuovi_button_ID_INDISPONIBLITA">Rimuovi-->
+<!--                            idisponibilit&agrave;</label>-->
+<!--                        <input id="rimuovi_button_ID_INDISPONIBLITA" name="rimuovi_indisponibilita" type="submit"-->
+<!--                               value="Elimina"/>-->
+<!--                    </div>-->
+<!--                </fieldset>-->
+<!--            </form>-->
         </li>
     </ul>
 </div>

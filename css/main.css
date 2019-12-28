@@ -869,6 +869,9 @@ body .aiuti_alla_navigazione {
 #credenziali_errate {
 	color: red;
 }
+.credenziali_errate {
+	color: red;
+}
 .elemento_sei_pannelli {
     flex-grow: 1;
     border: 1px solid white;
