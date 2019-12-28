@@ -37,9 +37,12 @@ $pagina = str_replace("<ANNO/>", $AAAA, $pagina);
 // se l'utente non ha premuto il tasto di invio dati visualizzo la pagina con il form
 if (isset($_POST["registrati"])) {
     $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nome", "cognome", "mail", "username", "password", "ripeti_password", "telefono", "giorno_nascita", "mese_nascita", "anno_nascita"], TRUE);
-    $form_valido = in_array(FALSE, $risultato_validazione);
+    /**
+     * se $form_non_valido === TRUE ci sono valori di $_POST non settati
+     */
+    $form_non_valido = in_array(FALSE, $risultato_validazione);
 
-    if($form_valido) { // IF1 - RAMO VERO IF1
+    if($form_non_valido) { // IF1 - RAMO VERO IF1
         $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo.", $risultato_validazione);
         $pagina = addUserNotificationToPage($pagina, $messageToUser, "credenziali_errate", "aligned_with_form");
     } else { // FINE RAMO VERO IF1 - RAMO FALSO IF1
