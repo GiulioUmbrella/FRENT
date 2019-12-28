@@ -51,7 +51,7 @@ class ImageManager {
 
         // verifico che sia stato caricato un file o più
         if(!isset($_FILES[$img_name_attr]) || $_FILES[$img_name_attr]["error"] === 4 || $_FILES[$img_name_attr]["error"][0] === 4) {
-            throw new Eccezione("Non è stato caricato alcun file." . print_r($_FILES, TRUE));   
+            throw new Eccezione("Non è stato caricato alcun file.");   
         }
         
         // verifico che l'indice del file chiesto sia nei limiti

@@ -81,8 +81,15 @@ try {
     $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
     
     $pagina = str_replace("<RECENTI/>", $content, $pagina);
-    echo $pagina;
     
+    if(isset($_SESSION["delete_user_message"])) {
+        $pagina = str_replace("<DELETE_USER_MESSAGE/>", "<p>" . $_SESSION["delete_user_message"] . "</p>", $pagina);
+        unset($_SESSION["delete_user_message"]);
+    } else {
+        $pagina = str_replace("<DELETE_USER_MESSAGE/>", "", $pagina);
+    }
+    
+    echo $pagina;
 } catch (Eccezione $ex) {
     echo "eccezione " . $ex->getMessage();
 }

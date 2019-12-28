@@ -1,19 +1,173 @@
 <?php
 
-require_once "class_Frent.php";
-require_once "class_Utente.php";
-require_once "class_CredenzialiDB.php";
-require_once "load_Frent.php";
-if (isset($_SESSION["user"])){
-    
-    $pagina = file_get_contents("./components/mio_profilo_modifica.html");
-    $pagina= str_replace("<HEADER/>",file_get_contents("./components/header_logged.html"),$pagina);
-    $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
-    
-    $user= $_SESSION["user"];
-    
-    $pagina = str_replace("<PATH/>",$user->getImgProfilo(),$pagina);
-    echo $pagina;
-}else{
+require_once "./load_Frent.php";
+require_once "./class_ImageManager.php";
+require_once "./components/form_functions.php";
+
+// --- REINDIRIZZO SE NON LOGGATO
+if(!isset($_SESSION["user"])) {
     header("Location: login.php");
 }
+
+// --- CARICAMENTO COMPONENTI PAGINA
+$pagina = file_get_contents("./components/mio_profilo_modifica.html");
+$pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+$pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
+
+// reperisco utente
+$user = $_SESSION["user"];
+
+// aggiunta dati utente
+$pagina = str_replace("<PATH/>", "../uploads/" . $user->getImgProfilo(), $pagina);
+$pagina = str_replace("<NOME/>", $user->getNome(), $pagina);
+$pagina = str_replace("<COGNOME/>", $user->getCognome(), $pagina);
+$pagina = str_replace("<MAIL/>", $user->getMail(), $pagina);
+$pagina = str_replace("<USERNAME/>", $user->getUsername(), $pagina);
+$pagina = str_replace("<TELEFONO/>", $user->getTelefono(), $pagina);
+
+// estrazione informazioni su data nascita dell'utente
+$dataNascita = DateTime::createFromFormat("Y-m-d", $user->getDataNascita());
+$giornoNascita = intval($dataNascita->format("d"));
+$meseNascita = intval($dataNascita->format("m"));
+$annoNascita = intval($dataNascita->format("Y"));
+
+// popolazione select#giorno_nascita
+$GG = "";
+for ($i = 1; $i <= 31; $i++) {
+    $GG .= "<option value=\"$i\" " . (($i === $giornoNascita) ? "selected=\"selected\"" : "") . ">$i</option>";
+}
+$pagina = str_replace("<GIORNO/>", $GG, $pagina);
+
+// popolazione select#mese_nascita
+$MM = "";
+$mesi = array("gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre");
+for ($i = 1; $i <= 12; $i++) {
+    $MM .= "<option value=\"$i\" " . (($i === $meseNascita) ? "selected=\"selected\"" : "") . ">" . $mesi[$i - 1] . "</option>";
+}
+$pagina = str_replace("<MESE/>", $MM, $pagina);
+
+// popolazione select#anno_nascita
+$AAAA = "";
+for ($i = intval(date("Y")), $bottom = intval(date("Y")) - 100; $i >= $bottom; $i--) {
+    $AAAA .= "<option value=\"$i\" " . (($i === $annoNascita) ? "selected=\"selected\"" : "") . ">$i</option>";
+}
+$pagina = str_replace("<ANNO/>", $AAAA, $pagina);
+
+// --- SE SONO STATI INVIATI FORM
+
+// --- FORM MODIFICA IMG PROFILO
+if(isset($_POST["modifica_img_profilo"])) {
+    try {
+        $imageManager = new ImageManager("../uploads/user" . $user->getIdUtente() . "/");
+        $imageManager->setFile("nuova_img_profilo", "imgProfilo" . $user->getIdUtente());
+
+        // possibilmente non verrà aggiornato nulla
+        // ma alla prima volta che cambio la foto da quella di default a una scelta dall'utente e le volte in cui cambia estensione allora ne ho necessità
+        $codice_aggiornamento = $frent->editUser(
+            $user->getNome(),
+            $user->getCognome(),
+            $user->getUsername(),
+            $user->getMail(),
+            $user->getPassword(),
+            $user->getDataNascita(),
+            "user" . $user->getIdUtente() . "/" . $imageManager->fileName(),
+            $user->getTelefono()
+        );
+
+        if($codice_aggiornamento === -1) {
+            $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel processo di modifica della password."), "info_box", "aligned_with_form");
+        } else {
+            // tento il salvataggio del nuovo file
+            if($imageManager->saveFile()) {
+                // aggiorno la variabile in sessione altrimenti ho discrepanze fra server e dati locali
+                $user->setImgProfilo("user" . $user->getIdUtente() . "/" . $imageManager->fileName());
+
+                $pagina = addUserNotificationToPage($pagina, htmlentities("La nuova immagine di profilo è stata correttamente salvata.") . "<a href=\"mio_profilo.php\" title=\"Vai alla pagina del profilo\">Torna alla pagina del profilo</a>.", "info_box", "aligned_with_form");    
+            } else {
+                $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel salvataggio della nuova immagine di profilo."), "info_box", "aligned_with_form");
+            }
+        }
+    } catch(Eccezione $exc) {
+        $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nell'invio della nuova immagine di profilo. Errore riscontrato: ") . $exc->getMessage(), "info_box", "aligned_with_form");
+    }
+}
+
+/// --- FORM MODIFICA PASSWORD
+if(isset($_POST["modifica_password"])) {
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nuova_password", "conferma_nuova_password"], TRUE);
+    $form_non_valido = in_array(FALSE, $risultato_validazione);
+
+    if($form_non_valido) { // IF1 - RAMO VERO IF1
+        $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo di modifica della password.", $risultato_validazione);
+        $pagina = addUserNotificationToPage($pagina, $messageToUser, "info_box", "aligned_with_form");
+    } else { // FINE RAMO VERO IF1 - RAMO FALSO IF2
+        if($_POST["nuova_password"] !== $_POST["conferma_nuova_password"]) { // IF2 - RAMO VERO IF2
+            $pagina = addUserNotificationToPage($pagina, "Le due password inserite per la modifica non corrispondono.", "info_box", "aligned_with_form");
+        } // FINE RAMO VERO IF2
+
+        try {
+            $codice_aggiornamento = $frent->editUser(
+                $user->getNome(),
+                $user->getCognome(),
+                $user->getUsername(),
+                $user->getMail(),
+                $_POST["nuova_password"],
+                $user->getDataNascita(),
+                $user->getImgProfilo(),
+                $user->getTelefono()
+            );
+
+            if($codice_aggiornamento === -1) { // IF3 - RAMO VERO IF3
+                $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel processo di modifica della password."), "info_box", "aligned_with_form");
+            } else { // FINE RAMO VERO IF3 - RAMO FALSO IF3
+                 // aggiorno la variabile in sessione altrimenti ho discrepanze fra server e dati locali
+                $user->setPassword($_POST["nuova_password"]);
+
+                $pagina = addUserNotificationToPage($pagina, "Modifica della password avvenuta con successo! <a href=\"mio_profilo.php\" title=\"Vai alla pagina del profilo\">Torna alla pagina del profilo</a>.", "info_box", "aligned_with_form"); 
+            } // FINE RAMO FALSO IF3
+        } catch(Eccezione $exc) {
+            $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nell'invio dei dati del modulo di modifica della password. Errore riscontrato: ") . $exc->getMessage(), "info_box", "aligned_with_form");
+        }     
+    } // FINE RAMO FALSO IF1
+}
+
+// --- FORM MODIFICA DATI PERSONALI
+if(isset($_POST["modifica_dati_personali"])) {
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nome", "cognome", "mail", "username", "telefono", "giorno_nascita", "mese_nascita", "anno_nascita"], TRUE);
+    $form_non_valido = in_array(FALSE, $risultato_validazione);
+
+    if($form_non_valido) { // IF1 - RAMO VERO IF1
+        $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo di modifica dei dati personali.", $risultato_validazione);
+        $pagina = addUserNotificationToPage($pagina, $messageToUser, "info_box", "aligned_with_form");
+    } else { // FINE RAMO VERO IF1 - RAMO FALSO IF2
+        try {
+            $codice_aggiornamento = $frent->editUser(
+                $_POST["nome"],
+                $_POST["cognome"],
+                $_POST["username"],
+                $_POST["mail"],
+                $user->getPassword(),
+                buildDate($_POST["anno_nascita"], $_POST["mese_nascita"], $_POST["giorno_nascita"]),
+                $user->getImgProfilo(),
+                $_POST["telefono"]
+            );
+
+            if($codice_aggiornamento === -1) {
+                $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel processo di modifica dei dati personali."), "info_box", "aligned_with_form");
+            } else {
+                 // aggiorno la variabile in sessione altrimenti ho discrepanze fra server e dati locali
+                $user->setNome($_POST["nome"]);
+                $user->setCognome($_POST["cognome"]);
+                $user->setUsername($_POST["username"]);
+                $user->setDataNascita(buildDate($_POST["anno_nascita"], $_POST["mese_nascita"], $_POST["giorno_nascita"]));
+                $user->setTelefono($_POST["telefono"]);
+
+                $pagina = addUserNotificationToPage($pagina, "Modifica dei dati personali avvenuta con successo! <a href=\"mio_profilo.php\" title=\"Vai alla pagina del profilo\">Torna alla pagina del profilo</a>.", "info_box", "aligned_with_form"); 
+            }
+        } catch(Eccezione $exc) {
+            $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel processo di modifica dei dati personali. Errore riscontrato: ") . $exc->getMessage(), "info_box", "aligned_with_form");
+        }       
+    } // FINE RAMO FALSO IF1
+}
+
+echo $pagina;

@@ -87,6 +87,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_foto_annuncio` (`id` INT)  BEGI
     WHERE annuncio = id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_occupazione` (`id` INT)  BEGIN
+    SELECT *
+    FROM occupazioni
+    WHERE id_occupazione = id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_occupazioni_annuncio` (`_id_annuncio` INT)  BEGIN
     SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizio, data_fine
     FROM occupazioni

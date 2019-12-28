@@ -13,99 +13,84 @@
 <HEADER/>
 </div>
 <div id="breadcrumb">
-    <p> Ti trovi in: <a href="index.php" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span
-            xml:lang="en">Home</span></a>:&gt;&gt; <a href="mio_profilo.php">Mio Profilo </a> &gt;&gt;
-        Modifica profilo </p>
+    <p>Ti trovi in: <a href="index.php" title="Vai alla pagina delle ricerca annunci" tabindex="6"><span xml:lang="en">Home</span></a>:&gt;&gt; <a href="mio_profilo.php">Mio Profilo </a> &gt;&gt;Modifica profilo </p>
 </div>
 
 <div id="content">
-    <h1>Il tuo profilo: </h1>
+    <h1>Modifica i dati del profilo</h1>
+
+    <div id="info_box"></div>
+
     <div class="modifica_immagine_profilo">
-        <img src="<PATH/>" id="immagine_profilo" alt="Immagine di profilo " />
-        <form method="post" action="./script_aggiorna_foto_profilo.php" class="form form_orizzontale add_margin_bottom">
+        <img src="<PATH/>" id="immagine_profilo" alt="Immagine di profilo" />
+        <form method="post" action="./modifica_mio_profilo.php" class="form form_orizzontale add_margin_bottom" enctype="multipart/form-data">
             <fieldset>
-                <legend>Cambia immagine profilo</legend>
-                    <input type="file" accept="image/png, image/jpeg" tabindex="8">
-                    <input type="submit" value="Conferma" tabindex="9" />
+                <legend>Cambia la tua immagine di profilo</legend>
+                    <input type="file" accept=".jpg, .jpeg, .png" id="nuova_img_profilo" name="nuova_img_profilo" tabindex="8">
+                    <input type="submit" value="Conferma" name="modifica_img_profilo" tabindex="9" />
                     <input type="reset" value="Annulla" tabindex="10" />
             </fieldset>
         </form>
     </div>
 
-    <form action="./script_aggiorna_password.php" method="post" class="form form_verticale form_modifica">
-        <!--    cambiare il password-->
+    <form action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Cambia Password</legend>
-                <label for="password_one">Modifica Password</label>
-                <input type="password" name="password_one" id="password_one" placeholder="Inserisci Password" value=""/>
-                <label for="password_two">Conferma Password</label>
-                <input type="password" name="password_two" id="password_two" placeholder="Reinserisci Password"
-                       value=""/>
-            <label for="conferma_button" class="aiuti_alla_navigazione">Conferma cambio password</label>
-            <input id="conferma_button" type="submit" value="Conferma modifica password"/>
+                <label for="nuova_password">Modifica Password</label>
+                <input type="password" name="nuova_password" id="nuova_password" placeholder="Inserisci la nuova password" />
+                <label for="conferma_nuova_password">Conferma Password</label>
+                <input type="password" name="conferma_nuova_password" id="conferma_nuova_password" placeholder="Reinserisci la nuova password" />
+            <label for="modifica_password" class="aiuti_alla_navigazione">Conferma cambio password</label>
+            <input id="modifica_password" name="modifica_password" type="submit" value="Conferma modifica password"/>
         </fieldset>
     </form>
 
-    <form action="" method="post" class="form form_verticale form_modifica">
-        <!--      finto form, che viene triggerato quando viene cliccato i campi dati diventano editabile.-->
-        <!-- TODO: in PHP impostare i value con i dati dell'account -->
+    <form action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
             <label for="nome">Nome</label>
-            <input type="text" name="nome" id="nome" value="<VALUENOME/>" tabindex="8"/>
+            <input type="text" name="nome" id="nome" value="<NOME/>" tabindex="8"/>
 
             <label for="cognome">Cognome</label>
-            <input type="text" name="cognome" id="cognome" value="<VALUECOGNOME/>" tabindex="9"/>
+            <input type="text" name="cognome" id="cognome" value="<COGNOME/>" tabindex="9"/>
 
             <label for="mail" lang="en">E-mail</label>
-            <input type="text" name="mail" value="<VALUEMAIL/>" id="mail"/>
+            <input type="text" name="mail" value="<MAIL/>" id="mail"/>
 
             <label for="username" lang="en">Username</label>
             <input type="text" name="username" id="username" value="<USERNAME/>" tabindex="10"/>
 
             <label for="telefono">Numero di telefono</label>
-            <input type="text" name="telefono" id="telefono" value="<NUMTELEFONO/>" tabindex="11"/>
+            <input type="text" name="telefono" id="telefono" value="<TELEFONO/>" tabindex="11"/>
         </fieldset>
         <fieldset id="data_di_nascita">
             <legend>Data di nascita</legend>
-            <label id="giorno_nascita_label" for="giorno_nascita">Giorno:</label>
+            <label id="giorno_nascita_label" for="giorno_nascita">Giorno</label>
             <select id="giorno_nascita" tabindex="12" >
-                <option value="1">1</option>
-                <option value="2" selected="true">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <!--TODO: PHP-->
+                <GIORNO/>
             </select>
-            <label for="mese_nascita">Mese:</label>
+            <label for="mese_nascita">Mese</label>
             <select id="mese_nascita" tabindex="13">
-                <option value="1">Gennaio</option>
-                <option value="2">Febbraio</option>
-                <option value="3">Marzo</option>
-                <option value="4">Aprile</option>
-                <!--TODO: PHP-->
+                <MESE/>
             </select>
-            <label for="anno_nascita">Anno:</label>
+            <label for="anno_nascita">Anno</label>
             <select id="anno_nascita" tabindex="14">
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <!--TODO: PHP-->
+                <ANNO/>
             </select>
         </fieldset>
         <fieldset>
-            <label class="aiuti_alla_navigazione" for="registrati">Modifica</label>
-            <input type="submit" id="registrati" value="Modifica dati"/>
+            <label class="aiuti_alla_navigazione" for="modifica_dati_personali">Modifica</label>
+            <input type="submit" id="modifica_dati_personali" name="modifica_dati_personali" value="Modifica dati"/>
         </fieldset>
     </form>
 
-    <form action="#" method="get" class="form form_verticale destroy_button">
+    <form action="./script_elimina_profilo.php" method="get" class="form form_verticale destroy_button">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Elimina il mio profilo</legend>
-            <input type="submit" class="" value="Elimina profilo">
+            <input type="submit" value="Elimina profilo">
         </fieldset>
     </form>
-    <p class="aligned_with_form">Se elimini il tuo profilo perderai tutti i dati ad esso connessi, visita le <a href="condizioni_di_utilizzo.html">condizioni di utilizzo</a></p>
+    <p class="aligned_with_form">Se elimini il tuo profilo perderai tutti i dati ad esso connessi. Per maggiori informazioni, visita le <a href="condizioni_di_utilizzo.html">condizioni di utilizzo</a>.</p>
 </div>
 
 <FOOTER/>
