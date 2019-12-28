@@ -4,12 +4,12 @@ require_once "./class_Database.php";
 require_once "./class_Frent.php";
 require_once "./class_Occupazione.php";
 require_once "./class_CredenzialiDB.php";
-//todo da rifare il modo di distiguere i 3 tipi di prenotazioni: utilizzare una funzione che trova la data corrente,
-// e quindi suddividerli, altrimenti è codice ripetuto.
+
 require_once "load_Frent.php";
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
 if (isset($_SESSION["user"])) {
-    $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+    require_once "./load_header.php";
+//    $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
     $content = "";
@@ -29,7 +29,8 @@ if (isset($_SESSION["user"])) {
     foreach ($occupazioni as $prenotazione) {
         $id_prenotazione = $prenotazione->getIdOccupazione();
         $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
-        $mail = ""; //todo manca la funzione per ottenere info dell'host
+        $host = $frent->getUser($annuncio->getIdHost());
+        $mail = $host->getMail();
         $nomeAnnuncio = $annuncio->getTitolo();
         $descrizionefoto = "";
         $luogoAlloggio = $annuncio->getIndirizzo()." citt&agrave;: ".$annuncio->getCitta();
@@ -37,9 +38,9 @@ if (isset($_SESSION["user"])) {
         $dataFine = $prenotazione->getDataFine();
         $totalePrenotazione = 0.0;
         $durata=abs(strtotime($prenotazione->getDataFine())-strtotime($prenotazione->getDataInizio()))/(3600*24);
-        $prezzo = $annuncio->getPrezzoNotte()* intval($durata);
+        $prezzo = $annuncio->getPrezzoNotte()* intval($durata) * $prenotazione->getNumOspiti();
         $path = $annuncio->getImgAnteprima();
-        
+        $numeroOspiti = $prenotazione->getNumOspiti();
         if ($prenotazione->getDataFine() < $data_corrente) { // prenotazioni passate
             
             $numPrenotazioniPassate++;
@@ -56,6 +57,7 @@ if (isset($_SESSION["user"])) {
                                 <img src=\"$path\" alt=\"Immagine di anteprima di Casa Loreto\"/>
                                 <p>Luogo: $luogoAlloggio</p>
                                 <p>Periodo: $dataInizio - $dataFine</p>
+                                <p>Numero ospiti: $numeroOspiti</p>
                             </div>
                             <div class=\"opzioni_prenotazione\">
                                 <p>Prezzo: $prezzo&euro;</p><a href=\"Commenta\" tabindex=\"<TABINDEX$i>\" title=\"Contatta il proprietario per posta elettronica\">Commenta</a>
@@ -76,6 +78,7 @@ if (isset($_SESSION["user"])) {
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
                             <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio- $dataFine</p>
+                                <p>Numero ospiti: $numeroOspiti</p>
                         </div>
                         <div class=\"opzioni_prenotazione\">
                             <p>Prezzo: $prezzo&euro;</p>
@@ -101,6 +104,7 @@ if (isset($_SESSION["user"])) {
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
                             <p>Luogo: $luogoAlloggio</p>
                             <p>Periodo: $dataInizio - $dataFine</p>
+                                <p>Numero ospiti: $numeroOspiti</p>
                         </div>
                         <div class=\"opzioni_prenotazione\">
                             <p>Prezzo: $prezzo&euro;</p>

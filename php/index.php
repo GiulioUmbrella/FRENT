@@ -8,7 +8,8 @@ require_once "load_Frent.php";
 try {
     $pagina = file_get_contents("./components/index.html");
     if (isset($_SESSION["user"])) {
-        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+        require_once "./load_header.php";
+//        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
         $pagina = str_replace("<ADMINLINK/>", "", $pagina);
     } else if (isset($_SESSION["admin"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
@@ -88,7 +89,6 @@ try {
     } else {
         $pagina = str_replace("<DELETE_USER_MESSAGE/>", "", $pagina);
     }
-    
     echo $pagina;
 } catch (Eccezione $ex) {
     echo "eccezione " . $ex->getMessage();

@@ -7,7 +7,9 @@ if(!isset($_SESSION["user"])) {
 }
 
 $pagina = file_get_contents("./components/mio_profilo_visualizza.html");
-$pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+
+require_once "./load_header.php";
+//$pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
 $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
 
 $user = $_SESSION["user"];

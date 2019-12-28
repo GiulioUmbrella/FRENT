@@ -383,7 +383,8 @@ class Frent {
             $utente->setNome($res_utente[0]['nome']);
             $utente->setUserName($res_utente[0]['user_name']);
             $utente->setImgProfilo($res_utente[0]['img_profilo']);
-            $utente->setImgProfilo($res_utente[0]['telefono']);
+            $utente->setTelefono($res_utente[0]['telefono']);
+            $utente->setMail($res_utente[0]['mail']);
 
             return $utente;
         } catch(Eccezione $exc) {
