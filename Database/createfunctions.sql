@@ -476,6 +476,20 @@ BEGIN
 END |
 DELIMITER ;
 
+/*Procedura per ottenere i dettagli di un'occupazione
+PRE: id è l'identificativo di un annuncio
+Restituisce il reocrd relativo all'ID passato come parametro
+*/
+DROP PROCEDURE IF EXISTS get_occupazione;
+DELIMITER |
+CREATE PROCEDURE get_occupazione(id int)
+BEGIN
+    SELECT *
+    FROM occupazioni
+    WHERE id_occupazione = id;
+END |
+DELIMITER ;
+
 /*Procedura che permette di ottenere tutte le occupazioni riguradanti un annuncio
 Restituisce i record relativi alle occupazioni dell'annuncio il cui ID è passato in input
 */

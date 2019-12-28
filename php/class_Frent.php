@@ -201,7 +201,44 @@ class Frent {
             throw $exc;
         }
     }
-    
+
+    /**
+     * Restituisce una singola occupazione, dato il suo ID.
+     * @param int id dell'occupazione
+     * @return Occupazione oggetto dell'occupazione richiesta
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Occupazione
+     */
+    public function getOccupazione($id_occupazione): Occupazione {
+        try {
+            if(get_class($this->auth_user) !== "Utente") {
+                throw new Eccezione("Il reperimento di un'occupazione può essere svolto solo da un utente registrato.");
+            }
+
+            if(!is_int($id_occupazione)) {
+                throw new Eccezione("Parametri di invocazione di getOccupazione errati."); 
+            }
+            $this->db_instance->connect();
+            $procedure_name_and_params = "get_occupazione($id_occupazione)";
+            $res_occupazione = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            if(count($res_occupazione) === 0) {
+                throw new Eccezione("Non ci sono occupazioni collegate all'ID fornito.");
+            }
+
+            $occupazione = Occupazione::build();
+            $occupazione->setIdOccupazione(intval($res_occupazione[0]["id_occupazione"]));
+            $occupazione->setIdUtente(intval($res_occupazione[0]["utente"]));
+            $occupazione->setIdAnnuncio(intval($res_occupazione[0]["annuncio"]));
+            $occupazione->setPrenotazioneGuest(boolval($res_occupazione[0]["prenotazione_guest"]));
+            $occupazione->setNumOspiti(intval($res_occupazione[0]["num_ospiti"]));
+            $occupazione->setDataInizio($res_occupazione[0]["data_inizio"]);
+            $occupazione->setDataFine($res_occupazione[0]["data_fine"]);
+
+            return $occupazione;
+        } catch(Eccezione $exc) {
+            throw $exc;
+        }
+    }
     /**
      * Restituisce le foto della galleria di annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio

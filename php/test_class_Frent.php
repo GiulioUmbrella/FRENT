@@ -40,6 +40,22 @@ function assertEquals($description, $expected, $gotten) {
 }
 
 /**
+ * Test in cui ci si aspetta l'uguaglianza fra i due oggetti $expected e $gotten. Stampa il risultato del test.
+ * @param string $description descrive il test. Deve essere esplicativo. Se $passed === TRUE sarà di colore verde, altrimenti sarà rosso
+ * @param object $expected è un oggetto che ci si aspetta come risultato del test
+ * @param object $gotten è un oggetto intera che si ottiene dall'esecuzione del metodo
+ */
+function assertObjectEquals($description, $expected, $gotten) {
+    $output = "";
+    if($expected == $gotten) {
+        $output .= "All good.";
+    } else {
+        $output .= "\$expected is:<br/>" . print_r($expected, TRUE) . "<br/>\$gotten is:<br />" . print_r($gotten, TRUE);
+    }
+    echo testReportBuild($description, $expected, $gotten, $output, $output === "All good." ? TRUE : FALSE);
+}
+
+/**
  * Test in cui ci si aspetta la NON uguaglianza fra il contenuto di $notExpected e $gotten. Stampa il risultato del test.
  * @param string $description descrive il test. Deve essere esplicativo. Se $passed === TRUE sarà di colore verde, altrimenti sarà rosso
  * @param array $notExpected è una array di variabili intere che ci non ci si vuole aspettare come risultato del test
@@ -90,6 +106,7 @@ $db = new Database(
 /**
  * Test funzionalità utente non loggato
  */
+/// istanziazione oggetti necessari ai test
 $frent = new Frent($db);
 
 assertNotEquals("Registrazione a buon fine", array(-1, -2), $frent->registrazione("Gino", "Pasticcio", "ginop", "ginopast@gmail.com", "password1", "1998-01-01", "foto.png", "3343343340"));
@@ -98,7 +115,14 @@ assertEquals("Registrazione non a buon fine, mail duplicata", -2, $frent->regist
 /**
  * Test funzionalità utente loggato
  */
+/// istanziazione oggetti necessari ai test
 $frent = new Frent($db, Utente::build());
+$occupazione = Occupazione::build(); $occupazione->setIdOccupazione(9);
+$occupazione->setIdUtente(9); $occupazione->setIdAnnuncio(4);
+$occupazione->setPrenotazioneGuest(TRUE); $occupazione->setNumOspiti(1);
+$occupazione->setDataInizio("2019-11-19"); $occupazione->setDataFine("2019-11-22");
+
 assertEquals("Cancellazione occupazione a buon fine", 0, $frent->deleteOccupazione(19));
 assertEquals("Cancellazione occupazione non a buon fine perché occupazione passata", -1, $frent->deleteOccupazione(18));
 assertEquals("Cancellazione occupazione non a buon fine perché prenotazione passata", -2, $frent->deleteOccupazione(20));
+assertObjectEquals("Reperimento corretto occupazione", $occupazione, $frent->getOccupazione(9));
