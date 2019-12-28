@@ -41,8 +41,8 @@ if (isset($_SESSION["user"])) {
                     <div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
                     <div>
                         <p>$descrizione</p>
-                        <a class=\"link_gestisci_annuncio\" href=\"./gestione_indisponibilita.php\" tabindex=\"13\"
-                        title=\"Vai alla gestione dell'annuncio\">Gestisci</a>
+                        <a class=\"link_gestisci_annuncio\" href=\"./modifica_annuncio.php\" tabindex=\"13\"
+                        title=\"Vai alla gestione dell'annuncio\">Modifica</a>
                     </div>
                 </div>
                 </li>";

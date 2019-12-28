@@ -23,7 +23,8 @@ if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
     $pagina = str_replace("<PROPRIETARIO/>", $utente->getUserName(), $pagina);
     $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo() . " a " . $annuncio->getCitta(), $pagina);
     $pagina = str_replace("<NUMOSPITI/>", $_SESSION["numOspiti"], $pagina);
-    $pagina = str_replace("<TOTALE/>", intval($_SESSION["numOspiti"]) * $annuncio->getPrezzoNotte() . "&euro;", $pagina);
+    $durata = (strtotime($_SESSION["dataFine"])- strtotime($_SESSION["dataInizio"]))/(24*3600);
+    $pagina = str_replace("<TOTALE/>", intval($_SESSION["numOspiti"]) * $annuncio->getPrezzoNotte() * ($durata) . "&euro;", $pagina);
     
     $pagina = str_replace("<LINK/>", "id=" . $annuncio->getIdAnnuncio() . "&dataInizio=" . $_SESSION["dataInizio"]
         . "&dataFine=" . $_SESSION["dataFine"] . "&numOspiti=" . $_SESSION["numOspiti"], $pagina);

@@ -1,4 +1,5 @@
 <?php
+//pagina totalmente funzionante e valida
 require_once "./class_Database.php";
 require_once "./class_Frent.php";
 require_once "./class_Occupazione.php";
@@ -45,12 +46,12 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_passate .= "
                     <li>
                         <div class=\"intestazione_lista\">
-                            <a href=\"./riepilogo_prenotazione.php\" tabindex=\"<TABINDEX$i>\"
+                            <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione tabindex=\"<TABINDEX$i>\"
                                 title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
                         </div>";
             $i++;
             $prenotazioni_passate.="
-                            <div class=\"corpo_lista lista_flex\">
+                        <div class=\"corpo_lista lista_flex\">
                             <div class=\"dettagli_prenotazione\">
                                 <img src=\"$path\" alt=\"Immagine di anteprima di Casa Loreto\"/>
                                 <p>Luogo: $luogoAlloggio</p>
@@ -68,16 +69,15 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
-                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a>";
+                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a> </div>";
             $i++;
             $prenotazioni_correnti.="
-                    </div>
                     <div class=\"corpo_lista lista_flex\">
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                                <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio- $dataFine</p>
+                            <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio- $dataFine</p>
                         </div>
-                            <div class=\"opzioni_prenotazione\">
+                        <div class=\"opzioni_prenotazione\">
                             <p>Prezzo: $prezzo&euro;</p>
                             <a href=\"mailto:$mail\" tabindex=\"<TABINDEX$i>\"
                                     title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a>
@@ -91,7 +91,7 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_future .= "
                 <li>
                     <div class=\"intestazione_lista\">
-                        <a href=\"./riepilogo_prenotazione.php\" tabindex=\"<TABINDEX$i>\"
+                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
                         title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
                     </div>";
             $i++;
