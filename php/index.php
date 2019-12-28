@@ -41,11 +41,17 @@ try {
         $content .= "<li class=\"elemento_sei_pannelli\"><a href='./dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     }
-   
     
     $pagina = str_replace("<RECENTI/>", $content, $pagina);
-    echo $pagina;
     
+    if(isset($_SESSION["delete_user_message"])) {
+        $pagina = str_replace("<DELETE_USER_MESSAGE/>", "<p>" . $_SESSION["delete_user_message"] . "</p>", $pagina);
+        unset($_SESSION["delete_user_message"]);
+    } else {
+        $pagina = str_replace("<DELETE_USER_MESSAGE/>", "", $pagina);
+    }
+    
+    echo $pagina;
 } catch (Eccezione $ex) {
     echo "eccezione " . $ex->getMessage();
 }
