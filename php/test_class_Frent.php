@@ -95,4 +95,10 @@ $frent = new Frent($db);
 assertNotEquals("Registrazione a buon fine", array(-1, -2), $frent->registrazione("Gino", "Pasticcio", "ginop", "ginopast@gmail.com", "password1", "1998-01-01", "foto.png", "3343343340"));
 assertEquals("Registrazione non a buon fine, mail duplicata", -2, $frent->registrazione("Gino", "Pasticcio", "ginopasticcio", "ginopast@gmail.com", "password1234", "1998-01-01", "foto2.png", "3343343340"));
 
-
+/**
+ * Test funzionalità utente loggato
+ */
+$frent = new Frent($db, Utente::build());
+assertEquals("Cancellazione occupazione a buon fine", 0, $frent->deleteOccupazione(19));
+assertEquals("Cancellazione occupazione non a buon fine perché occupazione passata", -1, $frent->deleteOccupazione(18));
+assertEquals("Cancellazione occupazione non a buon fine perché prenotazione passata", -2, $frent->deleteOccupazione(20));
