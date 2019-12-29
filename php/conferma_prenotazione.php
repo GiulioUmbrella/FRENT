@@ -9,6 +9,7 @@ $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged
 if (!$_SESSION["user"]) {
     header("Location: ./login.php");
 }
+
 if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
     and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"])) {
 //    $pagina = str_replace("<IDANNUNCIO/>", $_SESSION["annuncio"]->getIdAnnuncio(), $pagina);
@@ -25,7 +26,13 @@ if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
     $pagina = str_replace("<NUMOSPITI/>", $_SESSION["numOspiti"], $pagina);
     $durata = (strtotime($_SESSION["dataFine"])- strtotime($_SESSION["dataInizio"]))/(24*3600);
     $pagina = str_replace("<TOTALE/>", intval($_SESSION["numOspiti"]) * $annuncio->getPrezzoNotte() * ($durata) . "&euro;", $pagina);
+    $prenotazione = Occupazione::build();
+    $prenotazione->setIdAnnuncio($annuncio->getIdAnnuncio());
+    $prenotazione->setDataInizio($_SESSION["dataInizio"]);
+    $prenotazione->setDataFine($_SESSION["dataFine"]);
+    $prenotazione->setNumOspiti(intval($_SESSION["numOspiti"]));
     
+    $_SESSION["prenotazione"]= $prenotazione;
     $pagina = str_replace("<LINK/>", "id=" . $annuncio->getIdAnnuncio() . "&dataInizio=" . $_SESSION["dataInizio"]
         . "&dataFine=" . $_SESSION["dataFine"] . "&numOspiti=" . $_SESSION["numOspiti"], $pagina);
 }else{

@@ -47,7 +47,7 @@ if (isset($_POST["conferma_prenotazione"])) {
                         echo "confronto in corso";
                     }
                 }
-                if (!$occupazioneIsFit and $occupazioni[count($occupazioni) - 1]->getDataFine() < $_SESSION["dataInizio"])
+                if ($occupazioneIsFit and $occupazioni[count($occupazioni) - 1]->getDataFine() < $_SESSION["dataInizio"])
                     $occupazioneIsFit = false;
             }
     
@@ -62,11 +62,11 @@ if (isset($_POST["conferma_prenotazione"])) {
                 $occupazione->setPrenotazioneGuest(true);
                 $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
                 $_SESSION["prenotazione"] = $occupazione;
-//                header("Location: ./conferma_prenotazione.php");
+                header("Location: ./conferma_prenotazione.php");
             } else {
             
 //                echo "Date scelte non disponibili!";
-            throw new Eccezione("Date scelte non sono disponibili!");
+                throw new Eccezione("Date scelte non sono disponibili!");
             }
             
         } else {

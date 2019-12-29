@@ -12,6 +12,7 @@ if (isset($_SESSION["user"])) {
         $prenotazione = "";
         $id_prenotazione = 0;
         if (isset($_SESSION["prenotazione"])) {
+            echo "piglio la prenotazione";
             $prenotazione = $_SESSION["prenotazione"];
             $id_prenotazione = $frent->insertOccupazione($prenotazione->getIdAnnuncio(), $prenotazione->getNumOspiti(),
                 $prenotazione->getDataInizio(),
@@ -21,6 +22,7 @@ if (isset($_SESSION["user"])) {
         } else {
             $id_prenotazione = $_GET["id"];
         }
+        echo "$id_prenotazione";
         $prenotazioni = $frent->getOccupazione(intval($id_prenotazione));
         $annuncio = $frent->getAnnuncio($prenotazioni->getIdAnnuncio());
         $host=$frent->getUser($annuncio->getIdHost());

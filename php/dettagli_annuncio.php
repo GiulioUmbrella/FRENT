@@ -45,20 +45,20 @@ try {
     
     // impostazione della pagina in base al tipo di utenza
     if (isset($_SESSION["user"]) or isset($_SESSION["admin"])) {
-        if (isset($_SESSION["user"])) {
+        if (isset($_SESSION["user"])) {// utente autenticato
             $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
-            if ($annuncio->getIdHost() == $_SESSION["user"]->getIdUtente()) {
+            if ($annuncio->getIdHost() == $_SESSION["user"]->getIdUtente()) { // host dell'annuncio
                 $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_host.html"), $pagina);
                 $pagina = str_replace("<ID/>", $annuncio->getIdAnnuncio(), $pagina);
                 $_SESSION["id_annuncio"] = $annuncio->getIdAnnuncio();
-            } else {
-                if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))){
+            } else {// utente guest
+                if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))) {
                     $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_no_dati.html"), $pagina);
                     $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
-    
-                }else{
-                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_con_dati.html"),$pagina);
-                    $pagina = str_replace("<LINK/>", "./conferma_prenotazione.php",$pagina);
+                    
+                } else {
+                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_con_dati.html"), $pagina);
+                    $pagina = str_replace("<LINK/>", "./conferma_prenotazione.php", $pagina);
                 }
             }
         }
@@ -71,7 +71,7 @@ try {
             $pagina = str_replace("<PARAMS_SI/>", $params_si, $pagina);
             $pagina = str_replace("<PARAMS_NO/>", $params_no, $pagina);
         }
-    } else {
+    } else { // visitatore anonimo, non autenticato
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
         $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_non_autenticato.html"), $pagina);
         $pagina = str_replace("<LINK/>", "./login.php", $pagina);
@@ -121,7 +121,7 @@ try {
                 $immagine_profilo = "../immagini/me.jpg";
                 $testo_commento = $commento->getCommento();
                 $votazione = $commento->getValutazione();
-                $user_name = "xwen";
+                $user_name = $frent->getUser($commento->getUtente())->getUserName();
                 $data_commento = $commento->getDataPubblicazione();
                 $titolo_commento = $commento->getTitolo();
                 $str_commenti .= "
@@ -161,7 +161,7 @@ try {
     $photos = $frent->getFotoAnnuncio($annuncio->getIdAnnuncio());
     
     $content = "<div class=\"shower_immagine_anteprima\">";
-    if (count($photos) != 0) {
+    if (count($photos) != 0) { // se ci sono altre foto oltre alla galleria stampo anche i pulsanti
         $content .= "
             <button id=\"immagine_precedente\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&lt;</button>
             <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
@@ -171,7 +171,7 @@ try {
             $content .= "<img class=\"immagine\" alt=\"Descrizione immagine\" src=\"$path\"/>";
             
         }
-    } else {
+    } else { // esiste sono anteprima, quindi non devo stampare i pulsante.
         $content .= "<img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>";
     }
     $content .= "</div>";
