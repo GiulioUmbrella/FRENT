@@ -47,7 +47,7 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_passate .= "
                     <li>
                         <div class=\"intestazione_lista\">
-                            <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione tabindex=\"<TABINDEX$i>\"
+                            <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
                                 title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
                         </div>";
             $i++;

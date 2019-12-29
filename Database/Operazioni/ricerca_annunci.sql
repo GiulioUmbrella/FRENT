@@ -9,7 +9,6 @@ BEGIN
     SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
     FROM annunci A
     WHERE
-#           A.bloccato = 0 AND
           A.stato_approvazione = 1 AND A.citta like _citta
     AND A.max_ospiti >= _num_ospiti
     AND A.id_annuncio NOT IN (

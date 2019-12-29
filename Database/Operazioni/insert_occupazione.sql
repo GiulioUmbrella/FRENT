@@ -33,8 +33,8 @@ BEGIN
        SET  _occupazione_guest = 0;
      END IF;
 
-      INSERT INTO occupazioni(utente, annuncio, prenotazione_guest, num_ospiti, data_inizio, data_fine)
-      VALUES (_utente, _annuncio, _occupazione_guest, _numospiti, di, df);
+      INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
+      VALUES (_utente, _annuncio, _numospiti, di, df);
 
       IF ROW_COUNT() = 0 THEN -- Modifica non effettuata
           RETURN -3;
