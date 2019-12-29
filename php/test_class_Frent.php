@@ -119,7 +119,7 @@ assertEquals("Registrazione non a buon fine, mail duplicata", -2, $frent->regist
 $frent = new Frent($db, Utente::build());
 $occupazione = Occupazione::build(); $occupazione->setIdOccupazione(9);
 $occupazione->setIdUtente(9); $occupazione->setIdAnnuncio(4);
-$occupazione->setPrenotazioneGuest(TRUE); $occupazione->setNumOspiti(1);
+//$occupazione->setPrenotazioneGuest(TRUE); $occupazione->setNumOspiti(1);
 $occupazione->setDataInizio("2019-11-19"); $occupazione->setDataFine("2019-11-22");
 
 assertEquals("Cancellazione occupazione a buon fine", 0, $frent->deleteOccupazione(19));

@@ -40,7 +40,7 @@ class DataConstraints {
         "indirizzo" => 128, // string
         "citta" => 128, // string
         "stato_approvazione" => 2, // int
-        "bloccato" => 1, // bool (= 0, = 1)
+//        "bloccato" => 1, // bool (= 0, = 1)
         "max_ospiti" => 99, // int
     );
 

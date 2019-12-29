@@ -610,7 +610,7 @@ CREATE TABLE `annunci` (
   `citta` varchar(128) COLLATE utf8_bin NOT NULL,
   `host` int(11) NOT NULL,
   `stato_approvazione` tinyint(1) NOT NULL DEFAULT 0,
-  `bloccato` tinyint(1) NOT NULL DEFAULT 0,
+#   `bloccato` tinyint(1) NOT NULL DEFAULT 0,
   `max_ospiti` int(2) NOT NULL DEFAULT 1,
   `prezzo_notte` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -619,7 +619,9 @@ CREATE TABLE `annunci` (
 -- Dump dei dati per la tabella `annunci`
 --
 
-INSERT INTO `annunci` (`id_annuncio`, `titolo`, `descrizione`, `img_anteprima`, `indirizzo`, `citta`, `host`, `stato_approvazione`, `bloccato`, `max_ospiti`, `prezzo_notte`) VALUES
+INSERT INTO `annunci` (`id_annuncio`, `titolo`, `descrizione`, `img_anteprima`, `indirizzo`, `citta`, `host`, `stato_approvazione`,
+#                        `bloccato`,
+                       `max_ospiti`, `prezzo_notte`) VALUES
 (1, 'Casa Loreto', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via dell\'Accoglienza x', 'roma', 11, 1, 0, 2, 78),
 (2, 'Casa Agrippa', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Galaverna n.8 (indirizzo del comune)', 'roma', 16, 2, 0, 5, 53),
 (3, 'Casa Celeste', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Comune Catanzaro (civico 1 per i senza tetto, civico 2 per i senza fissa dimora)', 'roma', 9, 1, 0, 5, 82),

@@ -189,7 +189,7 @@ class Frent {
                 $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
                 $occupazione->setIdUtente(intval($assoc_occupazione['utente']));
                 $occupazione->setIdAnnuncio($id_annuncio);
-                $occupazione->setPrenotazioneGuest(boolval($assoc_occupazione['prenotazione_guest']));
+//                $occupazione->setPrenotazioneGuest(boolval($assoc_occupazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
                 $occupazione->setDataFine($assoc_occupazione['data_fine']);
@@ -229,7 +229,7 @@ class Frent {
             $occupazione->setIdOccupazione(intval($res_occupazione[0]["id_occupazione"]));
             $occupazione->setIdUtente(intval($res_occupazione[0]["utente"]));
             $occupazione->setIdAnnuncio(intval($res_occupazione[0]["annuncio"]));
-            $occupazione->setPrenotazioneGuest(boolval($res_occupazione[0]["prenotazione_guest"]));
+//            $occupazione->setPrenotazioneGuest(boolval($res_occupazione[0]["prenotazione_guest"]));
             $occupazione->setNumOspiti(intval($res_occupazione[0]["num_ospiti"]));
             $occupazione->setDataInizio($res_occupazione[0]["data_inizio"]);
             $occupazione->setDataFine($res_occupazione[0]["data_fine"]);
@@ -876,7 +876,7 @@ class Frent {
                 $occupazione->setIdOccupazione(intval($assoc_prenotazione['id_occupazione']));
                 $occupazione->setIdUtente(intval($assoc_prenotazione['utente']));
                 $occupazione->setIdAnnuncio(intval($assoc_prenotazione['annuncio']));
-                $occupazione->setPrenotazioneGuest(boolval($assoc_prenotazione['prenotazione_guest']));
+//                $occupazione->setPrenotazioneGuest(boolval($assoc_prenotazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_prenotazione['data_inizio']);
                 $occupazione->setDataFine($assoc_prenotazione['data_fine']);

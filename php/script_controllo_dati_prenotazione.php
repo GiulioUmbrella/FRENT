@@ -59,7 +59,7 @@ if (isset($_POST["conferma_prenotazione"])) {
                 $occupazione->setDataInizio($_POST["dataInizio"]);
                 $occupazione->setDataFine($_POST["dataFine"]);
 //                $occupazione->setDataFine($_POST["dataFine"]);
-                $occupazione->setPrenotazioneGuest(true);
+//                $occupazione->setPrenotazioneGuest(true);
                 $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
                 $_SESSION["prenotazione"] = $occupazione;
                 header("Location: ./conferma_prenotazione.php");

@@ -7,6 +7,8 @@ CREATE PROCEDURE get_citta_annunci()
 BEGIN
     SELECT DISTINCT citta
     FROM annunci
-    WHERE bloccato = 0 AND stato_approvazione = 1;
+    WHERE
+#           bloccato = 0 AND
+          stato_approvazione = 1;
 END |
 DELIMITER ;

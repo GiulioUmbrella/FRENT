@@ -16,7 +16,7 @@ class Annuncio {
     private $citta;
     private $host;
     private $stato_approvazione; // 0 = NVNA / VA = 1 / VNA = 2 (per le sigle guardare analisirequisiti.md)
-    private $bloccato;
+//    private $bloccato;
     private $max_ospiti;
     private $prezzo_notte;
     
@@ -57,11 +57,11 @@ class Annuncio {
     public function getStatoApprovazione(): int {
         return $this->stato_approvazione;
     }
-    
-    public function getBloccato(): bool {
-        return $this->bloccato;
-    }
-    
+//
+//    public function getBloccato(): bool {
+//        return $this->bloccato;
+//    }
+//
     public function getMaxOspiti(): int {
         return $this->max_ospiti;
     }
@@ -70,17 +70,17 @@ class Annuncio {
         return $this->prezzo_notte;
     }
     
-    /**
-     * @param bool $bloccato
-     * @throws Eccezione se $bloccato non è TRUE o FALSE
-     */
-    public function setBloccato($bloccato) {
-        if (is_bool($bloccato)) {
-            $this->bloccato = $bloccato;
-        } else {
-            throw new Eccezione("Il valore di bloccato non è nel formato valido.");
-        }
-    }
+//    /**
+//     * @param bool $bloccato
+//     * @throws Eccezione se $bloccato non è TRUE o FALSE
+//     */
+//    public function setBloccato($bloccato) {
+//        if (is_bool($bloccato)) {
+//            $this->bloccato = $bloccato;
+//        } else {
+//            throw new Eccezione("Il valore di bloccato non è nel formato valido.");
+//        }
+//    }
     
     /**
      * @param int $id_annuncio

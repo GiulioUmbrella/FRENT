@@ -53,17 +53,17 @@ class Occupazione {
         }
     }
     
-    /**
-     * @param bool $prenotazione_guest
-     * @throws Eccezione se $prenotazione_guest non è un valore booleano
-     */
-    public function setPrenotazioneGuest($prenotazione_guest) {
-        if (is_bool($prenotazione_guest)) {
-            $this->prenotazione_guest = $prenotazione_guest;
-        } else {
-            throw new Eccezione("Il flag di controllo se l'occupazione è una prenotazione non è nel formato valido.");
-        }
-    }
+//    /**
+//     * @param bool $prenotazione_guest
+//     * @throws Eccezione se $prenotazione_guest non è un valore booleano
+//     */
+//    public function setPrenotazioneGuest($prenotazione_guest) {
+//        if (is_bool($prenotazione_guest)) {
+//            $this->prenotazione_guest = $prenotazione_guest;
+//        } else {
+//            throw new Eccezione("Il flag di controllo se l'occupazione è una prenotazione non è nel formato valido.");
+//        }
+//    }
     
     /**
      * @param int $num_ospiti
@@ -116,9 +116,6 @@ class Occupazione {
         return $this->id_annuncio;
     }
     
-    public function getPrenotazioneGuest(): bool {
-        return $this->prenotazione_guest;
-    }
     
     public function getNumOspiti(): int {
         return $this->num_ospiti;

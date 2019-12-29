@@ -205,9 +205,10 @@ BEGIN
     END IF;
 
     -- Host tenta di commentare un suo annucio
-    IF (SELECT prenotazione_guest FROM occupazioni WHERE id_occupazione = _prenotazione) = 0 THEN
-      RETURN -3;
-    END IF;
+#     IF (SELECT
+#                prenotazione_guest FROM occupazioni WHERE id_occupazione = _prenotazione) = 0 THEN
+#       RETURN -3;
+#     END IF;
 
     INSERT INTO commenti(prenotazione, titolo, commento, votazione) VALUES
       (_prenotazione, _titolo, _commento, _votazione);
@@ -294,8 +295,12 @@ BEGIN
        SET  _occupazione_guest = 0;
      END IF;
 
-      INSERT INTO occupazioni(utente, annuncio, prenotazione_guest, num_ospiti, data_inizio, data_fine)
-      VALUES (_utente, _annuncio, _occupazione_guest, _numospiti, di, df);
+      INSERT INTO occupazioni(utente, annuncio,
+#                               prenotazione_guest,
+                              num_ospiti, data_inizio, data_fine)
+      VALUES (_utente, _annuncio,
+#               _occupazione_guest,
+              _numospiti, di, df);
 
       IF ROW_COUNT() = 0 THEN -- Modifica non effettuata
           RETURN -3;
@@ -392,7 +397,10 @@ CREATE PROCEDURE ricerca_annunci(_citta varchar(128), _num_ospiti int(2), di dat
 BEGIN
     SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
     FROM annunci A
-    WHERE A.bloccato = 0 AND A.stato_approvazione = 1 AND A.citta like _citta
+    WHERE
+#           A.bloccato = 0 AND
+          A.stato_approvazione = 1 AND A.citta like _citta
+
     AND A.max_ospiti >= _num_ospiti
     AND A.id_annuncio NOT IN (
         SELECT annuncio
@@ -443,7 +451,9 @@ CREATE PROCEDURE get_citta_annunci()
 BEGIN
     SELECT DISTINCT citta
     FROM annunci
-    WHERE bloccato = 0 AND stato_approvazione = 1;
+    WHERE
+#           bloccato = 0 AND
+          stato_approvazione = 1;
 END |
 DELIMITER ;
 
@@ -497,7 +507,9 @@ DROP PROCEDURE IF EXISTS get_occupazioni_annuncio;
 DELIMITER |
 CREATE PROCEDURE get_occupazioni_annuncio(_id_annuncio int)
 BEGIN
-    SELECT id_occupazione, utente, prenotazione_guest, num_ospiti, data_inizio, data_fine
+    SELECT id_occupazione, utente,
+#            prenotazione_guest,
+           num_ospiti, data_inizio, data_fine
     FROM occupazioni
     WHERE annuncio = _id_annuncio
     order by data_inizio;
@@ -515,7 +527,7 @@ BEGIN
     SELECT *
     FROM occupazioni
     WHERE utente = id_utente
-    AND prenotazione_guest = 1
+#     AND prenotazione_guest = 1
     order by occupazioni.data_inizio;
 END |
 DELIMITER ;

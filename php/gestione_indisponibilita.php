@@ -14,7 +14,6 @@ if (isset($_SESSION["user"])) {
         $content = "";
         $pagina = str_replace("<TITOLO/>",$annuncio->getTitolo(),$pagina);
         foreach ($occupazioni as $occupazione) {
-//            if (!$occupazione->getPrenotazioneGuest()){
             $ID=$occupazione->getIdOccupazione();
             $dataInizio=$occupazione->getDataInizio();
             $dataFine= $occupazione->getDataFine();
@@ -39,7 +38,6 @@ if (isset($_SESSION["user"])) {
                     </div>
                 </fieldset>
             </form>";
-//            }
         }
         $pagina= str_replace("<OCCUPAZIONI/>", $content,$pagina);
         
