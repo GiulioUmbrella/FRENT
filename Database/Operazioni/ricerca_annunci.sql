@@ -6,7 +6,7 @@ DROP PROCEDURE IF EXISTS ricerca_annunci;
 DELIMITER |
 CREATE PROCEDURE ricerca_annunci(_citta varchar(128), _num_ospiti int(2), di date, df date)
 BEGIN
-    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
+    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte, A.desc_anteprima
     FROM annunci A
     WHERE
           A.stato_approvazione = 1 AND A.citta like _citta
