@@ -38,8 +38,7 @@ if (isset($_SESSION["user"])) {
         $content.= "
              <li><div class=\"intestazione_lista\">
                 <a href=\"dettagli_annuncio.php?id=$id\" tabindex=\"12\">$Titolo</a>
-                <p>Stato Approvazione: $stato</p>
-                <p> Valutazione media: $punteggio</p>
+                <p>Stato Approvazione: $stato - Valutazione media: $punteggio</p>
                 </div>
                     <div class=\"corpo_lista\"><img src=\"$path\" alt=\"".$annuncio->getDescAnteprima()."\"/>
                     <div>
