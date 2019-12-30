@@ -53,14 +53,8 @@ try {
                 $pagina = str_replace("<ID/>", $annuncio->getIdAnnuncio(), $pagina);
                 $_SESSION["id_annuncio"] = $annuncio->getIdAnnuncio();
             } else {// utente guest
-//                if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))) {
                     $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_no_dati.html"), $pagina);
                     $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
-//
-//                } else {
-//                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_con_dati.html"), $pagina);
-//                    $pagina = str_replace("<LINK/>", "./conferma_prenotazione.php", $pagina);
-//                }
             }
         }
         
@@ -115,18 +109,19 @@ try {
     
     $pagina = str_replace("<PARAMS>", $link_ricerca,$pagina);
     $str_commenti = "";
+    $mediaCommenti = 0;
     try {
         $commenti = $frent->getCommentiAnnuncio($id);
-        $mediaCommenti = 0;
         if (count($commenti) != 0) {
             $totale = 0;
             $str_commenti = "<ul>";
             foreach ($commenti as $commento) {
                 $totale += intval($commento->getValutazione());
-                $immagine_profilo = "../immagini/me.jpg";
+                $user=$commento->getUtente();
+                $user_name =$user->getUserName();
+                $immagine_profilo = $user->getImgProfilo();
                 $testo_commento = $commento->getCommento();
                 $votazione = $commento->getValutazione();
-                $user_name = $frent->getUser($commento->getUtente())->getUserName();
                 $data_commento = $commento->getDataPubblicazione();
                 $titolo_commento = $commento->getTitolo();
                 $str_commenti .= "
@@ -137,7 +132,6 @@ try {
                                     <p class=\"username_commento\">$user_name</p>
                                     <p class=\"data_commento\">$data_commento</p>
                                 </div>
-                                <p class=\"totale_commenti_utente\">Numero Commenti Totali</p>
                             </div>
                             <div class=\"corpo_commento\">
                                 <h1>$titolo_commento</h1>
@@ -157,37 +151,25 @@ try {
         }
         $pagina = str_replace("<COMMENTI/>", $str_commenti, $pagina);
     
-        $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
     
     } catch (Eccezione $e) {
-        $pagina = str_replace("<Commenti/>", "<p>Ancora non ci sono commenti!</p>", $pagina);
+        $pagina = str_replace("<COMMENTI/>", $e->getMessage(), $pagina);
+//        $pagina = str_replace("<COMMENTI/>", "<p>Ancora non ci sono commenti!</p>", $pagina);
     }
     
+    $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
     $img = $annuncio->getImgAnteprima();
     $photos = $frent->getFotoAnnuncio($annuncio->getIdAnnuncio());
     
-    $content = "<div class=\"shower_immagine_anteprima\">";
-    if (count($photos) != 0) { // se ci sono altre foto oltre alla galleria stampo anche i pulsanti
-        $content .= "
-            <button id=\"immagine_precedente\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&lt;</button>
-            <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
-            <button id=\"immagine_successiva\" class=\"pulsanti_navigazione_immagini\" onclick=\"\">&gt;</button></div><div class=\"image_picker\">";
-        foreach ($photos as $foto) {
-            $path = $foto->getFilePath();
-            $content .= "<img class=\"immagine\" alt=\"Descrizione immagine\" src=\"$path\"/>";
-            
-        }
-    } else { // esiste sono anteprima, quindi non devo stampare i pulsante.
-        $content .= "<img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>";
-    }
-    $content .= "</div>";
     
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
     $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
     $pagina = str_replace("<PREZZO/>", $prezzoAnnuncio, $pagina);
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
     
-    $pagina = str_replace("<IMMAGINE/>", $content, $pagina);
+    $pagina = str_replace("<IMMAGINE/>", "<div class=\"shower_immagine_anteprima\">
+                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
+                        </div>", $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     echo $pagina;
     
