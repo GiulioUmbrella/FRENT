@@ -4,14 +4,12 @@
 - Miei Annunci  
 -- Dettagli  
     - Modifica Annuncio  
-        -- togli Foto  
         -- aggiorna
     - Gestione indisponibilit&agrave;  
         -- Modifica  
         -- elimina  
         -- aggiungi  
-    - Storico prenotazioni  
-    - blocca annuncio
+    - Storico prenotazioni
     - elimina annuncio  
 -- Aggiungi annuncio
 ---

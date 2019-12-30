@@ -13,7 +13,7 @@ Termini utilizzati nella documentazione, nei commenti, nel codice sorgente e nel
 
 - **Annuncio**: un annuncio riguarda la disponibilità di una singola casa (o appartamento) e ne descrive tutte le caratteristiche (indirizzo, città, numero massimo di ospiti, ecc.). Un annuncio riguarda una e una sola casa.
 - **Amministratore**: soggetto facente parte del personale che gestisce il portale. Non è considerato un utente (dal punto di vista della struttura del database è un'entità distinta). Ha compiti di gestione e moderazione all'interno del portale.
-- **Occupazione**: un'occupazione rappresenta principalmente un periodo temporale in cui un annuncio non è prenotabile. Se generata da un guest, è una prenotazione. Se invece è generata da un host, è un periodo in cui l'annuncio non è disponibile.  Riguarda un unico annuncio e un unico periodo temporale, definito da una data di inizio e una data di fine. In uno stesso periodo l'annuncio non può avere occupazioni con intervalli temporali sovrapponibili. _Sinonimo_: prenotazione (solo nell'ambito della generazione da parte di un guest).
+- **Occupazione**: un'occupazione rappresenta principalmente un periodo temporale in cui un annuncio non è prenotabile. Riguarda un unico annuncio e un unico periodo temporale, definito da una data di inizio e una data di fine. In uno stesso periodo l'annuncio non può avere occupazioni con intervalli temporali sovrapponibili. _Sinonimo_: prenotazione.
 
     Rispetto alla data corrente, distinguiamo dal punto di vista logico tre tipi di occupazioni (nel db questa distinzione non è presente)
     1. Passata: se la data di fine è maggiore di quella corrente
@@ -21,12 +21,11 @@ Termini utilizzati nella documentazione, nei commenti, nel codice sorgente e nel
     3. Futura: se la data di inzio è maggiore della data corrente
     Lo status di una occupazione quindi cambia di giorno in giorno. 
 - **Commento**: recensione dell'utente sul suo soggiorno presso una casa offerta da un determinato annuncio. Un utente può lasciare un commento solo sull'annuncio (ed eventualmente modificarlo successivamente), a partire dal giorno successivo all'ultimo giorno del suo soggiorno (corrispondente all'intervallo temporale intercorso fra la data di inizio e di fine dell'occupazione).
-- **Foto annuncio**: foto relativa ad un annuncio, presente nella galleria collegata a quest'ultimo. La foto di anteprima dell'annuncio non rientra in questa categoria, in quanto parte dell'entità Annuncio.
 - **Effettuare una prenotazione**: indica l'azione che corrisponde a generare una occupazione di un annuncio da parte di un utente guest, fornendo tutte le informazioni richieste.
 - **Ricerca**
 La ricerca è una attività effettuata da un utente qualsiasi fra gli annunci disponibili nel sito. Una ricerca è formata da almeno quattro campi:
     1. città,
-    2. data di check i,
+    2. data di check in,
     3. data di check out,
     4. numero di ospiti.
     
@@ -68,12 +67,10 @@ Un guest può lasciare la piattaforma (ovvero richiedere la rimozione del propri
 4. In presenza di prenotazioni correnti, la rimozione del proprio profilo viene negata.
 
 **Operazioni (host)**
-1. Creare un annuncio (con aggiunta delle foto che faranno parte della galleria dell'annuncio).
-2. Modificare un annuncio (incluse le modifiche alle foto collegate a questo).
-3. Creare un'occupazione relativo ad un annuncio di proprietà dell’host.
-4. Eliminare un'occupazione creato dall’host stesso.
-5. Visualizzare le prenotazioni (presenti, passate, future) relative ai propri annunci.
-6. Bloccare un annuncio, corrispondente a una occupazione a tempo indeterminato, fino a quando viene sbloccato.
+1. Creare un annuncio.
+2. Modificare un annuncio.
+3. Eliminare un'occupazione creato dall’host stesso.
+4. Visualizzare le occupazioni (presenti, passate, future) relative ai propri annunci.
 
 **Politiche (host)**
 Un host può lasciare la piattaforma (ovvero richiedere la rimozione del proprio account). Vengono attuate le politiche che seguono.
@@ -91,9 +88,7 @@ Un annuncio si può assumere diversi stati di approvazione:
 L'amministratore del portale non ha ancora visualizzato l'annuncio, quindi potrà approvarlo oppure no (l'annuncio potrà passare nello stato **VA** oppure **NVA**).
 - **NVA**: annuncio **N**on **V**isualizzato e **A**pprovato. Possibilità non contemplata.
 
-Un annuncio può essere eliminato se e solo se non ha prenotazioni correnti e future collegate. Vengono attuate le politiche che seguono.
-1. Tutte le foto vengono rimosse.
-2. Tutti i commenti vengono eliminati.
+Un annuncio può essere eliminato se e solo se non ha prenotazioni correnti e future collegate. Vengono attuate le politiche che seguono. Tutti i commenti vengono eliminati.
 
 **Semplificazioni**
 1. Non viene controllata la correttezza (ovvero l'esistenza) degli indirizzi immessi dagli utenti, ma solo il formato (esempio: viene verificato che sia un testo e non un indirizzo email).
@@ -104,7 +99,6 @@ Per affittare una casa o un appartamento relativi ad un annuncio in un periodo l
 
 **Operazioni**
 1. È possibile generare un'occupazione di un annuncio entro un orizzonte temporale limitato (un numero _x_ prefissato di giorni a partire dalla data corrente) 
-2. L’host può generare un'occupazione (temporanea) per non ricevere prenotazioni per l'annuncio solo se nel periodo scelto non ci sono altre occupazioni che si accavallano (causate da occupazioni dei guest o da altre occupazioni impostate dall’host).
 
 **Semplificazioni**
 1. Non vengono simulati pagamenti per le occupazioni e nemmeno il pagamento delle penali per le cancellazioni.
@@ -116,9 +110,3 @@ Per affittare una casa o un appartamento relativi ad un annuncio in un periodo l
 Un commento può essere cancellato per due motivi:
 1. Cancellazione da parte del guest che lo ha pubblicato.
 2. Cancellazione se viene rimosso l’annuncio.
-
-### Foto
-**Politiche**
-Una foto può essere cancellata:
-1. Dal proprietario di un annuncio.
-2. Quando un annuncio viene cancellato dall’host.

@@ -4,22 +4,17 @@ require_once "./CheckMethods.php";
 require_once "./class_DataConstraints.php";
 
 class Annuncio {
-    
-    /**
-     * Decidere come va fatto l'immagine....
-     */
     private $id_annuncio;
     private $titolo;
     private $descrizione;
     private $img_anteprima;
+    private $desc_anteprima;
     private $indirizzo;
     private $citta;
     private $host;
     private $stato_approvazione; // 0 = NVNA / VA = 1 / VNA = 2 (per le sigle guardare analisirequisiti.md)
-//    private $bloccato;
     private $max_ospiti;
     private $prezzo_notte;
-    private $desc_anteprima;
     
     private function __construct() {}
 
@@ -42,6 +37,10 @@ class Annuncio {
     public function getImgAnteprima(): string {
         return $this->img_anteprima;
     }
+
+    public function getDescAnteprima() {
+        return $this->desc_anteprima;
+    }
     
     public function getIndirizzo(): string {
         return $this->indirizzo;
@@ -58,11 +57,7 @@ class Annuncio {
     public function getStatoApprovazione(): int {
         return $this->stato_approvazione;
     }
-//
-//    public function getBloccato(): bool {
-//        return $this->bloccato;
-//    }
-//
+
     public function getMaxOspiti(): int {
         return $this->max_ospiti;
     }
@@ -70,18 +65,6 @@ class Annuncio {
     public function getPrezzoNotte(): float {
         return $this->prezzo_notte;
     }
-    
-//    /**
-//     * @param bool $bloccato
-//     * @throws Eccezione se $bloccato non è TRUE o FALSE
-//     */
-//    public function setBloccato($bloccato) {
-//        if (is_bool($bloccato)) {
-//            $this->bloccato = $bloccato;
-//        } else {
-//            throw new Eccezione("Il valore di bloccato non è nel formato valido.");
-//        }
-//    }
     
     /**
      * @param int $id_annuncio
@@ -204,16 +187,13 @@ class Annuncio {
     }
     
     /**
-     * @return mixed
-     */
-    public function getDescAnteprima() {
-        return $this->desc_anteprima;
-    }
-    
-    /**
-     * @param mixed $desc_anteprima
+     * @param string $desc_anteprima
      */
     public function setDescAnteprima($desc_anteprima): void {
-        $this->desc_anteprima = $desc_anteprima;
+        if (checkStringNoNumber($desc_anteprima) && checkStringMaxLen(trim($desc_anteprima), DataConstraints::annunci["desc_anteprima"])) {
+            $this->desc_anteprima = trim($desc_anteprima);
+        } else {
+            throw new Eccezione("La descrizione dell'anteprima supera la lunghezza consentita.");
+        }
     }
 }

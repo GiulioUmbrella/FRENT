@@ -55,9 +55,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_citta_annunci` ()  BEGIN
     SELECT DISTINCT citta
     FROM annunci
-    WHERE
-#           bloccato = 0 AND
-stato_approvazione = 1;
+    WHERE stato_approvazione = 1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_commenti_annuncio` (`id` INT)  BEGIN
@@ -84,8 +82,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_prenotazioni_guest` (`id_utente
     SELECT *
     FROM occupazioni
     WHERE utente = id_utente
-#     AND prenotazione_guest = 1
-    order by occupazioni.data_inizio;
+    ORDER BY occupazioni.data_inizio;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ultimi_annunci_approvati` (`id_utente` INT)  BEGIN
@@ -177,16 +174,6 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `delete_commento` (`_id_prenotazione` INT) RETURNS INT(11) BEGIN
     delete from commenti where prenotazione = _id_prenotazione;
-    IF ROW_COUNT() = 0 THEN
-      RETURN -1;
-    ELSE
-      RETURN 0;
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `delete_foto` (`_id_foto` INT) RETURNS INT(11) BEGIN
-    DELETE FROM foto_annunci WHERE id_foto = _id_foto;
-
     IF ROW_COUNT() = 0 THEN
       RETURN -1;
     ELSE
@@ -334,32 +321,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` IN
       ELSE
           RETURN _prenotazione; 
       END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `insert_foto` (`id_annuncio` INT, `_file_path` VARCHAR(128), `_descrizione` VARCHAR(128)) RETURNS INT(11) BEGIN
-    DECLARE min_file_path_length INT;
-    DECLARE min_descrizione_length INT;
-
-    -- Ritorna -1 in caso di annuncio inesistente
-    DECLARE EXIT HANDLER FOR 1452
-    BEGIN
-        RETURN -1;
-    END;
-
-    -- Ritorna -2 in caso _file_path o _descrizione non siano validi
-    SET min_file_path_length = 1;
-    SET min_descrizione_length = 1;
-
-    IF CHAR_LENGTH(_file_path) < min_file_path_length OR CHAR_LENGTH(_descrizione) < min_descrizione_length THEN
-      RETURN -2;
-    END IF;
-
-    INSERT INTO foto_annunci (file_path, descrizione, annuncio) VALUES (_file_path, _descrizione, id_annuncio);
-    IF ROW_COUNT() = 0 THEN
-        RETURN -3;
-    ELSE
-        RETURN LAST_INSERT_ID();
-    END IF;
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `insert_occupazione` (`_utente` INT, `_annuncio` INT, `_numospiti` INT(2), `di` DATE, `df` DATE) RETURNS INT(11) BEGIN
