@@ -17,46 +17,46 @@ if (isset($_SESSION["user"]) ){
             $pagina = str_replace("<CITTA/>",$annuncio->getCitta(),$pagina);
             $pagina = str_replace("<IDANNUNCIO/>", $annuncio->getIdAnnuncio(),$pagina);
             
-            $foto = $frent->getFotoAnnuncio(intval($annuncio->getIdAnnuncio()));
+//            $foto = $frent->getFotoAnnuncio(intval($annuncio->getIdAnnuncio()));
             $path=$annuncio->getImgAnteprima();
             $descrizione= $annuncio->getDescrizione();
             $pagina = str_replace("<TITOLO/>",$annuncio->getTitolo(),$pagina);
-            $content="
-            <li>
-                    <fieldset>
-                        <div class=\"commenti_foto\">
-                            <img src=\"$path\" alt=\"Immagine che hai deciso di caricare.\">
-                            <label for=\"commento1\">
-                            <textarea id=\"commento1\" maxlength=\"512\" rows=\"8\" cols=\"30\"
-                                      placeholder=\"Inserisci la descrizione della foto\">$descrizione</textarea>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                </li>";
+//            $content="
+//            <li>
+//                    <fieldset>
+//                        <div class=\"commenti_foto\">
+//                            <img src=\"$path\" alt=\"Immagine che hai deciso di caricare.\">
+//                            <label for=\"commento1\">
+//                            <textarea id=\"commento1\" maxlength=\"512\" rows=\"8\" cols=\"30\"
+//                                      placeholder=\"Inserisci la descrizione della foto\">$descrizione</textarea>
+//                            </label>
+//                        </div>
+//                    </fieldset>
+//
+//                </li>";
     
-            foreach ($foto as $f){
-                $descrizione=$f->getDescrizione();
-                $path = $f->getFilePath();
-                $id= $f->getIdFoto();
-                $content.="
-            <li>
-                    <fieldset>
-                        <div class=\"commenti_foto\">
-                            <img src=\"$path\" alt=\"Immagine che hai deciso di caricare.\">
-                            <label for=\"commento1\">
-                            <textarea id=\"commento1\" maxlength=\"512\" rows=\"8\" cols=\"30\"
-                                      placeholder=\"Inserisci la descrizione della foto\">$descrizione</textarea>
-                                <a href=\"script_elimina_foto.php?id=$id\" tabindex=\"17\"
-                                   title=\"elimina la foto numero 1\">Elimina</a>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                </li>";
-            }
+//            foreach ($foto as $f){
+//                $descrizione=$f->getDescrizione();
+//                $path = $f->getFilePath();
+//                $id= $f->getIdFoto();
+//                $content.="
+//            <li>
+//                    <fieldset>
+//                        <div class=\"commenti_foto\">
+//                            <img src=\"$path\" alt=\"Immagine che hai deciso di caricare.\">
+//                            <label for=\"commento1\">
+//                            <textarea id=\"commento1\" maxlength=\"512\" rows=\"8\" cols=\"30\"
+//                                      placeholder=\"Inserisci la descrizione della foto\">$descrizione</textarea>
+//                                <a href=\"script_elimina_foto.php?id=$id\" tabindex=\"17\"
+//                                   title=\"elimina la foto numero 1\">Elimina</a>
+//                            </label>
+//                        </div>
+//                    </fieldset>
+//
+//                </li>";
+//            }
     
-            $pagina = str_replace("<IMMAGINI/>",$content,$pagina);
+//            $pagina = str_replace("<IMMAGINI/>",$content,$pagina);
             echo $pagina;
         }catch (Eccezione $ex){
             header("Location: ./404.php");

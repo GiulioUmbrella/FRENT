@@ -19,6 +19,7 @@ class Annuncio {
 //    private $bloccato;
     private $max_ospiti;
     private $prezzo_notte;
+    private $desc_anteprima;
     
     private function __construct() {}
 
@@ -200,5 +201,19 @@ class Annuncio {
         } else {
             throw new Eccezione("Il prezzo non è nel formato valido.");
         }
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getDescAnteprima() {
+        return $this->desc_anteprima;
+    }
+    
+    /**
+     * @param mixed $desc_anteprima
+     */
+    public function setDescAnteprima($desc_anteprima): void {
+        $this->desc_anteprima = $desc_anteprima;
     }
 }

@@ -42,6 +42,7 @@ class DataConstraints {
         "stato_approvazione" => 2, // int
 //        "bloccato" => 1, // bool (= 0, = 1)
         "max_ospiti" => 99, // int
+        "desc_anteprima"=>256
     );
 
     /**

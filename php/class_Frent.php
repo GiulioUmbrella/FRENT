@@ -73,6 +73,7 @@ class Frent {
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
                 $annuncio->setDescrizione($assoc_annuncio['descrizione']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setDescAnteprima($assoc_annuncio['desc_anteprima']);
                 $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
                 $annuncio->setCitta($citta);
                 $annuncio->setPrezzoNotte(floatval($assoc_annuncio['prezzo_notte']));
@@ -239,36 +240,7 @@ class Frent {
             throw $exc;
         }
     }
-    /**
-     * Restituisce le foto della galleria di annuncio, dato il suo ID.
-     * @param int $id_annuncio id dell'annuncio
-     * @return array di oggetti di tipo Foto
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione degli oggetti Foto
-     */
-    public function getFotoAnnuncio($id_annuncio): array {
-        try {
-            if(!is_int($id_annuncio)) {
-                throw new Eccezione("Parametri di invocazione di getFotoAnnuncio errati.");
-            }
-            $this->db_instance->connect();
-            $procedure_name_and_params = "get_foto_annuncio($id_annuncio)";
-            $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
 
-            foreach($lista_foto as $i => $assoc_foto) {
-                $foto = Foto::build();
-                $foto->setIdFoto(intval($assoc_foto['id_foto']));
-                $foto->setFilePath($assoc_foto['file_path']);
-                $foto->setIdAnnuncio($id_annuncio);
-                $foto->setDescrizione($assoc_foto['descrizione']);
-                $lista_foto[$i] = $foto;
-            }
-    
-            return $lista_foto;
-        } catch(Eccezione $exc) {
-            throw $exc;
-        }
-    }
-    
     /**
      * Restituisce i commenti di un annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio
@@ -321,6 +293,7 @@ class Frent {
                 $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setDescAnteprima($assoc_annuncio['desc_anteprima']);
                 $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
 
@@ -351,6 +324,7 @@ class Frent {
             $annuncio->setStatoApprovazione(intval($res_annuncio[0]['stato_approvazione']));
             $annuncio->setDescrizione($res_annuncio[0]['descrizione']);
             $annuncio->setImgAnteprima($res_annuncio[0]['img_anteprima']);
+            $annuncio->setDescAnteprima($res_annuncio[0]['desc_anteprima']);
             $annuncio->setIndirizzo($res_annuncio[0]['indirizzo']);
             $annuncio->setCitta($res_annuncio[0]['citta']);
             $annuncio->setMaxOspiti(intval($res_annuncio[0]['max_ospiti']));
@@ -449,7 +423,7 @@ class Frent {
         }
     }
 
-    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $descAnteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("L'inserimento di un'annuncio può essere svolto solo da un utente registrato.");
@@ -459,6 +433,7 @@ class Frent {
             $annuncio->setTitolo($titolo);
             $annuncio->setDescrizione($descrizione);
             $annuncio->setImgAnteprima($img_anteprima);
+            $annuncio->setDescAnteprima($descAnteprima);
             $annuncio->setIndirizzo($indirizzo);
             $annuncio->setCitta($citta);
             $annuncio->setMaxOspiti($max_ospiti);
@@ -695,7 +670,7 @@ class Frent {
      * @return int -1 in caso di errori nella modifica
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+    public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $desc_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
@@ -707,6 +682,7 @@ class Frent {
             $annuncio->setTitolo($titolo);
             $annuncio->setDescrizione($descrizione);
             $annuncio->setImgAnteprima($img_anteprima);
+            $annuncio->setDescAnteprima($desc_anteprima);
             $annuncio->setIndirizzo($indirizzo);
             $annuncio->setCitta($citta);
             $annuncio->setMaxOspiti($max_ospiti);
@@ -836,6 +812,7 @@ class Frent {
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
                 $annuncio->setDescrizione($assoc_annuncio['descrizione']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setDescAnteprima($assoc_annuncio['desc_anteprima']);
                 $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
                 $annuncio->setCitta($assoc_annuncio['citta']);
                 $annuncio->setStatoApprovazione(intval($assoc_annuncio["stato_approvazione"]));
