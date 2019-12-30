@@ -17,7 +17,7 @@ if (isset($_SESSION["user"])) {
     
     $occupazioni = $frent->getPrenotazioniGuest();
 //    $occupazioni = array();
-    $i = 5;
+    $i = 7;
     $prenotazioni_future = " <h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
     $prenotazioni_passate = "<h1>Le mie prenotazioni Passate</h1><ul id=\"prenotazioni_passate\">";
     $prenotazioni_correnti = "  <h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
@@ -111,14 +111,14 @@ if (isset($_SESSION["user"])) {
                             <form action=\"./script_elimina_prenotazione.php?id=$id_prenotazione\" method=\"post\">
                                 <fieldset>
                                     <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
-                                    <input type=\"hidden\" id=\"id\" value=\"$id_prenotazione\"/>
-                                    <input type=\"submit\" id=\"elimina\" value=\"elimina\" tabindex=\"<TABINDEX$i>\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
+                                    <input type=\"submit\" value=\"elimina\" tabindex=\"<TABINDEX$i>\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
                                 </fieldset>
                             </form>
                         </div>
                     </div>
                 </li>";
         }
+//        <input type=\"hidden\" id=\"id\" value=\"$id_prenotazione\"/>
         $i = $i + 1;
     }
 

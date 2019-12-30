@@ -19,6 +19,9 @@ class Utente {
         return new Utente();
     }
     
+    /**
+     * @return int
+     */
     public function getIdUtente() {
         return $this->id_utente;
     }

@@ -1,6 +1,7 @@
 <?php
 require_once "./class_CredenzialiDB.php";
 require_once "./CheckMethods.php";
+// valida, e dovrebbe funzionare sempre, forse ho mancato qualche test case
 /*
 todo quando l'annuncio non approvato è visualizzato dal proprietario, il pulsante prenota deve sparire, e deve
     essere visualizza il pulsante modifica, reindirizzandolo verso la pagina della modifica dell'annunciom
@@ -52,14 +53,14 @@ try {
                 $pagina = str_replace("<ID/>", $annuncio->getIdAnnuncio(), $pagina);
                 $_SESSION["id_annuncio"] = $annuncio->getIdAnnuncio();
             } else {// utente guest
-                if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))) {
+//                if (!(isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"]))) {
                     $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_no_dati.html"), $pagina);
                     $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
-                    
-                } else {
-                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_con_dati.html"), $pagina);
-                    $pagina = str_replace("<LINK/>", "./conferma_prenotazione.php", $pagina);
-                }
+//
+//                } else {
+//                    $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_con_dati.html"), $pagina);
+//                    $pagina = str_replace("<LINK/>", "./conferma_prenotazione.php", $pagina);
+//                }
             }
         }
         
@@ -77,11 +78,12 @@ try {
         $pagina = str_replace("<LINK/>", "./login.php", $pagina);
     }
     require_once "./components/setMinMaxDates.php";
-    
+    $link_ricerca="citta=".$annuncio->getCitta();
     $pagina = str_replace("<OSPITIMASSIMO/>", $ospitiMassimo, $pagina);
     if (isset($_GET["dataInizio"])) {
         $dataInizio = $_GET["dataInizio"];
         $pagina = str_replace("<VALUEINIZIO/>", $dataInizio, $pagina);
+        $link_ricerca.="&dataInizio=".$dataInizio;
     } else {
         $pagina = str_replace("<VALUEINIZIO/>", "", $pagina);
     }
@@ -89,18 +91,21 @@ try {
     if (isset($_GET["dataFine"])) {
         $dataFine = $_GET["dataFine"];
         $pagina = str_replace("<VALUEFINE/>", $dataFine, $pagina);
+        $link_ricerca.="&dataFine=".$dataFine;
+    
     } else {
         $pagina = str_replace("<VALUEFINE/>", "", $pagina);
     }
     
     if (isset($_GET["numOspiti"])) {
         $numOspiti = $_GET["numOspiti"];
+        $link_ricerca.="&numOspiti=".$numOspiti;
         $pagina = str_replace("<VALUENUMERO/>", intval($_GET["numOspiti"]), $pagina);
     } else {
         $pagina = str_replace("<VALUENUMERO/>", 1, $pagina);
     }
     
-    if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"] == "true") {
+    if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"]) {
         $pagina = str_replace("<MSG/>", $_SESSION["msg"], $pagina);
         unset($_SESSION["dati_errati"]);
     } else {
@@ -108,14 +113,14 @@ try {
         $pagina = str_replace("<MSG/>", "", $pagina);
     }
     
-    
+    $pagina = str_replace("<PARAMS>", $link_ricerca,$pagina);
     $str_commenti = "";
     try {
         $commenti = $frent->getCommentiAnnuncio($id);
         $mediaCommenti = 0;
         if (count($commenti) != 0) {
-            $str_commenti .= "<ul>";
             $totale = 0;
+            $str_commenti = "<ul>";
             foreach ($commenti as $commento) {
                 $totale += intval($commento->getValutazione());
                 $immagine_profilo = "../immagini/me.jpg";
@@ -142,17 +147,18 @@ try {
                         </li>";
             }
             $mediaCommenti = $totale / (count($commenti));
+    
             $str_commenti .= "</ul>";
-            $pagina = str_replace("<COMMENTI/>", $str_commenti, $pagina);
-            
-            $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
-            
+    
         } else {
-            $pagina = str_replace("<Commenti/>", "<h2>Non ci sono commenti!</h2>", $pagina);
-            
+            $str_commenti="<p>Ancora Non ci sono commenti!</p>";
+//            $pagina = str_replace("<Commenti/>", "<h2>Ancora Non ci sono commenti!</h2>", $pagina);
+    
         }
-        
-        
+        $pagina = str_replace("<COMMENTI/>", $str_commenti, $pagina);
+    
+        $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
+    
     } catch (Eccezione $e) {
         $pagina = str_replace("<Commenti/>", "<p>Ancora non ci sono commenti!</p>", $pagina);
     }

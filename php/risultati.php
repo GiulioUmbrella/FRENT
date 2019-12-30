@@ -13,28 +13,38 @@ if (isset($_SESSION["admin"])) {
 require_once "load_Frent.php";
 $citta="";
 require_once "./components/setMinMaxDates.php";
-$numOspiti;
+$numOspiti=1;
 $dataInizio ="";
 $dataFine ="";
 if (isset($_GET["citta"])){
     $citta =$_GET["citta"];
     $pagina=str_replace("<VALUECITTA/>",$citta,$pagina);
+}else{
+    $pagina=str_replace("<VALUECITTA/>","",$pagina);
+    
 }
 if (isset($_GET["numOspiti"])){
     $numOspiti =intval($_GET["numOspiti"]);
     $_SESSION["numOspiti"]= $numOspiti;
     $pagina=str_replace("<VALUENUMERO/>",$numOspiti,$pagina);
+}else{
+    $pagina=str_replace("<VALUENUMERO/>",1,$pagina);
+    
 }
 if (isset($_GET["dataInizio"])){
     $dataInizio =$_GET["dataInizio"];
     $_SESSION["dataInizio"] = $dataInizio;
     $pagina=str_replace("<VALUEINIZIO/>",$dataInizio,$pagina);
+}else{
+    $pagina=str_replace("<VALUEINIZIO/>","",$pagina);
     
 }
 if (isset($_GET["dataFine"])){
     $dataFine =$_GET["dataFine"];
     $_SESSION["dataFine"] = $dataFine;
     $pagina=str_replace("<VALUEFINE/>",$dataFine,$pagina);
+}else{
+    $pagina=str_replace("<VALUEFINE/>","",$pagina);
 }
 
 $content = "";

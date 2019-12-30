@@ -312,7 +312,11 @@ class Frent {
     public function getUltimiAnnunciApprovati() {
         try {
             $this->db_instance->connect();
-            $procedure_name_and_params = "get_ultimi_annunci_approvati()";
+            $id=-1;
+            if ($this->auth_user){
+                $id= $this->auth_user->getIdUtente();
+            }
+            $procedure_name_and_params = "get_ultimi_annunci_approvati($id)";
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             foreach($lista_annunci as $i => $assoc_annuncio) {
@@ -414,28 +418,19 @@ class Frent {
     }
     /**
      * Inserisce una nuova occupazione per un annuncio, verificando la possibilità prima di effettuare l'operazione e marchiandola come prenotazione se fatta da un guest e non dall'host.
-     * @param int $id_annuncio id dell'annuncio
-     * @param int $numospiti numero di ospiti per cui è stata richiesta l'occupazione
-     * @param string $data_inizio data di inizio dell'occupazione
-     * @param string $data_fine data di fine dell'occupazione
+     * @param  Occupazione occupazione da inserire nel database
      * @return int ID dell'occupazione appena inserita se tutto è andato a buon fine
      * @return int -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
      * @return int -2 se ci sono altre occupazioni nel range di date passate in input
      * @return int -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function insertOccupazione($id_annuncio, $numospiti, $data_inizio, $data_fine): int {
+    public function insertOccupazione($occupazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("L'inserimento di un'occupazione può essere svolto solo da un utente registrato.");
             }
-
-            $occupazione = Occupazione::build();
-            $occupazione->setIdAnnuncio($id_annuncio);
-            $occupazione->setNumOspiti($numospiti);
-            $occupazione->setDataInizio($data_inizio);
-            $occupazione->setDataFine($data_fine);
-
+          
             if(!checkDateBeginAndEnd($occupazione->getDataInizio(), $occupazione->getDataFine())) {
                 throw new Eccezione("Non è possibile inserire una data di fine antecedente o uguale alla data di inizio");
             }
@@ -449,8 +444,8 @@ class Frent {
                 date('" . $occupazione->getDataFine() . "')
             )";
         
-            $res = $this->db_instance->queryFunction($function_name_and_params);
-            echo $res;
+//            $res = $this->db_instance->queryFunction($function_name_and_params);
+//            echo $res;
             return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
             throw $exc;
