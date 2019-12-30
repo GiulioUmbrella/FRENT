@@ -221,7 +221,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `aggiungi_foto` (`id_annuncio` INT, `
     RETURN LAST_INSERT_ID();
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `delete_annunco` (`_id_annuncio` INT) RETURNS INT(11) BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `delete_annuncio` (`_id_annuncio` INT) RETURNS INT(11) BEGIN
   DECLARE curdate DATE;
 
   DECLARE EXIT HANDLER FOR SQLEXCEPTION

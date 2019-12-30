@@ -6,9 +6,9 @@ Cosa restituisce:
   -1 l'annuncio non è eliminabile perchè ci sono prenotazioni in corso o future
   -2 l'annuncio, i commenti e le foto non sono stati eliminati (per esempio per errori nelle chiavi esterne)
 */
-DROP FUNCTION IF EXISTS delete_annunco;
+DROP FUNCTION IF EXISTS delete_annuncio;
 DELIMITER |
-CREATE FUNCTION delete_annunco(_id_annuncio INT) RETURNS INT
+CREATE FUNCTION delete_annuncio(_id_annuncio INT) RETURNS INT
 BEGIN
   DECLARE curdate DATE;
 

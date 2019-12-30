@@ -2,10 +2,10 @@
 require_once "./class_Frent.php";
 require_once "./class_Amministratore.php";
 
-require_once "./class_CredenzialiDB.php";
+require_once "load_Frent.php";
 session_start();
 
-if (isset($_SESSION["manager"]) and isset($_SESSION["admin"])){
+if (isset($_SESSION["admin"])){
     
     $id = intval($_GET["idAnnuncio"]);
     $status = intval($_GET["approvato"]);

@@ -32,7 +32,7 @@ if (isset($_SESSION["user"])) {
         $host = $frent->getUser($annuncio->getIdHost());
         $mail = $host->getMail();
         $nomeAnnuncio = $annuncio->getTitolo();
-        $descrizionefoto = "";
+        $descrizionefoto = "";//todo decide cose mettere nell'attributo ALT dell'anteprima
         $luogoAlloggio = $annuncio->getIndirizzo()." citt&agrave;: ".$annuncio->getCitta();
         $dataInizio = $prenotazione->getDataInizio();
         $dataFine = $prenotazione->getDataFine();
@@ -77,7 +77,7 @@ if (isset($_SESSION["user"])) {
                     <div class=\"corpo_lista lista_flex\">
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                            <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio- $dataFine</p>
+                            <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio - $dataFine</p>
                                 <p>Numero ospiti: $numeroOspiti</p>
                         </div>
                         <div class=\"opzioni_prenotazione\">
