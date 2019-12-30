@@ -303,19 +303,16 @@ class Frent {
             throw $exc;
         }
     }
-
+    
     /**
      * Restituisce una lista di annunci approvati per ultimi
+     * @param $id int indica id del user
      * @return array di oggetti di tipo Annuncio
      * @throws Eccezione in caso di errori nella connessione al database, errore nella creazione dell'oggeto di Annuncio
      */
-    public function getUltimiAnnunciApprovati() {
+    public function getUltimiAnnunciApprovati($id) {
         try {
             $this->db_instance->connect();
-            $id=-1;
-            if ($this->auth_user){
-                $id= $this->auth_user->getIdUtente();
-            }
             $procedure_name_and_params = "get_ultimi_annunci_approvati($id)";
             $lista_annunci = $this->db_instance->queryProcedure($procedure_name_and_params);
 

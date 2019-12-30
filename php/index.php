@@ -40,12 +40,17 @@ try {
     
     require_once "./components/setMinMaxDates.php";
     $content = "";
-    $annunci = $frent->getUltimiAnnunciApprovati();
+    $id = -1;
+    if (isset($_SESSION["user"]) and get_class($_SESSION["user"]) == "Utente")
+        $id=$_SESSION["user"]->getIdUtente();
+    $annunci = $frent->getUltimiAnnunciApprovati($id);
+    $index=11;
     foreach ($annunci as $annuncio) {
         $titolo = $annuncio->getTitolo();
         $id = $annuncio->getIdAnnuncio();
         $path = $annuncio->getImgAnteprima();
-        $content .= "<li class=\"elemento_sei_pannelli\"><a href='./dettagli_annuncio.php?id=$id'>$titolo<img src=\"$path\"
+        $content .= "<li class=\"elemento_sei_pannelli\">
+                    <a href='./dettagli_annuncio.php?id=$id' tabindex=\"".$index++."\">$titolo<img src=\"$path\"
                 alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
     }
     $numOspiti = 1;

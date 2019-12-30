@@ -22,8 +22,8 @@ if (isset($_POST["accedi"])) {
         
         $pagina = str_replace("<div id=\"credenziali_errate\"></div>",
             "<div id=\"credenziali_errate\" class=\"aligned_with_form\"><p>Credenziali errate!</p></div>", $pagina);
-        $pagina = str_replace("<VALUEUSERNAME>", "value=\"$nome\"", $pagina);
-        $pagina = str_replace("<VALUEPASSWORD>", "value=\"$password\"", $pagina);
+        $pagina = str_replace("<VALUEUSERNAME>", $nome, $pagina);
+        $pagina = str_replace("<VALUEPASSWORD>", $password, $pagina);
     }
     
 } else {
