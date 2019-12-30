@@ -11,7 +11,7 @@ try{
             $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
             $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
             $pagina = str_replace("<TITOLO/>", $annuncio->getTitolo(), $pagina);
-            
+            $pagina = str_replace("<IDANNUNCIO/>", $annuncio->getIdAnnuncio(),$pagina);
             $user = $_SESSION["user"];
             
             $prenotazioni = $frent->getOccupazioniAnnuncio($annuncio->getIdAnnuncio());
@@ -50,25 +50,25 @@ try{
                 }
             }
             if ($prenotazioneCorrente==""){
-                $pagina = str_replace("<PRENOTAZIONECORRENTE/>", "<li><p>Non ci sono prenotazioni correnti</p></li>", $pagina);
+                $pagina = str_replace("<PRENOTAZIONECORRENTE/>", "<li><p>Non ci sono prenotazioni attuali!</p></li>", $pagina);
                 
             }else{
                 $pagina = str_replace("<PRENOTAZIONECORRENTE/>", $prenotazioneCorrente, $pagina);
             }
             if ($prenotazioniFuture==""){
-                $pagina = str_replace("<PRENOTAZIONIFUTURE/>", "<li><p>Non ci sono prenotazioni future</p></li>", $pagina);
+                $pagina = str_replace("<PRENOTAZIONIFUTURE/>", "<li><p>Non ci sono prenotazioni future!</p></li>", $pagina);
                 
             }else{
                 $pagina = str_replace("<PRENOTAZIONIFUTURE/>", $prenotazioniFuture, $pagina);
             }
             if ($prenotazioniPassate==""){
-                $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "<li><p>Non ci sono prenotazioni passate</p></li>", $pagina);
-                
+                $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "<li><p>Non ci sono prenotazioni passate!</p></li>", $pagina);
+        
             }else{
                 $pagina = str_replace("<PRENOTAZIONIPASSATE/>", $prenotazioniPassate, $pagina);
             }
-            
-            
+    
+    
             echo $pagina;
         } else {
             header("Location: ./404.php");
