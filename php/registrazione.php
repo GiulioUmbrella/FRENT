@@ -42,12 +42,15 @@ if (isset($_POST["registrati"])) {
      */
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
+    $messageToUser = "";
+    $divId = "credenziali_errate";
+    $divClasses = "aligned_with_form";
+
     if($form_non_valido) { // IF1 - RAMO VERO IF1
         $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo.", $risultato_validazione);
-        $pagina = addUserNotificationToPage($pagina, $messageToUser, "credenziali_errate", "aligned_with_form");
     } else { // FINE RAMO VERO IF1 - RAMO FALSO IF1
         if($_POST["password"] !== $_POST["ripeti_password"]) { // IF2 - RAMO VERO IF2
-            $pagina = addUserNotificationToPage($pagina, "Le due password inserite non corrispondono.", "credenziali_errate", "aligned_with_form");
+            $messageToUser = "Le due password inserite non corrispondono.";
         } else { // FINE RAMO VERO IF2 - RAMO FALSO IF2
             try {
                 $codice_registrazione = $frent->registrazione(
@@ -62,23 +65,24 @@ if (isset($_POST["registrati"])) {
                 );
                 
                 if($codice_registrazione === -1) { // IF3 - RAMO VERO IF3
-                    $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel processo di registrazione."), "credenziali_errate", "aligned_with_form");
+                    $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione.");
                 } else if($codice_registrazione === -2) { // FINE RAMO VERO IF3 - RAMO FALSO IF3 - IF4 - RAMO VERO IF4
-                    $pagina = addUserNotificationToPage($pagina, "Un profilo ". htmlentities("è già") . " presente con l'indirizzo <span xml:lang=\"en\">mail</span> fornito. Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.", "credenziali_errate", "aligned_with_form");
+                    $messageToUser = "Un profilo ". htmlentities("è già") . " presente con l'indirizzo <span xml:lang=\"en\">mail</span> fornito. Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
                 } else { // FINE RAMO VERO IF4 - RAMO FALSO IF4
                     // tento di creare una cartella per salvare da qui in avanti i file dell'utente
                     if(!mkdir("../uploads/user$codice_registrazione")) { // IF5 - RAMO VERO IF5
                         throw new Eccezione("Non è stato possibile creare una cartella per le immagini dell'utente.");
                     } // FINE RAMO VERO IF5 - RAMO FALSO IF5
 
-                    $pagina = addUserNotificationToPage($pagina, "Registrazione avvenuta con successo! Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.", "credenziali_errate", "aligned_with_form");
+                    $messageToUser = "Registrazione avvenuta con successo! Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
                 } // FINE RAMO FALSO IF3 - FINE RAMO FALSO IF4
 
             } catch(Eccezione $exc) {
-                $pagina = addUserNotificationToPage($pagina, htmlentities("C'è stato un errore nel processo di registrazione. Errore riscontrato: ") . $exc->getMessage(), "credenziali_errate", "aligned_with_form");
+                $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione. Errore riscontrato: ") . $exc->getMessage();
             }
         } // FINE RAMO FALSO IF2
     } // FINE RAMO FALSO IF1
+    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses);
 }
 
 echo $pagina;
