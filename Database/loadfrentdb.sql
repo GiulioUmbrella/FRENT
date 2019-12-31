@@ -28,7 +28,6 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `admin_get_annunci` ()  BEGIN
     SELECT id_annuncio, titolo, stato_approvazione
-
     FROM annunci
     WHERE stato_approvazione = 0;
 END$$
@@ -49,7 +48,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_annunci_host` (`_id_host` INT)  BEGIN
     select *
     from annunci
-    where _id_host= annunci.host;
+    where host = _id_host;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_citta_annunci` ()  BEGIN
@@ -75,7 +74,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_occupazioni_annuncio` (`_id_ann
     SELECT id_occupazione, utente, num_ospiti, data_inizio, data_fine
     FROM occupazioni
     WHERE annuncio = _id_annuncio
-    order by data_inizio;
+    ORDER BY data_inizio;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_prenotazioni_guest` (`id_utente` INT)  BEGIN
@@ -107,19 +106,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `_mail` VARCHAR(191), IN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ricerca_annunci` (`_citta` VARCHAR(128), `_num_ospiti` INT(2), `di` DATE, `df` DATE)  BEGIN
-    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
+    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.desc_anteprima, A.indirizzo, A.prezzo_notte
     FROM annunci A
     WHERE A.stato_approvazione = 1 AND A.citta like _citta
-      AND A.max_ospiti >= _num_ospiti
-      AND A.id_annuncio NOT IN (
+    AND A.max_ospiti >= _num_ospiti
+    AND A.id_annuncio NOT IN (
         SELECT annuncio
         FROM occupazioni
         WHERE (
-                      (di >= data_inizio AND di <= data_fine) OR
-                      (df >= data_inizio AND df <= data_fine) OR
-                      (di <= data_inizio AND df >= data_fine) OR
-                      (di >= data_inizio AND df <= data_fine)
-                  )
+          (di >= data_inizio AND di <= data_fine) OR
+          (df >= data_inizio AND df <= data_fine) OR
+          (di <= data_inizio AND df >= data_fine) OR
+          (di >= data_inizio AND df <= data_fine)
+        )
     );
 END$$
 
@@ -291,7 +290,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_annuncio` (`_titolo` VARCHAR(
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` INT, `_titolo` VARCHAR(64), `_commento` VARCHAR(512), `_votazione` TINYINT(1)) RETURNS INT(11) BEGIN
-
     -- Ritorna 0 in caso di prenotazione inesistente
     DECLARE EXIT HANDLER FOR 1452
     BEGIN
@@ -307,11 +305,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` IN
         RETURN -2;
     END IF;
 
-    -- Host tenta di commentare un suo annucio
-    IF (SELECT prenotazione_guest FROM occupazioni WHERE id_occupazione = _prenotazione) = 0 THEN
-      RETURN -3;
-    END IF;
-
     INSERT INTO commenti(prenotazione, titolo, commento, votazione) VALUES
       (_prenotazione, _titolo, _commento, _votazione);
 
@@ -324,28 +317,27 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` IN
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `insert_occupazione` (`_utente` INT, `_annuncio` INT, `_numospiti` INT(2), `di` DATE, `df` DATE) RETURNS INT(11) BEGIN
-    DECLARE _occupazione_guest INT DEFAULT 1;
     -- controllo correttezza delle date
     IF DATEDIFF(df, di) <= 0 THEN
-        RETURN -1;
+      RETURN -1;
     END IF;
 
     -- Controllo presenza altre occupazioni
     IF EXISTS (
-            SELECT *
-            FROM occupazioni
-            WHERE annuncio = _annuncio AND (
-                    (di >= data_inizio AND di <= data_fine) OR
-                    (df >= data_inizio AND df <= data_fine) OR
-                    (di <= data_inizio AND df >= data_fine) OR
-                    (di >= data_inizio AND df <= data_fine)
-                )
-        ) THEN
+        SELECT *
+        FROM occupazioni
+        WHERE annuncio = _annuncio AND (
+          (di >= data_inizio AND di <= data_fine) OR
+          (df >= data_inizio AND df <= data_fine) OR
+          (di <= data_inizio AND df >= data_fine) OR
+          (di >= data_inizio AND df <= data_fine)
+        )
+    ) THEN
         RETURN -2;
     END IF;
 
     IF _utente = (SELECT host FROM annunci WHERE id_annuncio = _annuncio) THEN
-        SET  _occupazione_guest = 0;
+       RETURN -4;
     END IF;
 
     INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)

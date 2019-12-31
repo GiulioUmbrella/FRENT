@@ -1,3 +1,9 @@
+-- drop delle tabelle
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS amministratori, utenti, annunci, occupazioni, commenti;
+SET FOREIGN_KEY_CHECKS=1;
+
+-- creazione delle tabelle
 create table amministratori (
 	id_amministratore int primary key auto_increment,
 	user_name varchar(32) not null,
@@ -25,7 +31,7 @@ create table annunci (
 	titolo varchar(32) not null,
 	descrizione varchar(512) not null,
 	img_anteprima varchar(48) not null default "defaultImages/imgProfiloDefault.png",
-	desc_anteprima varchar(256) not null default "Immagine di default"
+	desc_anteprima varchar(256) not null default "Immagine di default",
 	indirizzo varchar(128) not null,
 	citta varchar(128) not null,
 	host int not null,

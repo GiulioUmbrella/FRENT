@@ -4,12 +4,12 @@ Cosa restituisce:
   -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
   -2 se ci sono altre occupazioni nel range di date passate in input
   -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
+  -4 se l'host sta tentando di prenotare presso un suo annuncio
 */
 DROP FUNCTION IF EXISTS insert_occupazione;
 DELIMITER |
 CREATE FUNCTION insert_occupazione(_utente int, _annuncio int, _numospiti int(2), di date, df date) RETURNS INT
 BEGIN
-    DECLARE _occupazione_guest INT DEFAULT 1;
     -- controllo correttezza delle date
     IF DATEDIFF(df, di) <= 0 THEN
       RETURN -1;
@@ -27,19 +27,19 @@ BEGIN
         )
     ) THEN
         RETURN -2;
-      END IF;
+    END IF;
 
-      IF _utente = (SELECT host FROM annunci WHERE id_annuncio = _annuncio) THEN
-       SET  _occupazione_guest = 0;
-     END IF;
+    IF _utente = (SELECT host FROM annunci WHERE id_annuncio = _annuncio) THEN
+       RETURN -4;
+    END IF;
 
-      INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
-      VALUES (_utente, _annuncio, _numospiti, di, df);
+    INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
+    VALUES (_utente, _annuncio, _numospiti, di, df);
 
-      IF ROW_COUNT() = 0 THEN -- Modifica non effettuata
-          RETURN -3;
-      ELSE
-          RETURN LAST_INSERT_ID();
-      END IF;
+    IF ROW_COUNT() = 0 THEN -- Modifica non effettuata
+        RETURN -3;
+    ELSE
+        RETURN LAST_INSERT_ID();
+    END IF;
 END |
 DELIMITER ;

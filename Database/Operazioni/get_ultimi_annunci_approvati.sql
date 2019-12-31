@@ -12,4 +12,3 @@ BEGIN
     LIMIT 6;
 END |
 DELIMITER ;
-
