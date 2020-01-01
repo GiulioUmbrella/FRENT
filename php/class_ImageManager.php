@@ -18,7 +18,7 @@ class ImageManager {
     /**
      * Costruttore di ImageManager.
      * @param string $targetFolder path della cartella destinazione radice in cui caricare i file
-     * @param int $maxFileSize dimensione massima di un file caricato
+     * @param int $maxFileSize dimensione massima di un file caricato (default di PHP è 2MB)
      */
     public function __construct($targetFolder, $maxFileSize = 2) {
         // valori costanti una volta inizializzati

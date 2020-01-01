@@ -28,16 +28,18 @@
                 <label for="max_ospiti">Numero ospiti</label>
                 <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="1" tabindex="8" placeholder="1"/>
 
-                <label for="immagini">Immagini: la prima caricata verr&agrave; utilizzata come anteprima</label>
-                <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" tabindex="9" multiple/>
+                <label for="immagini">Anteprima</label>
+                <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" tabindex="9" />
 
+                <label for="desc_anteprima">descrizione anteprima</label>
+                <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256" tabindex="10" placeholder="descrizione breve"></textarea>
 
                 <label for="prezzo_a_persona">Prezzo a persona</label>
-                <input type="number" id="prezzo_a_persona" min="0" name="prezzo_a_persona" tabindex="10" placeholder="20&euro;"/>
+                <input type="number" id="prezzo_a_persona" min="0" name="prezzo_a_persona" tabindex="11" placeholder="20&euro;"/>
 
 
                 <label for="descrizione">Descrizione</label>
-                <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="11" placeholder="Casa situata in centro a Padova vicino a molti edifici storici"></textarea>
+                <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="12" placeholder="Casa situata in centro a Padova vicino a molti edifici storici"></textarea>
 
         </fieldset>
         <fieldset>

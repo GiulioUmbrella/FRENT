@@ -37,26 +37,17 @@ class DataConstraints {
         "titolo" => 32, // string
         "descrizione" => 512, // string
         "img_anteprima" => 48, // string
+        "desc_anteprima" => 256, // string
         "indirizzo" => 128, // string
         "citta" => 128, // string
         "stato_approvazione" => 2, // int
-//        "bloccato" => 1, // bool (= 0, = 1)
-        "max_ospiti" => 99, // int
-    );
-
-    /**
-     * Tabella foto_annunci: dimensioni massime dei campi
-     */
-    const foto_annunci = array(
-        "file_path" => 128, // string
-        "descrizione" => 128 // string
+        "max_ospiti" => 99 // int
     );
 
     /**
      * Tabella occupazioni: dimensioni massime dei campi
      */
     const occupazioni = array(
-        "prenotazione_guest" => 1, // bool (= 0, = 1)
         "num_ospiti" => 99 // int
     );
 

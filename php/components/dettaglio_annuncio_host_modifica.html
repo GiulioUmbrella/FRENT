@@ -42,6 +42,9 @@
 
             <label for="anteprima">Modifica anteprima: </label>
             <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" tabindex="10"/>
+            <label for="desc_anteprima">descrizione anteprima</label>
+            <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256" tabindex="10" placeholder="descrizione breve"></textarea>
+
 
             <label for="prezzo_a_persona">Prezzo a persona:</label>
             <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" tabindex="11" value="<PrAPERSONA/>"
@@ -62,29 +65,7 @@
             <input type="text" name="citta" id="citta" placeholder="Citta" tabindex="15" value="<CITTA/>" maxlength="128"/>
 
         </fieldset>
-        <fieldset>
-<!--            <legend class="aiuti_alla_navigazione">Immagini</legend>-->
-<!--            <label for="immagini">Aggiungere immagini:</label>-->
-<!--            <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" tabindex="16" multiple/>-->
-            <ul>
-                <IMMAGINI/>
-<!--                <li>-->
-<!--                    <fieldset>-->
-<!--                        <div class="commenti_foto">-->
-<!--                            <img src="../immagini/img1.png" alt="Immagine che hai deciso di caricare.">-->
-<!--                            <label for="commento1">-->
-<!--                            <textarea id="commento1" maxlength="512" rows="8" cols="30"-->
-<!--                                      placeholder="Inserisci la descrizione della foto con nome.png"></textarea>-->
-<!--                                <a href="#" tabindex="17"-->
-<!--                                   title="elimina la foto numero 1">Elimina</a>-->
-<!--                            </label>-->
-<!--                        </div>-->
 
-<!--                    </fieldset>-->
-
-<!--                </li>-->
-            </ul>
-        </fieldset>
 
         <!--      questi due tabindex dipenderanno dal numero delle foto che ci sara-->
         <input type="submit" value="Aggiorna" tabindex="19">

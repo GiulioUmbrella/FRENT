@@ -7,6 +7,6 @@ CREATE procedure get_annunci_host(_id_host int)
 BEGIN
     select *
     from annunci
-    where _id_host= annunci.host;
+    where host = _id_host;
 END |
 DELIMITER ;

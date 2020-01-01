@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 30, 2019 alle 10:01
+-- Creato il: Dic 30, 2019 alle 18:23
 -- Versione del server: 10.4.8-MariaDB
 -- Versione PHP: 7.2.24
 
@@ -28,7 +28,6 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `admin_get_annunci` ()  BEGIN
     SELECT id_annuncio, titolo, stato_approvazione
-
     FROM annunci
     WHERE stato_approvazione = 0;
 END$$
@@ -49,15 +48,13 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_annunci_host` (`_id_host` INT)  BEGIN
     select *
     from annunci
-    where _id_host= annunci.host;
+    where host = _id_host;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_citta_annunci` ()  BEGIN
     SELECT DISTINCT citta
     FROM annunci
-    WHERE
-#           bloccato = 0 AND
-stato_approvazione = 1;
+    WHERE stato_approvazione = 1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_commenti_annuncio` (`id` INT)  BEGIN
@@ -65,12 +62,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_commenti_annuncio` (`id` INT)  
     FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
     INNER JOIN utenti U ON O.utente = U.id_utente
     WHERE O.annuncio = id;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_foto_annuncio` (`id` INT)  BEGIN
-    SELECT *
-    FROM foto_annunci
-    WHERE annuncio = id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_occupazione` (`id` INT)  BEGIN
@@ -83,21 +74,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_occupazioni_annuncio` (`_id_ann
     SELECT id_occupazione, utente, num_ospiti, data_inizio, data_fine
     FROM occupazioni
     WHERE annuncio = _id_annuncio
-    order by data_inizio;
+    ORDER BY data_inizio;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_prenotazioni_guest` (`id_utente` INT)  BEGIN
     SELECT *
     FROM occupazioni
     WHERE utente = id_utente
-#     AND prenotazione_guest = 1
-    order by occupazioni.data_inizio;
+    ORDER BY occupazioni.data_inizio;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ultimi_annunci_approvati` ()  BEGIN
-    SELECT id_annuncio,titolo, img_anteprima
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ultimi_annunci_approvati` (`id_utente` INT)  BEGIN
+    SELECT id_annuncio, titolo, img_anteprima, desc_anteprima
     FROM annunci
-    where stato_approvazione=1
+    WHERE stato_approvazione=1 and annunci.host!= id_utente
     ORDER BY id_annuncio DESC
     LIMIT 6;
 END$$
@@ -116,19 +106,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `_mail` VARCHAR(191), IN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ricerca_annunci` (`_citta` VARCHAR(128), `_num_ospiti` INT(2), `di` DATE, `df` DATE)  BEGIN
-    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.indirizzo, A.prezzo_notte
+    SELECT A.id_annuncio, A.titolo, A.descrizione, A.img_anteprima, A.desc_anteprima, A.indirizzo, A.prezzo_notte
     FROM annunci A
     WHERE A.stato_approvazione = 1 AND A.citta like _citta
-      AND A.max_ospiti >= _num_ospiti
-      AND A.id_annuncio NOT IN (
+    AND A.max_ospiti >= _num_ospiti
+    AND A.id_annuncio NOT IN (
         SELECT annuncio
         FROM occupazioni
         WHERE (
-                      (di >= data_inizio AND di <= data_fine) OR
-                      (df >= data_inizio AND df <= data_fine) OR
-                      (di <= data_inizio AND df >= data_fine) OR
-                      (di >= data_inizio AND df <= data_fine)
-                  )
+          (di >= data_inizio AND di <= data_fine) OR
+          (df >= data_inizio AND df <= data_fine) OR
+          (di <= data_inizio AND df >= data_fine) OR
+          (di >= data_inizio AND df <= data_fine)
+        )
     );
 END$$
 
@@ -152,47 +142,37 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `admin_edit_stato_approvazione_annunc
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `delete_annunco` (`_id_annuncio` INT) RETURNS INT(11) BEGIN
-  DECLARE curdate DATE;
+CREATE DEFINER=`root`@`localhost` FUNCTION `delete_annuncio` (`_id_annuncio` INT) RETURNS INT(11) BEGIN
+    DECLARE curdate DATE;
 
-  DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            RETURN -2;
+        END;
+
+    SET curdate = CURDATE();
+    IF _id_annuncio IN (SELECT annuncio
+                        FROM occupazioni
+                        WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
+        RETURN -1;
+    END IF;
+
+    DELETE FROM commenti
+    WHERE prenotazione IN ( SELECT id_occupazione
+                            FROM occupazioni
+                            WHERE annuncio = _id_annuncio);
+    -- in occupazioni il campo annuncio viene messo a null dalla politica di reazione
+    DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
+
+    IF ROW_COUNT() = 0 THEN
         RETURN -2;
-    END;
-
-  SET curdate = CURDATE();
-  IF _id_annuncio IN (SELECT annuncio
-                      FROM occupazioni
-                      WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
-    RETURN -1;
-  END IF;
-
-  DELETE FROM commenti
-  WHERE prenotazione IN ( SELECT id_occupazione
-                          FROM occupazioni
-                          WHERE annuncio = _id_annuncio);
-  -- in occupazioni il campo annuncio viene messo a null dalla politica di reazione
-  DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
-
-  IF ROW_COUNT() = 0 THEN
-    RETURN -2;
-  ELSE
-      RETURN 0;
-  END IF;
+    ELSE
+        RETURN 0;
+    END IF;
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `delete_commento` (`_id_prenotazione` INT) RETURNS INT(11) BEGIN
     delete from commenti where prenotazione = _id_prenotazione;
-    IF ROW_COUNT() = 0 THEN
-      RETURN -1;
-    ELSE
-      RETURN 0;
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `delete_foto` (`_id_foto` INT) RETURNS INT(11) BEGIN
-    DELETE FROM foto_annunci WHERE id_foto = _id_foto;
-
     IF ROW_COUNT() = 0 THEN
       RETURN -1;
     ELSE
@@ -310,7 +290,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_annuncio` (`_titolo` VARCHAR(
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` INT, `_titolo` VARCHAR(64), `_commento` VARCHAR(512), `_votazione` TINYINT(1)) RETURNS INT(11) BEGIN
-
     -- Ritorna 0 in caso di prenotazione inesistente
     DECLARE EXIT HANDLER FOR 1452
     BEGIN
@@ -326,11 +305,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` IN
         RETURN -2;
     END IF;
 
-    -- Host tenta di commentare un suo annucio
-    IF (SELECT prenotazione_guest FROM occupazioni WHERE id_occupazione = _prenotazione) = 0 THEN
-      RETURN -3;
-    END IF;
-
     INSERT INTO commenti(prenotazione, titolo, commento, votazione) VALUES
       (_prenotazione, _titolo, _commento, _votazione);
 
@@ -342,55 +316,28 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `insert_commento` (`_prenotazione` IN
       END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `insert_foto` (`id_annuncio` INT, `_file_path` VARCHAR(128), `_descrizione` VARCHAR(128)) RETURNS INT(11) BEGIN
-    DECLARE min_file_path_length INT;
-    DECLARE min_descrizione_length INT;
-
-    -- Ritorna -1 in caso di annuncio inesistente
-    DECLARE EXIT HANDLER FOR 1452
-    BEGIN
-        RETURN -1;
-    END;
-
-    -- Ritorna -2 in caso _file_path o _descrizione non siano validi
-    SET min_file_path_length = 1;
-    SET min_descrizione_length = 1;
-
-    IF CHAR_LENGTH(_file_path) < min_file_path_length OR CHAR_LENGTH(_descrizione) < min_descrizione_length THEN
-      RETURN -2;
-    END IF;
-
-    INSERT INTO foto_annunci (file_path, descrizione, annuncio) VALUES (_file_path, _descrizione, id_annuncio);
-    IF ROW_COUNT() = 0 THEN
-        RETURN -3;
-    ELSE
-        RETURN LAST_INSERT_ID();
-    END IF;
-END$$
-
 CREATE DEFINER=`root`@`localhost` FUNCTION `insert_occupazione` (`_utente` INT, `_annuncio` INT, `_numospiti` INT(2), `di` DATE, `df` DATE) RETURNS INT(11) BEGIN
-    DECLARE _occupazione_guest INT DEFAULT 1;
     -- controllo correttezza delle date
     IF DATEDIFF(df, di) <= 0 THEN
-        RETURN -1;
+      RETURN -1;
     END IF;
 
     -- Controllo presenza altre occupazioni
     IF EXISTS (
-            SELECT *
-            FROM occupazioni
-            WHERE annuncio = _annuncio AND (
-                    (di >= data_inizio AND di <= data_fine) OR
-                    (df >= data_inizio AND df <= data_fine) OR
-                    (di <= data_inizio AND df >= data_fine) OR
-                    (di >= data_inizio AND df <= data_fine)
-                )
-        ) THEN
+        SELECT *
+        FROM occupazioni
+        WHERE annuncio = _annuncio AND (
+          (di >= data_inizio AND di <= data_fine) OR
+          (df >= data_inizio AND df <= data_fine) OR
+          (di <= data_inizio AND df >= data_fine) OR
+          (di >= data_inizio AND df <= data_fine)
+        )
+    ) THEN
         RETURN -2;
     END IF;
 
     IF _utente = (SELECT host FROM annunci WHERE id_annuncio = _annuncio) THEN
-        SET  _occupazione_guest = 0;
+       RETURN -4;
     END IF;
 
     INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
@@ -451,26 +398,26 @@ CREATE TABLE `annunci` (
   `host` int(11) NOT NULL,
   `stato_approvazione` tinyint(1) NOT NULL DEFAULT 0,
   `max_ospiti` int(2) NOT NULL DEFAULT 1,
-  `prezzo_notte` float NOT NULL
+  `prezzo_notte` float NOT NULL,
+  `desc_anteprima` varchar(256) COLLATE utf8_bin NOT NULL DEFAULT 'descrizione anteprima'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dump dei dati per la tabella `annunci`
 --
 
-INSERT INTO `annunci` (`id_annuncio`, `titolo`, `descrizione`, `img_anteprima`, `indirizzo`, `citta`, `host`, `stato_approvazione`, `max_ospiti`, `prezzo_notte`) VALUES
-(1, 'Casa Loreto', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via dell\'Accoglienza x', 'roma', 11, 1, 2, 78),
-(2, 'Casa Agrippa', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Galaverna n.8 (indirizzo del comune)', 'roma', 16, 2, 5, 53),
-(3, 'Casa Celeste', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Comune Catanzaro (civico 1 per i senza tetto, civico 2 per i senza fissa dimora)', 'roma', 9, 1, 5, 82),
-(4, 'Casa Aquila', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Casa Comunale', 'roma', 2, 1, 1, 100),
-(5, 'Casa Amore', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via dell\'Olmo 1', 'roma', 16, 0, 5, 60),
-(6, 'Appartamento Aran', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via del Palazzo Comunale ', 'roma', 7, 1, 2, 128),
-(7, 'Appartamento Flann', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via del Palazzo Comunale ', 'roma', 16, 0, 6, 136),
-(8, 'Appartamento Glaucia', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via del Comune', 'roma', 16, 2, 6, 25),
-(9, 'Appartamento Nollaig', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via dell\'Orologio', 'roma', 2, 1, 6, 122),
-(10, 'Appartamento Amore', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via del Domicilio', 'roma', 4, 0, 5, 128),
-(11, 'Santa Barbara', 'casa nuova', '../immagini/borgoricco.jpg', 'asdasioudaos', 'padova', 10, 1, 1, 0),
-(12, 'Casa dei mostri\r\n', 'Casa nuova', '../immagini/borgoricco.jpg', 'via trieste', 'padova', 12, 1, 5, 12);
+INSERT INTO `annunci` (`id_annuncio`, `titolo`, `descrizione`, `img_anteprima`, `indirizzo`, `citta`, `host`, `stato_approvazione`, `max_ospiti`, `prezzo_notte`, `desc_anteprima`) VALUES
+(1, 'Casa Loreto', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via dell\'Accoglienza x', 'roma', 11, 1, 2, 78, 'descrizione anteprima'),
+(3, 'Casa Celeste', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Comune Catanzaro (civico 1 per i senza tetto, civico 2 per i senza fissa dimora)', 'roma', 9, 1, 5, 82, 'descrizione anteprima'),
+(4, 'Casa Aquila', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via Casa Comunale', 'roma', 2, 1, 1, 100, 'descrizione anteprima'),
+(5, 'Casa Amore', 'defualt descirptio', '../immagini/monselice.jpg', 'Via dell\'Olmo 1', 'roma', 16, 1, 5, 60, 'descrizione anteprima'),
+(6, 'Appartamento Aran', 'defualt descirptio', '../immagini/limena.jpeg', 'Via del Palazzo Comunale ', 'roma', 7, 1, 2, 128, 'descrizione anteprima'),
+(7, 'Appartamento Flann', 'defualt descirptio', '../immagini/monselice.jpg', 'Via del Palazzo Comunale ', 'roma', 16, 1, 6, 136, 'descrizione anteprima'),
+(8, 'Appartamento Glaucia', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via del Comune', 'roma', 16, 2, 6, 25, 'descrizione anteprima'),
+(9, 'Appartamento Nollaig', 'defualt descirptio', '../immagini/borgoricco.jpg', 'Via dell\'Orologio', 'roma', 2, 1, 6, 122, 'descrizione anteprima'),
+(10, 'Appartamento Amore', 'defualt descirptio', '../immagini/vicenza.jpg', 'Via del Domicilio', 'roma', 4, 1, 5, 128, 'descrizione anteprima'),
+(11, 'Santa Barbara', 'casa nuova', '../immagini/padova.jpg', 'asdasioudaos', 'padova', 10, 1, 1, 0, 'descrizione anteprima'),
+(12, 'Casa dei mostri\r\n', 'Casa nuova', '../immagini/borgoricco.jpg', 'via trieste', 'padova', 12, 0, 5, 12, 'descrizione anteprima');
 
 -- --------------------------------------------------------
 
@@ -491,23 +438,9 @@ CREATE TABLE `commenti` (
 --
 
 INSERT INTO `commenti` (`prenotazione`, `data_pubblicazione`, `titolo`, `commento`, `votazione`) VALUES
-(4, '2019-12-14 16:14:15', 'Mi piace', 'casa molto piacevole', 4),
 (9, '2019-12-14 16:18:39', 'la casa è orrenda', 'non mi è piaciuto per nulla soggiornare qui', 1),
 (12, '2019-12-18 15:17:29', 'Estremamente bello', 'Prossima volta che saro in citta, prenotero di nuovo qui', 5),
 (13, '2019-12-18 15:20:22', 'Brutto', 'Casa orribilis', 1);
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `foto_annunci`
---
-
-CREATE TABLE `foto_annunci` (
-  `id_foto` int(11) NOT NULL,
-  `file_path` varchar(128) COLLATE utf8_bin NOT NULL,
-  `descrizione` varchar(128) COLLATE utf8_bin NOT NULL,
-  `annuncio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -532,7 +465,7 @@ INSERT INTO `occupazioni` (`id_occupazione`, `utente`, `annuncio`, `num_ospiti`,
 (1, 1, 1, 1, '2019-11-02', '2019-11-07'),
 (2, 2, 1, 1, '2019-11-11', '2019-11-15'),
 (3, 16, 1, 1, '2019-11-21', '2019-11-25'),
-(4, 9, 2, 1, '2019-11-14', '2019-11-19'),
+(4, 9, 1, 1, '2019-11-14', '2019-11-19'),
 (5, 5, 3, 1, '2019-11-07', '2019-11-09'),
 (6, 16, 3, 1, '2019-11-14', '2019-11-16'),
 (7, 6, 3, 1, '2019-11-28', '2019-11-30'),
@@ -545,10 +478,24 @@ INSERT INTO `occupazioni` (`id_occupazione`, `utente`, `annuncio`, `num_ospiti`,
 (14, 16, 9, 1, '2019-11-06', '2019-11-09'),
 (15, 13, 9, 1, '2019-11-19', '2019-11-22'),
 (16, 12, 9, 1, '2019-11-24', '2019-11-26'),
-(17, 16, 10, 1, '2020-01-20', '2020-02-20'),
 (18, 16, 10, 1, '2019-11-13', '2019-11-17'),
 (19, 16, 12, 1, '2019-12-27', '2019-12-31'),
-(20, 16, 12, 2, '2020-02-04', '2020-02-12');
+(21, 16, 12, 1, '2020-02-11', '2020-02-14'),
+(22, 16, 12, 1, '2020-02-18', '2020-02-24'),
+(24, 16, 12, 1, '2020-03-09', '2020-03-11'),
+(25, 16, 12, 1, '2020-03-18', '2020-03-21'),
+(26, 16, 12, 1, '2020-03-22', '2020-03-24'),
+(27, 16, 12, 1, '2020-03-26', '2020-03-28'),
+(28, 16, 12, 1, '2020-03-29', '2020-03-31'),
+(29, 16, 12, 1, '2020-04-01', '2020-04-03'),
+(30, 16, 12, 1, '2020-05-11', '2020-05-12'),
+(31, 16, 12, 1, '2020-05-18', '2020-05-20'),
+(32, 16, 12, 1, '2020-05-22', '2020-05-23'),
+(33, 16, 12, 1, '2020-05-24', '2020-05-25'),
+(36, 16, 12, 1, '2020-05-31', '2020-06-01'),
+(37, 16, 12, 1, '2020-06-02', '2020-06-03'),
+(38, 16, 12, 5, '2020-06-18', '2020-06-19'),
+(41, 16, 1, 2, '2019-12-30', '2020-01-02');
 
 -- --------------------------------------------------------
 
@@ -573,21 +520,21 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `mail`, `user_name`, `password`, `data_nascita`, `img_profilo`, `telefono`) VALUES
-(1, 'Jolanda', 'Rossi', 'jolanda.rossi@mail.it', 'jolanda.rossi', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(2, 'Melchiorre', 'Ferrari', 'melchiorre.ferrari@mail.it', 'melchiorre.ferrari', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(3, 'Cirino', 'Russo', 'cirino.russo@mail.it', 'cirino.russo', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(4, 'Ignazio', 'Bianchi', 'ignazio.bianchi@mail.it', 'ignazio.bianchi', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(5, 'Elio', 'Romano', 'elio.romano@mail.it', 'elio.romano', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(6, 'Gianni', 'Gallo', 'gianni.gallo@mail.it', 'gianni.gallo', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(7, 'Amore', 'Costa', 'amore.costa@mail.it', 'amore.costa', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(8, 'Marisa', 'Fontana', 'marisa.fontana@mail.it', 'marisa.fontana', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(9, 'Dania', 'Conti', 'dania.conti@mail.it', 'dania.conti', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(10, 'Alberico', 'Esposito', 'alberico.esposito@mail.it', 'alberico.esposito', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(11, 'Lodovico', 'Ricci', 'lodovico.ricci@mail.it', 'lodovico.ricci', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(12, 'Marino', 'Bruno', 'marino.bruno@mail.it', 'marino.bruno', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(13, 'Nella', 'Rizzo', 'nella.rizzo@mail.it', 'nella.rizzo', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(14, 'Pompeo', 'Moretti', 'pompeo.moretti@mail.it', 'pompeo.moretti', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
-(15, 'Alfonso', 'Marino', 'alfonso.marino@mail.it', 'alfonso.marino', 'password', '1998-01-01', 'user_image.png', '+390000000000'),
+(1, 'Jolanda', 'Rossi', 'jolanda.rossi@mail.it', 'jolanda.rossi', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(2, 'Melchiorre', 'Ferrari', 'melchiorre.ferrari@mail.it', 'melchiorre.ferrari', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(3, 'Cirino', 'Russo', 'cirino.russo@mail.it', 'cirino.russo', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(4, 'Ignazio', 'Bianchi', 'ignazio.bianchi@mail.it', 'ignazio.bianchi', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(5, 'Elio', 'Romano', 'elio.romano@mail.it', 'elio.romano', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(6, 'Gianni', 'Gallo', 'gianni.gallo@mail.it', 'gianni.gallo', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(7, 'Amore', 'Costa', 'amore.costa@mail.it', 'amore.costa', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(8, 'Marisa', 'Fontana', 'marisa.fontana@mail.it', 'marisa.fontana', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(9, 'Dania', 'Conti', 'dania.conti@mail.it', 'dania.conti', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(10, 'Alberico', 'Esposito', 'alberico.esposito@mail.it', 'alberico.esposito', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(11, 'Lodovico', 'Ricci', 'lodovico.ricci@mail.it', 'lodovico.ricci', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(12, 'Marino', 'Bruno', 'marino.bruno@mail.it', 'marino.bruno', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(13, 'Nella', 'Rizzo', 'nella.rizzo@mail.it', 'nella.rizzo', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(14, 'Pompeo', 'Moretti', 'pompeo.moretti@mail.it', 'pompeo.moretti', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
+(15, 'Alfonso', 'Marino', 'alfonso.marino@mail.it', 'alfonso.marino', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
 (16, 'user', 'user', 'user@gmail.com', 'user', 'user', '1998-01-01', '../immagini/me.jpg', '+390000000000');
 
 --
@@ -613,13 +560,6 @@ ALTER TABLE `annunci`
 --
 ALTER TABLE `commenti`
   ADD PRIMARY KEY (`prenotazione`);
-
---
--- Indici per le tabelle `foto_annunci`
---
-ALTER TABLE `foto_annunci`
-  ADD PRIMARY KEY (`id_foto`),
-  ADD KEY `annuncio` (`annuncio`);
 
 --
 -- Indici per le tabelle `occupazioni`
@@ -653,16 +593,10 @@ ALTER TABLE `annunci`
   MODIFY `id_annuncio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT per la tabella `foto_annunci`
---
-ALTER TABLE `foto_annunci`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT per la tabella `occupazioni`
 --
 ALTER TABLE `occupazioni`
-  MODIFY `id_occupazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_occupazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`
@@ -685,12 +619,6 @@ ALTER TABLE `annunci`
 --
 ALTER TABLE `commenti`
   ADD CONSTRAINT `commenti_ibfk_1` FOREIGN KEY (`prenotazione`) REFERENCES `occupazioni` (`id_occupazione`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `foto_annunci`
---
-ALTER TABLE `foto_annunci`
-  ADD CONSTRAINT `foto_annunci_ibfk_1` FOREIGN KEY (`annuncio`) REFERENCES `annunci` (`id_annuncio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `occupazioni`

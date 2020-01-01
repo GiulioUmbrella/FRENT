@@ -9,7 +9,6 @@ BEGIN
     SELECT *
     FROM occupazioni
     WHERE utente = id_utente
-#     AND prenotazione_guest = 1
-    order by occupazioni.data_inizio;
+    ORDER BY occupazioni.data_inizio;
 END |
 DELIMITER ;
