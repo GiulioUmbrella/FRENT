@@ -122,9 +122,11 @@ if (isset($_SESSION["user"])) {
         $i = $i + 1;
     }
 
-
-   if($numPrenotazioniCorrenti!=0 or $prenotazioni_future!=0 or $prenotazioni_passate!=0){
-       $pagina = str_replace("<FLAG/>","<PRENOTAZIONIPASSATE/><PRENOTAZIONICORRENTI/><PRENOTAZIONIFUTURE/>",$pagina);
+    echo "$numPrenotazioniFuture";
+    echo "$numPrenotazioniCorrenti";
+    echo "$numPrenotazioniPassate";
+   if($numPrenotazioniCorrenti>0 or $numPrenotazioniFuture>0 or $numPrenotazioniPassate>0){
+       $pagina = str_replace("<FLAG/>","<PRENOTAZIONICORRENTI/><PRENOTAZIONIFUTURE/><PRENOTAZIONIPASSATE/>",$pagina);
        if ($numPrenotazioniPassate > 0) {
            $prenotazioni_passate .= "</ul>";
            $pagina = str_replace("<PRENOTAZIONIPASSATE/>", $prenotazioni_passate, $pagina);
