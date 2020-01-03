@@ -6,7 +6,6 @@ class Occupazione {
     private $id_occupazione;
     private $id_utente; //indica il guest che ha la prenotazione, quindi contiene il suo ID
     private $id_annuncio; // è il primary key dell'annuncio.
-    private $prenotazione_guest; // 1 indica che è una prenotazione, 0 è settato dall'host
     private $num_ospiti;
     private $data_inizio;
     private $data_fine;
@@ -52,18 +51,6 @@ class Occupazione {
             throw new Eccezione("L'ID dell'annuncio non è nel formato valido.");
         }
     }
-    
-//    /**
-//     * @param bool $prenotazione_guest
-//     * @throws Eccezione se $prenotazione_guest non è un valore booleano
-//     */
-//    public function setPrenotazioneGuest($prenotazione_guest) {
-//        if (is_bool($prenotazione_guest)) {
-//            $this->prenotazione_guest = $prenotazione_guest;
-//        } else {
-//            throw new Eccezione("Il flag di controllo se l'occupazione è una prenotazione non è nel formato valido.");
-//        }
-//    }
     
     /**
      * @param int $num_ospiti
@@ -115,7 +102,6 @@ class Occupazione {
     public function getIdAnnuncio(): int {
         return $this->id_annuncio;
     }
-    
     
     public function getNumOspiti(): int {
         return $this->num_ospiti;

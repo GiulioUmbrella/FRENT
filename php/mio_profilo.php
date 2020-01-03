@@ -16,7 +16,7 @@ $user = $_SESSION["user"];
 
 // inserisco dati dell'utente nella pagina
 $pagina = str_replace("<PATH/>", "../uploads/" . $user->getImgProfilo(), $pagina);
-$pagina = str_replace("<NOME/>", $user->getNome() . " " . $user->getCognome(), $pagina);
+$pagina = str_replace("<NOME/>", $user->getNome(), $pagina);
 $pagina = str_replace("<USERNAME/>", $user->getUsername(), $pagina);
 $pagina = str_replace("<MAIL/>", $user->getMail(), $pagina);
 

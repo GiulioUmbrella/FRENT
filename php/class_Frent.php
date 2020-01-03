@@ -5,7 +5,6 @@ require_once "./class_Amministratore.php";
 require_once "./class_Annuncio.php";
 require_once "./class_Commento.php";
 require_once "./class_Eccezione.php";
-require_once "./class_Foto.php";
 require_once "./class_Occupazione.php";
 require_once "./class_Utente.php";
 
@@ -73,6 +72,7 @@ class Frent {
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
                 $annuncio->setDescrizione($assoc_annuncio['descrizione']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setDescAnteprima($assoc_annuncio['desc_anteprima']);
                 $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
                 $annuncio->setCitta($citta);
                 $annuncio->setPrezzoNotte(floatval($assoc_annuncio['prezzo_notte']));
@@ -189,7 +189,6 @@ class Frent {
                 $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
                 $occupazione->setIdUtente(intval($assoc_occupazione['utente']));
                 $occupazione->setIdAnnuncio($id_annuncio);
-//                $occupazione->setPrenotazioneGuest(boolval($assoc_occupazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
                 $occupazione->setDataFine($assoc_occupazione['data_fine']);
@@ -229,7 +228,6 @@ class Frent {
             $occupazione->setIdOccupazione(intval($res_occupazione[0]["id_occupazione"]));
             $occupazione->setIdUtente(intval($res_occupazione[0]["utente"]));
             $occupazione->setIdAnnuncio(intval($res_occupazione[0]["annuncio"]));
-//            $occupazione->setPrenotazioneGuest(boolval($res_occupazione[0]["prenotazione_guest"]));
             $occupazione->setNumOspiti(intval($res_occupazione[0]["num_ospiti"]));
             $occupazione->setDataInizio($res_occupazione[0]["data_inizio"]);
             $occupazione->setDataFine($res_occupazione[0]["data_fine"]);
@@ -239,36 +237,7 @@ class Frent {
             throw $exc;
         }
     }
-    /**
-     * Restituisce le foto della galleria di annuncio, dato il suo ID.
-     * @param int $id_annuncio id dell'annuncio
-     * @return array di oggetti di tipo Foto
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione degli oggetti Foto
-     */
-    public function getFotoAnnuncio($id_annuncio): array {
-        try {
-            if(!is_int($id_annuncio)) {
-                throw new Eccezione("Parametri di invocazione di getFotoAnnuncio errati.");
-            }
-            $this->db_instance->connect();
-            $procedure_name_and_params = "get_foto_annuncio($id_annuncio)";
-            $lista_foto = $this->db_instance->queryProcedure($procedure_name_and_params);
 
-            foreach($lista_foto as $i => $assoc_foto) {
-                $foto = Foto::build();
-                $foto->setIdFoto(intval($assoc_foto['id_foto']));
-                $foto->setFilePath($assoc_foto['file_path']);
-                $foto->setIdAnnuncio($id_annuncio);
-                $foto->setDescrizione($assoc_foto['descrizione']);
-                $lista_foto[$i] = $foto;
-            }
-    
-            return $lista_foto;
-        } catch(Eccezione $exc) {
-            throw $exc;
-        }
-    }
-    
     /**
      * Restituisce i commenti di un annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio
@@ -321,6 +290,7 @@ class Frent {
                 $annuncio->setIdAnnuncio(intval($assoc_annuncio['id_annuncio']));
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setDescAnteprima($assoc_annuncio['desc_anteprima']);
                 $lista_annunci[$i] = $annuncio; // sostituzione in-place
             }
 
@@ -351,6 +321,7 @@ class Frent {
             $annuncio->setStatoApprovazione(intval($res_annuncio[0]['stato_approvazione']));
             $annuncio->setDescrizione($res_annuncio[0]['descrizione']);
             $annuncio->setImgAnteprima($res_annuncio[0]['img_anteprima']);
+            $annuncio->setDescAnteprima($res_annuncio[0]['desc_anteprima']);
             $annuncio->setIndirizzo($res_annuncio[0]['indirizzo']);
             $annuncio->setCitta($res_annuncio[0]['citta']);
             $annuncio->setMaxOspiti(intval($res_annuncio[0]['max_ospiti']));
@@ -440,16 +411,14 @@ class Frent {
                 date('" . $occupazione->getDataInizio() . "'),
                 date('" . $occupazione->getDataFine() . "')
             )";
-        
-//            $res = $this->db_instance->queryFunction($function_name_and_params);
-//            echo $res;
+
             return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
             throw $exc;
         }
     }
 
-    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+    public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $desc_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("L'inserimento di un'annuncio può essere svolto solo da un utente registrato.");
@@ -459,6 +428,7 @@ class Frent {
             $annuncio->setTitolo($titolo);
             $annuncio->setDescrizione($descrizione);
             $annuncio->setImgAnteprima($img_anteprima);
+            $annuncio->setDescAnteprima($desc_anteprima);
             $annuncio->setIndirizzo($indirizzo);
             $annuncio->setCitta($citta);
             $annuncio->setMaxOspiti($max_ospiti);
@@ -469,46 +439,12 @@ class Frent {
                 \"" . $annuncio->getTitolo() . "\",
                 \"" . $annuncio->getDescrizione() . "\",
                 \"" . $annuncio->getImgAnteprima() . "\",
+                \"" . $annuncio->getDescAnteprima() . "\",
                 \"" . $annuncio->getIndirizzo() . "\",
                 \"" . $annuncio->getCitta() . "\",
                 " . $this->auth_user->getIdUtente() . ",
                 " . $annuncio->getMaxOspiti() . ",
                 " . $annuncio->getPrezzoNotte() . "
-            )";
-
-            return intval($this->db_instance->queryFunction($function_name_and_params));
-        } catch(Eccezione $exc) {
-            throw $exc;
-        }
-    }
-
-    /**
-     * Inserisce una nuova foto all'interno legata ad un annuncio, dato il suo ID.
-     * @param int $id_annuncio id dell'annuncio a cui sarà collegata la foto
-     * @param string $file_path percorso in cui sarà presente la foto
-     * @param string $descrizione descrizione della foto per la galleria
-     * @return int ID della foto aggiunta se tutto è andato bene
-     * @return int -1 in caso di annuncio inesistente
-     * @return int -2 in caso di file_path o descrizione non soddisfino una lunghezza minima (= 1)
-     * @return int -3 l'inserimento è fallito
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
-     */
-    public function insertFoto($id_annuncio, $file_path, $descrizione): int {
-        try {
-            if(get_class($this->auth_user) !== "Utente") {
-                throw new Eccezione("L'inserimento di una foto di un annuncio può essere svolto solo da un utente registrato.");
-            }
-
-            $foto = Foto::build();
-            $foto->setIdAnnuncio($id_annuncio);
-            $foto->setFilePath($file_path);
-            $foto->setDescrizione($descrizione);
-
-            $this->db_instance->connect();
-            $function_name_and_params = "insert_foto(
-                " . $foto->getIdAnnuncio() . ",
-                \"" . $foto->getFilePath() . "\",
-                \"" . $foto->getDescrizione() . "\"
             )";
 
             return intval($this->db_instance->queryFunction($function_name_and_params));
@@ -608,31 +544,6 @@ class Frent {
     }
 
     /**
-     * Rimuove una foto di un annuncio, dato il suo ID:
-     * @param int $id_foto id della foto da rimuovere
-     * @return int 0 in caso la foto venga eliminato correttamente
-     * @return int -1 la foto non è stato eliminata
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
-     */
-    public function deleteFoto($id_foto): int {
-        try {
-            if(get_class($this->auth_user) !== "Utente") {
-                throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
-            }
-            if(!is_int($id_foto)) {
-                throw new Eccezione("Parametri di invocazione di deleteFoto errati.");
-            }
-            
-            $this->db_instance->connect();
-            $function_name_and_params = "delete_foto($id_foto)";
-    
-            return intval($this->db_instance->queryFunction($function_name_and_params));
-        } catch(Eccezione $exc) {
-            throw $exc;
-        }
-    }
-
-    /**
      * Rimuove un'occupazione da un'annuncio (liberandone la disponibilità), dato il suo ID:
      * @param int $id_occupazione id dell'occupazione di un annuncio
      * @return int 0 se l'occupazione è stata correttamente eliminata
@@ -695,7 +606,7 @@ class Frent {
      * @return int -1 in caso di errori nella modifica
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
+    public function editAnnuncio($id, $titolo, $descrizione, $img_anteprima, $desc_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
@@ -707,6 +618,7 @@ class Frent {
             $annuncio->setTitolo($titolo);
             $annuncio->setDescrizione($descrizione);
             $annuncio->setImgAnteprima($img_anteprima);
+            $annuncio->setDescAnteprima($desc_anteprima);
             $annuncio->setIndirizzo($indirizzo);
             $annuncio->setCitta($citta);
             $annuncio->setMaxOspiti($max_ospiti);
@@ -718,6 +630,7 @@ class Frent {
                 \"" . $annuncio->getTitolo() . "\",
                 \"" . $annuncio->getDescrizione() . "\",
                 \"" . $annuncio->getImgAnteprima() . "\",
+                \"" . $annuncio->getDescAnteprima() . "\",
                 \"" . $annuncio->getIndirizzo() . "\",
                 \"" . $annuncio->getCitta() . "\",
                 " . $annuncio->getMaxOspiti() . "
@@ -836,6 +749,7 @@ class Frent {
                 $annuncio->setTitolo($assoc_annuncio['titolo']);
                 $annuncio->setDescrizione($assoc_annuncio['descrizione']);
                 $annuncio->setImgAnteprima($assoc_annuncio['img_anteprima']);
+                $annuncio->setDescAnteprima($assoc_annuncio['desc_anteprima']);
                 $annuncio->setIndirizzo($assoc_annuncio['indirizzo']);
                 $annuncio->setCitta($assoc_annuncio['citta']);
                 $annuncio->setStatoApprovazione(intval($assoc_annuncio["stato_approvazione"]));
@@ -868,7 +782,6 @@ class Frent {
                 $occupazione->setIdOccupazione(intval($assoc_prenotazione['id_occupazione']));
                 $occupazione->setIdUtente(intval($assoc_prenotazione['utente']));
                 $occupazione->setIdAnnuncio(intval($assoc_prenotazione['annuncio']));
-//                $occupazione->setPrenotazioneGuest(boolval($assoc_prenotazione['prenotazione_guest']));
                 $occupazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
                 $occupazione->setDataInizio($assoc_prenotazione['data_inizio']);
                 $occupazione->setDataFine($assoc_prenotazione['data_fine']);

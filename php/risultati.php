@@ -73,7 +73,7 @@ try {
                         <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p>
                     </div>
                     <div class=\"corpo_lista\">
-                        <img src =\"$path\" alt=\"Foto copertina della casa\" />
+                        <img src =\"$path\" alt=\"".$annuncio->getDescAnteprima()."\" />
                         <div class=\"descrizione_annuncio\">
                         <p>$descrizione</p>
                         <p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p>

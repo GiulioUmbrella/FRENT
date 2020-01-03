@@ -51,7 +51,7 @@ try {
         $path = $annuncio->getImgAnteprima();
         $content .= "<li class=\"elemento_sei_pannelli\">
                     <a href='./dettagli_annuncio.php?id=$id' tabindex=\"".$index++."\">$titolo<img src=\"$path\"
-                alt=\"descrizione immagine di antemprima annuncio\"/></a></li>";
+                alt=\"".$annuncio->getDescAnteprima()."\"/></a></li>";
     }
     $numOspiti = 1;
     $dataInizio = "";

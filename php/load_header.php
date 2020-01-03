@@ -8,7 +8,7 @@ $header= "<div id=\"logo\">
     </div>
     <div id=\"nav\">
         <ul>
-            <li><span xml:lang=\"en\" lang=\"en\">Home</a>
+            <li xml:lang=\"en\" lang=\"en\">Home
             </li>
             <li><a tabindex=\"2\" href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>

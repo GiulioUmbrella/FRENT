@@ -24,8 +24,9 @@ if (isset($_SESSION["user"])) {
         $punteggio=0;
         if ($numeroRecensione!=0){
             foreach ($recensioni as $recensione)
-                $punteggio=$recensione->getValutazione()+$punteggio;
+                $punteggio=intval($recensione->getValutazione())+$punteggio;
             $punteggio=$punteggio/$numeroRecensione;
+            $punteggio= $punteggio/$numeroRecensione;
         }
         $stato="Approvato";
         if ($annuncio->getStatoApprovazione()==0){
@@ -37,9 +38,9 @@ if (isset($_SESSION["user"])) {
         $content.= "
              <li><div class=\"intestazione_lista\">
                 <a href=\"dettagli_annuncio.php?id=$id\" tabindex=\"12\">$Titolo</a>
-                <p>Stato Approvazione: $stato - Punteggio: $numeroRecensione:</p>
+                <p>Stato Approvazione: $stato - Valutazione media: $punteggio</p>
                 </div>
-                    <div class=\"corpo_lista\"><img src=\"$path\" alt=\"Foto copertina della casa\"/>
+                    <div class=\"corpo_lista\"><img src=\"$path\" alt=\"".$annuncio->getDescAnteprima()."\"/>
                     <div>
                         <p>$descrizione</p>
                         <a class=\"link_gestisci_annuncio\" href=\"./script_salva_dati_modifica_annuncio_in_session.php?id=$id\" tabindex=\"13\"

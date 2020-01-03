@@ -39,7 +39,7 @@ try {
     $_SESSION["annuncio"] = $annuncio;
     $prezzoAnnuncio = $annuncio->getPrezzoNotte();
     $ospitiMassimo = $annuncio->getMaxOspiti();
-    $foto = $frent->getFotoAnnuncio($id);
+//    $foto = $frent->getFotoAnnuncio($id);
     
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
@@ -159,7 +159,6 @@ try {
     
     $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
     $img = $annuncio->getImgAnteprima();
-    $photos = $frent->getFotoAnnuncio($annuncio->getIdAnnuncio());
     
     
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
@@ -168,7 +167,7 @@ try {
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
     
     $pagina = str_replace("<IMMAGINE/>", "<div class=\"shower_immagine_anteprima\">
-                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"Descrizione immagine\"/>
+                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"".$annuncio->getDescAnteprima()."\"/>
                         </div>", $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     echo $pagina;

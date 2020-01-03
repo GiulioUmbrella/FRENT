@@ -8,6 +8,6 @@ BEGIN
     SELECT id_occupazione, utente, num_ospiti, data_inizio, data_fine
     FROM occupazioni
     WHERE annuncio = _id_annuncio
-    order by data_inizio;
+    ORDER BY data_inizio;
 END |
 DELIMITER ;
