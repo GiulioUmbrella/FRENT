@@ -706,6 +706,24 @@ fieldset {
 .menu_gestione_annuncio li {
     padding: 0.5em;
     margin: 0.5em;
+    margin-right: 0em;
+    width: 101%;
+}
+
+.menu_gestione_annuncio_selected {
+    background-color: #ebebeb;
+}
+
+#laterale .menu_gestione_annuncio_delete:hover {
+    background-color: #ff6666;
+}
+
+.menu_gestione_annuncio li:hover {
+    background-color: #ebebeb;
+}
+
+.content_gestione_annuncio {
+    background-color: #ebebeb;
 }
 
 .menu_gestione_annuncio a{
