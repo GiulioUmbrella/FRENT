@@ -365,6 +365,21 @@ vertical-align: middle;
   color: black;
 }
 
+#content .lista_link_gestione {
+    line-height: 2.5em;
+}
+
+#content .lista_link_gestione li{
+    margin: 0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+#content .lista_link_gestione li a{
+    padding: 0.5em;
+    margin: 0em;
+}
 #content .link_approva {
   border: 1px solid green;
 }
@@ -618,9 +633,8 @@ fieldset {
     margin-right: 2%;
 }
 
-.input_label_orizzontale label {
-    display: block;
-    width: 100%;
+.primo_elemento_input_label_orizzontale {
+    margin-left: 4%;
 }
 
 .input_label_orizzontale input {
@@ -637,8 +651,7 @@ fieldset {
 }
 
 #data_di_nascita {
-    display: flex;
-    flex-direction: row;
+    display: inline-block;
     justify-content: center;
     align-items: center;
 }
@@ -1010,7 +1023,7 @@ html {
 }
 
 .corpo_lista .prezzototale {
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align: left;
     margin-right: 0em;
 }
@@ -1018,4 +1031,23 @@ html {
 .testo_descrizione_annuncio {
     display: none;
 }
+
+.informazioni_prenotazione {
+    float: none;
+    max-width: 100%;
+}
+
+.shower_immagine_anteprima {
+    width: 100%;
+}
+
+.immagine_anteprima {
+    width: 100%;
+}
+
+.informazioni_prenotazione .form_verticale input, .informazioni_prenotazione .form_verticale label, .informazioni_prenotazione .form_verticale select,.informazioni_prenotazione .form_verticale textarea {
+    margin-left: 0em;
+    width: 100%
+}
+
 }
