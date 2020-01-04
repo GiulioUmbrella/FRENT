@@ -701,6 +701,14 @@ fieldset {
     margin-left: 12em;
 }
 
+.modifica_immagine_profilo fieldset {
+    display: block;
+}
+
+.modifica_immagine_profilo input[type=submit], .modifica_immagine_profilo input[type=reset] {
+    padding: 0.5em;
+}
+
 .form_modifica {
     margin-top: 1em;
     border: 1px solid grey;
