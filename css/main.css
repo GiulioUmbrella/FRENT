@@ -922,10 +922,11 @@ html {
 }
 
 .layout_tre_pannelli {
-     grid-template-rows: auto 1fr auto auto;
+     grid-template-rows: auto auto 1fr auto auto;
     grid-template-areas:
     "l l l l"
     "c c c c"
+    "x x x x"
     "n n n n"
     "f f f f";
 }
@@ -968,4 +969,35 @@ html {
     width: 95%;
 }
 
+.intestazione_lista {
+    flex-direction: column;
+}
+
+.intestazione_lista p {
+    margin-top: 0em;
+}
+
+.corpo_lista {
+    min-height: 10em;
+}
+
+.corpo_lista div {
+    margin-left: 0em;
+}
+
+.corpo_lista img {
+    padding: 0.5em;
+    width: 10em;
+    max-height: 10em;
+}
+
+.corpo_lista .prezzototale {
+    font-size: 1.5em;
+    text-align: left;
+    margin-right: 0em;
+}
+
+.testo_descrizione_annuncio {
+    display: none;
+}
 }
