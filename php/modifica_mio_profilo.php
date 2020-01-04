@@ -78,7 +78,7 @@ if(isset($_POST["modifica_img_profilo"])) {
         );
 
         if($codice_aggiornamento === -1) {
-            $messageToUser = htmlentities("C'è stato un errore nel processo di modifica della foto profilo.". $imageManager->fileName());
+            $messageToUser = htmlentities("C'è stato un errore nel processo di modifica della foto profilo.");
         } else {
             // tento il salvataggio del nuovo file
             if($imageManager->saveFile()) {
@@ -171,5 +171,5 @@ if(isset($_POST["modifica_dati_personali"])) {
     } // FINE RAMO FALSO IF1
 }
 
-$pagina = addUserNotificationToPage($pagina, $messageToUser, "info_box", "aligned_with_form");
+$pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses);
 echo $pagina;
