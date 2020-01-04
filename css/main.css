@@ -921,7 +921,6 @@ html {
       "f";
 }
 
-
 .layout_tre_pannelli {
      grid-template-rows: auto 1fr auto auto;
     grid-template-areas:
@@ -960,7 +959,13 @@ html {
     border-radius: 0.5em;
     margin-top: 0.3em;
 }
+
+#footer ul {
+    display: block;
+}
+
 .link_aggiungi_annuncio {
     width: 95%;
 }
+
 }
