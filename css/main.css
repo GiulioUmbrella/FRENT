@@ -965,6 +965,24 @@ html {
     display: block;
 }
 
+.gestione_annunci_mobile {
+    grid-template-areas: "l l l l" "x x x x" "c c c c" "n n n n" "f f f f"
+}
+
+.menu_gestione_annuncio {
+    margin-top: 0em;
+    display: flex;
+}
+
+.menu_gestione_annuncio li {
+    margin: 0em;
+    margin-right: 0.2em;
+    width: 101%;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
 .link_aggiungi_annuncio {
     width: 95%;
 }
