@@ -921,12 +921,12 @@ html {
       "f";
 }
 
-
 .layout_tre_pannelli {
-     grid-template-rows: auto 1fr auto auto;
+     grid-template-rows: auto auto 1fr auto auto;
     grid-template-areas:
     "l l l l"
     "c c c c"
+    "x x x x"
     "n n n n"
     "f f f f";
 }
@@ -960,7 +960,62 @@ html {
     border-radius: 0.5em;
     margin-top: 0.3em;
 }
+
+#footer ul {
+    display: block;
+}
+
+.gestione_annunci_mobile {
+    grid-template-areas: "l l l l" "x x x x" "c c c c" "n n n n" "f f f f"
+}
+
+.menu_gestione_annuncio {
+    margin-top: 0em;
+    display: flex;
+}
+
+.menu_gestione_annuncio li {
+    margin: 0em;
+    margin-right: 0.2em;
+    width: 101%;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
 .link_aggiungi_annuncio {
     width: 95%;
+}
+
+.intestazione_lista {
+    flex-direction: column;
+}
+
+.intestazione_lista p {
+    margin-top: 0em;
+}
+
+.corpo_lista {
+    min-height: 10em;
+}
+
+.corpo_lista div {
+    margin-left: 0em;
+}
+
+.corpo_lista img {
+    padding: 0.5em;
+    width: 10em;
+    max-height: 10em;
+}
+
+.corpo_lista .prezzototale {
+    font-size: 1.5em;
+    text-align: left;
+    margin-right: 0em;
+}
+
+.testo_descrizione_annuncio {
+    display: none;
 }
 }
