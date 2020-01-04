@@ -418,6 +418,21 @@ class Frent {
         }
     }
 
+    /**
+     * Inserisce un nuovo annuncio.
+     * @param string $titolo il titolo dell'annuncio
+     * @param string $descrizione la descrizione dell'annuncio
+     * @param string $img_anteprima nome del file dell'immagine di anteprima
+     * @param string $desc_anteprima descrizione dell'immagine di anteprima
+     * @param string $indirizzo indirizzo e numero civico dove sta l'alloggio dell'annuncio
+     * @param string $citta città in cui è situtato l'alloggio dell'annuncio
+     * @param int $max_ospiti numero massimo di ospiti che può accettare l'annuncio in una prenotazione
+     * @param float $prezzo_notte prezzo del pernottamento per una notte
+     * @return int ID dell'annuncio aggiunto se tutto è andata ok (ID >= 1).
+     * @return int -1 in caso di host inesistente
+     * @return int -2 in caso ci sia stato un errore durante l'inserimento
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
+     */
     public function insertAnnuncio($titolo, $descrizione, $img_anteprima, $desc_anteprima, $indirizzo, $citta, $max_ospiti, $prezzo_notte): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {

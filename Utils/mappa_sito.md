@@ -11,5 +11,5 @@
         -- aggiungi  
     - Storico prenotazioni
     - elimina annuncio  
--- Aggiungi annuncio
+-- Nuovo annuncio
 ---
