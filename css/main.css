@@ -618,9 +618,8 @@ fieldset {
     margin-right: 2%;
 }
 
-.input_label_orizzontale label {
-    display: block;
-    width: 100%;
+.primo_elemento_input_label_orizzontale {
+    margin-left: 4%;
 }
 
 .input_label_orizzontale input {
@@ -637,8 +636,7 @@ fieldset {
 }
 
 #data_di_nascita {
-    display: flex;
-    flex-direction: row;
+    display: inline-block;
     justify-content: center;
     align-items: center;
 }
