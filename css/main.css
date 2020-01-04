@@ -903,10 +903,11 @@ body .aiuti_alla_navigazione {
 }
 
 /*-----------------Riepilogo prenotazione-----------------*/
-@media (max-device-width: 800px) {
+@media (max-device-width: 600px) {
 
 html {
   zoom: 3;
+  max-width: 100%;
 }
 
 #breadcrumb { display: none;}
@@ -944,4 +945,22 @@ html {
    width: 100%
 }
 
+#nav ul{
+   display: block;
+}
+
+#nav {
+    background-color: white;
+}
+
+#nav ul li {
+    height: 2em;
+    background-color: #e3eaa7;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    margin-top: 0.3em;
+}
+.link_aggiungi_annuncio {
+    width: 95%;
+}
 }
