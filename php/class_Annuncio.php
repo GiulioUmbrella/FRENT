@@ -190,7 +190,7 @@ class Annuncio {
      * @param string $desc_anteprima
      */
     public function setDescAnteprima($desc_anteprima): void {
-        if (checkStringNoNumber($desc_anteprima) && checkStringMaxLen(trim($desc_anteprima), DataConstraints::annunci["desc_anteprima"])) {
+        if (checkStringMaxLen(trim($desc_anteprima), DataConstraints::annunci["desc_anteprima"])) {
             $this->desc_anteprima = trim($desc_anteprima);
         } else {
             throw new Eccezione("La descrizione dell'anteprima supera la lunghezza consentita.");

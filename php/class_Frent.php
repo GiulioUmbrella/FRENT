@@ -641,14 +641,14 @@ class Frent {
 
             $this->db_instance->connect();
             $function_name_and_params = "edit_annuncio(
-                " . $annuncio->getIdAnnuncio() . "
+                " . $annuncio->getIdAnnuncio() . ",
                 \"" . $annuncio->getTitolo() . "\",
                 \"" . $annuncio->getDescrizione() . "\",
                 \"" . $annuncio->getImgAnteprima() . "\",
                 \"" . $annuncio->getDescAnteprima() . "\",
                 \"" . $annuncio->getIndirizzo() . "\",
                 \"" . $annuncio->getCitta() . "\",
-                " . $annuncio->getMaxOspiti() . "
+                " . $annuncio->getMaxOspiti() . ",
                 " . $annuncio->getPrezzoNotte() . "
             )";
     
