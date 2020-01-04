@@ -365,6 +365,21 @@ vertical-align: middle;
   color: black;
 }
 
+#content .lista_link_gestione {
+    line-height: 2.5em;
+}
+
+#content .lista_link_gestione li{
+    margin: 0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+#content .lista_link_gestione li a{
+    padding: 0.5em;
+    margin: 0em;
+}
 #content .link_approva {
   border: 1px solid green;
 }
