@@ -131,6 +131,10 @@ vertical-align: middle;
     display: inline-block;
 }
 
+#link_to_menu {
+display: none;
+}
+
 /*-----------------Content-----------------*/
 #content {
   margin-left: 1em;
@@ -365,6 +369,21 @@ vertical-align: middle;
   color: black;
 }
 
+#content .lista_link_gestione {
+    line-height: 2.5em;
+}
+
+#content .lista_link_gestione li{
+    margin: 0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+#content .lista_link_gestione li a{
+    padding: 0.5em;
+    margin: 0em;
+}
 #content .link_approva {
   border: 1px solid green;
 }
@@ -618,9 +637,8 @@ fieldset {
     margin-right: 2%;
 }
 
-.input_label_orizzontale label {
-    display: block;
-    width: 100%;
+.primo_elemento_input_label_orizzontale {
+    margin-left: 4%;
 }
 
 .input_label_orizzontale input {
@@ -637,8 +655,7 @@ fieldset {
 }
 
 #data_di_nascita {
-    display: flex;
-    flex-direction: row;
+    display: inline-block;
     justify-content: center;
     align-items: center;
 }
@@ -684,6 +701,14 @@ fieldset {
     margin-left: 12em;
 }
 
+.modifica_immagine_profilo fieldset {
+    display: block;
+}
+
+.modifica_immagine_profilo input[type=submit], .modifica_immagine_profilo input[type=reset] {
+    padding: 0.5em;
+}
+
 .form_modifica {
     margin-top: 1em;
     border: 1px solid grey;
@@ -706,6 +731,24 @@ fieldset {
 .menu_gestione_annuncio li {
     padding: 0.5em;
     margin: 0.5em;
+    margin-right: 0em;
+    width: 101%;
+}
+
+.menu_gestione_annuncio_selected {
+    background-color: #ebebeb;
+}
+
+#laterale .menu_gestione_annuncio_delete:hover {
+    background-color: #ff6666;
+}
+
+.menu_gestione_annuncio li:hover {
+    background-color: #ebebeb;
+}
+
+.content_gestione_annuncio {
+    background-color: #ebebeb;
 }
 
 .menu_gestione_annuncio a{
@@ -885,10 +928,11 @@ body .aiuti_alla_navigazione {
 }
 
 /*-----------------Riepilogo prenotazione-----------------*/
-@media (max-device-width: 800px) {
+@media (max-device-width: 600px) {
 
 html {
   zoom: 3;
+  max-width: 100%;
 }
 
 #breadcrumb { display: none;}
@@ -902,12 +946,12 @@ html {
       "f";
 }
 
-
 .layout_tre_pannelli {
-     grid-template-rows: auto 1fr auto auto;
+     grid-template-rows: auto auto 1fr auto auto;
     grid-template-areas:
     "l l l l"
     "c c c c"
+    "x x x x"
     "n n n n"
     "f f f f";
 }
@@ -926,4 +970,104 @@ html {
    width: 100%
 }
 
+#nav ul{
+   display: block;
+}
+
+#nav {
+    background-color: white;
+}
+
+#nav ul li {
+    height: 2em;
+    background-color: #e3eaa7;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    margin-top: 0.3em;
+}
+
+#footer ul {
+    display: block;
+}
+
+.gestione_annunci_mobile {
+    grid-template-areas: "l l l l" "x x x x" "c c c c" "n n n n" "f f f f"
+}
+
+.menu_gestione_annuncio {
+    margin-top: 0em;
+    display: flex;
+}
+
+.menu_gestione_annuncio li {
+    margin: 0em;
+    margin-right: 0.2em;
+    width: 101%;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
+.link_nuovo_annuncio {
+    width: 95%;
+}
+
+.intestazione_lista {
+    flex-direction: column;
+}
+
+.intestazione_lista p {
+    margin-top: 0em;
+}
+
+.corpo_lista {
+    min-height: 10em;
+}
+
+.corpo_lista div {
+    margin-left: 0em;
+}
+
+.corpo_lista img {
+    padding: 0.5em;
+    width: 10em;
+    max-height: 10em;
+}
+
+.corpo_lista .prezzototale {
+    font-size: 1.2em;
+    text-align: left;
+    margin-right: 0em;
+}
+
+.testo_descrizione_annuncio {
+    display: none;
+}
+
+.informazioni_prenotazione {
+    float: none;
+    max-width: 100%;
+}
+
+.shower_immagine_anteprima {
+    width: 100%;
+}
+
+.immagine_anteprima {
+    width: 100%;
+}
+
+.informazioni_prenotazione .form_verticale input, .informazioni_prenotazione .form_verticale label, .informazioni_prenotazione .form_verticale select,.informazioni_prenotazione .form_verticale textarea {
+    margin-left: 0em;
+    width: 100%
+}
+
+#link_to_menu {
+    display: inline;
+    background-image: url("../immagini/hamburger_menu.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-right: 24px;
+    margin-left:2em;
+}
 }

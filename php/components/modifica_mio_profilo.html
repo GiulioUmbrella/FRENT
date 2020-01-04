@@ -27,9 +27,11 @@
                 <legend>Cambia la tua immagine di profilo</legend>
                     <label for="nuova_img_profilo">Sono accettati file in formato <span xml:lang="en">JPG</span>, <span xml:lang="en">JPEG</span>, <span xml:lang="en">PNG</span>, dalla dimensione massima di 2 MB.</label>
                     <input type="file" accept=".png, .jpg, .jpeg" id="nuova_img_profilo" name="nuova_img_profilo" tabindex="8">
+		    <div class="confirm_delete_buttons">
                     <input type="submit" value="Conferma" name="modifica_img_profilo" tabindex="9" />
                     <input type="reset" value="Annulla" tabindex="10" />
-            </fieldset>
+            	    </div>
+	    </fieldset>
         </form>
     </div>
 
@@ -54,10 +56,10 @@
             <label for="cognome">Cognome</label>
             <input type="text" name="cognome" id="cognome" value="<COGNOME/>" tabindex="9"/>
 
-            <label for="mail" lang="en">E-mail</label>
+            <label for="mail" xml:lang="en">E-mail</label>
             <input type="text" name="mail" value="<MAIL/>" id="mail"/>
 
-            <label for="username" lang="en">Username</label>
+            <label for="username" xml:lang="en">Username</label>
             <input type="text" name="username" id="username" value="<USERNAME/>" tabindex="10"/>
 
             <label for="telefono">Numero di telefono</label>
@@ -65,18 +67,24 @@
         </fieldset>
         <fieldset id="data_di_nascita">
             <legend>Data di nascita</legend>
+	    <div class="input_label_orizzontale primo_elemento_input_label_orizzontale">
             <label id="giorno_nascita_label" for="giorno_nascita">Giorno</label>
             <select id="giorno_nascita" name="giorno_nascita" tabindex="12" >
                 <GIORNO/>
             </select>
+	    </div>
+	    <div class="input_label_orizzontale">
             <label for="mese_nascita">Mese</label>
             <select id="mese_nascita" name="mese_nascita" tabindex="13">
                 <MESE/>
             </select>
+	    </div>
+	    <div class="input_label_orizzontale">
             <label for="anno_nascita">Anno</label>
             <select id="anno_nascita" name="anno_nascita" tabindex="14">
                 <ANNO/>
             </select>
+	    </div>
         </fieldset>
         <fieldset>
             <label class="aiuti_alla_navigazione" for="modifica_dati_personali">Modifica</label>

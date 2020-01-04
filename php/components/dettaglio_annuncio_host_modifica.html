@@ -9,7 +9,7 @@
     <!--  <script src="script.js"></script>
     -->
 </head>
-<body class="layout_tre_pannelli">
+<body class="layout_tre_pannelli gestione_annunci_mobile">
 
 <HEADER/>
 <div id="breadcrumb">
@@ -18,7 +18,7 @@
 
 <div id="laterale">
     <ul class="menu_gestione_annuncio">
-        <li>Modifica</li>
+        <li class="menu_gestione_annuncio_selected">Modifica</li>
 <!--        <li><a href="./gestione_indisponibilita.php"-->
 <!--               tabindex="9" title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;-->
 <!--                    relative a questo annuncio">Gestione Indisponibilit&agrave;</a></li>-->
@@ -29,7 +29,7 @@
     </ul>
 </div>
 
-<div id="content">
+<div id="content" class="content_gestione_annuncio">
     <h1 class="titolo_gestione_annuncio">Gestione annuncio <TITOLO/></h1> <!--TODO: PHP-->
     <form action="./script_aggiorna_annuncio.php" method="post" class="form form_verticale">
         <fieldset>

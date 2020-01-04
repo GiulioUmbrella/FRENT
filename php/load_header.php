@@ -5,6 +5,7 @@ if ( $nomepagina=="index.php"){
 $header= "<div id=\"logo\">
     <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
     <h1>Frent</h1>
+    <a href=\"#nav\" id=\"link_to_menu\"><span></span>Vai al men&ugrave;</a>
     </div>
     <div id=\"nav\">
         <ul>
@@ -23,6 +24,7 @@ $header= "<div id=\"logo\">
 $header="<div id=\"logo\">
     <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
     <h1>Frent</h1>
+    <a href=\"#nav\" id=\"link_to_menu\"><span></span>Vai al men&ugrave;</a>
     </div>
     <div id=\"nav\">
         <ul>
@@ -39,6 +41,7 @@ $header="<div id=\"logo\">
 $header="<div id=\"logo\">
     <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
     <h1>Frent</h1>
+    <a href=\"#nav\" id=\"link_to_menu\"><span></span>Vai al men&ugrave;</a>
     </div>
     <div id=\"nav\">
         <ul>
@@ -46,7 +49,7 @@ $header="<div id=\"logo\">
             </li>
             <li><a tabindex=\"2\" href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>
-            <li>I miei <br/>annunci</li>
+            <li>I miei annunci</li>
             <li><a tabindex=\"4\" href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
                 profilo</a></li>
             <li><a tabindex=\"5\" href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
@@ -56,6 +59,7 @@ $header="<div id=\"logo\">
     $header="<div id=\"logo\">
     <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
     <h1>Frent</h1>
+    <a href=\"#nav\" id=\"link_to_menu\"><span></span>Vai al men&ugrave;</a>
     </div>
     <div id=\"nav\">
         <ul>
