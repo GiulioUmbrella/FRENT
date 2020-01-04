@@ -131,6 +131,10 @@ vertical-align: middle;
     display: inline-block;
 }
 
+#link_to_menu {
+display: none;
+}
+
 /*-----------------Content-----------------*/
 #content {
   margin-left: 1em;
@@ -1050,4 +1054,12 @@ html {
     width: 100%
 }
 
+#link_to_menu {
+    display: inline;
+    background-image: url("../immagini/hamburger_menu.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-right: 24px;
+    margin-left:2em;
+}
 }
