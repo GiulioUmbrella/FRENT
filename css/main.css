@@ -1018,4 +1018,23 @@ html {
 .testo_descrizione_annuncio {
     display: none;
 }
+
+.informazioni_prenotazione {
+    float: none;
+    max-width: 100%;
+}
+
+.shower_immagine_anteprima {
+    width: 100%;
+}
+
+.immagine_anteprima {
+    width: 100%;
+}
+
+.informazioni_prenotazione .form_verticale input, .informazioni_prenotazione .form_verticale label, .informazioni_prenotazione .form_verticale select,.informazioni_prenotazione .form_verticale textarea {
+    margin-left: 0em;
+    width: 100%
+}
+
 }
