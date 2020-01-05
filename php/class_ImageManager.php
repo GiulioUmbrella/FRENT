@@ -1,7 +1,6 @@
 <?php
 
 require_once("./class_Eccezione.php");
-define("MB", 1048576);
 
 /**
  * Class ImageManager
@@ -13,17 +12,14 @@ class ImageManager {
     private $targetFileName;
     private $targetFileExtension;
     private $tempFileName;
-    private $maxFileSize;
 
     /**
      * Costruttore di ImageManager.
      * @param string $targetFolder path della cartella destinazione radice in cui caricare i file
-     * @param int $maxFileSize dimensione massima di un file caricato (default di PHP è 2MB)
      */
-    public function __construct($targetFolder, $maxFileSize = 2) {
+    public function __construct($targetFolder) {
         // valori costanti una volta inizializzati
         $this->targetFolder = $targetFolder;
-        $this->maxFileSize = $maxFileSize;
 
         $this->targetFileName = "";
         $this->targetFileExtension = "";
@@ -54,6 +50,10 @@ class ImageManager {
             throw new Eccezione("Non è stato caricato alcun file.");   
         }
         
+        if($_FILES[$img_name_attr]["error"] === 1 || $_FILES[$img_name_attr]["error"][0] === 1) {
+            throw new Eccezione("Il file caricato supera la dimensione consentita indicata.");
+        }
+        
         // verifico che l'indice del file chiesto sia nei limiti
         if($fileIndex !== -1 && $fileIndex > $this->countFiles($img_name_attr)) {
             throw new Eccezione("È stato richiesto di accedere ad un file non caricato.");
@@ -61,9 +61,6 @@ class ImageManager {
 
         // recupero il nome del file caricato
         $name = $fileIndex !== -1 ? $_FILES[$img_name_attr]["name"][$fileIndex] : $_FILES[$img_name_attr]["name"];
-        
-        // file size
-        $size = $fileIndex !== -1 ? $_FILES[$img_name_attr]["size"][$fileIndex] : $_FILES[$img_name_attr]["size"];
         
         // recupero l'estensione del file
         $this->targetFileExtension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -85,11 +82,6 @@ class ImageManager {
         // verifico che il file caricato sia effetivamente un file imamgine (verifica i metadati)
         if (getimagesize($this->tempFileName) === false) {
             throw new Eccezione("Il file caricato non è un'immagine.");
-        }
-        
-        // verifico che il file non superi la dimensione massima consentita
-        if ($size > $this->maxFileSize * MB) {
-            throw new Eccezione("Il file caricato supera la dimensione massima di " . $this->maxFileSize . "MB.");
         }
     }
 
