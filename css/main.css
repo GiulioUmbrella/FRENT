@@ -791,12 +791,12 @@ fieldset {
 /*-----------------I miei annunci-----------------*/
 .link_nuovo_annuncio {
     border: 1px solid #4CAF50;
-    border-radius: 1em;
+    border-radius: 10em;
     background-color: #4CAF50;
     padding: 0.5em;
     text-decoration: none;
     color: black;
-    width: 100%;
+    width: 97%;
     margin-bottom: 1em;
     float: left;
     font-size: 1.3em;
@@ -1008,10 +1008,6 @@ html {
     text-align: center;
 }
 
-.link_nuovo_annuncio {
-    width: 95%;
-}
-
 .intestazione_lista {
     flex-direction: column;
 }
@@ -1068,6 +1064,13 @@ html {
     background-repeat: no-repeat;
     background-position: right bottom;
     padding-right: 24px;
-    margin-left:2em;
+    margin-left: 2.5em;
+    font-size: 0.8em;
 }
+
+.link_gestisci_annuncio {
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+}
+
 }
