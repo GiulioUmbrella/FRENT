@@ -13,7 +13,7 @@
 
 <HEADER/>
 <div id="breadcrumb">
-    <p>Ti trovi in: <a href="./index.php" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en">Home</a> &gt;&gt; <a href="./miei_annunci.php" title="Torna nei miei annunci" tabindex="7">I miei annunci</a> &gt;&gt; <TITOLO/></p>
+    <p>Ti trovi in: <a href="./index.php"  title="Vai alla pagina di ricerca" xml:lang="en">Home</a> &gt;&gt; <a href="./miei_annunci.php" title="Torna nei miei annunci" >I miei annunci</a> &gt;&gt; <TITOLO/></p>
 </div>
 
 <div id="laterale">
@@ -23,9 +23,9 @@
 <!--               tabindex="9" title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;-->
 <!--                    relative a questo annuncio">Gestione Indisponibilit&agrave;</a></li>-->
 <!--        <li><a href="visualizza_commenti.html"> Visualizza commenti</a></li>-->
-        <li><a href="./storico_prenotazioni.php" tabindex="10"
+        <li><a href="./storico_prenotazioni.php"
                title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
-        <li><a href="script_elimina_annuncio.php?id=<IDANNUNCIO/>" tabindex="12">Elimina Annuncio</a></li>
+        <li><a href="script_elimina_annuncio.php?id=<IDANNUNCIO/>" >Elimina Annuncio</a></li>
     </ul>
 </div>
 
@@ -37,39 +37,38 @@
             <legend class="aiuti_alla_navigazione">Dati annuncio</legend>
 
             <label for="max_ospiti">Numero ospiti:</label>
-            <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="<NUMOSPITIMAX/>" tabindex="9"
+            <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="<NUMOSPITIMAX/>"
                    placeholder="Numero degli ospiti" />
 
             <label for="anteprima">Modifica anteprima: </label>
-            <input type="file" id="anteprima" name="anteprima" accept=".png, .jpg, .jpeg" tabindex="10"/>
+            <input type="file" id="anteprima" name="anteprima" accept=".png, .jpg, .jpeg"/>
             <label for="desc_anteprima">descrizione anteprima</label>
-            <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256" tabindex="10" placeholder="descrizione breve"></textarea>
+            <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256"  placeholder="descrizione breve"></textarea>
 
 
             <label for="prezzo_a_persona">Prezzo a persona:</label>
-            <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" tabindex="11" value="<PrAPERSONA/>"
+            <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" value="<PrAPERSONA/>"
                    placeholder="&euro; a persona"/>
 
             <label for="descrizione">Descrizione:</label>
-            <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="12"
-                      placeholder="inserisci qui la descrizione"><DESCRIZIONE/></textarea>
+            <textarea id="descrizione" name="descrizione" maxlength="512" placeholder="inserisci qui la descrizione"><DESCRIZIONE/></textarea>
 
         </fieldset>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Indirizzo</legend>
 
             <label for="indirizzo">Indirizzo:</label>
-            <input type="text" name="indirizzo" id="indirizzo" placeholder="via" tabindex="13" value="<VIA/>" maxlength="128"/>
+            <input type="text" name="indirizzo" id="indirizzo" placeholder="via" value="<VIA/>" maxlength="128"/>
 
             <label for="citta">Citt&agrave;:</label>
-            <input type="text" name="citta" id="citta" placeholder="Citta" tabindex="15" value="<CITTA/>" maxlength="128"/>
+            <input type="text" name="citta" id="citta" placeholder="Citta"  value="<CITTA/>" maxlength="128"/>
 
         </fieldset>
 
 
         <!--      questi due tabindex dipenderanno dal numero delle foto che ci sara-->
-        <input type="submit" value="Aggiorna" tabindex="19">
-        <input type="reset" value="Annulla Modifiche" tabindex="20">
+        <input type="submit" value="Aggiorna">
+        <input type="reset" value="Annulla Modifiche">
     </form>
 </div>
 <FOOTER/>

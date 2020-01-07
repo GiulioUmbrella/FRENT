@@ -37,13 +37,13 @@ if (isset($_SESSION["user"])) {
         
         $content.= "
              <li><div class=\"intestazione_lista\">
-                <a href=\"dettagli_annuncio.php?id=$id\" tabindex=\"12\">$Titolo</a>
+                <a href=\"dettagli_annuncio.php?id=$id\" >$Titolo</a>
                 <p>Stato Approvazione: $stato - Valutazione media: $punteggio</p>
                 </div>
                     <div class=\"corpo_lista\"><img src=\"$path\" alt=\"".$annuncio->getDescAnteprima()."\"/>
                     <div>
                         <p>$descrizione</p>
-                        <a class=\"link_gestisci_annuncio\" href=\"./script_salva_dati_modifica_annuncio_in_session.php?id=$id\" tabindex=\"13\"
+                        <a class=\"link_gestisci_annuncio\" href=\"./script_salva_dati_modifica_annuncio_in_session.php?id=$id\"
                         title=\"Vai alla gestione dell'annuncio\">Modifica</a>
                     </div>
                 </div>

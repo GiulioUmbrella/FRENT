@@ -69,7 +69,7 @@ try {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"dettagli_annuncio.php?id=$id&dataInizio=$dataInizio&dataFine=$dataFine&numOspiti=$numOspiti\"
-                                tabindex=\"12\">$Titolo</a>
+                                >$Titolo</a>
                         <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p>
                     </div>
                     <div class=\"corpo_lista\">

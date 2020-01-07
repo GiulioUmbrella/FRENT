@@ -17,36 +17,35 @@
     </div>
     <div id="nav">
         <ul>
-            <li><a tabindex="1" href="../php/components/index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
+            <li><a  href="../php/components/index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
             </li>
-            <li><a tabindex="2" href="../php/components/login.html" title="Vai alla pagina di accesso">Accedi</a></li>
-            <li><a tabindex="3" href="../php/components/registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
-            <li><a tabindex="4" href="../php/components/mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le
+            <li><a  href="../php/components/login.html" title="Vai alla pagina di accesso">Accedi</a></li>
+            <li><a  href="../php/components/registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
+            <li><a href="../php/components/mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le
                 mie prenotazioni</a></li>
-            <li><a tabindex="5" href="../php/components/miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
+            <li><a  href="../php/components/miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
                 annunci</a></li>
-            <li><a tabindex="6" href="../php/components/mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
+            <li><a href="../php/components/mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
                 profilo</a></li>
-            <li><a tabindex="7" href="#" title="Effettua la disconnessione">Esci</a></li>
+            <li><a href="" title="Effettua la disconnessione">Esci</a></li>
         </ul>
     </div>
 </div>
 <div id="breadcrumb">
-    <p> Ti trovi in:<a href="../php/components/miei_annunci.html" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
-        <a href="../php/components/miei_annunci.html" title="Torna nei miei annunci" tabindex="7">Miei Annunci</a>&gt;&gt;Titolo Annuncio
+    <p> Ti trovi in:<a href="../php/components/miei_annunci.html" title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
+        <a href="../php/components/miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a>&gt;&gt;Titolo Annuncio
     </p>
 </div>
 
 <div id="laterale">
     <ul class="menu_gestione_annuncio">
         <li><a href="gestione_indisponibilita.html"
-               tabindex="9" title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;
+               title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;
                     relative a questo annuncio">Gestione Indisponibilit&agrave;</a></li>
         <li>Modifica</li>
         <li><a href="visualizza_commenti.html"> Visualizza commenti</a></li>
-        <li><a href="../php/components/storico_prenotazioni.html" tabindex="10"
-               title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
-        <li><a href="#" tabindex="12">Elimina Annuncio</a></li>
+        <li><a href="../php/components/storico_prenotazioni.html" title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
+        <li><a href="#">Elimina Annuncio</a></li>
     </ul>
 </div>
 
@@ -58,18 +57,18 @@
             <legend class="aiuti_alla_navigazione">Dati annuncio</legend>
 
             <label for="max_ospiti">Numero ospiti:</label>
-            <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="1" tabindex="9"
+            <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="1"
                    placeholder="Numero degli ospiti"/>
 
             <label for="anteprima">Modifica anteprima: </label>
-            <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" tabindex="10"/>
+            <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" />
 
             <label for="prezzo_a_persona">Prezzo a persona:</label>
-            <input type="number" id="prezzo_a_persona" name="prezzo_a_persona" tabindex="11"
+            <input type="number" id="prezzo_a_persona" name="prezzo_a_persona"
                    placeholder="&euro; a persona"/>
 
             <label for="descrizione">Descrizione:</label>
-            <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="12"
+            <textarea id="descrizione" name="descrizione" maxlength="512"
                       placeholder="inserisci qui la descrizione"></textarea>
 
         </fieldset>
@@ -77,19 +76,19 @@
             <legend class="aiuti_alla_navigazione">Indirizzo</legend>
 
             <label for="via">Via:</label>
-            <input type="text" name="via" id="via" placeholder="via" tabindex="13" maxlength="128"/>
+            <input type="text" name="via" id="via" placeholder="via" maxlength="128"/>
 
             <label for="numero_civico">Numero Civico:</label>
-            <input type="text" name="numero_civico" id="numero_civico" tabindex="14" placeholder="Numero civico"/>
+            <input type="text" name="numero_civico" id="numero_civico" placeholder="Numero civico"/>
 
             <label for="citta">Citt&agrave;:</label>
-            <input type="text" name="citta" id="citta" placeholder="Citta" tabindex="15" maxlength="128"/>
+            <input type="text" name="citta" id="citta" placeholder="Citta" maxlength="128"/>
 
         </fieldset>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Immagini</legend>
             <label for="immagini">Aggiungere immagini:</label>
-            <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" tabindex="16" multiple/>
+            <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" multiple/>
             <ul>
                 <li>
                     <fieldset>
@@ -98,7 +97,7 @@
                             <label for="commento1">
                             <textarea id="commento1" maxlength="512" rows="8" cols="30"
                                       placeholder="Inserisci la descrizione della foto con nome.png"></textarea>
-                                <a href="#" tabindex="17"
+                                <a href="#"
                                    title="elimina la foto numero 1">Elimina</a>
                             </label>
                         </div>
@@ -110,8 +109,8 @@
         </fieldset>
 
         <!--      questi due tabindex dipenderanno dal numero delle foto che ci sara-->
-        <input type="submit" value="Aggiorna" tabindex="19">
-        <input type="reset" value="Annulla Modifiche" tabindex="20">
+        <input type="submit" value="Aggiorna" >
+        <input type="reset" value="Annulla Modifiche" />
     </form>
 </div>
 <div id="footer">

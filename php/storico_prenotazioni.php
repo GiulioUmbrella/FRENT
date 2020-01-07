@@ -33,7 +33,7 @@ try{
             <div class=\"corpo_lista lista_storico_prenotazioni\">
                 <ul>
                     <li><span xml:lang=\"en\" lang='en' class=\"intestazione_campo\">Username:</span>
-                        <a href=\"mailto:".$mail."\" tabindex=\"9\" title=\"manda una mail al guest\">$username</a></li>
+                        <a href=\"mailto:".$mail."\" title=\"manda una mail al guest\">$username</a></li>
                     <li class=\"intestazione_campo\">Numero ospiti: $numOspiti</li>
                     <li class=\"intestazione_campo\">Data inizio: $dataInizio</li>
                     <li class=\"intestazione_campo\">Data fine: $dataFine</li>

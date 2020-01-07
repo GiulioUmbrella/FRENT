@@ -27,7 +27,7 @@
             <legend class="aiuti_alla_navigazione">Ricerca annuncio</legend>
             <div class="input_label_orizzontale">
                 <label for="citta">Citt&agrave;</label>
-                <input list="cities" tabindex="6" name="citta" id="citta"
+                <input list="cities" name="citta" id="citta"
                        placeholder="Citt&agrave;"/>
                 <datalist id="cities">
                     <CITIES_RICERCA/>
@@ -36,20 +36,20 @@
             <!--Chiarire cosa fare per Safari -->
             <div class="input_label_orizzontale">
                 <label for="dataInizio">Data Inizio</label>
-                <input type="date" tabindex="7" name="dataInizio" min="<MINDAYB/>" max="<MAXDAYB/>" value="<DATAINIZIO/>" id="dataInizio"/>
+                <input type="date" name="dataInizio" min="<MINDAYB/>" max="<MAXDAYB/>" value="<DATAINIZIO/>" id="dataInizio"/>
             </div>
             <div class="input_label_orizzontale">
                 <label for="dataFine">Data Fine</label>
-                <input type="date" tabindex="8" name="dataFine" min="<MINDAYE/>" max="<MAXDAYE/> " value="<DATAFINE/>" id="dataFine"/>
+                <input type="date"  name="dataFine" min="<MINDAYE/>" max="<MAXDAYE/> " value="<DATAFINE/>" id="dataFine"/>
             </div>
             <div class="input_label_orizzontale">
                 <label for="numOspiti">Num Ospiti</label>
-                <input type="number" tabindex="9" name="numOspiti" id="numOspiti"
+                <input type="number" name="numOspiti" id="numOspiti"
                        min="1" max="99" value="<NUMOSPITI/>"/>
             </div>
             <div class="input_label_orizzontale">
                 <label for="pulsante_cerca" class="aiuti_alla_navigazione">Pulsante Ricerca</label>
-                <input type="submit" tabindex="10" id="pulsante_cerca" value="Cerca">
+                <input type="submit" id="pulsante_cerca" value="Cerca">
             </div>
         </fieldset>
 

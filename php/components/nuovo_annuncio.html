@@ -12,7 +12,7 @@
 <body class="layout_centrale">
 <HEADER/>
 <div id="breadcrumb" >
-    <p>Ti trovi in: <a href="index.php" tabindex="5" title="Vai alla pagina di ricerca" xml:lang="en" lang="en">Home</a> &gt;&gt; <a href="./miei_annunci.php" tabindex="6" title="Torna nei miei annunci">I miei annunci</a> &gt;&gt; Nuovo Annuncio</p>
+    <p>Ti trovi in: <a href="index.php" title="Vai alla pagina di ricerca" xml:lang="en" lang="en">Home</a> &gt;&gt; <a href="./miei_annunci.php"  title="Torna nei miei annunci">I miei annunci</a> &gt;&gt; Nuovo Annuncio</p>
 </div>
 <div id="content">
     <h1>Nuovo annuncio</h1>
@@ -21,36 +21,36 @@
         <fieldset>
             <legend class="aiuti_alla_navigazione">Dati descrittivi dell'annuncio</legend>
                 <label for="titolo">Titolo annuncio <small>(ovvero il nome dell'abitazione, appartamento o alloggio)</small></label>
-                <input type="text" name="titolo" id="titolo" tabindex="7" maxlength="32"/>
+                <input type="text" name="titolo" id="titolo"  maxlength="32"/>
 
                 <label for="descrizione">Descrizione <small>(devono essere informazioni utili: pi&ugrave; esaustive sono, pi&ugrave; &egrave; possibile che il tuo annuncio venga scelto!)</small></label>
-                <textarea id="descrizione" name="descrizione" maxlength="512" tabindex="8"></textarea>
+                <textarea id="descrizione" name="descrizione" maxlength="512" ></textarea>
 
                 <label for="max_ospiti">Numero ospiti <small>(quanti ospiti possono essere presenti al massimo)</small></label>
-                <input type="text" name="max_ospiti" id="max_ospiti" maxlength="2" value="1" tabindex="9"/>
+                <input type="text" name="max_ospiti" id="max_ospiti" maxlength="2" value="1" />
 
                 <label for="img_anteprima">Immagine di anteprima dell'annuncio <small>(l'immagine pu&ograve; essere in formato <span xml:lang="en">JPG</span>, <span xml:lang="en">JPEG</span>, <span xml:lang="en">PNG</span> ed avere una dimensione massima di 2 MB)</small></label>
-                <input type="file" id="img_anteprima" name="img_anteprima" accept=".png, .jpg, .jpeg" tabindex="10" />
+                <input type="file" id="img_anteprima" name="img_anteprima" accept=".png, .jpg, .jpeg"  />
 
                 <label for="desc_anteprima">Descrizione per l'immagine di anteprima <small>(deve descrivere l'immagine di anteprima che hai selezionato)</small></label>
-                <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256" tabindex="11"></textarea>
+                <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256" ></textarea>
 
                 <label for="prezzo_notte">Prezzo per notte <small>(in &euro;)</small></label>
-                <input type="text" id="prezzo_notte" name="prezzo_notte" tabindex="12"/>
+                <input type="text" id="prezzo_notte" name="prezzo_notte" />
         </fieldset>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Indirizzo</legend>
                 <label for="via">Via</label>
-                <input type="text" name="via" id="via" maxlength="120" tabindex="13" />
+                <input type="text" name="via" id="via" maxlength="120" />
 
                 <label for="numero_civico">Numero civico</label>
-                <input type="text" name="numero_civico" id="numero_civico" tabindex="14" />
+                <input type="text" name="numero_civico" id="numero_civico" />
 
                 <label for="citta">Citt&agrave;</label>
-                <input type="text" name="citta" id="citta" maxlength="128" tabindex="15"/>
+                <input type="text" name="citta" id="citta" maxlength="128" />
         </fieldset>
-        <input type="submit" value="Salva" name="nuovo_annuncio" id="nuovo_annuncio" tabindex="16">
-        <input type="reset" value="Reset" xml:lang="en" tabindex="17">
+        <input type="submit" value="Salva" name="nuovo_annuncio" id="nuovo_annuncio" >
+        <input type="reset" value="Reset" xml:lang="en" >
 
     </form>
 </div>

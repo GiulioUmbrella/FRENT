@@ -11,13 +11,13 @@ $header= "<div id=\"logo\">
         <ul>
             <li xml:lang=\"en\" lang=\"en\">Home
             </li>
-            <li><a tabindex=\"2\" href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
+            <li><a href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>
-            <li><a tabindex=\"3\" href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei
+            <li><a href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei
                 annunci</a></li>
-            <li><a tabindex=\"4\" href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
+            <li><a  href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
                 profilo</a></li>
-            <li><a tabindex=\"5\" href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
+            <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
 }elseif ($nomepagina=="mie_prenotazioni.php"){
@@ -28,13 +28,13 @@ $header="<div id=\"logo\">
     </div>
     <div id=\"nav\">
         <ul>
-            <li><a tabindex=\"1\" href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
+            <li><a  href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
             </li>
             <li>Le mie prenotazioni</li>
-            <li><a tabindex=\"3\" href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei annunci</a></li>
-            <li><a tabindex=\"4\" href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
+            <li><a  href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei annunci</a></li>
+            <li><a  href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
                 profilo</a></li>
-            <li><a tabindex=\"5\" href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
+            <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
 }elseif ($nomepagina=="miei_annunci.php"){
@@ -45,14 +45,14 @@ $header="<div id=\"logo\">
     </div>
     <div id=\"nav\">
         <ul>
-            <li><a tabindex=\"1\" href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
+            <li><a href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
             </li>
-            <li><a tabindex=\"2\" href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
+            <li><a  href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>
             <li>I miei annunci</li>
-            <li><a tabindex=\"4\" href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
+            <li><a  href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
                 profilo</a></li>
-            <li><a tabindex=\"5\" href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
+            <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
 }elseif ($nomepagina=="mio_profilo.php"){
@@ -63,14 +63,14 @@ $header="<div id=\"logo\">
     </div>
     <div id=\"nav\">
         <ul>
-            <li><a tabindex=\"1\" href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
+            <li><a  href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
             </li>
-            <li><a tabindex=\"2\" href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
+            <li><a  href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>
-            <li><a tabindex=\"3\" href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei
+            <li><a  href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei
                 annunci</a></li>
             <li>Il mio profilo</li>
-            <li><a tabindex=\"5\" href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
+            <li><a href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
 }

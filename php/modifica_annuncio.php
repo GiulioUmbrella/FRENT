@@ -47,7 +47,7 @@ if (isset($_SESSION["user"]) ){
 //                            <label for=\"commento1\">
 //                            <textarea id=\"commento1\" maxlength=\"512\" rows=\"8\" cols=\"30\"
 //                                      placeholder=\"Inserisci la descrizione della foto\">$descrizione</textarea>
-//                                <a href=\"script_elimina_foto.php?id=$id\" tabindex=\"17\"
+//                                <a href=\"script_elimina_foto.php?id=$id\"
 //                                   title=\"elimina la foto numero 1\">Elimina</a>
 //                            </label>
 //                        </div>

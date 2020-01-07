@@ -47,7 +47,7 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_passate .= "
                     <li>
                         <div class=\"intestazione_lista\">
-                            <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
+                            <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
                                 title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
                         </div>";
             $i++;
@@ -60,7 +60,7 @@ if (isset($_SESSION["user"])) {
                                 <p>Numero ospiti: $numeroOspiti</p>
                             </div>
                             <div class=\"opzioni_prenotazione\">
-                                <p>Prezzo: $prezzo&euro;</p><a href=\"Commenta\" tabindex=\"<TABINDEX$i>\" title=\"Contatta il proprietario per posta elettronica\">Commenta</a>
+                                <p>Prezzo: $prezzo&euro;</p><a href=\"Commenta\" title=\"Contatta il proprietario per posta elettronica\">Commenta</a>
                             </div>
                         </div>
                     </li>";// todo da decidere come far commentare
@@ -70,7 +70,7 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_correnti .= "
                 <li>
                     <div class=\"intestazione_lista\">
-                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
+                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
                             title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a> </div>";
             $i++;
             $prenotazioni_correnti.="
@@ -82,7 +82,7 @@ if (isset($_SESSION["user"])) {
                         </div>
                         <div class=\"opzioni_prenotazione\">
                             <p>Prezzo: $prezzo&euro;</p>
-                            <a href=\"mailto:$mail\" tabindex=\"<TABINDEX$i>\"
+                            <a href=\"mailto:$mail\"
                                     title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_future .= "
                 <li>
                     <div class=\"intestazione_lista\">
-                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" tabindex=\"<TABINDEX$i>\"
+                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
                         title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
                     </div>";
             $i++;
@@ -111,7 +111,7 @@ if (isset($_SESSION["user"])) {
                             <form action=\"./script_elimina_prenotazione.php?id=$id_prenotazione\" method=\"post\">
                                 <fieldset>
                                     <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
-                                    <input type=\"submit\" value=\"elimina\" tabindex=\"<TABINDEX$i>\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
+                                    <input type=\"submit\" value=\"elimina\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
                                 </fieldset>
                             </form>
                         </div>

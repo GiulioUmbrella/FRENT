@@ -50,7 +50,7 @@ try {
         $id = $annuncio->getIdAnnuncio();
         $path = $annuncio->getImgAnteprima();
         $content .= "<li class=\"elemento_sei_pannelli\">
-                    <a href='./dettagli_annuncio.php?id=$id' tabindex=\"".$index++."\">$titolo<img src=\"$path\"
+                    <a href='./dettagli_annuncio.php?id=$id' >$titolo<img src=\"$path\"
                 alt=\"".$annuncio->getDescAnteprima()."\"/></a></li>";
     }
     $numOspiti = 1;
