@@ -878,13 +878,19 @@ fieldset {
     font-size: 1.1em;
 }
 
-/*STA COSA DEVE STARE IN FONDO*/
 body .aiuti_alla_navigazione {
     position: absolute;
     height: 0;
     overflow: hidden;
 }
 
+.messaggio_errore {
+    color: red;
+}
+
+.messaggio_ok {
+    color: green;
+}
 
 #primo_pannello_piu_vistate {
     flex-grow: 3;
