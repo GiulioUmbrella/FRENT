@@ -943,6 +943,11 @@ html {
   max-width: 100%;
 }
 
+html body #content {
+    line-height: 1.2em;
+    font-size: 1.2em;
+}
+
 #breadcrumb { display: none;}
 
 .layout_colonna {
