@@ -404,6 +404,7 @@ display: none;
 /* LISTA COMMENTI */
 #commenti {
     margin-top: 2em;
+    clear: both;
 }
 
 #commenti ul {
@@ -581,7 +582,7 @@ fieldset {
     padding: 0.25em 0.75em 0.25em 0.75em ;
     background-color: #4CAF50;
     border-radius: 1em;
-    border: 1px solid dodgerblue;
+    border: 1px solid #4CAF50;
     color: black;
     cursor: pointer;
 }
@@ -611,6 +612,7 @@ fieldset {
 .form_verticale label {
     height: 1.5em;
     margin-top: 1em;
+    display: inline-block;
 }
 
 .form_verticale textarea {
@@ -877,13 +879,19 @@ fieldset {
     font-size: 1.1em;
 }
 
-/*STA COSA DEVE STARE IN FONDO*/
 body .aiuti_alla_navigazione {
     position: absolute;
     height: 0;
     overflow: hidden;
 }
 
+.messaggio_errore {
+    color: red;
+}
+
+.messaggio_ok {
+    color: green;
+}
 
 #primo_pannello_piu_vistate {
     flex-grow: 3;
@@ -933,6 +941,11 @@ body .aiuti_alla_navigazione {
 html {
   zoom: 3;
   max-width: 100%;
+}
+
+html body #content {
+    line-height: 1.2em;
+    font-size: 1.2em;
 }
 
 #breadcrumb { display: none;}
@@ -1064,13 +1077,29 @@ html {
     background-repeat: no-repeat;
     background-position: right bottom;
     padding-right: 24px;
-    margin-left: 2.5em;
     font-size: 0.8em;
+    float: right;
+    margin-top: 1em;
+    margin-right: 0.5em;
 }
 
 .link_gestisci_annuncio {
     margin-bottom: 0.5em;
     margin-left: 0.5em;
+}
+
+.form_logout {
+    float: none;
+    width:98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.logout_button {
+    width: 100%;
+}
+
+.list_annunci_pendenti li {
+    padding: 0.5em;
 }
 
 }
