@@ -611,6 +611,7 @@ fieldset {
 .form_verticale label {
     height: 1.5em;
     margin-top: 1em;
+    display: inline-block;
 }
 
 .form_verticale textarea {
