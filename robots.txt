@@ -1,0 +1,32 @@
+# ROBOTS
+User-agent: *
+# Pagine generiche
+Disallow: php/404.php
+Disallow: php/error_page.php
+Disallow: php/approvazione_annunci.php
+# Script
+Disallow: php/script_approvazione_annunci.php
+Disallow: php/script_controllo_dati_prenotazione.php
+Disallow: php/script_controllo_dati_ricerca.php
+Disallow: php/script_elimina_annuncio.php
+Disallow: php/script_elimina_prenotazione.php
+Disallow: php/script_elimina_profilo.php
+Disallow: php/script_logout_admin.php
+Disallow: php/script_logout_user.php
+# Funzioni, classi e componenti
+Disallow: php/CheckMethods.php
+Disallow: php/class*.php
+Disallow: php/components/
+# Loader
+Disallow: php/load_Frent.php
+Disallow: php/load_header.php
+# Pagine per utenti autenticati
+Disallow: php/conferma_prenotazione.php
+Disallow: php/miei_annunci.php
+Disallow: php/mie_prenotazioni.php
+Disallow: php/mio_profilo.php
+Disallow: php/modifica_annuncio.php
+Disallow: php/modifica_mio_profilo.php
+Disallow: php/nuovo_annuncio.php
+Disallow: php/riepilogo_prenotazione.php
+Disallow: php/storico_prenotazioni.php
