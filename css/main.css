@@ -404,6 +404,7 @@ display: none;
 /* LISTA COMMENTI */
 #commenti {
     margin-top: 2em;
+    clear: both;
 }
 
 #commenti ul {
