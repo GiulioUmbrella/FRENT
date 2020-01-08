@@ -83,6 +83,7 @@ try {
     }
     $pagina = str_replace("<DATAINIZIO/>", $dataInizio, $pagina);
     $pagina = str_replace("<DATAFINE/>", $dataInizio, $pagina);
+    $pagina = str_replace("<NUMOSPITI/>", $numOspiti, $pagina);
     
     $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
     
