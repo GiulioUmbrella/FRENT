@@ -581,7 +581,7 @@ fieldset {
     padding: 0.25em 0.75em 0.25em 0.75em ;
     background-color: #4CAF50;
     border-radius: 1em;
-    border: 1px solid dodgerblue;
+    border: 1px solid #4CAF50;
     color: black;
     cursor: pointer;
 }
@@ -1074,6 +1074,20 @@ html {
 .link_gestisci_annuncio {
     margin-bottom: 0.5em;
     margin-left: 0.5em;
+}
+
+.form_logout {
+    float: none;
+    width:98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.logout_button {
+    width: 100%;
+}
+
+.list_annunci_pendenti li {
+    padding: 0.5em;
 }
 
 }
