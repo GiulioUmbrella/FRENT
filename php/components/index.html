@@ -3,13 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>Modifica Annuncio</title>
-
-   
     <meta name="description" content="Home page del popolare sito di affitto case Frent"/>
-   
- 
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
-
+    <script src="../javascript/form_validator.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/main.css"/>
     <link rel="icon" href="../immagini/icona.ico"/>
 </head>
@@ -21,7 +17,7 @@
 </div>
 
 <div id="content">
-    <form class="form form_orizzontale" action="./script_controllo_dati_ricerca.php">
+    <form class="form form_orizzontale" action="./script_controllo_dati_ricerca.php" onsubmit="return validazione_form_ricerca()">
         <div id="credenziali_errate"><DATIMANCANTI/></div>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Ricerca annuncio</legend>
