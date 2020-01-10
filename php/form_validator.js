@@ -1,7 +1,6 @@
 // i metodi che controllano un dato cominciano il check_nomecampo
 // i metodi che controlano un form, ovvero tanti campi, hanno il nome validazione_ecc.
 
-//funzione generale per mostrare errore
 function mostra_errore(input, testoErrore){
     togli_errore(input);
     const p = input.parentNode;
@@ -44,12 +43,14 @@ function check_numeroTelefonico() {
 }
 function check_userMail(mailInput) {
     const reg = new RegExp('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$');
-
+    window.alert("check mail");
     if (reg.test(mailInput.value)){
+        window.alert("check mail successo");
         togli_errore(mailInput);
         return true;
     }
-    mostra_errore(mailInput,"La mail inserita valida!");
+    window.alert("check mail fine");
+    mostra_errore(mailInput,"La mail inserita non è valida!");
     return false;
 
 }
@@ -61,7 +62,7 @@ function check_password(pwdInput) {
         togli_errore(pwdInput);
         return true;
     }
-    mostra_errore(pwdInput,"Password non valido!")
+    mostra_errore(pwdInput,"Password non valido!");
     return false;
 }
 function check_descrizione_foto() {
@@ -86,10 +87,15 @@ function  validazione_form_registrazione() {
 }
 //usato sia per login utente che login amministratore
 function validazione_form_login() {
+    window.alert("check1");
     const userMail = document.getElementById("user");
+    window.alert("check2");
     const userPass = document.getElementById("password");
+    window.alert("check3");
     const res_mail = check_userMail(userMail);
+    window.alert("check4");
     const res_pass = check_password(userPass);
+    window.alert("check");
     return res_mail && res_pass;
 }
 function  validazione_form_aggiungi_annuncio() {
