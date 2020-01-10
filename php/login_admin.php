@@ -12,7 +12,7 @@ if(!isset($_POST["accedi"])) {
     $pagina = str_replace("<VALUEUSERNAME>", "", $pagina);
     $pagina = str_replace("<VALUEPASSWORD>", "", $pagina);
 } else {
-    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["user", "password"], TRUE);
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["user", "password"]);
     /**
      * se $form_non_valido === TRUE ci sono valori di $_POST non settati
      */
@@ -36,11 +36,13 @@ if(!isset($_POST["accedi"])) {
             $_SESSION["admin"] = $admin;
             header("Location: ./approvazione_annunci.php");
         } catch (Eccezione $e) {
-            $messageToUser = htmlentities("C'è stato un errore nel processo di accesso. Errore riscontrato: ") . $exc->getMessage();
+            $messageToUser = htmlentities("C'è stato un errore nel processo di accesso. Errore riscontrato: ") . $e->getMessage();
 
             // i valori che ho trovato in $_POST li reinserisco nel form così l'utente non deve reinserirli
             $pagina = str_replace("<VALUEUSERNAME>", $nome, $pagina);
             $pagina = str_replace("<VALUEPASSWORD>", $password, $pagina);
+    
+            $pagina = str_replace("</msg>", $messageToUser, $pagina);
         }
     }
 }

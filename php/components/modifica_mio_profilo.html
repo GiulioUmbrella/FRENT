@@ -20,7 +20,7 @@
 
     <div id="info_box"></div>
 
-    <div class="modifica_immagine_profilo">
+    <div onsubmit="return validazione_form_cambio_password();" class="modifica_immagine_profilo">
         <img src="<PATH/>" id="immagine_profilo" alt="Immagine di profilo" />
         <form method="post" action="./modifica_mio_profilo.php" class="form form_orizzontale add_margin_bottom" enctype="multipart/form-data">
             <fieldset>
@@ -35,7 +35,7 @@
         </form>
     </div>
 
-    <form action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
+    <form onsubmit="return validazione_form_modifica_profilo();" action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Cambia Password</legend>
                 <label for="nuova_password">Modifica Password</label>
@@ -47,7 +47,7 @@
         </fieldset>
     </form>
 
-    <form action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
+    <form onsubmit="return validazione_form_modifica_profilo()ò" action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
             <label for="nome">Nome</label>

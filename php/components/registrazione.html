@@ -17,57 +17,76 @@
 <body class="layout_centrale">
 <HEADER/>
 
-<div id="breadcrumb" >
+<div id="breadcrumb">
     <p>Ti trovi in: <a href="index.html" xml:lang="en">Home</a> &gt;&gt; Registrazione</p>
 </div>
 
-<div id="content" >
-  <h1>Registrati</h1>
-    <form action="./registrazione.php" method="post" class="form form_verticale">
+<div id="content">
+    <h1>Registrati</h1>
+    <form onsubmit="return validazione_form_registrazione();" action="./registrazione.php" method="post"
+          class="form form_verticale">
         <div id="credenziali_errate"></div>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
-            <label for="nome">Nome</label>
-            <input type="text" name="nome" id="nome"/>
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome"/>
 
-            <label for="cognome">Cognome</label>
-            <input type="text" name="cognome" id="cognome"/>
+            </div>
+            <div>
+                <label for="cognome">Cognome</label>
+                <input type="text" name="cognome" id="cognome"/>
 
-            <label for="mail" lang="en">E-mail</label>
-            <input type="text" name="mail" id="mail"/>
+            </div>
+            <div>
+                <label for="mail" lang="en">E-mail</label>
+                <input type="text" name="mail" id="mail"/>
 
-            <label for="username" lang="en">Username</label>
-            <input type="text" name="username" id="username"/>
+            </div>
+            <div>
+                <label for="username" lang="en">Username</label>
+                <input type="text" name="username" id="username"/>
 
-            <label for="password" lang="en">Password</label>
-            <input type="password" name="password" id="password"/>
+            </div>
+            <div>
+                <label for="password" lang="en">Password</label>
+                <input type="password" name="password" id="password"/>
 
-            <label for="ripeti_password" lang="en">Ripeti password</label>
-            <input type="password" name="ripeti_password" id="ripeti_password"/>
+            </div>
+            <div>
+                <label for="ripeti_password" lang="en">Ripeti password</label>
+                <input type="password" name="ripeti_password" id="ripeti_password"/>
 
-            <label for="telefono">Numero di telefono</label>
-            <input type="text" name="telefono" id="telefono"/>
+            </div>
+
+            <div>
+                <label for="telefono">Numero di telefono</label>
+                <input type="text" name="telefono" id="telefono"/>
+
+            </div>
+
+
         </fieldset>
         <fieldset id="data_di_nascita">
             <legend>Data di nascita</legend>
-	    <div class="input_label_orizzontale primo_elemento_input_label_orizzontale">
-            <label for="giorno_nascita">Giorno</label>
-            <select id="giorno_nascita" name="giorno_nascita" >
-                <GIORNO/>
-            </select>
-	    </div>
-	    <div class="input_label_orizzontale">
-            <label for="mese_nascita">Mese</label>
-            <select id="mese_nascita" name="mese_nascita" >
-                <MESE/>
-            </select>
-	    </div>
-	    <div class="input_label_orizzontale">
-            <label for="anno_nascita">Anno</label>
-            <select id="anno_nascita" name="anno_nascita" >
-                <ANNO/>
-            </select>
-	    </div>
+            <div class="input_label_orizzontale primo_elemento_input_label_orizzontale">
+                <label for="giorno_nascita">Giorno</label>
+                <select id="giorno_nascita" name="giorno_nascita">
+                    <GIORNO/>
+                </select>
+            </div>
+            <div class="input_label_orizzontale">
+                <label for="mese_nascita">Mese</label>
+                <select id="mese_nascita" name="mese_nascita">
+                    <MESE/>
+                </select>
+            </div>
+            <div class="input_label_orizzontale">
+                <label for="anno_nascita">Anno</label>
+                <select id="anno_nascita" name="anno_nascita">
+                    <ANNO/>
+                </select>
+            </div>
         </fieldset>
         <fieldset>
             <label class="aiuti_alla_navigazione" for="registrati">Registrati</label>
@@ -79,12 +98,13 @@
     <p class="aligned_with_form"> Hai già un <span lang="en">account</span>? <a href="./login.php">Accedi</a>!</p>
 </div>
 
-<div  id="footer">
+<div id="footer">
     <ul>
         <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
         <li><a href="condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
             utilizzo</a></li>
-        <li><a href="../../html/faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a>
+        <li><a href="../../html/faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en"
+                                                                                  title="Frequently Asked Questions">FAQ</abbr></a>
         </li>
     </ul>
 </div>

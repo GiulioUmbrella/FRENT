@@ -31,7 +31,7 @@
 
 <div id="content" class="content_gestione_annuncio">
     <h1 class="titolo_gestione_annuncio">Gestione annuncio <TITOLO/></h1> <!--TODO: PHP-->
-    <form action="./script_aggiorna_annuncio.php" method="post" class="form form_verticale">
+    <form onsubmit="return validazione_form_modifica_annuncio();" action="./script_aggiorna_annuncio.php" method="post" class="form form_verticale">
         <fieldset>
             <!-- TODO: aggiungere i valori dell'annuncio da modificare con PHP -->
             <legend class="aiuti_alla_navigazione">Dati annuncio</legend>
@@ -57,15 +57,13 @@
         <fieldset>
             <legend class="aiuti_alla_navigazione">Indirizzo</legend>
 
-            <label for="indirizzo">Indirizzo:</label>
+            <label for="indirizzo">Via e Civico:</label>
             <input type="text" name="indirizzo" id="indirizzo" placeholder="via" value="<VIA/>" maxlength="128"/>
 
             <label for="citta">Citt&agrave;:</label>
             <input type="text" name="citta" id="citta" placeholder="Citta"  value="<CITTA/>" maxlength="128"/>
 
         </fieldset>
-
-
         <!--      questi due tabindex dipenderanno dal numero delle foto che ci sara-->
         <input type="submit" value="Aggiorna">
         <input type="reset" value="Annulla Modifiche">
