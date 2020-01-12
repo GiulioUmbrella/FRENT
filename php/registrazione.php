@@ -2,6 +2,40 @@
 require_once "./load_Frent.php";
 require_once "./components/form_functions.php";
 
+/**
+ * Funzioni con l'unico scopo di evitare duplicazione di codice.
+ */
+
+/**
+ * Sostituisce i placeholder.
+ * @param array $post corrisponde all'array $_POST, da passare come parametor
+ * @param string $pagina aggiornata per riferimento con i valori dei placeholder presi da $_POST
+ */
+function placeholder_replacement_with_content($post, &$pagina) {
+    // ripristino i dati
+    $pagina = replacePlaceholders(
+        $pagina,
+        ["<VALUENOME>","<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
+        [$post["nome"], $post["cognome"], $post["mail"], $post["username"], $post["password"], $post["ripeti_password"], $post["telefono"]]
+    );
+}
+
+/**
+ * Sostituisce i placeholder con stringhe vuote.
+ * @param string $pagina aggiornata per riferimento con i valori dei placeholder sostituiti da stringhe vuote
+ */
+function placeholder_replacement_with_empty(&$pagina) {
+    // ripristino i dati
+    $pagina = replacePlaceholders(
+        $pagina,
+        ["<VALUENOME>","<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
+        ["", "", "", "", "", "", ""]
+    );
+}
+
+
+// REGISTRAZIONE
+
 // verifico che l'utente abbia effettuato l'accesso poiché in quel caso lo reindirizzo alla homepage
 if (isset($_SESSION["user"])) {
     header("Location: index.php");
@@ -42,16 +76,22 @@ if (isset($_POST["registrati"])) {
      */
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
-    $messageToUser = "";
-    $divId = "credenziali_errate";
-    $divClasses = "aligned_with_form";
+    /**
+     * Valori per la funzione addUserNotificationToPage
+     */
 
-    if($form_non_valido) { // IF1 - RAMO VERO IF1
-        $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo.", $risultato_validazione);
-    } else { // FINE RAMO VERO IF1 - RAMO FALSO IF1
-        if($_POST["password"] !== $_POST["ripeti_password"]) { // IF2 - RAMO VERO IF2
+    $messageToUser = "";
+    $divId = "info_box";
+    $divClasses = "aligned_with_form messaggio_errore";
+    $inParagraph = TRUE; // dice alla funzione addUserNotificationToPage che il contenuto non andrà dentro un paragraph
+
+    if($form_non_valido) {
+        $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo.</p>", $risultato_validazione);
+        $inParagraph = FALSE;
+    } else {
+        if($_POST["password"] !== $_POST["ripeti_password"]) {
             $messageToUser = "Le due password inserite non corrispondono.";
-        } else { // FINE RAMO VERO IF2 - RAMO FALSO IF2
+        } else {
             try {
                 $codice_registrazione = $frent->registrazione(
                     $_POST["nome"],
@@ -60,29 +100,36 @@ if (isset($_POST["registrati"])) {
                     $_POST["mail"],
                     $_POST["password"],
                     buildDate($_POST["anno_nascita"], $_POST["mese_nascita"], $_POST["giorno_nascita"]),
-                    "defaultImages/imgProfiloDefault.png",
+                    FOTO_PROFILO_DEFAULT,
                     $_POST["telefono"]
                 );
                 
-                if($codice_registrazione === -1) { // IF3 - RAMO VERO IF3
+                if($codice_registrazione === -1) {
                     $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione.");
-                } else if($codice_registrazione === -2) { // FINE RAMO VERO IF3 - RAMO FALSO IF3 - IF4 - RAMO VERO IF4
+                } else if($codice_registrazione === -2) {
                     $messageToUser = "Un profilo ". htmlentities("è già") . " presente con l'indirizzo <span xml:lang=\"en\">mail</span> fornito. Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
-                } else { // FINE RAMO VERO IF4 - RAMO FALSO IF4
+                } else {
                     // tento di creare una cartella per salvare da qui in avanti i file dell'utente
-                    if(!mkdir("../uploads/user$codice_registrazione")) { // IF5 - RAMO VERO IF5
+                    if(!mkdir(uploadsFolder()."user$codice_registrazione")) {
                         throw new Eccezione("Non è stato possibile creare una cartella per le immagini dell'utente.");
-                    } // FINE RAMO VERO IF5 - RAMO FALSO IF5
+                    }
 
+                    // placeholder sostituiti con stringa vuota in quanto avvenuta registrazione
+                    placeholder_replacement_with_empty($pagina);
+                    $divClasses = "aligned_with_form messaggio_ok";
                     $messageToUser = "Registrazione avvenuta con successo! Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
-                } // FINE RAMO FALSO IF3 - FINE RAMO FALSO IF4
+                }
 
             } catch(Eccezione $exc) {
                 $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione. Errore riscontrato: ") . $exc->getMessage();
             }
-        } // FINE RAMO FALSO IF2
-    } // FINE RAMO FALSO IF1
-    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses);
+        }
+    }
+    /// se è stata invocata placeholder_replacement_with_empty, la funzione non avrà side-effect
+    placeholder_replacement_with_content($_POST, $pagina); // aggiornata per riferimento
+    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
+} else {
+    placeholder_replacement_with_empty($pagina); // aggiornata per riferimento
 }
 
 echo $pagina;
