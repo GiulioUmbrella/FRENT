@@ -47,16 +47,16 @@ class ImageManager {
 
         // verifico che sia stato caricato un file o più
         if(!isset($_FILES[$img_name_attr]) || $_FILES[$img_name_attr]["error"] === 4 || $_FILES[$img_name_attr]["error"][0] === 4) {
-            throw new Eccezione("Non è stato caricato alcun file.");   
+            throw new Eccezione("Non è stato caricato alcun file immagine.");   
         }
         
         if($_FILES[$img_name_attr]["error"] === 1 || $_FILES[$img_name_attr]["error"][0] === 1) {
-            throw new Eccezione("Il file caricato supera la dimensione consentita indicata.");
+            throw new Eccezione("Il file immagine caricato supera la dimensione consentita indicata.");
         }
         
         // verifico che l'indice del file chiesto sia nei limiti
         if($fileIndex !== -1 && $fileIndex > $this->countFiles($img_name_attr)) {
-            throw new Eccezione("È stato richiesto di accedere ad un file non caricato.");
+            throw new Eccezione("È stato richiesto di accedere ad un file immagine non caricato.");
         }
 
         // recupero il nome del file caricato
@@ -76,7 +76,7 @@ class ImageManager {
             $this->targetFileExtension != "png" &&
             $this->targetFileExtension != "jpeg"
         ) {
-            throw new Eccezione("Il file caricato non ha un'estensione valida.");
+            throw new Eccezione("Il file immagine caricato non ha un'estensione valida.");
         }
         
         // verifico che il file caricato sia effetivamente un file imamgine (verifica i metadati)
@@ -142,7 +142,7 @@ class ImageManager {
      */
     private function verifyFilePresence() {
         if (strlen($this->targetFileExtension) === 0 || strlen($this->targetFileName) === 0) {
-            throw new Eccezione("Non è stato ancora selezionato un file.");
+            throw new Eccezione("Non è stato ancora selezionato un file immagine.");
         }
     }
 
