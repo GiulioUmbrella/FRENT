@@ -37,8 +37,8 @@ if(!isset($_POST["accedi"])) {
             // aggiunto l'oggetto utente alla sessione  amp
             $_SESSION["user"] = $utente;
             header("Location: ./index.php");
-        } catch (Eccezione $e) {
-            $messageToUser = htmlentities("C'è stato un errore nel processo di accesso. Errore riscontrato: ") . $e->getMessage();
+        } catch (Eccezione $exc) {
+            $messageToUser = htmlentities("C'è stato un errore nel processo di accesso. Errore riscontrato: ") . $exc->getMessage();
 
             // i valori che ho trovato in $_POST li reinserisco nel form così l'utente non deve reinserirli
             $pagina = str_replace("<VALUEUSERNAME>", $nome, $pagina);

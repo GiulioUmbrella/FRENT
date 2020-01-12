@@ -1,18 +1,22 @@
 <?php
 
+define("FOTO_PROFILO_DEFAULT", "defaultImages/imgProfiloDefault.png");
+define("ANTEPRIMA_ANNUNCIO_DEFAULT", "defaultImages/imgAnteprimaAnnuncioDefault.png");
+
 /**
  * Aggiorna la pagina aggiungendo un messaggio per avvisare l'utente, che sia un semplice avviso oppure un messaggio di errore.
  * @param string $pageContent corrisponde al file HTML della pagina da mostrare, sottoforma di stringa
  * @param string $contentToShow corrisponde all'avviso o errore da mostrare all'utente all'interno di un paragrafo (non usa htmlentities, farlo nella chiamata se necessario)
  * @param string $divId corrisponde all'id del tag div che conterrà il messaggio
  * @param string $divClasses corrisponde alla/e classe/i da aggiungere (se necessario, di default è vuoto come parametro) per stilizzare il contenuto mostrato
+ * @param bool $inParagraph se $contentToShow va dentro un paragrafo <p></p> oppure no
  * @return string $pageContent con il proprio contenuto modificato secondo le specifiche
  */
-function addUserNotificationToPage($pageContent, $contentToShow, $divId, $divClasses = ""): string {
+function addUserNotificationToPage($pageContent, $contentToShow, $divId, $divClasses = "", $inParagraph = TRUE): string {
     return str_replace(
         "<div id=\"$divId\"></div>",
         "<div id=\"$divId\" " . ($divClasses === "" ? "" : "class=\"$divClasses\"") . ">" .
-            "<p>$contentToShow</p>" .
+            (($inParagraph === TRUE) ? "<p>$contentToShow</p>" : $contentToShow) .
         "</div>",
         $pageContent
     );
@@ -33,7 +37,7 @@ function formValidationErrorList($message, $resultOfValidation) {
     }
     $errorList .= "</ul>";
 
-    return htmlentities($message) . $errorList;
+    return $message . $errorList;
 }
 
 
@@ -70,4 +74,28 @@ function buildDate($year, $month, $day) {
     }
     
     return "$year-$month-$day";
+}
+
+/**
+ * Data una lista di placeholder da cercare su una stringa, li sostituisce con i valori richiesti.
+ * Non effettua un controllo di validità sulla lunghezza dei due array (è compito del chiamante)
+ * @param string $pageContent contiene la stringa con i placeholder
+ * @param array $placeholders array di stringhe dei placeholder
+ * @param array $actualValues array di stringhe dei valori da inserire
+ * @return string pagina con il nuovo contenuto
+ */
+function replacePlaceholders($pageContent, $placeholders, $actualValues) {
+    $newpage = $pageContent;
+    foreach($placeholders as $key => $ph) {
+        $newpage = str_replace($ph, $actualValues[$key], $newpage);
+    }
+
+    return $newpage;
+}
+
+/**
+ * Restituisce il path della cartella in cui effettuare gli upload.
+ */
+function uploadsFolder() {
+    return "../uploads/";
 }

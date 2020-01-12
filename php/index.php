@@ -1,9 +1,7 @@
 <?php
 //echo phpinfo();
 require_once "./CheckMethods.php";
-require_once "./class_Frent.php";
-require_once "./class_CredenzialiDB.php";
-require_once "./class_Annuncio.php";
+require_once "./components/form_functions.php";
 require_once "load_Frent.php";
 try {
     $pagina = file_get_contents("./components/index.html");
@@ -48,7 +46,7 @@ try {
     foreach ($annunci as $annuncio) {
         $titolo = $annuncio->getTitolo();
         $id = $annuncio->getIdAnnuncio();
-        $path = $annuncio->getImgAnteprima();
+        $path = uploadsFolder() . $annuncio->getImgAnteprima();
         $content .= "<li class=\"elemento_sei_pannelli\">
                     <a href='./dettagli_annuncio.php?id=$id' >$titolo<img src=\"$path\"
                 alt=\"".$annuncio->getDescAnteprima()."\"/></a></li>";

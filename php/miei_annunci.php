@@ -1,8 +1,8 @@
 <?php
 //todo nell'elenco visualizzare lo stato di approvazione degli annunci!
-require_once "class_Database.php";
-require_once "class_Frent.php";
 require_once "./load_Frent.php";
+require_once "./components/form_functions.php";
+
 $pagina = file_get_contents("./components/miei_annunci.html");
 
 if (isset($_SESSION["user"])) {
@@ -18,7 +18,7 @@ if (isset($_SESSION["user"])) {
         $Titolo = $annuncio->getTitolo();
         $descrizione=$annuncio->getDescrizione();
         $prezzoTotale=$annuncio->getPrezzoNotte();
-        $path= $annuncio->getImgAnteprima();
+        $path= uploadsFolder() . $annuncio->getImgAnteprima();
         $recensioni=$frent->getCommentiAnnuncio(intval($annuncio->getIdAnnuncio()));
         $numeroRecensione= count($recensioni);
         $punteggio=0;

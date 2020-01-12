@@ -893,6 +893,10 @@ body .aiuti_alla_navigazione {
     color: green;
 }
 
+.messaggio_attenzione {
+    color: orange;
+}
+
 #primo_pannello_piu_vistate {
     flex-grow: 3;
     background-image: url("../immagini/roma.jpg");
