@@ -35,7 +35,7 @@ if(!isset($_POST["accedi"])) {
             // aggiunto l'oggetto utente alla sessione
             $_SESSION["admin"] = $admin;
             header("Location: ./approvazione_annunci.php");
-        } catch (Eccezione $e) {
+        } catch (Eccezione $exc) {
             $messageToUser = htmlentities("C'è stato un errore nel processo di accesso. Errore riscontrato: ") . $exc->getMessage();
 
             // i valori che ho trovato in $_POST li reinserisco nel form così l'utente non deve reinserirli
