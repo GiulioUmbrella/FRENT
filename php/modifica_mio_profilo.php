@@ -56,7 +56,8 @@ $pagina = str_replace("<ANNO/>", $AAAA, $pagina);
 // --- SE SONO STATI INVIATI FORM
 $messageToUser = "";
 $divId = "info_box";
-$divClasses = "aligned_with_form";
+$divClasses = "aligned_with_form messaggio_errore";
+$inParagraph = TRUE; // dice alla funzione addUserNotificationToPage che il contenuto non andrà dentro un paragraph
 
 // --- FORM MODIFICA IMG PROFILO
 if(isset($_POST["modifica_img_profilo"])) {
@@ -85,6 +86,7 @@ if(isset($_POST["modifica_img_profilo"])) {
                 // aggiorno la variabile in sessione altrimenti ho discrepanze fra server e dati locali
                 $user->setImgProfilo("user" . $user->getIdUtente() . "/" . $imageManager->fileName());
 
+                $divClasses = "aligned_with_form messaggio_ok";
                 $messageToUser = htmlentities("La nuova immagine di profilo è stata correttamente salvata.") . "<a href=\"mio_profilo.php\" title=\"Vai alla pagina del profilo\">Torna alla pagina del profilo</a>.";
             } else {
                 $messageToUser = htmlentities("C'è stato un errore nel salvataggio della nuova immagine di profilo.");
@@ -101,7 +103,8 @@ if(isset($_POST["modifica_password"])) {
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
     if($form_non_valido) { // IF1 - RAMO VERO IF1
-        $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo di modifica della password.", $risultato_validazione);
+        $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo di modifica della password.</p>", $risultato_validazione);
+        $inParagraph = FALSE;
     } else { // FINE RAMO VERO IF1 - RAMO FALSO IF2
         if($_POST["nuova_password"] !== $_POST["conferma_nuova_password"]) { // IF2 - RAMO VERO IF2
             $messageToUser = "Le due password inserite per la modifica non corrispondono.";
@@ -125,6 +128,7 @@ if(isset($_POST["modifica_password"])) {
                  // aggiorno la variabile in sessione altrimenti ho discrepanze fra server e dati locali
                 $user->setPassword($_POST["nuova_password"]);
 
+                $divClasses = "aligned_with_form messaggio_ok";
                 $messageToUser = "Modifica della password avvenuta con successo! <a href=\"mio_profilo.php\" title=\"Vai alla pagina del profilo\">Torna alla pagina del profilo</a>.";
             } // FINE RAMO FALSO IF3
         } catch(Eccezione $exc) {
@@ -139,7 +143,8 @@ if(isset($_POST["modifica_dati_personali"])) {
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
     if($form_non_valido) { // IF1 - RAMO VERO IF1
-        $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo di modifica dei dati personali.", $risultato_validazione);
+        $messageToUser = formValidationErrorList("<p>C'&egraveM stato un errore nella compilazione del modulo di modifica dei dati personali.</p>", $risultato_validazione);
+        $inParagraph = FALSE;
     } else { // FINE RAMO VERO IF1 - RAMO FALSO IF2
         try {
             $codice_aggiornamento = $frent->editUser(
@@ -163,6 +168,7 @@ if(isset($_POST["modifica_dati_personali"])) {
                 $user->setDataNascita(buildDate($_POST["anno_nascita"], $_POST["mese_nascita"], $_POST["giorno_nascita"]));
                 $user->setTelefono($_POST["telefono"]);
 
+                $divClasses = "aligned_with_form messaggio_ok";
                 $messageToUser = "Modifica dei dati personali avvenuta con successo! <a href=\"mio_profilo.php\" title=\"Vai alla pagina del profilo\">Torna alla pagina del profilo</a>.";
             }
         } catch(Eccezione $exc) {
