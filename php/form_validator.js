@@ -184,7 +184,7 @@ function check_prezzo_notte(input) {
     return false;
 }
 
-function check_via(input) {
+function check_indirizzo(input) {
 
 }
 
@@ -274,7 +274,7 @@ function validazione_form_modifica_annuncio() {
     const input_img_anteprima = document.getElementById("img_anteprima");
     const input_desc_anteprima = document.getElementById("desc_anteprima");
     const input_prezzoNotte = document.getElementById("prezzo_notte");
-    const input_via = document.getElementById("via");
+    const input_indirizzo = document.getElementById("indirizzo");
     const input_citta = document.getElementById("citta");
 
     const res_descrizione = check_descrizione(input_descrizione);
@@ -282,10 +282,10 @@ function validazione_form_modifica_annuncio() {
     const res_img_anteprima = check_immagini(input_img_anteprima);
     const res_desc_anteprima = check_descrizione_foto(input_desc_anteprima);
     const res_prezzoNotte = check_prezzo_notte(input_prezzoNotte);
-    const res_via = check_via(input_via);
+    const res_indirizzo = check_indirizzo(input_indirizzo);
     const res_citta = check_citta(input_citta);
     return res_desc_anteprima && res_descrizione && res_img_anteprima && res_maxOspiti && res_prezzoNotte &&
-        res_via && res_citta;
+        res_indirizzo && res_citta;
 }
 function validazione_form_modifica_foto_profilo(input){
     // todo fare eventuali controlli.

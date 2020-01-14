@@ -11,9 +11,9 @@ if (isset($_SESSION["user"]) ){
             $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
             
             $pagina = str_replace("<NUMOSPITIMAX/>",$annuncio->getMaxOspiti(),$pagina);
-            $pagina = str_replace("<PrAPERSONA/>",$annuncio->getPrezzoNotte(),$pagina);
+            $pagina = str_replace("<PREZZONOTTE/>",$annuncio->getPrezzoNotte(),$pagina);
             $pagina = str_replace("<DESCRIZIONE/>",$annuncio->getDescrizione(),$pagina);
-            $pagina = str_replace("<VIA/>",$annuncio->getIndirizzo(),$pagina);
+            $pagina = str_replace("<INDIRIZZO/>",$annuncio->getIndirizzo(),$pagina);
             $pagina = str_replace("<CITTA/>",$annuncio->getCitta(),$pagina);
             $pagina = str_replace("<IDANNUNCIO/>", $annuncio->getIdAnnuncio(),$pagina);
             
