@@ -177,5 +177,8 @@ if(isset($_POST["modifica_dati_personali"])) {
     } // FINE RAMO FALSO IF1
 }
 
-$pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
+if(isset($_POST["modifica_img_profilo"]) || isset($_POST["modifica_password"]) || isset($_POST["modifica_dati_personali"])) {
+    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
+}
+
 echo $pagina;
