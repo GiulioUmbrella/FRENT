@@ -46,14 +46,14 @@ function check_immagini(input) {
 }
 
 function check_password_first(input) {
-
     const val = input.value.trim();
     const reg = new RegExp("");
     if (val.length > 3 && reg.test(val)) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Il password non valido!")
+    mostra_errore(input, "Il password non valido!");
+    return false;
 }
 
 function check_password_second(primo, secondo) {
@@ -112,7 +112,7 @@ function check_numeroTelefonico(input) {
 function check_userMail(mailInput) {
     const reg = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     // const reg = new RegExp('^\\w+([._-]?\\w+)*@\\w+([.-]?\\w+)*(.\\w{2,6})+$');
-    if (reg.test(mailInput.value.trim())) {
+    if (reg.test(mailInput.value.trim()) && mailInput.toString().trim().length<191) {
 
         togli_errore(mailInput);
         return true;
@@ -124,7 +124,7 @@ function check_userMail(mailInput) {
 
 function check_password(pwdInput) {
     const value = pwdInput.value.trim();
-    if (value.length > 0) {
+    if (value.length > 0 && value.length <=48) {
         togli_errore(pwdInput);
         return true;
     }
@@ -145,10 +145,12 @@ function check_data(gg, mm, aa) {
     const d = ''.concat(anno.toString()).concat("-").concat(mese.toString()).concat("-").concat(giorno.toString());
     const data = new Date(d);
     //fixme funziona il test case sotto
-    if (data.toString()!=="Invalid Date"){
+    if (data.toString().trim()!=="Invalid Date"){
+        window.alert("data ok");
         togli_errore(gg);
         return true;
     }
+    window.alert("data nok");
     mostra_errore(gg);
     return false;
 }
@@ -187,13 +189,13 @@ function check_via(input) {
 }
 
 function check_username(input) {
-    const val = input.value.trim();
-
-    if (val.length > 3) {
+    const val = input.value.toString().trim();
+    const reg = new RegExp("^[a-zA-Z0-9]{4,32}$");
+    if (reg.test(val)) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Username inserito non valido!");
+    mostra_errore(input, "Nome inserito non valido")
     return false;
 }
 
@@ -233,7 +235,7 @@ function validazione_form_registrazione() {
     const res_nome = check_nome(inputNome);
     const res_cognome = check_cognome(inputCognome);
     const res_mail = check_userMail(inputMail);
-    const res_username = check_nome(inputUserName);
+    const res_username = check_username(inputUserName);
     const res_pwd = check_password_first(inputPwd);
     const res_pwdR = check_password_second(inputPwd, inputPwdR);
     const res_telefono = check_numeroTelefonico(inputNumTelefono);
@@ -285,8 +287,17 @@ function validazione_form_modifica_annuncio() {
     return res_desc_anteprima && res_descrizione && res_img_anteprima && res_maxOspiti && res_prezzoNotte &&
         res_via && res_citta;
 }
+function validazione_form_modifica_foto_profilo(input){
+    // todo fare eventuali controlli.
+
+    return true;
+}
 
 function validazione_form_cambio_password() {
+    const inputPwd = document.getElementById("nuova_password");
+    const inputPwd_R = document.getElementById("conferma_nuova_password");
+
+    return check_password_first(inputPwd) && check_password_second(inputPwd, inputPwd_R);
 
 }
 
