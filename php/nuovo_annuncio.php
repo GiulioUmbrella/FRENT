@@ -45,7 +45,7 @@ $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html")
 
 // se l'utente ha premuto il tasto di invio dati visualizzo la pagina con il form
 if(isset($_POST["nuovo_annuncio"])) {
-    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["titolo", "descrizione", "max_ospiti", "desc_anteprima", "prezzo_notte", "indirizzo", "citta"], TRUE);
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["titolo", "descrizione", "max_ospiti", "desc_anteprima", "prezzo_notte", "indirizzo", "citta"]);
     /**
      * se $form_non_valido === TRUE ci sono valori di $_POST non settati
      */

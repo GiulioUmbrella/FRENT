@@ -99,7 +99,7 @@ if(isset($_POST["modifica_img_profilo"])) {
 
 /// --- FORM MODIFICA PASSWORD
 if(isset($_POST["modifica_password"])) {
-    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nuova_password", "conferma_nuova_password"], TRUE);
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nuova_password", "conferma_nuova_password"]);
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
     if($form_non_valido) { // IF1 - RAMO VERO IF1
@@ -139,7 +139,7 @@ if(isset($_POST["modifica_password"])) {
 
 // --- FORM MODIFICA DATI PERSONALI
 if(isset($_POST["modifica_dati_personali"])) {
-    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nome", "cognome", "mail", "username", "telefono", "giorno_nascita", "mese_nascita", "anno_nascita"], TRUE);
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nome", "cognome", "mail", "username", "telefono", "giorno_nascita", "mese_nascita", "anno_nascita"]);
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
     if($form_non_valido) { // IF1 - RAMO VERO IF1

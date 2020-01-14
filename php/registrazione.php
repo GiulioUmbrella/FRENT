@@ -70,7 +70,7 @@ $pagina = str_replace("<ANNO/>", $AAAA, $pagina);
 
 // se l'utente non ha premuto il tasto di invio dati visualizzo la pagina con il form
 if (isset($_POST["registrati"])) {
-    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nome", "cognome", "mail", "username", "password", "ripeti_password", "telefono", "giorno_nascita", "mese_nascita", "anno_nascita"], TRUE);
+    $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["nome", "cognome", "mail", "username", "password", "ripeti_password", "telefono", "giorno_nascita", "mese_nascita", "anno_nascita"]);
     /**
      * se $form_non_valido === TRUE ci sono valori di $_POST non settati
      */
