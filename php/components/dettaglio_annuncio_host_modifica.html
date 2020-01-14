@@ -30,42 +30,42 @@
     <h1 class="titolo_gestione_annuncio">Gestione annuncio
         <TITOLO/>
     </h1> <!--TODO: PHP-->
-    <form onsubmit="return validazione_form_modifica_annuncio();" action="./script_aggiorna_annuncio.php" method="post"
-          class="form form_verticale">
+    <div id="info_box"></div>
+    <form onsubmit="return validazione_form_modifica_annuncio();" action="./modifica_annuncio.php" method="post"
+          class="form form_verticale" enctype="multipart/form-data">
         <fieldset>
             <!-- TODO: aggiungere i valori dell'annuncio da modificare con PHP -->
             <legend class="aiuti_alla_navigazione">Dati annuncio</legend>
             <div>
-
+            <label for="descrizione">Descrizione <small>(devono essere informazioni utili: pi&ugrave; esaustive sono, pi&ugrave; &egrave; possibile che il tuo annuncio venga scelto!)</small></label>
+            <textarea id="descrizione" name="descrizione" maxlength="512"><DESCRIZIONE/></textarea>
+            
             <label for="max_ospiti">Numero ospiti <small>(quanti ospiti possono essere presenti al massimo)</small></label>
             <input type="text" name="max_ospiti" id="max_ospiti" maxlength="2" value="<NUMOSPITIMAX/>"/>
 
             <label for="anteprima">Immagine di anteprima dell'annuncio <small>(l'immagine pu&ograve; essere in formato <span xml:lang="en">JPG</span>, <span xml:lang="en">JPEG</span>, <span xml:lang="en">PNG</span> ed avere una dimensione massima di 2 MB)</small></label>
             <input type="file" id="anteprima" name="anteprima" accept=".png, .jpg, .jpeg"/>
             
-            <label for="desc_anteprima">descrizione anteprima</label>
-            <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256"  placeholder="descrizione breve"></textarea>
+            <label for="desc_anteprima">Descrizione per l'immagine di anteprima <small>(deve descrivere l'immagine di anteprima che hai selezionato)</small></label>
+            <textarea id="desc_anteprima" name="desc_anteprima" maxlength="256"><DESCANTEPRIMA/></textarea>
 
             <label for="prezzo_notte">Prezzo per notte <small>(in &euro;)</small></label>
             <input type="text" id="prezzo_notte" name="prezzo_notte" value="<PREZZONOTTE/>" />
-
-            <label for="descrizione">Descrizione <small>(devono essere informazioni utili: pi&ugrave; esaustive sono, pi&ugrave; &egrave; possibile che il tuo annuncio venga scelto!)</small></label>
-            <textarea id="descrizione" name="descrizione" maxlength="512"><DESCRIZIONE/></textarea>
 
         </fieldset>
         <fieldset>
             <legend class="aiuti_alla_navigazione">Indirizzo</legend>
             <div>
                 <label for="indirizzo">Indirizzo <small>(via e numero civico)</small></label>
-                <input type="text" name="indirizzo" id="indirizzo" maxlength="128" value="<INDIRIZZO/>"/>
+                <input type="text" name="indirizzo" id="indirizzo" maxlength="128" value="<INDIRIZZO/>" />
             </div>
             <div><label for="citta">Citt&agrave;</label>
-                <input type="text" name="citta" id="citta" maxlength="128"/>
+                <input type="text" name="citta" id="citta" maxlength="128" value="<CITTA/>" />
             </div>
 
         </fieldset>
         <!--      questi due tabindex dipenderanno dal numero delle foto che ci sara-->
-        <input type="submit" value="Aggiorna">
+        <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna">
         <input type="reset" value="Annulla Modifiche">
     </form>
 </div>
