@@ -21,9 +21,9 @@
 
     <div id="info_box"></div>
 
-    <div onsubmit="return validazione_form_cambio_password();" class="modifica_immagine_profilo">
+    <div  class="modifica_immagine_profilo">
         <img src="<PATH/>" id="immagine_profilo" alt="Immagine di profilo" />
-        <form method="post" action="./modifica_mio_profilo.php" class="form form_orizzontale add_margin_bottom" enctype="multipart/form-data">
+        <form method="post" onsubmit="return validazione_form_modifica_foto_profilo();" action="./modifica_mio_profilo.php" class="form form_orizzontale add_margin_bottom" enctype="multipart/form-data">
             <fieldset>
                 <legend>Cambia la tua immagine di profilo</legend>
                     <label for="nuova_img_profilo">Sono accettati file in formato <span xml:lang="en">JPG</span>, <span xml:lang="en">JPEG</span>, <span xml:lang="en">PNG</span>, dalla dimensione massima di 2 MB.</label>
@@ -36,19 +36,24 @@
         </form>
     </div>
 
-    <form onsubmit="return validazione_form_modifica_profilo();" action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
+    <form onsubmit="return validazione_form_cambio_password();" action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Cambia Password</legend>
-                <label for="nuova_password">Modifica Password</label>
-                <input type="password" name="nuova_password" id="nuova_password" />
+                <div>
+                    <label for="nuova_password">Modifica Password</label>
+                    <input type="password" name="nuova_password" id="nuova_password" />
+                </div>
+            <div>
                 <label for="conferma_nuova_password">Conferma Password</label>
                 <input type="password" name="conferma_nuova_password" id="conferma_nuova_password" />
+
+            </div>
             <label for="modifica_password" class="aiuti_alla_navigazione">Conferma cambio password</label>
             <input id="modifica_password" name="modifica_password" type="submit" value="Conferma modifica password"/>
         </fieldset>
     </form>
 
-    <form onsubmit="return validazione_form_modifica_profilo()ò" action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
+    <form onsubmit="return validazione_form_modifica_profilo();" action="./modifica_mio_profilo.php" method="post" class="form form_verticale form_modifica">
         <fieldset>
             <legend class="aiuti_alla_navigazione">Informazioni generali</legend>
             <label for="nome">Nome</label>
