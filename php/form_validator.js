@@ -19,11 +19,53 @@ function togli_errore(input) {
 }
 
 function check_nome(input) {
+    const val = input.value.toString().trim();
+    const reg = new RegExp("^[a-zA-Z ]{4,32}$");
+    if (reg.test(val)) {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Nome inserito non valido")
+    return false;
+}
+
+function check_cognome(input) {
+    const val = input.value.toString().trim();
+    const reg = new RegExp("^[a-zA-Z ]{4,32}$");
+    if (val.length > 3 && reg.test(val)) {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Cognome inserito non valido")
+    return false;
+}
+
+// todo
+function check_immagini(input) {
 
 }
 
-function check_immagini() {
+function check_password_first(input) {
 
+    const val = input.value.trim();
+    const reg = new RegExp("");
+    if (val.length > 3 && reg.test(val)) {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Il password non valido!")
+}
+
+function check_password_second(primo, secondo) {
+
+    const val = primo.value.trim();
+    const val2 = secondo.value.trim();
+    if (val.toString() === val2.toString()) {
+        togli_errore(secondo);
+        return true;
+    }
+    mostra_errore(secondo, "I due password non sono uguali!");
+    return false;
 }
 
 function check_citta(n) {
@@ -35,17 +77,6 @@ function check_citta(n) {
     mostra_errore(n, "Il nome della citt&agrave; non va bene.")
 }
 
-function check_data(data) {
-    const reg = new RegExp('');
-
-    if (reg.test(data.value)) {
-        togli_errore(data);
-        return true;
-    }
-    mostra_errore(data, "data non valida.");
-    return false;
-
-}
 
 function check_dateInizioEFine(dataInizio, dataFine) {
 
@@ -66,14 +97,14 @@ function check_numOspiti(num) {
 
 function check_numeroTelefonico(input) {
 
-    const reg = new RegExp('^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{7}$');
-
+    // i vecchi numeri di telefono, tuttora esistenti, hanno una cifra in meno.
+    const reg = new RegExp('^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
     if (reg.test(input.value)) {
         togli_errore(input);
         return true;
     }
 
-    mostra_errore(input, "Numero non valido!");
+    mostra_errore(input, "Numero di telefono non valido!");
     return false;
 
 }
@@ -92,8 +123,7 @@ function check_userMail(mailInput) {
 }
 
 function check_password(pwdInput) {
-    var value = pwdInput.value;
-    value = value.trim();
+    const value = pwdInput.value.trim();
     if (value.length > 0) {
         togli_errore(pwdInput);
         return true;
@@ -107,7 +137,20 @@ function check_data(gg, mm, aa) {
     const mese = parseInt(mm.value);
     const anno = parseInt(aa.value);
 
-
+    if (isNaN(giorno) || isNaN(mese) || isNaN(anno)){
+        mostra_errore("La data non valida!");
+        return false;
+    }
+    // const d = ''.concat(anno.toString()).concat("-").concat("13").concat("-").concat(giorno.toString());
+    const d = ''.concat(anno.toString()).concat("-").concat(mese.toString()).concat("-").concat(giorno.toString());
+    const data = new Date(d);
+    //fixme funziona il test case sotto
+    if (data.toString()!=="Invalid Date"){
+        togli_errore(gg);
+        return true;
+    }
+    mostra_errore(gg);
+    return false;
 }
 
 function check_descrizione_foto() {
@@ -143,6 +186,17 @@ function check_via(input) {
 
 }
 
+function check_username(input) {
+    const val = input.value.trim();
+
+    if (val.length > 3) {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Username inserito non valido!");
+    return false;
+}
+
 function check_civico(input) {
 
 }
@@ -175,23 +229,19 @@ function validazione_form_registrazione() {
     const inputMese = document.getElementById("mese_nascita");
     const inputAnno = document.getElementById("anno_nascita");
 
-    if (inputPwd.value.toString() === inputPwdR.toString()) {
 
-        const res_nome = check_nome(inputNome);
-        const res_cognome = check_nome(inputCognome);
-        const res_mail = check_nome(inputMail);
-        const res_username = check_nome(inputUserName);
-        const res_pwd = check_nome(inputPwd);
-        const res_pwdR = check_nome(inputPwdR);
-        const res_telefono = check_numeroTelefonico(inputNumTelefono);
-        const res_data = check_data(inputGiorno.value, inputMese.value, inputAnno.value);
+    const res_nome = check_nome(inputNome);
+    const res_cognome = check_cognome(inputCognome);
+    const res_mail = check_userMail(inputMail);
+    const res_username = check_nome(inputUserName);
+    const res_pwd = check_password_first(inputPwd);
+    const res_pwdR = check_password_second(inputPwd, inputPwdR);
+    const res_telefono = check_numeroTelefonico(inputNumTelefono);
+    const res_data = check_data(inputGiorno, inputMese, inputAnno);
 
-        return res_telefono && res_nome && res_cognome && res_mail && res_pwd && res_pwdR && res_username && res_data;
+    return res_telefono && res_nome && res_cognome && res_mail && res_pwd && res_pwdR && res_username && res_data;
 
-    } else {
-        mostra_errore(inputPwdR, "Password inseriti non sono identici");
-        return false;
-    }
+
 }
 
 //usato sia per login utente che login amministratore
