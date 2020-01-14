@@ -62,7 +62,7 @@ $inParagraph = TRUE; // dice alla funzione addUserNotificationToPage che il cont
 // --- FORM MODIFICA IMG PROFILO
 if(isset($_POST["modifica_img_profilo"])) {
     try {
-        $imageManager = new ImageManager("../uploads/user" . $user->getIdUtente() . "/");
+        $imageManager = new ImageManager(uploadsFolder() . "user" . $user->getIdUtente() . "/");
         $imageManager->setFile("nuova_img_profilo", "imgProfilo" . $user->getIdUtente());
 
         // possibilmente non verrà aggiornato nulla
@@ -177,5 +177,5 @@ if(isset($_POST["modifica_dati_personali"])) {
     } // FINE RAMO FALSO IF1
 }
 
-$pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses);
+$pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
 echo $pagina;

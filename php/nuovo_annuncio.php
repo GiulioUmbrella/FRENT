@@ -110,7 +110,7 @@ if(isset($_POST["nuovo_annuncio"])) {
                     $messageToUser = htmlentities("L'annuncio è stato salvato, ma non è stato possibile inserire l'immagine di anteprima richiesta (errore di salvataggio).");
                 }
 
-                $messageToUser .= "<a href=\"miei_annunci.php\" title=\"Vai alla pagina del profilo\">Torna alla lista degli annunci</a>.";
+                $messageToUser .= "<a href=\"miei_annunci.php\" title=\"Vai alla lista degli annunci\">Torna alla lista degli annunci</a>.";
             }
         } catch(Eccezione $exc) {
             $messageToUser = htmlentities("C'è stato un errore nel processo di inserimento del nuovo annuncio. Errore riscontrato: ") . $exc->getMessage();
