@@ -12,6 +12,8 @@ todo quando l'annuncio non approvato è visualizzato dal proprietario, il pulsan
 require_once "./class_Frent.php";
 require_once "./class_CredenzialiDB.php";
 require_once "load_Frent.php";
+require_once "./components/form_functions.php";
+
 try {
     /*
      * quando annuncio non è stato approvato, fare dei controlli che non può essere visualizzato,
@@ -158,7 +160,7 @@ try {
     }
     
     $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
-    $img = $annuncio->getImgAnteprima();
+    $img = uploadsFolder() . $annuncio->getImgAnteprima();
     
     
     $pagina = str_replace("<TITOLO_ANNUNCIO/>", $annuncio->getTitolo(), $pagina);
