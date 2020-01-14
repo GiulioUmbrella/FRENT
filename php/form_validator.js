@@ -85,7 +85,7 @@ function check_dateInizioEFine(dataInizio, dataFine) {
 function check_numOspiti(num) {
     const v = num.value;
 
-    if (isNaN(v) && v <= 99) {
+    if (isNaN(v) && parseInt(v) <= 99) {
         togli_errore(num);
         return true;
     }
@@ -157,6 +157,7 @@ function check_data(gg, mm, aa) {
 
 function check_descrizione_foto() {
 
+
 }
 
 function check_descrizione(input) {
@@ -170,7 +171,14 @@ function check_descrizione(input) {
 }
 
 function check_titoloAnnuncio(input) {
+    const val =  input.value.trim();
 
+    if (val.length>0 && val.length<=32){
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input,"indirizzo inserito non valido!");
+    return true;
 }
 
 function check_prezzo_notte(input) {
@@ -186,6 +194,14 @@ function check_prezzo_notte(input) {
 
 function check_via(input) {
 
+    const val =  input.value.trim();
+
+    if (val.length>0 && val.length<=128){
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input,"indirizzo inserito non valido!");
+    return true;
 }
 
 function check_username(input) {
@@ -199,9 +215,7 @@ function check_username(input) {
     return false;
 }
 
-function check_civico(input) {
 
-}
 
 function validazione_form_ricerca() {
     const citta = document.getElementById("cities");
