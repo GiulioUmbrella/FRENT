@@ -1107,3 +1107,8 @@ html body #content {
 }
 
 }
+
+strong{
+    margin-left: 2em;
+    color: red;
+}
