@@ -107,6 +107,7 @@ if (isset($_POST["registrati"])) {
                 if($codice_registrazione === -1) {
                     $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione.");
                 } else if($codice_registrazione === -2) {
+                    $divClasses = "aligned_with_form messaggio_attenzione";
                     $messageToUser = "Un profilo ". htmlentities("è già") . " presente con l'indirizzo <span xml:lang=\"en\">mail</span> fornito. Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
                 } else {
                     // tento di creare una cartella per salvare da qui in avanti i file dell'utente
