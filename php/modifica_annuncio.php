@@ -21,19 +21,13 @@ if (isset($_SESSION["id"])) {
     }
 
     // l'annuncio esiste, l'utente pure, l'annuncio è dell'utente
-    // --- CARICAMENTO COMPONENTI PAGINA
+    // --- CARICAMENTO COMPONENTI PAGINA CHE NON CAMBIANO DOPO LA MODIFICA
     $pagina = file_get_contents("./components/dettaglio_annuncio_host_modifica.html");
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     $pagina = str_replace("<IDANNUNCIO/>", $annuncio->getIdAnnuncio(), $pagina);
     $pagina = str_replace("<TITOLO/>", $annuncio->getTitolo(), $pagina);
-    $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
-    $pagina = str_replace("<DESCANTEPRIMA/>", $annuncio->getDescAnteprima(), $pagina);
-    $pagina = str_replace("<NUMOSPITIMAX/>", $annuncio->getMaxOspiti(), $pagina);
-    $pagina = str_replace("<PREZZONOTTE/>", $annuncio->getPrezzoNotte(), $pagina);
-    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo(), $pagina);
-    $pagina = str_replace("<CITTA/>", $annuncio->getCitta(), $pagina);
-
+    
     $messageToUser = "";
     $divId = "info_box";
     $divClasses = "aligned_with_form messaggio_errore";
@@ -42,7 +36,7 @@ if (isset($_SESSION["id"])) {
     if(isset($_POST["aggiorna"])) {
         $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["descrizione", "max_ospiti", "desc_anteprima", "prezzo_notte", "indirizzo", "citta"]);
         $form_non_valido = in_array(FALSE, $risultato_validazione);
-
+        
         if($form_non_valido) {
             $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo di modifica dell'annuncio.</p>", $risultato_validazione);
             $inParagraph = FALSE;
@@ -52,12 +46,12 @@ if (isset($_SESSION["id"])) {
                 $imageManager = new ImageManager(uploadsFolder() . "user" . $user->getIdUtente() . "/");
                 /// $no_file === TRUE => non è stato caricato un file
                 $no_file = isset($_FILES["anteprima"]) && $_FILES["anteprima"]["error"] === 4;
-
-                if(!$no_file) {
+                
+                if(!$no_file) { // preaparo invio di file
                     $imageManager->setFile("anteprima", "annuncio" . $annuncio->getIdAnnuncio());
                 }
-
-
+                
+                
                 $codice_aggiornamento = $frent->editAnnuncio(
                     $annuncio->getIdAnnuncio(),
                     $annuncio->getTitolo(),
@@ -69,24 +63,10 @@ if (isset($_SESSION["id"])) {
                     intval($_POST["max_ospiti"]),
                     floatval($_POST["prezzo_notte"])
                 );
-    
+                
                 if($codice_aggiornamento === -1) {
                     $messageToUser = htmlentities("C'è stato un errore nell'aggiornamento dei dati dell'annuncio.");
                 } else {
-                    /*
-                    if(isset($_FILES["anteprima"])) {
-                        if($imageManager->saveFile()) {
-                            $divClasses = "aligned_with_form messaggio_ok";
-                            $messageToUser = "Modifica dei dati dell'annuncio avvenuta con successo! <a href=\"dettagli_annuncio.php\" title=\"Torna ai dettagli dell'annuncio\">Torna ai dettagli dell'annuncio</a>.";
-                        } else {
-                            $divClasses = "aligned_with_form messaggio_attenzione";
-                            $messageToUser = htmlentities("L'annuncio è stato modificato, ma c'è stato un errore nel salvataggio della nuova immagine dell'annuncio.");
-                        }
-                    } else {
-                        $divClasses = "aligned_with_form messaggio_ok";
-                        $messageToUser = "Modifica dei dati dell'annuncio avvenuta con successo! <a href=\"dettagli_annuncio.php\" title=\"Torna ai dettagli dell'annuncio\">Torna ai dettagli dell'annuncio</a>.";
-                    }
-                    */
                     if($no_file || $imageManager->saveFile()) {
                         $divClasses = "aligned_with_form messaggio_ok";
                         $messageToUser = "Modifica dei dati dell'annuncio avvenuta con successo! <a href=\"dettagli_annuncio.php?id=" . $annuncio->getIdAnnuncio() . "\" title=\"Torna ai dettagli dell'annuncio\">Torna ai dettagli dell'annuncio</a>.";
@@ -101,7 +81,17 @@ if (isset($_SESSION["id"])) {
         }
         $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
     }
-
+    
+    // aggiorno il contenuto della pagina
+    $annuncio = $frent->getAnnuncio($ID_ANNUNCIO); // ripesco dal database i dati dell'annuncio
+    // Inserisco le componenti che possono essere cambiate
+    $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
+    $pagina = str_replace("<DESCANTEPRIMA/>", $annuncio->getDescAnteprima(), $pagina);
+    $pagina = str_replace("<NUMOSPITIMAX/>", $annuncio->getMaxOspiti(), $pagina);
+    $pagina = str_replace("<PREZZONOTTE/>", $annuncio->getPrezzoNotte(), $pagina);
+    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo(), $pagina);
+    $pagina = str_replace("<CITTA/>", $annuncio->getCitta(), $pagina);
+    
     echo $pagina;
 } else {
     header("Location: index.php");
