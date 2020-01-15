@@ -206,7 +206,9 @@ display: none;
 .intestazione_lista > a {
   font-size: 2em;
   float:left;
-    flex: 1 0 0;
+  flex: 1 0 0;
+ /* margin-bottom: 0.25em;
+  line-height: 1.2em;*/
 }
 
 .intestazione_lista > p {
@@ -776,7 +778,7 @@ fieldset {
 }
 
 .link_modifica {
-    border: 1px solid green;
+    border: 1px solid #4CAF5;
     text-align: center;
     border-radius: 1em;
     text-decoration: none;
@@ -792,7 +794,7 @@ fieldset {
 
 /*-----------------I miei annunci-----------------*/
 .link_nuovo_annuncio {
-    border: 1px solid #4CAF50;
+    border: 1px solid #4CAF5;
     border-radius: 10em;
     background-color: #4CAF50;
     padding: 0.5em;
@@ -947,15 +949,28 @@ html {
   max-width: 100%;
 }
 
+html body {
+    font-size: 1em;
+}
+
 html body #content {
-    line-height: 1.2em;
+    line-height: 1.15em;
     font-size: 1.2em;
+}
+
+html body #content h1{
+    line-height: 1.5em;
+}
+
+html body #footer {
+    font-size: 1.5em;
 }
 
 #breadcrumb { display: none;}
 
 .layout_colonna {
       grid-template-rows: auto 1fr auto auto;
+      grid-template-columns: 1fr;
       grid-template-areas:
       "l"
       "c"
@@ -964,22 +979,24 @@ html body #content {
 }
 
 .layout_tre_pannelli {
-     grid-template-rows: auto auto 1fr auto auto;
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-    "l l l l"
-    "c c c c"
-    "x x x x"
-    "n n n n"
-    "f f f f";
+    "l"
+    "c"
+    "x"
+    "n"
+    "f";
 }
 
 .layout_centrale {
     grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-    "l l l l"
-    "c c c c"
-    "n n n n"
-    "f f f f";
+    "l"
+    "c"
+    "n"
+    "f";
 }
 
 .input_label_orizzontale {
@@ -1004,7 +1021,9 @@ html body #content {
 }
 
 #footer ul {
-    display: block;
+    flex-direction: column;
+    font-size: 0.8em;
+
 }
 
 .gestione_annunci_mobile {
@@ -1027,6 +1046,7 @@ html body #content {
 
 .intestazione_lista {
     flex-direction: column;
+    margin-bottom: 1em;
 }
 
 .intestazione_lista p {
@@ -1075,6 +1095,10 @@ html body #content {
     width: 100%
 }
 
+.input_label_orizzontale input {
+   -webkit-appearance: none;
+}
+
 #link_to_menu {
     display: inline;
     background-image: url("../immagini/hamburger_menu.png");
@@ -1087,9 +1111,10 @@ html body #content {
     margin-right: 0.5em;
 }
 
-.link_gestisci_annuncio {
+#content .link_gestisci_annuncio {
     margin-bottom: 0.5em;
     margin-left: 0.5em;
+    margin-right: 0em;
 }
 
 .form_logout {
@@ -1104,6 +1129,68 @@ html body #content {
 
 .list_annunci_pendenti li {
     padding: 0.5em;
+}
+
+.sei_pannelli {
+    flex-direction: column;
+}
+
+.sei_pannelli li {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.instestazione_lista {
+    display: inline;
+
+}
+
+.intestazione_lista > a {
+  margin-bottom: 0.25em;
+  line-height: 1.2em;
+}
+
+.dettagli_prenotazione  p {
+    clear: both;
+    margin-left: 0.5em;
+}
+
+.lista_flex .dettagli_prenotazione {
+    display: block;
+}
+
+.lista_flex {
+    display: block;
+}
+
+.lista_flex .dettagli_prenotazione {
+    border-right: 0px;
+}
+
+
+.lista_flex .opzioni_prenotazione {
+    border-top: 1px solid gray;
+}
+
+.lista_flex .opzioni_prenotazione p {
+    margin-top: 0em;
+}
+
+.corpo_lista img {
+    width: 90%;
+}
+
+.lista_flex .dettagli_prenotazione img + p {
+
+}
+
+.lista_flex .opzioni_prenotazione p {
+    font-size: 1.2em;
+}
+
+.lista_flex .opzioni_prenotazione form input[type="submit"] {
+    font-size: 1.2em;
 }
 
 }
