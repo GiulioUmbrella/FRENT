@@ -33,11 +33,11 @@ try{
             <div class=\"corpo_lista lista_storico_prenotazioni\">
                 <ul>
                     <li><span xml:lang=\"en\" lang='en' class=\"intestazione_campo\">Username:</span>
-                        <a href=\"mailto:".$mail."\" title=\"manda una mail al guest\">$username</a></li>
+                        <a href=\"mailto:".$mail."\" title=\"Manda una mail all'ospite\">$username</a></li>
                     <li class=\"intestazione_campo\">Numero ospiti: $numOspiti</li>
                     <li class=\"intestazione_campo\">Data inizio: $dataInizio</li>
                     <li class=\"intestazione_campo\">Data fine: $dataFine</li>
-                    <li class=\"intestazione_campo\">Totale prenotazione: $totale&euro;</li>
+                    <li class=\"intestazione_campo\">Totale prenotazione: &euro; $totale</li>
                 </ul>
             </div>
         </li>";
@@ -50,19 +50,19 @@ try{
                 }
             }
             if ($prenotazioneCorrente==""){
-                $pagina = str_replace("<PRENOTAZIONECORRENTE/>", "<li><p>Non ci sono prenotazioni attuali!</p></li>", $pagina);
+                $pagina = str_replace("<PRENOTAZIONECORRENTE/>", "<li><p>Non ci sono prenotazioni in corso.</p></li>", $pagina);
                 
             }else{
                 $pagina = str_replace("<PRENOTAZIONECORRENTE/>", $prenotazioneCorrente, $pagina);
             }
             if ($prenotazioniFuture==""){
-                $pagina = str_replace("<PRENOTAZIONIFUTURE/>", "<li><p>Non ci sono prenotazioni future!</p></li>", $pagina);
+                $pagina = str_replace("<PRENOTAZIONIFUTURE/>", "<li><p>Non ci sono prenotazioni future.</p></li>", $pagina);
                 
             }else{
                 $pagina = str_replace("<PRENOTAZIONIFUTURE/>", $prenotazioniFuture, $pagina);
             }
             if ($prenotazioniPassate==""){
-                $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "<li><p>Non ci sono prenotazioni passate!</p></li>", $pagina);
+                $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "<li><p>Non ci sono prenotazioni passate.</p></li>", $pagina);
         
             }else{
                 $pagina = str_replace("<PRENOTAZIONIPASSATE/>", $prenotazioniPassate, $pagina);

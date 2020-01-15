@@ -50,12 +50,12 @@ if (isset($_GET["dataFine"])){
 $content = "";
 try {
     $risultati = $frent->ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine);
-    if (count($risultati) ==0) throw new Eccezione("Non ci sono annunci con questi parametri di ricerca");
+    if (count($risultati) ==0) throw new Eccezione("Non ci sono annunci con questi parametri di ricerca.");
     foreach ($risultati as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
         $Titolo = $annuncio->getTitolo();
         $descrizione=$annuncio->getDescrizione();
-        $prezzoTotale=$annuncio->getPrezzoNotte();
+        $prezzonotte=$annuncio->getPrezzoNotte();
         $path= $annuncio->getImgAnteprima();
         $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
         $numeroRecensione= count($recensioni);
@@ -70,13 +70,13 @@ try {
                     <div class=\"intestazione_lista\">
                         <a href=\"dettagli_annuncio.php?id=$id&dataInizio=$dataInizio&dataFine=$dataFine&numOspiti=$numOspiti\"
                                 >$Titolo</a>
-                        <p>Punteggio:$punteggio - Num Recensioni:$numeroRecensione </p>
+                        <p>Punteggio: $punteggio - Num Recensioni: $numeroRecensione </p>
                     </div>
                     <div class=\"corpo_lista\">
                         <img src =\"$path\" alt=\"".$annuncio->getDescAnteprima()."\" />
                         <div class=\"descrizione_annuncio\">
                         <p class=\"testo_descrizione_annuncio\">$descrizione</p>
-                        <p class=\"prezzototale\">Prezzo: $prezzoTotale&euro; persona/notte</p>
+                        <p class=\"prezzototale\">Prezzo: &euro; $prezzonotte persona/notte</p>
                         </div>
                     </div>
                 </li>";
