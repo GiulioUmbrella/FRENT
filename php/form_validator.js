@@ -30,7 +30,7 @@ function check_nome(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Nome inserito non valido")
+    mostra_errore(input, "Nome inserito non valido");
     return false;
 }
 
@@ -41,7 +41,7 @@ function check_cognome(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Cognome inserito non valido")
+    mostra_errore(input, "Cognome inserito non valido");
     return false;
 }
 
@@ -243,7 +243,7 @@ function check_username(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Nome inserito non valido")
+    mostra_errore(input, "Nome inserito non valido");
     return false;
 }
 
