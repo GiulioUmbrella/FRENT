@@ -1111,9 +1111,10 @@ html body #footer {
     margin-right: 0.5em;
 }
 
-.link_gestisci_annuncio {
+#content .link_gestisci_annuncio {
     margin-bottom: 0.5em;
     margin-left: 0.5em;
+    margin-right: 0em;
 }
 
 .form_logout {
