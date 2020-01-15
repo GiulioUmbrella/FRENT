@@ -1095,6 +1095,10 @@ html body #footer {
     width: 100%
 }
 
+.input_label_orizzontale input {
+   -webkit-appearance: none;
+}
+
 #link_to_menu {
     display: inline;
     background-image: url("../immagini/hamburger_menu.png");
