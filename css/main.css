@@ -778,7 +778,7 @@ fieldset {
 }
 
 .link_modifica {
-    border: 1px solid green;
+    border: 1px solid #4CAF5;
     text-align: center;
     border-radius: 1em;
     text-decoration: none;
@@ -794,7 +794,7 @@ fieldset {
 
 /*-----------------I miei annunci-----------------*/
 .link_nuovo_annuncio {
-    border: 1px solid #4CAF50;
+    border: 1px solid #4CAF5;
     border-radius: 10em;
     background-color: #4CAF50;
     padding: 0.5em;
