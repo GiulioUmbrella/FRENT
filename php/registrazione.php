@@ -15,7 +15,7 @@ function placeholder_replacement_with_content($post, &$pagina) {
     // ripristino i dati
     $pagina = replacePlaceholders(
         $pagina,
-        ["<VALUENOME>","<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
+        ["<VALUENOME>", "<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
         [$post["nome"], $post["cognome"], $post["mail"], $post["username"], $post["password"], $post["ripeti_password"], $post["telefono"]]
     );
 }
@@ -28,7 +28,7 @@ function placeholder_replacement_with_empty(&$pagina) {
     // ripristino i dati
     $pagina = replacePlaceholders(
         $pagina,
-        ["<VALUENOME>","<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
+        ["<VALUENOME>", "<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
         ["", "", "", "", "", "", ""]
     );
 }
@@ -75,21 +75,21 @@ if (isset($_POST["registrati"])) {
      * se $form_non_valido === TRUE ci sono valori di $_POST non settati
      */
     $form_non_valido = in_array(FALSE, $risultato_validazione);
-
+    
     /**
      * Valori per la funzione addUserNotificationToPage
      */
-
+    
     $messageToUser = "";
     $divId = "info_box";
     $divClasses = "aligned_with_form messaggio_errore";
     $inParagraph = TRUE; // dice alla funzione addUserNotificationToPage che il contenuto non andrà dentro un paragraph
-
-    if($form_non_valido) {
+    
+    if ($form_non_valido) {
         $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo.</p>", $risultato_validazione);
         $inParagraph = FALSE;
     } else {
-        if($_POST["password"] !== $_POST["ripeti_password"]) {
+        if ($_POST["password"] !== $_POST["ripeti_password"]) {
             $messageToUser = "Le due password inserite non corrispondono.";
         } else {
             try {
@@ -104,24 +104,24 @@ if (isset($_POST["registrati"])) {
                     $_POST["telefono"]
                 );
                 
-                if($codice_registrazione === -1) {
+                if ($codice_registrazione === -1) {
                     $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione.");
-                } else if($codice_registrazione === -2) {
+                } else if ($codice_registrazione === -2) {
                     $divClasses = "aligned_with_form messaggio_attenzione";
-                    $messageToUser = "Un profilo ". htmlentities("è già") . " presente con l'indirizzo <span xml:lang=\"en\">mail</span> fornito. Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
+                    $messageToUser = "Un profilo " . htmlentities("è già") . " presente con l'indirizzo <span xml:lang=\"en\">mail</span> fornito. Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
                 } else {
                     // tento di creare una cartella per salvare da qui in avanti i file dell'utente
-                    if(!mkdir(uploadsFolder()."user$codice_registrazione")) {
+                    if (!mkdir(uploadsFolder() . "user$codice_registrazione")) {
                         throw new Eccezione("Non è stato possibile creare una cartella per le immagini dell'utente.");
                     }
-
+                    
                     // placeholder sostituiti con stringa vuota in quanto avvenuta registrazione
                     placeholder_replacement_with_empty($pagina);
                     $divClasses = "aligned_with_form messaggio_ok";
                     $messageToUser = "Registrazione avvenuta con successo! Puoi accedere cliccando su <a href=\"login.php\" title=\"Vai alla pagina di accesso\">questo link</a>.";
                 }
-
-            } catch(Eccezione $exc) {
+                
+            } catch (Eccezione $exc) {
                 $messageToUser = htmlentities("C'è stato un errore nel processo di registrazione. Errore riscontrato: ") . $exc->getMessage();
             }
         }
