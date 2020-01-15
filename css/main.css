@@ -1160,6 +1160,23 @@ html body #footer {
     display: block;
 }
 
+.lista_flex {
+    display: block;
+}
+
+.lista_flex .dettagli_prenotazione {
+    border-right: 0px;
+}
+
+
+.lista_flex .opzioni_prenotazione {
+    border-top: 1px solid gray;
+}
+
+.lista_flex .opzioni_prenotazione p {
+    margin-top: 0em;
+}
+
 .corpo_lista img {
     width: 90%;
 }
