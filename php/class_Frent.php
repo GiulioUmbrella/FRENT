@@ -149,7 +149,7 @@ class Frent {
             $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             if(count($res_utente) === 0) {
-                throw new Eccezione("Non ci sono utenti collegati alle credenziali fornite.");
+                throw new Eccezione("Le credenziali fornite sono errate.");
             }
             
             $utente = Utente::build();
@@ -879,7 +879,7 @@ class Frent {
             $res_admin = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             if(count($res_admin) === 0) {
-                throw new Eccezione("Non ci sono amministratori collegati alle credenziali fornite.");
+                throw new Eccezione("Le credenziali fornite sono errate.");
             }
 
             $admin = Amministratore::build();
