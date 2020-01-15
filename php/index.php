@@ -28,7 +28,7 @@ try {
     foreach ($citta_ricercabili as $citta_ricercabile) {
         
         if (isset($_SESSION["citta"]) and $citta_ricercabile == $_SESSION["citta"]) {
-            echo "trovato!";
+//            echo "trovato!";
             $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected>$citta_ricercabile</option>";
         } else {
             $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\">$citta_ricercabile</option>";
