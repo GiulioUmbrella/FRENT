@@ -948,8 +948,12 @@ html {
 }
 
 html body #content {
-    line-height: 1.2em;
+    line-height: 1.15em;
     font-size: 1.2em;
+}
+
+html body #content h1{
+    line-height: 1.5em;
 }
 
 #breadcrumb { display: none;}
@@ -1027,6 +1031,7 @@ html body #content {
 
 .intestazione_lista {
     flex-direction: column;
+    margin-bottom: 1em;
 }
 
 .intestazione_lista p {
