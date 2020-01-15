@@ -14,7 +14,7 @@ try {
     $pagina = file_get_contents("./components/approvazione_annunci.html");
     $msg = "Bentornato " . $_SESSION["admin"]->getUserName() . "!";
     $pagina = str_replace("<SALUTO/>", $msg, $pagina);
-    $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare: </h2> <ul>";
+    $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare</h2> <ul>";
     
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
@@ -22,7 +22,7 @@ try {
         $content .= "<li>";
         $content .= "<a href=\"dettagli_annuncio.php?id=$id\">" . $titolo . "</a>";
         $content .= "<a href=\"./script_approvazione_annunci.php?idAnnuncio=$id&approvato=1\"  class=\"link_gestione link_approva\">Approva</a>";
-        $content .= "<a href=\"./script_approvazione_annunci.php?idAnnuncio=$id&approvato=2\" class=\"link_gestione link_rigetta\">Non approva</a></li>";
+        $content .= "<a href=\"./script_approvazione_annunci.php?idAnnuncio=$id&approvato=2\" class=\"link_gestione link_rigetta\">Rigetta</a></li>";
     }
     $content .= "</ul>";
     $pagina = str_replace("<Flag1/>", $content, $pagina);

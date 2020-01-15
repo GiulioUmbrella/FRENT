@@ -28,11 +28,11 @@ if (isset($_SESSION["user"])) {
             $punteggio=$punteggio/$numeroRecensione;
             $punteggio= $punteggio/$numeroRecensione;
         }
-        $stato="Approvato";
+        $stato="Visualizzato, Approvato"; // VA - VISUALIZZATO APPROVATO
         if ($annuncio->getStatoApprovazione()==0){
-            $stato="NVNA";
+            $stato="Non Visualizzato, Non Approvato"; // NON VISUALIZZATO - NON APPROVATO
         }else if ($annuncio->getStatoApprovazione()==2){
-            $stato="VNA";
+            $stato="Visualizzato, Non Approvato";
         }
         
         $content.= "

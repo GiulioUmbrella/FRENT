@@ -143,7 +143,7 @@ if(isset($_POST["modifica_dati_personali"])) {
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
     if($form_non_valido) { // IF1 - RAMO VERO IF1
-        $messageToUser = formValidationErrorList("<p>C'&egraveM stato un errore nella compilazione del modulo di modifica dei dati personali.</p>", $risultato_validazione);
+        $messageToUser = formValidationErrorList("<p>C'&egrave stato un errore nella compilazione del modulo di modifica dei dati personali.</p>", $risultato_validazione);
         $inParagraph = FALSE;
     } else { // FINE RAMO VERO IF1 - RAMO FALSO IF2
         try {

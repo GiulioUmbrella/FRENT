@@ -1,11 +1,8 @@
 <?php
 //pagina totalmente funzionante e valida
-require_once "./class_Database.php";
-require_once "./class_Frent.php";
-require_once "./class_Occupazione.php";
-require_once "./class_CredenzialiDB.php";
-
 require_once "load_Frent.php";
+require_once "./components/form_functions.php";
+
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
 if (isset($_SESSION["user"])) {
     require_once "./load_header.php";
@@ -18,9 +15,9 @@ if (isset($_SESSION["user"])) {
     $occupazioni = $frent->getPrenotazioniGuest();
 //    $occupazioni = array();
     $i = 7;
-    $prenotazioni_future = " <h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
-    $prenotazioni_passate = "<h1>Le mie prenotazioni Passate</h1><ul id=\"prenotazioni_passate\">";
-    $prenotazioni_correnti = "  <h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
+    $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
+    $prenotazioni_passate = "<h1>Le mie prenotazioni passate</h1><ul id=\"prenotazioni_passate\">";
+    $prenotazioni_correnti = "<h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
     $data_corrente = date("Y-m-d");
     
     $numPrenotazioniPassate = 0;
@@ -33,13 +30,13 @@ if (isset($_SESSION["user"])) {
         $mail = $host->getMail();
         $nomeAnnuncio = $annuncio->getTitolo();
         $descrizionefoto = $annuncio->getDescAnteprima();//todo decide cose mettere nell'attributo ALT dell'anteprima
-        $luogoAlloggio = $annuncio->getIndirizzo()." citt&agrave;: ".$annuncio->getCitta();
+        $luogoAlloggio = $annuncio->getIndirizzo().", ".$annuncio->getCitta();
         $dataInizio = $prenotazione->getDataInizio();
         $dataFine = $prenotazione->getDataFine();
         $totalePrenotazione = 0.0;
         $durata=abs(strtotime($prenotazione->getDataFine())-strtotime($prenotazione->getDataInizio()))/(3600*24);
         $prezzo = $annuncio->getPrezzoNotte()* intval($durata) * $prenotazione->getNumOspiti();
-        $path = $annuncio->getImgAnteprima();
+        $path = uploadsFolder() . $annuncio->getImgAnteprima();
         $numeroOspiti = $prenotazione->getNumOspiti();
         if ($prenotazione->getDataFine() < $data_corrente) { // prenotazioni passate
 
@@ -48,19 +45,20 @@ if (isset($_SESSION["user"])) {
                     <li>
                         <div class=\"intestazione_lista\">
                             <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                                title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
+                                title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] $nomeAnnuncio</a>
                         </div>";
             $i++;
             $prenotazioni_passate.="
                         <div class=\"corpo_lista lista_flex\">
                             <div class=\"dettagli_prenotazione\">
-                                <img src=\"$path\" alt=\"Immagine di anteprima di Casa Loreto\"/>
-                                <p>Luogo: $luogoAlloggio</p>
-                                <p>Periodo: $dataInizio - $dataFine</p>
+                                <img src=\"$path\" alt=\"$descrizionefoto\"/>
+                                <p>Indirizzo: $luogoAlloggio</p>
+                                <p>Periodo: dal $dataInizio al $dataFine</p>
                                 <p>Numero ospiti: $numeroOspiti</p>
                             </div>
                             <div class=\"opzioni_prenotazione\">
-                                <p>Prezzo: $prezzo&euro;</p><a href=\"Commenta\" title=\"Contatta il proprietario per posta elettronica\">Commenta</a>
+                                <p>Totale: &euro; $prezzo</p>
+                                <a href=\"Commenta\" title=\"Scrivi un commento sulla tua prenotazione\">Commenta</a>
                             </div>
                         </div>
                     </li>";// todo da decidere come far commentare
@@ -77,13 +75,13 @@ if (isset($_SESSION["user"])) {
                     <div class=\"corpo_lista lista_flex\">
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                            <p>Luogo: $luogoAlloggio</p><p>Periodo:$dataInizio - $dataFine</p>
-                                <p>Numero ospiti: $numeroOspiti</p>
+                            <p>Indirizzo: $luogoAlloggio</p>
+                            <p>Periodo: dal $dataInizio al $dataFine</p>
+                            <p>Numero ospiti: $numeroOspiti</p>
                         </div>
                         <div class=\"opzioni_prenotazione\">
-                            <p>Prezzo: $prezzo&euro;</p>
-                            <a href=\"mailto:$mail\"
-                                    title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a>
+                            <p>Totale: &euro; $prezzo</p>
+                            <a href=\"mailto:$mail\" title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a>
                         </div>
                     </div>
                 </li>";
@@ -95,23 +93,23 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                        title=\"Vai al riepilogo della prenotazione presso Casa Loreto\">[#$id_prenotazione] $nomeAnnuncio</a>
+                        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] $nomeAnnuncio</a>
                     </div>";
             $i++;
             $prenotazioni_future.="
                     <div class=\"corpo_lista lista_flex\">
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                            <p>Luogo: $luogoAlloggio</p>
-                            <p>Periodo: $dataInizio - $dataFine</p>
-                                <p>Numero ospiti: $numeroOspiti</p>
+                            <p>Indirizzo: $luogoAlloggio</p>
+                            <p>Periodo: dal $dataInizio al $dataFine</p>
+                            <p>Numero ospiti: $numeroOspiti</p>
                         </div>
                         <div class=\"opzioni_prenotazione\">
-                            <p>Prezzo: $prezzo&euro;</p>
+                            <p>Totale: &euro; $prezzo</p>
                             <form action=\"./script_elimina_prenotazione.php?id=$id_prenotazione\" method=\"post\">
                                 <fieldset>
                                     <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
-                                    <input type=\"submit\" value=\"elimina\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
+                                    <input type=\"submit\" value=\"Elimina\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
                                 </fieldset>
                             </form>
                         </div>
