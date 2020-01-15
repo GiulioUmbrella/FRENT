@@ -970,6 +970,7 @@ html body #footer {
 
 .layout_colonna {
       grid-template-rows: auto 1fr auto auto;
+      grid-template-columns: 1fr;
       grid-template-areas:
       "l"
       "c"
@@ -990,6 +991,7 @@ html body #footer {
 
 .layout_centrale {
     grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
     "l"
     "c"
