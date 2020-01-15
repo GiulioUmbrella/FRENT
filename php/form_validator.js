@@ -4,7 +4,6 @@
 function mostra_errore(input, testoErrore) {
     togli_errore(input);
     const p = input.parentElement;
-    // console.log(p);
     const strong = document.createElement("strong");
     strong.appendChild(document.createTextNode(testoErrore));
     p.appendChild(strong);
@@ -17,12 +16,12 @@ function togli_errore(input) {
         p.removeChild(p.children[2]);
     }
 }
-function togli_errore_3(input) {
-    const p = input.parentNode;
-    if (p.children.length > 2) {
-        p.removeChild(p.children[2]);
-    }
-}
+// function togli_errore_3(input) {
+//     const p = input.parentNode;
+//     if (p.children.length > 2) {
+//         p.removeChild(p.children[2]);
+//     }
+// }
 
 function check_nome(input) {
     const val = input.value.toString().trim();
@@ -80,43 +79,31 @@ function check_citta(n) {
         togli_errore(n);
         return true;
     }
-    mostra_errore(n, "Il nome della città; non va bene.")
+    mostra_errore(n, "Il nome della città non valido.")
 }
 
 
 function check_dateInizioEFine(dataInizio, dataFine) {
-    // //window.alert("check dataIF start");
     const dI = dataInizio.value.toString().trim();
     const dF = dataFine.value.toString().trim();
-    // //window.alert("check dataIF 1");
     const dataI = new Date(dI);
 
-    // //window.alert("check dataIF 2");
     const dataF = new Date(dF);
-    // //window.alert("check dataIF 3");
-    //window.alert(dataI.getTime());
     if (dataI < dataF) {
-        //window.alert("check_dateInizioEFine ok");
         togli_errore(dataF);
         return true;
     }
-    //window.alert("check_dateInizioEFine Nok");
 
     mostra_errore(dataFine, "Data fine prima di data inizio!");
-    //window.alert("prima del return");
     return false;
 }
 
 function check_numOspiti(num) {
     const v = num.value.trim();
-    // //window.alert(v);
     if (!isNaN(v) && parseInt(v) <= 9) {
-        // //window.alert("Numero ok");
         togli_errore(num);
         return true;
     }
-    // //window.alert("Numero nok");
-
 
     mostra_errore(num, "Valore inserito non valido.");
     return false;
@@ -124,8 +111,6 @@ function check_numOspiti(num) {
 }
 
 function check_numeroTelefonico(input) {
-
-    // i vecchi numeri di telefono, tuttora esistenti, hanno una cifra in meno.
     const reg = new RegExp('^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
     if (reg.test(input.value)) {
         togli_errore(input);
@@ -161,11 +146,8 @@ function check_password(pwdInput) {
 }
 
 function check_data(input) {
-    //window.alert(input.value.toString().trim());
 
     const data = new Date(input.value.toString().trim());
-    // const data = new Date(input.toString().trim());
-    //window.alert(data.toDateString());
     if (data.toDateString() !== "Invalid Date") {
         togli_errore(input);
         return true;
@@ -183,16 +165,13 @@ function check_data_a_3(gg, mm, aa) {
         mostra_errore("La data non valida!");
         return false;
     }
-    // const d = ''.concat(anno.toString()).concat("-").concat("13").concat("-").concat(giorno.toString());
     const d = ''.concat(anno.toString()).concat("-").concat(mese.toString()).concat("-").concat(giorno.toString());
     const data = new Date(d);
     //fixme funziona il test case sotto
     if (data.toString().trim() !== "Invalid Date") {
-        //window.alert("data ok");
         togli_errore(gg);
         return true;
     }
-    //window.alert("data nok");
     mostra_errore(gg);
     return false;
 }
@@ -237,7 +216,7 @@ function check_titoloAnnuncio(input) {
 function check_prezzo_notte(input) {
     const val = input.value;
 
-    if (!isNaN(val) && parseInt(val) > 0) {
+    if (val==="Gratis" || !isNaN(val) && parseInt(val) > 0) {
         togli_errore(input);
         return true;
     }
@@ -276,31 +255,14 @@ function validazione_form_ricerca() {
     const numOspiti = document.getElementById("numOspiti");
 
     const resDataInizio = check_data(dataInizio);
-    //window.alert("data controllare");
     const resCitta = check_citta(citta);
     const resNumOspiti = check_numOspiti(numOspiti);
     const resDataFine = check_data(dataFine);
-    //window.alert("date ok");
 
     if (resDataInizio && resDataFine) {
-
-        //window.alert(numOspiti.toString());
-        //window.alert("citta checked");
-
         const resDataIF = check_dateInizioEFine(dataInizio, dataFine);
-        //window.alert("dataIF checked");
-        //window.alert("numOspiti checked");
-
-        // if (resDataIF)
-            //window.alert(" TUtto ok");
-        // else
-            //window.alert(" TUtto nok");
-
-
         return resCitta && resDataIF && resNumOspiti;
     }
-
-    //window.alert("date nok");
     return false;
 }
 
@@ -351,14 +313,6 @@ function validazione_form_aggiungi_annuncio() {
 
 }
 
-function validazione_form_ricerca_dettaglio_annuncio() {
-    const dataInizio = document.getElementById("dataInizio");
-    const dataFine = document.getElementById("dataFine");
-    const numOspiti = document.getElementById("numOspiti");
-
-    const res_dataInizio = check_dateInizioEFine(dataInizio);
-
-}
 
 function validazione_form_modifica_annuncio() {
     const input_descrizione = document.getElementById("descrizione");
