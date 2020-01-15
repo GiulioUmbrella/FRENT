@@ -216,7 +216,7 @@ function check_titoloAnnuncio(input) {
 function check_prezzo_notte(input) {
     const val = input.value;
 
-    if (val==="Gratis" || !isNaN(val) && parseInt(val) > 0) {
+    if (!isNaN(val) && parseInt(val) > 0) {
         togli_errore(input);
         return true;
     }
