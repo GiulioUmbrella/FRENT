@@ -1198,4 +1198,5 @@ html body #footer {
 strong{
     margin-left: 2em;
     color: red;
+    display: block;
 }
