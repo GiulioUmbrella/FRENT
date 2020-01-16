@@ -1,5 +1,5 @@
-// i metodi che controllano un dato cominciano il check_nomecampo
-// i metodi che controlano un form, ovvero tanti campi, hanno il nome validazione_ecc.
+// i metodi che controllano un dato cominciano il check_nome campo
+// i metodi che controllano un form, ovvero tanti campi, hanno il nome validazione_ecc.
 
 function mostra_errore(input, testoErrore) {
     togli_errore(input);
