@@ -21,15 +21,11 @@ function mostra_errore_inizio(input, testoErrore) {
     const p = input.parentElement;
     const strong = document.createElement("strong");
     strong.appendChild(document.createTextNode(testoErrore));
-    // window.alert("creato elemento");
     p.insertBefore(strong,p.children[0]);
-    // window.alert("inserito!");
 }
 //da richiamare sempre prima di mostraErrore
 function togli_errore_inizio(input) {
     const p = input.parentNode;
-    // window.alert(input.id.toString());
-    // window.alert(p.children.length.toString());
     if (p.children.length > 2) {
         p.removeChild(p.children[0]);
     }
@@ -45,16 +41,8 @@ function mostra_errore_citta(input, testoErrore) {
     const p = input.parentElement;
     const strong = document.createElement("strong");
     strong.appendChild(document.createTextNode(testoErrore));
-    // window.alert("creato elemento");
     p.insertBefore(strong,p.children[0]);
-    // window.alert("inserito!");
 }
-// function togli_errore_3(input) {
-//     const p = input.parentNode;
-//     if (p.children.length > 2) {
-//         p.removeChild(p.children[2]);
-//     }
-// }
 
 function check_nome(input) {
     const val = input.value.toString().trim();
@@ -201,7 +189,6 @@ function check_data_a_3(gg, mm, aa) {
     }
     const d = ''.concat(anno.toString()).concat("-").concat(mese.toString()).concat("-").concat(giorno.toString());
     const data = new Date(d);
-    //fixme funziona il test case sotto
     if (data.toString().trim() !== "Invalid Date") {
         togli_errore(gg);
         return true;
