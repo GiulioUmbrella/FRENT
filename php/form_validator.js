@@ -12,9 +12,42 @@ function mostra_errore(input, testoErrore) {
 //da richiamare sempre prima di mostraErrore
 function togli_errore(input) {
     const p = input.parentNode;
-    if (p.children.length > 2) {
-        p.removeChild(p.children[2]);
+    if (p.children.length >2) {
+        p.removeChild(p.children[0]);
     }
+}
+function mostra_errore_inizio(input, testoErrore) {
+    togli_errore_inizio(input);
+    const p = input.parentElement;
+    const strong = document.createElement("strong");
+    strong.appendChild(document.createTextNode(testoErrore));
+    // window.alert("creato elemento");
+    p.insertBefore(strong,p.children[0]);
+    // window.alert("inserito!");
+}
+//da richiamare sempre prima di mostraErrore
+function togli_errore_inizio(input) {
+    const p = input.parentNode;
+    // window.alert(input.id.toString());
+    // window.alert(p.children.length.toString());
+    if (p.children.length > 2) {
+        p.removeChild(p.children[0]);
+    }
+}
+function togli_errore_citta(input) {
+    const p = input.parentNode;
+    if (p.children.length >3) {
+        p.removeChild(p.children[0]);
+    }
+}
+function mostra_errore_citta(input, testoErrore) {
+    togli_errore_citta(input);
+    const p = input.parentElement;
+    const strong = document.createElement("strong");
+    strong.appendChild(document.createTextNode(testoErrore));
+    // window.alert("creato elemento");
+    p.insertBefore(strong,p.children[0]);
+    // window.alert("inserito!");
 }
 // function togli_errore_3(input) {
 //     const p = input.parentNode;
@@ -75,11 +108,12 @@ function check_password_second(primo, secondo) {
 
 function check_citta(n) {
     const reg = new RegExp('^[a-zA-Z]{3,128}$');
-    if (reg.test(n.value)) {
-        togli_errore(n);
+    if (reg.test(n.value.toString())) {
+        togli_errore_citta(n);
         return true;
     }
-    mostra_errore(n, "Il nome della città non valido.")
+    mostra_errore_citta(n, "Città non valida.");
+    return false;
 }
 
 
@@ -94,18 +128,18 @@ function check_dateInizioEFine(dataInizio, dataFine) {
         return true;
     }
 
-    mostra_errore(dataFine, "Data fine prima di data inizio!");
+    mostra_errore_inizio(dataFine, "Data fine prima di data inizio!");
     return false;
 }
 
 function check_numOspiti(num) {
     const v = num.value.trim();
     if (!isNaN(v) && parseInt(v) <= 9) {
-        togli_errore(num);
+        togli_errore_inizio(num);
         return true;
     }
 
-    mostra_errore(num, "Valore inserito non valido.");
+    mostra_errore_inizio(num, "Valore inserito non valido.");
     return false;
 
 }
@@ -152,7 +186,7 @@ function check_data(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Data inserita non valida!");
+    mostra_errore_inizio(input, "Data non valida!");
     return false;
 }
 

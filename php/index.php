@@ -62,7 +62,7 @@ try {
             unset($_SESSION["numOspiti"]);
         }
         if (isset($_SESSION["dataInizio"])){
-            echo $_SESSION["dataInizio"];
+//            echo $_SESSION["dataInizio"];
             $dataInizio = $_SESSION["dataInizio"];
     
             unset($_SESSION["dataInizio"]);
