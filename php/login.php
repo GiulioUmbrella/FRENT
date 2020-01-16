@@ -21,10 +21,12 @@ if(!isset($_POST["accedi"])) {
     $messageToUser = "";
     $divId = "credenziali_errate";
     $divClasses = "aligned_with_form";
-
+    
+    $pagina = str_replace("</msg>", "", $pagina);
     if($form_non_valido) { // IF1 - RAMO VERO IF1
         $pagina = str_replace("<VALUEUSERNAME>","", $pagina);
         $pagina = str_replace("<VALUEPASSWORD>","", $pagina);
+    
         $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo.", $risultato_validazione);
     } else { // FINE RAMO VERO IF1 - RAMO FALSO IF1
         // reperisco i valori da post
@@ -36,7 +38,9 @@ if(!isset($_POST["accedi"])) {
             
             // aggiunto l'oggetto utente alla sessione  amp
             $_SESSION["user"] = $utente;
+            
             header("Location: ./index.php");
+            
         } catch (Eccezione $exc) {
             $messageToUser = htmlentities("C'è stato un errore durante l'accesso. Errore riscontrato: ") . $exc->getMessage();
 
