@@ -121,6 +121,7 @@ class ImageManager {
      * Restituisce il numero dei file caricati tramite il form. Il metodo deve venire invocato se è stato abilitato il caricamento multiplo.
      * @param string $img_name_attr valore dell'attributo name dell'elemento <input type="file" ..></file>
      * nel form da cui si sta recuperando l'immagine.
+     * @return int numero di file caricati
      */
     public function countFiles($img_name_attr): int {
         return count($_FILES[$img_name_attr]["name"]);
