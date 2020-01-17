@@ -21,8 +21,9 @@ if(!isset($_POST["accedi"])) {
     $messageToUser = "";
     $divId = "credenziali_errate";
     $divClasses = "aligned_with_form";
+    $inParagraph = TRUE;
     
-    $pagina = str_replace("</msg>", "", $pagina);
+    // $pagina = str_replace("</msg>", "", $pagina);
     if($form_non_valido) { // IF1 - RAMO VERO IF1
         $pagina = str_replace("<VALUEUSERNAME>","", $pagina);
         $pagina = str_replace("<VALUEPASSWORD>","", $pagina);

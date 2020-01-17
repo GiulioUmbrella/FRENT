@@ -79,7 +79,7 @@ if (isset($_SESSION["id"])) {
                 $messageToUser = htmlentities("C'è stato un errore nel processo di modifica dell'annuncio. Errore riscontrato: ") . $exc->getMessage();
             }             
         }
-        $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
+        $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph); // sostituisce <INFO_BOX/>
     }
     
     // aggiorno il contenuto della pagina
@@ -92,6 +92,7 @@ if (isset($_SESSION["id"])) {
     $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo(), $pagina);
     $pagina = str_replace("<CITTA/>", $annuncio->getCitta(), $pagina);
     
+    $pagina = str_replace("<INFO_BOX/>", "", $pagina);
     echo $pagina;
 } else {
     header("Location: index.php");

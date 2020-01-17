@@ -118,8 +118,9 @@ if(isset($_POST["nuovo_annuncio"])) {
     }
     /// se è stata invocata placeholder_replacement_with_empty, la funzione non avrà side-effect
     placeholder_replacement_with_content($_POST, $pagina); // aggiornata per riferimento
-    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
+    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph); // sostituisce <INFO_BOX/>
 } else {
+    $pagina = str_replace("<INFO_BOX/>", "", $pagina);
     placeholder_replacement_with_empty($pagina); // aggiornata per riferimento
 }
 

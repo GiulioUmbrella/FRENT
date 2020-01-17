@@ -19,11 +19,6 @@ $user = $_SESSION["user"];
 
 // aggiunta dati utente
 $pagina = str_replace("<PATH/>", "../uploads/" . $user->getImgProfilo(), $pagina);
-$pagina = str_replace("<NOME/>", $user->getNome(), $pagina);
-$pagina = str_replace("<COGNOME/>", $user->getCognome(), $pagina);
-$pagina = str_replace("<MAIL/>", $user->getMail(), $pagina);
-$pagina = str_replace("<USERNAME/>", $user->getUsername(), $pagina);
-$pagina = str_replace("<TELEFONO/>", $user->getTelefono(), $pagina);
 
 // estrazione informazioni su data nascita dell'utente
 $dataNascita = DateTime::createFromFormat("Y-m-d", $user->getDataNascita());
@@ -175,10 +170,20 @@ if(isset($_POST["modifica_dati_personali"])) {
             $messageToUser = htmlentities("C'è stato un errore nel processo di modifica dei dati personali. Errore riscontrato: ") . $exc->getMessage();
         }       
     } // FINE RAMO FALSO IF1
+
 }
 
+// aggiorno il contenuto della pagina modificato (possibilmente)
+$pagina = str_replace("<NOME/>", $user->getNome(), $pagina);
+$pagina = str_replace("<COGNOME/>", $user->getCognome(), $pagina);
+$pagina = str_replace("<MAIL/>", $user->getMail(), $pagina);
+$pagina = str_replace("<USERNAME/>", $user->getUsername(), $pagina);
+$pagina = str_replace("<TELEFONO/>", $user->getTelefono(), $pagina);
+
 if(isset($_POST["modifica_img_profilo"]) || isset($_POST["modifica_password"]) || isset($_POST["modifica_dati_personali"])) {
-    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph);
+    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph); // sostituisce <INFO_BOX/>
 }
+
+$pagina = str_replace("<INFO_BOX/>", "", $pagina);
 
 echo $pagina;

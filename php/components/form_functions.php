@@ -14,7 +14,7 @@ define("ANTEPRIMA_ANNUNCIO_DEFAULT", "defaultImages/imgAnteprimaAnnuncioDefault.
  */
 function addUserNotificationToPage($pageContent, $contentToShow, $divId, $divClasses = "", $inParagraph = TRUE): string {
     return str_replace(
-        "<div id=\"$divId\"></div>",
+        "<INFO_BOX/>", // stringa decisa per essere sostituita con box di messaggi errore
         "<div id=\"$divId\" " . ($divClasses === "" ? "" : "class=\"$divClasses\"") . ">" .
             (($inParagraph === TRUE) ? "<p>$contentToShow</p>" : $contentToShow) .
         "</div>",
