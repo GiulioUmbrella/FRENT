@@ -43,7 +43,8 @@ if (isset($_SESSION["user"])) {
 
 // carico componenti per la pagina
 $pagina = file_get_contents("./components/registrazione.html");
-$pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
+require_once ("load_header.php");
+//$pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
 $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
 
 // popolazione select#giorno_nascita
