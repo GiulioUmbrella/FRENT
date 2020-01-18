@@ -1,0 +1,23 @@
+<h3>Aggiungi un commento alla prenotazione</h3>
+<form action="./riepilogo_prenotazione.php" method="post" class="form form_verticale">
+    <INFO_BOX />
+    <fieldset>
+        <legend class="aiuti_alla_navigazione">Modulo di commento</legend>
+        <div>
+            <label for="titolo_commento">Titolo</label>
+            <input type="text" name="titolo_commento" id="titolo_commento" maxlength="64" value="<VALUETITOLO/>" />
+        </div>
+        <div>
+            <label for="testo_commento">Commento</label>
+            <textarea name="testo_commento" id="testo_commento" maxlength="512"><VALUECOMMENTO/></textarea>
+        </div>
+        <div>
+            <label for="valutazione_commento">Commento</label>
+            <input type="text" name="valutazione_commento" id="valutazione_commento" maxlength="1" value="<VALUEVALUTAZIONE/>" />
+        </div>
+        <div>
+            <label class="aiuti_alla_navigazione" for="pubblica_commento">Conferma la pubblicazione</label>
+            <input type="submit" id="pubblica_commento" name="pubblica_commento" value="Pubblica il commento" />
+        </div>
+    </fieldset>
+</form>

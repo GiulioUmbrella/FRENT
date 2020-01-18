@@ -11,17 +11,18 @@ if (isset($_SESSION["user"])) {
         
         if (isset($_GET["id"])) {
             $id_prenotazione = intval($_GET["id"]);
-            if ($frent->getOccupazione($id_prenotazione)->getIdUtente() != $_SESSION["user"]->getIdUtente())
+            if ($frent->getOccupazione($id_prenotazione)->getIdUtente() != $_SESSION["user"]->getIdUtente()) {
                 header("Location: ./404.php");
+            }
             $prenotazioni = $frent->getOccupazione(intval($id_prenotazione));
             $annuncio = $frent->getAnnuncio($prenotazioni->getIdAnnuncio());
             $host = $frent->getUser($annuncio->getIdHost());
             $durata = abs(strtotime($prenotazioni->getDataFine()) - strtotime($prenotazioni->getDataInizio())) / (3600 * 24);
+
             $totale = $durata * $annuncio->getPrezzoNotte() * $prenotazioni->getNumOspiti();
             $pagina = str_replace("<IDPRENOTAZIONE/>", $prenotazioni->getIdOccupazione(), $pagina);
             $pagina = str_replace("<DATAINIZIO/>", $prenotazioni->getDataInizio(), $pagina);
             $pagina = str_replace("<DATAFINE/>", $prenotazioni->getDataFine(), $pagina);
-            
             $pagina = str_replace("<MAILPROPRIETARIO/>", $host->getMail(), $pagina);
             $pagina = str_replace("<NUMOSPITI/>", $prenotazioni->getNumOspiti(), $pagina);
             $pagina = str_replace("<NOMEANNUNCIO/>", $annuncio->getTitolo(), $pagina);
@@ -29,11 +30,36 @@ if (isset($_SESSION["user"])) {
             $pagina = str_replace("<CITTA/>", $annuncio->getCitta(), $pagina);
             $pagina = str_replace("<PROPRIETARIO/>", $host->getUserName(), $pagina);
             $pagina = str_replace("<PREZZO/>", $totale, $pagina);
-            
+
+            $commentiAnnuncio = $frent->getCommentiAnnuncio($prenotazioni->getIdAnnuncio());
+            // ricerca del commento fatto dall'utente
+            $commentoUtente = Commento::build();
+            $commentoTrovato = false;
+            $i = 0; $l = count($commentiAnnuncio);
+            while($i < $l && !$commentoTrovato) {
+                if($commentiAnnuncio[$i]->getIdPrenotazione() !== $id_prenotazione) {
+                    $i++;
+                } else {
+                    $commentoTrovato = true;
+                    $commentoUtente = $commentiAnnuncio[$i];
+                }
+            }
+
+            $content = "";
+            if($commentoTrovato) {
+                $content = "<ul class=\"riepilogo_annucio\">";
+                $content .= "<li>Titolo: " . $commentoUtente->getTitolo() . "</li>";
+                $content .= "<li>Valutazione: " . $commentoUtente->getValutazione() . "</li>";
+                $content .= "<li>Commento: " . $commentoUtente->getCommento() . "</li>";
+                $content .= "</ul>";
+            } else {
+                $content = file_get_contents("./components/aggiungi_commento_form.html");
+            }
+
+            $pagina = str_replace("<COMMENTO/>", $content, $pagina);
             
             echo $pagina;
         } else {
-//            echo "header";
             header("Location: ./404.php");
         }
     } catch (Eccezione $ex) {
