@@ -45,7 +45,7 @@ if (isset($_SESSION["user"])) {
                     <li>
                         <div class=\"intestazione_lista\">
                             <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                                title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] $nomeAnnuncio</a>
+                                title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - $nomeAnnuncio</a>
                         </div>";
             $i++;
             $prenotazioni_passate.="
@@ -69,7 +69,7 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a> </div>";
+                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - Soggiorno presso $nomeAnnuncio</a> </div>";
             $i++;
             $prenotazioni_correnti.="
                     <div class=\"corpo_lista lista_flex\">
@@ -93,7 +93,7 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] $nomeAnnuncio</a>
+                        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - $nomeAnnuncio</a>
                     </div>";
             $i++;
             $prenotazioni_future.="
