@@ -21,7 +21,6 @@ if (isset($_SESSION["user"])) {
             $pagina = str_replace("<IDPRENOTAZIONE/>", $prenotazioni->getIdOccupazione(), $pagina);
             $pagina = str_replace("<DATAINIZIO/>", $prenotazioni->getDataInizio(), $pagina);
             $pagina = str_replace("<DATAFINE/>", $prenotazioni->getDataFine(), $pagina);
-            $pagina = str_replace("", $prenotazioni->getIdOccupazione(), $pagina);
             
             $pagina = str_replace("<MAILPROPRIETARIO/>", $host->getMail(), $pagina);
             $pagina = str_replace("<NUMOSPITI/>", $prenotazioni->getNumOspiti(), $pagina);
