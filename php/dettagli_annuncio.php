@@ -45,6 +45,18 @@ try {
     
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
+    if (isset($_SESSION["admin"])){
+        $pagina = str_replace("<BREAD/>",$annuncio->getTitolo(),$pagina);
+        $pagina = str_replace("<FOOTER/>", "", $pagina);
+    
+    }else{
+        $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
+    
+        $pagina= str_replace("<BREAD/>",$pagina = "<a href=\"./index.php\" title=\"Vai alla pagina delle ricerca annunci\">
+                        <span xml:lang=\"en\" lang=\"en\">Home</span></a> &gt;&gt; <a href=\"./risultati.php?<PARAMS>\">Ricerca</a>
+                        &gt;&gt; <TITOLO_ANNUNCIO/></p>
+                        ",$pagina);
+    }
     
     // impostazione della pagina in base al tipo di utenza
     if (isset($_SESSION["user"]) or isset($_SESSION["admin"])) {
@@ -73,6 +85,7 @@ try {
         $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_non_autenticato.html"), $pagina);
         $pagina = str_replace("<LINK/>", "./login.php", $pagina);
     }
+    
     require_once "./components/setMinMaxDates.php";
     $link_ricerca="citta=".$annuncio->getCitta();
     $pagina = str_replace("<OSPITIMASSIMO/>", $ospitiMassimo, $pagina);
@@ -171,7 +184,6 @@ try {
     $pagina = str_replace("<IMMAGINE/>", "<div class=\"shower_immagine_anteprima\">
                         <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"".$annuncio->getDescAnteprima()."\"/>
                         </div>", $pagina);
-    $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     echo $pagina;
     
 } catch (Eccezione $ex) {
