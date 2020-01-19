@@ -2,4 +2,116 @@
     padding: 0em;
     margin: 0em;
     text-decoration: none;
+	font-family: serif;
 }
+
+a:link {
+	color: blue;
+}
+
+a:visited {
+	color: blue;
+}
+
+#nav {
+    display: none;
+}
+
+#footer {
+	display: none;
+}
+
+.aiuti_alla_navigazione {
+	display: none;
+}
+
+#link_to_menu {
+	display: none;
+}
+
+fieldset {
+	border: 0px;
+}
+
+input {
+	display: none;
+}
+
+.aligned_with_form {
+	display: none;
+}
+
+.sei_pannelli li a{
+	display: block;
+	margin: 0.2cm;
+}
+
+.sei_pannelli img{
+    width: 3cm;
+    height: 3cm;
+    margin-left: 0.1cm;
+}
+
+h1 {
+	text-align: center;
+}
+
+.corpo_lista {
+	margin-bottom: 0.2cm;
+	border-bottom: 1px solid black;
+}
+
+
+.dettagli_prenotazione img {
+	display: none;
+}
+
+.dettagli_prenotazione p {
+}
+
+.opzioni_prenotazione p {
+	font-weight: bold;
+}
+
+.opzioni_prenotazione a {
+	display: none;
+}
+
+.link_nuovo_annuncio {
+	display: none;
+}
+
+.corpo_lista img {
+	display: none;
+}
+
+
+.link_gestisci_annuncio {
+	display: none;
+}
+
+.informazioni_personali img {
+	display: none;
+}
+
+.link_modifica {
+	display: none;
+}
+
+.modifica_immagine_profilo img {
+	display: none;
+}
+
+#laterale input {
+	display: inline;
+}
+
+.riepilogo_annucio li a {
+	display: none;
+}
+
+#laterale form {
+	border-bottom: 1px solid black;
+	margin-bottom: 0.2cm;
+}
+
