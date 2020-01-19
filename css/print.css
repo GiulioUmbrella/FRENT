@@ -37,6 +37,10 @@ input {
 	display: none;
 }
 
+textarea {
+	display: none;
+}
+
 .aligned_with_form {
 	display: none;
 }
@@ -118,4 +122,8 @@ h1 {
 .shower_immagine_anteprima img{
 	width: 3cm;
 	height: 3cm;
+}
+
+.menu_gestione_annuncio {
+	display: none;
 }
