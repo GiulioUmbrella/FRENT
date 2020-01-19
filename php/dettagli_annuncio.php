@@ -52,7 +52,7 @@ try {
     }else{
         $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
-        $pagina= str_replace("<BREAD/>",$pagina = "<a href=\"./index.php\" title=\"Vai alla pagina delle ricerca annunci\">
+        $pagina= str_replace("<BREAD/>","<a href=\"./index.php\" title=\"Vai alla pagina delle ricerca annunci\">
                         <span xml:lang=\"en\" lang=\"en\">Home</span></a> &gt;&gt; <a href=\"./risultati.php?<PARAMS>\">Ricerca</a>
                         &gt;&gt; <TITOLO_ANNUNCIO/></p>
                         ",$pagina);
