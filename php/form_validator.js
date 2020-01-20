@@ -13,7 +13,7 @@ function mostra_errore(input, testoErrore) {
 function togli_errore(input) {
     const p = input.parentNode;
     if (p.children.length >2) {
-        p.removeChild(p.children[0]);
+        p.removeChild(p.children[p.children.length-1]);
     }
 }
 function mostra_errore_inizio(input, testoErrore) {
@@ -133,7 +133,7 @@ function check_numOspiti(num) {
 }
 
 function check_numeroTelefonico(input) {
-    const reg = new RegExp('^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
+    const reg = new RegExp('^(\\((00|\\+)39\\   )|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
     if (reg.test(input.value)) {
         togli_errore(input);
         return true;
@@ -145,7 +145,7 @@ function check_numeroTelefonico(input) {
 }
 
 function check_userMail(mailInput) {
-    const reg = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const reg = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     // const reg = new RegExp('^\\w+([._-]?\\w+)*@\\w+([.-]?\\w+)*(.\\w{2,6})+$');
     if (reg.test(mailInput.value.trim()) && mailInput.toString().trim().length < 191) {
 
@@ -179,16 +179,14 @@ function check_data(input) {
 }
 
 function check_data_a_3(gg, mm, aa) {
-    const giorno = parseInt(gg.value);
-    const mese = parseInt(mm.value);
-    const anno = parseInt(aa.value);
-
+    const giorno = parseInt(gg.options[gg.selectedIndex].value.toString());
+    const mese = parseInt(mm.options[mm.selectedIndex].value.toString());
+    const anno = parseInt(aa.options[aa.selectedIndex].value.toString());
     if (isNaN(giorno) || isNaN(mese) || isNaN(anno)) {
         mostra_errore("La data non valida!");
         return false;
     }
-    const d = ''.concat(anno.toString()).concat("-").concat(mese.toString()).concat("-").concat(giorno.toString());
-    const data = new Date(d);
+    const data = new Date(anno, mese, giorno);
     if (data.toString().trim() !== "Invalid Date") {
         togli_errore(gg);
         return true;
@@ -381,13 +379,13 @@ function validazione_form_modifica_profilo() {
     const inputGiorno = document.getElementById("giorno_nascita");
     const inputMese = document.getElementById("mese_nascita");
     const inputAnno = document.getElementById("anno_nascita");
-
     const res_cognome = check_nome(inputCognome);
     const res_nome = check_nome(inputNome);
-    const res_mail = check_nome(inputMail);
-    const res_username = check_nome(inputUserName);
+    const res_mail = check_userMail(inputMail);
+    const res_username = check_username(inputUserName);
     const res_telefono = check_numeroTelefonico(inputNumTelefono);
-    const res_data = check_data(inputGiorno.value, inputMese.value, inputAnno.value);
+    const res_data = check_data_a_3(inputGiorno, inputMese, inputAnno);
+    window.alert("check data");
 
     return res_telefono && res_nome && res_cognome && res_mail && res_username && res_data;
 

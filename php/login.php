@@ -7,7 +7,7 @@ $pagina = file_get_contents("./components/login.html");
 $pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login.php", $pagina);
 $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
-
+require_once ("load_header.php");
 if(!isset($_POST["accedi"])) {
     $pagina = str_replace("<VALUEUSERNAME>", "", $pagina);
     $pagina = str_replace("<VALUEPASSWORD>", "", $pagina);

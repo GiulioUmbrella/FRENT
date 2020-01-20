@@ -1,12 +1,14 @@
 <?php
+
     $nomepagina = basename($_SERVER['PHP_SELF']);
-    $header="";
-if ( $nomepagina=="index.php"){
-$header= "<div id=\"logo\">
-    <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
-    <h1>Frent</h1>
-    <a href=\"#nav\" id=\"link_to_menu\">Men&ugrave;</a>
-    </div>
+    $header="<div id=\"logo\">
+        <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
+        <h1>Frent </h1>
+	<a href = \"#nav\" id = \"link_to_menu\" > Men & ugrave;</a >
+    </div >";
+if (isset($_SESSION["user"])){
+    if ( $nomepagina=="index.php"){
+        $header.= "
     <div id=\"nav\">
         <ul>
             <li xml:lang=\"en\" lang=\"en\">Home
@@ -20,12 +22,8 @@ $header= "<div id=\"logo\">
             <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
-}elseif ($nomepagina=="mie_prenotazioni.php"){
-$header="<div id=\"logo\">
-    <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
-    <h1>Frent</h1>
-    <a href=\"#nav\" id=\"link_to_menu\">Men&ugrave;</a>
-    </div>
+    }elseif ($nomepagina=="mie_prenotazioni.php"){
+        $header.="
     <div id=\"nav\">
         <ul>
             <li><a  href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
@@ -37,12 +35,8 @@ $header="<div id=\"logo\">
             <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
-}elseif ($nomepagina=="miei_annunci.php"){
-$header="<div id=\"logo\">
-    <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
-    <h1>Frent</h1>
-    <a href=\"#nav\" id=\"link_to_menu\">Men&ugrave;</a>
-    </div>
+    }elseif ($nomepagina=="miei_annunci.php"){
+        $header.="
     <div id=\"nav\">
         <ul>
             <li><a href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
@@ -55,12 +49,8 @@ $header="<div id=\"logo\">
             <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
-}elseif ($nomepagina=="mio_profilo.php"){
-    $header="<div id=\"logo\">
-    <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
-    <h1>Frent</h1>
-    <a href=\"#nav\" id=\"link_to_menu\">Men&ugrave;</a>
-    </div>
+    }elseif ($nomepagina=="mio_profilo.php"){
+        $header.="
     <div id=\"nav\">
         <ul>
             <li><a  href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
@@ -73,7 +63,39 @@ $header="<div id=\"logo\">
             <li><a href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
+    }
+    
+}else{
+    if ($nomepagina=="index.php"){
+        $header .= "
+    <div id=\"nav\">
+        <ul>
+            <li>Home</li>
+            <li><a href=\"./login.php\" title=\"Vai alla pagina di accesso\">Accedi</a></li>
+            <li><a href=\"./registrazione.php\" title=\"Vai alla pagina di registrazione\">Registrati</a></li>
+        </ul>
+    </div>";
+    }elseif ($nomepagina=="login.php"){
+        $header .="
+    <div id=\"nav\">
+        <ul>
+            <li><a href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
+            </li>
+            <li>Accedi</li>
+            <li><a href=\"./registrazione.php\" title=\"Vai alla pagina di registrazione\">Registrati</a></li>
+        </ul>
+    </div>";
+    }elseif ($nomepagina=="registrazione.php"){
+        $header.="
+    <div id=\"nav\">
+        <ul>
+            <li><a href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
+            </li>
+            <li><a href=\"./login.php\" title=\"Vai alla pagina di accesso\">Accedi</a></li>
+            <li>Registrati</li>
+        </ul>
+    </div>";
+    }
 }
-
 
 $pagina = str_replace("<HEADER/>",$header, $pagina);

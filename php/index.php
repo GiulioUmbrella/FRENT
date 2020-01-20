@@ -5,8 +5,8 @@ require_once "./components/form_functions.php";
 require_once "load_Frent.php";
 try {
     $pagina = file_get_contents("./components/index.html");
+    require_once "./load_header.php";
     if (isset($_SESSION["user"])) {
-        require_once "./load_header.php";
 //        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
         $pagina = str_replace("<ADMINLINK/>", "", $pagina);
     } else if (isset($_SESSION["admin"])) {
