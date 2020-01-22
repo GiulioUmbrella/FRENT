@@ -1157,6 +1157,11 @@ html body #footer {
     margin-right: 1%;
 }
 
+.sei_pannelli li img {
+    width: 100%;
+    height: 90%;
+}
+
 .instestazione_lista {
     display: inline;
 }
