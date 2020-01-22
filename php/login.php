@@ -2,16 +2,45 @@
 require_once "./load_Frent.php";
 require_once "./components/form_functions.php";
 
+/**
+ * Funzioni con l'unico scopo di evitare duplicazione di codice.
+ */
+
+/**
+ * Sostituisce i placeholder.
+ * @param array $post corrisponde all'array $_POST, da passare come parametor
+ * @param string $pagina aggiornata per riferimento con i valori dei placeholder presi da $_POST
+ */
+function placeholder_replacement_with_content($post, &$pagina) {
+    // ripristino i dati
+    $pagina = replacePlaceholders(
+        $pagina,
+        ["<VALUEUSERNAME>","<VALUEPASSWORD>"],
+        [$post["user"], $post["password"]]
+    );
+}
+
+/**
+ * Sostituisce i placeholder con stringhe vuote.
+ * @param string $pagina aggiornata per riferimento con i valori dei placeholder sostituiti da stringhe vuote
+ */
+function placeholder_replacement_with_empty(&$pagina) {
+    // ripristino i dati
+    $pagina = replacePlaceholders(
+        $pagina,
+        ["<VALUEUSERNAME>","<VALUEPASSWORD>"],
+        ["", ""]
+    );
+}
+
+
 // carico pagina e componenti
 $pagina = file_get_contents("./components/login.html");
+require_once ("./load_header.php");
 $pagina = str_replace("<FORM/>", file_get_contents("./components/login_form.html"), $pagina);
 $pagina = str_replace("<PAGE/>", "./login.php", $pagina);
 $pagina= str_replace("<FOOTER/>",file_get_contents("./components/footer.html"),$pagina);
-require_once ("load_header.php");
-if(!isset($_POST["accedi"])) {
-    $pagina = str_replace("<VALUEUSERNAME>", "", $pagina);
-    $pagina = str_replace("<VALUEPASSWORD>", "", $pagina);
-} else {
+if(isset($_POST["accedi"])) {
     $risultato_validazione = checkValuesForKeysInAssociativeArray($_POST, ["user", "password"]);
     /**
      * se $form_non_valido === TRUE ci sono valori di $_POST non settati
@@ -19,23 +48,17 @@ if(!isset($_POST["accedi"])) {
     $form_non_valido = in_array(FALSE, $risultato_validazione);
 
     $messageToUser = "";
-    $divId = "credenziali_errate";
-    $divClasses = "aligned_with_form";
+    $divId = "info_box";
+    $divClasses = "aligned_with_form messaggio_errore";
     $inParagraph = TRUE;
     
     // $pagina = str_replace("</msg>", "", $pagina);
-    if($form_non_valido) { // IF1 - RAMO VERO IF1
-        $pagina = str_replace("<VALUEUSERNAME>","", $pagina);
-        $pagina = str_replace("<VALUEPASSWORD>","", $pagina);
-    
-        $messageToUser = formValidationErrorList("C'è stato un errore nella compilazione del modulo.", $risultato_validazione);
-    } else { // FINE RAMO VERO IF1 - RAMO FALSO IF1
-        // reperisco i valori da post
-        $nome = $_POST["user"];
-        $password = $_POST["password"];
-
+    if($form_non_valido) {
+        $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo.</p>", $risultato_validazione);
+        $inParagraph = FALSE;
+    } else {
         try {
-            $utente = $frent->login($nome, $password);
+            $utente = $frent->login($_POST["user"], $_POST["password"]);
             
             // aggiunto l'oggetto utente alla sessione  amp
             $_SESSION["user"] = $utente;
@@ -44,14 +67,14 @@ if(!isset($_POST["accedi"])) {
             
         } catch (Eccezione $exc) {
             $messageToUser = htmlentities("C'è stato un errore durante l'accesso. Errore riscontrato: ") . $exc->getMessage();
-
-            // i valori che ho trovato in $_POST li reinserisco nel form così l'utente non deve reinserirli
-            $pagina = str_replace("<VALUEUSERNAME>", $nome, $pagina);
-            $pagina = str_replace("<VALUEPASSWORD>", $password, $pagina);
-            $pagina = str_replace("</msg>", $messageToUser, $pagina);
-            
         }
     }
+    /// se è stata invocata placeholder_replacement_with_empty, la funzione non avrà side-effect
+    placeholder_replacement_with_content($_POST, $pagina); // aggiornata per riferimento
+    $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph); // sostituisce <INFO_BOX/>
+} else {
+    $pagina = str_replace("<INFO_BOX/>", "", $pagina);
+    placeholder_replacement_with_empty($pagina); // aggiornata per riferimento
 }
 
 echo $pagina;
