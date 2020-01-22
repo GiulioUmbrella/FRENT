@@ -7,7 +7,7 @@ user_data = []
 annunci_data = []
 occupazioni = []
 commenti = []
-data_base = "2019-11-"
+data_base = "2020-02-"
 
 def write_on_csv(header, csv_data, file_path="data.csv"):
     with open(file_path, 'w') as csv_file:
@@ -20,7 +20,7 @@ def generate_users():
     #15 Nomi
     names = ["Jolanda","Melchiorre","Cirino","Ignazio","Elio","Gianni","Amore","Marisa","Dania","Alberico","Lodovico","Marino","Nella","Pompeo","Alfonso"]
     surnames = ["Rossi","Ferrari","Russo","Bianchi","Romano","Gallo","Costa","Fontana","Conti","Esposito","Ricci","Bruno","Rizzo","Moretti","Marino"]
-    default_image = "defaultImages/imgProfiloDefault.png"
+    default_image = "../uploads/defaultImages/imgProfiloDefault.png"
     #Need more users? decomment this lines
     '''
     exponential = 15 #Up to len(names)
@@ -59,7 +59,38 @@ def generate_annunci():
     titoli = ["Casa {}".format(n) for n in ["Loreto","Agrippa","Celeste","Aquila","Amore"]]
     titoli += ["Appartamento {}". format(n) for n in ["Aran","Flann","Glaucia","Nollaig","Amore"]]
 
-    descrizioni = ["defualt descirptio" for _ in titoli]
+    descrizioni = ["Accogliente casa in riva al mare con una vista fantastica. Molto vicina al centro città e ai negozzi dove è possibile fare shopping.",
+                    "Casa in aperta campagna, ottimo luogo dove riposarsi nei fine settiman. Consigliata soprattutto alle coppie",
+                    "Casa in montagna a 2 metri dalle piste da sci. Otiima per passare la settimana bianca.",
+                    "Casa accogliente in centro città a due passi dalla metro. Molto vicina al nuovisissimo MCDonald.",
+                    "Casa Amore, un nome una garanzia. Il vostro soggiorno sarà molto appagante.",
+                    "Appartamentino in centro città a due metri dalla stazione dei treni e dall'aereoporto.",
+                    "Un appartamentino molto accogliente nel quale sono ben accetti animali di tutte le taglie.",
+                    "Appartamento dalle nobili origini ristrutturato per renderlo un posticino accogliente e pragmatico.",
+                    "Appartemento vista mare con spiaggia annesse, venite da noi a godervi delle bellissime giornate di solo.",
+                    "Appartamento dove l'amore è di casa."]
+    foto = ["../uploads/defaultImages/c1.jpg",
+            "../uploads/defaultImages/c2.jpg",
+            "../uploads/defaultImages/c3.jpg",
+            "../uploads/defaultImages/c4.jpg",
+            "../uploads/defaultImages/c5.jpg",
+            "../uploads/defaultImages/a1.jpg",
+            "../uploads/defaultImages/a2.jpg",
+            "../uploads/defaultImages/a3.jpg",
+            "../uploads/defaultImages/a4.jpg",
+            "../uploads/defaultImages/a5.jpg",]
+
+    descrizione_foto = ["Stanza con un tavolo, due finestre, separate da una colonna",
+                        "Sala da pranzo con zona cucina e zona soggiorno. Una televisione a destra e una porta in fondo a sinistra.",
+                        "Stanza con un divano a due posti, uno specchio e  una piccola tv.",
+                        "Casa a due piani con giardino.",
+                        "Casa ad un unico piano con un garage ed un ampio giardino ben curato.",
+                        "Vista esterna di una casa a due piani con un garage e un giardino ben curato.",
+                        "Sala da pranzo con un tavolino, 4 sedie, un divanetto e una televisione sopra un mobile.",
+                        "Sala da pranzo con cucina, un tavolo con una panca e due sedie. A destra è presente un corridoio.",
+                        "Cucina con un tavolo ed un divano sttaccato alla parete. Sulla sinistra c'è una porta finestra.",
+                        "Appartamento visto da fuori con un balconcino con delle fioriere. Appartamento a due piani.",
+                        "Sala da pranza con salotto, molto grande, pavimento in parquet, tavolo con panca e divano con tavolino."]
 
     if len(argv) > 1:
         if argv[1] == "--less-random":
@@ -88,8 +119,8 @@ def generate_annunci():
             str(i+1),
             titoli[i],
             descrizioni[i],
-            "defaultImages/imgProfiloDefault.png",
-            "Immagine di default",
+            foto[i],
+            descrizione_foto[i],
             indirizzi[i],
             citta[i],
             hosts[i],
@@ -127,9 +158,9 @@ def generate_occupazioni():
 
 def generate_commenti():
     comments_header = ["prenotazione", "data_pubblicazione", "titolo", "commento", "votazione"]
-    next_data_base = "2019-12-01 09:21:00" #da modifcare in caso di cambiamenti
+    next_data_base = "2020-02-10 09:21:00" #da modifcare in caso di cambiamenti
     for occupazione in occupazioni:
-        new_commento = [occupazione[0], next_data_base, "Titolo per l'occupazioni di id {}".format(occupazione[0]), "Commento molto molto ma vermanete molto lungo relativo all'occupazione di id {}".format(occupazione[0]), str(random.randrange(1, 5))]
+        new_commento = [occupazione[0], next_data_base, "Soggiorno molto bello".format(occupazione[0]), "Il soggiorno è stato molto piacevole, consiglio assolutamente la visita", str(random.randrange(3, 5))]
         commenti.append(new_commento)
     write_on_csv(comments_header, commenti, "commenti.csv")
 
