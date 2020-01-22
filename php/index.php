@@ -6,8 +6,17 @@ require_once "load_Frent.php";
 try {
     $pagina = file_get_contents("./components/index.html");
     require_once "./load_header.php";
+    
     if (isset($_SESSION["user"])) {
 //        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
+        $dataCorrente=date("m-d");
+        echo $dataCorrente;
+        $dataNascita = $_SESSION["user"]->getDataNascita();
+        echo "data Nascita $dataNascita";
+//        $dataNascita = $dataNascita.str
+        if ($dataNascita===$dataCorrente){
+            $pagina= str_replace("<h1>FRENT</h1>","<h1>Buon compleanno!</h1>",$pagina);
+        }
         $pagina = str_replace("<ADMINLINK/>", "", $pagina);
     } else if (isset($_SESSION["admin"])) {
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);

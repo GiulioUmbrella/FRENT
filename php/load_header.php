@@ -3,8 +3,8 @@
     $nomepagina = basename($_SERVER['PHP_SELF']);
     $header="<div id=\"logo\">
         <a href=\"#content\" class=\"aiuti_alla_navigazione\" title=\"Salta il men&ugrave;\">Salta il men&ugrave;</a>
-        <h1>Frent </h1>
-	<a href = \"#nav\" id = \"link_to_menu\" > Men & ugrave;</a >
+        <h1>Frent</h1>
+	<a href = \"#nav\" id = \"link_to_menu\" > Men&ugrave;</a >
     </div >";
 if (isset($_SESSION["user"])){
     if ( $nomepagina=="index.php"){
