@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="utf-8">
-    <title><TITOLO_ANNUNCIO/> - Frent</title> <!--TODO: PHP-->
+    <title><TITOLO_ANNUNCIO/> - Frent</title>
 
-    <meta name="description" content="DESCRIZIONE ANNUNCIO"/> <!--TODO: PHP-->
+    <meta name="description" content="<DESCRIZIONE/>"/>
   
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
 
@@ -18,19 +18,21 @@
 <HEADER/>
 
 <div id="breadcrumb">
-    <p>Ti trovi in: <BREAD/></p>
+    <p>Ti trovi in: <BREADCRUMB/></p>
 </div>
 <div id="content">
     <div class="informazioni_prenotazione">
         <h1 class="titolo_annuncio"><TITOLO_ANNUNCIO/></h1>
-        <h2>Valutazione media: <VALUTAZIONE/></h2>
-        <h2>Numero commenti ricevuti:<NUMEROCOMMENTI/> </h2>
-        <h2>Prezzo <PREZZO/>&euro;</h2>
+        <p>Valutazione media: <VALUTAZIONE/></p>
+        <p>Numero commenti ricevuti:<NUMEROCOMMENTI/></p>
+        <p>Prezzo: <PREZZO/>&euro;</p>
         <p>Numero ospiti massimo: <OSPITIMASSIMO/></p>
        <FLAG/>
     </div>
     <IMMAGINE/>
+    <h2>Descrizione</h2>
     <p><DESCRIZIONE/></p>
+    <INFO_BOX/>
     <div id="commenti">
         <h2>Commenti</h2>
         <COMMENTI/>
