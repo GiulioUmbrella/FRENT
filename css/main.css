@@ -889,6 +889,19 @@ body .aiuti_alla_navigazione {
     overflow: hidden;
 }
 
+.torna_su {
+    position: fixed;
+    bottom:3em;
+    right: 1em;
+    padding: 1em;
+    border: 1px solid #4CAF50; 
+    background-color: #4CAF50;
+    border-radius: 100%;
+    height: 2em;
+    width: 2em;
+    text-align: center;
+}
+
 .messaggio_errore {
     color: red;
 }
