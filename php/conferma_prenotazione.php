@@ -5,16 +5,12 @@ $pagina = file_get_contents("./components/conferma_prenotazione.html");
 $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
 $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
 
-if (!$_SESSION["user"]) {
+if (!isset($_SESSION["user"])) {
     header("Location: ./login.php");
 }
 
-if (isset($_SESSION["annuncio"]) AND isset($_SESSION["dataInizio"])
-    and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"])) {
-//    $pagina = str_replace("<IDANNUNCIO/>", $_SESSION["annuncio"]->getIdAnnuncio(), $pagina);
-//
+if (isset($_SESSION["annuncio"]) and isset($_SESSION["dataInizio"]) and isset($_SESSION["dataFine"]) and isset($_SESSION["numOspiti"])) {
     $annuncio = $_SESSION["annuncio"];
-//
     $utente = $frent->getUser(intval($annuncio->getIdHost()));
     $pagina = str_replace("<TITOLO/>", $annuncio->getTitolo(), $pagina);
     $pagina = str_replace("<DATAINIZIO/>", $_SESSION["dataInizio"], $pagina);
