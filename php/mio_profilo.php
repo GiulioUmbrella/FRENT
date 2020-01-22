@@ -21,10 +21,10 @@ $pagina = str_replace("<USERNAME/>", $user->getUsername(), $pagina);
 $pagina = str_replace("<MAIL/>", $user->getMail(), $pagina);
 
 if(isset($_SESSION["delete_user_message"])) {
-    $pagina = str_replace("<DELETE_USER_MESSAGE/>", "<p>" . $_SESSION["delete_user_message"] . "</p>", $pagina);
+    $pagina = str_replace("<INFO_BOX/>", "<p class=\"messaggio_errore\">" . $_SESSION["delete_user_message"] . "</p>", $pagina);
     unset($_SESSION["delete_user_message"]);
 } else {
-    $pagina = str_replace("<DELETE_USER_MESSAGE/>", "", $pagina);
+    $pagina = str_replace("<INFO_BOX/>", "", $pagina);
 }
 
 echo $pagina;
