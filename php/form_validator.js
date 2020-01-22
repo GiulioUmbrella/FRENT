@@ -133,7 +133,8 @@ function check_numOspiti(num) {
 }
 
 function check_numeroTelefonico(input) {
-    const reg = new RegExp('^(\\((00|\\+)39\\   )|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
+    // const reg = new RegExp('^(\\((00|\\+)39\\)|(00|\\+)39)\\?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
+    const reg = new RegExp("/^([+][0-9]{1,3})?[0-9]{4,13}$/");
     if (reg.test(input.value)) {
         togli_errore(input);
         return true;
@@ -286,6 +287,7 @@ function validazione_form_ricerca() {
 }
 
 function validazione_form_registrazione() {
+
     const inputNome = document.getElementById("nome");
     const inputCognome = document.getElementById("cognome");
     const inputMail = document.getElementById("mail");
