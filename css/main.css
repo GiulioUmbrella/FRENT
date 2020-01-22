@@ -1,4 +1,5 @@
-*{
+
+* {
     padding: 0em;
 	margin: 0em;
 }
@@ -1217,4 +1218,77 @@ strong{
     margin-left: 2em;
     color: red;
     display: block;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+.layout_colonna {
+	display: block;
+}
+
+.layout_tre_colonne {
+	display: block;
+}
+
+#logo {
+	width: 100%;
+	padding-bottom: 1em;
+}
+
+#nav {
+	height: 4em;	
+	padding-bottom: 1em;
+	margin-bottom: -1em;
+}
+
+#nav ul li {
+	height: 3em;
+}
+
+#breadcrumb {
+	margin-top: 1em;
+}
+
+#laterale form input {
+	height: 1.5em;
+}
+
+#laterale form fieldset div {
+	float: left;
+	margin-left: 5em;
+}
+
+
+.intestazione_lista {
+	display: inline-block;
+}
+
+.intestazione_lista > p {
+	margin-top: 1.5em;
+	float: none;
+}
+
+.lista_flex {
+	display: block;
+}
+
+.lista_flex .opzioni_prenotazione {
+	text-align: left;
+}
+
+.lista_flex .opzioni_prenotazione p {
+	margin-top: 0em;
+}
+
+.lista_flex .opzioni_prenotazione a {
+	display: inline-block;
+	margin: 5em 0em 0.5em -13em;
+}
+
+.menu_gestione_annuncio {
+	margin-top: 0em;
+}
+
+.informazioni_personali img {
+	float: none;
+}
 }
