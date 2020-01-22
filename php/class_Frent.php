@@ -275,11 +275,11 @@ class Frent {
     
     /**
      * Restituisce una lista di annunci approvati per ultimi
-     * @param $id int indica id del user
+     * @param int $id identificatore dell'utente (default: -1, indica che non è loggato l'utente)
      * @return array di oggetti di tipo Annuncio
      * @throws Eccezione in caso di errori nella connessione al database, errore nella creazione dell'oggeto di Annuncio
      */
-    public function getUltimiAnnunciApprovati($id) {
+    public function getUltimiAnnunciApprovati($id = -1): array {
         try {
             $this->db_instance->connect();
             $procedure_name_and_params = "get_ultimi_annunci_approvati($id)";
@@ -315,6 +315,9 @@ class Frent {
             $procedure_name_and_params = "get_annuncio($id_annuncio)";
             $res_annuncio = $this->db_instance->queryProcedure($procedure_name_and_params);
             
+            if(count($res_annuncio) === 0) {
+                throw new Eccezione("L'ID dell'annuncio fornito non corrisponde a nessun annuncio.");
+            }
             $annuncio = Annuncio::build();
             $annuncio->setIdAnnuncio(intval($res_annuncio[0]['id_annuncio']));
             $annuncio->setTitolo($res_annuncio[0]['titolo']);
@@ -349,6 +352,11 @@ class Frent {
             $this->db_instance->connect();
             $procedure_name_and_params = "get_user($id_utente)";
             $res_utente = $this->db_instance->queryProcedure($procedure_name_and_params);
+
+            if(count($res_utente) === 0) {
+                throw new Eccezione("Non esiste alcun utente collegato all'ID fornito.");
+            }
+
             $utente = Utente::build();
             $utente->setIdUtente(intval($res_utente[0]['id_utente']));
             $utente->setCognome($res_utente[0]['cognome']);
@@ -384,6 +392,7 @@ class Frent {
             throw $exc;
         } 
     }
+    
     /**
      * Inserisce una nuova occupazione per un annuncio, verificando la possibilità prima di effettuare l'operazione e marchiandola come prenotazione se fatta da un guest e non dall'host.
      * @param  Occupazione occupazione da inserire nel database
@@ -515,11 +524,12 @@ class Frent {
      * @return int -2 l'annuncio, i commenti e le foto non sono stati eliminati (per esempio per errori nelle chiavi esterne)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function deleteAnnuncio($id_annuncio) {
+    public function deleteAnnuncio($id_annuncio): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La cancellazione di un annuncio può essere svolta solo da un utente registrato.");
             }
+
             if(!is_int($id_annuncio)) {
                 throw new Eccezione("Parametri di invocazione di deleteAnnuncio errati.");
             }
