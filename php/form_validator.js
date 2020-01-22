@@ -12,17 +12,19 @@ function mostra_errore(input, testoErrore) {
 //da richiamare sempre prima di mostraErrore
 function togli_errore(input) {
     const p = input.parentNode;
-    if (p.children.length >2) {
-        p.removeChild(p.children[p.children.length-1]);
+    if (p.children.length > 2) {
+        p.removeChild(p.children[p.children.length - 1]);
     }
 }
+
 function mostra_errore_inizio(input, testoErrore) {
     togli_errore_inizio(input);
     const p = input.parentElement;
     const strong = document.createElement("strong");
     strong.appendChild(document.createTextNode(testoErrore));
-    p.insertBefore(strong,p.children[0]);
+    p.insertBefore(strong, p.children[0]);
 }
+
 //da richiamare sempre prima di mostraErrore
 function togli_errore_inizio(input) {
     const p = input.parentNode;
@@ -30,18 +32,20 @@ function togli_errore_inizio(input) {
         p.removeChild(p.children[0]);
     }
 }
+
 function togli_errore_citta(input) {
     const p = input.parentNode;
-    if (p.children.length >3) {
+    if (p.children.length > 3) {
         p.removeChild(p.children[0]);
     }
 }
+
 function mostra_errore_citta(input, testoErrore) {
     togli_errore_citta(input);
     const p = input.parentElement;
     const strong = document.createElement("strong");
     strong.appendChild(document.createTextNode(testoErrore));
-    p.insertBefore(strong,p.children[0]);
+    p.insertBefore(strong, p.children[0]);
 }
 
 function check_nome(input) {
@@ -68,12 +72,27 @@ function check_cognome(input) {
 
 // todo
 function check_immagini(input) {
-    return true;
+    const size = parseFloat(input.files[0].size.toString()) / 1024;
+    const type = input.files[0].type.toString();
+
+    const types = ["image/png", "image/jpeg", "image/jpg"];
+    let found = false;
+    for (let i=0; i< types.length; i++) {
+        if (types[i] === type)
+            found = true;
+    }
+
+    if (found && size < 2048 && size!==0) {
+        togli_errore_citta(input);
+        return true;
+    }
+    mostra_errore_citta(input,"File non valido!");
+    return false;
 }
 
 function check_password_first(input) {
     const val = input.value.trim();
-    const reg = new RegExp("");
+    const reg = new RegExp("[a-zA-Z0-9]{3,48}");
     if (val.length > 3 && reg.test(val)) {
         togli_errore(input);
         return true;
@@ -133,7 +152,8 @@ function check_numOspiti(num) {
 }
 
 function check_numeroTelefonico(input) {
-    const reg = new RegExp('^(\\((00|\\+)39\\   )|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
+    // const reg = new RegExp('^(\\((00|\\+)39\\)|(00|\\+)39)\\?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{6,7}$');
+    const reg = new RegExp("/^([+][0-9]{1,3})?[0-9]{4,13}$/");
     if (reg.test(input.value)) {
         togli_errore(input);
         return true;
@@ -213,7 +233,7 @@ function check_descrizione(input) {
         togli_errore(input);
         return true;
     }
-    if (val.length!==0)
+    if (val.length !== 0)
         mostra_errore(input, "Descrizione troppo lunga");
     else
         mostra_errore(input, "Descrizione troppo corta");
@@ -286,6 +306,7 @@ function validazione_form_ricerca() {
 }
 
 function validazione_form_registrazione() {
+
     const inputNome = document.getElementById("nome");
     const inputCognome = document.getElementById("cognome");
     const inputMail = document.getElementById("mail");
@@ -353,10 +374,9 @@ function validazione_form_modifica_annuncio() {
         res_indirizzo && res_citta;
 }
 
-function validazione_form_modifica_foto_profilo(input) {
-    // todo fare eventuali controlli.
-
-    return true;
+function validazione_form_modifica_foto_profilo() {
+    const input = document.getElementById("nuova_img_profilo");
+    return check_immagini(input);
 }
 
 function validazione_form_cambio_password() {
