@@ -446,17 +446,22 @@ display: none;
 
 .corpo_commento {
     border: 1px solid black;
+    padding: 0.5em;
 }
 
 .corpo_commento h1 {
-  font-size: 1.2em;
+  font-size: 1.5em;
   float:left;
   margin-right: 1em;
 }
+
 .corpo_commento h1 + p {
   margin-top: 0.2em;
 }
 
+.corpo_commento p {
+    margin-top: 0.5em;
+}
 
 /* Liste per FAQ e condizioni di utilizzo*/
 
