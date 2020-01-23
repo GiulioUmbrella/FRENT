@@ -418,7 +418,6 @@ html body .aiuti_alla_navigazione {
 
 .corpo_commento h1 {
     font-size: 1.5em;
-    float: left;
     margin-right: 1em;
 }
 
@@ -465,7 +464,7 @@ html body .aiuti_alla_navigazione {
 /*----DETTAGLI ANNUNCIO----*/
 .informazioni_prenotazione {
     float: right;
-    max-width: 25%;
+    max-width: 35%;
 }
 
 .informazioni_prenotazione h2 {
@@ -473,13 +472,8 @@ html body .aiuti_alla_navigazione {
     font-size: 1.3em;
 }
 
-.shower_immagine_anteprima {
-    display: flex;
-    width: 75%;
-}
-
 .immagine_anteprima {
-    width: 85%;
+    width: 60%;
 }
 
 /*Form per la conferma della prenotazione*/
