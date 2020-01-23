@@ -798,6 +798,10 @@ fieldset {
 #img_errore_404 {
     background-image: url("../immagini/opss040.jpg");
     background-repeat: no-repeat;
+    width: 50%;
+    height: 25em;
+    display: block;
+    margin: auto;
 }
 
 /*FIX LAYOUT MOBILE*/
