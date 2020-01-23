@@ -41,7 +41,7 @@ else
 fi
 
 echo -n "Creazione tabelle (createtables.sql)... "
-if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < createtables.sql; then
+if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < create_tables.sql; then
   echo "${GREEN}DONE${NC}"
 else
   echo "${RED}FAILED${NC}"
@@ -59,10 +59,10 @@ do
   fi
 done
 
-echo -n "Caricamento dati (load_data.sql)... "
-if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < load_data.sql; then
-  echo "${GREEN}DONE${NC}"
-else
-  echo "${RED}FAILED${NC}"
-  exit 1
-fi
+#echo -n "Caricamento dati (load_data.sql)... "
+#if mysql -h localhost -P3306 -u ${LOGNAME} -D ${LOGNAME} --local-infile=1 --password=$( cat $HOME/pwd_db-1920.txt ) --show-warnings < load_data.sql; then
+#  echo "${GREEN}DONE${NC}"
+#else
+#  echo "${RED}FAILED${NC}"
+#  exit 1
+#fi
