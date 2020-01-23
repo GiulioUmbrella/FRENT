@@ -54,7 +54,13 @@ if (isset($_SESSION["user"])) {
                 $content .= "<li>Commento: " . $commentoUtente->getCommento() . "</li>";
                 $content .= "</ul>";
             } else {
-                $content = file_get_contents("./components/aggiungi_commento_form.html");
+		$content = "";
+		if ($prenotazioni->getDataFine() < date("Y-m-d")) {
+		    $content = file_get_contents("./components/aggiungi_commento_form.html");
+		}
+		else {
+		    $content = "<p>Non &egrave; ancora possibile commentare questa prenotazione.</p>";
+		}
             }
 
             $pagina = str_replace("<COMMENTO/>", $content, $pagina);
