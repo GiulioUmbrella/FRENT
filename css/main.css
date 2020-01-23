@@ -11,6 +11,10 @@ html, body {
     font-family: Verdana, Helvetica, sans-serif;
 }
 
+p {
+    font-size: 1.5em;
+}
+
 a {
     color: #1B3409;
 }
@@ -173,7 +177,6 @@ html body .aiuti_alla_navigazione {
 
 #content p {
     line-height: 1em;
-    font-size: 1.5em;
 }
 
 /*Stile per i titoli figli diretti di content*/
@@ -381,6 +384,10 @@ html body .aiuti_alla_navigazione {
     clear: both;
 }
 
+#commenti h2 {
+    margin-bottom: 1em;
+}
+
 #commenti ul li {
     margin-bottom: 2em;
 }
@@ -408,8 +415,11 @@ html body .aiuti_alla_navigazione {
 .intestazione_commento .username_commento {
     font-size: 1.1em;
     font-weight: bold;
-    float: left;
     margin-right: 1em;
+}
+
+.intestazione_commento .data_commento {
+    font-size: 1em;
 }
 
 .corpo_commento {
@@ -803,7 +813,7 @@ fieldset {
 /*FIX LAYOUT MOBILE*/
 @media (max-device-width: 600px) {
     html {
-        zoom: 3;
+        zoom: 2;
     }
 
     /*Ristrutturazione layout per mobile*/
