@@ -230,7 +230,6 @@ html body .aiuti_alla_navigazione {
 
 .intestazione_lista > p {
     font-size: 1em;
-    float: left;
     margin: 0.5em 0 0.5em 0;
 }
 
@@ -240,7 +239,8 @@ html body .aiuti_alla_navigazione {
     border: 1px solid gray;
     border-radius: 1em;
     margin: 0.5em 0 1em 0;
-    min-height: 14em; /*In caso ci sia una foto*/
+   /* min-height: 14em; /*In caso ci sia una foto*/
+    overflow: auto;
 }
 
 .corpo_lista img {
@@ -256,10 +256,11 @@ html body .aiuti_alla_navigazione {
 }
 
 /*Presentazione prezzo*/
-.corpo_lista .prezzo_totale {
-    font-size: 2em;
+#content .corpo_lista .prezzo_totale { /*Priorità aumentata*/
+    font-size: 1.5em;
     text-align: right;
     margin-right: 1em;
+    font-weight: bold;
 }
 
 /*Presentazione del corpo di un elemento di una lista di prenotazioni*/
@@ -291,7 +292,7 @@ html body .aiuti_alla_navigazione {
 .corpo_lista_prenotazioni .opzioni_prenotazione p {
     font-size: 1.5em;
     font-weight: bold;
-    margin-top: 25%;
+    margin-top: 1em;
 }
 
 .corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"] {
@@ -308,9 +309,12 @@ html body .aiuti_alla_navigazione {
     background-color: #4CAF50;
     font-size: 1.2em;
     padding: 0.25em 0.75em 0.25em 0.75em;
-    margin: 0 0.5em 0 0.5em;
+    margin: auto;
+    margin-top: 0.5em;
+    width: 25%;
+    height: 2em;
     border: 1px solid #ddd;
-    border-radius: 1em;
+    border-radius: 1.5em;
     color: black;
     cursor: pointer;
 }
