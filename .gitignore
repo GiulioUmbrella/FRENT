@@ -2,6 +2,7 @@
 .idea/
 .vscode/
 Database/data_builder/*.csv
+uploads/user*
 
 /~$.docx
 

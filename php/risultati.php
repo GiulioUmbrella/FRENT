@@ -1,7 +1,7 @@
 <?php
+require_once "./components/form_functions.php";
+require_once "./components/setMinMaxDates.php";
 require_once "load_Frent.php";
-require_once "class_Frent.php";
-require_once "./class_CredenzialiDB.php";
 $pagina = file_get_contents("./components/risultati.html");
 if (isset($_SESSION["admin"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
@@ -10,9 +10,7 @@ if (isset($_SESSION["admin"])) {
 } else {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
 }
-require_once "load_Frent.php";
 $citta="";
-require_once "./components/setMinMaxDates.php";
 $numOspiti=1;
 $dataInizio ="";
 $dataFine ="";
@@ -56,7 +54,7 @@ try {
         $Titolo = $annuncio->getTitolo();
         $descrizione=$annuncio->getDescrizione();
         $prezzonotte=$annuncio->getPrezzoNotte();
-        $path= $annuncio->getImgAnteprima();
+        $path= uploadsFolder() . $annuncio->getImgAnteprima();
         $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
         $numeroRecensione= count($recensioni);
         $punteggio=0;
@@ -82,7 +80,7 @@ try {
                 </li>";
     }
 } catch (Eccezione $e) {
-    $content="<h1>Non ci sono annunci che soddisfano i parametri di ricerca!</h1>";
+    $content="<h1>" . $e->getMessage() . "</h1>";
 }
 //$risultati=array();
 

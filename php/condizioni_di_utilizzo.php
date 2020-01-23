@@ -1,5 +1,4 @@
 <?php
-//require_once "./php/classi/class_Annuncio.php";
 session_start();
 $pagina = file_get_contents("./components/condizioni_di_utilizzo.html");
 if (isset($_SESSION["user"])) {

@@ -5,7 +5,6 @@ require_once "./components/form_functions.php";
 
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
 if (isset($_SESSION["user"])) {
-    require_once "./load_header.php";
 //    $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
@@ -45,7 +44,7 @@ if (isset($_SESSION["user"])) {
                     <li>
                         <div class=\"intestazione_lista\">
                             <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                                title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] $nomeAnnuncio</a>
+                                title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - $nomeAnnuncio</a>
                         </div>";
             $i++;
             $prenotazioni_passate.="
@@ -58,7 +57,7 @@ if (isset($_SESSION["user"])) {
                             </div>
                             <div class=\"opzioni_prenotazione\">
                                 <p>Totale: &euro; $prezzo</p>
-                                <a href=\"Commenta\" title=\"Scrivi un commento sulla tua prenotazione\">Commenta</a>
+                                <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" title=\"Scrivi un commento sulla tua prenotazione\">Commenta</a>
                             </div>
                         </div>
                     </li>";// todo da decidere come far commentare
@@ -69,7 +68,7 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] Soggiorno presso $nomeAnnuncio</a> </div>";
+                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - Soggiorno presso $nomeAnnuncio</a> </div>";
             $i++;
             $prenotazioni_correnti.="
                     <div class=\"corpo_lista lista_flex\">
@@ -93,7 +92,7 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class=\"intestazione_lista\">
                         <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">[#$id_prenotazione] $nomeAnnuncio</a>
+                        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - $nomeAnnuncio</a>
                     </div>";
             $i++;
             $prenotazioni_future.="
@@ -143,9 +142,6 @@ if (isset($_SESSION["user"])) {
        }else{
            $pagina = str_replace("<PRENOTAZIONIFUTURE/>", "", $pagina);
         
-       }
-       for ($j=5; $j<$i; $j=$j+1){
-           $pagina= str_replace("<TABINDEX$j>",$j,$pagina);
        }
    }else{
        $pagina= str_replace("<FLAG/>","<h1>Non ci sono prenotazioni!</h1>",$pagina);

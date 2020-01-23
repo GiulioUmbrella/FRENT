@@ -2,9 +2,9 @@
 <html lang="it">
 <head>
     <meta charset="utf-8">
-    <title><TITOLO_ANNUNCIO/> - Frent</title> <!--TODO: PHP-->
+    <title><TITOLO_ANNUNCIO/> - Frent</title>
 
-    <meta name="description" content="DESCRIZIONE ANNUNCIO"/> <!--TODO: PHP-->
+    <meta name="description" content="<DESCRIZIONE/>"/>
   
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
 
@@ -18,66 +18,26 @@
 <HEADER/>
 
 <div id="breadcrumb">
-    <p>Ti trovi in: <BREAD/></p>
-        </div>
-
+    <p>Ti trovi in: <BREADCRUMB/></p>
+</div>
 <div id="content">
     <div class="informazioni_prenotazione">
         <h1 class="titolo_annuncio"><TITOLO_ANNUNCIO/></h1>
-        <h2>Valutazione media: <VALUTAZIONE/></h2>
-        <h2>Numero commenti ricevuti:<NUMEROCOMMENTI/> </h2>
-        <h2>Prezzo <PREZZO/>&euro;</h2>
+        <p>Valutazione media: <VALUTAZIONE/></p>
+        <p>Numero commenti ricevuti:<NUMEROCOMMENTI/></p>
+        <p>Prezzo: <PREZZO/>&euro;</p>
         <p>Numero ospiti massimo: <OSPITIMASSIMO/></p>
-
        <FLAG/>
-
     </div>
-
-   <IMMAGINE/>
-
-
-    <p>
-     <DESCRIZIONE/>
-
-
-    </p>
+    <IMMAGINE/>
+    <h2>Descrizione</h2>
+    <p><DESCRIZIONE/></p>
+    <INFO_BOX/>
     <div id="commenti">
         <h2>Commenti</h2>
-
-            <COMMENTI/>
-<!--        <ul>-->
-<!--            <li>-->
-<!--                <div class="intestazione_commento">-->
-<!--                    &lt;!&ndash; Chiedere se va bene img &ndash;&gt;-->
-<!--                    <img src="../../immagini/me.jpg" alt=""/>-->
-<!--                    <div>-->
-<!--                        <p class="username_commento">UserNameUserNameUserNameUserName</p>-->
-<!--                        <p class="data_commento">Data</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="corpo_commento">-->
-<!--                    <h1>TitoloTitoloTitoloTitoloTitoloTitolo</h1>-->
-<!--                    <p>Votazione: 3/5</p>-->
-<!--                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut-->
-<!--                        labore-->
-<!--                        et dolore magna aliqua.-->
-<!--                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--                        consequat.-->
-<!--                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--                        pariatur.-->
-<!--                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim-->
-<!--                        id-->
-<!--                        est laborum."-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--        </ul>-->
+        <COMMENTI/>
     </div>
 </div>
-
 <FOOTER/>
-
-
 </body>
 </html>
