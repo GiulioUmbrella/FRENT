@@ -184,6 +184,9 @@ if(isset($_POST["modifica_img_profilo"]) || isset($_POST["modifica_password"]) |
     $pagina = addUserNotificationToPage($pagina, $messageToUser, $divId, $divClasses, $inParagraph); // sostituisce <INFO_BOX/>
 }
 
+// aggiorno l'oggetto in sessione perché l'ho potenzialmente aggiornato
+$_SESSION["user"] = $user;
+
 $pagina = str_replace("<INFO_BOX/>", "", $pagina);
 
 echo $pagina;
