@@ -905,6 +905,10 @@ fieldset {
         -webkit-appearance: none;
     }
 
+    #content select {
+        -webkit-appearance: none;
+    }
+
     .form_logout {
         float: none;
         width: 98%;
