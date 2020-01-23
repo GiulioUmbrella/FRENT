@@ -48,7 +48,7 @@ if (isset($_SESSION["user"])) {
                         </div>";
             $i++;
             $prenotazioni_passate.="
-                        <div class=\"corpo_lista lista_flex\">
+                        <div class=\"corpo_lista corpo_lista_prenotazioni\">
                             <div class=\"dettagli_prenotazione\">
                                 <img src=\"$path\" alt=\"$descrizionefoto\"/>
                                 <p>Indirizzo: $luogoAlloggio</p>
@@ -71,7 +71,7 @@ if (isset($_SESSION["user"])) {
                             title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - Soggiorno presso $nomeAnnuncio</a> </div>";
             $i++;
             $prenotazioni_correnti.="
-                    <div class=\"corpo_lista lista_flex\">
+                    <div class=\"corpo_lista corpo_lista_prenotazioni\">
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
                             <p>Indirizzo: $luogoAlloggio</p>
@@ -96,7 +96,7 @@ if (isset($_SESSION["user"])) {
                     </div>";
             $i++;
             $prenotazioni_future.="
-                    <div class=\"corpo_lista lista_flex\">
+                    <div class=\"corpo_lista corpo_lista_prenotazioni\">
                         <div class=\"dettagli_prenotazione\">
                             <img src=\"$path\" alt=\"$descrizionefoto\"/>
                             <p>Indirizzo: $luogoAlloggio</p>

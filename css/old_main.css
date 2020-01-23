@@ -1,0 +1,1317 @@
+
+* {
+    padding: 0em;
+	margin: 0em;
+}
+
+a {
+    color: #1B3409;
+}
+
+/* Layout per desktop*/
+html, body {
+    height: 100%;
+    width:100%;
+    max-width: 1024px;
+	margin: auto;
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 0.9em;
+
+}
+
+.layout_colonna {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-gap: 1em;
+    grid-template-areas:
+        "l"
+        "n"
+        "b"
+        "c"
+        "f";
+}
+
+.layout_colonna #logo { grid-area: l;}
+.layout_colonna #nav { grid-area: n;}
+.layout_colonna #breadcrumb {grid-area: b;}
+.layout_colonna #content { grid-area: c; }
+.layout_colonna #footer { grid-area: f; }
+
+
+.layout_tre_pannelli {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+  grid-gap: 1em;
+  grid-template-areas:
+        "l l l l"
+        "n n n n"
+        "b b b b"
+        "x c c c"
+        "f f f f";
+}
+
+.layout_tre_pannelli #logo     { grid-area: l; }
+.layout_tre_pannelli #nav     { grid-area: n; }
+.layout_tre_pannelli #breadcrumb { grid-area: b; }
+.layout_tre_pannelli #laterale    { grid-area: x; }
+.layout_tre_pannelli #content    { grid-area: c; }
+.layout_tre_pannelli #footer     { grid-area: f; }
+
+/*
+* LAYOUT PER PAGINA DI REGISTRAZIONE E LOGIN
+*/
+
+.layout_centrale{
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+  grid-template-rows: auto auto  auto 1fr auto;
+  grid-gap: 1em;
+  grid-template-areas:
+        "l l l l"
+        "n n n n"
+        "b b b b"
+        ". c c ."
+        "f f f f";
+}
+
+.layout_centrale #logo      { grid-area: l ;}
+.layout_centrale #nav       { grid-area: n ;}
+.layout_centrale #breadcrumb { grid-area:b ;}
+.layout_centrale #content    { grid-area:c ;}
+.layout_centrale #footer     { grid-area:f ;}
+
+/*-----------------Header-----------------*/
+
+#nav {
+	margin-top: -1em;
+    background-color: #e3eaa7;
+}
+
+#nav ul {
+    list-style: none;
+    display: flex;
+    /*border: 1px solid #000;*/
+    border-left: 0;
+}
+
+#nav li {
+flex: 1 1 0em;
+/*border-left:1px solid #000;*/
+text-align:center;
+vertical-align: middle;
+  font-size: 2em;
+}
+
+#nav li a {
+  display : block;
+  width:100%;
+  height:100%;
+    text-decoration: none;
+    color: #223C11;
+    font-weight: bold;
+}
+
+#nav li:hover {
+    background-color: #B1E092;
+}
+
+#nav .menu_selected {
+    background-color: #B1E092;
+}
+
+#logo {
+    display: inline-block;
+    font-size: 2em;
+    background-color: #e3eaa7;
+    color: #405d27;
+}
+
+#logo h1 {
+    display: inline-block;
+}
+
+#link_to_menu {
+display: none;
+}
+
+/*-----------------Content-----------------*/
+#content {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+
+#content p {
+  line-height: 1em;
+  font-size: 1.5em;
+}
+
+#content > h1 {
+    text-align: center;
+    color: #405d27;
+}
+
+#content > h2 {
+    line-height: 2em;
+    color: #4b593f;
+}
+
+/* -----------------Footer----------------- */
+#footer {
+    text-align: center;
+    border: 1px solid #000;
+    background-color: #b6da81;
+}
+
+#footer ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#footer li {
+    flex-grow: 1;
+    align-self: center
+}
+
+#breadcrumb {
+    background-color: #D5E1DF;
+    margin-top: -1em;
+}
+
+/* -----------------Liste----------------- */
+
+#content ul li{
+    list-style: none;
+}
+
+
+.intestazione_lista {
+  margin-bottom:0.1em;
+   /* per andare a capo */
+    display: flex;
+    flex-direction: row;
+    clear: left;
+}
+
+.intestazione_lista form fieldset {
+    margin-bottom: 0;
+}
+
+.intestazione_lista form {
+    flex-grow: 1;
+}
+
+.intestazione_lista > a {
+  font-size: 1.5em;
+  float:left;
+  flex: 1 0 0;
+ /* margin-bottom: 0.25em;
+  line-height: 1.2em;*/
+}
+
+.intestazione_lista > p {
+  font-size: 1em;
+  float:right;
+  margin-top:1em;
+}
+
+.corpo_lista {
+  clear:both;
+  border:1px solid gray;
+    border-radius: 1em;
+  margin-bottom:1em;
+  min-height: 12em;
+}
+
+.corpo_lista img {
+    float:left;
+    padding:1em;
+    width:14em;
+    max-height:12em;
+}
+
+.corpo_lista div {
+  margin-left: 16em;
+  padding-top:0.5em;
+
+}
+
+.corpo_lista .descrizione_annuncio {
+
+}
+
+.corpo_lista .prezzo_totale {
+    font-size: 2em;
+    text-align: right;
+    margin-right: 1em;
+}
+
+.corpo_lista_prenotazioni{
+    display: flex;
+}
+
+.corpo_lista_prenotazioni .dettagli_prenotazione {
+    margin-left: 0em;
+    flex: 5 0 0;
+    border-right: 1px solid gray;
+}
+
+.corpo_lista_prenotazioni .dettagli_prenotazione img+p {
+    font-size: 1.2em;
+    padding-top: 0.5em;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione {
+    padding: 0em;
+    margin-left: 0em;
+    flex: 1 0 0;
+    text-align: center;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 25%;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"]{
+    -webkit-appearance: none;
+    background-color: #d64161;
+    font-size: 1.5em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione a{
+    -webkit-appearance: none;
+    display: block;
+    text-decoration: none;
+    background-color: #4CAF50;
+    font-size: 1.2em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    margin: 0em 0.5em 0em 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione a:hover {
+    background-color: #12a507;
+}
+/*ELENCO ANNUNCI DA VALIDARE */
+
+.list_annunci_pendenti {
+  font-size: 1.5em;
+}
+
+.list_annunci_pendenti li{
+  display: flex;
+  padding: 1em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+}
+
+.list_annunci_pendenti li a {
+  flex: 4 0 0;
+  padding: 0.5em;
+}
+
+/*ELENCO PRENOTAZIONI NON ANCORA COMMENTATE*/
+.list_commenti_manacanti {
+    margin-top: 15%;
+}
+
+.list_commenti_manacanti li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    border: 1px solid grey;
+    border-radius: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.list_commenti_manacanti p, .list_commenti_manacanti a{
+    font-size: 1.5em;
+}
+
+.titolo_annuncio_commenti_mancanti {
+    margin-left: 1em;
+}
+
+.data_prenotazione_commenti_mancanti {
+    margin-left: 1em;
+    flex: 1 0 0;
+}
+
+.link_commenta_commenti_mancanti {
+    text-align: right;
+    margin-right: 1em;
+    border: 1px solid blue;
+    border-radius: 1em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    text-decoration: none;
+}
+
+
+#content .link_gestione {
+  text-align: center;
+  flex: 1 0 0;
+  border-radius: 1em;
+  text-decoration: none;
+  color: black;
+}
+
+#content .lista_link_gestione {
+    line-height: 2.5em;
+}
+
+#content .lista_link_gestione li{
+    margin: 0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+#content .lista_link_gestione li a{
+    padding: 0.5em;
+    margin: 0em;
+}
+#content .link_approva {
+  border: 1px solid green;
+}
+
+#content .link_rigetta {
+  margin-left: 1em;
+  border: 1px solid red;
+}
+
+#content .link_rigetta:hover {
+  background-color: red;
+}
+
+#content .link_approva:hover {
+  background-color: #12a507;
+}
+
+/* LISTA COMMENTI */
+#commenti {
+    margin-top: 2em;
+    clear: both;
+}
+
+#commenti ul {
+  list-style:none;
+}
+
+#commenti li {
+  margin-bottom: 2em;
+}
+
+.intestazione_commento {
+  min-height: 6em;
+  border: 1px solid black;
+  margin-bottom: 0.1em;
+}
+
+.intestazione_commento img {
+  float:left;
+  padding:1em;
+  max-width: 4em;
+  max-height:4em;
+  border-radius: 50%;
+}
+
+.intestazione_commento div {
+  padding: 1em ;
+}
+
+.intestazione_commento .username_commento {
+    font-size: 1.1em;
+    font-weight: bold;
+    float:left;
+    margin-right: 1em;
+}
+
+.corpo_commento {
+    border: 1px solid black;
+    padding: 0.5em;
+}
+
+.corpo_commento h1 {
+  font-size: 1.5em;
+  float:left;
+  margin-right: 1em;
+}
+
+.corpo_commento h1 + p {
+  margin-top: 0.2em;
+}
+
+.corpo_commento p {
+    margin-top: 0.5em;
+}
+
+/* Liste per FAQ e condizioni di utilizzo*/
+
+.list_pagina_statica dt {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+
+.list_pagina_statica dd {
+  border: none;
+  min-height:auto;
+  font-size: 1.2em;
+}
+
+.list_pagina_statica ol {
+  margin-left: 1.2em;
+}
+
+
+/* -----------------Dettaglio Annuncio----------------- */
+.informazioni_prenotazione {
+    float: right;
+    max-width: 25%;
+}
+
+.shower_immagine_anteprima {
+    display: flex;
+    width: 75%;
+}
+
+.immagine_anteprima {
+    width: 85%;
+}
+
+.pulsanti_navigazione_immagini {
+    font-size: 5em;
+    border: none;
+    background: lightgray;
+    border-radius: 0px;
+}
+
+.image_picker {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1em;
+    width: 74%;
+}
+
+.image_picker img {
+    max-width: 10%;
+	max-height: 10%;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.informazioni_prenotazione h2 {
+    font-weight: normal;
+    font-size: 1.3em;
+}
+
+.informazioni_prenotazione input[type="submit"] {
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    padding: 0.5em 1em 0.5em 1em;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: #4CAF50;
+    border: 1px solid #ddd;
+    border-radius: 0.5em;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+}
+
+.informazioni_prenotazione input[type="submit"]:hover{
+    background-color: #12a507;
+}
+
+/* -----------------Form----------------- */
+.form{
+  padding: 2em;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.form {
+    padding: 1% 2.5% 1%;
+}
+
+.form input[type="submit"] {
+    -webkit-appearance: none; /*Necessario per non usare il bottone di default in chrome e safari*/
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: #4CAF50;
+    border: 1px solid #ddd;
+    color: black;
+    cursor: pointer;
+}
+
+.form input[type="reset"] {
+    background-color: #d64161; /*Necessario per non usare il bottone di default in chrome e safari*/
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: slategray;
+    border: 1px solid #ddd;
+    color: black;
+    cursor: pointer;
+}
+
+.form_logout {
+    float: right;
+    padding-right: 1em;
+    padding-top: 0.15em;
+}
+
+.form_logout fieldset {
+    margin-bottom: 0em;
+}
+
+.logout_button {
+    -webkit-appearance: none;
+    font-size: 1.2em;
+    padding: 0.25em 0.75em 0.25em 0.75em ;
+    background-color: #4CAF50;
+    border-radius: 1em;
+    border: 1px solid #4CAF50;
+    color: black;
+    cursor: pointer;
+}
+
+.legend_evidenziata {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    margin-left: -1em;
+}
+
+.destroy_button input[type="submit"]  {
+    background-color: #d64161;
+}
+
+.form_verticale input, .form_verticale label, .form_verticale select, .form_verticale textarea {
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.form_verticale input {
+    height: 3em;
+}
+
+.form_verticale label {
+    height: 1.5em;
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.form_verticale textarea {
+    min-height: 5em;
+}
+
+.form_verticale input[type="submit"] {
+    height: 3em;
+}
+
+.form_verticale ul {
+    list-style: none;
+    margin-left: 5%;
+}
+
+.form_variabile {
+    text-align: center;
+}
+
+.input_label_orizzontale {
+    display: inline-block;
+    height: 4em;
+    width: 17%;
+    margin-right: 2%;
+}
+
+.primo_elemento_input_label_orizzontale {
+    margin-left: 4%;
+}
+
+.input_label_orizzontale input {
+    width: 100%;
+    height: 2em;
+}
+
+.bottom_line {
+    border-bottom: 1px solid black;
+}
+
+.space_top {
+    margin-top: 1em;
+}
+
+#data_di_nascita {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+#data_di_nascita legend {
+    margin-left: 5%;
+}
+
+
+#data_di_nascita label{
+    /*margin: 0em;*/
+    flex: 1 0 0;
+}
+
+#data_di_nascita select{
+    min-width: 10%;
+    margin: 1em 1em 0em 0em;
+}
+
+#data_di_nascita #giorno_nascita_label {
+    margin-left: 5%;
+}
+
+#data_di_nascita #anno_nascita {
+    margin-right: 5%;
+}
+
+.modifica_immagine_profilo {
+    border: 1px solid grey;
+    border-radius: 1em;
+    min-height: 12em;
+}
+
+.modifica_immagine_profilo img{
+    float: left;
+    max-height: 10em;
+    max-width: 10em;
+    border-radius: 50%;
+    margin: 1em;
+}
+
+.modifica_immagine_profilo form {
+    margin-left: 12em;
+}
+
+.modifica_immagine_profilo fieldset {
+    display: block;
+}
+
+.modifica_immagine_profilo input[type=submit], .modifica_immagine_profilo input[type=reset] {
+    padding: 0.5em;
+}
+
+.form_modifica {
+    margin-top: 1em;
+    border: 1px solid grey;
+    border-radius: 1em;
+}
+
+
+.only_element {
+    margin: 0em;
+    padding: 0em;
+}
+
+/*-----------------Dettaglio annuncio host visualizza-----------------*/
+.menu_gestione_annuncio {
+    list-style: none;
+    font-size: 1.2em;
+    margin-top: 25%;
+}
+
+.menu_gestione_annuncio li {
+    padding: 0.5em;
+    margin: 0.5em;
+    margin-right: 0em;
+    width: 101%;
+}
+
+.menu_gestione_annuncio_selected {
+    background-color: #ebebeb;
+}
+
+#laterale .menu_gestione_annuncio_delete:hover {
+    background-color: #ff6666;
+}
+
+.menu_gestione_annuncio li:hover {
+    background-color: #ebebeb;
+}
+
+.content_gestione_annuncio {
+    background-color: #ebebeb;
+}
+
+.menu_gestione_annuncio a{
+    display: block;
+    text-decoration: none;
+}
+.aligned_with_form {
+  text-align: center;
+  font-size: 1.25em;
+}
+
+/*-----------------Visualizazione del profilo-----------------*/
+.informazioni_personali img{
+    float: left;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    padding-right: 1em;
+}
+
+.informazioni_personali p {
+    font-size: 1.3em;
+}
+
+.link_modifica {
+    border: 1px solid #4CAF5;
+    text-align: center;
+    border-radius: 1em;
+    text-decoration: none;
+    color: black;
+    background: #4CAF50;
+    padding: 0.5em;
+    float: right;
+}
+
+.link_modifica:hover {
+    background: #12a507;
+}
+
+/*-----------------I miei annunci-----------------*/
+.link_nuovo_annuncio {
+    border: 1px solid #4CAF5;
+    border-radius: 10em;
+    background-color: #4CAF50;
+    padding: 0.5em;
+    text-decoration: none;
+    color: black;
+    width: 97%;
+    margin-bottom: 1em;
+    float: left;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.link_gestisci_annuncio {
+    display: inline-block;
+    border: 1px solid #4CAF50;
+    border-radius: 1em;
+    background-color: #4CAF50;
+    padding: 0.5em 1em 0.5em 1em ;
+    text-decoration: none;
+    color: black;
+    vertical-align: center;
+    margin-top: 1em;
+    margin-right: 90%;
+}
+
+.titolo_gestione_annuncio {
+    margin-bottom: 0.5em;
+}
+
+.lista_storico_prenotazioni li{
+    padding: 0.30em;
+    font-size: 1.2em;
+}
+
+.sei_pannelli {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sei_pannelli li{
+    width: 33%;
+    height: 20em;
+}
+
+.sei_pannelli li a {
+    display: block;
+    height: 20em;
+    background-repeat: no-repeat;
+    background-size: 10em 10em ;
+}
+/*-----------------Indisponibilità-----------------*/
+#content .stile_indisponibilita_modifica{
+    text-decoration: none;
+    margin: 2em;
+}
+
+#content .stile_indisponibilita_elimina {
+    text-decoration: none;
+    color: red;
+    background: #dddddd;
+}
+/**********************  Prove css per Lista FOTO********************/
+#content .form_variabile .commenti_foto img,
+#content .form_verticale .commenti_foto img {
+    width: 10em;
+    height: 10em;
+    float: left;
+}
+#content .form_variabile .commenti_foto textarea,
+#content .form_verticale .commenti_foto textarea{
+    float:right;
+}
+.commenti_foto textarea{
+    width: 18em;
+}
+
+
+/*-----------------Riepilogo prenotazione-----------------*/
+.riepilogo_annucio {
+    border: 1px solid gray;
+    border-radius: 1em;
+    padding: 0.5em;
+    font-size: 1.1em;
+}
+
+body .aiuti_alla_navigazione {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}
+
+.torna_su {
+    position: fixed;
+    bottom:3em;
+    right: 1em;
+    padding: 1em;
+    border: 1px solid #4CAF50; 
+    background-color: #4CAF50;
+    border-radius: 100%;
+    height: 2em;
+    width: 2em;
+    text-align: center;
+}
+
+.messaggio_errore {
+    color: red;
+}
+
+.messaggio_ok {
+    color: green;
+}
+
+.messaggio_attenzione {
+    color: orange;
+}
+
+#primo_pannello_piu_vistate {
+    flex-grow: 3;
+    background-image: url("../immagini/roma.jpg");
+}
+#secondo_pannello_piu_visitate {
+    flex-grow: 3;
+    background-image: url("../immagini/padova.jpg");
+}
+#terzo_pannello_piu_visitate {
+    flex-grow: 1;
+    background-image: url("../immagini/monselice.jpg");
+}
+#quarto_pannello_piu_visitate {
+    flex-grow: 1;
+    background-image: url("../immagini/limena.jpeg");
+}
+#quinto_pannello_piu_visitate {
+    flex-grow: 1;
+    background-image: url("../immagini/vicenza.jpg");
+}
+#sesto_pannello_piu_visitate {
+    flex-grow: 1;
+     background-image: url("../immagini/borgoricco.jpg");
+ }
+#credenziali_errate {
+	color: red;
+}
+.credenziali_errate {
+	color: red;
+}
+.elemento_sei_pannelli {
+    flex-grow: 1;
+    border: 1px solid white;
+    background-repeat: no-repeat;
+}
+
+.elemento_sei_pannelli img{
+    margin-top: -1.5em;
+    width: 98%;
+    height: 98%;
+}
+
+/*-----------------Riepilogo prenotazione-----------------*/
+@media (max-device-width: 600px) {
+
+html {
+  zoom: 3;
+  max-width: 100%;
+}
+
+html body {
+    font-size: 1em;
+}
+
+html body #content {
+    line-height: 1.15em;
+    font-size: 1.2em;
+}
+
+html body #content h1{
+    line-height: 1.5em;
+}
+
+html body #footer {
+    font-size: 1.5em;
+}
+
+#breadcrumb { display: none;}
+
+.layout_colonna {
+      grid-template-rows: auto 1fr auto auto;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+      "l"
+      "c"
+      "n"
+      "f";
+}
+
+.layout_tre_pannelli {
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "l"
+    "c"
+    "x"
+    "n"
+    "f";
+}
+
+.layout_centrale {
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "l"
+    "c"
+    "n"
+    "f";
+}
+
+.input_label_orizzontale {
+  display: block;
+   width: 100%
+}
+
+#nav ul{
+   display: block;
+}
+
+#nav {
+   	background-color: white;
+}
+
+#nav ul li {
+    height: 2.1em;
+    background-color: #e3eaa7;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    margin-top: 0.3em;
+    font-size: 1.5em;
+}
+
+#footer ul {
+    flex-direction: column;
+    font-size: 0.8em;
+
+}
+
+.gestione_annunci_mobile {
+    grid-template-areas: "l l l l" "x x x x" "c c c c" "n n n n" "f f f f"
+}
+
+.menu_gestione_annuncio {
+    margin-top: 0em;
+    display: flex;
+}
+
+.menu_gestione_annuncio li {
+    margin: 0em;
+    margin-right: 0.2em;
+    width: 101%;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
+.intestazione_lista {
+    flex-direction: column;
+    margin-bottom: 0em;
+}
+
+.intestazione_lista p {
+    margin-top: 0em;
+}
+
+.corpo_lista {
+    min-height: 10em;
+}
+
+.corpo_lista div {
+    margin-left: 0em;
+}
+
+.corpo_lista img {
+    padding: 0.5em;
+    width: 10em;
+    max-height: 10em;
+}
+
+.corpo_lista .prezzo_totale {
+    font-size: 1.2em;
+    text-align: left;
+    margin-right: 0em;
+}
+
+.testo_descrizione_annuncio {
+    display: none;
+}
+
+.informazioni_prenotazione {
+    float: none;
+    max-width: 100%;
+}
+
+.shower_immagine_anteprima {
+    width: 100%;
+}
+
+.immagine_anteprima {
+    width: 100%;
+}
+
+.informazioni_prenotazione .form_verticale input, .informazioni_prenotazione .form_verticale label, .informazioni_prenotazione .form_verticale select,.informazioni_prenotazione .form_verticale textarea {
+    margin-left: 0em;
+    width: 100%
+}
+
+.input_label_orizzontale input {
+   -webkit-appearance: none;
+}
+
+#link_to_menu {
+    display: inline;
+    background-image: url("../immagini/hamburger_menu.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-right: 24px;
+    font-size: 0.8em;
+    float: right;
+    margin-top: 1em;
+    margin-right: 0.5em;
+}
+
+#content .link_gestisci_annuncio {
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0em;
+}
+
+.form_logout {
+    float: none;
+    width:98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.logout_button {
+    width: 100%;
+}
+
+.list_annunci_pendenti li {
+    padding: 0.5em;
+}
+
+.sei_pannelli {
+    flex-direction: column;
+}
+
+.sei_pannelli li {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.sei_pannelli li img {
+    width: 100%;
+    height: 90%;
+}
+
+.instestazione_lista {
+    display: inline;
+}
+
+.intestazione_lista > a {
+  margin-bottom: 0.25em;
+  line-height: 1.2em;
+  font-size: 1.4em;
+}
+
+#content .dettagli_prenotazione  p {
+    clear: both;
+    margin-left: 0.5em;
+    font-size:1em;
+}
+
+.corpo_lista_prenotazioni .dettagli_prenotazione {
+    display: block;
+}
+
+.corpo_lista_prenotazioni {
+    display: block;
+}
+
+.corpo_lista_prenotazioni .dettagli_prenotazione {
+    border-right: 0px;
+}
+
+
+.corpo_lista_prenotazioni .opzioni_prenotazione {
+    border-top: 1px solid gray;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
+    margin-top: 0em;
+}
+
+.corpo_lista img {
+    width: 90%;
+}
+
+#content .corpo_lista_prenotazioni .dettagli_prenotazione img + p {
+    line-height: 1em;
+    font-size: 1.2em;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
+    font-size: 1.2em;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"] {
+    font-size: 1.2em;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione a {
+    width:37%;
+    margin-bottom: 1em;
+    margin-left:25%;
+}
+
+.corpo_lista div p {
+    margin-left: 0.5em;
+}
+
+.link_nuovo_annuncio {
+    width: 92%;
+}
+
+}
+
+strong{
+    margin-left: 2em;
+    color: red;
+    display: block;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+.layout_colonna {
+	display: block;
+}
+
+.layout_tre_colonne {
+	display: block;
+}
+
+#logo {
+	width: 100%;
+	padding-bottom: 1em;
+}
+
+#nav {
+	height: 4em;	
+	padding-bottom: 1em;
+	margin-bottom: -1em;
+}
+
+#nav ul li {
+	height: 3em;
+}
+
+#breadcrumb {
+	margin-top: 1em;
+}
+
+#laterale form input {
+	height: 1.5em;
+}
+
+#laterale form fieldset div {
+	float: left;
+	margin-left: 5em;
+}
+
+
+.intestazione_lista {
+	display: inline-block;
+}
+
+.intestazione_lista > p {
+	margin-top: 1.5em;
+	float: none;
+}
+
+.corpo_lista_prenotazioni {
+	display: block;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione {
+	text-align: left;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
+	margin-top: 0em;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione a {
+	display: inline-block;
+	margin: 5em 0em 0.5em -13em;
+}
+
+.menu_gestione_annuncio {
+	margin-top: 0em;
+}
+
+.informazioni_personali img {
+	float: none;
+}
+}
