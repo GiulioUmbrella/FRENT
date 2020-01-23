@@ -1,6 +1,4 @@
 <?php
-//echo phpinfo();
-require_once "./CheckMethods.php";
 require_once "./components/form_functions.php";
 require_once "load_Frent.php";
 try {
@@ -8,14 +6,10 @@ try {
     require_once "./load_header.php";
     
     if (isset($_SESSION["user"])) {
-//        $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
-        $dataCorrente=date("m-d");
-        echo $dataCorrente;
-        $dataNascita = $_SESSION["user"]->getDataNascita();
-        echo "data Nascita $dataNascita";
-//        $dataNascita = $dataNascita.str
-        if ($dataNascita===$dataCorrente){
-            $pagina= str_replace("<h1>FRENT</h1>","<h1>Buon compleanno!</h1>",$pagina);
+        $dataCorrente = date("m-d");
+        $dataNascita = date("m-d", strtotime($_SESSION["user"]->getDataNascita()));
+        if ($dataNascita === $dataCorrente){
+            $pagina= str_replace("<h1>Frent</h1>","<h1>Buon compleanno!</h1>",$pagina);
         }
         $pagina = str_replace("<ADMINLINK/>", "", $pagina);
     } else if (isset($_SESSION["admin"])) {
@@ -27,9 +21,7 @@ try {
         </li>", $pagina);
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_no_logged.html"), $pagina);
     }
-    $frent = new Frent(new Database(CredenzialiDB::DB_ADDRESS, CredenzialiDB::DB_USER,
-        CredenzialiDB::DB_PASSWORD, CredenzialiDB::DB_NAME));
-    
+
     $content = "";
     
     $citta_ricercabili = $frent->getCittaAnnunci();
@@ -37,7 +29,6 @@ try {
     foreach ($citta_ricercabili as $citta_ricercabile) {
         
         if (isset($_SESSION["citta"]) and $citta_ricercabile == $_SESSION["citta"]) {
-//            echo "trovato!";
             $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected>$citta_ricercabile</option>";
         } else {
             $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\">$citta_ricercabile</option>";
@@ -47,11 +38,14 @@ try {
     
     require_once "./components/setMinMaxDates.php";
     $content = "";
-    $id = -1;
-    if (isset($_SESSION["user"]) and get_class($_SESSION["user"]) == "Utente")
-        $id=$_SESSION["user"]->getIdUtente();
-    $annunci = $frent->getUltimiAnnunciApprovati($id);
-    $index=11;
+
+    $annunci = array();
+    if (isset($_SESSION["user"]) and get_class($_SESSION["user"]) == "Utente") {
+        $annunci = $frent->getUltimiAnnunciApprovati($_SESSION["user"]->getIdUtente());
+    } else {
+        $annunci = $frent->getUltimiAnnunciApprovati();
+    }
+
     foreach ($annunci as $annuncio) {
         $titolo = $annuncio->getTitolo();
         $id = $annuncio->getIdAnnuncio();
@@ -65,13 +59,12 @@ try {
     $dataFine = "";
     
     if (isset($_SESSION["datiRicercaMancanti"])) {
-        $pagina = str_replace("<DATIMANCANTI/>", "<p>" . $_SESSION["datiRicercaMancanti"] . "</p>", $pagina);
+        $pagina = str_replace("<INFO_BOX/>", "<p class=\"messaggio_errore\">" . $_SESSION["datiRicercaMancanti"] . "</p>", $pagina);
         if (isset($_SESSION["numOspiti"])){
             $numOspiti = $_SESSION["numOspiti"];
             unset($_SESSION["numOspiti"]);
         }
         if (isset($_SESSION["dataInizio"])){
-//            echo $_SESSION["dataInizio"];
             $dataInizio = $_SESSION["dataInizio"];
     
             unset($_SESSION["dataInizio"]);
@@ -81,12 +74,9 @@ try {
             $dataFine = $_SESSION["dataFine"];
             unset($_SESSION["dataFine"]);
         }
-//        if (isset($_SESSION["citta"]))
-//            $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected='true'>";
-//
         unset($_SESSION["datiRicercaMancanti"]);
     } else {
-        $pagina = str_replace("<DATIMANCANTI/>", "", $pagina);
+        $pagina = str_replace("<INFO_BOX/>", "", $pagina);
     }
     $pagina = str_replace("<DATAINIZIO/>", $dataInizio, $pagina);
     $pagina = str_replace("<DATAFINE/>", $dataInizio, $pagina);
@@ -97,10 +87,10 @@ try {
     $pagina = str_replace("<RECENTI/>", $content, $pagina);
     
     if(isset($_SESSION["delete_user_message"])) {
-        $pagina = str_replace("<DELETE_USER_MESSAGE/>", "<p>" . $_SESSION["delete_user_message"] . "</p>", $pagina);
+        $pagina = str_replace("<INFO_BOX/>", "<p class=\"messaggio_ok\">" . $_SESSION["delete_user_message"] . "</p>", $pagina);
         unset($_SESSION["delete_user_message"]);
     } else {
-        $pagina = str_replace("<DELETE_USER_MESSAGE/>", "", $pagina);
+        $pagina = str_replace("<INFO_BOX/>", "", $pagina);
     }
     echo $pagina;
 } catch (Eccezione $ex) {
