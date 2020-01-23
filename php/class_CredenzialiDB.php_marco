@@ -1,0 +1,14 @@
+<?php
+
+class CredenzialiDB{
+    const DB_ADDRESS="localhost";
+    const DB_USER="mferrati";
+    const DB_PASSWORD="fahV0Chie6cohqua";
+    const DB_NAME="mferrati";
+}
+//class CredenzialiDB{
+//    const DB_ADDRESS="localhost";
+//    const DB_USER="xwen";
+//    const DB_PASSWORD="le1pi2rie8Choo3a";
+//    const DB_NAME="xwen";
+//}
