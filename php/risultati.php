@@ -76,7 +76,7 @@ try {
                         <img src =\"$path\" alt=\"".$annuncio->getDescAnteprima()."\" />
                         <div class=\"descrizione_annuncio\">
                         <p class=\"testo_descrizione_annuncio\">$descrizione</p>
-                        <p class=\"prezzototale\">Prezzo: &euro; $prezzonotte persona/notte</p>
+                        <p class=\"prezzo_totale\">Prezzo: &euro; $prezzonotte persona/notte</p>
                         </div>
                     </div>
                 </li>";

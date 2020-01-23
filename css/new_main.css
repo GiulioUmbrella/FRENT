@@ -1,0 +1,1100 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    font-family: Verdana, Helvetica, sans-serif;
+}
+
+a {
+    color: #1B3409;
+}
+
+/*Non vogliamo pallini in nessuna lista*/
+ul {
+    list-style-type: none;
+}
+
+input[type="submit"] {
+    -webkit-appearance: none;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: #4CAF50;
+    border: 1px solid #4CAF50;
+    border-radius: 0.5em;
+    color: black;
+    cursor: pointer;
+}
+
+input[type="reset"] {
+    -webkit-appearance: none;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    background-color: #D64161;
+    border: 1px solid #D64161;
+    border-radius: 0.5em;
+    color: black;
+    cursor: pointer;
+}
+
+strong {
+    margin-left: 2em;
+    color: red;
+    display: block;
+}
+
+html body .aiuti_alla_navigazione {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}
+
+.torna_su {
+    position: fixed;
+    bottom: 3em;
+    right: 1em;
+    padding: 1em;
+    border: 1px solid #4CAF50;
+    background-color: #4CAF50;
+    border-radius: 100%;
+    height: 2em;
+    width: 2em;
+    text-align: center;
+}
+
+/*Layout grid per i diversi tipi di pagina*/
+/*Layout colonna -> tutto il contenuto è incolonnato*/
+.layout_colonna {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-gap: 1em;
+    grid-template-areas: "l" "n" "b" "c" "f";
+}
+
+/*Layout a tre pannelli*/
+.layout_tre_pannelli {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-gap: 1em;
+    grid-template-areas: "l l l l" "n n n n" "b b b b" "x c c c" "f f f f";
+}
+
+/*Layout centrale -> viene data maggiore enfasi alla zona centrale*/
+.layout_centrale {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-gap: 1em;
+    grid-template-areas: "l l l l" "n n n n" "b b b b" ". c c ." "f f f f";
+}
+
+/*----LOGO----*/
+#logo {
+    grid-area: l;
+    display: inline-block;
+    font-size: 2em;
+    background-color: #E3EAA7;
+    color: #405D27;
+}
+
+/*Scritta del logo*/
+#logo h1 {
+    display: inline-block;
+}
+
+/*Link al menù per mobile*/
+#link_to_menu {
+    display: none;
+}
+
+/*----NAVIGATION BAR----*/
+#nav {
+    grid-area: n;
+    margin-top: -1em;
+    background-color: #e3eaa7;
+}
+
+/*Lista contenente il menù della nav bar*/
+#nav ul {
+    display: flex;
+    border-left: 0;
+}
+
+/*Elementi del menu della nav bar*/
+#nav ul li {
+    flex: 1 1 0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2em;
+}
+
+#nav ul li:hover {
+    background-color: #B1E092;
+}
+
+/*Link (e testo semplice) per il menù della nav bar*/
+#nav ul li a, #nav ul li span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #223C11;
+    font-weight: bold;
+}
+
+.menu_selected {
+    background-color: #B1E092;
+}
+
+/*----BREADCRUM----*/
+#breadcrumb {
+    grid-area: b;
+    background-color: #D5E1DF;
+    margin-top: -1em;
+}
+
+/*----SEZIONE LATERALE----*/
+#laterale {
+    grid-area: x;
+}
+
+/*----CONTENUTO----*/
+#content {
+    grid-area: c;
+    margin: 0 1em 0 1em;
+}
+
+#content p {
+    line-height: 1em;
+    font-size: 1.5em;
+}
+
+/*Stile per i titoli figli diretti di content*/
+#content > h1 {
+    text-align: center;
+    color: #405D27;
+}
+
+#content > h2 {
+    line-height: 2em;
+    color: #4B593F;
+}
+
+/*----FOOTER----*/
+#footer {
+    grid-area: f;
+    text-align: center;
+    border: 1px solid black;
+    background-color: #B6DA81;
+}
+
+#footer ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#footer ul li {
+    flex-grow: 1;
+    align-self: center;
+}
+
+/*----LISTE----*/
+/*Intestazione degli elementi di una lista*/
+.intestazione_lista {
+    margin-bottom: 0.1em;
+    display: flex;
+    flex-direction: row;
+    clear: left;
+}
+
+/*Presentazione form nell'intestazione di un elemento*/
+.intestazione_lista form {
+    flex-grow: 1;
+}
+
+.intestazione_lista form fieldset {
+    margin-bottom: 0;
+}
+
+/*Presentazione di un link nell'intestazione di un elemento*/
+.intestazione_lista > a {
+    font-size: 1.5em;
+    float: left;
+    flex: 1 0 0;
+}
+
+.intestazione_lista > p {
+    font-size: 1em;
+    float: right;
+    margin-top: 1em;
+}
+
+/*Corpo degli elementi di una lista*/
+.corpo_lista {
+    clear: both;
+    border: 1px solid gray;
+    border-radius: 1em;
+    margin-bottom: 1em;
+    min-height: 12em; /*In caso ci sia una foto*/
+}
+
+.corpo_lista img {
+    float: left;
+    padding: 1em;
+    width: 14em;
+    max-height: 12em;
+}
+
+.corpo_lista div {
+    margin-left: 16em;
+    padding-top: 0.5em;
+}
+
+/*Presentazione prezzo*/
+.corpo_lista .prezzo_totale {
+    font-size: 2em;
+    text-align: right;
+    margin-right: 1em;
+}
+
+/*Presentazione del corpo di un elemento di una lista di prenotazioni*/
+.corpo_lista_prenotazioni {
+    display: flex;
+}
+
+/*------Lista prenotazioni------*/
+/*Presentazione del dettagli della prenotazione*/
+.corpo_lista_prenotazioni .dettagli_prenotazione {
+    margin-left: 0;
+    flex: 5 0 0;
+    border-right: 1px solid gray;
+}
+
+.corpo_lista_prenotazioni .dettagli_prenotazione img + p {
+    font-size: 1.2em;
+    padding-top: 0.5em;
+}
+
+/*Presentazione delle opzioni per una prenotazione*/
+.corpo_lista_prenotazioni .opzioni_prenotazione {
+    padding: 0;
+    margin-left: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 25%;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"] {
+    background-color: #D64161;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border-color: #D64161;
+    border-radius: 1em;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione a {
+    -webkit-appearance: none;
+    display: block;
+    text-decoration: none;
+    background-color: #4CAF50;
+    font-size: 1.2em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    margin: 0 0.5em 0 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    color: black;
+    cursor: pointer;
+}
+
+.corpo_lista_prenotazioni .opzioni_prenotazione a:hover {
+    color: #12A507;
+}
+
+/*------Lista annunci da validare------*/
+.list_annunci_pendenti {
+    font-size: 1.5em;
+}
+
+.list_annunci_pendenti li {
+    display: flex;
+    padding: 1em;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+}
+
+.list_annunci_pendenti li a {
+    flex-grow: 4;
+    padding: 0.5em;
+}
+
+.lista_link_gestione {
+    line-height: 2.5em;
+}
+
+.lista_link_gestione li {
+    margin: 1em 0 1em 0;
+    font-size: 1.5em;
+}
+
+.link_gestione  {
+    text-align: center;
+    flex-grow: 1;
+    border-radius: 1em;
+    text-decoration: none;
+    color: black;
+    padding: 0.5em;
+    margin: 0;
+}
+
+.link_approva {
+    border: 1px solid #4CAF50;
+}
+
+.link_approva:hover {
+    background-color: #4CAF50;
+}
+
+.link_rigetta {
+    margin-left: 1em;
+    border: 1px solid #D64161;
+}
+
+.link_rigetta:hover {
+    background-color: #D64161;
+}
+
+/*------Lista dei commenti------*/
+#commenti {
+    margin-top: 2em;
+    clear: both;
+}
+
+#commenti ul li {
+    margin-bottom: 2em;
+}
+
+.intestazione_commento {
+    min-height: 6em;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    margin-bottom: 0.1em;
+}
+
+/*Foto profilo*/
+.intestazione_commento img {
+    float: left;
+    padding: 1em;
+    max-height: 4em;
+    max-width: 4em;
+    border-radius: 50%;
+}
+
+.intestazione_commento div {
+    padding: 1em;
+}
+
+.intestazione_commento .username_commento {
+    font-size: 1.1em;
+    font-weight: bold;
+    float: left;
+    margin-right: 1em;
+}
+
+.corpo_commento {
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
+
+.corpo_commento h1 {
+    font-size: 1.5em;
+    float: left;
+    margin-right: 1em;
+}
+
+.corpo_commento h1 + p {
+    margin-top: 0.2em;
+}
+
+.corpo_commento p {
+    margin-top: 0.5em;
+}
+
+/*------Lista FAQ e Condizioni di utilizzo------*/
+.list_pagina_statica dt  {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.list_pagina_statica dd {
+    border: none;
+    min-height: auto;
+    font-size: 1.2em;
+}
+
+.list_pagina_statica ol {
+    list-style-position: inside;
+}
+
+/*------Lista storico prenotazioni------*/
+.lista_storico_prenotazioni li {
+    padding: 0.30em;
+    font-size: 1.2em;
+}
+
+/*----DETTAGLI ANNUNCIO----*/
+.informazioni_prenotazione {
+    float: right;
+    max-width: 25%;
+}
+
+.informazioni_prenotazione h2 {
+    font-weight: normal;
+    font-size: 1.3em;
+}
+
+.shower_immagine_anteprima {
+    display: flex;
+    width: 75%;
+}
+
+.immagine_anteprima {
+    width: 85%;
+}
+
+/*Form per la conferma della prenotazione*/
+.informazioni_prenotazione input[type="submit"] {
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.informazioni_prenotazione input[type="submit"]:hover {
+    background-color: #12A507;
+}
+
+/*----FORM VARI----*/
+.form {
+    padding: 1% 2.5% 1%;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.form_verticale input, .form_verticale label, .form_verticale select, .form_verticale textarea {
+    display: block;
+    width: 90%;
+    margin: 0 5% 0 5%;
+}
+
+/*Tutti i tipi di input*/
+.form_verticale input {
+    height: 3em;
+}
+
+.form_verticale label {
+    height: 1.5em;
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.form_verticale textarea {
+    min-height: 5em;
+}
+
+.form_verticale ul {
+    margin-left: 5%;
+}
+
+/*Presentazione div che racchiude label e input nei form*/
+.input_label_orizzontale {
+    display: inline-block;
+    height: 4em;
+    width: 17%;
+    margin-right: 2%;
+}
+
+.input_label_orizzontale input {
+    width: 100%;
+    height: 2em;
+}
+
+.primo_elemento_input_label_orizzontale {
+    margin-left: 4%;
+}
+
+/*Presentazione fieldset e input per inserire la data di nascita*/
+#data_di_nascita {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+#data_di_nascita legend {
+    margin-left: 5%;
+}
+
+#data_di_nascita label {
+    flex-grow: 1;
+}
+
+#data_di_nascita select {
+    -webkit-appearance: none;
+    min-width: 10%;
+    margin: 1em 1em 0 0;
+}
+
+#data_di_nascita #giorno_nascita {
+    margin-left: 5%;
+}
+
+#data_di_nascita #anno_nascita {
+    margin-right: 5%;
+}
+
+/*------Form per la modifica del profilo*/
+.form_modifica {
+    margin-top: 1em;
+    border: 1px solid gray;
+    border-radius: 1em;
+}
+
+.modifica_immagine_profilo {
+    border: 1px solid gray;
+    border-radius: 1em;
+    min-height: 12em;
+}
+
+.modifica_immagine_profilo img {
+    float: left;
+    max-width: 10em;
+    max-height: 10em;
+    border-radius: 50%;
+    margin: 1em;
+}
+
+.modifica_immagine_profilo form {
+    margin-left: 12em;
+}
+
+.modifica_immagine_profilo fieldset {
+    display: block;
+}
+
+.modifica_immagine_profilo input[type="submit"], .modifica_immagine_profilo input[type="reset"] {
+    padding: 0.5em;
+}
+
+/*Stile presentazione legend evidenziata*/
+.legend_evidenziata {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    margin-left: -1em;
+}
+
+/*------Form per il logout dell'amministratore*/
+.form_logout {
+    float: right;
+    padding: 0.15em 1em 0 0;
+}
+
+.form_logout fieldset {
+    margin-bottom: 0;
+}
+
+.logout_button {
+    font-size: 1.5em;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border-radius: 1em;
+}
+
+/*------Stile messaggi per i form*/
+.messaggio_errore {
+    color: red;
+}
+
+.messaggio_ok {
+    color: green;
+}
+
+.messaggio_attenzione {
+    color: orange;
+}
+
+/*TODO: Controllare quale viene usato*/
+#credenziali_errate {
+    color: red;
+}
+
+.credenziali_errate {
+    color: red;
+}
+
+/*Per testo allineato con un form*/
+.aligned_with_form {
+    text-align: center;
+    font-size: 1.25em;
+}
+
+/*----MODIFICA ANNUNCIO----*/
+.titolo_gestione_annuncio {
+    margin-bottom: 0.5em;
+}
+
+.menu_gestione_annuncio {
+    font-size: 1.2em;
+    margin-top: 25%;
+}
+
+.menu_gestione_annuncio li {
+    padding: 0.5em;
+    margin: 0.5em 0 0.5em 0.5em;
+    width: 101%;
+}
+
+.menu_gestione_annuncio li:hover {
+    background-color: #EBEBEB;
+}
+
+.menu_gestione_annuncio a {
+    display: block;
+    text-decoration: none;
+}
+
+.menu_gestione_annuncio_selected {
+    background-color: #EBEBEB;
+}
+
+#laterale .menu_gestione_annuncio_delete:hover { /*Aumentata la priorità*/
+    background-color: #D64161;
+}
+
+.content_gestione_annuncio {
+    background-color: #EBEBEB;
+}
+
+/*--VISUALIZZAZIONE PROFILO--*/
+.informazioni_personali {
+    float: left;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    padding-right: 1em;
+}
+
+.informazioni_personali p {
+    font-size: 1.3em;
+}
+
+.link_modifica {
+    border: 1px solid #4CAF50;
+    text-align: center;
+    border-radius: 1em;
+    text-decoration: none;
+    color: black;
+    background: #4CAF50;
+    padding: 0.5em;
+    float: right;
+}
+
+.link_modifica:hover {
+    background-color: #12A507;
+}
+
+/*----VISUALIZZAZIONE ANNUNCI*/
+.link_nuovo_annuncio {
+    border: 1px solid #4CAF50;
+    border-radius: 10em;
+    background-color: #4CAF50;
+    padding: 0.5em;
+    text-decoration: none;
+    color: black;
+    width: 97%;
+    margin-bottom: 1em;
+    float: left;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.link_gestisci_annuncio {
+    display: inline-block;
+    border: 1px solid #4CAF50;
+    border-radius: 1em;
+    background-color: #4CAF50;
+    padding: 0.5em 1em 0.5em 1em;
+    text-decoration: none;
+    color: black;
+    vertical-align: center;
+    margin-top: 1em;
+    margin-right: 90%;
+}
+
+/*----INDEX----*/
+.sei_pannelli {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sei_pannelli li {
+    width: 33%;
+    height: 20em;
+}
+
+.sei_pannelli li a {
+    display: block;
+    height: 20em;
+}
+
+.elemento_sei_pannelli {
+    flex-grow: 1;
+    border: 1px solid white;
+}
+
+.elemento_sei_pannelli img {
+    margin-top: -1.5em;
+    width: 98%;
+    height: 98%;
+}
+
+/*----RIEPILOGO PRENOTAZIONE----*/
+.riepilogo_annucio {
+    border: 1px solid gray;
+    border-radius: 1em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    line-height: 1.3;
+}
+
+/*FIX LAYOUT MOBILE*/
+@media (max-device-width: 600px) {
+    html {
+        zoom: 3;
+    }
+
+    /*Ristrutturazione layout per mobile*/
+    .layout_colonna {
+        grid-template-rows: auto 1fr auto auto;
+        grid-template-columns: 1fr;
+        grid-template-areas: "l" "c" "n" "f";
+    }
+
+    .layout_tre_pannelli {
+        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-columns: 1fr;
+        grid-template-areas: "l" "c" "x" "n" "f";
+    }
+
+    .layout_centrale {
+        grid-template-rows: auto 1fr auto auto;
+        grid-template-columns: 1fr;
+        grid-template-areas: "l" "c" "n" "f";
+    }
+
+    .gestione_annunci_mobile {
+        grid-template-areas: "l l l l" "x x x x" "c c c c" "n n n n" "f f f f"
+    }
+
+    /*----LOGO----*/
+    #link_to_menu {
+        display: inline;
+        background-image: url("../immagini/hamburger_menu.png");
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        padding-right: 24px;
+        font-size: 0.8em;
+        float: right;
+        margin-top: 1em;
+        margin-right: 0.5em;
+    }
+
+    /*----NAVIGATION BAR mobile*/
+    #nav {
+        background-color: white;
+    }
+
+    #nav ul {
+        display: block;
+    }
+
+    #nav ul li {
+        height: 2.1em;
+        background-color: #e3eaa7;
+        border: 1px solid lightgray;
+        border-radius: 0.5em;
+        margin-top: 0.3em;
+        font-size: 1.5em;
+    }
+
+    /*----BREADCRUMB mobile*/
+    #breadcrumb {
+        display: none;
+    }
+
+    /*----CONTENT mobile*/
+    #content {
+        line-height: 1.15em;
+        font-size: 1.2em;
+    }
+
+    #content h1 {
+        line-height: 1.5em;
+    }
+
+    /*----FOOTER mobile*/
+    #footer {
+        font-size: 1.5em;
+    }
+
+    #footer ul {
+        flex-direction: column;
+        font-size: 0.8em;
+    }
+
+    /*----FORM mobile----*/
+    .input_label_orizzontale {
+        display: block;
+        width: 100%;
+    }
+
+    .input_label_orizzontale input {
+        -webkit-appearance: none;
+    }
+
+    .form_logout {
+        float: none;
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .logout_button {
+        width: 100%;
+    }
+
+
+    /*----MODIFICA ANNUNCIO mobile*/
+    .menu_gestione_annuncio {
+        margin-top: 0em;
+        display: flex;
+    }
+
+    .menu_gestione_annuncio li {
+        margin: 0 0.2em 0 0;
+        width: 101%;
+        border: 1px solid lightgray;
+        border-radius: 0.5em;
+        text-align: center;
+    }
+
+    .link_gestisci_annuncio {
+        margin: 1em 0 0.5em 0.5em;
+    }
+
+    /*----LISTE----*/
+    .intestazione_lista {
+        display: inline;
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    .intestazione_lista p {
+        margin-top: 0;
+    }
+
+    .intestazione_lista > a {
+        margin-bottom: 0.25em;
+        line-height: 1.2em;
+        font-size: 1.4em;
+    }
+
+    .corpo_lista {
+        min-height: 10em;
+    }
+
+    .corpo_lista div {
+        margin-left: 0;
+    }
+
+    .corpo_lista img {
+        padding: 0.5em;
+        max-height: 10em;
+        width: 90%;
+    }
+
+    .corpo_lista div p {
+        margin-left: 0.5em;
+    }
+
+    .corpo_lista .prezzo_totale {
+        font-size: 1.2em;
+        text-align: left;
+        margin-right: 0;
+    }
+
+    /*------Lista prenotazioni mobile------*/
+    .corpo_lista_prenotazioni {
+        display: block;
+    }
+
+    .corpo_lista_prenotazioni .dettagli_prenotazione {
+        display: block;
+        border-right: 0;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione {
+        border-top: 1px solid gray;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione p {
+        margin-top: 0;
+        font-size: 1.2em;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione a {
+        width: 37%;
+        margin-bottom: 1em;
+        margin-left: 25%;
+    }
+
+    .corpo_lista_prenotazioni .dettagli_prenotazione img + p {
+        line-height: 1em;
+        font-size: 1.2em;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"] {
+        font-size: 1.2em;
+    }
+
+    /*------Lista annunci da verificare mobile------*/
+    .list_annunci_pendenti li {
+        padding: 0.5em;
+    }
+
+    /*----DETTAGLI ANNUNCIO mobile----*/
+    .informazioni_prenotazione {
+        float: none;
+        max-width: 100%;
+    }
+
+    .shower_immagine_anteprima {
+        width: 100%;
+    }
+
+    .immagine_anteprima {
+        width: 100%;
+    }
+
+    .informazioni_prenotazione .form_verticale input, .informazioni_prenotazione .form_verticale label, .informazioni_prenotazione .form_verticale select, .informazioni_prenotazione .form_verticale textarea {
+        margin-left: 0;
+        width: 100%
+    }
+
+    /*----INDEX mobile----*/
+    .sei_pannelli {
+        flex-direction: column;
+    }
+
+    .sei_pannelli li {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .sei_pannelli li img {
+        width: 100%;
+        height: 90%;
+    }
+
+    /*----VISUALIZZAZIONE ANNUNCI mobile*/
+    .link_nuovo_annuncio {
+        width: 92%;
+    }
+}
+
+/*FIX LAYOUT IE*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .layout_colonna {
+        display: block;
+    }
+
+    .layout_tre_colonne {
+        display: block;
+    }
+
+    #logo {
+        width: 100%;
+        padding-bottom: 1em;
+    }
+
+    #nav {
+        height: 4em;
+        padding-bottom: 1em;
+        margin-bottom: -1em;
+    }
+
+    #nav ul li {
+        height: 3em;
+    }
+
+    #breadcrumb {
+        margin-top: 1em;
+    }
+
+    #laterale form input {
+        height: 1.5em;
+    }
+
+    #laterale form fieldset div {
+        float: left;
+        margin-left: 5em;
+    }
+
+    .intestazione_lista {
+        display: inline-block;
+    }
+
+    .intestazione_lista > p {
+        margin-top: 1.5em;
+        float: none;
+    }
+
+    .corpo_lista_prenotazioni {
+        display: block;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione {
+        text-align: left;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione p {
+        margin-top: 0;
+    }
+
+    .corpo_lista_prenotazioni .opzioni_prenotazione a {
+        display: inline-block;
+        margin: 5em 0 0.5em -13em;
+    }
+
+    .menu_gestione_annuncio {
+        margin-top: 0;
+    }
+
+    .informazioni_personali img {
+        float: none;
+    }
+}

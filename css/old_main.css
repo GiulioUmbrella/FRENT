@@ -244,41 +244,41 @@ display: none;
 
 }
 
-.corpo_lista .prezzototale {
+.corpo_lista .prezzo_totale {
     font-size: 2em;
     text-align: right;
     margin-right: 1em;
 }
 
-.lista_flex{
+.corpo_lista_prenotazioni{
     display: flex;
 }
 
-.lista_flex .dettagli_prenotazione {
+.corpo_lista_prenotazioni .dettagli_prenotazione {
     margin-left: 0em;
     flex: 5 0 0;
     border-right: 1px solid gray;
 }
 
-.lista_flex .dettagli_prenotazione img+p {
+.corpo_lista_prenotazioni .dettagli_prenotazione img+p {
     font-size: 1.2em;
     padding-top: 0.5em;
 }
 
-.lista_flex .opzioni_prenotazione {
+.corpo_lista_prenotazioni .opzioni_prenotazione {
     padding: 0em;
     margin-left: 0em;
     flex: 1 0 0;
     text-align: center;
 }
 
-.lista_flex .opzioni_prenotazione p {
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
     font-size: 1.5em;
     font-weight: bold;
     margin-top: 25%;
 }
 
-.lista_flex .opzioni_prenotazione form input[type="submit"]{
+.corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"]{
     -webkit-appearance: none;
     background-color: #d64161;
     font-size: 1.5em;
@@ -289,7 +289,7 @@ display: none;
     cursor: pointer;
 }
 
-.lista_flex .opzioni_prenotazione a{
+.corpo_lista_prenotazioni .opzioni_prenotazione a{
     -webkit-appearance: none;
     display: block;
     text-decoration: none;
@@ -303,7 +303,7 @@ display: none;
     cursor: pointer;
 }
 
-.lista_flex .opzioni_prenotazione a:hover {
+.corpo_lista_prenotazioni .opzioni_prenotazione a:hover {
     background-color: #12a507;
 }
 /*ELENCO ANNUNCI DA VALIDARE */
@@ -1088,7 +1088,7 @@ html body #footer {
     max-height: 10em;
 }
 
-.corpo_lista .prezzototale {
+.corpo_lista .prezzo_totale {
     font-size: 1.2em;
     text-align: left;
     margin-right: 0em;
@@ -1183,24 +1183,24 @@ html body #footer {
     font-size:1em;
 }
 
-.lista_flex .dettagli_prenotazione {
+.corpo_lista_prenotazioni .dettagli_prenotazione {
     display: block;
 }
 
-.lista_flex {
+.corpo_lista_prenotazioni {
     display: block;
 }
 
-.lista_flex .dettagli_prenotazione {
+.corpo_lista_prenotazioni .dettagli_prenotazione {
     border-right: 0px;
 }
 
 
-.lista_flex .opzioni_prenotazione {
+.corpo_lista_prenotazioni .opzioni_prenotazione {
     border-top: 1px solid gray;
 }
 
-.lista_flex .opzioni_prenotazione p {
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
     margin-top: 0em;
 }
 
@@ -1208,20 +1208,20 @@ html body #footer {
     width: 90%;
 }
 
-#content .lista_flex .dettagli_prenotazione img + p {
+#content .corpo_lista_prenotazioni .dettagli_prenotazione img + p {
     line-height: 1em;
     font-size: 1.2em;
 }
 
-.lista_flex .opzioni_prenotazione p {
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
     font-size: 1.2em;
 }
 
-.lista_flex .opzioni_prenotazione form input[type="submit"] {
+.corpo_lista_prenotazioni .opzioni_prenotazione form input[type="submit"] {
     font-size: 1.2em;
 }
 
-.lista_flex .opzioni_prenotazione a {
+.corpo_lista_prenotazioni .opzioni_prenotazione a {
     width:37%;
     margin-bottom: 1em;
     margin-left:25%;
@@ -1290,19 +1290,19 @@ strong{
 	float: none;
 }
 
-.lista_flex {
+.corpo_lista_prenotazioni {
 	display: block;
 }
 
-.lista_flex .opzioni_prenotazione {
+.corpo_lista_prenotazioni .opzioni_prenotazione {
 	text-align: left;
 }
 
-.lista_flex .opzioni_prenotazione p {
+.corpo_lista_prenotazioni .opzioni_prenotazione p {
 	margin-top: 0em;
 }
 
-.lista_flex .opzioni_prenotazione a {
+.corpo_lista_prenotazioni .opzioni_prenotazione a {
 	display: inline-block;
 	margin: 5em 0em 0.5em -13em;
 }
