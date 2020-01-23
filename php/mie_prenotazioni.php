@@ -57,7 +57,7 @@ if (isset($_SESSION["user"])) {
                             </div>
                             <div class=\"opzioni_prenotazione\">
                                 <p>Totale: &euro; $prezzo</p>
-                                <a href=\"Commenta\" title=\"Scrivi un commento sulla tua prenotazione\">Commenta</a>
+                                <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" title=\"Scrivi un commento sulla tua prenotazione\">Commenta</a>
                             </div>
                         </div>
                     </li>";// todo da decidere come far commentare
