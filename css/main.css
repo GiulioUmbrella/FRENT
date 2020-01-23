@@ -209,8 +209,7 @@ html body .aiuti_alla_navigazione {
 /*Intestazione degli elementi di una lista*/
 .intestazione_lista {
     margin-bottom: 0.1em;
-    display: flex;
-    flex-direction: row;
+    display: block;
     clear: left;
 }
 
@@ -226,14 +225,13 @@ html body .aiuti_alla_navigazione {
 /*Presentazione di un link nell'intestazione di un elemento*/
 .intestazione_lista > a {
     font-size: 1.5em;
-    float: left;
     flex: 1 0 0;
 }
 
 .intestazione_lista > p {
     font-size: 1em;
-    float: right;
-    margin-top: 1em;
+    float: left;
+    margin: 0.5em 0 0.5em 0;
 }
 
 /*Corpo degli elementi di una lista*/
@@ -241,8 +239,8 @@ html body .aiuti_alla_navigazione {
     clear: both;
     border: 1px solid gray;
     border-radius: 1em;
-    margin-bottom: 1em;
-    min-height: 12em; /*In caso ci sia una foto*/
+    margin: 0.5em 0 1em 0;
+    min-height: 14em; /*In caso ci sia una foto*/
 }
 
 .corpo_lista img {
@@ -502,7 +500,8 @@ fieldset {
 
 /*Tutti i tipi di input*/
 .form_verticale input {
-    height: 3em;
+    height: 2.5em;
+    margin-top: 1em;
 }
 
 .form_verticale label {
@@ -534,6 +533,11 @@ fieldset {
 
 .primo_elemento_input_label_orizzontale {
     margin-left: 4%;
+}
+
+#content .destroy_button { /*Aumentata la priorità*/
+    background-color: #D64161;
+    border: 1px solid #D64161;
 }
 
 /*Presentazione fieldset e input per inserire la data di nascita*/
@@ -688,7 +692,7 @@ fieldset {
 }
 
 /*--VISUALIZZAZIONE PROFILO--*/
-.informazioni_personali {
+.informazioni_personali img{
     float: left;
     width: 20%;
     height: 20%;
@@ -886,7 +890,13 @@ fieldset {
         width: 100%;
     }
 
+    #data_di_nascita .primo_elemento_input_label_orizzontale {
+        margin-left: 0;
+    }
 
+    #data_di_nascita select {
+        margin-left: 5%;
+    }
     /*----MODIFICA ANNUNCIO mobile*/
     .menu_gestione_annuncio {
         margin-top: 0em;
@@ -905,10 +915,9 @@ fieldset {
         margin: 1em 0 0.5em 0.5em;
     }
 
-    /*----LISTE----*/
+    /*----LISTE mobile----*/
     .intestazione_lista {
-        display: inline;
-        flex-direction: column;
+        display: block;
         margin-bottom: 0;
     }
 
