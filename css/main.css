@@ -439,11 +439,21 @@ html body .aiuti_alla_navigazione {
 .list_pagina_statica dd {
     border: none;
     min-height: auto;
-    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+#content.list_pagina_statica dd p { 
+    font-size: 1.1em;
+    line-height: 1.3em;
 }
 
 .list_pagina_statica ol {
     list-style-position: inside;
+}
+
+.list_pagina_statica ol li {
+    font-size: 1.2em;
+    line-height: 1.3em;
 }
 
 /*------Lista storico prenotazioni------*/
