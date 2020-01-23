@@ -473,13 +473,8 @@ html body .aiuti_alla_navigazione {
     font-size: 1.3em;
 }
 
-.shower_immagine_anteprima {
-    display: flex;
-    width: 75%;
-}
-
 .immagine_anteprima {
-    width: 85%;
+    width: 70%;
 }
 
 /*Form per la conferma della prenotazione*/
