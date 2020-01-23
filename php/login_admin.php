@@ -58,7 +58,7 @@ if(isset($_POST["accedi"])) {
         $inParagraph = FALSE;
     } else {
         try {
-            $admin = $frent->login($_POST["user"], $_POST["password"]);
+            $admin = $frent->adminLogin($_POST["user"], $_POST["password"]);
             
             // aggiunto l'oggetto admin alla sessione  amp
             $_SESSION["admin"] = $admin;

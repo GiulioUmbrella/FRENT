@@ -346,14 +346,12 @@ html body .aiuti_alla_navigazione {
     font-size: 1.5em;
 }
 
-.link_gestione  {
+#content .link_gestione { /*Aumentata priorità*/
     text-align: center;
-    flex-grow: 1;
     border-radius: 1em;
     text-decoration: none;
     color: black;
-    padding: 0.5em;
-    margin: 0;
+    max-width: 15em;
 }
 
 .link_approva {
