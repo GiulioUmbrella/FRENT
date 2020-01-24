@@ -3,17 +3,18 @@
     <INFO_BOX/>
     <fieldset>
         <legend class="aiuti_alla_navigazione">Inserisci un commento</legend>
+        <input type="hidden" name="id_prenotazione" id="id_prenotazione" value="<IDPRENOTAZIONE/>" />
         <div>
             <label for="titolo_commento">Titolo</label>
-            <input type="text" name="titolo_commento" id="titolo_commento" maxlength="64"/>
+            <input type="text" name="titolo_commento" id="titolo_commento" maxlength="64" value="<VALUETITOLOCOMMENTO/>"/>
         </div>
         <div>
             <label for="testo_commento">Commento</label>
-            <textarea name="testo_commento" id="testo_commento" maxlength="512"></textarea>
+            <textarea name="testo_commento" id="testo_commento" cols="10" rows="4"><VALUETESTOCOMMENTO/></textarea>
         </div>
         <div>
             <label for="valutazione_commento">Valutazione (un voto da 1 a 5)</label>
-            <input type="text" name="valutazione_commento" id="valutazione_commento" maxlength="1"/>
+            <input type="text" name="valutazione_commento" id="valutazione_commento" maxlength="1" value="<VALUEVOTOCOMMENTO/>"/>
         </div>
         <div>
             <label class="aiuti_alla_navigazione" for="pubblica_commento">Conferma la pubblicazione</label>
