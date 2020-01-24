@@ -6,7 +6,7 @@
 html, body {
     height: 100%;
     width: 100%;
-    max-width: 98%;
+    max-width: 1024px;
     margin: auto;
     font-family: Verdana, Helvetica, sans-serif;
 }

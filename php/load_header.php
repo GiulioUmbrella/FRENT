@@ -11,7 +11,7 @@ if (isset($_SESSION["user"])){
         $header.= "
     <div id=\"nav\">
         <ul>
-            <li xml:lang=\"en\" lang=\"en\">Home
+            <li class=\"menu_selected\" xml:lang=\"en\" lang=\"en\"><span>Home</span>
             </li>
             <li><a href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>
@@ -28,7 +28,7 @@ if (isset($_SESSION["user"])){
         <ul>
             <li><a  href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
             </li>
-            <li>Le mie prenotazioni</li>
+            <li class=\"menu_selected\"><span>Le mie prenotazioni</span></li>
             <li><a  href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei annunci</a></li>
             <li><a  href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
                 profilo</a></li>
@@ -43,7 +43,7 @@ if (isset($_SESSION["user"])){
             </li>
             <li><a  href=\"./mie_prenotazioni.php\" title=\"Vai alla pagina delle prenotazioni effettuate\">Le
                 mie prenotazioni</a></li>
-            <li>I miei annunci</li>
+            <li class=\"menu_selected\"><span>I miei annunci</span></li>
             <li><a  href=\"./mio_profilo.php\" title=\"Vai alla pagina del profilo\">Il mio
                 profilo</a></li>
             <li><a  href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
@@ -59,7 +59,7 @@ if (isset($_SESSION["user"])){
                 mie prenotazioni</a></li>
             <li><a  href=\"./miei_annunci.php\" title=\"Vai alla pagina degli annunci posseduti\">I miei
                 annunci</a></li>
-            <li>Il mio profilo</li>
+            <li class=\"menu_selected\"><span>Il mio profilo</span></li>
             <li><a href=\"./script_logout_user.php\" title=\"Effettua la disconnessione\">Esci</a></li>
         </ul>
     </div>";
@@ -70,7 +70,7 @@ if (isset($_SESSION["user"])){
         $header .= "
     <div id=\"nav\">
         <ul>
-            <li>Home</li>
+            <li class=\"menu_selected\"><span>Home</span></li>
             <li><a href=\"./login.php\" title=\"Vai alla pagina di accesso\">Accedi</a></li>
             <li><a href=\"./registrazione.php\" title=\"Vai alla pagina di registrazione\">Registrati</a></li>
         </ul>
@@ -81,7 +81,7 @@ if (isset($_SESSION["user"])){
         <ul>
             <li><a href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
             </li>
-            <li>Accedi</li>
+            <li class=\"menu_selected\"><span>Accedi</span></li>
             <li><a href=\"./registrazione.php\" title=\"Vai alla pagina di registrazione\">Registrati</a></li>
         </ul>
     </div>";
@@ -92,7 +92,7 @@ if (isset($_SESSION["user"])){
             <li><a href=\"./index.php\" title=\"Vai alla pagina di ricerca degli annunci\" xml:lang=\"en\" lang=\"en\">Home</a>
             </li>
             <li><a href=\"./login.php\" title=\"Vai alla pagina di accesso\">Accedi</a></li>
-            <li>Registrati</li>
+            <li class=\"menu_selected\"><span>Registrati</span></li>
         </ul>
     </div>";
     }
