@@ -15,7 +15,7 @@ function placeholder_replacement_with_content($post, &$pagina) {
     // ripristino i dati
     $pagina = replacePlaceholders(
         $pagina,
-        ["<VALUENOME>", "<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
+        ["<VALUENOME/>", "<VALUECOGNOME/>", "<VALUEMAIL/>", "<VALUEUSERNAME/>", "<VALUEPASSWORD/>", "<VALUERIPETIPASSWORD/>", "<VALUETELEFONO/>"],
         [$post["nome"], $post["cognome"], $post["mail"], $post["username"], $post["password"], $post["ripeti_password"], $post["telefono"]]
     );
 }
@@ -28,7 +28,7 @@ function placeholder_replacement_with_empty(&$pagina) {
     // ripristino i dati
     $pagina = replacePlaceholders(
         $pagina,
-        ["<VALUENOME>", "<VALUECOGNOME>", "<VALUEMAIL>", "<VALUEUSERNAME>", "<VALUEPASSWORD>", "<VALUERIPETIPASSWORD>", "<VALUETELEFONO>"],
+        ["<VALUENOME/>", "<VALUECOGNOME/>", "<VALUEMAIL/>", "<VALUEUSERNAME/>", "<VALUEPASSWORD/>", "<VALUERIPETIPASSWORD/>", "<VALUETELEFONO/>"],
         ["", "", "", "", "", "", ""]
     );
 }
