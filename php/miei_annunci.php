@@ -44,7 +44,7 @@ if (isset($_SESSION["user"])) {
                     <div>
                         <p>$descrizione</p>
                         <a class=\"link_gestisci_annuncio\" href=\"./script_salva_dati_modifica_annuncio_in_session.php?id=$id\"
-                        title=\"Vai alla gestione dell'annuncio\">Modifica</a>
+                        title=\"Vai alla gestione dell'annuncio\">Gestione annuncio</a>
                     </div>
                 </div>
                 </li>";
