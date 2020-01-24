@@ -111,7 +111,14 @@ try {
     $pagina = str_replace("<DATAFINE/>", $prenotazioni->getDataFine(), $pagina);
     $pagina = str_replace("<MAILPROPRIETARIO/>", $host->getMail(), $pagina);
     $pagina = str_replace("<NUMOSPITI/>", $prenotazioni->getNumOspiti(), $pagina);
-    $pagina = str_replace("<NOMEANNUNCIO/>", "<a href=\"./dettagli_annuncio.php?id=$id\" title=\"Visualizza altre informazioni dell\'annuncio $titolo\">$titolo</a>", $pagina);
+    // tolgo il link quando l'annuncio relativo a questo prenotazione, non è più in stato approvato.
+    // se viene prenotata un annuncio, successivamente l'host lo modifica, la prenotazione rimane valida!
+    if ($annuncio->getStatoApprovazione()!=1){
+        $pagina = str_replace("<NOMEANNUNCIO/>", $titolo, $pagina);
+    }else{
+    
+        $pagina = str_replace("<NOMEANNUNCIO/>", "<a href=\"./dettagli_annuncio.php?id=$id\" title=\"Visualizza altre informazioni dell\'annuncio $titolo\">$titolo</a>", $pagina);
+    }
     $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo(), $pagina);
     $pagina = str_replace("<CITTA/>", $annuncio->getCitta(), $pagina);
     $pagina = str_replace("<PROPRIETARIO/>", $host->getUserName(), $pagina);

@@ -25,6 +25,7 @@ try {
     $annuncio = $frent->getAnnuncio($id); // SE NON TROVATO, LANCIO ECCEZIONE
     // se non sono ne admin ne user e annuncio non è stato approvato, non posso vederlo.
     // se sono user ma non sono host e annuncio non è stato approvato, non posso vederlo.
+    // se sono un guest che ho alloggiato in questo annuncio
     if (
         (!isset($_SESSION["admin"]) and !isset($_SESSION["user"]) and $annuncio->getStatoApprovazione() != 1) or
         (isset($_SESSION["user"]) and $_SESSION["user"]->getIdUtente() != $annuncio->getIdHost() and $annuncio->getStatoApprovazione() != 1)
@@ -41,7 +42,7 @@ try {
      * Modalità admin:
      * - il breadcrumb è solo il nome dell'annuncio
      * - niente footer
-     * - visualizzazione foto antemprima, info sull'annuncio e pulsanti approvazione/rigetto
+     * - visualizzazione foto anteprima, info sull'annuncio e pulsanti approvazione/rigetto
      */
     if (isset($_SESSION["admin"])) { // visualizzazione da parte di un amministratore
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);

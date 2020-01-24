@@ -9,7 +9,6 @@ function mostra_errore(input, testoErrore) {
     p.appendChild(strong);
 }
 
-//da richiamare sempre prima di mostraErrore
 function togli_errore(input) {
     const p = input.parentNode;
     if (p.children.length > 2) {
@@ -348,7 +347,6 @@ function validazione_form_registrazione() {
     const inputPwdR = document.getElementById("ripeti_password");
     const inputNumTelefono = document.getElementById("telefono");
 
-    //controlla la data di nascita
     const inputGiorno = document.getElementById("giorno_nascita");
     const inputMese = document.getElementById("mese_nascita");
     const inputAnno = document.getElementById("anno_nascita");
@@ -368,7 +366,6 @@ function validazione_form_registrazione() {
 
 }
 
-//usato sia per login utente che login amministratore
 function validazione_form_login() {
     const userMail = document.getElementById("user");
     const userPass = document.getElementById("password");
@@ -428,7 +425,6 @@ function validazione_form_modifica_profilo() {
     const inputUserName = document.getElementById("username");
     const inputNumTelefono = document.getElementById("telefono");
 
-    //controlla la data di nascita
     const inputGiorno = document.getElementById("giorno_nascita");
     const inputMese = document.getElementById("mese_nascita");
     const inputAnno = document.getElementById("anno_nascita");
@@ -438,7 +434,6 @@ function validazione_form_modifica_profilo() {
     const res_username = check_username(inputUserName);
     const res_telefono = check_numeroTelefonico(inputNumTelefono);
     const res_data = check_data_a_3(inputGiorno, inputMese, inputAnno);
-    window.alert("check data");
 
     return res_telefono && res_nome && res_cognome && res_mail && res_username && res_data;
 
