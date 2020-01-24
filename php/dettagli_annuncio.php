@@ -16,7 +16,8 @@ try {
      */
     
     if (!isset($_GET["id"])) {
-        header("Location: ./404.php");
+//        header("Location: ./404.php");
+        echo "riga 20";
     }
     
     $id = intval($_GET["id"]);
@@ -28,7 +29,8 @@ try {
         (!isset($_SESSION["admin"]) and !isset($_SESSION["user"]) and $annuncio->getStatoApprovazione() != 1) or
         (isset($_SESSION["user"]) and $_SESSION["user"]->getIdUtente() != $annuncio->getIdHost() and $annuncio->getStatoApprovazione() != 1)
     ) {
-        header("Location: ./404.php");
+//        header("Location: ./404.php");
+        echo "riga 33";
     }
     
     $_SESSION["annuncio"] = $annuncio; 
@@ -167,7 +169,7 @@ try {
                             </div>
                         </li>";
             }
-            $mediaCommenti = $totale / (count($commenti));
+            $mediaCommenti = ($totale / (count($commenti))*100)/100;
             $str_commenti .= "</ul>";
         } else {
             $str_commenti="<p>Ancora Non ci sono commenti!</p>";    
