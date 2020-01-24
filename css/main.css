@@ -814,7 +814,10 @@ fieldset {
     html {
         zoom: 2;
     }
-
+	
+    html body {
+        max-width: 100%;
+    }
     /*Ristrutturazione layout per mobile*/
     .layout_colonna {
         grid-template-rows: auto 1fr auto auto;
