@@ -114,7 +114,7 @@ function check_password_second(primo, secondo) {
 }
 
 function check_citta(n) {
-    const reg = new RegExp('^[a-zA-Z]{3,128}$');
+    const reg = new RegExp('^[a-zA-Z ]{3,128}$');
     if (reg.test(n.value.toString())) {
         togli_errore_citta(n);
         return true;
