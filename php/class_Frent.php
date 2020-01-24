@@ -482,7 +482,7 @@ class Frent {
      * @param int $prenotazione id della prenotazione (corrispondente anche al commento, in quanto univoco - associazione 1:1)
      * @param string $titolo titolo del commento
      * @param string $commento commento esplicativo della prenotazione
-     * @param int $votazione voto da 1 a 5, intero
+     * @param int $valutazione voto da 1 a 5, intero
      * @return int ID del commento appena inserito se l'inserimento è andato a buon fine
      * @return int -1 in caso di prenotazione inesistente
      * @return int -2 in caso di prenotazione già commentata
@@ -490,7 +490,7 @@ class Frent {
      * @return int -4 se il commento non è stato inserito (per esempio in caso di errori nelle chiavi esterne)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function insertCommento($prenotazione, $titolo, $commento, $votazione): int {
+    public function insertCommento($prenotazione, $titolo, $commento, $valutazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("L'inserimento di un commento può essere svolto solo da un utente registrato.");
@@ -500,7 +500,7 @@ class Frent {
             $cmt->setIdPrenotazione($prenotazione);
             $cmt->setTitolo($titolo);
             $cmt->setCommento($commento);
-            $cmt->setValutazione($votazione);
+            $cmt->setValutazione($valutazione);
 
             $this->db_instance->connect();
             $function_name_and_params = "insert_commento(

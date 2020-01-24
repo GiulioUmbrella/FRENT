@@ -6,7 +6,7 @@ class Commento {
     private $data_pubblicazione;
     private $titolo;
     private $commento;
-    private $votazione;
+    private $valutazione;
     private $id_prenotazione;
     private $utente; // istanza di Utente che ha pubblicato l'account
 
@@ -29,7 +29,7 @@ class Commento {
     }
     
     public function getValutazione(): int {
-        return $this->votazione;
+        return $this->valutazione;
     }
     
     /**
@@ -71,12 +71,12 @@ class Commento {
     }
     
     /**
-     * @param string $votazione
-     * @throws Eccezione se $votazione non è un intero e non è compreso fra 0 e 5, estremi inclusi
+     * @param string $valutazione
+     * @throws Eccezione se $valutazione non è un intero e non è compreso fra 0 e 5, estremi inclusi
      */
-    public function setValutazione($votazione) {
-        if (is_int($votazione) and $votazione >= 0 and $votazione <= 5) {
-            $this->votazione = $votazione;
+    public function setValutazione($valutazione) {
+        if (is_int($valutazione) and $valutazione >= 0 and $valutazione <= 5) {
+            $this->valutazione = $valutazione;
         } else {
             throw new Eccezione("Il voto inserito non è nel formato valido.");
         }

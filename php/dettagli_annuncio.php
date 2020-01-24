@@ -150,7 +150,7 @@ try {
                 $user_name =$user->getUserName();
                 $immagine_profilo = uploadsFolder() . $user->getImgProfilo();
                 $testo_commento = $commento->getCommento();
-                $votazione = $commento->getValutazione();
+                $valutazione = $commento->getValutazione();
                 $data_commento = date("Y-m-d", strtotime($commento->getDataPubblicazione()));
                 $titolo_commento = $commento->getTitolo();
                 $str_commenti .= "
@@ -164,7 +164,7 @@ try {
                             </div>
                             <div class=\"corpo_commento\">
                                 <h1>$titolo_commento</h1>
-                                <p>Votazione: $votazione</p>
+                                <p>Votazione: $valutazione</p>
                                 <p>$testo_commento</p>
                             </div>
                         </li>";
