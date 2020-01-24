@@ -659,6 +659,10 @@ fieldset {
     color: red;
 }
 
+.info_label {
+    font-size: 0.8em;
+}
+
 /*Per testo allineato con un form*/
 .aligned_with_form {
     text-align: center;
