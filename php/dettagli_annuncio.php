@@ -169,7 +169,7 @@ try {
                             </div>
                         </li>";
             }
-            $mediaCommenti = ($totale / (count($commenti))*100)/100;
+            $mediaCommenti = number_format($totale / (count($commenti)),2);
             $str_commenti .= "</ul>";
         } else {
             $str_commenti="<p>Ancora Non ci sono commenti!</p>";    
@@ -186,6 +186,7 @@ try {
     $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
     $pagina = str_replace("<PREZZO/>", $annuncio->getPrezzoNotte(), $pagina);
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
+    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo().", citt&agrave; ". $annuncio->getCitta(), $pagina);
     
     $img = uploadsFolder() . $annuncio->getImgAnteprima();
     $pagina = str_replace("<IMMAGINE/>", "<div>
