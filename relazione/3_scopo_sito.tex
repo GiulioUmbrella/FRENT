@@ -51,7 +51,6 @@ Le funzionalità che il sito offre per i \textbf{guest} sono:
 \item Cancellare una prenotazione.
 \item Commentare una prenotazioni passate.
 \item Visualizzare le proprie prenotazioni (passate, correnti e future).
-\item Modificare i propri commenti.
 \item Eliminare i propri commenti.
 \end{itemize}
 
@@ -61,7 +60,7 @@ Un guest può decidere di lasciare la piattaforma cancellando il suo profilo. In
 \item Rimane lo storico delle prenotazioni effettuate passate (si perderà il riferimento all'utente).
 \item Rimane lo storico dei commenti agli annunci pubblicati.
 \item Vengono cancellate le prenotazioni future.
-\item In presenza di prenotazioni correnti, la rimozione del proprio profilo viene negata.
+\item In presenza di prenotazioni correnti o future, la rimozione del proprio profilo viene negata.
 \end{itemize}
 
 Se un utente inserisce almeno un annuncio, diventa anche un host. Le funzionalità che il sito offre per gli \textbf{host} sono: 
@@ -72,13 +71,10 @@ Se un utente inserisce almeno un annuncio, diventa anche un host. Le funzionalit
 \item Eliminare un annuncio (solo se non ci sono prenotazioni correnti o future)
 \end{itemize}
 
-
-
-
 Se un utente host vuole abbandonare la piattaforma, valgono le seguenti regole 
 \begin{itemize}
 \item In presenza di prenotazioni correnti e/o future relative ai suoi annunci, la rimozione del proprio profilo viene negata.
-\item Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario, le foto e i commenti vengono rimosse. Rimangono tutte le occupazioni (perdendo il riferimento all'annuncio) per lasciare ai guest uno storico delle prenotazioni.
+\item Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario vengono rimossi. Rimangono tutte le occupazioni (perdendo il riferimento all'annuncio) per lasciare ai guest uno storico delle prenotazioni.
 \end{itemize}
 
 Esiste una terza categoria di utenti, gli amministratori. Svolgono un ruolo di controllo e non sono considerati in modo separato dagli altri utenti registrati.  \\
@@ -108,6 +104,6 @@ I guest possono visualizzare nella propria pagina tutto lo storico delle loro pr
 Gli host possono visualizzare per ciascun annuncio di tutte le prenotazioni di qualsiasi tipo relative allo specifico annuncio.
 
 \subsubsection{Commento} 
-Un guest può commentare le proprie prenotazioni ma solo quelle passate. Un commento è costituito da un titolo, da una descrizione e da un voto 
+Un guest può commentare le proprie prenotazioni ma solo quelle passate. Un commento è costituito da un titolo, da una descrizione e da un valutazione. 
 
 \end{document}
