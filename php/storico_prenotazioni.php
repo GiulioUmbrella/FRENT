@@ -25,7 +25,8 @@ try{
                 $numOspiti = $prenotazione->getNumOspiti();
                 $dataInizio = $prenotazione->getDataInizio();
                 $dataFine = $prenotazione->getDataFine();
-                $totale = (strtotime($dataFine) - strtotime($dataInizio)) / (24 * 3600) * $annuncio->getPrezzoNotte();
+                $durata = abs(strtotime($prenotazione->getDataFine()) - strtotime($prenotazione->getDataInizio())) / (3600 * 24);
+                $totale = $durata * $annuncio->getPrezzoNotte() * $prenotazione->getNumOspiti();
                 $guest = $frent->getUser($prenotazione->getIdUtente());
                 $username = $guest->getUserName();
                 $mail = $guest->getMail();
