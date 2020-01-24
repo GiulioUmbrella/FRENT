@@ -306,20 +306,16 @@ html body .aiuti_alla_navigazione {
 }
 
 .corpo_lista_prenotazioni .opzioni_prenotazione a {
-    -webkit-appearance: none;
     display: block;
     text-decoration: none;
     background-color: #4CAF50;
-    font-size: 1.2em;
-    padding: 0.25em 0.75em 0.25em 0.75em;
+    padding: 0.25em 0 0.25em 0;
     margin: auto;
     margin-top: 0.5em;
-    width: 30%;
-    height: 2em;
-    border: 1px solid #ddd;
+    width: 36%;
+    height: 2.5em;
     border-radius: 1.5em;
     color: black;
-    cursor: pointer;
 }
 
 .corpo_lista_prenotazioni .opzioni_prenotazione a:hover {
