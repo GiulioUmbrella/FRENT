@@ -30,7 +30,9 @@
             <legend>Ricerca annuncio</legend>
             <div>
                 <label for="citta">Città:</label>
-                <input type="text" name="citta" id="citta" placeholder="Città" value="<VALUECITTA/>"/>
+                <!-- <input type="text" name="citta" id="citta" placeholder="Città" value="<VALUECITTA/>"/> -->
+                <input list="cities" name="citta" id="citta" placeholder="Citt&agrave;"/>
+                <datalist id="cities"><CITIES_RICERCA/></datalist>
                 <!--Chiarire cosa fare per Safari -->
             </div>
             <div>
