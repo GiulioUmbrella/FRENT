@@ -186,7 +186,7 @@ try {
     $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
     $pagina = str_replace("<PREZZO/>", $annuncio->getPrezzoNotte(), $pagina);
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
-    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo().", citt&agrave; ". $annuncio->getCitta(), $pagina);
+    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo().", ". $annuncio->getCitta(), $pagina);
     
     $img = uploadsFolder() . $annuncio->getImgAnteprima();
     $pagina = str_replace("<IMMAGINE/>", "<div>
