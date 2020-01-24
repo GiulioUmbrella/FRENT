@@ -1,8 +1,8 @@
 <?php
 require_once "./components/form_functions.php";
-require_once "./components/setMinMaxDates.php";
 require_once "load_Frent.php";
 $pagina = file_get_contents("./components/risultati.html");
+require_once "./components/setMinMaxDates.php";
 if (isset($_SESSION["admin"])) {
     $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_admin_logged.html"), $pagina);
 } elseif (isset($_SESSION["user"])) {
@@ -53,7 +53,7 @@ try {
         $id = $annuncio->getIdAnnuncio();
         $Titolo = $annuncio->getTitolo();
         $descrizione=$annuncio->getDescrizione();
-        $prezzonotte=$annuncio->getPrezzoNotte();
+        $prezzoNotte=$annuncio->getPrezzoNotte();
         $path= uploadsFolder() . $annuncio->getImgAnteprima();
         $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
         $numeroRecensione= count($recensioni);
@@ -74,7 +74,7 @@ try {
                         <img src =\"$path\" alt=\"".$annuncio->getDescAnteprima()."\" />
                         <div class=\"descrizione_annuncio\">
                         <p class=\"testo_descrizione_annuncio\">$descrizione</p>
-                        <p class=\"prezzo_totale\">Prezzo: &euro; $prezzonotte persona/notte</p>
+                        <p class=\"prezzo_totale\">Prezzo: &euro; $prezzoNotte persona/notte</p>
                         </div>
                     </div>
                 </li>";
