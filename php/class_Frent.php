@@ -479,10 +479,7 @@ class Frent {
 
     /**
      * Inserisce un nuovo commento ad un annuncio, dato il suo ID.
-     * @param int $prenotazione id della prenotazione (corrispondente anche al commento, in quanto univoco - associazione 1:1)
-     * @param string $titolo titolo del commento
-     * @param string $commento commento esplicativo della prenotazione
-     * @param int $valutazione voto da 1 a 5, intero
+     * @param Commento $commento istanza corretta di commento, esplicativo della prenotazione
      * @return int ID del commento appena inserito se l'inserimento è andato a buon fine
      * @return int -1 in caso di prenotazione inesistente
      * @return int -2 in caso di prenotazione già commentata
@@ -490,24 +487,18 @@ class Frent {
      * @return int -4 se il commento non è stato inserito (per esempio in caso di errori nelle chiavi esterne)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function insertCommento($prenotazione, $titolo, $commento, $valutazione): int {
+    public function insertCommento($commento): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("L'inserimento di un commento può essere svolto solo da un utente registrato.");
             }
 
-            $cmt = Commento::build();
-            $cmt->setIdPrenotazione($prenotazione);
-            $cmt->setTitolo($titolo);
-            $cmt->setCommento($commento);
-            $cmt->setValutazione($valutazione);
-
             $this->db_instance->connect();
             $function_name_and_params = "insert_commento(
-                " . $cmt->getIdPrenotazione() . ",
-                \"" . $cmt->getTitolo() . "\",
-                \"" . $cmt->getCommento() . "\",
-                " . $cmt->getValutazione() . "
+                " . $commento->getIdPrenotazione() . ",
+                \"" . $commento->getTitolo() . "\",
+                \"" . $commento->getCommento() . "\",
+                " . $commento->getValutazione() . "
             )";
 
             return intval($this->db_instance->queryFunction($function_name_and_params));
@@ -547,7 +538,7 @@ class Frent {
      * * Rimuove un commento legato ad una prenotazione, dato l'ID della prenotazione (che corrisponde a quello del commento).
      * @param int $id_prenotazione id del commento da rimuovere
      * @return int 0 in caso il commento venga eliminato correttamente
-     * @return int -1 l'annuncio non è stato eliminato
+     * @return int -1 il commento non è stato eliminato
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
     public function deleteCommento($id_prenotazione): int {

@@ -88,22 +88,24 @@ try {
         }
     }
     
-    $content = "";
+    $commentoHTML = "";
     if ($commentoTrovato) {
-        $content = "<ul class=\"riepilogo_annucio\">";
-        $content .= "<li>Titolo: " . $commentoUtente->getTitolo() . "</li>";
-        $content .= "<li>Commento: " . $commentoUtente->getCommento() . "</li>";
-        $content .= "<li>Valutazione: " . $commentoUtente->getValutazione() . "</li>";
-        $content .= "</ul>";
+        $commentoHTML = "<ul class=\"riepilogo_annucio\">";
+        $commentoHTML .= "<li>Titolo: " . $commentoUtente->getTitolo() . "</li>";
+        $commentoHTML .= "<li>Commento: " . $commentoUtente->getCommento() . "</li>";
+        $commentoHTML .= "<li>Valutazione: " . $commentoUtente->getValutazione() . "</li>";
+        $commentoHTML .= "<li><a href=\"script_elimina_commento.php?id=<IDPRENOTAZIONE/>\" title=\"Elimina commento\" class=\"messaggio_errore\">Elimina commento</a></li>";
+        $commentoHTML .= "</ul>";
     } else {
-        $content = "";
+        $commentoHTML = "";
         if ($prenotazioni->getDataFine() < date("Y-m-d")) {
-            $content = file_get_contents("./components/aggiungi_commento_form.html");
+            $commentoHTML = file_get_contents("./components/aggiungi_commento_form.html");
         } else {
-            $content = "<p>Mi dispiace, ma non &egrave; ancora possibile commentare questa prenotazione!</p>";
+            $commentoHTML = "<p>Mi dispiace, ma non &egrave; ancora possibile commentare questa prenotazione!</p>";
         }
     }
-    $pagina = str_replace("<COMMENTO/>", $content, $pagina);
+
+    $pagina = str_replace("<COMMENTO/>", $commentoHTML, $pagina);
     $pagina = str_replace("<IDPRENOTAZIONE/>", $prenotazioni->getIdOccupazione(), $pagina);
     $pagina = str_replace("<DATAINIZIO/>", $prenotazioni->getDataInizio(), $pagina);
     $pagina = str_replace("<DATAFINE/>", $prenotazioni->getDataFine(), $pagina);
@@ -138,12 +140,13 @@ try {
             $inParagraph = FALSE;
         } else {
             try {
-                $codice_inserimento = $frent->insertCommento(
-                    $id_prenotazione,
-                    $_POST["titolo_commento"],
-                    $_POST["testo_commento"],
-                    intval($_POST["valutazione_commento"])
-                );
+                $cmt = Commento::build();
+                $cmt->setIdPrenotazione($id_prenotazione);
+                $cmt->setTitolo($_POST["titolo_commento"]);
+                $cmt->setCommento($_POST["testo_commento"]);
+                $cmt->setValutazione(intval($_POST["valutazione_commento"]));
+                
+                $codice_inserimento = $frent->insertCommento($cmt);
                 
                 if($codice_inserimento === -1 || $codice_inserimento === -4) { // in caso di prenotazione inesistente (-1) e se il commento non è stato inserito (-4)
                     $messageToUser = htmlentities("C'è stato un errore nel processo di inserimento del commento.");
