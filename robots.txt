@@ -9,6 +9,7 @@ Disallow: php/script_approvazione_annunci.php
 Disallow: php/script_controllo_dati_prenotazione.php
 Disallow: php/script_controllo_dati_ricerca.php
 Disallow: php/script_elimina_annuncio.php
+Disallow: php/script_elimina_commento.php
 Disallow: php/script_elimina_prenotazione.php
 Disallow: php/script_elimina_profilo.php
 Disallow: php/script_logout_admin.php
