@@ -6,7 +6,7 @@
 html, body {
     height: 100%;
     width: 100%;
-    max-width: 1024px;
+    max-width: 98%;
     margin: auto;
     font-family: Verdana, Helvetica, sans-serif;
 }
@@ -279,7 +279,7 @@ html body .aiuti_alla_navigazione {
     border-right: 1px solid gray;
 }
 
-.corpo_lista_prenotazioni .dettagli_prenotazione img + p {
+.corpo_lista_prenotazioni .dettagli_prenotazione  p {
     font-size: 1.2em;
     padding-top: 0.5em;
 }
@@ -314,7 +314,7 @@ html body .aiuti_alla_navigazione {
     padding: 0.25em 0.75em 0.25em 0.75em;
     margin: auto;
     margin-top: 0.5em;
-    width: 25%;
+    width: 30%;
     height: 2em;
     border: 1px solid #ddd;
     border-radius: 1.5em;
@@ -323,7 +323,7 @@ html body .aiuti_alla_navigazione {
 }
 
 .corpo_lista_prenotazioni .opzioni_prenotazione a:hover {
-    color: #12A507;
+    background-color: #12A507;
 }
 
 /*------Lista annunci da validare------*/
@@ -572,7 +572,6 @@ fieldset {
 }
 
 #data_di_nascita select {
-    -webkit-appearance: none;
     min-width: 10%;
     margin: 1em 1em 0 0;
 }
