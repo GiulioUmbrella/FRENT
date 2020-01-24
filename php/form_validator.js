@@ -248,7 +248,7 @@ function check_titoloAnnuncio(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "indirizzo inserito non valido!");
+    mostra_errore(input, "Titolo inserito non valido!");
     return true;
 }
 
@@ -271,7 +271,7 @@ function check_indirizzo(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "indirizzo inserito non valido!");
+    mostra_errore(input, "Indirizzo inserito non valido!");
     return true;
 }
 
@@ -283,6 +283,39 @@ function check_username(input) {
         return true;
     }
     mostra_errore(input, "Nome inserito non valido");
+    return false;
+}
+
+function check_titoloCommento(input) {
+    const val = input.value.toString().trim();
+
+    if (val.length > 0 && val .length <= 64) {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Titolo inserito non valido");
+    return false;
+}
+
+function check_testoCommento(input) {
+    const val = input.value.toString().trim();
+
+    if (val.length > 0 && val .length <= 512) {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Testo commento non valido");
+    return false;
+}
+
+function check_valutazioneCommento(input) {
+    const val = input.value.toString().trim();
+
+    if (val === "1" || val === "2" || val === "3" || val === "4" || val === "5") {
+        togli_errore(input);
+        return true;
+    }
+    mostra_errore(input, "Valutazione insertia non valida");
     return false;
 }
 
@@ -422,4 +455,16 @@ function validazione_form_prenota_annuncio() {
     const res = check_dateInizioEFine(dataInizio, dataFine);
     const res_numOspiti = check_numOspiti(numOspiti);
     return res_dataInizio && res_dataFine && res && res_numOspiti;
+}
+
+function validazione_form_inserisci_commento() {
+    const inputTitolo = document.getElementById("titolo_commento");
+    const inputCommento = document.getElementById("testo_commento");
+    const inputValutazione = document.getElementById("valutazione_commento");
+
+    const res_inputTitolo = check_titoloCommento(inputTitolo);
+    const res_inputCommento = check_testoCommento(inputCommento);
+    const res_inputValutazione = check_valutazioneCommento(inputValutazione);
+
+    return res_inputTitolo && res_inputCommento && res_inputValutazione;
 }
