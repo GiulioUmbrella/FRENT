@@ -94,7 +94,7 @@ try {
         $commentoHTML .= "<li>Titolo: " . $commentoUtente->getTitolo() . "</li>";
         $commentoHTML .= "<li>Commento: " . $commentoUtente->getCommento() . "</li>";
         $commentoHTML .= "<li>Valutazione: " . $commentoUtente->getValutazione() . "</li>";
-        $commentoHTML .= "<li><a href=\"script_elimina_commento.php?id=<IDPRENOTAZIONE/>\" title=\"Elimina commento\" class=\"messaggio_errore\">Elimina commento</a></li>";
+        $commentoHTML .= "<li class=\"link_elimina_commento\"><a href=\"script_elimina_commento.php?id=<IDPRENOTAZIONE/>\" title=\"Elimina commento\">Elimina commento</a></li>";
         $commentoHTML .= "</ul>";
     } else {
         $commentoHTML = "";
