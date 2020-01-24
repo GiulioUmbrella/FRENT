@@ -64,16 +64,17 @@ if(isset($_POST["nuovo_annuncio"])) {
         $inParagraph = FALSE;
     } else {
         try {
-            $codice_inserimento = $frent->insertAnnuncio(
-                $_POST["titolo"],
-                $_POST["descrizione"],
-                ANTEPRIMA_ANNUNCIO_DEFAULT,
-                $_POST["desc_anteprima"],
-                $_POST["indirizzo"],
-                $_POST["citta"],
-                intval($_POST["max_ospiti"]),
-                floatval($_POST["prezzo_notte"])
-            );
+            $annuncio = Annuncio::build();
+            $annuncio->setTitolo($_POST["titolo"]);
+            $annuncio->setDescrizione($_POST["descrizione"]);
+            $annuncio->setImgAnteprima(ANTEPRIMA_ANNUNCIO_DEFAULT);
+            $annuncio->setDescAnteprima($_POST["desc_anteprima"]);
+            $annuncio->setIndirizzo($_POST["indirizzo"]);
+            $annuncio->setCitta($_POST["citta"]);
+            $annuncio->setMaxOspiti(intval($_POST["max_ospiti"]));
+            $annuncio->setPrezzoNotte(floatval($_POST["prezzo_notte"]));
+
+            $codice_inserimento = $frent->insertAnnuncio($annuncio);
             
             if($codice_inserimento === -1 || $codice_inserimento === -2) {
                 $messageToUser = htmlentities("C'è stato un errore nel processo di inserimento del nuovo annuncio.");
