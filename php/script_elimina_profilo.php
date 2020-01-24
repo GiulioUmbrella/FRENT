@@ -2,6 +2,10 @@
 
 require_once "./load_Frent.php";
 
+if(!isset($_SESSION["user"])) {
+    header("Location: ./login.php");
+}
+
 $nextPage = "";
 try {
     switch($frent->deleteUser()) {
