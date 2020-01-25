@@ -12,8 +12,8 @@ if (isset($_SESSION["user"])) {
     $content = "";
     // pescare le prenotazioni correnti
     
-    $occupazioni = $frent->getPrenotazioniGuest();
-//    $occupazioni = array();
+    $prenotazioni = $frent->getPrenotazioniGuest();
+//    $prenotazioni = array();
     $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
     $prenotazioni_passate = "<h1>Le mie prenotazioni passate</h1><ul id=\"prenotazioni_passate\">";
     $prenotazioni_correnti = "<h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
@@ -22,8 +22,8 @@ if (isset($_SESSION["user"])) {
     $numPrenotazioniPassate = 0;
     $numPrenotazioniCorrenti = 0;
     $numPrenotazioniFuture = 0;
-    foreach ($occupazioni as $prenotazione) {
-        $id_prenotazione = $prenotazione->getIdOccupazione();
+    foreach ($prenotazioni as $prenotazione) {
+        $id_prenotazione = $prenotazione->getIdPrenotazione();
         $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
         $host = $frent->getUser($annuncio->getIdHost());
         $mail = $host->getMail();

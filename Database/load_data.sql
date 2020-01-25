@@ -3,7 +3,7 @@ SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE TABLE `amministratori`;
 TRUNCATE TABLE `utenti`;
 TRUNCATE TABLE `annunci`;
-TRUNCATE TABLE `occupazioni`;
+TRUNCATE TABLE `prenotazioni`;
 TRUNCATE TABLE `commenti`;
 
 SET FOREIGN_KEY_CHECKS=1;
@@ -22,7 +22,7 @@ LOAD DATA LOCAL INFILE 'data_builder/annunci.csv' INTO TABLE annunci
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data_builder/occupazioni.csv' INTO TABLE occupazioni
+LOAD DATA LOCAL INFILE 'data_builder/prenotazioni.csv' INTO TABLE prenotazioni
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   ESCAPED BY '"'

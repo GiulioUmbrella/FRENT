@@ -15,11 +15,11 @@ try {
             $nextPage = "index.php";
         break;
         case -1:
-            $_SESSION["delete_user_message"] = "Hai occupazioni correnti, non puoi attualmente eliminare il tuo profilo.";
+            $_SESSION["delete_user_message"] = "Hai prenotazioni correnti, non puoi attualmente eliminare il tuo profilo.";
             $nextPage = "mio_profilo.php";
         break;
         case -2:
-            $_SESSION["delete_user_message"] = "Hai occupazioni future previste, non puoi attualmente eliminare il tuo profilo.";
+            $_SESSION["delete_user_message"] = "Hai prenotazioni future previste, non puoi attualmente eliminare il tuo profilo.";
             $nextPage = "mio_profilo.php";
         break;
         case -3:

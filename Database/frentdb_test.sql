@@ -57,29 +57,29 @@ END$$
 
 CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_commenti_annuncio` (`id` INT)  BEGIN
     SELECT C.*, U.user_name, U.img_profilo 
-    FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
+    FROM prenotazioni O INNER JOIN commenti C ON O.id_prenotazione = C.prenotazione
     INNER JOIN utenti U ON O.utente = U.id_utente
     WHERE O.annuncio = id;
 END$$
 
-CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_occupazione` (`id` INT)  BEGIN
+CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_prenotazione` (`id` INT)  BEGIN
     SELECT *
-    FROM occupazioni
-    WHERE id_occupazione = id;
+    FROM prenotazioni
+    WHERE id_prenotazione = id;
 END$$
 
-CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_occupazioni_annuncio` (`_id_annuncio` INT)  BEGIN
-    SELECT id_occupazione, utente, num_ospiti, data_inizio, data_fine
-    FROM occupazioni
+CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_prenotazioni_annuncio` (`_id_annuncio` INT)  BEGIN
+    SELECT id_prenotazione, utente, num_ospiti, data_inizio, data_fine
+    FROM prenotazioni
     WHERE annuncio = _id_annuncio
     ORDER BY data_inizio;
 END$$
 
 CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_prenotazioni_guest` (`id_utente` INT)  BEGIN
     SELECT *
-    FROM occupazioni
+    FROM prenotazioni
     WHERE utente = id_utente
-    ORDER BY occupazioni.data_inizio;
+    ORDER BY prenotazioni.data_inizio;
 END$$
 
 CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `get_ultimi_annunci_approvati` (`id_utente` INT)  BEGIN
@@ -118,7 +118,7 @@ CREATE DEFINER=`mferrati`@`localhost` PROCEDURE `ricerca_annunci` (`_citta` VARC
     AND A.max_ospiti >= _num_ospiti
     AND A.id_annuncio NOT IN (
         SELECT annuncio
-        FROM occupazioni
+        FROM prenotazioni
         WHERE (
           (di >= data_inizio AND di <= data_fine) OR
           (df >= data_inizio AND df <= data_fine) OR
@@ -158,14 +158,14 @@ CREATE DEFINER=`mferrati`@`localhost` FUNCTION `delete_annuncio` (`_id_annuncio`
 
   SET curdate = CURDATE();
   IF _id_annuncio IN (SELECT annuncio
-                      FROM occupazioni
+                      FROM prenotazioni
                       WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
     RETURN -1;
   END IF;
 
   DELETE FROM commenti
-  WHERE prenotazione IN ( SELECT id_occupazione
-                          FROM occupazioni
+  WHERE prenotazione IN ( SELECT id_prenotazione
+                          FROM prenotazioni
                           WHERE annuncio = _id_annuncio);
   
   DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
@@ -186,19 +186,19 @@ CREATE DEFINER=`mferrati`@`localhost` FUNCTION `delete_commento` (`_id_prenotazi
     END IF;
 END$$
 
-CREATE DEFINER=`mferrati`@`localhost` FUNCTION `delete_occupazione` (`_id_occupazione` INT) RETURNS INT(11) BEGIN
+CREATE DEFINER=`mferrati`@`localhost` FUNCTION `delete_prenotazione` (`_id_prenotazione` INT) RETURNS INT(11) BEGIN
   DECLARE d_inizio date;
 
   SELECT data_inizio INTO d_inizio
-  FROM occupazioni
-  WHERE id_occupazione = _id_occupazione;
+  FROM prenotazioni
+  WHERE id_prenotazione = _id_prenotazione;
 
   IF CURDATE() >= d_inizio THEN
     RETURN -1;
   END IF;
 
-  DELETE FROM occupazioni
-  WHERE id_occupazione = _id_occupazione;
+  DELETE FROM prenotazioni
+  WHERE id_prenotazione = _id_prenotazione;
 
   IF ROW_COUNT() = 0 THEN
     RETURN -2;
@@ -211,14 +211,14 @@ CREATE DEFINER=`mferrati`@`localhost` FUNCTION `delete_user` (`_id_utente` INT) 
 
 
 IF EXISTS (
-    SELECT * FROM occupazioni WHERE utente = _id_utente AND (data_inizio <= CURDATE() AND data_fine >= CURDATE())
+    SELECT * FROM prenotazioni WHERE utente = _id_utente AND (data_inizio <= CURDATE() AND data_fine >= CURDATE())
   ) THEN
   RETURN -1;
 END IF;
 
 
 IF EXISTS (
-  SELECT * FROM occupazioni WHERE annuncio IN (
+  SELECT * FROM prenotazioni WHERE annuncio IN (
     SELECT id_annuncio FROM annunci WHERE host = _id_utente) AND ((data_inizio <= CURDATE() AND data_fine >= CURDATE()) OR (data_inizio >= CURDATE())
   )
 ) THEN
@@ -322,7 +322,7 @@ CREATE DEFINER=`mferrati`@`localhost` FUNCTION `insert_commento` (`_prenotazione
       END IF;
 END$$
 
-CREATE DEFINER=`mferrati`@`localhost` FUNCTION `insert_occupazione` (`_utente` INT, `_annuncio` INT, `_numospiti` INT(2), `di` DATE, `df` DATE) RETURNS INT(11) BEGIN
+CREATE DEFINER=`mferrati`@`localhost` FUNCTION `insert_prenotazione` (`_utente` INT, `_annuncio` INT, `_numospiti` INT(2), `di` DATE, `df` DATE) RETURNS INT(11) BEGIN
     
     IF DATEDIFF(df, di) <= 0 THEN
       RETURN -1;
@@ -331,7 +331,7 @@ CREATE DEFINER=`mferrati`@`localhost` FUNCTION `insert_occupazione` (`_utente` I
     
     IF EXISTS (
         SELECT *
-        FROM occupazioni
+        FROM prenotazioni
         WHERE annuncio = _annuncio AND (
           (di >= data_inizio AND di <= data_fine) OR
           (df >= data_inizio AND df <= data_fine) OR
@@ -346,7 +346,7 @@ CREATE DEFINER=`mferrati`@`localhost` FUNCTION `insert_occupazione` (`_utente` I
        RETURN -4;
     END IF;
 
-    INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
+    INSERT INTO prenotazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
     VALUES (_utente, _annuncio, _numospiti, di, df);
 
     IF ROW_COUNT() = 0 THEN 
@@ -466,11 +466,11 @@ INSERT INTO `commenti` (`prenotazione`, `data_pubblicazione`, `titolo`, `comment
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `occupazioni`
+-- Struttura della tabella `prenotazioni`
 --
 
-CREATE TABLE `occupazioni` (
-  `id_occupazione` int(11) NOT NULL,
+CREATE TABLE `prenotazioni` (
+  `id_prenotazione` int(11) NOT NULL,
   `utente` int(11) NOT NULL,
   `annuncio` int(11) DEFAULT NULL,
   `num_ospiti` int(2) NOT NULL DEFAULT '1',
@@ -479,10 +479,10 @@ CREATE TABLE `occupazioni` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `occupazioni`
+-- Dump dei dati per la tabella `prenotazioni`
 --
 
-INSERT INTO `occupazioni` (`id_occupazione`, `utente`, `annuncio`, `num_ospiti`, `data_inizio`, `data_fine`) VALUES
+INSERT INTO `prenotazioni` (`id_prenotazione`, `utente`, `annuncio`, `num_ospiti`, `data_inizio`, `data_fine`) VALUES
 (1, 1, 1, 1, '2020-02-02', '2020-02-07'),
 (2, 2, 1, 1, '2020-02-11', '2020-02-15'),
 (3, 3, 1, 1, '2020-02-21', '2020-02-25'),
@@ -529,22 +529,22 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `user_name`, `mail`, `password`, `data_nascita`, `img_profilo`, `telefono`) VALUES
-(1, 'Jolanda', 'Rossi', 'jolanda.rossi', 'jolanda.rossi@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(2, 'Melchiorre', 'Ferrari', 'melchiorre.ferrari', 'melchiorre.ferrari@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(3, 'Cirino', 'Russo', 'cirino.russo', 'cirino.russo@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(4, 'Ignazio', 'Bianchi', 'ignazio.bianchi', 'ignazio.bianchi@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(5, 'Elio', 'Romano', 'elio.romano', 'elio.romano@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(6, 'Gianni', 'Gallo', 'gianni.gallo', 'gianni.gallo@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(7, 'Amore', 'Costa', 'amore.costa', 'amore.costa@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(8, 'Marisa', 'Fontana', 'marisa.fontana', 'marisa.fontana@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(9, 'Dania', 'Conti', 'dania.conti', 'dania.conti@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(10, 'Alberico', 'Esposito', 'alberico.esposito', 'alberico.esposito@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(11, 'Lodovico', 'Ricci', 'lodovico.ricci', 'lodovico.ricci@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(12, 'Marino', 'Bruno', 'marino.bruno', 'marino.bruno@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(13, 'Nella', 'Rizzo', 'nella.rizzo', 'nella.rizzo@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(14, 'Pompeo', 'Moretti', 'pompeo.moretti', 'pompeo.moretti@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(15, 'Alfonso', 'Marino', 'alfonso.marino', 'alfonso.marino@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(16, 'Marco', 'Ferrati', 'mferrati', 'user@gmail.com', 'user', '2020-02-08', '../uploads/defaultImages/imgProfiloDefault.png', '+391234567890'),
+(1, 'Jolanda', 'Rossi', 'jolanda.rossi', 'jolanda.rossi@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(2, 'Melchiorre', 'Ferrari', 'melchiorre.ferrari', 'melchiorre.ferrari@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(3, 'Cirino', 'Russo', 'cirino.russo', 'cirino.russo@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(4, 'Ignazio', 'Bianchi', 'ignazio.bianchi', 'ignazio.bianchi@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(5, 'Elio', 'Romano', 'elio.romano', 'elio.romano@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(6, 'Gianni', 'Gallo', 'gianni.gallo', 'gianni.gallo@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(7, 'Amore', 'Costa', 'amore.costa', 'amore.costa@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(8, 'Marisa', 'Fontana', 'marisa.fontana', 'marisa.fontana@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(9, 'Dania', 'Conti', 'dania.conti', 'dania.conti@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(10, 'Alberico', 'Esposito', 'alberico.esposito', 'alberico.esposito@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(11, 'Lodovico', 'Ricci', 'lodovico.ricci', 'lodovico.ricci@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(12, 'Marino', 'Bruno', 'marino.bruno', 'marino.bruno@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(13, 'Nella', 'Rizzo', 'nella.rizzo', 'nella.rizzo@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(14, 'Pompeo', 'Moretti', 'pompeo.moretti', 'pompeo.moretti@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(15, 'Alfonso', 'Marino', 'alfonso.marino', 'alfonso.marino@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(16, 'Marco', 'Ferrati', 'mferrati', 'user@gmail.com', 'user', '2020-02-08', 'defaultImages/imgProfiloDefault.png', '+391234567890'),
 (17, 'Utente', 'Generico', 'genericUser', 'utente.generico@mail.com', 'password', '1992-05-02', 'defaultImages/imgProfiloDefault.png', '3401234567');
 
 --
@@ -572,10 +572,10 @@ ALTER TABLE `commenti`
   ADD PRIMARY KEY (`prenotazione`);
 
 --
--- Indici per le tabelle `occupazioni`
+-- Indici per le tabelle `prenotazioni`
 --
-ALTER TABLE `occupazioni`
-  ADD PRIMARY KEY (`id_occupazione`),
+ALTER TABLE `prenotazioni`
+  ADD PRIMARY KEY (`id_prenotazione`),
   ADD KEY `utente` (`utente`),
   ADD KEY `annuncio` (`annuncio`);
 
@@ -601,10 +601,10 @@ ALTER TABLE `amministratori`
 ALTER TABLE `annunci`
   MODIFY `id_annuncio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT per la tabella `occupazioni`
+-- AUTO_INCREMENT per la tabella `prenotazioni`
 --
-ALTER TABLE `occupazioni`
-  MODIFY `id_occupazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+ALTER TABLE `prenotazioni`
+  MODIFY `id_prenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT per la tabella `utenti`
 --
@@ -624,14 +624,14 @@ ALTER TABLE `annunci`
 -- Limiti per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  ADD CONSTRAINT `commenti_ibfk_1` FOREIGN KEY (`prenotazione`) REFERENCES `occupazioni` (`id_occupazione`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `commenti_ibfk_1` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`id_prenotazione`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `occupazioni`
+-- Limiti per la tabella `prenotazioni`
 --
-ALTER TABLE `occupazioni`
-  ADD CONSTRAINT `occupazioni_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utenti` (`id_utente`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `occupazioni_ibfk_2` FOREIGN KEY (`annuncio`) REFERENCES `annunci` (`id_annuncio`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `prenotazioni`
+  ADD CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utenti` (`id_utente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prenotazioni_ibfk_2` FOREIGN KEY (`annuncio`) REFERENCES `annunci` (`id_annuncio`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

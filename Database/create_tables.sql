@@ -1,6 +1,6 @@
 -- drop delle tabelle
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS amministratori, utenti, annunci, occupazioni, commenti;
+DROP TABLE IF EXISTS amministratori, utenti, annunci, prenotazioni, commenti;
 SET FOREIGN_KEY_CHECKS=1;
 
 -- creazione delle tabelle
@@ -41,8 +41,8 @@ create table annunci (
 	foreign key (host) references utenti(id_utente) on update cascade on delete cascade
 );
 
-create table occupazioni (
-	id_occupazione int primary key auto_increment,
+create table prenotazioni (
+	id_prenotazione int primary key auto_increment,
 	utente int not null,
 	annuncio int,
 	num_ospiti int(2) not null default 1, -- limite da 0 a 99 (almeno da db)
@@ -53,10 +53,10 @@ create table occupazioni (
 );
 
 create table commenti (
-	prenotazione int primary key, -- occupazione=prenotazione
+	prenotazione int primary key, -- prenotazione=prenotazione
 	data_pubblicazione datetime DEFAULT CURRENT_TIMESTAMP,
 	titolo varchar(64) not null,
 	commento varchar(512) not null,
 	votazione tinyint(1) not null, -- verificare via trigger che sia 0 < voto < 6
-	foreign key(prenotazione) references occupazioni(id_occupazione) on update cascade on delete cascade
+	foreign key(prenotazione) references prenotazioni(id_prenotazione) on update cascade on delete cascade
 );

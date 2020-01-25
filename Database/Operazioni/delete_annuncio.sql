@@ -1,4 +1,4 @@
-/*Funzione che permette l'eliminazio di un annucio previo controllo
+/*Funzione che permette l'eliminazione di un annuncio previo controllo
 Cosa restituisce:
   0 l'annuncio è stato eliminato e con esso le foto e i commenti
   -1 l'annuncio non è eliminabile perchè ci sono prenotazioni in corso o future
@@ -17,16 +17,16 @@ BEGIN
 
   SET curdate = CURDATE();
   IF _id_annuncio IN (SELECT annuncio
-                      FROM occupazioni
+                      FROM prenotazioni
                       WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
     RETURN -1;
   END IF;
 
   DELETE FROM commenti
-  WHERE prenotazione IN ( SELECT id_occupazione
-                          FROM occupazioni
+  WHERE prenotazione IN ( SELECT id_prenotazione
+                          FROM prenotazioni
                           WHERE annuncio = _id_annuncio);
-  -- in occupazioni il campo annuncio viene messo a null dalla politica di reazione
+  -- in prenotazioni il campo annuncio viene messo a null dalla politica di reazione
   DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
 
   IF ROW_COUNT() = 0 THEN

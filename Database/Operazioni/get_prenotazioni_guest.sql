@@ -7,8 +7,8 @@ DELIMITER |
 CREATE PROCEDURE get_prenotazioni_guest(id_utente int)
 BEGIN
     SELECT *
-    FROM occupazioni
+    FROM prenotazioni
     WHERE utente = id_utente
-    ORDER BY occupazioni.data_inizio;
+    ORDER BY prenotazioni.data_inizio;
 END |
 DELIMITER ;

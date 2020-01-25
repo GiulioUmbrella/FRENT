@@ -7,7 +7,7 @@ DELIMITER |
 CREATE PROCEDURE get_commenti_annuncio(id int)
 BEGIN
     SELECT C.*, U.user_name, U.img_profilo 
-    FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
+    FROM prenotazioni O INNER JOIN commenti C ON O.id_prenotazione = C.prenotazione
     INNER JOIN utenti U ON O.utente = U.id_utente
     WHERE O.annuncio = id;
 END |

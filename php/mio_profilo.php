@@ -1,6 +1,7 @@
 <?php
 
 require_once "./load_Frent.php";
+require_once "./components/form_functions.php";
 
 if(!isset($_SESSION["user"])) {
     header("Location: login.php");
@@ -15,7 +16,7 @@ $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html")
 $user = $_SESSION["user"];
 
 // inserisco dati dell'utente nella pagina
-$pagina = str_replace("<PATH/>", "../uploads/" . $user->getImgProfilo(), $pagina);
+$pagina = str_replace("<PATH/>", uploadsFolder() . $user->getImgProfilo(), $pagina);
 $pagina = str_replace("<NOME/>", $user->getNome(), $pagina);
 $pagina = str_replace("<USERNAME/>", $user->getUsername(), $pagina);
 $pagina = str_replace("<MAIL/>", $user->getMail(), $pagina);

@@ -5,7 +5,7 @@ require_once "./class_Amministratore.php";
 require_once "./class_Annuncio.php";
 require_once "./class_Commento.php";
 require_once "./class_Eccezione.php";
-require_once "./class_Occupazione.php";
+require_once "./class_Prenotazione.php";
 require_once "./class_Utente.php";
 
 /**
@@ -174,69 +174,69 @@ class Frent {
     }
 
     /**
-     * Restituisce le occupazioni di un annuncio, dato il suo ID.
+     * Restituisce le prenotazioni di un annuncio, dato il suo ID.
      * @param int $id_annuncio id dell'annuncio
-     * @return array di oggetti di tipo Occupazione
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione degli oggetti Occupazione
+     * @return array di oggetti di tipo Prenotazione
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione degli oggetti Prenotazione
      */
-    public function getOccupazioniAnnuncio($id_annuncio): array {
+    public function getPrenotazioniAnnuncio($id_annuncio): array {
         try {
             if(!is_int($id_annuncio)) {
-                throw new Eccezione("Parametri di invocazione di getOccupazioniAnnuncio errati.");
+                throw new Eccezione("Parametri di invocazione di getPrenotazioniAnnuncio errati.");
             }
             $this->db_instance->connect();
-            $procedure_name_and_params = "get_occupazioni_annuncio($id_annuncio)";
-            $lista_occupazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
+            $procedure_name_and_params = "get_prenotazioni_annuncio($id_annuncio)";
+            $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
-            foreach($lista_occupazioni as $i => $assoc_occupazione) {
-                $occupazione = Occupazione::build();
-                $occupazione->setIdOccupazione(intval($assoc_occupazione['id_occupazione']));
-                $occupazione->setIdUtente(intval($assoc_occupazione['utente']));
-                $occupazione->setIdAnnuncio($id_annuncio);
-                $occupazione->setNumOspiti(intval($assoc_occupazione['num_ospiti']));
-                $occupazione->setDataInizio($assoc_occupazione['data_inizio']);
-                $occupazione->setDataFine($assoc_occupazione['data_fine']);
-                $lista_occupazioni[$i] = $occupazione;
+            foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
+                $prenotazione = Prenotazione::build();
+                $prenotazione->setIdPrenotazione(intval($assoc_prenotazione['id_prenotazione']));
+                $prenotazione->setIdUtente(intval($assoc_prenotazione['utente']));
+                $prenotazione->setIdAnnuncio($id_annuncio);
+                $prenotazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
+                $prenotazione->setDataInizio($assoc_prenotazione['data_inizio']);
+                $prenotazione->setDataFine($assoc_prenotazione['data_fine']);
+                $lista_prenotazioni[$i] = $prenotazione;
             }
     
-            return $lista_occupazioni;
+            return $lista_prenotazioni;
         } catch(Eccezione $exc) {
             throw $exc;
         }
     }
 
     /**
-     * Restituisce una singola occupazione, dato il suo ID.
-     * @param int id dell'occupazione
-     * @return Occupazione oggetto dell'occupazione richiesta
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Occupazione
+     * Restituisce una singola prenotazione, dato il suo ID.
+     * @param int id della prenotazione
+     * @return Prenotazione oggetto della prenotazione richiesta
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errori nella creazione dell'oggetto Prenotazione
      */
-    public function getOccupazione($id_occupazione): Occupazione {
+    public function getPrenotazione($id_prenotazione): Prenotazione {
         try {
             if(get_class($this->auth_user) !== "Utente") {
-                throw new Eccezione("Il reperimento di un'occupazione può essere svolto solo da un utente registrato.");
+                throw new Eccezione("Il reperimento di una prenotazione può essere svolto solo da un utente registrato.");
             }
 
-            if(!is_int($id_occupazione)) {
-                throw new Eccezione("Parametri di invocazione di getOccupazione errati."); 
+            if(!is_int($id_prenotazione)) {
+                throw new Eccezione("Parametri di invocazione di getPrenotazione errati.");
             }
             $this->db_instance->connect();
-            $procedure_name_and_params = "get_occupazione($id_occupazione)";
-            $res_occupazione = $this->db_instance->queryProcedure($procedure_name_and_params);
+            $procedure_name_and_params = "get_prenotazione($id_prenotazione)";
+            $prenotazione = $this->db_instance->queryProcedure($procedure_name_and_params);
 
-            if(count($res_occupazione) === 0) {
-                throw new Eccezione("Non ci sono occupazioni collegate all'ID fornito.");
+            if(count($prenotazione) === 0) {
+                throw new Eccezione("Non ci sono prenotazioni collegate all'ID fornito.");
             }
 
-            $occupazione = Occupazione::build();
-            $occupazione->setIdOccupazione(intval($res_occupazione[0]["id_occupazione"]));
-            $occupazione->setIdUtente(intval($res_occupazione[0]["utente"]));
-            $occupazione->setIdAnnuncio(intval($res_occupazione[0]["annuncio"]));
-            $occupazione->setNumOspiti(intval($res_occupazione[0]["num_ospiti"]));
-            $occupazione->setDataInizio($res_occupazione[0]["data_inizio"]);
-            $occupazione->setDataFine($res_occupazione[0]["data_fine"]);
+            $prenotazione = Prenotazione::build();
+            $prenotazione->setIdPrenotazione(intval($prenotazione[0]["id_prenotazione"]));
+            $prenotazione->setIdUtente(intval($prenotazione[0]["utente"]));
+            $prenotazione->setIdAnnuncio(intval($prenotazione[0]["annuncio"]));
+            $prenotazione->setNumOspiti(intval($prenotazione[0]["num_ospiti"]));
+            $prenotazione->setDataInizio($prenotazione[0]["data_inizio"]);
+            $prenotazione->setDataFine($prenotazione[0]["data_fine"]);
 
-            return $occupazione;
+            return $prenotazione;
         } catch(Eccezione $exc) {
             throw $exc;
         }
@@ -398,31 +398,31 @@ class Frent {
     }
     
     /**
-     * Inserisce una nuova occupazione per un annuncio, verificando la possibilità prima di effettuare l'operazione e marchiandola come prenotazione se fatta da un guest e non dall'host.
-     * @param  Occupazione occupazione da inserire nel database
-     * @return int ID dell'occupazione appena inserita se tutto è andato a buon fine
+     * Inserisce una nuova prenotazione per un annuncio, verificando la possibilità prima di effettuare l'operazione e marchiandola come prenotazione se fatta da un guest e non dall'host.
+     * @param  Prenotazione prenotazione da inserire nel database
+     * @return int ID della prenotazione appena inserita se tutto è andato a buon fine
      * @return int -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
-     * @return int -2 se ci sono altre occupazioni nel range di date passate in input
+     * @return int -2 se ci sono altre prenotazioni nel range di date passate in input
      * @return int -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function insertOccupazione($occupazione): int {
+    public function insertPrenotazione($prenotazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
-                throw new Eccezione("L'inserimento di un'occupazione può essere svolto solo da un utente registrato.");
+                throw new Eccezione("L'inserimento di una prenotazione può essere svolto solo da un utente registrato.");
             }
           
-            if(!checkDateBeginAndEnd($occupazione->getDataInizio(), $occupazione->getDataFine())) {
+            if(!checkDateBeginAndEnd($prenotazione->getDataInizio(), $prenotazione->getDataFine())) {
                 throw new Eccezione("Non è possibile inserire una data di fine antecedente o uguale alla data di inizio");
             }
 
             $this->db_instance->connect();
-            $function_name_and_params = "insert_occupazione(
+            $function_name_and_params = "insert_prenotazione(
                 " . $this->auth_user->getIdUtente() . ",
-                " . $occupazione->getIdAnnuncio() . ",
-                " . $occupazione->getNumOspiti() . ",
-                date('" . $occupazione->getDataInizio() . "'),
-                date('" . $occupazione->getDataFine() . "')
+                " . $prenotazione->getIdAnnuncio() . ",
+                " . $prenotazione->getNumOspiti() . ",
+                date('" . $prenotazione->getDataInizio() . "'),
+                date('" . $prenotazione->getDataFine() . "')
             )";
 
             return intval($this->db_instance->queryFunction($function_name_and_params));
@@ -547,24 +547,24 @@ class Frent {
     }
 
     /**
-     * Rimuove un'occupazione da un'annuncio (liberandone la disponibilità), dato il suo ID:
-     * @param int $id_occupazione id dell'occupazione di un annuncio
-     * @return int 0 se l'occupazione è stata correttamente eliminata
-     * @return int -1 se l'occupazione non è eliminabile in quanto prenotazione presente o passata
-     * @return int -2 in caso l'occupazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
+     * Rimuove una prenotazione da un'annuncio (liberandone la disponibilità), dato il suo ID:
+     * @param int $id_prenotazione id della prenotazione di un annuncio
+     * @return int 0 se la prenotazione è stata correttamente eliminata
+     * @return int -1 se la prenotazione non è eliminabile in quanto prenotazione presente o passata
+     * @return int -2 in caso la prenotazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
-    public function deleteOccupazione($id_occupazione): int {
+    public function deletePrenotazione($id_prenotazione): int {
         try {
             if(get_class($this->auth_user) !== "Utente") {
-                throw new Eccezione("La cancellazione di un'occupazione di un annuncio può essere svolta solo da un utente registrato.");
+                throw new Eccezione("La cancellazione di una prenotazione di un annuncio può essere svolta solo da un utente registrato.");
             }
-            if(!is_int($id_occupazione)) {
-                throw new Eccezione("Parametri di invocazione di deleteOccupazione errati.");
+            if(!is_int($id_prenotazione)) {
+                throw new Eccezione("Parametri di invocazione di deletePrenotazione errati.");
             }
             
             $this->db_instance->connect();
-            $function_name_and_params = "delete_occupazione($id_occupazione)";
+            $function_name_and_params = "delete_prenotazione($id_prenotazione)";
     
             return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
@@ -575,8 +575,8 @@ class Frent {
     /**
      * Rimuove dal database l'utente collegato, se possibile. E' compito del chiamante occuparsi del logout dell'utente dopo la rimozione effettiva.
      * @return int 0 in caso di rimozione avvenuta con successo
-     * @return int -1 in caso ci siano occupazioni correnti
-     * @return int -2 in caso ci siano annunci di cui è guest con occupazioni correnti o future
+     * @return int -1 in caso ci siano prenotazioni correnti
+     * @return int -2 in caso ci siano annunci di cui è guest con prenotazioni correnti o future
      * @return int -3 in caso l'operazione di delete abbia fallito (per esempio gli è stato passato un id non valido)
      * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database
      */
@@ -768,8 +768,8 @@ class Frent {
 
     /**
      * Restituisce la lista delle prenotazione presenti, passate e future, effettuate dall'utente collegato al sistema
-     * @return array di oggetti di tipo Occupazione
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Occupazione
+     * @return array di oggetti di tipo Prenotazione
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Prenotazione
      */
     public function getPrenotazioniGuest(): array {
         try {
@@ -781,14 +781,14 @@ class Frent {
             $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
-                $occupazione = Occupazione::build();
-                $occupazione->setIdOccupazione(intval($assoc_prenotazione['id_occupazione']));
-                $occupazione->setIdUtente(intval($assoc_prenotazione['utente']));
-                $occupazione->setIdAnnuncio(intval($assoc_prenotazione['annuncio']));
-                $occupazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
-                $occupazione->setDataInizio($assoc_prenotazione['data_inizio']);
-                $occupazione->setDataFine($assoc_prenotazione['data_fine']);
-                $lista_prenotazioni[$i] = $occupazione; // sostituzione in-place
+                $prenotazione = Prenotazione::build();
+                $prenotazione->setIdPrenotazione(intval($assoc_prenotazione['id_prenotazione']));
+                $prenotazione->setIdUtente(intval($assoc_prenotazione['utente']));
+                $prenotazione->setIdAnnuncio(intval($assoc_prenotazione['annuncio']));
+                $prenotazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
+                $prenotazione->setDataInizio($assoc_prenotazione['data_inizio']);
+                $prenotazione->setDataFine($assoc_prenotazione['data_fine']);
+                $lista_prenotazioni[$i] = $prenotazione; // sostituzione in-place
             }
     
             return $lista_prenotazioni;
@@ -830,7 +830,7 @@ class Frent {
     /**
      * Restituisce la lista degli annunci ancora da approvare da parte di un amministratore.
      * @return array restituisce un array di istanze della classe Annuncio che devono essere approvati
-     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Occupazione
+     * @throws Eccezione in caso di parametri invalidi, errori nella connessione al database, errore nella creazione degli oggetti Prenotazione
      */
     public function adminGetAnnunci(): array {
         if(get_class($this->auth_user) !== "Amministratore") {

@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])){
 if (isset($_GET["id"])){
     $idCommento = intval($_GET["id"]);
     // sfruttando il fatto che la prenotazione ha lo stesso id del commento
-    if ($_SESSION["user"]->getIdUtente() !== $frent->getOccupazione($idCommento)->getIdUtente()){
+    if ($_SESSION["user"]->getIdUtente() !== $frent->getPrenotazione($idCommento)->getIdUtente()){
         $_SESSION["msg"] = htmlentities("Non hai il permesso per effettuare quest'operazione!");
         header("Location: ./error_page.php");
     }

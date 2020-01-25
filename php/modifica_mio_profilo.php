@@ -18,7 +18,7 @@ $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html")
 $user = $_SESSION["user"];
 
 // aggiunta dati utente
-$pagina = str_replace("<PATH/>", "../uploads/" . $user->getImgProfilo(), $pagina);
+$pagina = str_replace("<PATH/>", uploadsFolder() . $user->getImgProfilo(), $pagina);
 
 // estrazione informazioni su data nascita dell'utente
 $dataNascita = DateTime::createFromFormat("Y-m-d", $user->getDataNascita());
