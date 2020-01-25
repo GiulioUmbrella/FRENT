@@ -243,7 +243,8 @@ html body .aiuti_alla_navigazione {
     border-radius: 1em;
     margin: 0.5em 0 1em 0;
    /* min-height: 14em; /*In caso ci sia una foto*/
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .corpo_lista img {
