@@ -529,22 +529,22 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `user_name`, `mail`, `password`, `data_nascita`, `img_profilo`, `telefono`) VALUES
-(1, 'Jolanda', 'Rossi', 'jolanda.rossi', 'jolanda.rossi@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(2, 'Melchiorre', 'Ferrari', 'melchiorre.ferrari', 'melchiorre.ferrari@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(3, 'Cirino', 'Russo', 'cirino.russo', 'cirino.russo@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(4, 'Ignazio', 'Bianchi', 'ignazio.bianchi', 'ignazio.bianchi@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(5, 'Elio', 'Romano', 'elio.romano', 'elio.romano@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(6, 'Gianni', 'Gallo', 'gianni.gallo', 'gianni.gallo@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(7, 'Amore', 'Costa', 'amore.costa', 'amore.costa@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(8, 'Marisa', 'Fontana', 'marisa.fontana', 'marisa.fontana@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(9, 'Dania', 'Conti', 'dania.conti', 'dania.conti@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(10, 'Alberico', 'Esposito', 'alberico.esposito', 'alberico.esposito@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(11, 'Lodovico', 'Ricci', 'lodovico.ricci', 'lodovico.ricci@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(12, 'Marino', 'Bruno', 'marino.bruno', 'marino.bruno@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(13, 'Nella', 'Rizzo', 'nella.rizzo', 'nella.rizzo@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(14, 'Pompeo', 'Moretti', 'pompeo.moretti', 'pompeo.moretti@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(15, 'Alfonso', 'Marino', 'alfonso.marino', 'alfonso.marino@mail.it', 'password', '1998-01-01', '../uploads/defaultImages/imgProfiloDefault.png', '+390000000000'),
-(16, 'Marco', 'Ferrati', 'mferrati', 'user@gmail.com', 'user', '2020-02-08', '../uploads/defaultImages/imgProfiloDefault.png', '+391234567890'),
+(1, 'Jolanda', 'Rossi', 'jolanda.rossi', 'jolanda.rossi@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(2, 'Melchiorre', 'Ferrari', 'melchiorre.ferrari', 'melchiorre.ferrari@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(3, 'Cirino', 'Russo', 'cirino.russo', 'cirino.russo@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(4, 'Ignazio', 'Bianchi', 'ignazio.bianchi', 'ignazio.bianchi@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(5, 'Elio', 'Romano', 'elio.romano', 'elio.romano@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(6, 'Gianni', 'Gallo', 'gianni.gallo', 'gianni.gallo@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(7, 'Amore', 'Costa', 'amore.costa', 'amore.costa@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(8, 'Marisa', 'Fontana', 'marisa.fontana', 'marisa.fontana@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(9, 'Dania', 'Conti', 'dania.conti', 'dania.conti@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(10, 'Alberico', 'Esposito', 'alberico.esposito', 'alberico.esposito@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(11, 'Lodovico', 'Ricci', 'lodovico.ricci', 'lodovico.ricci@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(12, 'Marino', 'Bruno', 'marino.bruno', 'marino.bruno@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(13, 'Nella', 'Rizzo', 'nella.rizzo', 'nella.rizzo@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(14, 'Pompeo', 'Moretti', 'pompeo.moretti', 'pompeo.moretti@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(15, 'Alfonso', 'Marino', 'alfonso.marino', 'alfonso.marino@mail.it', 'password', '1998-01-01', 'defaultImages/imgProfiloDefault.png', '+390000000000'),
+(16, 'Marco', 'Ferrati', 'mferrati', 'user@gmail.com', 'user', '2020-02-08', 'defaultImages/imgProfiloDefault.png', '+391234567890'),
 (17, 'Utente', 'Generico', 'genericUser', 'utente.generico@mail.com', 'password', '1992-05-02', 'defaultImages/imgProfiloDefault.png', '3401234567');
 
 --
