@@ -222,19 +222,19 @@ class Frent {
             }
             $this->db_instance->connect();
             $procedure_name_and_params = "get_prenotazione($id_prenotazione)";
-            $prenotazione = $this->db_instance->queryProcedure($procedure_name_and_params);
+            $assoc_prenotazione = $this->db_instance->queryProcedure($procedure_name_and_params);
 
-            if(count($prenotazione) === 0) {
+            if(count($assoc_prenotazione) === 0) {
                 throw new Eccezione("Non ci sono prenotazioni collegate all'ID fornito.");
             }
 
             $prenotazione = Prenotazione::build();
-            $prenotazione->setIdPrenotazione(intval($prenotazione[0]["id_prenotazione"]));
-            $prenotazione->setIdUtente(intval($prenotazione[0]["utente"]));
-            $prenotazione->setIdAnnuncio(intval($prenotazione[0]["annuncio"]));
-            $prenotazione->setNumOspiti(intval($prenotazione[0]["num_ospiti"]));
-            $prenotazione->setDataInizio($prenotazione[0]["data_inizio"]);
-            $prenotazione->setDataFine($prenotazione[0]["data_fine"]);
+            $prenotazione->setIdPrenotazione(intval($assoc_prenotazione[0]["id_prenotazione"]));
+            $prenotazione->setIdUtente(intval($assoc_prenotazione[0]["utente"]));
+            $prenotazione->setIdAnnuncio(intval($assoc_prenotazione[0]["annuncio"]));
+            $prenotazione->setNumOspiti(intval($assoc_prenotazione[0]["num_ospiti"]));
+            $prenotazione->setDataInizio($assoc_prenotazione[0]["data_inizio"]);
+            $prenotazione->setDataFine($assoc_prenotazione[0]["data_fine"]);
 
             return $prenotazione;
         } catch(Eccezione $exc) {
