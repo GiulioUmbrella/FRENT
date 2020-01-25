@@ -50,9 +50,13 @@ try {
         $titolo = $annuncio->getTitolo();
         $id = $annuncio->getIdAnnuncio();
         $path = uploadsFolder() . $annuncio->getImgAnteprima();
-        $content .= "<li class=\"elemento_sei_pannelli\">
-                    <a href='./dettagli_annuncio.php?id=$id' >$titolo<img src=\"$path\"
-                alt=\"".$annuncio->getDescAnteprima()."\"/></a></li>";
+        $item = file_get_contents("./components/item_index_annuncio.html");
+        $item = str_replace("</ID>", $annuncio->getIdAnnuncio(),$item);
+        $item = str_replace("</TITOLO>", $annuncio->getTitolo(),$item);
+        $item = str_replace("</PATH>", $annuncio->getImgAnteprima(),$item);
+        $item = str_replace("</DESC>", $annuncio->getDescAnteprima(),$item);
+        
+        $content .=  $item;
     }
     $numOspiti = 1;
     $dataInizio = "";
