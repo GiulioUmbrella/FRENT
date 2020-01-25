@@ -342,6 +342,7 @@ html body .aiuti_alla_navigazione {
 
 .lista_link_gestione {
     line-height: 2.5em;
+    display: flex;
 }
 
 .lista_link_gestione li {
