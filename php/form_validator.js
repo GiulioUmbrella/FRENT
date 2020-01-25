@@ -120,7 +120,7 @@ function check_immagini(input) {
 
 function check_password_first(input) {
     const val = input.value.trim();
-    const reg = new RegExp("[a-zA-Z0-9]{3,48}");
+    const reg = new RegExp("^[a-zA-Z0-9]{3,48}$");
     if (reg.test(val)) {
         togli_errore(input);
         return true;
