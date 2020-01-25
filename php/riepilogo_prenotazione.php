@@ -59,7 +59,7 @@ if (!isset($_GET["id"]) && !isset($_POST["id_prenotazione"])) {
 $id_prenotazione = isset($_GET["id"]) ? intval($_GET["id"]) : intval($_POST["id_prenotazione"]);
 
 try {
-    $prenotazioni = $frent->getOccupazione($id_prenotazione);
+    $prenotazioni = $frent->getPrenotazione($id_prenotazione);
     $annuncio = $frent->getAnnuncio($prenotazioni->getIdAnnuncio());
     $host = $frent->getUser($annuncio->getIdHost());
     
@@ -106,7 +106,7 @@ try {
     }
 
     $pagina = str_replace("<COMMENTO/>", $commentoHTML, $pagina);
-    $pagina = str_replace("<IDPRENOTAZIONE/>", $prenotazioni->getIdOccupazione(), $pagina);
+    $pagina = str_replace("<IDPRENOTAZIONE/>", $prenotazioni->getIdPrenotazione(), $pagina);
     $pagina = str_replace("<DATAINIZIO/>", $prenotazioni->getDataInizio(), $pagina);
     $pagina = str_replace("<DATAFINE/>", $prenotazioni->getDataFine(), $pagina);
     $pagina = str_replace("<MAILPROPRIETARIO/>", $host->getMail(), $pagina);

@@ -14,7 +14,7 @@ try{
             $pagina = str_replace("<IDANNUNCIO/>", $annuncio->getIdAnnuncio(),$pagina);
             $user = $_SESSION["user"];
             
-            $prenotazioni = $frent->getOccupazioniAnnuncio($annuncio->getIdAnnuncio());
+            $prenotazioni = $frent->getPrenotazioniAnnuncio($annuncio->getIdAnnuncio());
             
             $data_corrente = date("Y-m-d");
             

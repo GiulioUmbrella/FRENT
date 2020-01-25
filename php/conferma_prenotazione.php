@@ -20,7 +20,7 @@ if (isset($_SESSION["annuncio"]) and isset($_SESSION["dataInizio"]) and isset($_
     $pagina = str_replace("<NUMOSPITI/>", $_SESSION["numOspiti"], $pagina);
     $durata = (strtotime($_SESSION["dataFine"])- strtotime($_SESSION["dataInizio"]))/(24*3600);
     $pagina = str_replace("<TOTALE/>", "&euro; " . (intval($_SESSION["numOspiti"]) * $annuncio->getPrezzoNotte() * ($durata)), $pagina);
-    $prenotazione = Occupazione::build();
+    $prenotazione = Prenotazione::build();
     $prenotazione->setIdAnnuncio($annuncio->getIdAnnuncio());
     $prenotazione->setDataInizio($_SESSION["dataInizio"]);
     $prenotazione->setDataFine($_SESSION["dataFine"]);

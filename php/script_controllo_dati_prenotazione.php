@@ -1,7 +1,7 @@
 <?php
 require_once "./CheckMethods.php";
 require_once "class_Annuncio.php";
-require_once "class_Occupazione.php";
+require_once "class_Prenotazione.php";
 require_once "class_Utente.php";
 require_once "class_Eccezione.php";
 require_once "./load_Frent.php";
@@ -13,7 +13,7 @@ if (!isset($_SESSION["annuncio"])) {
     header("Location: ./index.php");
 }
 $pagina = file_get_contents("./components/conferma_prenotazione.html");
-$occupazione = Occupazione::build();
+$prenotazione = Prenotazione::build();
 if (isset($_POST["conferma_prenotazione"])) {
     $id_prenotazione=-1;
     try {
@@ -29,13 +29,13 @@ if (isset($_POST["conferma_prenotazione"])) {
             $_SESSION["dataFine"] = $_POST["dataFine"];
             $_SESSION["dataInizio"] = $_POST["dataInizio"];
             $_SESSION["numOspiti"] = $_POST["numOspiti"];
-            $_SESSION["occupazione"] = $occupazione;
-            $occupazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
-            $occupazione->setNumOspiti(intval($_POST["numOspiti"]));
-            $occupazione->setDataInizio($_POST["dataInizio"]);
-            $occupazione->setDataFine($_POST["dataFine"]);
-            $occupazione->setIdUtente($_SESSION["user"]->getIdUtente());
-            $id_prenotazione = $frent->insertOccupazione($occupazione);
+            $_SESSION["prenotazione"] = $prenotazione;
+            $prenotazione->setIdAnnuncio($_SESSION["annuncio"]->getIdAnnuncio());
+            $prenotazione->setNumOspiti(intval($_POST["numOspiti"]));
+            $prenotazione->setDataInizio($_POST["dataInizio"]);
+            $prenotazione->setDataFine($_POST["dataFine"]);
+            $prenotazione->setIdUtente($_SESSION["user"]->getIdUtente());
+            $id_prenotazione = $frent->insertPrenotazione($prenotazione);
             echo $id_prenotazione;
             
             

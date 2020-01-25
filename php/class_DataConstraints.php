@@ -45,9 +45,9 @@ class DataConstraints {
     );
 
     /**
-     * Tabella occupazioni: dimensioni massime dei campi
+     * Tabella prenotazioni: dimensioni massime dei campi
      */
-    const occupazioni = array(
+    const prenotazioni = array(
         "num_ospiti" => 99 // int
     );
 
