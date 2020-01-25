@@ -54,7 +54,10 @@ class Frent {
      */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
-            if(!is_int($numOspiti) || !checkDateBeginAndEnd($dataInizio, $dataFine)) {
+            if(!is_int($numOspiti) ||
+                !checkDateBeginAndEnd($dataInizio, $dataFine) ||
+                !checkStringNoNumber($citta)
+            ) {
                 throw new Eccezione("Parametri di invocazione di ricercaAnnunci errati.");
             }
             $this->db_instance->connect();
@@ -101,9 +104,11 @@ class Frent {
      */
     public function registrazione($nome, $cognome, $username, $mail, $password, $dataNascita, $imgProfilo, $numTelefono): int {
         try {
+            $this->db_instance->connect();
+
             $utente = Utente::build();
-            $utente->setNome($nome);
-            $utente->setCognome($cognome);
+            $utente->setNome($this->db_instance->escapeString($nome));
+            $utente->setCognome($this->db_instance->escapeString($cognome));
             $utente->setUserName($username);
             $utente->setMail($mail);
             $utente->setDataNascita($dataNascita);
@@ -111,7 +116,6 @@ class Frent {
             $utente->setTelefono($numTelefono);
             $utente->setPassword($password);
 
-            $this->db_instance->connect();
             $function_name_and_params = "registrazione(
                 \"" . $utente->getNome() . "\",
                 \"" . $utente->getCognome() . "\",
@@ -138,7 +142,7 @@ class Frent {
      */
     public function login($mail, $password): Utente {
         try {
-            if(!is_string($mail) || !is_string($password)) {
+            if(!checkIsValidMail($mail)) {
                 throw new Eccezione("Parametri di invocazione di login errati.");
             }
             $this->db_instance->connect();
@@ -610,20 +614,20 @@ class Frent {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La cancellazione di una foto di un annuncio può essere svolta solo da un utente registrato.");
             }
-            
+            $this->db_instance->connect();
+
             // provo a creare un oggetto così ho implicitamente un controllo sui dati passati
             $annuncio = Annuncio::build();
             $annuncio->setIdAnnuncio($id);
-            $annuncio->setTitolo($titolo);
-            $annuncio->setDescrizione($descrizione);
+            $annuncio->setTitolo($this->db_instance->escapeString($titolo));
+            $annuncio->setDescrizione($this->db_instance->escapeString($descrizione));
             $annuncio->setImgAnteprima($img_anteprima);
-            $annuncio->setDescAnteprima($desc_anteprima);
-            $annuncio->setIndirizzo($indirizzo);
-            $annuncio->setCitta($citta);
+            $annuncio->setDescAnteprima($this->db_instance->escapeString($desc_anteprima));
+            $annuncio->setIndirizzo($this->db_instance->escapeString($indirizzo));
+            $annuncio->setCitta($this->db_instance->escapeString($citta));
             $annuncio->setMaxOspiti($max_ospiti);
             $annuncio->setPrezzoNotte($prezzo_notte);
 
-            $this->db_instance->connect();
             $function_name_and_params = "edit_annuncio(
                 " . $annuncio->getIdAnnuncio() . ",
                 \"" . $annuncio->getTitolo() . "\",
@@ -657,14 +661,14 @@ class Frent {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La modifica di un commento può essere svolta solo da un utente registrato.");
             }
+            $this->db_instance->connect();
             
             $cmt = Commento::build();
             $cmt->setIdPrenotazione($id);
-            $cmt->setTitolo($titolo);
-            $cmt->setCommento($commento);
+            $cmt->setTitolo($this->db_instance->escapeString($titolo));
+            $cmt->setCommento($this->db_instance->escapeString($commento));
             $cmt->setValutazione($valutazione);
 
-            $this->db_instance->connect();
             $function_name_and_params = "edit_commento(
                 " . $cmt->getIdPrenotazione() . ",
                 \"" . $cmt->getTitolo() . "\",
@@ -697,10 +701,11 @@ class Frent {
             if(get_class($this->auth_user) !== "Utente") {
                 throw new Eccezione("La modifica dei dati della propria utenza può essere svolta solo da un utente registrato.");
             }
+            $this->db_instance->connect();
 
             $utente = Utente::build();
-            $utente->setNome($nome);
-            $utente->setCognome($cognome);
+            $utente->setNome($this->db_instance->escapeString($nome));
+            $utente->setCognome($this->db_instance->escapeString($cognome));
             $utente->setUserName($username);
             $utente->setMail($mail);
             $utente->setDataNascita($datanascita);
@@ -708,7 +713,6 @@ class Frent {
             $utente->setTelefono($telefono);
             $utente->setPassword($password);
 
-            $this->db_instance->connect();
             $function_name_and_params = "edit_user(
                 " . $this->auth_user->getIdUtente() . ",
                 \"" . $utente->getNome() . "\",
@@ -855,7 +859,7 @@ class Frent {
      */
     public function adminLogin($mail, $password): Amministratore {
         try {
-            if(!is_string($mail) || !is_string($password)) {
+            if(!checkIsValidMail($mail)) {
                 throw new Eccezione("Parametri di invocazione di adminLogin errati.");
             }
             $this->db_instance->connect();

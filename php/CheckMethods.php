@@ -42,12 +42,11 @@ function checkStringMinLen($str, $len): bool{
 }
 
 /**
- * controlla se il valore $date contiene una data valida secondo il formato specificato.
+ * controlla se il valore $date contiene una data valida secondo il formato yyyy-mm-dd.
  * @param string $date la stringa che dovrebbe contenere la data.
- * @param string $format il formato in cui è rappresentato la data.
  * @return bool restituisce true sse $date è una data valida rispetto al formato specificato.
  */
-function checkIsValidDate($date, $format="Y-m-d"):bool {
+function checkIsValidDate($date): bool {
     $str = explode("-",$date);
     if (count($str)!=3)
         return false;
@@ -59,8 +58,8 @@ function checkIsValidDate($date, $format="Y-m-d"):bool {
  * @param string $str è la stringa da controllare
  * @return bool restituisce true sse la stringa non contiene nessun carattere numerico.
  */
-function checkStringNoNumber($str):bool {
-    return is_string($str) and  preg_match('~^[\p{L}\p{Z}]+$~u', $str);
+function checkStringNoNumber($str): bool {
+    return is_string($str) and !preg_match("/[0-9]+/", $str); // la regex restituisce true se trova numeri, false se non li trova: io voglio che non li trovi
 }
 
 /**
