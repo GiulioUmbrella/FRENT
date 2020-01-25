@@ -415,10 +415,12 @@ function validazione_form_login() {
 
 function validazione_form_aggiungi_annuncio() {
     const input_titolo = document.getElementById("titolo");
+    const input_img_anteprima = document.getElementById("anteprima");
 
     const res_titolo = check_titoloAnnuncio(input_titolo);
+    const res_img_anteprima = check_immagini(input_img_anteprima);
 
-    return res_titolo && validazione_form_modifica_annuncio();
+    return res_titolo && res_img_anteprima && validazione_form_modifica_annuncio();
 
 }
 
@@ -426,7 +428,6 @@ function validazione_form_aggiungi_annuncio() {
 function validazione_form_modifica_annuncio() {
     const input_descrizione = document.getElementById("descrizione");
     const input_max_ospiti = document.getElementById("max_ospiti");
-    const input_img_anteprima = document.getElementById("anteprima");
     const input_desc_anteprima = document.getElementById("desc_anteprima");
     const input_prezzoNotte = document.getElementById("prezzo_notte");
     const input_indirizzo = document.getElementById("indirizzo");
@@ -434,12 +435,11 @@ function validazione_form_modifica_annuncio() {
 
     const res_descrizione = check_descrizione(input_descrizione);
     const res_maxOspiti = check_numOspiti(input_max_ospiti);
-    const res_img_anteprima = check_immagini(input_img_anteprima);
     const res_desc_anteprima = check_descrizione_foto(input_desc_anteprima);
     const res_prezzoNotte = check_prezzo_notte(input_prezzoNotte);
     const res_indirizzo = check_indirizzo(input_indirizzo);
     const res_citta = check_citta_ma_errore_sotto(input_citta);
-    return res_desc_anteprima && res_descrizione && res_img_anteprima && res_maxOspiti && res_prezzoNotte &&
+    return res_desc_anteprima && res_descrizione && res_maxOspiti && res_prezzoNotte &&
         res_indirizzo && res_citta;
 }
 
