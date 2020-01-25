@@ -1,4 +1,4 @@
-/*Funzione che permette la modifca di un annuncio
+/*Funzione che permette la modifica di un annuncio
 Cosa restituisce:
   ID dell'annuncio modificato
   -1 in caso di errori

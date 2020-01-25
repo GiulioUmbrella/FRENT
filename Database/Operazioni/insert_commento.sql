@@ -1,5 +1,5 @@
 /*Funzione che permette l'inserimento di un commento ad una prenotazione
-PRE: _prenotazione è l'ID di una prenotazione (occupazione di un guest), gli altri parametri sono validi
+PRE: _prenotazione è l'ID di una prenotazione, gli altri parametri sono validi
 Cosa restituisce:
   ID del commento appena inserito se l'inserimento è andato a buon fine
   -1 in caso di prenotazione inesistente

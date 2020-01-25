@@ -12,7 +12,7 @@ BEGIN
     AND A.max_ospiti >= _num_ospiti
     AND A.id_annuncio NOT IN (
         SELECT annuncio
-        FROM occupazioni
+        FROM prenotazioni
         WHERE (
           (di >= data_inizio AND di <= data_fine) OR
           (df >= data_inizio AND df <= data_fine) OR

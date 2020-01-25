@@ -1,5 +1,5 @@
 /*Funzione che elimina un commento
-PRE: _id è l'ID di una prenotazione
+PRE: _id_prenotazione è l'ID di una prenotazione
 Cosa restituisce:
   0 in caso il commento venga eliminato correttamente
   -1 altrimenti

@@ -185,12 +185,12 @@ class Frent {
                 throw new Eccezione("Parametri di invocazione di getPrenotazioniAnnuncio errati.");
             }
             $this->db_instance->connect();
-            $procedure_name_and_params = "get_occupazioni_annuncio($id_annuncio)";
+            $procedure_name_and_params = "get_prenotazioni_annuncio($id_annuncio)";
             $lista_prenotazioni = $this->db_instance->queryProcedure($procedure_name_and_params);
     
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
                 $prenotazione = Prenotazione::build();
-                $prenotazione->setIdPrenotazione(intval($assoc_prenotazione['id_occupazione']));
+                $prenotazione->setIdPrenotazione(intval($assoc_prenotazione['id_prenotazione']));
                 $prenotazione->setIdUtente(intval($assoc_prenotazione['utente']));
                 $prenotazione->setIdAnnuncio($id_annuncio);
                 $prenotazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));
@@ -221,7 +221,7 @@ class Frent {
                 throw new Eccezione("Parametri di invocazione di getPrenotazione errati.");
             }
             $this->db_instance->connect();
-            $procedure_name_and_params = "get_occupazione($id_prenotazione)";
+            $procedure_name_and_params = "get_prenotazione($id_prenotazione)";
             $prenotazione = $this->db_instance->queryProcedure($procedure_name_and_params);
 
             if(count($prenotazione) === 0) {
@@ -229,7 +229,7 @@ class Frent {
             }
 
             $prenotazione = Prenotazione::build();
-            $prenotazione->setIdPrenotazione(intval($prenotazione[0]["id_occupazione"]));
+            $prenotazione->setIdPrenotazione(intval($prenotazione[0]["id_prenotazione"]));
             $prenotazione->setIdUtente(intval($prenotazione[0]["utente"]));
             $prenotazione->setIdAnnuncio(intval($prenotazione[0]["annuncio"]));
             $prenotazione->setNumOspiti(intval($prenotazione[0]["num_ospiti"]));
@@ -417,7 +417,7 @@ class Frent {
             }
 
             $this->db_instance->connect();
-            $function_name_and_params = "insert_occupazione(
+            $function_name_and_params = "insert_prenotazione(
                 " . $this->auth_user->getIdUtente() . ",
                 " . $prenotazione->getIdAnnuncio() . ",
                 " . $prenotazione->getNumOspiti() . ",
@@ -564,7 +564,7 @@ class Frent {
             }
             
             $this->db_instance->connect();
-            $function_name_and_params = "delete_occupazione($id_prenotazione)";
+            $function_name_and_params = "delete_prenotazione($id_prenotazione)";
     
             return intval($this->db_instance->queryFunction($function_name_and_params));
         } catch(Eccezione $exc) {
@@ -782,7 +782,7 @@ class Frent {
     
             foreach($lista_prenotazioni as $i => $assoc_prenotazione) {
                 $prenotazione = Prenotazione::build();
-                $prenotazione->setIdPrenotazione(intval($assoc_prenotazione['id_occupazione']));
+                $prenotazione->setIdPrenotazione(intval($assoc_prenotazione['id_prenotazione']));
                 $prenotazione->setIdUtente(intval($assoc_prenotazione['utente']));
                 $prenotazione->setIdAnnuncio(intval($assoc_prenotazione['annuncio']));
                 $prenotazione->setNumOspiti(intval($assoc_prenotazione['num_ospiti']));

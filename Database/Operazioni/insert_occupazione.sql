@@ -1,24 +1,24 @@
 /*Funzione che permette la creazione di una nuova funzione controllando la validità dei dati inseriti
 Cosa restituisce:
-  ID dell'occupazione appena inserita se tutto è andato a buon fine
+  ID dell'prenotazione appena inserita se tutto è andato a buon fine
   -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
-  -2 se ci sono altre occupazioni nel range di date passate in input
+  -2 se ci sono altre prenotazioni nel range di date passate in input
   -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
   -4 se l'host sta tentando di prenotare presso un suo annuncio
 */
-DROP FUNCTION IF EXISTS insert_occupazione;
+DROP FUNCTION IF EXISTS insert_prenotazione;
 DELIMITER |
-CREATE FUNCTION insert_occupazione(_utente int, _annuncio int, _numospiti int(2), di date, df date) RETURNS INT
+CREATE FUNCTION insert_prenotazione(_utente int, _annuncio int, _numospiti int(2), di date, df date) RETURNS INT
 BEGIN
     -- controllo correttezza delle date
     IF DATEDIFF(df, di) <= 0 THEN
       RETURN -1;
     END IF;
 
-    -- Controllo presenza altre occupazioni
+    -- Controllo presenza altre prenotazioni
     IF EXISTS (
         SELECT *
-        FROM occupazioni
+        FROM prenotazioni
         WHERE annuncio = _annuncio AND (
           (di >= data_inizio AND di <= data_fine) OR
           (df >= data_inizio AND df <= data_fine) OR
@@ -33,7 +33,7 @@ BEGIN
        RETURN -4;
     END IF;
 
-    INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
+    INSERT INTO prenotazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
     VALUES (_utente, _annuncio, _numospiti, di, df);
 
     IF ROW_COUNT() = 0 THEN -- Modifica non effettuata

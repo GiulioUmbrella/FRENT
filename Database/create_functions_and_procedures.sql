@@ -72,16 +72,16 @@ BEGIN
 
   SET curdate = CURDATE();
   IF _id_annuncio IN (SELECT annuncio
-                      FROM occupazioni
+                      FROM prenotazioni
                       WHERE (data_inizio <= curdate AND data_fine >= curdate) OR data_inizio > curdate) THEN
     RETURN -1;
   END IF;
 
   DELETE FROM commenti
-  WHERE prenotazione IN ( SELECT id_occupazione
-                          FROM occupazioni
+  WHERE prenotazione IN ( SELECT id_prenotazione
+                          FROM prenotazioni
                           WHERE annuncio = _id_annuncio);
-  -- in occupazioni il campo annuncio viene messo a null dalla politica di reazione
+  -- in prenotazioni il campo annuncio viene messo a null dalla politica di reazione
   DELETE FROM annunci WHERE id_annuncio = _id_annuncio;
 
   IF ROW_COUNT() = 0 THEN
@@ -111,28 +111,28 @@ BEGIN
 END |
 DELIMITER ;
 
-/*Funzione che si occupa di eliminare un occupazione previo controlli
+/*Funzione che si occupa di eliminare un prenotazione previo controlli
 Cosa restituisce:
-  0 se l'occupazione è stata correttamente eliminata
-  -1 se l'occupazione non è eliminabile in quanto prenotazione presente o passata
-  -2 in caso l'occupazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
+  0 se l'prenotazione è stata correttamente eliminata
+  -1 se l'prenotazione non è eliminabile in quanto prenotazione presente o passata
+  -2 in caso l'prenotazione non sia stata eliminata (per esempio per errori nelle chiavi esterne)
 */
-DROP FUNCTION IF EXISTS delete_occupazione;
+DROP FUNCTION IF EXISTS delete_prenotazione;
 DELIMITER |
-CREATE FUNCTION delete_occupazione( _id_occupazione int) RETURNS INT
+CREATE FUNCTION delete_prenotazione( _id_prenotazione int) RETURNS INT
 BEGIN
   DECLARE d_inizio date;
 
   SELECT data_inizio INTO d_inizio
-  FROM occupazioni
-  WHERE id_occupazione = _id_occupazione;
+  FROM prenotazioni
+  WHERE id_prenotazione = _id_prenotazione;
 
   IF CURDATE() >= d_inizio THEN
     RETURN -1;
   END IF;
 
-  DELETE FROM occupazioni
-  WHERE id_occupazione = _id_occupazione;
+  DELETE FROM prenotazioni
+  WHERE id_prenotazione = _id_prenotazione;
 
   IF ROW_COUNT() = 0 THEN
     RETURN -2;
@@ -145,8 +145,8 @@ DELIMITER ;
 /*Funzione per l'eleiminazione di un utente
 Cosa ritorna:
   0 in caso di successo altrimenti:
-  -1 in caso ci siano occupazioni correnti
-  -2 in caso ci siano annuci con occupazioni correnti o future
+  -1 in caso ci siano prenotazioni correnti
+  -2 in caso ci siano annuci con prenotazioni correnti o future
   -3 in caso l'operazione di delete abbia fallito (per esempio gli è stato passato un id non valido)
 */
 DROP FUNCTION IF EXISTS delete_user;
@@ -154,16 +154,16 @@ DELIMITER |
 CREATE FUNCTION delete_user(_id_utente int) RETURNS INT
 BEGIN
 
--- Abort in caso di occupazioni correnti
+-- Abort in caso di prenotazioni correnti
 IF EXISTS (
-    SELECT * FROM occupazioni WHERE utente = _id_utente AND (data_inizio <= CURDATE() AND data_fine >= CURDATE())
+    SELECT * FROM prenotazioni WHERE utente = _id_utente AND (data_inizio <= CURDATE() AND data_fine >= CURDATE())
   ) THEN
   RETURN -1;
 END IF;
 
--- Abort in caso di annunci con occupazioni future o in corso
+-- Abort in caso di annunci con prenotazioni future o in corso
 IF EXISTS (
-  SELECT * FROM occupazioni WHERE annuncio IN (
+  SELECT * FROM prenotazioni WHERE annuncio IN (
     SELECT id_annuncio FROM annunci WHERE host = _id_utente) AND ((data_inizio <= CURDATE() AND data_fine >= CURDATE()) OR (data_inizio >= CURDATE())
   )
 ) THEN
@@ -304,35 +304,35 @@ DELIMITER |
 CREATE PROCEDURE get_commenti_annuncio(id int)
 BEGIN
     SELECT C.*, U.user_name, U.img_profilo 
-    FROM occupazioni O INNER JOIN commenti C ON O.id_occupazione = C.prenotazione
+    FROM prenotazioni O INNER JOIN commenti C ON O.id_prenotazione = C.prenotazione
     INNER JOIN utenti U ON O.utente = U.id_utente
     WHERE O.annuncio = id;
 END |
 DELIMITER ;
 
-/*Procedura per ottenere i dettagli di un'occupazione
+/*Procedura per ottenere i dettagli di un'prenotazione
 PRE: id è l'identificativo di un annuncio
 Restituisce il reocrd relativo all'ID passato come parametro
 */
-DROP PROCEDURE IF EXISTS get_occupazione;
+DROP PROCEDURE IF EXISTS get_prenotazione;
 DELIMITER |
-CREATE PROCEDURE get_occupazione(id int)
+CREATE PROCEDURE get_prenotazione(id int)
 BEGIN
     SELECT *
-    FROM occupazioni
-    WHERE id_occupazione = id;
+    FROM prenotazioni
+    WHERE id_prenotazione = id;
 END |
 DELIMITER ;
 
-/*Procedura che permette di ottenere tutte le occupazioni riguradanti un annuncio
-Restituisce i record relativi alle occupazioni dell'annuncio il cui ID è passato in input
+/*Procedura che permette di ottenere tutte le prenotazioni riguradanti un annuncio
+Restituisce i record relativi alle prenotazioni dell'annuncio il cui ID è passato in input
 */
-DROP PROCEDURE IF EXISTS get_occupazioni_annuncio;
+DROP PROCEDURE IF EXISTS get_prenotazioni_annuncio;
 DELIMITER |
-CREATE PROCEDURE get_occupazioni_annuncio(_id_annuncio int)
+CREATE PROCEDURE get_prenotazioni_annuncio(_id_annuncio int)
 BEGIN
-    SELECT id_occupazione, utente, num_ospiti, data_inizio, data_fine
-    FROM occupazioni
+    SELECT id_prenotazione, utente, num_ospiti, data_inizio, data_fine
+    FROM prenotazioni
     WHERE annuncio = _id_annuncio
     ORDER BY data_inizio;
 END |
@@ -347,9 +347,9 @@ DELIMITER |
 CREATE PROCEDURE get_prenotazioni_guest(id_utente int)
 BEGIN
     SELECT *
-    FROM occupazioni
+    FROM prenotazioni
     WHERE utente = id_utente
-    ORDER BY occupazioni.data_inizio;
+    ORDER BY prenotazioni.data_inizio;
 END |
 DELIMITER ;
 
@@ -409,7 +409,7 @@ END |
 DELIMITER ;
 
 /*Funzione che permette l'inserimento di un commento ad una prenotazione
-PRE: _prenotazione è l'ID di una prenotazione (occupazione di un guest), gli altri parametri sono validi
+PRE: _prenotazione è l'ID di una prenotazione (prenotazione di un guest), gli altri parametri sono validi
 Cosa restituisce:
   ID del commento appena inserito se l'inserimento è andato a buon fine
   -1 in caso di prenotazione inesistente
@@ -449,25 +449,25 @@ DELIMITER ;
 
 /*Funzione che permette la creazione di una nuova funzione controllando la validità dei dati inseriti
 Cosa restituisce:
-  ID dell'occupazione appena inserita se tutto è andato a buon fine
+  ID dell'prenotazione appena inserita se tutto è andato a buon fine
   -1 se la data di inizio e la data di fine passate in input non sono ordinate temporalmente
-  -2 se ci sono altre occupazioni nel range di date passate in input
+  -2 se ci sono altre prenotazioni nel range di date passate in input
   -3 se l'inserimento è fallito (per esempio a causa di chiavi esterne errate)
   -4 se l'host sta tentando di prenotare presso un suo annuncio
 */
-DROP FUNCTION IF EXISTS insert_occupazione;
+DROP FUNCTION IF EXISTS insert_prenotazione;
 DELIMITER |
-CREATE FUNCTION insert_occupazione(_utente int, _annuncio int, _numospiti int(2), di date, df date) RETURNS INT
+CREATE FUNCTION insert_prenotazione(_utente int, _annuncio int, _numospiti int(2), di date, df date) RETURNS INT
 BEGIN
     -- controllo correttezza delle date
     IF DATEDIFF(df, di) <= 0 THEN
       RETURN -1;
     END IF;
 
-    -- Controllo presenza altre occupazioni
+    -- Controllo presenza altre prenotazioni
     IF EXISTS (
         SELECT *
-        FROM occupazioni
+        FROM prenotazioni
         WHERE annuncio = _annuncio AND (
           (di >= data_inizio AND di <= data_fine) OR
           (df >= data_inizio AND df <= data_fine) OR
@@ -482,7 +482,7 @@ BEGIN
        RETURN -4;
     END IF;
 
-    INSERT INTO occupazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
+    INSERT INTO prenotazioni(utente, annuncio, num_ospiti, data_inizio, data_fine)
     VALUES (_utente, _annuncio, _numospiti, di, df);
 
     IF ROW_COUNT() = 0 THEN -- Modifica non effettuata
@@ -549,7 +549,7 @@ BEGIN
     AND A.max_ospiti >= _num_ospiti
     AND A.id_annuncio NOT IN (
         SELECT annuncio
-        FROM occupazioni
+        FROM prenotazioni
         WHERE (
           (di >= data_inizio AND di <= data_fine) OR
           (df >= data_inizio AND df <= data_fine) OR
