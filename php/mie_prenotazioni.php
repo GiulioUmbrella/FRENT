@@ -14,7 +14,6 @@ if (isset($_SESSION["user"])) {
     
     $occupazioni = $frent->getPrenotazioniGuest();
 //    $occupazioni = array();
-    $i = 7;
     $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
     $prenotazioni_passate = "<h1>Le mie prenotazioni passate</h1><ul id=\"prenotazioni_passate\">";
     $prenotazioni_correnti = "<h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
@@ -39,85 +38,50 @@ if (isset($_SESSION["user"])) {
         $path = uploadsFolder() . $annuncio->getImgAnteprima();
         $numeroOspiti = $prenotazione->getNumOspiti();
         if ($prenotazione->getDataFine() < $data_corrente) { // prenotazioni passate
-
             $numPrenotazioniPassate++;
-            $prenotazioni_passate .= "
-                    <li>
-                        <div class=\"intestazione_lista\">
-                            <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                                title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - $nomeAnnuncio</a>
-                        </div>";
-            $i++;
-            $prenotazioni_passate.="
-                        <div class=\"corpo_lista corpo_lista_prenotazioni\">
-                            <div class=\"dettagli_prenotazione\">
-                                <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                                <p>Indirizzo: $luogoAlloggio</p>
-                                <p>Periodo: dal $dataInizio al $dataFine</p>
-                                <p>Numero ospiti: $numeroOspiti</p>
-                            </div>
-                            <div class=\"opzioni_prenotazione\">
-                                <p>Totale: &euro; $prezzo</p>
-                                <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\" title=\"Scrivi un commento sulla tua prenotazione\">Commenta</a>
-                            </div>
-                        </div>
-                    </li>";// todo da decidere come far commentare
+            $item = file_get_contents("./components/item_prenotazione_passata.html");
+            $item = str_replace("<ID/>",$id_prenotazione,$item);
+            $item = str_replace("<TITOLO/>",$annuncio->getTitolo(),$item);
+            $item = str_replace("<PATH/>",$path,$item);
+            $item = str_replace("<INDIRIZZO/>",$luogoAlloggio,$item);
+            $item = str_replace("<DI/>",$dataInizio,$item);
+            $item = str_replace("<DF/>",$dataFine,$item);
+            $item = str_replace("<PREZZO/>",$prezzo,$item);
+            $item = str_replace("<NO/>",$numeroOspiti,$item);
+            $item = str_replace("<DESC/>", $descrizionefoto,$item);
+            $prenotazioni_passate .= $item;
         } elseif ($data_corrente <= $prenotazione->getDataFine() and $data_corrente >= $prenotazione->getDataInizio()) { //prenotazioni correnti
             
             $numPrenotazioniCorrenti++;
-            $prenotazioni_correnti .= "
-                <li>
-                    <div class=\"intestazione_lista\">
-                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                            title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - Soggiorno presso $nomeAnnuncio</a> </div>";
-            $i++;
-            $prenotazioni_correnti.="
-                    <div class=\"corpo_lista corpo_lista_prenotazioni\">
-                        <div class=\"dettagli_prenotazione\">
-                            <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                            <p>Indirizzo: $luogoAlloggio</p>
-                            <p>Periodo: dal $dataInizio al $dataFine</p>
-                            <p>Numero ospiti: $numeroOspiti</p>
-                        </div>
-                        <div class=\"opzioni_prenotazione\">
-                            <p>Totale: &euro; $prezzo</p>
-                            <a href=\"mailto:$mail\" title=\"Contatta il proprietario per posta elettronica\">Contatta il proprietario</a>
-                        </div>
-                    </div>
-                </li>";
+            $item = file_get_contents("./components/item_prenotazione_corrente.html");
+            $item = str_replace("<ID/>",$id_prenotazione,$item);
+            $item = str_replace("<MAIL/>", $mail,$item);
+            $item = str_replace("<TITOLO/>",$nomeAnnuncio,$item);
+            $item = str_replace("<PATH/>",$path,$item);
+            $item = str_replace("<INDIRIZZO/>",$luogoAlloggio,$item);
+            $item = str_replace("<DI/>",$dataInizio,$item);
+            $item = str_replace("<DF/>",$dataFine,$item);
+            $item = str_replace("<PREZZO/>",$prezzo,$item);
+            $item = str_replace("<NO/>",$numeroOspiti,$item);
+            $item = str_replace("<DESC/>", $descrizionefoto,$item);
+            $prenotazioni_correnti .= $item;
         
         } else if ($data_corrente < $prenotazione->getDataInizio()) { //prenotazioni future
             
             $numPrenotazioniFuture++;
-            $prenotazioni_future .= "
-                <li>
-                    <div class=\"intestazione_lista\">
-                        <a href=\"./riepilogo_prenotazione.php?id=$id_prenotazione\"
-                        title=\"Vai al riepilogo della prenotazione presso $nomeAnnuncio\">PREN$id_prenotazione - $nomeAnnuncio</a>
-                    </div>";
-            $i++;
-            $prenotazioni_future.="
-                    <div class=\"corpo_lista corpo_lista_prenotazioni\">
-                        <div class=\"dettagli_prenotazione\">
-                            <img src=\"$path\" alt=\"$descrizionefoto\"/>
-                            <p>Indirizzo: $luogoAlloggio</p>
-                            <p>Periodo: dal $dataInizio al $dataFine</p>
-                            <p>Numero ospiti: $numeroOspiti</p>
-                        </div>
-                        <div class=\"opzioni_prenotazione\">
-                            <p>Totale: &euro; $prezzo</p>
-                            <form action=\"./script_elimina_prenotazione.php?id=$id_prenotazione\" method=\"post\">
-                                <fieldset>
-                                    <legend class=\"aiuti_alla_navigazione\">Elimina prenotazione</legend>
-                                    <input type=\"submit\" value=\"Elimina\" title=\"Elimina la prenotazione per $nomeAnnuncio\"/>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </li>";
+            $item = file_get_contents("./components/item_prenotazione_futura.html");
+            $item = str_replace("<ID/>",$id_prenotazione,$item);
+            $item = str_replace("<MAIL/>", $mail,$item);
+            $item = str_replace("<TITOLO/>",$nomeAnnuncio,$item);
+            $item = str_replace("<PATH/>",$path,$item);
+            $item = str_replace("<INDIRIZZO/>",$luogoAlloggio,$item);
+            $item = str_replace("<DI/>",$dataInizio,$item);
+            $item = str_replace("<DF/>",$dataFine,$item);
+            $item = str_replace("<PREZZO/>",$prezzo,$item);
+            $item = str_replace("<NO/>",$numeroOspiti,$item);
+            $item = str_replace("<DESC/>", $descrizionefoto,$item);
+            $prenotazioni_future .=$item;
         }
-//        <input type=\"hidden\" id=\"id\" value=\"$id_prenotazione\"/>
-        $i = $i + 1;
     }
 
    if($numPrenotazioniCorrenti>0 or $numPrenotazioniFuture>0 or $numPrenotazioniPassate>0){

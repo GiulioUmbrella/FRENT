@@ -14,7 +14,6 @@ if (isset($_SESSION["user"])) {
     $annunci =$frent->getAnnunciHost();
     $content="";
     foreach ($annunci as $annuncio) {
-        $id = $annuncio->getIdAnnuncio();
         $Titolo = $annuncio->getTitolo();
         $descrizione=$annuncio->getDescrizione();
         $prezzoTotale=$annuncio->getPrezzoNotte();
@@ -25,7 +24,6 @@ if (isset($_SESSION["user"])) {
         if ($numeroRecensione!=0){
             foreach ($recensioni as $recensione)
                 $punteggio=intval($recensione->getValutazione())+$punteggio;
-            $punteggio=$punteggio/$numeroRecensione;
             $punteggio= $punteggio/$numeroRecensione;
         }
         $stato="Visualizzato, Approvato"; // VA - VISUALIZZATO APPROVATO
@@ -35,19 +33,15 @@ if (isset($_SESSION["user"])) {
             $stato="Visualizzato, Non Approvato";
         }
         
-        $content.= "
-             <li><div class=\"intestazione_lista\">
-                <a href=\"dettagli_annuncio.php?id=$id\" >$Titolo</a>
-                <p>Stato: $stato - Valutazione media: $punteggio</p>
-                </div>
-                    <div class=\"corpo_lista\"><img src=\"$path\" alt=\"".$annuncio->getDescAnteprima()."\"/>
-                    <div>
-                        <p>$descrizione</p>
-                        <a class=\"link_gestisci_annuncio\" href=\"./script_salva_dati_modifica_annuncio_in_session.php?id=$id\"
-                        title=\"Vai alla gestione dell'annuncio\">Gestione annuncio</a>
-                    </div>
-                </div>
-                </li>";
+        $item = file_get_contents("./components/item_mio_annuncio.html");
+        $item = str_replace("<TITOLO/>",$annuncio->getTitolo(),$item);
+        $item = str_replace("<ID/>",$annuncio->getIdAnnuncio(),$item);
+        $item = str_replace("<PUNTEGGIO/>",$punteggio,$item);
+        $item = str_replace("<PATH/>",$annuncio->getImgAnteprima(),$item);
+        $item = str_replace("<DESC/>",$annuncio->getDescrizione(),$item);
+        $item = str_replace("<ANTEPRIMADESC/>",$annuncio->getDescAnteprima(),$item);
+        $item = str_replace("<STATO/>", $stato,$item);
+        $content.= $item;
     }
     $pagina= str_replace("<LISTAANNUNCI/>",$content,$pagina);
     echo $pagina;
