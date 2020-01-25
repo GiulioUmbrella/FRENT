@@ -43,9 +43,11 @@ function togli_errore_inizio(input) {
 }
 
 function togli_errore_citta(input) {
-    const p = input.parentNode;
-    if (p.children.length > 3) {
-        p.removeChild(p.children[0]);
+    const p = input.parentElement.children;
+    for(i=0; i < p.length; i++){
+    if (p[i].tagName == "STRONG") {
+        p[i].remove();
+    }
     }
 }
 
@@ -55,6 +57,15 @@ function mostra_errore_citta(input, testoErrore) {
     const strong = document.createElement("strong");
     strong.appendChild(document.createTextNode(testoErrore));
     p.insertBefore(strong, p.children[0]);
+}
+
+
+function mostra_errore_file(input, testoErrore) {
+    togli_errore_citta(input);
+    const p = input.parentElement;
+    const strong = document.createElement("strong");
+    strong.appendChild(document.createTextNode(testoErrore));
+    p.insertBefore(strong, input.nextSibling);
 }
 
 function check_nome(input) {
@@ -99,9 +110,9 @@ function check_immagini(input) {
             return true;
         }
 
-        mostra_errore_citta(input,"Il file caricato non è valido.");
+        mostra_errore_file(input,"Il file caricato non è valido.");
     } else {
-        mostra_errore_citta(input,"Non è stato caricato alcun file.");
+        mostra_errore_file(input,"Non è stato caricato alcun file.");
     }
 
     return false;
@@ -130,6 +141,7 @@ function check_password_second(primo, secondo) {
 }
 
 function check_citta(n) {
+	togli_errore_citta(n);
     const reg = latin_alphabet_regex(2,128);
     if (reg.test(n.value.toString())) {
         togli_errore_citta(n);
@@ -139,6 +151,16 @@ function check_citta(n) {
     return false;
 }
 
+function check_citta_ma_errore_sotto(n) {
+        togli_errore_citta(n);
+    const reg = latin_alphabet_regex(2,128);
+    if (reg.test(n.value.toString())) {
+        togli_errore_citta(n);
+        return true;
+    }
+    mostra_errore(n, "La città inserita non è valida.");
+    return false;
+}
 
 function check_dateInizioEFine(dataInizio, dataFine) {
     const dI = dataInizio.value.toString().trim();
@@ -416,7 +438,7 @@ function validazione_form_modifica_annuncio() {
     const res_desc_anteprima = check_descrizione_foto(input_desc_anteprima);
     const res_prezzoNotte = check_prezzo_notte(input_prezzoNotte);
     const res_indirizzo = check_indirizzo(input_indirizzo);
-    const res_citta = check_citta(input_citta);
+    const res_citta = check_citta_ma_errore_sotto(input_citta);
     return res_desc_anteprima && res_descrizione && res_img_anteprima && res_maxOspiti && res_prezzoNotte &&
         res_indirizzo && res_citta;
 }
