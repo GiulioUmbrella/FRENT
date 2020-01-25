@@ -103,7 +103,7 @@ class Commento {
      * @throws Eccezione se $utente non è un'istanza di classe Utente e se i suoi campi username e img_profilo sono vuoti
      */
     public function setUtente($utente) {
-        if(get_class($utente) === "Utente" && strlen($utente->getImgProfilo()) > 0 && strlen($utente->getUserName())) {
+        if(get_class($utente) === "Utente" && strlen($utente->getImgProfilo()) > 0 && strlen($utente->getUserName()) > 0) {
             $this->utente = $utente;
         } else {
             throw new Eccezione("L'istanza di utente non è nel formato valido.");

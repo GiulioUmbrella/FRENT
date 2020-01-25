@@ -65,12 +65,12 @@ if(isset($_POST["nuovo_annuncio"])) {
     } else {
         try {
             $annuncio = Annuncio::build();
-            $annuncio->setTitolo($_POST["titolo"]);
-            $annuncio->setDescrizione($_POST["descrizione"]);
+            $annuncio->setTitolo(addslashes($_POST["titolo"]));
+            $annuncio->setDescrizione(addslashes($_POST["descrizione"]));
             $annuncio->setImgAnteprima(ANTEPRIMA_ANNUNCIO_DEFAULT);
-            $annuncio->setDescAnteprima($_POST["desc_anteprima"]);
-            $annuncio->setIndirizzo($_POST["indirizzo"]);
-            $annuncio->setCitta($_POST["citta"]);
+            $annuncio->setDescAnteprima(addslashes($_POST["desc_anteprima"]));
+            $annuncio->setIndirizzo(addslashes($_POST["indirizzo"]));
+            $annuncio->setCitta(addslashes($_POST["citta"]));
             $annuncio->setMaxOspiti(intval($_POST["max_ospiti"]));
             $annuncio->setPrezzoNotte(floatval($_POST["prezzo_notte"]));
 

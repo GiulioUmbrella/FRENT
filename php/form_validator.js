@@ -8,7 +8,7 @@ function latin_alphabet_regex(min_length, max_length) {
      * Quindi \u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF sono caratteri Unicode corrispondenti a lettere accentate e di altri alfabeti latini estesi.
      * Per riferimento: https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)
      */
-    return new RegExp("^[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s\']{"+min_length+","+max_length+"}$");
+    return new RegExp("^([a-zA-Z]|[\u00C0-\u00D6]|[\u00D8-\u00F6]|[\u00F8-\u00FF]|[\\\s\']){" + min_length + "," + max_length + "}$");
 }
 
 function mostra_errore(input, testoErrore) {
@@ -179,7 +179,7 @@ function check_dateInizioEFine(dataInizio, dataFine) {
 
 function check_numOspiti(num) {
     const v = num.value.trim();
-    if (!isNaN(v) && parseInt(v) >= 0 && parseInt(v) <= 9) {
+    if (!isNaN(v) && parseInt(v) >= 0 && parseInt(v) <= 99) {
         togli_errore_inizio(num);
         return true;
     }

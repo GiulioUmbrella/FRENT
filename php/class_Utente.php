@@ -99,7 +99,7 @@ class Utente {
      */
     public function setMail($mail) {
         $trim_mail = trim($mail);
-        if (checkIsValidMail($trim_mail, DataConstraints::utenti["mail"]) and strlen($trim_mail)  > 6) {
+        if (checkIsValidMail($trim_mail, DataConstraints::utenti["mail"]) and strlen($trim_mail) > 6) {
             // 6 perché a@a.aa, e aa perché non ci sono TLD con una lettera
             $this->mail = $trim_mail;
         } else {
@@ -167,7 +167,7 @@ class Utente {
      * @throws Eccezione se $password è una stringa più lunga del consentito
      */
     public function setPassword($password) {
-        if(checkStringMaxLen($password, DataConstraints::utenti["password"])) {
+        if(preg_match("/^[a-zA-Z0-9]{3,48}$/", $password) && checkStringMaxLen($password, DataConstraints::utenti["password"])) {
             $this->password = $password;
         } else {
             throw new Eccezione("La password inserita supera la lunghezza consentita.");

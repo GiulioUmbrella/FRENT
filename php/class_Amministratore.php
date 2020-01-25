@@ -61,4 +61,8 @@ class Amministratore {
             throw new Eccezione("La password inserita supera la lunghezza consentita.");
         }
     }
+
+    public function getPassword(): string {
+        return $this->password;
+    }
 }

@@ -131,8 +131,9 @@ class Annuncio {
      * @throws Eccezione se $citta contiene numeri o $citta supera la lunghezza consentita
      */
     public function setCitta($citta) {
-        if (checkStringNoNumber($citta) && checkStringMaxLen(trim($citta), DataConstraints::annunci["citta"])) {
-            $this->citta = ucwords(strtolower(trim($citta)));
+        $trim_citta = ucwords(strtolower(trim($citta)));
+        if (checkStringNoNumber($trim_citta) && checkStringMaxLen($trim_citta, DataConstraints::annunci["citta"])) {
+            $this->citta = $trim_citta;
         } else {
             throw new Eccezione("Il nome della città non è nel formato valido.");
         }

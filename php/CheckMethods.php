@@ -59,7 +59,7 @@ function checkIsValidDate($date): bool {
  * @return bool restituisce true sse la stringa non contiene nessun carattere numerico.
  */
 function checkStringNoNumber($str): bool {
-    return is_string($str) and preg_match('^[^0-9]$', $str);
+    return is_string($str) and !preg_match("/[0-9]+/", $str); // la regex restituisce true se trova numeri, false se non li trova: io voglio che non li trovi
 }
 
 /**
@@ -79,8 +79,4 @@ function checkDateBeginAndEnd($dataI, $dataF): bool {
  */
 function checkPhoneNumber($telefono): bool {
     return is_string($telefono) and preg_match("/^([+][0-9]{1,3})?[0-9]{4,13}$/", $telefono);
-}
-
-function checkIsAlphanumeric($str): bool {
-    return is_string($str) && preg_match("^[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s\']+$", $str);
 }

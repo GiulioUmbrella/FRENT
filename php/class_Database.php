@@ -78,9 +78,9 @@ class Database {
 
     /**
      * Effettua la disconnessione dal database a cui si è connessi.
-     * @return TRUE se la connessione è stata chiusa, FALSE altrimenti.
+     * @return bool TRUE se la connessione è stata chiusa, FALSE altrimenti.
      */
-    public function disconnect() {
+    public function disconnect(): bool {
         $this->is_connected = !($this->db->close());
         return !($this->is_connected);
     }
@@ -89,12 +89,24 @@ class Database {
      * Imposta un set di caratteri da utilizzare durante l'invio delle richieste e la ricezione delle risposte con MySQL.
      * Ha valenza dal momento dell'invocazione del metodo (se c'è una connessione aperta). fino alla chiusura della connessione della connessione mediante il metodo disconnect.
      * @param string $charset set di caratteri da utilizzare nella connessione
-     * @return TRUE se il set di caratteri è stato impostato, FALSE altrimenti
+     * @return bool TRUE se il set di caratteri è stato impostato, FALSE altrimenti
      */
-    public function setCharset($charset) {
+    public function setCharset($charset): bool {
         if ($this->is_connected)
             return $this->db->set_charset($charset);
         else return FALSE;
+    }
+
+    /**
+     * Wrapper per mysqli_real_escape_string($link, $escapestr).
+     * @param string $string di cui ottenere l'escape
+     * @return string $string di cui è stato fatto l'escape
+     */
+    public function escapeString($string): string {
+        if (!($this->is_connected)) {
+            throw new Eccezione("Non è attiva una connessione con il database.");
+        }
+        return $this->db->real_escape_string($string);
     }
 
     /**
@@ -102,9 +114,9 @@ class Database {
      * @param string $procedure nome della procedura e relativi parametri, se presenti.
      * Per esempio: nome_procedura('p1', 2 ,'p3').
      * @return array di hash/array associativi.
-     * @throws Eccezione se la query non è andata a buon fine.
+     * @throws Eccezione se la query non è andata a buon fine o se non attiva una connessione con il database.
      */
-    public function queryProcedure($procedure) {
+    public function queryProcedure($procedure): array {
         if (!($this->is_connected)) {
             throw new Eccezione("Non è attiva una connessione con il database.");
         }
@@ -140,9 +152,9 @@ class Database {
      * @param string $function string della funzione e relativi parametri, se presenti.
      * Per esempio: nome_funzione('p1', 2 ,'p3').
      * @return string risultato dell'interrogazione sotto forma di variabile e non di array.
-     * @throws Eccezione se la query non è andata a buon fine.
+     * @throws Eccezione se la query non è andata a buon fine o se non attiva una connessione con il database.
      */
-    public function queryFunction($function) {
+    public function queryFunction($function): string {
         if (!($this->is_connected)) {
             throw new Eccezione("Non è attiva una connessione con il database.");
         }
