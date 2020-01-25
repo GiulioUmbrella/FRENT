@@ -1,6 +1,16 @@
 // i metodi che controllano un dato cominciano il check_nome campo
 // i metodi che controllano un form, ovvero tanti campi, hanno il nome validazione_ecc.
 
+function latin_alphabet_regex(min_length, max_length) {
+    /**
+     * Espressione regolare che permette lettere dell'alfabeto, maiuscole e minuscole,
+     * incluse lettere accentate e di altri alfabeti latini estesi, spazi, apici (non virgolette).
+     * Quindi \u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF sono caratteri Unicode corrispondenti a lettere accentate e di altri alfabeti latini estesi.
+     * Per riferimento: https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)
+     */
+    return new RegExp("^[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s\']{"+min_length+","+max_length+"}$");
+}
+
 function mostra_errore(input, testoErrore) {
     togli_errore(input);
     const p = input.parentElement;
@@ -49,76 +59,83 @@ function mostra_errore_citta(input, testoErrore) {
 
 function check_nome(input) {
     const val = input.value.toString().trim();
-    const reg = new RegExp("^[a-zA-Z ]{4,32}$");
+    // const reg = new RegExp("^[a-zA-Z ]{4,32}$");
+    const reg = latin_alphabet_regex(4,32);
     if (reg.test(val)) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Nome inserito non valido");
+    mostra_errore(input, "Il nome inserito non è valido.");
     return false;
 }
 
 function check_cognome(input) {
     const val = input.value.toString().trim();
-    const reg = new RegExp("^[a-zA-Z ]{4,32}$");
-    if (val.length > 3 && reg.test(val)) {
+    // const reg = new RegExp("^[a-zA-Z ]{4,32}$");
+    const reg = latin_alphabet_regex(4,32);
+    if (reg.test(val)) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Cognome inserito non valido");
+    mostra_errore(input, "Il cognome inserito non è valido.");
     return false;
 }
 
 // todo
 function check_immagini(input) {
-    const size = parseFloat(input.files[0].size.toString()) / 1024;
-    const type = input.files[0].type.toString();
+    if(input.files.length > 0) {
+        const size = parseFloat(input.files[0].size.toString()) / 1024;
+        const type = input.files[0].type.toString();
 
-    const types = ["image/png", "image/jpeg", "image/jpg"];
-    let found = false;
-    for (let i=0; i< types.length; i++) {
-        if (types[i] === type)
-            found = true;
+        const types = ["image/png", "image/jpeg", "image/jpg"];
+        let found = false;
+        for (let i=0; i< types.length; i++) {
+            if (types[i] === type)
+                found = true;
+        }
+
+        if (found && size < 2048 && size!==0) {
+            togli_errore_citta(input);
+            return true;
+        }
+
+        mostra_errore_citta(input,"Il file caricato non è valido.");
+    } else {
+        mostra_errore_citta(input,"Non è stato caricato alcun file.");
     }
 
-    if (found && size < 2048 && size!==0) {
-        togli_errore_citta(input);
-        return true;
-    }
-    mostra_errore_citta(input,"File non valido!");
     return false;
 }
 
 function check_password_first(input) {
     const val = input.value.trim();
     const reg = new RegExp("[a-zA-Z0-9]{3,48}");
-    if (val.length > 3 && reg.test(val)) {
+    if (reg.test(val)) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Il password non valido!");
+    mostra_errore(input, "La password può contenere solo caratteri alfanumerici.");
     return false;
 }
 
 function check_password_second(primo, secondo) {
-
     const val = primo.value.trim();
     const val2 = secondo.value.trim();
     if (val.toString() === val2.toString()) {
         togli_errore(secondo);
         return true;
     }
-    mostra_errore(secondo, "I due password non sono uguali!");
+    mostra_errore(secondo, "Le password inserite non corrispondono (devono essere uguali).");
     return false;
 }
 
 function check_citta(n) {
-    const reg = new RegExp('^[a-zA-Z ]{3,128}$');
+    const reg = latin_alphabet_regex(2,128);
     if (reg.test(n.value.toString())) {
         togli_errore_citta(n);
         return true;
     }
-    mostra_errore_citta(n, "Città non valida.");
+    mostra_errore_citta(n, "La città inserita non è valida.");
     return false;
 }
 
@@ -127,25 +144,25 @@ function check_dateInizioEFine(dataInizio, dataFine) {
     const dI = dataInizio.value.toString().trim();
     const dF = dataFine.value.toString().trim();
     const dataI = new Date(dI);
-
     const dataF = new Date(dF);
+
     if (dataI < dataF) {
         togli_errore(dataF);
         return true;
     }
 
-    mostra_errore_inizio(dataFine, "Data fine prima di data inizio!");
+    mostra_errore_inizio(dataFine, "La data di fine inserita è antecedente la data di inizio.");
     return false;
 }
 
 function check_numOspiti(num) {
     const v = num.value.trim();
-    if (!isNaN(v) && parseInt(v) <= 9) {
+    if (!isNaN(v) && parseInt(v) >= 0 && parseInt(v) <= 9) {
         togli_errore_inizio(num);
         return true;
     }
 
-    mostra_errore_inizio(num, "Valore inserito non valido.");
+    mostra_errore_inizio(num, "Il numero inserito deve essere compreso fra 0 e 99.");
     return false;
 
 }
@@ -158,7 +175,7 @@ function check_numeroTelefonico(input) {
         return true;
     }
 
-    mostra_errore(input, "Numero di telefono non valido!");
+    mostra_errore(input, "Il numero di telefono inserito non è valido.");
     return false;
 
 }
@@ -171,7 +188,7 @@ function check_userMail(mailInput) {
         togli_errore(mailInput);
         return true;
     }
-    mostra_errore(mailInput, "La mail inserita non è valida!");
+    mostra_errore(mailInput, "La mail inserita non è valida.");
     return false;
 
 }
@@ -182,7 +199,7 @@ function check_password(pwdInput) {
         togli_errore(pwdInput);
         return true;
     }
-    mostra_errore(pwdInput, "Password non valido!");
+    mostra_errore(pwdInput, "La password inserita non è valida.");
     return false;
 }
 
@@ -193,7 +210,7 @@ function check_data(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore_inizio(input, "Data non valida!");
+    mostra_errore_inizio(input, "La data inserita non è valida.");
     return false;
 }
 
@@ -202,7 +219,7 @@ function check_data_a_3(gg, mm, aa) {
     const mese = parseInt(mm.options[mm.selectedIndex].value.toString());
     const anno = parseInt(aa.options[aa.selectedIndex].value.toString());
     if (isNaN(giorno) || isNaN(mese) || isNaN(anno)) {
-        mostra_errore("La data non valida!");
+        mostra_errore("La data inserita non è valida.");
         return false;
     }
     const data = new Date(anno, mese, giorno);
@@ -221,7 +238,7 @@ function check_descrizione_foto(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Devi inserire la descrizione!");
+    mostra_errore(input, "La descrizione può essere lunga fino a 256 caratteri.");
     return true;
 
 }
@@ -233,9 +250,9 @@ function check_descrizione(input) {
         return true;
     }
     if (val.length !== 0)
-        mostra_errore(input, "Descrizione troppo lunga");
+        mostra_errore(input, "La descrizione inserita è troppo lunga.");
     else
-        mostra_errore(input, "Descrizione troppo corta");
+        mostra_errore(input, "Devi inserire una descrizione.");
 
     return false;
 }
@@ -247,18 +264,18 @@ function check_titoloAnnuncio(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Titolo inserito non valido!");
+    mostra_errore(input, "Il titolo inserito non è valido.");
     return true;
 }
 
 function check_prezzo_notte(input) {
     const val = input.value;
 
-    if (!isNaN(val) && parseInt(val) > 0) {
+    if (!isNaN(val) && parseFloat(val) > 0) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Il prezzo inserito non valido!");
+    mostra_errore(input, "Il prezzo inserito non è valido.");
     return false;
 }
 
@@ -270,7 +287,7 @@ function check_indirizzo(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Indirizzo inserito non valido!");
+    mostra_errore(input, "L'indirizzo inserito non è valido.");
     return true;
 }
 
@@ -281,7 +298,7 @@ function check_username(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Nome inserito non valido");
+    mostra_errore(input, "Il nome utente può contenere solo caratteri alfanumerici.");
     return false;
 }
 
@@ -292,29 +309,29 @@ function check_titoloCommento(input) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Titolo inserito non valido");
+    mostra_errore(input, "Il titolo del commento può essere lungo fino a 64 caratteri.");
     return false;
 }
 
 function check_testoCommento(input) {
     const val = input.value.toString().trim();
 
-    if (val.length > 0 && val .length <= 512) {
+    if (val.length > 0 && val.length <= 512) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Testo commento non valido");
+    mostra_errore(input, "Il testo del commento può essere lungo fino a 512 caratteri.");
     return false;
 }
 
 function check_valutazioneCommento(input) {
     const val = input.value.toString().trim();
 
-    if (val === "1" || val === "2" || val === "3" || val === "4" || val === "5") {
+    if (parseInt(val) >= 0 && parseInt(val) <= 5) {
         togli_errore(input);
         return true;
     }
-    mostra_errore(input, "Valutazione insertia non valida");
+    mostra_errore(input, "La valutazione del commento può essere compresa fra 0 e 5.");
     return false;
 }
 
