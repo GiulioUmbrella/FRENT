@@ -1,4 +1,4 @@
-id_occupazione,utente,annuncio,num_ospiti,data_inizio,data_fine
+id_prenotazione,utente,annuncio,num_ospiti,data_inizio,data_fine
 1,1,1,1,2019-11-2,2019-11-7
 2,2,1,1,2019-11-11,2019-11-15
 3,3,1,1,2019-11-21,2019-11-25
