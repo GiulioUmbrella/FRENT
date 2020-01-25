@@ -29,7 +29,7 @@ $annoNascita = intval($dataNascita->format("Y"));
 // popolazione select#giorno_nascita
 $GG = "";
 for ($i = 1; $i <= 31; $i++) {
-    $GG .= "<option value=\"$i\"" . (($i === $giornoNascita) ? "selected=\"selected\"" : "") . ">$i</option>";
+    $GG .= "<option value=\"$i\"" . (($i === $giornoNascita) ? " selected=\"selected\"" : "") . ">$i</option>";
 }
 $pagina = str_replace("<GIORNO/>", $GG, $pagina);
 
@@ -37,14 +37,14 @@ $pagina = str_replace("<GIORNO/>", $GG, $pagina);
 $MM = "";
 $mesi = array("gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre");
 for ($i = 1; $i <= 12; $i++) {
-    $MM .= "<option value=\"$i\"" . (($i === $meseNascita) ? "selected=\"selected\"" : "") . ">" . $mesi[$i - 1] . "</option>";
+    $MM .= "<option value=\"$i\"" . (($i === $meseNascita) ? " selected=\"selected\"" : "") . ">" . $mesi[$i - 1] . "</option>";
 }
 $pagina = str_replace("<MESE/>", $MM, $pagina);
 
 // popolazione select#anno_nascita
 $AAAA = "";
 for ($i = intval(date("Y")), $bottom = intval(date("Y")) - 100; $i >= $bottom; $i--) {
-    $AAAA .= "<option value=\"$i\"" . (($i === $annoNascita) ? "selected=\"selected\"" : "") . ">$i</option>";
+    $AAAA .= "<option value=\"$i\"" . (($i === $annoNascita) ? " selected=\"selected\"" : "") . ">$i</option>";
 }
 $pagina = str_replace("<ANNO/>", $AAAA, $pagina);
 
