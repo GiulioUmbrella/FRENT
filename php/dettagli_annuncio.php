@@ -17,7 +17,6 @@ try {
     
     if (!isset($_GET["id"])) {
 //        header("Location: ./404.php");
-        echo "riga 20";
     }
     
     $id = intval($_GET["id"]);
@@ -31,7 +30,6 @@ try {
         (isset($_SESSION["user"]) and $_SESSION["user"]->getIdUtente() != $annuncio->getIdHost() and $annuncio->getStatoApprovazione() != 1)
     ) {
 //        header("Location: ./404.php");
-        echo "riga 33";
     }
     
     $_SESSION["annuncio"] = $annuncio; 
