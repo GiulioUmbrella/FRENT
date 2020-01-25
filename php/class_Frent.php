@@ -54,7 +54,10 @@ class Frent {
      */
     public function ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine): array {
         try {
-            if(!is_int($numOspiti) || !checkDateBeginAndEnd($dataInizio, $dataFine)) {
+            if(!is_int($numOspiti) ||
+                !checkDateBeginAndEnd($dataInizio, $dataFine) ||
+                !checkStringNoNumber($citta)
+            ) {
                 throw new Eccezione("Parametri di invocazione di ricercaAnnunci errati.");
             }
             $this->db_instance->connect();
@@ -138,7 +141,7 @@ class Frent {
      */
     public function login($mail, $password): Utente {
         try {
-            if(!is_string($mail) || !is_string($password)) {
+            if(!checkIsValidMail($mail) || !checkIsAlphanumeric($password)) {
                 throw new Eccezione("Parametri di invocazione di login errati.");
             }
             $this->db_instance->connect();
@@ -855,7 +858,7 @@ class Frent {
      */
     public function adminLogin($mail, $password): Amministratore {
         try {
-            if(!is_string($mail) || !is_string($password)) {
+            if(!checkIsValidMail($mail) || !checkIsAlphanumeric($password)) {
                 throw new Eccezione("Parametri di invocazione di adminLogin errati.");
             }
             $this->db_instance->connect();
