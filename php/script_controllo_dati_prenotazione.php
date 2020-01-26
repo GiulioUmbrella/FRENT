@@ -12,7 +12,6 @@ if (!isset($_SESSION["user"])) {
 if (!isset($_SESSION["annuncio"])) {
     header("Location: ./index.php");
 }
-$pagina = file_get_contents("./components/conferma_prenotazione.html");
 $prenotazione = Prenotazione::build();
 if (isset($_POST["conferma_prenotazione"])) {
     $id_prenotazione=-1;

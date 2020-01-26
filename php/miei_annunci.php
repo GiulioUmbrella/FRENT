@@ -1,5 +1,4 @@
 <?php
-//todo nell'elenco visualizzare lo stato di approvazione degli annunci!
 require_once "./load_Frent.php";
 require_once "./components/form_functions.php";
 

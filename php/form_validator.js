@@ -92,7 +92,6 @@ function check_cognome(input) {
     return false;
 }
 
-// todo
 function check_immagini(input) {
     if(input.files.length > 0) {
         const size = parseFloat(input.files[0].size.toString()) / 1024;

@@ -26,7 +26,7 @@ if (isset($_SESSION["user"])) {
         $host = $frent->getUser($annuncio->getIdHost());
         $mail = $host->getMail();
         $nomeAnnuncio = $annuncio->getTitolo();
-        $descrizionefoto = $annuncio->getDescAnteprima();//todo decide cose mettere nell'attributo ALT dell'anteprima
+        $descrizionefoto = $annuncio->getDescAnteprima();
         $luogoAlloggio = $annuncio->getIndirizzo().", ".$annuncio->getCitta();
         $dataInizio = $prenotazione->getDataInizio();
         $dataFine = $prenotazione->getDataFine();
