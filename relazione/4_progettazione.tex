@@ -4,7 +4,19 @@
 \section{Progettazione}
 
 \subsection{Base di dati}
-La prima fase della progettazione è stata la base di dati. Come illustrato in precedenza abbiamo definito lo scopo e gli utilizzatori del sito. Inoltre abbiamo deciso di implementare tutte le funzionalità di base offerte dal sito come funzioni e procedure SQL. Inoltre abbiamo creato dei dati per poter eseguire dei test e verificare i risultati. 
+La prima fase della progettazione è stata la base di dati. Come illustrato in precedenza abbiamo definito lo scopo e gli utilizzatori del sito. Inoltre abbiamo deciso di implementare tutte le funzionalità di base offerte dal sito come funzioni e procedure SQL. Inoltre abbiamo creato dei dati per poter eseguire dei test e verificare i risultati. Per maggiore chiarezza, riportiamo sia lo schema ER che lo schema relazionale.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=6cm]{immagini/schema_ER-2}
+\caption{Schema ER }
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm, height=8cm]{immagini/schema_relazionale-2}
+\caption{Schema relazionale }
+\end{figure}
 
 \subsubsection{Dati guest richiesti}
 In questa fase abbiamo anche pensato a che informazioni chiedere all'utente per registrarsi a FRENT per non rendere i form troppo lunghi. La data di nascita è un requisito fondamentale per poter affittare/noleggiare un immobile ed è quindi obbligatorio inserirla. Un campo utile ma non strettamente necessario è il numero di telefono dell'utente. Per non complicare troppo la realizzazione abbiamo messi tutti i campi obbligatori. Come sviluppo futuro si potrebbe demandare l'inserimento del numero di telefono ad un secondo momento. 
