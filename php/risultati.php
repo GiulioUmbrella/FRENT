@@ -16,22 +16,9 @@ $dataInizio ="";
 $dataFine ="";
 if (isset($_GET["citta"])){
     $citta = $_GET["citta"];
-    try {
-        $citta_ricercabili = $frent->getCittaAnnunci();
-        $lista_citta_ricercabili = "";
-        foreach ($citta_ricercabili as $citta_ricercabile) {
-            if ($citta_ricercabile === $citta) {
-                $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\" selected>$citta_ricercabile</option>";
-            } else {
-                $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\">$citta_ricercabile</option>";
-            }
-        }
-    } catch (Eccezione $e) {
-        $content="<h1>" . $e->getMessage() . "</h1>";
-    }
-    $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
+    $pagina = str_replace("<CITTA/>", $citta, $pagina);
 } else {
-    $pagina = str_replace("<CITIES_RICERCA/>", "", $pagina);
+    $pagina = str_replace("<CITTA/>", "", $pagina);
 }
 if (isset($_GET["numOspiti"])){
     $numOspiti =intval($_GET["numOspiti"]);
@@ -55,6 +42,17 @@ if (isset($_GET["dataFine"])){
     $pagina=str_replace("<VALUEFINE/>",$dataFine,$pagina);
 }else{
     $pagina=str_replace("<VALUEFINE/>","",$pagina);
+}
+
+try {
+    $citta_ricercabili = $frent->getCittaAnnunci();
+    $lista_citta_ricercabili = "";
+    foreach ($citta_ricercabili as $citta_ricercabile) {
+        $lista_citta_ricercabili .= "<option value=\"$citta_ricercabile\">$citta_ricercabile</option>";
+    }
+    $pagina = str_replace("<CITIES_RICERCA/>", $lista_citta_ricercabili, $pagina);
+} catch (Eccezione $e) {
+    $content="<h1>" . $e->getMessage() . "</h1>";
 }
 
 $content = "";
