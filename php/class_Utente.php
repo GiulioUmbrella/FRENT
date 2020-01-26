@@ -117,7 +117,11 @@ class Utente {
      */
     public function setDataNascita($data_nascita) {
         if (checkIsValidDate($data_nascita)) {
-            $this->data_nascita = $data_nascita;
+            if((intval(date("Y")) - intval(date("Y", strtotime($data_nascita))) >= 18)) {
+                $this->data_nascita = $data_nascita;
+            } else {
+                throw new Eccezione("Il servizio è attivo per soli maggiorenni.");
+            }
         } else {
             throw new Eccezione("La data di nascita inserita non è nel formato valido.");
         }
