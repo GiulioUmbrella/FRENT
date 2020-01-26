@@ -6,7 +6,7 @@ require_once "./components/form_functions.php";
  * quando l'annuncio non approvato è visualizzato dal proprietario, il pulsante "Prenota" deve sparire, e deve
  * essere visualizza il pulsante "Modifica", reindirizzandolo verso la pagina della modifica dell'annuncio
  * e quindi sparisce anche i due form di data.
-*/
+ */
 
 try {
     /**
@@ -28,13 +28,13 @@ try {
         (!isset($_SESSION["admin"]) and !isset($_SESSION["user"]) and $annuncio->getStatoApprovazione() != 1) or
         (isset($_SESSION["user"]) and $_SESSION["user"]->getIdUtente() != $annuncio->getIdHost() and $annuncio->getStatoApprovazione() != 1)
     ) {
-       header("Location: ./404.php");
+        header("Location: ./404.php");
     }
     
-    $_SESSION["annuncio"] = $annuncio; 
+    $_SESSION["annuncio"] = $annuncio;
     
     $pagina = file_get_contents("./components/dettagli_annuncio.html");
-
+    
     /**
      * Modalità admin:
      * - il breadcrumb è solo il nome dell'annuncio
@@ -48,13 +48,12 @@ try {
         $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_admin.html"), $pagina);
         $pagina = str_replace("<PARAMS_SI/>", "?idAnnuncio=" . $annuncio->getIdAnnuncio() . "&approvato=1", $pagina);
         $pagina = str_replace("<PARAMS_NO/>", "?idAnnuncio=" . $annuncio->getIdAnnuncio() . "&approvato=0", $pagina);
-    }
-    /**
+    } /**
      * Modalità utente:
      * - il breadcrumb è il percorso completo per arrivare all'annuncio
      * - footer di tutte le pagine
      * - pulsante di modifica annuncio se l'utente è host, altrimenti inserisco il form per la prenotazione
-     */    
+     */
     elseif (isset($_SESSION["user"])) {// utente autenticato
         $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
         
@@ -66,8 +65,7 @@ try {
             $pagina = str_replace("<FLAG/>", file_get_contents("./components/dettaglio_annuncio_visitatore_no_dati.html"), $pagina);
             $pagina = str_replace("<LINK/>", "./script_controllo_dati_prenotazione.php", $pagina);
         }
-    }
-    /**
+    } /**
      * Modalità utente non autenticato:
      * - header non autenticato
      * - mostro la funzionalità di accesso (link a pagina login)
@@ -83,7 +81,7 @@ try {
      * L'admin certamente non le deve visualizzare, quindi lo escludo e gli faccio saltare tutto questo codice.
      * L'utente non loggato deve prima accedere per poter effettuare la prenotazione.
      */
-    if(!isset($_SESSION["admin"])) {
+    if (!isset($_SESSION["admin"])) {
         $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
         $pagina = str_replace(
             "<BREADCRUMB/>",
@@ -94,12 +92,12 @@ try {
         );
         require_once "./components/setMinMaxDates.php";
         
-        $link_ricerca = "citta=".$annuncio->getCitta();
+        $link_ricerca = "citta=" . $annuncio->getCitta();
         
         if (isset($_GET["dataInizio"])) {
             $dataInizio = $_GET["dataInizio"];
             $pagina = str_replace("<VALUEINIZIO/>", $dataInizio, $pagina);
-            $link_ricerca.="&dataInizio=".$dataInizio;
+            $link_ricerca .= "&dataInizio=" . $dataInizio;
         } else {
             $pagina = str_replace("<VALUEINIZIO/>", "", $pagina);
         }
@@ -107,22 +105,22 @@ try {
         if (isset($_GET["dataFine"])) {
             $dataFine = $_GET["dataFine"];
             $pagina = str_replace("<VALUEFINE/>", $dataFine, $pagina);
-            $link_ricerca.="&dataFine=".$dataFine;
+            $link_ricerca .= "&dataFine=" . $dataFine;
         } else {
             $pagina = str_replace("<VALUEFINE/>", "", $pagina);
         }
         
         if (isset($_GET["numOspiti"])) {
             $numOspiti = intval($_GET["numOspiti"]);
-            $link_ricerca.="&numOspiti=".$numOspiti;
+            $link_ricerca .= "&numOspiti=" . $numOspiti;
             $pagina = str_replace("<VALUENUMERO/>", $numOspiti, $pagina);
         } else {
             $pagina = str_replace("<VALUENUMERO/>", 1, $pagina);
         }
-
+        
         $pagina = str_replace("<PARAMS>", $link_ricerca, $pagina);
     }
-
+    
     if (isset($_SESSION["dati_errati"]) and $_SESSION["dati_errati"]) {
         $pagina = str_replace("<INFO_BOX/>", $_SESSION["msg"], $pagina);
         unset($_SESSION["dati_errati"]);
@@ -144,38 +142,26 @@ try {
             $str_commenti = "<ul>";
             foreach ($commenti as $commento) {
                 $totale += intval($commento->getValutazione());
-                $user=$commento->getUtente();
-                $user_name =$user->getUserName();
-                $immagine_profilo = uploadsFolder() . $user->getImgProfilo();
-                $testo_commento = $commento->getCommento();
-                $valutazione = $commento->getValutazione();
-                $data_commento = date("Y-m-d", strtotime($commento->getDataPubblicazione()));
-                $titolo_commento = $commento->getTitolo();
-                $str_commenti .= "
-                        <li>
-                            <div class=\"intestazione_commento\">
-                                <img src=\"$immagine_profilo\" alt=\"\"/>
-                                <div>
-                                    <p class=\"username_commento\">$user_name</p>
-                                    <p class=\"data_commento\">$data_commento</p>
-                                </div>
-                            </div>
-                            <div class=\"corpo_commento\">
-                                <h1>$titolo_commento</h1>
-                                <p>Votazione: $valutazione</p>
-                                <p>$testo_commento</p>
-                            </div>
-                        </li>";
+                $user = $commento->getUtente();
+                $item = file_get_contents("./components/item_commento.html");
+                $item = str_replace("<PATH/>", uploadsFolder() . $user->getImgProfilo(), $item);
+                $item = str_replace("<USERNAME/>", $user->getUserName(), $item);
+                $item = str_replace("<DATACOMMENTO/>", date("Y-m-d", strtotime($commento->getDataPubblicazione())), $item);
+                $item = str_replace("<TITOLOCOMMENTO/>", $commento->getTitolo(), $item);
+                $item = str_replace("<VALUTAZIONE/>", $commento->getValutazione(), $item);
+                $item = str_replace("<TESTO/>", $commento->getCommento(), $item);
+                
+                $str_commenti .= $item;
             }
-            $mediaCommenti = number_format($totale / (count($commenti)),2);
+            $mediaCommenti = number_format($totale / (count($commenti)), 2);
             $str_commenti .= "</ul>";
         } else {
-            $str_commenti="<p>Ancora non ci sono commenti!</p>";
+            $str_commenti = "<p>Ancora non ci sono commenti!</p>";
         }
     } catch (Eccezione $e) {
         $str_commenti = $e->getMessage();
     }
-
+    
     // finisco la sostituzione dei placeholder
     $pagina = str_replace("<COMMENTI/>", $str_commenti, $pagina);
     $pagina = str_replace("<VALUTAZIONE/>", $mediaCommenti, $pagina);
@@ -184,13 +170,13 @@ try {
     $pagina = str_replace("<NUMEROCOMMENTI/>", count($commenti), $pagina);
     $pagina = str_replace("<PREZZO/>", $annuncio->getPrezzoNotte(), $pagina);
     $pagina = str_replace("<DESCRIZIONE/>", $annuncio->getDescrizione(), $pagina);
-    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo().", ". $annuncio->getCitta(), $pagina);
+    $pagina = str_replace("<INDIRIZZO/>", $annuncio->getIndirizzo() . ", " . $annuncio->getCitta(), $pagina);
     
     $img = uploadsFolder() . $annuncio->getImgAnteprima();
     $pagina = str_replace("<IMMAGINE/>", "<div>
-                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"".$annuncio->getDescAnteprima()."\"/>
+                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"" . $annuncio->getDescAnteprima() . "\"/>
                         </div>", $pagina);
-
+    
     echo $pagina;
 } catch (Eccezione $ex) {
     header("Location: ./404.php");
