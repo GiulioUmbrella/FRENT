@@ -2,9 +2,10 @@
 \begin{document}
 
 \section{Progettazione}
+Questa sezione introduce la progettazione del sito. Per rendere più chiaro il documento, introduciamo prima gli elementi di progettazione è poi nella successiva sezione la realizzazione. Dove possibile, abbiamo sempre anticipato la progettazione alla realizzazione. Per esempio la scelta di usare un modello gerarchico per il sito, la struttura della home page e la presentazione dei risultati di ricerca in forma di lista sono stati scelti in anticipo. Per alcune parti del sito, progettazione e realizzazione sono andate in parallelo. 
 
 \subsection{Base di dati}
-La prima fase della progettazione è stata la base di dati. Come illustrato in precedenza abbiamo definito lo scopo e gli utilizzatori del sito. Inoltre abbiamo deciso di implementare tutte le funzionalità di base offerte dal sito come funzioni e procedure SQL. Inoltre abbiamo creato dei dati per poter eseguire dei test e verificare i risultati. Per maggiore chiarezza, riportiamo sia lo schema ER che lo schema relazionale.
+La prima fase della progettazione è stata la base di dati.  Il modello entità-relazione è stato utilizzato come punto di partenze per definire lo scopo e gli utilizzatori del sito. Per maggiore chiarezza, riportiamo sia lo schema ER che lo schema relazionale. La spiegazione approfondita è stata inserita nella precedente sezione, Scopo del sito.
 
 \begin{figure}[h]
 \centering
@@ -22,7 +23,7 @@ La prima fase della progettazione è stata la base di dati. Come illustrato in p
 In questa fase abbiamo anche pensato a che informazioni chiedere all'utente per registrarsi a FRENT per non rendere i form troppo lunghi. La data di nascita è un requisito fondamentale per poter affittare/noleggiare un immobile ed è quindi obbligatorio inserirla. Un campo utile ma non strettamente necessario è il numero di telefono dell'utente. Per non complicare troppo la realizzazione abbiamo messi tutti i campi obbligatori. Come sviluppo futuro si potrebbe demandare l'inserimento del numero di telefono ad un secondo momento. 
 
 \subsection{Contesto dell'informazione }
-Una volta definiti gli utenti, abbiamo pensato a come facilitare il più possibile l'utilizzo del sito. Abbiamo quindi pensato ai loro possibili obbiettivi nell'utilizzo di FRENT. Il punto di partenza è quindi capire \textit{cosa} vogliono di utenti:
+Una volta definiti gli utenti, abbiamo pensato a come facilitare il più possibile l'utilizzo del sito. Come scelta preliminare abbiamo localizzati gli utenti come cittadini italiani che cercano alloggi in Italia. Eventuali internazionalizzazioni sarebbero state troppo complesse da gestire. Abbiamo quindi pensato agli obbiettivi degli utenti di FRENT.  Il punto di partenza è quindi capire \textit{cosa} vogliono di utenti:
 
 \begin{itemize}
 \item Guest: facile fare una ricerca, facile gestire le prenotazioni 
