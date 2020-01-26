@@ -4,7 +4,6 @@ session_start();
 $datiOk=true;
 if (isset($_GET["dataFine"]) and checkIsValidDate($_GET["dataFine"]) ){
     $dataFine =$_GET["dataFine"];
-    echo $dataFine;
     $_SESSION["dataFine"] = $dataFine;
 }else{
     
@@ -27,7 +26,6 @@ if (isset($_GET["numOspiti"]) and is_int(intval($_GET["numOspiti"]))){
 }
 if (isset($_GET["citta"]) and  $_GET["citta"] != ""){
     $citta =$_GET["citta"];
-    echo $citta;
     $_SESSION["citta"]= $citta;
 }else{
     $_SESSION["datiRicercaMancanti"]="Devi scegliere la citt&agrave;";

@@ -24,7 +24,6 @@ if (isset($_POST["conferma_prenotazione"])) {
             intval($_POST["numOspiti"]) <= $_SESSION["annuncio"]->getMaxOspiti() and
             checkDateBeginAndEnd($_POST["dataInizio"], $_POST["dataFine"])
         ) {
-            echo "dati ok!";
             
             $_SESSION["dataFine"] = $_POST["dataFine"];
             $_SESSION["dataInizio"] = $_POST["dataInizio"];
@@ -36,9 +35,6 @@ if (isset($_POST["conferma_prenotazione"])) {
             $prenotazione->setDataFine($_POST["dataFine"]);
             $prenotazione->setIdUtente($_SESSION["user"]->getIdUtente());
             $id_prenotazione = $frent->insertPrenotazione($prenotazione);
-            echo $id_prenotazione;
-            
-            
         } else {
             
             $_SESSION["dati_errati"] = "true";
@@ -66,7 +62,6 @@ if (isset($_POST["conferma_prenotazione"])) {
         
     }
     if ($id_prenotazione != -1 and $id_prenotazione!=-2 and $id_prenotazione!=-3){
-        echo "prenotazione effettuata";
         header("Location: ./riepilogo_prenotazione.php?id=$id_prenotazione");
     }else{
         switch ($id_prenotazione) {
