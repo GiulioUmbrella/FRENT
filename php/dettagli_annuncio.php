@@ -135,7 +135,7 @@ try {
      * Voglio comunque mostrare la pagina se riesco.
      * Se c'è qualche problema, salto la parte dei commenti e basta.
      */
-    $str_commenti = "<p>Ancora Non ci sono commenti!</p>"; 
+    $str_commenti = "<p>Ancora non ci sono commenti!</p>";
     $mediaCommenti = 0;
     try {
         $commenti = $frent->getCommentiAnnuncio($id);
@@ -170,7 +170,7 @@ try {
             $mediaCommenti = number_format($totale / (count($commenti)),2);
             $str_commenti .= "</ul>";
         } else {
-            $str_commenti="<p>Ancora Non ci sono commenti!</p>";    
+            $str_commenti="<p>Ancora non ci sono commenti!</p>";
         }
     } catch (Eccezione $e) {
         $str_commenti = $e->getMessage();
