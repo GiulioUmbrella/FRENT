@@ -6,6 +6,9 @@
 \subsection{Base di dati}
 La prima fase della progettazione è stata la base di dati. Come illustrato in precedenza abbiamo definito lo scopo e gli utilizzatori del sito. Inoltre abbiamo deciso di implementare tutte le funzionalità di base offerte dal sito come funzioni e procedure SQL. Inoltre abbiamo creato dei dati per poter eseguire dei test e verificare i risultati. 
 
+\subsubsection{Dati guest richiesti}
+In questa fase abbiamo anche pensato a che informazioni chiedere all'utente per registrarsi a FRENT per non rendere i form troppo lunghi. La data di nascita è un requisito fondamentale per poter affittare/noleggiare un immobile ed è quindi obbligatorio inserirla. Un campo utile ma non strettamente necessario è il numero di telefono dell'utente. Per non complicare troppo la realizzazione abbiamo messi tutti i campi obbligatori. Come sviluppo futuro si potrebbe demandare l'inserimento del numero di telefono ad un secondo momento. 
+
 \subsection{Contesto dell'informazione }
 Una volta definiti gli utenti, abbiamo pensato a come facilitare il più possibile l'utilizzo del sito. Abbiamo quindi pensato ai loro possibili obbiettivi nell'utilizzo di FRENT. Il punto di partenza è quindi capire \textit{cosa} vogliono di utenti:
 
@@ -25,10 +28,15 @@ Questo vale sia per i guest che per gli host. I guest possono capire come è str
 L'idea originale era inserire nella home altre sezione simili, ad esempio gli annunci più votati o le offerte last minute. Abbiamo inserito gli ultimi annunci inseriti per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicità, abbiamo inserito solo questa sezione. \\
 
 \subsubsection{Boa di Segnalazione}
-La boa di segnalazione serve per ritrovare elementi informativi utili. Le boe di segnalazione in FRENT sono raggruppate in due zone, header e footer. 
-L'header cambia per utente generico e utente registrato. Per l'utente generico diamo subito la possibilità di registrarsi o di accedere. Per l'utente registrato invece offriamo un cruscotto per la gestione completa delle informazioni. 
+La boa di segnalazione serve per ritrovare elementi informativi utili. Le boe di segnalazione in FRENT sono raggruppate in due zone, header e footer. Entrambe cambiano per utente generico e utente registrato.
 
-Il footer riporta invece informazioni di carattere generale, come le condizioni di utilizzo del sito e le FAQ. Queste informazioni si trovano di solito nel footer e abbiamo deciso di inserirle in basso per non violare le condizioni esterne di utilizzo del sito.  
+\begin{itemize}
+\item \textbf{Header}
+Per l'utente generico diamo subito la possibilità di registrarsi o di accedere. Per l'utente registrato invece offriamo un cruscotto per la gestione completa delle informazioni. 
+\item \textbf{Footer}
+Per tutti gli utenti, il footer riporta invece informazioni di carattere generale, come le condizioni di utilizzo del sito e le FAQ. Queste informazioni si trovano di solito nel footer e abbiamo deciso di inserirle in basso per non violare le condizioni esterne di utilizzo del sito.  Solo per gli utenti non registrati, è presente il link per l'amministratore. Si trova in una posizione poco visibile perchè diamo per scontato che l'amministratore sia un utente che conosce il sito e sa dove andare a cercarlo. Inoltre, se un utente si registra come guest possiamo escludere che voglia usare le funzioni da amministratore e quindi possiamo nascondere il link. 
+\end{itemize}
+
 
 \subsection{Schema organizzativi}
 A questo punto la domanda che ci siamo posti è \textit{come} presentare le informazioni agli utenti. Abbiamo organizzati l'elenco delle informazioni usando degli schemi esatti. Le funzioni che l'utente può utilizzare per manipolare tali dati sono state raggruppate con schemi orientati al compito.
@@ -72,7 +80,7 @@ Le funzioni per manipolare i dati sono specifiche e sono state organizzati in sc
 \item \textbf{Gestione annunci host}
 \begin{itemize}
 \item \textbf{Modifica} Modifica le informazioni relative ad un annuncio.
-\item \textbf{Storico} 
+\item \textbf{Prenotazioni} Tutte le prenotazioni relative ad un singolo annuncio.
 \item \textbf{Elimina Annuncio} Permette di eliminare un annuncio e avvisa se sono presenti prenotazioni correnti e future.
 \end{itemize}
 \end{itemize}
@@ -83,18 +91,33 @@ Per motivi di semplicità FRENT utilizza alcuni elementi di ipertesto. Le pagine
 La pagina per i dettagli di un annuncio che un host può visualizzare è la stessa dei risultati di ricerca. In questo l'host può vedere la pagina come appare ad un guest dopo la ricerca. Mancano le funzioni per effettuare la prenotazione (un host non può essere guest di se stesso). Inoltre vi è un pulsante che permette di andare alla pagina per la modifica dei dati dell'annuncio.
 
 \subsection{Web design}
-Per impostare il layout delle pagine abbiamo cercato di utilizzare degli schemi quanto più semplici possibile. lPer aiutare la navigazione tutte le pagine riportano il breadcrumb con il percorso completo per arrivare alla pagina. In questo modo l'utente può ricostruire in maniera intuitiva il percorso che ha fatto. Per non confondere l'utente, nei menu con link alle pagine abbiamo evitato di inserire link circolari. 
-Abbiamo utilizzato il layout a tre pannelli per due pagine: risultati ricerche e gestione annuncio
-Risultati ricerche
-In questo caso abbiamo conservato 
+Per impostare il layout delle pagine abbiamo cercato di utilizzare degli schemi quanto più semplici possibile. Per aiutare la navigazione tutte le pagine riportano il breadcrumb con il percorso completo per arrivare alla pagina. In questo modo l'utente può ricostruire in maniera intuitiva il percorso che ha fatto. Per non creare confusione, nei menu con link alle pagine abbiamo evitato di inserire link circolari. \\
+Per organizzare le pagine abbiamo utilizzato un interfaccia a schede e un layout a tre pannelli per alcune pagine.
+
+\subsubsection{Interfaccia a schede} 
+La maggior parte delle pagine sono organizzate con interfaccia a schede che rispetta la gerarchia. Sono presenti della etichette con dei link che permettono di navigare il sito e raggiungere tutte le componenti principali.
+\subsubsection{Layout a tre pannelli} 
+Per la pagina con i risultati delle ricerca e gestione annuncio abbiamo utilizzato un layout a tre panelli. L'header è lo stesso delle pagine con interfaccia a schede. Il menu laterale cambia per offrire un supporto specifico per la pagina.
+
+\begin{itemize}
+\item \textbf{Risultati di ricerca} Il menù laterale riassume i parametri utilizzati dall'utente per la ricerca e la possibilità di fare nuove ricerche. In questo modo l'utente non deve tornare alla home per eseguire una nuova ricerca (ad esempio se non ci sono risultati o ha inserito i campi in modo sbagliato) 
+\item \textbf{Gestione annuncio} Il menu laterale riporta tutte le funzioni per gestire un annuncio. 
+\end{itemize}
+
 
 
 \subsection{Mobile}
 Menu intelligente, il menu è un link che riporta al fondo della pagina 
 
 \subsection{Emozioni}
+Abbiamo cercato di introdurre alcune componenti emotive nella realizzazione del sito.
 
+\begin{itemize}
+\item \textbf{Commenti} Per coinvolgere l'utente, abbiamo deciso di dare la possibilità di esprimere la propria opinione sulla prenotazione e dare un voto. Per dare rilevanza, i commenti sono inseriti sotto i dettagli dell'annuncio. Per semplicità, non ci sono funzioni di moderatore e i commenti non possono essere segnalati. 
 
+\item \textbf{Buon compleanno} Come forma di sorpresa, inseriamo gli auguri di buon compleanno all'utente nell'header della pagina. Tra le informazioni che dobbiamo necessariamente raccogliere c'e' anche la data di nascita e quindi possiamo usarla per questo scopo.  
+\end{itemize}
 
+Fra le emozioni che si possono sfruttare per sviluppi futuri sono la reward e l'esclusività. Come reward si possono inserire sconti ed offerte per gli utenti di lungo periodo. Come esclusività avevamo pensato ad inserire una forma di status per il guest sulla base del numero di prenotazioni fatte. Le prenotazioni possono essere associate ai viaggi e l'utente ricevere uno status come ad esempio "Viaggiatore Esperto" o "Viaggiatore di Livello X". Questo campo verrebbe visualizzato nei commenti e nel profilo dell'utente. 
 
 \end{document}
