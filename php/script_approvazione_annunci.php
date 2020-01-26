@@ -22,7 +22,6 @@ if (isset($_SESSION["admin"])){
     }
 }else{
     header("Location: ./404.php");
-//    echo "Session missing";
 }
 
 

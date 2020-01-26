@@ -15,4 +15,3 @@ if (isset($_GET["id"])){
         header("Location: ./error_page.php");
     }
 }
-//header("Location: ./mie_prenotazioni.php");

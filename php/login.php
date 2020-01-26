@@ -52,7 +52,6 @@ if(isset($_POST["accedi"])) {
     $divClasses = "aligned_with_form messaggio_errore";
     $inParagraph = TRUE;
     
-    // $pagina = str_replace("</msg>", "", $pagina);
     if($form_non_valido) {
         $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo.</p>", $risultato_validazione);
         $inParagraph = FALSE;
@@ -60,7 +59,7 @@ if(isset($_POST["accedi"])) {
         try {
             $utente = $frent->login($_POST["user"], $_POST["password"]);
             
-            // aggiunto l'oggetto utente alla sessione  amp
+            // aggiunto l'oggetto utente alla sessione
             $_SESSION["user"] = $utente;
             
             header("Location: ./index.php");

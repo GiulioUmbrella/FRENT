@@ -52,7 +52,6 @@ if(isset($_POST["accedi"])) {
     $divClasses = "aligned_with_form messaggio_errore";
     $inParagraph = TRUE;
     
-    // $pagina = str_replace("</msg>", "", $pagina);
     if($form_non_valido) {
         $messageToUser = formValidationErrorList("<p>C'&egrave; stato un errore nella compilazione del modulo.</p>", $risultato_validazione);
         $inParagraph = FALSE;

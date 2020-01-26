@@ -6,14 +6,12 @@ require_once "./components/form_functions.php";
 $pagina = file_get_contents("./components/mie_prenotazioni.html");
 if (isset($_SESSION["user"])) {
     require_once "./load_header.php";
-//    $pagina = str_replace("<HEADER/>", file_get_contents("./components/header_logged.html"), $pagina);
     $pagina = str_replace("<FOOTER/>", file_get_contents("./components/footer.html"), $pagina);
     
     $content = "";
     // pescare le prenotazioni correnti
     
     $prenotazioni = $frent->getPrenotazioniGuest();
-//    $prenotazioni = array();
     $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
     $prenotazioni_passate = "<h1>Le mie prenotazioni passate</h1><ul id=\"prenotazioni_passate\">";
     $prenotazioni_correnti = "<h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";

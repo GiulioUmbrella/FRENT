@@ -33,9 +33,8 @@ if (isset($_GET["citta"]) and  $_GET["citta"] != ""){
     $_SESSION["datiRicercaMancanti"]="Devi scegliere la citt&agrave;";
     $datiOk=false;
 }
-//$datiOk=true;
+
 if ($datiOk){
-//    echo "dati ok";
     header("Location: ./risultati.php?citta=".$_SESSION["citta"]."&dataInizio="
         .$_SESSION["dataInizio"]."&dataFine=".$_SESSION["dataFine"]."&numOspiti=".$_SESSION["numOspiti"]);
 }else{

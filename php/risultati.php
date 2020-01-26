@@ -94,7 +94,6 @@ try {
 } catch (Eccezione $e) {
     $content="<h1>" . $e->getMessage() . "</h1>";
 }
-//$risultati=array();
 
 
 
