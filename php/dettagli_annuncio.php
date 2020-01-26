@@ -24,12 +24,11 @@ try {
     $annuncio = $frent->getAnnuncio($id); // SE NON TROVATO, LANCIO ECCEZIONE
     // se non sono ne admin ne user e annuncio non è stato approvato, non posso vederlo.
     // se sono user ma non sono host e annuncio non è stato approvato, non posso vederlo.
-    // se sono un guest che ho alloggiato in questo annuncio
     if (
         (!isset($_SESSION["admin"]) and !isset($_SESSION["user"]) and $annuncio->getStatoApprovazione() != 1) or
         (isset($_SESSION["user"]) and $_SESSION["user"]->getIdUtente() != $annuncio->getIdHost() and $annuncio->getStatoApprovazione() != 1)
     ) {
-//        header("Location: ./404.php");
+       header("Location: ./404.php");
     }
     
     $_SESSION["annuncio"] = $annuncio; 
