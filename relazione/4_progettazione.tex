@@ -17,12 +17,12 @@ Una volta definiti gli utenti, abbiamo pensato a come facilitare il più possibi
 A questo punto dovevamo definire \textit{dove} gli utenti possono trovare ciò di cui hanno bisogno. Abbiamo utilizzato la metafora della pesca vista a lezione per capire come offrire agli utenti una esperienza piacevole e ridurre al minimo la complessità delle ricerche. Questo ha fornito gli elementi di base per organizzare la home del sito. Tutte le altre pagine gravitano a partire da questa. 
 
 \subsubsection{Tiro Perfetto} 
-Il tiro perfetto è la metafora per indicare gli utenti che sanno cosa stanno cercando. Per questo motivo nella home page del sito abbiamo inserito un form orizzontale per effettuare la ricerca di. In questo modo la funzione di ricerca è immediatamente disponibile. In questo modo gli utenti possono sia ottenere delle informazioni velocemente che sperimentare direttamente che tipo di servizi offre FRENT. 
+Il tiro perfetto è la metafora per indicare gli utenti che sanno cosa stanno cercando. Per questo motivo nella home page del sito abbiamo inserito un form orizzontale per effettuare la ricerca di un annuncio. In questo modo la funzione di ricerca è immediatamente disponibile. In questo modo gli utenti possono sia ottenere delle informazioni velocemente che sperimentare direttamente che tipo di servizi offre FRENT.
  
 \subsubsection{Trappola per aragoste} 
 Per catturare l'attenzione degli utenti che stanno esplorando il sito, abbiamo inserito nel corpo centrale della home una sezione con gli ultimi annunci pubblicati. Il destinatario di questa sezione è un utente che esplora il sito nei tempi morti o vuole capire che tipo di servizi offre. Gli annunci sono la base del servizio offerto da FRENT ed è bene che gli utenti siano familiari con la loro struttura. Se un utente clicca sopra viene inviato direttamente ad un annuncio. Lo scopo è far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
 Questo vale sia per i guest che per gli host. I guest possono capire come è strutturato un annuncio e che informazioni sono disponibili. Gli host possono capire com'è strutturato un annuncio e quindi risulterà più facile compilare i campi del form per l'aggiunta di un annuncio. \\
-L'idea originale era inserire nella home altre sezione simili, ad esempio gli annunci più votati o le offerte last minute. Abbiamo inserito ultimi annunci inseriti per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicità, abbiamo inserito solo questa sezione. \\
+L'idea originale era inserire nella home altre sezione simili, ad esempio gli annunci più votati o le offerte last minute. Abbiamo inserito gli ultimi annunci inseriti per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicità, abbiamo inserito solo questa sezione. \\
 
 \subsubsection{Boa di Segnalazione}
 La boa di segnalazione serve per ritrovare elementi informativi utili. Le boe di segnalazione in FRENT sono raggruppate in due zone, header e footer. 
@@ -41,7 +41,7 @@ Per la presentazione dei risultati di ricerca, elenco prenotazioni,  elenco annu
 La ricerca riporta l'elenco completo di tutti gli annunci che soddisfano le richieste dell'utente. E' realizzato come un elenco in cui ogni elemento è strutturato allo stesso modo. In questo modo l'utente può farsi un'idea preliminare degli annunci disponibili. Cliccando su un annuncio si viene portati ad una nuova pagina che entra nel dettaglio delle informazioni.
 
 \item\textbf{Elenco prenotazioni guest}
-L'elenco prenotazioni riporta tutte le prenotazioni di un guest, raggruppate in base al loro tipo: passate, corrente e future. Ovviamente i risultati di questa pagina sono influenza dalla data corrente. Le prenotazioni sono riportate in questo ordine, prima corrente, poi future e infine passate. L'ordine riflette il valore che abbiamo attributo all'informazione dal punto di vista del guest. 
+L'elenco prenotazioni riporta tutte le prenotazioni di un guest, raggruppate in base al loro tipo: passate, correnti e future. Ovviamente i risultati di questa pagina sono influenzati dalla data corrente. Le prenotazioni sono riportate in questo ordine, prima corrente, poi future e infine passate. L'ordine riflette il valore che abbiamo attributo all'informazione dal punto di vista del guest.
 \begin{enumerate}
 \item \textbf{Corrente} L'informazione sulla prenotazioni corrente è stata giudicata la più importata e viene quindi presentata per prima. L'idea è che un utente in viaggio voglia controllare i dettagli della prenotazione o contattare l'host in modo rapido. Ad esempio vuole controllare l'indirizzo esatto mentre si sta viaggiando. Per questo motivo è anche inserito anche un pulsante per contattare l'host. Per semplicità è il solo invio di una email.
 \item \textbf{Future} Le prenotazioni future sono messe in seconda posizione perchè è probabile che l'informazione venga visualizzata frequentemente dall'utente mentre organizza viaggi. 
@@ -59,7 +59,7 @@ L'elenco degli annunci da approvare offre all'amministratore tutti gli annunci c
 \end{itemize}
 
 \subsubsection{Schemi ambigui}
-Le funzioni per manipolare sono i dati sono specifiche e sono state organizzati in schemi orientati al compito. In questo modo l'utente ha un'indicazione precisa su dove andare per eseguire le operazioni.
+Le funzioni per manipolare i dati sono specifiche e sono state organizzati in schemi orientati al compito. In questo modo l'utente ha un'indicazione precisa su dove andare per eseguire le operazioni.
 
 \begin{itemize}
 \item \textbf{Header utenti registrati}
@@ -78,9 +78,9 @@ Le funzioni per manipolare sono i dati sono specifiche e sono state organizzati 
 \end{itemize}
 
 \subsection{Struttura organizzativa}
-Le pagine di FRENT sono organizzate in modo gerarchico. La pagina di partenza è la home da cui è possibile raggiungere tutte le principali funzioni del sito. Per ciascun livello ci è cercato di elencare funzioni mutualmente esclusive. Ad esempio la home porta alle pagine "Le mie prenotazioni" e "I miei annunci" per gestire prenotazioni e annunci. Inoltre le relazioni padre-figlio fra pagine sono state pensate per essere naturali. Ad esempio dalla "I miei annunci" si arriva all'elenco degli annunci pubblicati da un host. Per ciascun annunci si può andare ad una pagina specifica di gestione che riporta tutte le funzioni specifiche per un singolo annuncio. In modo analogo, la pagina "Le mie prenotazioni" riporta tutte le prenotazioni fatte dal guest. Per ciascuna prenotazione si può andare a vederne i dettagli. \\
+Le pagine di FRENT sono organizzate in modo gerarchico. La pagina di partenza è la home da cui è possibile raggiungere tutte le principali funzioni del sito. Per ciascun livello si è cercato di elencare funzioni mutualmente esclusive. Ad esempio la home porta alle pagine "Le mie prenotazioni" e "I miei annunci" per gestire prenotazioni e annunci. Inoltre le relazioni padre-figlio fra pagine sono state pensate per essere naturali. Ad esempio dalla pagina "I miei annunci" si arriva all'elenco degli annunci pubblicati da un host. Per ciascun annuncio si può andare ad una pagina specifica di gestione che riporta tutte le funzioni specifiche per un singolo annuncio. In modo analogo, la pagina "Le mie prenotazioni" riporta tutte le prenotazioni fatte dal guest. Per ciascuna prenotazione si può andare a vederne i dettagli. \\
 Per motivi di semplicità FRENT utilizza alcuni elementi di ipertesto. Le pagine di "Accesso" e "Registrazione" sono collegate fra di loro. In questo modo un utente che sbaglia ad accedere ad una funzione (ad esempio un utente non registrato prova a fare l'accesso) viene reindirizzato alla pagina corretta. 
-La pagina per visualizzare i dettagli di un annuncio che un host può è la stessa dei risultati di ricerca. In questo l'host può vedere la pagina come appare ad un guest dopo la ricerca. Mancano le funzioni per effettuare la prenotazione (un host non può essere guest di se stesso). Inoltre vi è un pulsante che permette di andare alla pagina per la modifica dei dati dell'annuncio.
+La pagina per i dettagli di un annuncio che un host può visualizzare è la stessa dei risultati di ricerca. In questo l'host può vedere la pagina come appare ad un guest dopo la ricerca. Mancano le funzioni per effettuare la prenotazione (un host non può essere guest di se stesso). Inoltre vi è un pulsante che permette di andare alla pagina per la modifica dei dati dell'annuncio.
 
 \subsection{Web design}
 Per impostare il layout delle pagine abbiamo cercato di utilizzare degli schemi quanto più semplici possibile. lPer aiutare la navigazione tutte le pagine riportano il breadcrumb con il percorso completo per arrivare alla pagina. In questo modo l'utente può ricostruire in maniera intuitiva il percorso che ha fatto. Per non confondere l'utente, nei menu con link alle pagine abbiamo evitato di inserire link circolari. 
