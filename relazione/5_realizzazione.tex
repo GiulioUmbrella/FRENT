@@ -1,27 +1,46 @@
-Come ci siamo divisi il lavoro
-1 DB assieme
-2 parte statica assime
-presentazione 
-funzionalita
+\documentclass[1_relazione.tex]{subfiles}
+\begin{document}
+
+\section{Realizzazione}
+Questa sezione illustra i passi per la realizzazione di FRENT.  I criteri che abbiamo utilizzato sono:
+\begin{itemize}
+\item Separazione fra struttura, presentazione e comportamento 
+\item Garantire l'accessibilità
+\item Scelta della corretta tecnologia da impiegare
+\end{itemize}
+
+\subsection{Base di dati}
+La base di dati è stata la prima parte del progetto codificata. A partire dallo schemi ER introdotti nella sezione precedente, abbiamo creato le entità e le relazioni in SQL. Abbiamo controllato con attenzione le politiche di reazione in caso di cancellazione e modifiche ai dati, in modo che la base di dati fosse sempre coerente. Inoltre abbiamo deciso di implementare tutte le funzionalità di base offerte dal sito come funzioni e procedure SQL. 
+
+\subsection{Struttura}
+Il punto di partenza per la creazione del sito sono state le pagine statiche. Abbiamo deciso di implementare le pagine in xhtml e utilizzare htlm5 solo per quelle pagine in cui era indispensabile. Una componente fondamentale per il funzionamento del sito sono le date il guest deve sempre indicare la data di inizio e di fine della prenotazione. Per facilitare l'inserimento di questo dato abbiamo scelto di utilizzare il widget-calendario di html5. Abbiamo giudicato improponibile chiedere al guest di inserire 6 numeri (in un formato specifico per giunta) per ogni ricerca. Le pagine di home, elenco risultati e dettagli annunci sono perciò implementate con html5. \\
+Abbiamo inoltre implementato gli schemi esatti che sono stati introdotti nella sezione di progettazione realizzati sotto forma di liste. In questa fase abbiamo realizzato gli header e i footer che poi sarebbero stati scelti dinamicamente in un secondo periodo. \\
+Per ragioni di accessibilità, tutti i form sono racchiusi nel tag fieldset e utilizzano il tag legend  
+Le pagine cosi composte ci hanno permesso di capire se stavamo andando nella direzione giusta. Una delle decisione che abbiamo preso è stata rimuovere una delle funzionalità che avevamo imposta all'inizio, l'elenco degli annunci preferiti del guest (non riportato nello schema). 
+
+\subsection{Presentazione}
+Il secondo passaggio è stata la presentazione.  Abbiamo creato un file .css separato per la presentazione che poi abbiamo inserito nella pagine .html. 
+
+Per gestire gli elementi nella pagina abbiamo utilizzato i grid layout. L'uso di questa tecnologia ha permesso di ottenere ottimi risultati in breve tempo. Abbiamo impostato tre tipi di grid:
+\begin{itemize}
+\item \textbf{Layout colonna}  La pagina è formata da un'unica colonna.
+\item \textbf{Layout a tre pannell} Layout a tre pannelli.
+\item \textbf{Layout centrale} La pagina è formata da un'unica colonna, ma viene data maggiore enfasi alla zona centrale. Tutti i form utilizzano questo layout
+\end{itemize}
+
+Lo svantaggio di utilizzare Grid è che non garantisce retrocompatibiltà con i browser più vecchi, ad esempio IE. Tuttavia come illustrato in precedenza la percentuale attesa di utenti di FRENT che usano IE è talmente bassa da giustificare l'utilizzo di Grid. In un secondo momento abbiamo introdotto alcune impostazioni css specifiche per IE.
+
+I form hanno tutti la stessa presentazioni. 
+
+\subsection{Comportamento}
+Per gestire il comportamento abbiamo usato due tecnologie, php e javascript.
+
+\subsubsection{PHP}
+Le pagine in formato html sono state utlizz
 
 
-mock up struttura sito 
-servizi
-1 parte statica
-2 stile
-3 php
-4 mobile
-5 capire quando usare html5
-6 javascript
+\subsubsection{Javascript}
+Javascript è stato impiegato per effettuare i controlli lato client sull'input inserito dall'utente.
 
 
-
-pagineHTML5
-
-
-JAVA SCRIPT/PHP
-deve essere presente una forma di controllo dell’input inserito dall’utente, sia lato client che lato server
-
-
-DATABASE
-i dati inseriti dagli utenti devono essere salvati in un database;
+\end{document}
