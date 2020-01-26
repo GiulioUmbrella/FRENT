@@ -28,7 +28,9 @@ try {
     }
     $content .= "</ul>";
 } catch (Eccezione $ex) {
-    $content = "<h2>C'&egrave; stato un errore nel reperimento degli annunci da approvare</h2><p>Errore riscontrato: " . $ex->getMessage() . "</p>";
+    
+    $_SESSION["msg"]="<h2>C'&egrave; stato un errore nel reperimento degli annunci da approvare</h2><p>Errore riscontrato: " . $ex->getMessage() . "</p>";
+    header("Location: ./error_page.php");
 }
 
 $pagina = str_replace("<ANNUNCI_PENDENTI/>", $content, $pagina);

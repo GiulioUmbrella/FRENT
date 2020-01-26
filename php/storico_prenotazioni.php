@@ -30,24 +30,21 @@ try{
                 $guest = $frent->getUser($prenotazione->getIdUtente());
                 $username = $guest->getUserName();
                 $mail = $guest->getMail();
-                $p = "<li>
-            <div class=\"corpo_lista lista_storico_prenotazioni\">
-                <ul>
-                    <li><span xml:lang=\"en\" lang='en' class=\"intestazione_campo\">Username:</span>
-                        <a href=\"mailto:".$mail."\" title=\"Manda una mail all'ospite\">$username</a></li>
-                    <li class=\"intestazione_campo\">Numero ospiti: $numOspiti</li>
-                    <li class=\"intestazione_campo\">Data inizio: $dataInizio</li>
-                    <li class=\"intestazione_campo\">Data fine: $dataFine</li>
-                    <li class=\"intestazione_campo\">Totale prenotazione: &euro; $totale</li>
-                </ul>
-            </div>
-        </li>";
+                $item = file_get_contents("./components/item_prenotazione_storico.html");
+                
+                $item = str_replace("<DI/>",$dataInizio,$item);
+                $item = str_replace("<DF/>",$dataFine,$item);
+                $item = str_replace("<MAIL/>",$mail,$item);
+                $item = str_replace("<NO/>",$numOspiti,$item);
+                $item = str_replace("<USERNAME/>",$username,$item);
+                $item = str_replace("<TOTALE/>",$totale,$item);
+
                 if ($prenotazione->getDataFine() < $data_corrente) {
-                    $prenotazioniPassate .= $p;
+                    $prenotazioniPassate .= $item;
                 } else if ($prenotazione->getDataInizio() > $data_corrente) {
-                    $prenotazioniFuture .= $p;
+                    $prenotazioniFuture .= $item;
                 } else {
-                    $prenotazioneCorrente = $p;
+                    $prenotazioneCorrente = $item;
                 }
             }
             if ($prenotazioneCorrente==""){

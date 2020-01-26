@@ -183,5 +183,7 @@ try {
 
     echo $pagina;
 } catch (Eccezione $ex) {
-    echo "Eccezione: " . $exc->getMessage();
+    
+    $_SESSION["msg"]="<h2>".$ex->getMessage()."</h2>";
+    header("Location: ./error_page.php");
 }
