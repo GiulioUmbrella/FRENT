@@ -149,3 +149,12 @@ img {
 .intestazione_commento img {
 	display: none;
 }
+
+dt {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+dd {
+	line-height: 1.1em;
+}
