@@ -55,11 +55,11 @@ La struttura del sistema \`{e} composta da:
     Questa scelta \`{e} stata presa per tenere separata la struttura (che non cambia), dal comportamento.
     \item \textbf{script}: sono dei file PHP con al loro interno degli script che ricevono dei dati da elaborare (tipicamente dai form HTML o dalla sessione) per effettuare delle operazioni lato server, senza mostrare direttamente il processo all'utente, ma solo il risultato finale reindirizzando l'utente ad un'altra pagina.
     Esempi di questi script sono quelli per il logout, l'eliminazione di un profilo e il controllo di validità dei dati di una prenotazione.
-    \item \textbf{loader}: sono dei file PHP con al loro interno insiemi di istruzioni che compiono un determinato procedimento. Ne sono stati creati due, uno per il caricamento delle classi fin qui illustrate (\textbf{php/load\_Frent.php}) e uno per la selezione dell'header da mostrare all'utente (\textbf{php/load\_header.php}) in base alla pagina in cui si trova e alla categoria di utenza.
+    \item \textbf{loader}: sono dei file PHP con al loro interno insiemi di istruzioni che compiono un determinato procedimento. Ne sono stati creati due, uno per il caricamento delle classi fin qui illustrate (\textbf{frent/load\_Frent.php}) e uno per la selezione dell'header da mostrare all'utente (\textbf{frent/load\_header.php}) in base alla pagina in cui si trova e alla categoria di utenza.
 \end{itemize}
 Le pagine PHP sono state create utilizzando meno possibile il codice HTML nei file PHP.
-Ad esempio, nella pagina \textbf{php/miei\_annunci.php} la definizione della struttura del singolo annuncio \`{e} stata delegata al file \textit{php/components/item\_mio\_annuncio.html}, così da garantire la separazione della struttura dal comportamento.
-L'unico file che non rispetta la separazione in maniera abbastanza importante è il file \textit{php/load\_header.php}.\\
+Ad esempio, nella pagina \textbf{frent/miei\_annunci.php} la definizione della struttura del singolo annuncio \`{e} stata delegata al file \textit{frent/components/item\_mio\_annuncio.html}, così da garantire la separazione della struttura dal comportamento.
+L'unico file che non rispetta la separazione in maniera abbastanza importante è il file \textit{frent/load\_header.php}.\\
 
 Si è deciso inoltre di gestire la maggior parte degli errori attraverso il lancio di eccezioni (del tipo Eccezione definito sopra), in quanto questi errori sono tipicamente fatali.
 Quando vengono lanciati degli errori dalle chiamate ai metodi delle classi sopra definite, se l'errore:
@@ -67,8 +67,8 @@ Quando vengono lanciati degli errori dalle chiamate ai metodi delle classi sopra
     \item \`{E} stato causato dall'inserimento errato di un valore, viene mostrato un messaggio di errore;
     \item Se non \`{e} stato causato dall'utente, ma ad esempio da una richiesta al database fallita o di una pagina inesistente, la pagina reagisce in uno dei seguenti modi:
     \begin{enumerate}
-        \item L'utente viene re-indirizzato alla pagina \textbf{php/error\_page.php} con un eventuale messaggio di errore il più possibile esplicativo;
-        \item L'utente viene re-indirizzato alla pagina \textbf{php/404.php};
+        \item L'utente viene re-indirizzato alla pagina \textbf{frent/error\_page.php} con un eventuale messaggio di errore il più possibile esplicativo;
+        \item L'utente viene re-indirizzato alla pagina \textbf{frent/404.php};
         \item Interviene il server e mostra l'eventuale errore. In questo particolare caso non è stato possibile per noi (data la configurazione del server ospitante il progetto) modificarne il comportamento.
     \end{enumerate}
 \end{itemize}
@@ -78,7 +78,7 @@ Quando un utente si registra al sito viene creata di deafult una carftella \text
 \subsubsection{JavaScript}
 Il linguaggio JavaScript \`{e} stato impiegato come complemento al sito e non come strumento per implementarne le funzionalità.
 Infatti, alcuni utenti potrebbero aver scelto di disabilitare JavaScript all'interno del browser oppure avere un browser obsoleto. Entrambi i casi sono stati considerati da noi molto rari, ma non impossibili.
-Per questo motivo abbiamo ridotto al solo essenziale le funzionalità svolte dallo script JavaScript \textbf{php/form\_validator.js}.
+Per questo motivo abbiamo ridotto al solo essenziale le funzionalità svolte dallo script JavaScript \textbf{frent/form\_validator.js}.
 Questo file ha il solo compito di contenere le funzioni che vengono invocate dai form alla pressione del pulsante di submit di un form, le quali si occupano di controllare l'input dell'utente prima dell'invio al server (ovvero all'esecuzione di codice PHP).
 Le funzioni chiamate dai form HTML sono quelle con il nome che comincia con \textit{validazione\_form}. Saranno queste funzioni a richiamare le singole funzioni, \textit{check\_nome\_campo}, per controllare la validit\`{a} dei valori inseriti dall'utente.
 Se il controllo effettuato ha successo viene restituito \textbf{true}, altrimenti viene visualizzato un messaggio di errore informativo implementato con un elemento \textit{strong} e successivamente restituito \textbf{false}.
