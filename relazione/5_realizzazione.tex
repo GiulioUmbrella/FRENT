@@ -1,75 +1,75 @@
 \documentclass[1_relazione.tex]{subfiles}
 \begin{document}
 
-\section{Realizzazione}
-Questa sezione illustra i passi per la realizzazione di FRENT.  I criteri che abbiamo utilizzato sono:
-\begin{itemize}
-\item Separazione fra struttura, presentazione e comportamento 
-\item Garantire l'accessibilit\`{a}
-\item Scelta della corretta tecnologia da impiegare
-\end{itemize}
+    \section{Realizzazione}
+    Questa sezione illustra i passi per la realizzazione di FRENT. I criteri che abbiamo utilizzato sono:
+    \begin{itemize}
+        \item Separazione fra struttura, presentazione e comportamento
+        \item Garantire l'accessibilit\`{a}
+        \item Scelta della corretta tecnologia da impiegare
+    \end{itemize}
 
-\subsection{Base di dati}
-La base di dati \`{e} stata la prima parte del progetto codificata. A partire dallo schemi ER introdotti nella sezione precedente, abbiamo creato le entit\`{a} e le relazioni in SQL. Abbiamo controllato con attenzione le politiche di reazione in caso di cancellazione e modifiche ai dati, in modo che la base di dati fosse sempre coerente. Inoltre abbiamo deciso di implementare tutte le funzionalit\`{a} di base offerte dal sito come funzioni e procedure SQL.
+    \subsection{Base di dati}
+    La base di dati \`{e} stata la prima parte del progetto codificata. A partire dallo schemi ER introdotti nella sezione precedente, abbiamo creato le entit\`{a} e le relazioni in SQL. Abbiamo controllato con attenzione le politiche di reazione in caso di cancellazione e modifiche ai dati, in modo che la base di dati fosse sempre coerente. Inoltre abbiamo deciso di implementare tutte le funzionalit\`{a} di base offerte dal sito come funzioni e procedure SQL.
 
-\subsection{Struttura}
-Il punto di partenza per la creazione del sito sono state le pagine statiche. In tutte le pagine abbiamo prestato attenzione ai tag utilizzati e a rispettarne il significato semantico come visto in classe e nei laboratori. Abbiamo deciso di implementare le pagine in xhtml e utilizzare htlm5 solo per quelle pagine in cui era indispensabile. Una componente fondamentale per il funzionamento del sito sono le date il guest deve sempre indicare la data di inizio e di fine della prenotazione. Per facilitare l'inserimento di questo dato abbiamo scelto di utilizzare il widget-calendario di html5. Abbiamo giudicato improponibile chiedere al guest di inserire 6 numeri (in un formato specifico per giunta) per ogni ricerca. Le pagine di home, elenco risultati e dettagli annunci sono perci\`{o} implementate con html5. \\
-Abbiamo inoltre implementato gli schemi esatti che sono stati introdotti nella sezione di progettazione realizzati sotto forma di liste. In questa fase abbiamo realizzato gli header e i footer che poi sarebbero stati scelti dinamicamente in un secondo periodo. \\
-Per ragioni di accessibilit\`{a}, tutti i form sono racchiusi nel tag fieldset e utilizzano il tag legend .
-Le pagine cosi composte ci hanno permesso di capire se stavamo andando nella direzione giusta. Una delle decisione che abbiamo preso \`{e} stata rimuovere una delle funzionalit\`{a} che avevamo imposta all'inizio, l'elenco degli annunci preferiti del guest (non riportato nello schema).
+    \subsection{Struttura}
+    Il punto di partenza per la creazione del sito sono state le pagine statiche. In tutte le pagine abbiamo prestato attenzione ai tag utilizzati e a rispettarne il significato semantico come visto in classe e nei laboratori. Abbiamo deciso di implementare le pagine in xhtml e utilizzare htlm5 solo per quelle pagine in cui era indispensabile. Una componente fondamentale per il funzionamento del sito sono le date il guest deve sempre indicare la data di inizio e di fine della prenotazione. Per facilitare l'inserimento di questo dato abbiamo scelto di utilizzare il widget-calendario di html5. Abbiamo giudicato improponibile chiedere al guest di inserire 6 numeri (in un formato specifico per giunta) per ogni ricerca. Le pagine di home, elenco risultati e dettagli annunci sono perci\`{o} implementate con html5. \\
+    Abbiamo inoltre implementato gli schemi esatti che sono stati introdotti nella sezione di progettazione realizzati sotto forma di liste. In questa fase abbiamo realizzato gli header e i footer che poi sarebbero stati scelti dinamicamente in un secondo periodo. \\
+    Per ragioni di accessibilit\`{a}, tutti i form sono racchiusi nel tag fieldset e utilizzano il tag legend .
+    Le pagine cosi composte ci hanno permesso di capire se stavamo andando nella direzione giusta. Una delle decisione che abbiamo preso \`{e} stata rimuovere una delle funzionalit\`{a} che avevamo imposta all'inizio, l'elenco degli annunci preferiti del guest (non riportato nello schema).
 
-\subsection{Presentazione}
-Il secondo passaggio \`{e} stata la presentazione. In questo paragrafo riportiamo i punti pi\`{u} rilevanti. Abbiamo creato un file .css separato per la presentazione che poi abbiamo inserito nella pagine .html. Il font utilizzato per le pagine \`{e} quello senza grazie, per migliorare la leggibilit\`{a}. Il font utilizzato per la stampa delle pagine \`{e} con grazia. Questo per garantire migliore leggibilit\`{a} dei contenuti.  \\
- % Grid
-Per organizzare gli elementi nella pagina abbiamo utilizzato i grid layout. L'uso di questa tecnologia ha permesso di ottenere ottimi risultati in breve tempo. Abbiamo impostato tre tipi di grid:
-\begin{itemize}
-\item \textbf{Layout colonna} La pagina è formata da un'unica colonna.
-\item \textbf{Layout a tre pannelli} Layout a tre pannelli.
-\item \textbf{Layout centrale} La pagina è formata da un'unica colonna, ma viene data maggiore enfasi alla zona centrale. Tutti i form utilizzano questo layout
-\end{itemize}
+    \subsection{Presentazione}
+    Il secondo passaggio \`{e} stata la presentazione. In questo paragrafo riportiamo i punti pi\`{u} rilevanti. Abbiamo creato un file .css separato per la presentazione che poi abbiamo inserito nella pagine .html. Il font utilizzato per le pagine \`{e} quello senza grazie, per migliorare la leggibilit\`{a}. Il font utilizzato per la stampa delle pagine \`{e} con grazia. Questo per garantire migliore leggibilit\`{a} dei contenuti.  \\
+    % Grid
+    Per organizzare gli elementi nella pagina abbiamo utilizzato i grid layout. L'uso di questa tecnologia ha permesso di ottenere ottimi risultati in breve tempo. Abbiamo impostato tre tipi di grid:
+    \begin{itemize}
+        \item \textbf{Layout colonna} La pagina \`{e} formata da un'unica colonna.
+        \item \textbf{Layout a tre pannelli} Layout a tre pannelli.
+        \item \textbf{Layout centrale} La pagina \`{e} formata da un'unica colonna, ma viene data maggiore enfasi alla zona centrale. Tutti i form utilizzano questo layout
+    \end{itemize}
 
-Lo svantaggio di utilizzare Grid \`{e} che non garantisce retrocompatibilt\`{a} con i browser pi\`{u} vecchi, ad esempio IE. Tuttavia come illustrato in precedenza la percentuale attesa di utenti di FRENT che usano IE \`{e} talmente bassa da giustificare l'utilizzo di Grid. In un secondo momento abbiamo introdotto alcune impostazioni css specifiche per IE. \\
-% Form
-Tutti i form rispettano le stesse convenzioni interne per non creare disorientamento nell'utente. Per modificare e inserire i dati abbiamo utilizzato dei form posizionati al centro della pagina. Nel momento in cui l'utente modifica i dati non ha bisogno di accedere ad altre tipologie di informazioni all'interno della pagina. Fanno eccezione i form orizzontali e verticali di ricerca annunci che per\`{o} devono essere integrati nella pagina come abbiamo spiegato nella sezione sulla progettazione.
+    Lo svantaggio di utilizzare Grid \`{e} che non garantisce retrocompatibilt\`{a} con i browser pi\`{u} vecchi, ad esempio IE. Tuttavia come illustrato in precedenza la percentuale attesa di utenti di FRENT che usano IE \`{e} talmente bassa da giustificare l'utilizzo di Grid. In un secondo momento abbiamo introdotto alcune impostazioni css specifiche per IE. \\
+    % Form
+    Tutti i form rispettano le stesse convenzioni interne per non creare disorientamento nell'utente. Per modificare e inserire i dati abbiamo utilizzato dei form posizionati al centro della pagina. Nel momento in cui l'utente modifica i dati non ha bisogno di accedere ad altre tipologie di informazioni all'interno della pagina. Fanno eccezione i form orizzontali e verticali di ricerca annunci che per\`{o} devono essere integrati nella pagina come abbiamo spiegato nella sezione sulla progettazione.
 
-% Liste
+    % Liste
 
 
-% Colore
-Per scegliere i colori abbiamo utilizzato un pallete messa a disposizione dalla w3c. La scelta del colore \`{e} stata fatta in modo arbitrario dopo aver provato diverse combinazioni. Non abbiamo l'esperienza necessaria per poter fare una scelta precisa dei colori. Abbiamo quindi cercato di utilizzare i colori nel modo pi\`{u} semplice possibile per non creare disorientamento nell'utente.
+    % Colore
+    Per scegliere i colori abbiamo utilizzato un pallete messa a disposizione dalla w3c. La scelta del colore \`{e} stata fatta in modo arbitrario dopo aver provato diverse combinazioni. Non abbiamo l'esperienza necessaria per poter fare una scelta precisa dei colori. Abbiamo quindi cercato di utilizzare i colori nel modo pi\`{u} semplice possibile per non creare disorientamento nell'utente.
 
-\subsection{Comportamento}
-Per gestire il comportamento abbiamo usato due tecnologie, PHP e JavaScript.
+    \subsection{Comportamento}
+    Per gestire il comportamento abbiamo usato due tecnologie, PHP e JavaScript.
 
-\subsubsection{PHP}
-Per la rendere il sito dinamica \`{e} stato utilizzato il linguaggio PHP.
-La struttura del sistema \`{e} composta da:
-\begin{itemize}
-    \item Class_Database.php: che permette, dato un comando SQL, di interagire con il database;
-    \item Class_Frent.php: che permette di effettuare le chiamate alle procedure o funzioni presenti nel Database;
-    \item Classi Entit\`{a}: sono delle classi che rappresentano le entit\`{a} del database, simile a Java Beans permettono di contenere i dati in modo compatto.
-    \item Classe CredenzialiDB.php viene usato per salvare i dati di accesso al Database del server;
-    \item Classe DataConstraints.php: \`{e} una classe di raccolta che viene usato per salvare i limiti di lunghezza dei dati di database, permettendo cos\`{i} la gestione centrale. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito.
-    \item Classe ImageManager: % todo
-    \item Pagine: le pagine PHP vengono create prendendo in input la pagina html statica corrispondente, e  sostituendo i vari FLAG di posizione con le informazioni reperite dal database. Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent.php. Anche questa scelta \`{e} dettata dalla scelta di tenere in modo centralizzato le parti che nei futuri sviluppi potrebbero subire modifiche.
-    \item  Script: sono dei script php che servono per effettuare delle operazioni, una queste operazioni \`{e} il logout.
-    \item classi loader: sono due load_frent.php e load_header sono delle classi contengono dei codici php ripetute in quasi tutte le pagine o script, per cui si \`{e} deciso di raccoglierli e di inserirlo in queste classi.
-\end{itemize}
+    \subsubsection{PHP}
+    Per la rendere il sito dinamica \`{e} stato utilizzato il linguaggio PHP.
+    La struttura del sistema \`{e} composta da:
+    \begin{itemize}
+        \item Class_Database.php: che permette, dato un comando SQL, di interagire con il database;
+        \item Class_Frent.php: che permette di effettuare le chiamate alle procedure o funzioni presenti nel Database;
+        \item Classi Entit\`{a}: sono delle classi che rappresentano le entit\`{a} del database, simile a Java Beans permettono di contenere i dati in modo compatto.
+        \item Classe CredenzialiDB.php viene usato per salvare i dati di accesso al Database del server;
+        \item Classe DataConstraints.php: \`{e} una classe di raccolta che viene usato per salvare i limiti di lunghezza dei dati di database, permettendo cos\`{i} la gestione centrale. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito.
+        \item Classe ImageManager: % todo
+        \item Pagine: le pagine PHP vengono create prendendo in input la pagina html statica corrispondente, e sostituendo i vari FLAG di posizione con le informazioni reperite dal database. Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent.php. Anche questa scelta \`{e} dettata dalla scelta di tenere in modo centralizzato le parti che nei futuri sviluppi potrebbero subire modifiche.
+        \item  Script: sono dei script php che servono per effettuare delle operazioni, una queste operazioni \`{e} il logout.
+        \item classi loader: sono due load_frent.php e load_header sono delle classi contengono dei codici php ripetute in quasi tutte le pagine o script, per cui si \`{e} deciso di raccoglierli e di inserirlo in queste classi.
+    \end{itemize}
 
-Le pagine PHP sono state create utilizzando meno possibile il codice HTML nei file PHP, per esempio, nella pagina miei_annunci.php la definizione dei singoli annunci \`{e} stata fatta nel file \textit{components/item_mio_annuncio.html}, in questo modo \`{e} stata garantita la pulizia del codice PHP senza inquinarla con codice HTML ad eccezione della \textit{classe load_header.php}. Nei casi in cui il codice HTML richiesto \`{e} di una sola riga, si \`{e} deciso di inserirlo direttamente.
+    Le pagine PHP sono state create utilizzando meno possibile il codice HTML nei file PHP, per esempio, nella pagina miei_annunci.php la definizione dei singoli annunci \`{e} stata fatta nel file \textit{components/item_mio_annuncio.html}, in questo modo \`{e} stata garantita la pulizia del codice PHP senza inquinarla con codice HTML ad eccezione della \textit{classe load_header.php}. Nei casi in cui il codice HTML richiesto \`{e} di una sola riga, si \`{e} deciso di inserirlo direttamente.
 
-Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Frent.php, se l'errore \`{e} stato causato dall'inserimento errato di un valore, viene mostrato il messaggio di errore, mentre se non \`{e} stato causato dall'utente, la pagina reagisce in uno dei seguenti modi:
-\begin{enumerate}
-    \item l'utente viene re-indirizzato alla pagina error_page.php con eventuale messaggio di errore;
-    \item l'utente viene re-indirizzato alla pagina 404.php;
-    \item interviene il server e mostra l'eventuale errore.
-\end{enumerate}
+    Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Frent.php, se l'errore \`{e} stato causato dall'inserimento errato di un valore, viene mostrato il messaggio di errore, mentre se non \`{e} stato causato dall'utente, la pagina reagisce in uno dei seguenti modi:
+    \begin{enumerate}
+        \item l'utente viene re-indirizzato alla pagina error_page.php con eventuale messaggio di errore;
+        \item l'utente viene re-indirizzato alla pagina 404.php;
+        \item interviene il server e mostra l'eventuale errore.
+    \end{enumerate}
 
-\subsubsection{Javascript}
-Il linguaggio JavaScript è stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
-Il file \textit{form_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
-    I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione_nome_form}, ed \'{e} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
-    Se il valore inserito non \`{e} valido, viene inserito un elemento \textit{strong} che contiene il messaggio di errore. 
+    \subsubsection{Javascript}
+    Il linguaggio JavaScript \`{e} stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
+    Il file \textit{form_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
+    I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione_nome_form}, ed sar\`{a} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
+    Se il valore inserito non \`{e} valido viene inserito un elemento d \textit{strong} che contiene il messaggio di errore.
 
 
 \end{document}
