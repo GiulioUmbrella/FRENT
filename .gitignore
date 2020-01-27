@@ -9,3 +9,5 @@ uploads/user*
 ~$ppa_del_sito.docx
 
 ~WRL0003.tmp
+
+*.log
