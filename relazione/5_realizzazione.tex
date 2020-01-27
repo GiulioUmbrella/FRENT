@@ -74,10 +74,11 @@ Quando vengono lanciati degli errori dalle chiamate ai metodi delle classi sopra
 \end{itemize}
 
 \subsubsection{JavaScript}
-Il linguaggio JavaScript \`{e} stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
-Il file \textit{form\_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
-I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione\_nome\_form}, ed sar\`{a} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
-Se il valore inserito non \`{e} valido viene inserito un tag \textit{strong} che contiene il messaggio di errore.
-
+Il linguaggio JavaScript \`{e} stato impiegato come complemento al sito e non come strumento per implementare le funzionalità del sito.
+Infatti, alcuni utenti potrebbero aver scelto di disabilitare JavaScript all'interno del browser oppure avere un browser obsoleto. Entrambi i casi sono stati considerati da noi molto rari, ma non impossibili.
+Per questo motivo abbiamo ridotto al solo essenziale le funzionalità svolte dallo script JavaScript \textbf{php/form\_validator.js}.
+Questo file ha il solo compito di contenere le funzioni che vengono invocate dai form alla pressione del pulsante di submit di un form, le quali si occupano di controllare l'input dell'utente prima dell'invio al server (ovvero all'esecuzione di codice PHP).
+Le funzioni chiamate dai form HTML sono quelle con il nome che comincia con \textit{validazione\_form}. Saranno queste funzioni a richiamare le singole funzioni per controllare la validit\`{a} dei valori inseriti dall'utente.
+Se il controllo effettuato ha successo viene restituito \textbf{true}, altrimenti viene visualizzato un messaggio di errore informativo implementato con un elemento \textit{strong} e successivamente restituito \textbf{false}.
 
 \end{document}
