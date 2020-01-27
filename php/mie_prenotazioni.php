@@ -12,7 +12,7 @@ if (isset($_SESSION["user"])) {
     // pescare le prenotazioni correnti
     
     $prenotazioni = $frent->getPrenotazioniGuest();
-    $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\">";
+    $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\"> ";
     $prenotazioni_passate = "<h1>Le mie prenotazioni passate</h1><ul id=\"prenotazioni_passate\">";
     $prenotazioni_correnti = "<h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
     $data_corrente = date("Y-m-d");
@@ -81,29 +81,39 @@ if (isset($_SESSION["user"])) {
             $prenotazioni_future .=$item;
         }
     }
-
+    
    if($numPrenotazioniCorrenti>0 or $numPrenotazioniFuture>0 or $numPrenotazioniPassate>0){
        $pagina = str_replace("<FLAG/>","<PRENOTAZIONICORRENTI/><PRENOTAZIONIFUTURE/><PRENOTAZIONIPASSATE/>",$pagina);
        if ($numPrenotazioniPassate > 0) {
+           $pagina = str_replace("<LINKPASS/>",
+               "<a class=\"aiuti_alla_navigazione\" href=\"#prenotazioni_passate\">Vai alle tue prenotazioni passate</a>" , $pagina);
            $prenotazioni_passate .= "</ul>";
            $pagina = str_replace("<PRENOTAZIONIPASSATE/>", $prenotazioni_passate, $pagina);
         
        }else{
+           $pagina = str_replace("<LINKPASS/>","" , $pagina);
            $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "", $pagina);
         
        }
        if ($numPrenotazioniCorrenti > 0) {
+           $pagina = str_replace("<LINKCOR/>",
+               "<a class=\"aiuti_alla_navigazione\" href=\"#prenotazioni_correnti\">Vai alle tue prenotazioni correnti</a>" , $pagina);
            $prenotazioni_correnti .= "</ul>";
            $pagina = str_replace("<PRENOTAZIONICORRENTI/>", $prenotazioni_correnti, $pagina);
         
        }else{
-           $pagina = str_replace("<PRENOTAZIONICORRENTI/>", "", $pagina);
+           $pagina = str_replace("<LINKCOR/>", "", $pagina);
+           $pagina = str_replace("<PRENOTAZIONIPASSATE/>","" , $pagina);
        }
        if ($numPrenotazioniFuture > 0) {
            $prenotazioni_future .= "</ul>";
+           $pagina = str_replace("<LINKFUT/>",
+               "<a class=\"aiuti_alla_navigazione\" href=\"#prenotazioni_future\">Vai alle tue prenotazioni future</a>",$pagina);
            $pagina = str_replace("<PRENOTAZIONIFUTURE/>", $prenotazioni_future, $pagina);
        }else{
-           $pagina = str_replace("<PRENOTAZIONIFUTURE/>", "", $pagina);
+           $pagina = str_replace("<LINKFUT/>", "", $pagina);
+    
+           $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "",$pagina);
         
        }
    }else{
