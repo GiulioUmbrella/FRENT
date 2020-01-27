@@ -90,4 +90,6 @@ if (isset($_POST["conferma_prenotazione"])) {
     }
     
     
+} else {
+    header("index.php");
 }
