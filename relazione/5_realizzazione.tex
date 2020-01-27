@@ -38,20 +38,21 @@ Tutti i form rispettano le stesse convenzioni interne per non creare disorientam
 % Colore
 Per scegliere i colori abbiamo utilizzato un palette messa a disposizione dalla W3C. La scelta del colore \`{e} stata fatta in modo da evitare possibili problemi di contrasto dopo aver provato diverse combinazioni. Non abbiamo l'esperienza necessaria per poter fare una scelta precisa dei colori. Abbiamo quindi cercato di utilizzare i colori nel modo pi\`{u} semplice possibile per non creare disorientamento nell'utente.
 
-    \subsection{Comportamento}
-    Per gestire il comportamento abbiamo usato due tecnologie, PHP e JavaScript.
+\subsection{Comportamento}
+Per gestire il comportamento del sito abbiamo usato due tecnologie, PHP (lato server) e JavaScript (lato client).
 
 \subsubsection{PHP}
-Per rendere il sito dinamica \`{e} stato utilizzato il linguaggio PHP.
+Per rendere il sito dinamico \`{e} stato utilizzato il linguaggio PHP.
 La struttura del sistema \`{e} composta da:
 \begin{itemize}
-    \item Class\_Database.php: che permette, dato un comando SQL, di interagire con il database;
-    \item Class\_Frent.php: che permette di effettuare le chiamate alle procedure o funzioni presenti nel Database;
-    \item Classi Entit\`{a}: sono delle classi che rappresentano le entit\`{a} del database, simile a Java Beans permettono di contenere i dati in modo compatto.
-    \item Classe CredenzialiDB.php viene usato per salvare i dati di accesso al Database del server;
-    \item Classe DataConstraints.php: \`{e} una classe di raccolta che viene usato per salvare i limiti di lunghezza dei dati di database, permettendo cos\`{i} la gestione centrale. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito.
+    \item classe \textbf{Database}: permette l'apertura e la chiusura di connessioni con il database MySQL realizzato e illustrato nella sezione Progettazione.
+    Avendo realizzato una funzione o una procedura SQL per ogni funzionalit\`{a} offerta dal sito, sono presenti due metodi queryProcedure e queryFunction ottimizzati per l'interrogazione del database rispettivamente con procedure e funzioni.
+    \item classe \textbf{Frent}: permette di effettuare le chiamate alle procedure o funzioni presenti nel database. Si interfaccia con la classe Database per le interrogazioni e si occupa di controllare gli input inseriti dall'utente e di segnalare violazioni di precondizioni sui dati;
+    \item classi \textbf{Amministratore}, \textbf{Annuncio}, \textbf{Commento}, \textbf{Prenotazione}, \textbf{Utente}: sono delle classi che rappresentano le entit\`{a} del database. Contengono metodi set e get per ogni attributo presente nella rispettiva tabella del database e si occupano anche del controllo di validit\`{a} degli input;
+    \item classe \textbf{CredenzialiDB}: viene usata per salvare i dati di accesso al database MySQL;
+    \item classe \textbf{DataConstraints}: \`{e} una classe di raccolta che viene usata per salvare i limiti di lunghezza dei dati impostati nel database, permettendo cos\`{i} la gestione centralizzata. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito;
     \item Classe ImageManager: % todo
-    \item Pagine: le pagine PHP vengono create prendendo in input la pagina html statica corrispondente, e  sostituendo i vari FLAG di posizione con le informazioni reperite dal database. Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent.php. Anche questa scelta \`{e} dettata dalla scelta di tenere in modo centralizzato le parti che nei futuri sviluppi potrebbero subire modifiche.
+    \item pagine: le pagine PHP vengono create prendendo in input la pagina html statica corrispondente, e sostituendo i vari FLAG di posizione con le informazioni reperite dal database. Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent. Anche questa scelta \`{e} dettata di tenere in modo centralizzato le parti che nei futuri sviluppi potrebbero subire modifiche.
     \item  Script: sono dei script php che servono per effettuare delle operazioni, una queste operazioni \`{e} il logout.
     \item classi loader: sono due load\_frent.php e load\_header sono delle classi contengono dei codici php ripetute in quasi tutte le pagine o script, per cui si \`{e} deciso di raccoglierli e di inserirlo in queste classi.
 \end{itemize}
@@ -65,11 +66,11 @@ Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Fr
     \item interviene il server e mostra l'eventuale errore. 
 \end{enumerate}
 
-    \subsubsection{Javascript}
-    Il linguaggio JavaScript \`{e} stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
-    Il file \textit{form_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
-    I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione_nome_form}, ed sar\`{a} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
-    Se il valore inserito non \`{e} valido viene inserito un elemento d \textit{strong} che contiene il messaggio di errore.
+\subsubsection{Javascript}
+Il linguaggio JavaScript \`{e} stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
+Il file \textit{form_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
+I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione_nome_form}, ed sar\`{a} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
+Se il valore inserito non \`{e} valido viene inserito un elemento d \textit{strong} che contiene il messaggio di errore.
 
 
 \end{document}
