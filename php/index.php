@@ -45,7 +45,7 @@ try {
         $item = str_replace("</ID>", $annuncio->getIdAnnuncio(),$item);
         $item = str_replace("</TITOLO>", $annuncio->getTitolo(),$item);
         $item = str_replace("</PATH>", uploadsFolder() . $annuncio->getImgAnteprima(),$item);
-        $item = str_replace("</DESC>", $annuncio->getDescAnteprima(),$item);
+        $item = str_replace("</DESC>", "./get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio(),$item);
         
         $content .=  $item;
     }
