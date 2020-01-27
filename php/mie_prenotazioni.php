@@ -91,18 +91,16 @@ if (isset($_SESSION["user"])) {
            $pagina = str_replace("<PRENOTAZIONIPASSATE/>", $prenotazioni_passate, $pagina);
         
        }else{
-           $pagina = str_replace("<LINKPASS/>","" , $pagina);
            $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "", $pagina);
-        
+    
        }
        if ($numPrenotazioniCorrenti > 0) {
            $pagina = str_replace("<LINKCOR/>",
                "<a class=\"aiuti_alla_navigazione\" href=\"#prenotazioni_correnti\">Vai alle tue prenotazioni correnti</a>" , $pagina);
            $prenotazioni_correnti .= "</ul>";
            $pagina = str_replace("<PRENOTAZIONICORRENTI/>", $prenotazioni_correnti, $pagina);
-        
+    
        }else{
-           $pagina = str_replace("<LINKCOR/>", "", $pagina);
            $pagina = str_replace("<PRENOTAZIONICORRENTI/>","" , $pagina);
        }
        if ($numPrenotazioniFuture > 0) {
@@ -111,14 +109,16 @@ if (isset($_SESSION["user"])) {
                "<a class=\"aiuti_alla_navigazione\" href=\"#prenotazioni_future\">Vai alle tue prenotazioni future</a>",$pagina);
            $pagina = str_replace("<PRENOTAZIONIFUTURE/>", $prenotazioni_future, $pagina);
        }else{
-           $pagina = str_replace("<LINKFUT/>", "", $pagina);
     
            $pagina = str_replace("<PRENOTAZIONIPASSATE/>", "",$pagina);
-        
+    
        }
    }else{
        $pagina= str_replace("<FLAG/>","<h1>Non ci sono prenotazioni!</h1>",$pagina);
    }
+    $pagina = str_replace("<LINKPASS/>","" , $pagina);
+    $pagina = str_replace("<LINKCOR/>", "", $pagina);
+    $pagina = str_replace("<LINKFUT/>", "", $pagina);
     echo $pagina;
 } else {
     header("Location: login.php");
