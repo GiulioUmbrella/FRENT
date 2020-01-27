@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+<head>
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
+    <title>Nuovo annuncio | Frent</title>
+
+    <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
+    <meta name="description" content="Crea un nuovo annuncio per affittare la tua casa"/>
+    <link rel="icon" href="../immagini/icona.ico"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/print.css" media="print"/>
+    <script src="./form_validator.js" type="text/javascript"></script>
+</head>
+<body class="layout_centrale">
+<HEADER/>
+<div id="breadcrumb" >
+    <p>Ti trovi in: <a href="index.php" title="Vai alla pagina di ricerca" xml:lang="en">Home</a> &gt;&gt; <a href="./miei_annunci.php"  title="Torna nei miei annunci">I miei annunci</a> &gt;&gt; Nuovo Annuncio</p>
+</div>
+<div id="content">
+    <h1>Nuovo annuncio</h1>
+    <INFO_BOX/>
+    <form onsubmit="return validazione_form_aggiungi_annuncio();" action="./nuovo_annuncio.php" method="post"
+          class="form form_verticale form_annuncio" enctype="multipart/form-data">
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Dati descrittivi dell'annuncio</legend>
+            <div>
+                <label for="titolo">Titolo annuncio <span class="info_label">(ovvero il nome dell'abitazione, appartamento o
+                    alloggio)</span></label>
+                <input type="text" name="titolo" id="titolo" maxlength="32" value="<VALUETITOLO/>"/>
+
+            </div>
+            <div><label for="descrizione">Descrizione <span class="info_label">(devono essere informazioni utili: pi&ugrave; esaustive
+                sono, pi&ugrave; &egrave; possibile che il tuo annuncio venga scelto!)</span></label>
+                <textarea id="descrizione" name="descrizione" cols="16" rows="4"><VALUEDESCRIZIONE/></textarea>
+            </div>
+            <div><label for="max_ospiti">Numero ospiti <span class="info_label">(quanti ospiti possono essere presenti al massimo)</span></label>
+                <input type="text" name="max_ospiti" id="max_ospiti" maxlength="2" value="<VALUEMAXOSPITI/>"/>
+            </div>
+            <div>
+                <label for="anteprima">Immagine di anteprima dell'annuncio <span class="info_label">(l'immagine pu&ograve; essere in
+                    formato <span xml:lang="en">JPG</span>, <span xml:lang="en">JPEG</span>, <span
+                            xml:lang="en">PNG</span> ed avere una dimensione massima di 2 MB)</span></label>
+                <input type="file" id="anteprima" name="anteprima" accept=".png, .jpg, .jpeg"/>
+
+            </div>
+            <div><label for="desc_anteprima">Descrizione per l'immagine di anteprima <span class="info_label">(deve descrivere l'immagine
+                di anteprima che hai selezionato)</span></label>
+                <textarea id="desc_anteprima" name="desc_anteprima" cols="16" rows="4"><VALUEDESCRIZIONEANTEPRIMA/></textarea>
+            </div>
+            <div>
+                <label for="prezzo_notte">Prezzo per notte per persona <span class="info_label">(in &euro;)</span></label>
+                <input type="text" id="prezzo_notte" name="prezzo_notte" value="<VALUEPREZZONOTTE/>"/>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Indirizzo</legend>
+            <div>
+                <label for="indirizzo">Indirizzo <span class="info_label">(via e numero civico)</span></label>
+                <input type="text" name="indirizzo" id="indirizzo" maxlength="128" value="<VALUEINDIRIZZO/>"/>
+
+            </div>
+            <div><label for="citta">Citt&agrave;</label>
+                <input type="text" name="citta" id="citta" maxlength="128" value="<VALUECITTA/>" />
+            </div>
+        </fieldset>
+        <input type="submit" value="Salva" name="nuovo_annuncio" id="nuovo_annuncio"/>
+        <input type="reset" value="Reset" xml:lang="en"/>
+    </form>
+</div>
+
+<FOOTER/>
+</body>
+</html>

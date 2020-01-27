@@ -1,0 +1,23 @@
+<form onsubmit="return validazione_form_prenota_annuncio();" action="<LINK/>" method="post" class="form form_verticale">
+    <INFO_BOX/>
+    <fieldset>
+        <legend class="aiuti_alla_navigazione">Dati della prenotazione</legend>
+
+        <div>
+            <label for="dataInizio">Data inizio</label>
+            <input id="dataInizio" name="dataInizio" min="<MINDAYB/>" max="<MAXDAYB/>" value="<VALUEINIZIO/>"
+                   type="date" />
+        </div>
+        <div>
+            <label for="dataFine">Data fine</label>
+            <input id="dataFine" name="dataFine" value="<VALUEFINE/>" min="<MINDAYE/>" max="<MAXDAYE/>" type="date" />
+        </div>
+        <div>
+            <label for="numOspiti">Numero Ospiti</label>
+            <input type="number" name="numOspiti" id="numOspiti" min="1" max="<OSPITIMASSIMO/>" value="<VALUENUMERO/>"/>
+        </div>
+        <label class="aiuti_alla_navigazione" for="conferma_prenotazione">Conferma prenotazione</label>
+        <input id="conferma_prenotazione" name="conferma_prenotazione" type="submit" value="Prenota"/>
+    </fieldset>
+</form>
+
