@@ -73,14 +73,14 @@ Quando vengono lanciati degli errori dalle chiamate ai metodi delle classi sopra
     \end{enumerate}
 \end{itemize}
 
-Quando un utente si registra al sito viene creata di deafult una cartella \textit{uploads/userID} con ID dell'utente dove verranno caricati tutti i file da lui aggiunti come immagini profilo (\textit{uploads/userID/imgProfiloID}) e anteprime degli annunci (\textit{uploads/userID/AnnuncioID_ANUNCIO}).
+Quando un utente si registra al sito viene creata di deafult una carftella \textit{uploads/userID} con ID dell'utente dove verranno caricati tutti i file da lui aggiunti come immagini profilo (\textit{uploads/userID/imgProfiloID}) e anteprime degli annunci (\textit{uploads/userID/AnnuncioID\_ANUNCIO}).
 
 \subsubsection{JavaScript}
 Il linguaggio JavaScript \`{e} stato impiegato come complemento al sito e non come strumento per implementarne le funzionalità.
 Infatti, alcuni utenti potrebbero aver scelto di disabilitare JavaScript all'interno del browser oppure avere un browser obsoleto. Entrambi i casi sono stati considerati da noi molto rari, ma non impossibili.
 Per questo motivo abbiamo ridotto al solo essenziale le funzionalità svolte dallo script JavaScript \textbf{php/form\_validator.js}.
 Questo file ha il solo compito di contenere le funzioni che vengono invocate dai form alla pressione del pulsante di submit di un form, le quali si occupano di controllare l'input dell'utente prima dell'invio al server (ovvero all'esecuzione di codice PHP).
-Le funzioni chiamate dai form HTML sono quelle con il nome che comincia con \textit{validazione\_form}. Saranno queste funzioni a richiamare le singole funzioni, \textit{check_nome_campo}, per controllare la validit\`{a} dei valori inseriti dall'utente.
+Le funzioni chiamate dai form HTML sono quelle con il nome che comincia con \textit{validazione\_form}. Saranno queste funzioni a richiamare le singole funzioni, \textit{check\_nome\_campo}, per controllare la validit\`{a} dei valori inseriti dall'utente.
 Se il controllo effettuato ha successo viene restituito \textbf{true}, altrimenti viene visualizzato un messaggio di errore informativo implementato con un elemento \textit{strong} e successivamente restituito \textbf{false}.
 
 \end{document}
