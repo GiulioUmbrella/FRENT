@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <title>Modifica Annuncio</title>
+
+    <link rel="icon" href="../immagini/icona.ico"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/print.css" media="print"/>
+</head>
+<body class="layout_tre_pannelli">
+
+<div id="header">
+    <div id="logo">
+        <h1>Frent</h1>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><a  href="../php/components/index.html" title="Vai alla pagina di ricerca degli annunci">Cerca annunci</a>
+            </li>
+            <li><a  href="../php/components/login.html" title="Vai alla pagina di accesso">Accedi</a></li>
+            <li><a  href="../php/components/registrazione.html" title="Vai alla pagina di registrazione">Registrati</a></li>
+            <li><a href="../php/components/mie_prenotazioni.html" title="Vai alla pagina delle prenotazioni effettuate">Le
+                mie prenotazioni</a></li>
+            <li><a  href="../php/components/miei_annunci.html" title="Vai alla pagina degli annunci posseduti">I miei
+                annunci</a></li>
+            <li><a href="../php/components/mio_profilo_visualizza.html" title="Vai alla pagina del profilo">Il mio
+                profilo</a></li>
+            <li><a href="" title="Effettua la disconnessione">Esci</a></li>
+        </ul>
+    </div>
+</div>
+<div id="breadcrumb">
+    <p> Ti trovi in:<a href="../php/components/miei_annunci.html" title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
+        <a href="../php/components/miei_annunci.html" title="Torna nei miei annunci">Miei Annunci</a>&gt;&gt;Titolo Annuncio
+    </p>
+</div>
+
+<div id="laterale">
+    <ul class="menu_gestione_annuncio">
+        <li><a href="gestione_indisponibilita.html"
+               title="Visualizzare, aggiungere, eliminare le indisponibilit&agrave;
+                    relative a questo annuncio">Gestione Indisponibilit&agrave;</a></li>
+        <li>Modifica</li>
+        <li><a href="visualizza_commenti.html"> Visualizza commenti</a></li>
+        <li><a href="../php/components/storico_prenotazioni." title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
+        <li><a href="#">Elimina Annuncio</a></li>
+    </ul>
+</div>
+
+<div id="content">
+    <h1 class="titolo_gestione_annuncio">Gestione annuncio TITOLO ANNUNCIO</h1>
+    <form action="" method="post" class="form form_verticale">
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Dati annuncio</legend>
+
+            <label for="max_ospiti">Numero ospiti:</label>
+            <input type="number" name="max_ospiti" id="max_ospiti" max="99" min="1" value="1"
+                   placeholder="Numero degli ospiti"/>
+
+            <label for="anteprima">Modifica anteprima: </label>
+            <input type="file" id="anteprima" name="anteprima" accept="image/png, image/jpeg" />
+
+            <label for="prezzo_a_persona">Prezzo a persona:</label>
+            <input type="number" id="prezzo_a_persona" name="prezzo_a_persona"
+                   placeholder="&euro; a persona"/>
+
+            <label for="descrizione">Descrizione:</label>
+            <textarea id="descrizione" name="descrizione" maxlength="512"
+                      placeholder="inserisci qui la descrizione"></textarea>
+
+        </fieldset>
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Indirizzo</legend>
+
+            <label for="via">Via:</label>
+            <input type="text" name="via" id="via" placeholder="via" maxlength="128"/>
+
+            <label for="numero_civico">Numero Civico:</label>
+            <input type="text" name="numero_civico" id="numero_civico" placeholder="Numero civico"/>
+
+            <label for="citta">Citt&agrave;:</label>
+            <input type="text" name="citta" id="citta" placeholder="Citta" maxlength="128"/>
+
+        </fieldset>
+        <fieldset>
+            <legend class="aiuti_alla_navigazione">Immagini</legend>
+            <label for="immagini">Aggiungere immagini:</label>
+            <input type="file" id="immagini" name="immagini" accept="image/png, image/jpeg" multiple/>
+            <ul>
+                <li>
+                    <fieldset>
+                        <div class="commenti_foto">
+                            <img src="../immagini/img1.png" alt="Immagine che hai deciso di caricare.">
+                            <label for="commento1">
+                            <textarea id="commento1" maxlength="512" rows="8" cols="30"
+                                      placeholder="Inserisci la descrizione della foto con nome.png"></textarea>
+                                <a href="#" title="elimina la foto numero 1">Elimina</a>
+                            </label>
+                        </div>
+
+                    </fieldset>
+
+                </li>
+            </ul>
+        </fieldset>
+
+        <!--      questi due tabindex dipenderanno dal numero delle foto che ci sara-->
+        <input type="submit" value="Aggiorna" >
+        <input type="reset" value="Annulla Modifiche" />
+    </form>
+</div>
+<div id="footer">
+    <ul>
+        <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
+        <li><a href="../php/components/condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
+            utilizzo</a></li>
+        <li><a href="faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+

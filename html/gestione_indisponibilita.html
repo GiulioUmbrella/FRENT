@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <title>Gestisci indisponibili&agrave;</title>
+
+    <link rel="icon" href="../immagini/icona.ico"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/print.css" media="print"/>
+    <!--  <script src="script.js"></script>
+    -->
+</head>
+<body class="layout_tre_pannelli">
+
+<HEADER/>
+<div id="breadcrumb">
+    <p> Ti trovi in:<a href="../php/components/miei_annunci.html"  title="Vai alla pagina di ricerca" xml:lang="en">Home</a>&gt;&gt;
+        <a href="../php/components/miei_annunci.html" title="Torna nei miei annunci" >Miei Annunci</a>&gt;&gt;<TITOLO/>
+    </p>
+</div>
+
+<div id="laterale">
+    <ul class="menu_gestione_annuncio">
+        <li>Gestione Indisponibilit&agrave;</li>
+        <li><a href="dettaglio_annunci_host_modifica.html" title="Modificare l'annuncio">Modifica</a>
+        </li>
+        <li><a href="visualizza_commenti.html">Visualizza commenti</a></li>
+        <li><a href="../php/components/storico_prenotazioni.html"
+               title="Visualizzare tutte le prenotazioni relative a questo annuncio">Storico</a></li>
+        <li><a href="#" >Elimina Annuncio</a></li>
+    </ul>
+</div>
+
+<div id="content">
+    <h1 class="titolo_gestione_annuncio">Gestione annuncio TITOLO ANNUNCIO</h1>
+    <form action="gestione_indisponibilita.html" method="post" class="form form_orizzontale">
+        <fieldset>
+            <legend class="legend_evidenziata">Inserire una nuova indisponibilit&agrave;</legend>
+            <div class="input_label_orizzontale">
+                <label for="data_inizio">Data Inizio</label>
+                <input type="date" id="data_inizio"  name="data_inizio"
+                       placeholder="Data inizio nuova indisponibilit&agrave;" value=""/>
+            </div>
+            <div class="input_label_orizzontale">
+                <label for="data_fine">Data Fine</label>
+                <input type="date" id="data_fine" name="data_fine"
+                       placeholder="Data fine nuova indisponibilit&agrave;" value=""/>
+            </div>
+            <div class="input_label_orizzontale">
+                <label for="aggiungi" class="aiuti_alla_navigazione">Aggiungi</label>
+                <input id="aggiungi" type="submit" value="Aggiungi" >
+            </div>
+
+            <div class="input_label_orizzontale">
+                <label for="resetta" class="aiuti_alla_navigazione">Reset</label>
+                <input id="resetta" type="reset" value="Annulla" >
+            </div>
+        </fieldset>
+    </form>
+    <hr />
+    <h2>Questo annuncio risulta indisponibile nei seguenti periodi:</h2>
+    <ul class="lista_indisponibilita">
+        <li>
+            <form class="form form_orizzontale" method="post" action="gestione_indisponibilita.html">
+                <fieldset>
+                    <legend class="aiuti_alla_navigazione">Modifica indisponibilit&agrave;</legend>
+                    <div class="input_label_orizzontale">
+                        <label for="data_inizio_ID_INDISPONIBILITA">Data inizio</label>
+                        <input id="data_inizio_ID_INDISPONIBILITA" name="data_inizio" type="date" />
+                    </div>
+                    <div class="input_label_orizzontale">
+                        <label for="data_fine_ID_INDISPONIBILITA">Data fine</label>
+                        <input id="data_fine_ID_INDISPONIBILITA" name="data_fine" type="date" />
+                    </div>
+                    <div class="input_label_orizzontale">
+                        <label class="aiuti_alla_navigazione" for="modifica_button_ID_INDISPONIBLITA">Modifica idisponibilit&agrave;</label>
+                        <input id="modifica_button_ID_INDISPONIBLITA" name="modifica_indisponibilita" type="submit" value="Modifica"/>
+                    </div>
+                    <div class="input_label_orizzontale">
+                        <label class="aiuti_alla_navigazione" for="rimuovi_button_ID_INDISPONIBLITA">Rimuovi idisponibilit&agrave;</label>
+                        <input id="rimuovi_button_ID_INDISPONIBLITA" name="rimuovi_indisponibilita" type="submit" value="Elimina"/>
+                    </div>
+                </fieldset>
+            </form>
+        </li>
+    </ul>
+</div>
+
+<div id="footer"  >
+    <ul>
+        <li>Frent - Progetto di Tecnologie Web A.A. 2019/2020</li>
+        <li><a href="../php/components/condizioni_di_utilizzo.html" title="Vai alle condizioni di utilizzo di Frent">Condizioni di
+            utilizzo</a></li>
+        <li><a href="faq.html" title="Vai alla pagina delle FAQ"><abbr xml:lang="en" title="Frequently Asked Questions">FAQ</abbr></a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,33 @@
+# ROBOTS
+User-agent: *
+# Pagine generiche
+Disallow: frent/404.php
+Disallow: frent/error_page.php
+Disallow: frent/approvazione_annunci.php
+# Script
+Disallow: frent/script_approvazione_annunci.php
+Disallow: frent/script_controllo_dati_prenotazione.php
+Disallow: frent/script_controllo_dati_ricerca.php
+Disallow: frent/script_elimina_annuncio.php
+Disallow: frent/script_elimina_commento.php
+Disallow: frent/script_elimina_prenotazione.php
+Disallow: frent/script_elimina_profilo.php
+Disallow: frent/script_logout_admin.php
+Disallow: frent/script_logout_user.php
+# Funzioni, classi e componenti
+Disallow: frent/CheckMethods.php
+Disallow: frent/class*.php
+Disallow: frent/components/
+# Loader
+Disallow: frent/load_Frent.php
+Disallow: frent/load_header.php
+# Pagine per utenti autenticati
+Disallow: frent/conferma_prenotazione.php
+Disallow: frent/miei_annunci.php
+Disallow: frent/mie_prenotazioni.php
+Disallow: frent/mio_profilo.php
+Disallow: frent/modifica_annuncio.php
+Disallow: frent/modifica_mio_profilo.php
+Disallow: frent/nuovo_annuncio.php
+Disallow: frent/riepilogo_prenotazione.php
+Disallow: frent/storico_prenotazioni.php

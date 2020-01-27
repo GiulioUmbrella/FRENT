@@ -1,5 +1,6 @@
 .DS_Store
 .idea/
+
 *.aux
 *.log
 *.pdf
@@ -7,3 +8,14 @@
 *.fdb_latexmk
 *.fls
 *.synctex(busy)
+.vscode/
+Database/data_builder/*.csv
+uploads/user*
+
+/~$.docx
+
+~$ppa_del_sito.docx
+
+~WRL0003.tmp
+
+*.log
