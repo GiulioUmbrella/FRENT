@@ -60,8 +60,6 @@ try {
     $risultati = $frent->ricercaAnnunci($citta, $numOspiti, $dataInizio, $dataFine);
     if (count($risultati) ==0) throw new Eccezione("Non ci sono annunci con questi parametri di ricerca.");
     foreach ($risultati as $annuncio) {
-        $id = $annuncio->getIdAnnuncio();
-        $prezzoNotte=$annuncio->getPrezzoNotte();
         $path= uploadsFolder() . $annuncio->getImgAnteprima();
         $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
         $numeroRecensione= count($recensioni);
@@ -79,6 +77,10 @@ try {
         $item = str_replace("<DES/>", $annuncio->getDescrizione(),$item);
         $item = str_replace("<PREZZO/>", $annuncio->getPrezzoNotte(),$item);
         $item = str_replace("<NUMRECENSIONE/>",$numeroRecensione,$item);
+        $item = str_replace("<DI/>",$dataInizio,$item);
+        $item = str_replace("<DF/>",$dataFine,$item);
+        $item = str_replace("<NO/>",$numOspiti,$item);
+        $item = str_replace("<<DESCANTE/>",$annuncio->getDescAnteprima(),$item);
         
         $content .= $item ;
     }
