@@ -5,40 +5,40 @@
 Questa sezione introduce la progettazione del sito. Per rendere più chiaro il documento, introduciamo prima gli elementi di progettazione è poi nella successiva sezione la realizzazione. Dove possibile, abbiamo sempre anticipato la progettazione alla realizzazione. Per esempio la scelta di usare un modello gerarchico per il sito, la struttura della home page e la presentazione dei risultati di ricerca in forma di lista sono stati scelti in anticipo. Per alcune parti del sito, progettazione e realizzazione sono andate in parallelo. 
 
 \subsection{Base di dati}
-La prima fase della progettazione è stata la base di dati.  Il modello entità-relazione è stato utilizzato come punto di partenze per definire lo scopo e gli utilizzatori del sito. Per maggiore chiarezza, riportiamo sia lo schema ER che lo schema relazionale. La spiegazione approfondita è stata inserita nella precedente sezione, Scopo del sito.
+La prima fase della progettazione è stata la base di dati.  Il modello Entità-Relazione è stato utilizzato come punto di partenze per definire lo scopo e gli utilizzatori del sito. Per maggiore chiarezza, riportiamo sia lo schema ER che lo schema relazionale. La spiegazione approfondita è stata inserita nella precedente sezione, Scopo del sito.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=14cm, height=6cm]{immagini/schema_ER-2}
-\caption{Schema ER }
+\includegraphics[scale=0.5]{immagini/schema_ER-2}
+\caption{Schema ER}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=14cm, height=8cm]{immagini/schema_relazionale-2}
-\caption{Schema relazionale }
+\includegraphics[scale=0.4]{immagini/schema_relazionale-2}
+\caption{Schema relazionale}
 \end{figure}
 
 \subsubsection{Dati guest richiesti}
-In questa fase abbiamo anche pensato a che informazioni chiedere all'utente per registrarsi a FRENT per non rendere i form troppo lunghi. La data di nascita è un requisito fondamentale per poter affittare/noleggiare un immobile ed è quindi obbligatorio inserirla. Un campo utile ma non strettamente necessario è il numero di telefono dell'utente. Per non complicare troppo la realizzazione abbiamo messi tutti i campi obbligatori. Come sviluppo futuro si potrebbe demandare l'inserimento del numero di telefono ad un secondo momento. 
+In questa fase abbiamo anche pensato a che informazioni chiedere all'utente per registrarsi a FRENT per non rendere i form troppo lunghi. La data di nascita è un requisito fondamentale per poter affittare/noleggiare un immobile ed è quindi obbligatorio inserirla. Un campo utile ma non strettamente necessario è il numero di telefono dell'utente. Per non complicare troppo la realizzazione tutti i campi sono stati resi obbligatori. Come sviluppo futuro si potrebbe demandare l'inserimento del numero di telefono ad un secondo momento.
 
 \subsection{Contesto dell'informazione }
 Una volta definiti gli utenti, abbiamo pensato a come facilitare il più possibile l'utilizzo del sito. Come scelta preliminare abbiamo localizzati gli utenti come cittadini italiani che cercano alloggi in Italia. Eventuali internazionalizzazioni sarebbero state troppo complesse da gestire. Abbiamo quindi pensato agli obbiettivi degli utenti di FRENT.  Il punto di partenza è quindi capire \textit{cosa} vogliono di utenti:
 
 \begin{itemize}
-\item Guest: facile fare una ricerca, facile gestire le prenotazioni 
-\item Host facile inserire un annuncio, facile gestire annunci
+\item Guest: facile fare una ricerca, facile gestire le prenotazioni.
+\item Host: facile inserire un annuncio, facile gestire annunci.
 \end{itemize}
 
-A questo punto dovevamo definire \textit{dove} gli utenti possono trovare ciò di cui hanno bisogno. Abbiamo utilizzato la metafora della pesca vista a lezione per capire come offrire agli utenti una esperienza piacevole e ridurre al minimo la complessità delle ricerche. Questo ha fornito gli elementi di base per organizzare la home del sito. Tutte le altre pagine gravitano a partire da questa. 
+A questo punto abiamo definito \textit{dove} gli utenti possono trovare ciò di cui hanno bisogno.\\ Abbiamo utilizzato la metafora della pesca vista a lezione per capire come offrire agli utenti una esperienza piacevole e ridurre al minimo la complessità delle ricerche. Questo ha fornito gli elementi di base per organizzare la home del sito. Tutte le altre pagine gravitano a partire da questa.
 
 \subsubsection{Tiro Perfetto} 
-Il tiro perfetto è la metafora per indicare gli utenti che sanno cosa stanno cercando. Per questo motivo nella home page del sito abbiamo inserito un form orizzontale per effettuare la ricerca di un annuncio. In questo modo la funzione di ricerca è immediatamente disponibile. In questo modo gli utenti possono sia ottenere delle informazioni velocemente che sperimentare direttamente che tipo di servizi offre FRENT.
+Il tiro perfetto è la metafora per indicare gli utenti che sanno cosa stanno cercando. Per questo motivo nella home page del sito abbiamo inserito un form orizzontale per effettuare la ricerca di annunci che ne soddisfino i parametri. In questo modo la funzione di ricerca è immediatamente disponibile e gli utenti possono sia ottenere delle informazioni velocemente che sperimentare direttamente che tipo di servizi offre FRENT.
  
 \subsubsection{Trappola per aragoste} 
-Per catturare l'attenzione degli utenti che stanno esplorando il sito, abbiamo inserito nel corpo centrale della home una sezione con gli ultimi annunci pubblicati. Il destinatario di questa sezione è un utente che esplora il sito nei tempi morti o vuole capire che tipo di servizi offre. Gli annunci sono la base del servizio offerto da FRENT ed è bene che gli utenti siano familiari con la loro struttura. Se un utente clicca sopra viene inviato direttamente ad un annuncio. Lo scopo è far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
+Per catturare l'attenzione degli utenti che stanno esplorando il sito, abbiamo inserito nel corpo centrale della home una sezione con gli ultimi annunci pubblicati. Il destinatario di questa sezione è un utente che esplora il sito nei tempi morti o vuole capire che tipo di servizi offre. Gli annunci sono la base del servizio offerto da FRENT ed è bene che gli utenti siano familiari con la loro struttura. Se un utente clicca sull'immagine di un annuncio viene inviato direttamente all'anuncio selezionato. Lo scopo è far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
 Questo vale sia per i guest che per gli host. I guest possono capire come è strutturato un annuncio e che informazioni sono disponibili. Gli host possono capire com'è strutturato un annuncio e quindi risulterà più facile compilare i campi del form per l'aggiunta di un annuncio. \\
-L'idea originale era inserire nella home altre sezione simili, ad esempio gli annunci più votati o le offerte last minute. Abbiamo inserito gli ultimi annunci inseriti per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicità, abbiamo inserito solo questa sezione. \\
+Un possibile sviluppo futuro potrebbe essere quello di inserire nella home altre sezione simili, ad esempio gli annunci più votati o le offerte last minute. Abbiamo inserito gli ultimi annunci approvati per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicità, abbiamo inserito solo questa sezione. \\
 
 \subsubsection{Boa di Segnalazione}
 La boa di segnalazione serve per ritrovare elementi informativi utili. Le boe di segnalazione in FRENT sono raggruppate in due zone, header e footer. Entrambe cambiano per utente generico e utente registrato.
