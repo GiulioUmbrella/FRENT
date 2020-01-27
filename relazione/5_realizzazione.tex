@@ -62,12 +62,14 @@ Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Fr
 \begin{enumerate}
     \item l'utente viene re-indirizzato alla pagina error_page.php con eventuale messaggio di errore;
     \item l'utente viene re-indirizzato alla pagina 404.php;
-    \item interviene il server e mostra l'eventuale errore. 
+    \item interviene il server e mostra l'eventuale errore.
 \end{enumerate}
 
 \subsubsection{Javascript}
 Il linguaggio JavaScript è stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
-
+Il file \textit{form_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
+    I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione_nome_form}, ed \'{e} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
+    Se il valore inserito non \`{e} valido, viene inserito un elemento \textit{strong} che contiene il messaggio di errore. 
 
 
 \end{document}
