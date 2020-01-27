@@ -1,5 +1,13 @@
 .DS_Store
 .idea/
+
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.synctex(busy)
 .vscode/
 Database/data_builder/*.csv
 uploads/user*
