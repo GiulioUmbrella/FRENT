@@ -48,7 +48,7 @@ create table prenotazioni (
 	num_ospiti int(2) not null default 1, -- limite da 0 a 99 (almeno da db)
 	data_inizio date not null,
 	data_fine date not null,
-	foreign key (utente) references utenti(id_utente) on update cascade on delete set null,
+	foreign key (utente) references utenti(id_utente) on update cascade on delete cascade,
 	foreign key (annuncio) references annunci(id_annuncio) on update cascade on delete set null
 );
 
