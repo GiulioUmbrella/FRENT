@@ -4,8 +4,13 @@
 \section{FRENT}
 
 \subsection{Scopo del sito}
-FRENT, abbreviazione di Friendly-Rent, è un sito per far permettere agli utenti di affittare le proprie case. L'idea di base è offrire una piattaforma per far incontrare direttamente la domanda e l'offerta per l'affitto di case per periodi di vacanza. \\
-Gli utenti sono divisi in tre categorie,  \textit{guest}, \textit{host} e \textit{amministratori}. I guest sono gli utenti base che possono cercare e prenotare case. Gli host sono utenti che mettono a disposizione le proprie case ma possono a loro volta prendere in affitto le case di altri host. Gli amministratori svolgono funzioni di controllo sugli annunci pubblicati dagli host. \\
+FRENT, abbreviazione di Friendly-Rent, è un sito che permette ai suoi utenti di mettere in affitto le proprie case o di cercare annunci creati da altri. L'idea di base è offrire una piattaforma per far incontrare direttamente la domanda e l'offerta per l'affitto di case per periodi di vacanza. \\
+Gli utenti sono divisi in tre categorie,  \textit{guest}, \textit{host} e \textit{amministratori}:
+\begin{itemize}
+ \item I guest sono gli utenti base che possono cercare e prenotare case;
+ \item Gli host sono utenti che mettono a disposizione le proprie case ma possono a loro volta prendere in affitto le case di altri host;
+ \item Gli amministratori svolgono funzioni di controllo sugli annunci pubblicati dagli host.
+\end{itemize}
 Le informazioni sugli immobili pubblicate dagli host sono denominate \textit{annunci}. I guest possono effettuare una \textit{ricerca} sugli annunci pubblicati dagli host. Un annuncio che viene prenotato da un guest è una \textit{prenotazione}. \\
 I guest possono lasciare dei \textit{commenti} sulle proprie prenotazioni. Quando un guest visualizza un annuncio, può vedere i commenti lasciati dagli altri utenti. \\
 Per semplicità, non vengono gestite transizione monetarie fra guest e host e per le prenotazioni non sono richiesti depositi cauzionali. 
@@ -14,19 +19,19 @@ Per semplicità, non vengono gestite transizione monetarie fra guest e host e pe
 
 \subsubsection{Guest} 
 
-La tipologia di guest a cui FRENT si rivolge sono principalmente compresi nella fascia di età fra i 25 e 35 anni. Il guest medio ipotizzato è un lavoratore che vuole prenotare un appartamento per una vacanza di coppia o con un gruppo di amici. Si tratta quindi di individui che hanno disponibilità economiche per effettuare viaggi e che preferiscono gestire un appartamento in autonomia piuttosto che rivolgersi ad alberghi. La percentuale di guest in fasce di età maggiore attesa è ridotta, in quanto si tratta di individui che preferiscono alloggiare in strutture che offrono servizi completi.  Il numero di guest in una fascia di età più basse (18-25) atteso è molto basso a causa di budget ridotti.   \\
+La tipologia di guest a cui FRENT si rivolge è principalmente compresa nella fascia di età fra i 25 e 35 anni. Il guest medio ipotizzato è un lavoratore che vuole prenotare un appartamento per una vacanza di coppia o con un gruppo di amici. Si tratta quindi di individui che hanno la disponibilità economica per effettuare viaggi e preferiscono alloggiare in un appartamento in autonomia piuttosto che rivolgersi ad alberghi. La percentuale di guest in fasce di età superiori è ridotta, in quanto si tratta di individui che preferiscono alloggiare in strutture che offrono servizi completi.  Il numero di guest in una fascia di età più inferiore (18-25) atteso è molto basso a causa di budget ridotti.   \\
 
 
 Per quanto riguarda i dispositivi utilizzati, l'aspettativa è che le ricerche vengano effettuate per lo più da dispositivi mobili durante i tempi morti della giornata di un utente (sui mezzi pubblici o prima di andare a dormire), mentre la gestione delle prenotazioni e i commenti da desktop. 
 Vista la fascia del guest medio, il sito è stato pensato per utenti che utilizzano dispositivi e browser moderni. 
 % Frase da rivedere(funzionalità o lavoro)
-Per questo motivo le funzionalità per i browser più vecchi (eg IE) sono minime. La percentuale attesa di utenti che usano vecchi browser è molto bassa e non giustifica i costi di sviluppo e manutenzione.
+Per questo motivo le funzionalità per i browser più vecchi (per esempio Internet Explorer) sono minime. La percentuale attesa di utenti che usano browser obsoleti è molto bassa e non giustifica i costi di sviluppo e manutenzione tuttavia la presentazione delle pagine è stata resa fruibile anche per questi browser.
 
 \subsubsection{Host}
-Gli host individuati sono individui fra i 30 e 50 anni, proprietari di immobili. La pubblicazione e la gestione degli annunci sono attività che richiedono una certa attenzione ed è ragionevole ipotizzare che vengono fatte da desktop. Difficilmente un host pubblicherà un annuncio mentre è impegnato in altre attività. \\
+Gli host individuati sono persone fra i 30 e 50 anni, proprietari di immobili. La pubblicazione e la gestione degli annunci sono attività che richiedono una certa attenzione ed è ragionevole ipotizzare che vengono fatte da desktop. Difficilmente un host pubblicherà un annuncio mentre è impegnato in altre attività. \\
 L'host medio ipotizzato fa un uso abituale di Internet e di tecnologie web. Infatti la gestione degli annunci richiede competenze minime sull'utilizzo di una pagina web: compilazione di form, caricamento di una foto, accesso a pagine web specifiche. Quindi è poco probabile che un utente che fa un uso sporadico di Internet decida di usare FRENT per pubblicare un annuncio.
 %La componente host di FRENT non è pensata per un utente che cerca informazioni in modo superficialee o raggiunge la pagina per caso. 
-Anche per gli host l'aspettativa è che gli host utilizzino tecnologie moderne.
+Anche per gli host l'aspettativa è che utilizzino tecnologie moderne.
 
 
 \subsubsection{Amministratore}
@@ -38,47 +43,40 @@ L'amministratore svolge un ruolo all'interno di FRENT e come tale si assume che 
 \subsubsection{Utente} 
 L'utente si divide inizialmente in due categorie, \textit{generico} e \textit{registrato}. Un utente generico:
 \begin{itemize}
-\item ricerca annunci 
-\item visualizzare gli annunci.
-\item registrarsi
+\item Ricerca annunci;
+\item Visualizza gli annunci;
+\item Si registra;
+ \item Si autentica presso il sito.
 \end{itemize}
- Per incentivare l'uso del sito da parte di quanti più utenti possibili, permettiamo anche a chi non è iscritto di vedere i risultati delle ricerche. All'utente generico è data la possibilità di registrarsi al portale per usufruire di tutti i servizi.  \\
-Un utente registrato eredita tutte le operazioni che può fare un utente generico. Si divide in due categorie logiche come indicato sopra: guest e host. Tutti gli utenti registrati sono guest. 
-
+Per incentivare l'uso del sito da parte di quanti più utenti possibili, permettiamo anche a chi non è iscritto di vedere i risultati delle ricerche. All'utente generico è data la possibilità di registrarsi al portale per usufruire di tutti i servizi.  \\
+Un utente registrato eredita tutte le operazioni che può fare un utente generico (tranne registrarsi). Si divide in due categorie logiche come indicato sopra: guest e host. Tutti gli utenti registrati sono guest.\\
 Le funzionalità che il sito offre per i \textbf{guest} sono: 
 \begin{itemize}
-\item Effettuare una prenotazione.
-\item Cancellare una prenotazione.
-\item Commentare una prenotazioni passate.
-\item Visualizzare le proprie prenotazioni (passate, correnti e future).
+\item Effettuare una prenotazione;
+\item Cancellare una prenotazione;
+\item Commentare una prenotazioni passate;
+\item Visualizzare le proprie prenotazioni (passate, correnti e future);
 \item Eliminare i propri commenti.
 \end{itemize}
-
-Un guest può decidere di lasciare la piattaforma cancellando il suo profilo. In questo caso sono attuate le seguenti politiche
-
+Un guest può decidere di lasciare la piattaforma cancellando il suo profilo. In questo caso sono attuate le seguenti politiche:
 \begin{itemize}
-\item Rimane lo storico delle prenotazioni effettuate passate (si perderà il riferimento all'utente).
-\item Rimane lo storico dei commenti agli annunci pubblicati.
-\item Vengono cancellate le prenotazioni future.
+\item Vengono eliminate tutte le prenotazioni effettuate;
+\item Vengono eliminati i commenti agli annunci che sono stati pubblicati.
 \item In presenza di prenotazioni correnti o future, la rimozione del proprio profilo viene negata.
 \end{itemize}
-
 Se un utente inserisce almeno un annuncio, diventa anche un host. Le funzionalità che il sito offre per gli \textbf{host} sono: 
 \begin{itemize}
-\item Pubblicazione annunci.
-\item Modificare un annuncio. Le modifiche devono essere approvate dall'amministratore (vedi specifiche di un annuncio per maggiori dettagli).
-\item Visualizzare le prenotazioni dei propri annunci.
-\item Eliminare un annuncio (solo se non ci sono prenotazioni correnti o future)
+\item Pubblicazione annunci;
+\item Modifica dei propri annunci. Le modifiche devono essere approvate dall'amministratore (vedi specifiche di un annuncio per maggiori dettagli);
+\item Visualizzazione delle prenotazioni dei propri annunci;
+\item Eliminazione di un annuncio (solo se non ci sono prenotazioni correnti o future).
 \end{itemize}
-
-Se un utente host vuole abbandonare la piattaforma, valgono le seguenti regole 
+Se un utente host vuole abbandonare la piattaforma, valgono le seguenti regole:
 \begin{itemize}
-\item In presenza di prenotazioni correnti e/o future relative ai suoi annunci, la rimozione del proprio profilo viene negata.
+\item In presenza di prenotazioni correnti e/o future relative ai suoi annunci, la rimozione del proprio profilo viene negata;
 \item Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario vengono rimossi. Rimangono tutte le occupazioni (perdendo il riferimento all'annuncio) per lasciare ai guest uno storico delle prenotazioni.
 \end{itemize}
-
 Esiste una terza categoria di utenti, gli amministratori. Svolgono un ruolo di controllo e non sono considerati in modo separato dagli altri utenti registrati.  \\
-
 \subsubsection{Annuncio} 
 Gli annunci rappresentano gli immobili messi a disposizione dagli host. La pubblicazione di un annuncio avviene in due fasi: \textit{inserimento} e \textit{approvazione}.
 Nella fase di inserimento l'host deve inserire un numero di dati minimo, titolo, descrizione, un'immagine di anteprima. A questo punto l'annuncio viene passato all'amministratore che può approvarlo o meno. Un annuncio si può trovare in tre possibili stati: 
