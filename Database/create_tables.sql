@@ -49,11 +49,11 @@ create table prenotazioni (
 	data_inizio date not null,
 	data_fine date not null,
 	foreign key (utente) references utenti(id_utente) on update cascade on delete cascade,
-	foreign key (annuncio) references annunci(id_annuncio) on update cascade on delete set null
+	foreign key (annuncio) references annunci(id_annuncio) on update cascade on delete cascade
 );
 
 create table commenti (
-	prenotazione int primary key, -- prenotazione=prenotazione
+	prenotazione int primary key,
 	data_pubblicazione datetime DEFAULT CURRENT_TIMESTAMP,
 	titolo varchar(64) not null,
 	commento varchar(512) not null,
