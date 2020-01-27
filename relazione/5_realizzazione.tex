@@ -32,14 +32,14 @@ Lo svantaggio di utilizzare Grid \`{e} che non garantisce retrocompatibilt\`{a} 
 % Form
 Tutti i form rispettano le stesse convenzioni interne per non creare disorientamento nell'utente. Per modificare e inserire i dati abbiamo utilizzato dei form posizionati al centro della pagina. Nel momento in cui l'utente modifica i dati non ha bisogno di accedere ad altre tipologie di informazioni all'interno della pagina. Fanno eccezione i form orizzontali e verticali di ricerca annunci che per\`{o} devono essere integrati nella pagina come abbiamo spiegato nella sezione sulla progettazione.
 
-% Liste
+    % Liste
 
 
 % Colore
 Per scegliere i colori abbiamo utilizzato un palette messa a disposizione dalla W3C. La scelta del colore \`{e} stata fatta in modo da evitare possibili problemi di contrasto dopo aver provato diverse combinazioni. Non abbiamo l'esperienza necessaria per poter fare una scelta precisa dei colori. Abbiamo quindi cercato di utilizzare i colori nel modo pi\`{u} semplice possibile per non creare disorientamento nell'utente.
 
-\subsection{Comportamento}
-Per gestire il comportamento abbiamo usato due tecnologie, PHP e JavaScript.
+    \subsection{Comportamento}
+    Per gestire il comportamento abbiamo usato due tecnologie, PHP e JavaScript.
 
 \subsubsection{PHP}
 Per rendere il sito dinamica \`{e} stato utilizzato il linguaggio PHP.
@@ -65,9 +65,11 @@ Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Fr
     \item interviene il server e mostra l'eventuale errore. 
 \end{enumerate}
 
-\subsubsection{Javascript}
-Il linguaggio JavaScript è stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
-
+    \subsubsection{Javascript}
+    Il linguaggio JavaScript \`{e} stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
+    Il file \textit{form_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
+    I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione_nome_form}, ed sar\`{a} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
+    Se il valore inserito non \`{e} valido viene inserito un elemento d \textit{strong} che contiene il messaggio di errore.
 
 
 \end{document}
