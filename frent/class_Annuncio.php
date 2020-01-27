@@ -189,6 +189,7 @@ class Annuncio {
     
     /**
      * @param string $desc_anteprima
+     * @throws Eccezione
      */
     public function setDescAnteprima($desc_anteprima) {
         if (checkStringMaxLen(trim($desc_anteprima), DataConstraints::annunci["desc_anteprima"])) {

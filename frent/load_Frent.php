@@ -24,5 +24,9 @@ if(isset($_SESSION["user"])) {
 } else if(isset($_SESSION["admin"])) {
     $auth_user = $_SESSION["admin"];
 }
-
-$frent = (isset($auth_user)) ? new Frent($db, $auth_user) : new Frent($db);
+try {
+    $frent = (isset($auth_user)) ? new Frent($db, $auth_user) : new Frent($db);
+}catch (Eccezione $ex){
+    $_SESSION["msg"]= $ex->getMessage();
+    header("Location: ./error_page.php");
+}

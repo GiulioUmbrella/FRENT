@@ -96,11 +96,12 @@ class Database {
             return $this->db->set_charset($charset);
         else return FALSE;
     }
-
+    
     /**
      * Wrapper per mysqli_real_escape_string($link, $escapestr).
      * @param string $string di cui ottenere l'escape
      * @return string $string di cui è stato fatto l'escape
+     * @throws Eccezione
      */
     public function escapeString($string): string {
         if (!($this->is_connected)) {
