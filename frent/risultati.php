@@ -80,7 +80,7 @@ try {
         $item = str_replace("<DI/>",$dataInizio,$item);
         $item = str_replace("<DF/>",$dataFine,$item);
         $item = str_replace("<NO/>",$numOspiti,$item);
-        $item = str_replace("<<DESCANTE/>",$annuncio->getDescAnteprima(),$item);
+        $item = str_replace("<DESCANTE/>",$annuncio->getDescAnteprima(),$item);
         
         $content .= $item ;
     }
