@@ -174,7 +174,8 @@ try {
     
     $img = uploadsFolder() . $annuncio->getImgAnteprima();
     $pagina = str_replace("<IMMAGINE/>", "<div>
-                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\" alt=\"" . $annuncio->getDescAnteprima() . "\"/>
+                        <img id=\"immagine_anteprima\" class=\"immagine_anteprima\" src=\"$img\"
+                        alt=\"Immagine di " . $annuncio->getTitolo() . "\" longdesc=\"get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio()."\"/>
                         </div>", $pagina);
     
     echo $pagina;
