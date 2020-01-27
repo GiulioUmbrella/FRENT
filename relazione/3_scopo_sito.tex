@@ -74,22 +74,33 @@ Se un utente inserisce almeno un annuncio, diventa anche un host. Le funzionalit
 Se un utente host vuole abbandonare la piattaforma, valgono le seguenti regole:
 \begin{itemize}
 \item In presenza di prenotazioni correnti e/o future relative ai suoi annunci, la rimozione del proprio profilo viene negata;
-\item Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario vengono rimossi. Rimangono tutte le occupazioni (perdendo il riferimento all'annuncio) per lasciare ai guest uno storico delle prenotazioni.
+\item Se non ci sono prenotazioni future, gli annunci relativi al quel proprietario vengono rimossi.
 \end{itemize}
-Esiste una terza categoria di utenti, gli amministratori. Svolgono un ruolo di controllo e non sono considerati in modo separato dagli altri utenti registrati.  \\
+Esiste una terza categoria di utenti, gli amministratori. Svolgono un ruolo di controllo e sono considerati in modo separato dagli altri utenti registrati.  \\
 \subsubsection{Annuncio} 
 Gli annunci rappresentano gli immobili messi a disposizione dagli host. La pubblicazione di un annuncio avviene in due fasi: \textit{inserimento} e \textit{approvazione}.
-Nella fase di inserimento l'host deve inserire un numero di dati minimo, titolo, descrizione, un'immagine di anteprima. A questo punto l'annuncio viene passato all'amministratore che può approvarlo o meno. Un annuncio si può trovare in tre possibili stati: 
+Nella fase di inserimento l'host deve inserire tutti i dati richiesti:
+\begin{itemize}
+ \item Titolo;
+ \item Descrizione;
+ \item Numero ospiti massimo;
+ \item Immagine anteprima dell'annuncio;
+ \item Descrizione dell'immagine inserita;
+ \item Prezzo per notte per persona;
+ \item Indirizzo;
+ \item Città.
+\end{itemize}
+A questo punto l'annuncio viene passato all'amministratore che può approvarlo o meno. Un annuncio si può trovare in tre possibili stati:
 
 \begin{itemize}
 \item \textbf{VA}: annuncio Visualizzato e Approvato. L'amministratore del portale ha visualizzato l'annuncio, lo ha ritenuto idoneo al portale e quindi lo ha reso disponibile a ricevere prenotazioni.
 \item \textbf{VNA}: annuncio Visualizzato e Non Approvato. L'amministratore del portale ha visualizzato l'annuncio, ma non lo ha ritenuto idoneo al portale. Non è più di sua competenza fino a quando l'host che ha pubblicato l'annuncio non lo modificherà. A quel punto l'annuncio tornerà nello stato NVNA.
-\item \textbf{NVNA}: annuncio Non Visualizzato e Non Approvato. L'amministratore del portale non ha ancora visualizzato l'annuncio, quindi potrà approvarlo oppure no (l'annuncio potrà passare nello stato VA oppure NVA).
+\item \textbf{NVNA}: annuncio Non Visualizzato e Non Approvato. L'amministratore del portale non ha ancora visualizzato l'annuncio, quindi potrà approvarlo oppure no (l'annuncio potrà passare nello stato VA oppure VNA).
 \end{itemize}
 Un annuncio non può essere \textbf{NVA},  Non Visualizzato e Approvato. 
 
 \subsubsection{Ricerca} 
-La ricerca permette ai guest di cercare fra gli annunci pubblicati dagli host. I parametri minimi per effettuare una ricerca sono: città, data di inizio, data di fine e numero di ospiti. Per quanto riguarda le data di inizio e di fine vengono selezionati tutti gli annunci che sono disponibili per l'intero periodo selezionato. In caso di sovrapposizione in qualsiasi giorno l'annuncio viene scartato.
+La ricerca permette ai guest di cercare fra gli annunci pubblicati dagli host. I parametri per effettuare una ricerca sono: città, data di inizio, data di fine e numero di ospiti. Per quanto riguarda le data di inizio e di fine vengono selezionati tutti gli annunci che sono disponibili per l'intero periodo selezionato. In caso di sovrapposizione in qualsiasi giorno l'annuncio viene scartato.
 
 \subsubsection{Prenotazione} 
 Un guest effettua una prenotazione per riservare un annuncio per un certo periodo di tempo. Ci sono \textit{tre} categorie di prenotazioni: \textit{passata} , \textit{corrente} e \textit{futura}.  La categoria a cui appartiene una prenotazione dipende dalla data corrente \\
@@ -98,8 +109,8 @@ Un guest effettua una prenotazione per riservare un annuncio per un certo period
 \item \textbf{Corrente} Se la data corrente è compresa fra quella di inizio e quella di fine.
 \item \textbf{Passata} Se la data di fine è inferiore alla data corrente.
 \end{itemize}
-I guest possono visualizzare nella propria pagina tutto lo storico delle loro prenotazioni. Inoltre possono commentare le prenotazioni passate e cancellare le prenotazioni future. 
-Gli host possono visualizzare per ciascun annuncio di tutte le prenotazioni di qualsiasi tipo relative allo specifico annuncio.
+I guest possono visualizzare nella pagina "Le mie prenotazioni" tutto lo storico delle loro prenotazioni. Inoltre possono commentare le prenotazioni passate e cancellare le prenotazioni future.\\
+Gli host possono visualizzare per ciascun annuncio tutte le prenotazioni ad esso collegate.
 
 \subsubsection{Commento} 
 Un guest può commentare le proprie prenotazioni ma solo quelle passate. Un commento è costituito da un titolo, da una descrizione e da un valutazione. 
