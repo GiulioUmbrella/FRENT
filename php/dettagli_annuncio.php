@@ -87,7 +87,7 @@ try {
             "<BREADCRUMB/>",
             "<a href=\"./index.php\" title=\"Vai alla pagina delle ricerca annunci\">" .
             "<span xml:lang=\"en\" lang=\"en\">Home</span></a> &gt;&gt; <a href=\"./risultati.php?<PARAMS>\">Ricerca</a>" .
-            "&gt;&gt; <TITOLO_ANNUNCIO/>",
+            " &gt;&gt; <TITOLO_ANNUNCIO/>",
             $pagina
         );
         require_once "./components/setMinMaxDates.php";
