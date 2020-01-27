@@ -75,9 +75,8 @@ try {
             unset($_SESSION["dataFine"]);
         }
         unset($_SESSION["datiRicercaMancanti"]);
-    } else {
-        $pagina = str_replace("<INFO_BOX/>", "", $pagina);
     }
+    
     $pagina = str_replace("<DATAINIZIO/>", $dataInizio, $pagina);
     $pagina = str_replace("<DATAFINE/>", $dataInizio, $pagina);
     $pagina = str_replace("<NUMOSPITI/>", $numOspiti, $pagina);
