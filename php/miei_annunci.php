@@ -38,7 +38,7 @@ if (isset($_SESSION["user"])) {
         $item = str_replace("<PUNTEGGIO/>",$punteggio,$item);
         $item = str_replace("<PATH/>",uploadsFolder().$annuncio->getImgAnteprima(),$item);
         $item = str_replace("<DESC/>",$annuncio->getDescrizione(),$item);
-        $item = str_replace("<ANTEPRIMADESC/>",$annuncio->getDescAnteprima(),$item);
+        $item = str_replace("<ANTEPRIMADESC/>","./get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio(),$item);
         $item = str_replace("<STATO/>", $stato,$item);
         $content.= $item;
     }
