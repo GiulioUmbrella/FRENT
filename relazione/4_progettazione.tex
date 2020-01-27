@@ -42,7 +42,7 @@ Un possibile sviluppo futuro potrebbe essere quello di inserire nella home altre
 
 Lo scopo \`{e} far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
 Questo vale sia per i guest che per gli host. I guest possono capire com'\`{e} strutturato un annuncio e che informazioni sono disponibili. Gli host possono capire com'\`{e} strutturato un annuncio e quindi risulter\`{a} pi\`{u} facile compilare i campi del form per l'aggiunta di un annuncio. \\
-L'idea originale era inserire nella home altre sezione simili, ad esempio gli annunci pi\`{u} votati o le offerte last minute. Abbiamo inserito gli ultimi annunci inseriti per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicit\`{a}, abbiamo inserito solo questa sezione. \\
+Un possibile sviluppo futuro potrebbe essere inserire nella home altre sezione simili, ad esempio gli annunci pi\`{u} votati o le offerte last minute.\\ Abbiamo inserito gli ultimi annunci approvati per fornire un incentivo agli host a pubblicare nuovi annunci. \\
 
 \subsubsection{Boa di Segnalazione}
 La boa di segnalazione serve per ritrovare elementi informativi utili. Le boe di segnalazione in FRENT sono raggruppate in due zone, header e footer. Entrambe cambiano per utente generico e utente registrato.
@@ -51,32 +51,32 @@ La boa di segnalazione serve per ritrovare elementi informativi utili. Le boe di
 \item \textbf{Header}
 Per l'utente generico diamo subito la possibilit\`{a} di registrarsi o di accedere. Per l'utente registrato invece offriamo un cruscotto per la gestione completa delle informazioni.
 \item \textbf{Footer}
-Per tutti gli utenti, il footer riporta invece informazioni di carattere generale, come le condizioni di utilizzo del sito e le FAQ. Queste informazioni si trovano di solito nel footer e abbiamo deciso di inserirle in basso per non violare le convenzioni esterne di utilizzo del sito.  Solo per gli utenti non registrati e solo nella pagina home, \`{e} presente il link verso la pagina di accesso per l'amministratore. Si trova in una posizione poco visibile perch\`{e} diamo per scontato che l'amministratore sia un utente che conosce il sito e sa dove andare a cercarlo. Inoltre, se un utente si registra come guest possiamo escludere che voglia usare le funzioni da amministratore e quindi possiamo nascondere il link.
+Per tutti gli utenti, il footer riporta invece informazioni di carattere generale, come le condizioni di utilizzo del sito e le FAQ. Queste informazioni si trovano di solito nel footer e abbiamo deciso di inserirle in basso per non violare le convenzioni esterne di utilizzo del sito.  Solo per gli utenti non registrati e solo nella pagina home, \`{e} presente il link verso la pagina di accesso per l'amministratore. Si trova in una posizione poco visibile perch\`{e} diamo per scontato che l'amministratore sia un utente che conosce il sito e sa dove andare a cercarlo.
 \end{itemize}
 
 
 \subsection{Schema organizzativi}
-A questo punto la domanda che ci siamo posti \`{e} \textit{come} presentare le informazioni agli utenti. Abbiamo organizzati l'elenco delle informazioni usando degli schemi esatti. Le funzioni che l'utente pu\`{o} utilizzare per manipolare tali dati sono state raggruppate con schemi orientati al compito.
+A questo punto la domanda che ci siamo posti \`{e} \textit{come} presentare le informazioni agli utenti. Abbiamo organizzato l'elenco delle informazioni usando degli schemi esatti. Le funzioni che l'utente pu\`{o} utilizzare per manipolare tali dati sono state raggruppate con schemi orientati al compito.
 
 \subsubsection{Schemi esatti}
-Per la presentazione dei risultati di ricerca, elenco prenotazioni,  elenco annunci degli host e elenco annunci amministratori, la scelta che ci \`{e} sembrata pi\`{u} naturale \`{e} stata presentare le informazioni in modo esatto.
+Per la presentazione dei risultati di ricerca, elenco prenotazioni,  elenco annunci degli host e elenco annunci amministratori, la scelta che ci \`{e} sembrata pi\`{u} naturale \`{e} stata presentare le informazioni in modo esatto:
 
 \begin{itemize}
 \item \textbf{Ricerca}
-La ricerca riporta l'elenco completo di tutti gli annunci che soddisfano le richieste dell'utente. E' realizzato come un elenco in cui ogni elemento \`{e} strutturato allo stesso modo. In questo modo l'utente pu\`{o} farsi un'idea preliminare degli annunci disponibili. Cliccando su un annuncio si viene portati ad una nuova pagina che entra nel dettaglio delle informazioni.
+La ricerca riporta l'elenco completo di tutti gli annunci che soddisfano le richieste dell'utente. \`{E} realizzato come un elenco in cui ogni elemento \`{e} strutturato allo stesso modo. In questo modo l'utente pu\`{o} farsi un'idea preliminare degli annunci disponibili. Cliccando su un annuncio si viene portati ad una nuova pagina che entra nel dettaglio delle informazioni.
 
 \item\textbf{Elenco prenotazioni guest}
 L'elenco prenotazioni riporta tutte le prenotazioni di un guest, raggruppate in base al loro tipo: passate, correnti e future. Ovviamente i risultati di questa pagina sono influenzati dalla data corrente. Le prenotazioni sono riportate in questo ordine, prima corrente, poi future e infine passate. L'ordine riflette il valore che abbiamo attributo all'informazione dal punto di vista del guest.
 \begin{enumerate}
-\item \textbf{Corrente} L'informazione sulla prenotazioni corrente \`{e} stata giudicata la pi\`{u} importata e viene quindi presentata per prima. L'idea \`{e} che un utente in viaggio voglia controllare i dettagli della prenotazione o contattare l'host in modo rapido. Ad esempio vuole controllare l'indirizzo esatto mentre si sta viaggiando. Per questo motivo \`{e} anche inserito anche un pulsante per contattare l'host. Per semplicit\`{a} \`{e} il solo invio di una email.
+\item \textbf{Corrente} L'informazione sulla prenotazioni corrente \`{e} stata giudicata la pi\`{u} importata e viene quindi presentata per prima. L'idea \`{e} che un utente in viaggio voglia controllare i dettagli della prenotazione o contattare l'host in modo rapido. Ad esempio vuole controllare l'indirizzo esatto mentre si sta viaggiando. Per questo motivo \`{e} stato inserito anche un pulsante per contattare l'host. Per semplicit\`{a} \`{e} il solo invio di una email.
 \item \textbf{Future} Le prenotazioni future sono messe in seconda posizione perch\`{e} \`{e} probabile che l'informazione venga visualizzata frequentemente dall'utente mentre organizza viaggi.
-\item \textbf{Passate} Le presentazioni passate sono messe alla fine perch\`{e} svolgono una funzione di storico per il guest e  per effettuare i commenti. E' difficile che un utente vada regolarmente a controllare le prenotazioni passate e una volta lasciato il commento non ha pi\`{u} motivi specifici per tornare ad una vecchia prenotazione.
+\item \textbf{Passate} Le presentazioni passate sono messe alla fine perch\`{e} svolgono una funzione di storico per il guest e  per effettuare i commenti. \`{E} difficile che un utente vada regolarmente a controllare le prenotazioni passate e una volta lasciato il commento non ha pi\`{u} motivi specifici per tornare ad una vecchia prenotazione.
 \end{enumerate}
 
 \item \textbf{Elenco annunci host}
-L'elenco degli annunci riporta gli annunci pubblicati da un host. In questo modo l'host pu\`{o} controllare in modo semplice tutti i propri annunci e il loro status. Sotto il titolo dell'annuncio viene riportato se l'annuncio \`{e} stato visualizzato e/o approvato dall'amministratore. Inoltre \`{e} presente un pulsante per andare ad un pagina specifica per la gestione del singolo annuncio.
+L'elenco degli annunci riporta gli annunci pubblicati da un host. In questo modo l'host pu\`{o} controllare in modo semplice tutti i propri annunci e il loro stato di approvazione. Sotto il titolo dell'annuncio viene riportato se l'annuncio \`{e} stato visualizzato e/o approvato dall'amministratore. Inoltre \`{e} presente un pulsante per andare ad un pagina specifica per la gestione del singolo annuncio.
 
-\item \textbf{Prenotazioni annuncio} Questo campo \`{e} analogo all'elenco prenotazioni per il guest, ma \`{e} elenca tutte le prenotazioni per annuncio.
+\item \textbf{Prenotazioni annuncio} Questo campo \`{e} analogo all'elenco prenotazioni per il guest, ma elenca tutte le prenotazioni dell'annuncio.
 
 \item \textbf{Elenco annunci da approvare}
 L'elenco degli annunci da approvare offre all'amministratore tutti gli annunci che devono essere verificati. 
@@ -89,8 +89,8 @@ Le funzioni per manipolare i dati sono specifiche e sono state organizzati in sc
 \begin{itemize}
 \item \textbf{Header utenti registrati}
 \begin{itemize}
-\item \textbf{Le mie prenotazioni} I guest possono visualizzare le informazioni sulle loro prenotazioni
-\item \textbf{I miei annunci} Per gestire gli annunci e inserirne di nuovi. Gli host possono controllare tutti i propri annunci. Inoltre viene ben evidenziata l'opzione "Nuovo Annuncio" per permettere ai guest di diventare host.
+\item \textbf{Le mie prenotazioni} I guest possono visualizzare le informazioni sulle loro prenotazioni.
+\item \textbf{I miei annunci} Per gestire gli annunci e inserirne di nuovi. Gli host possono controllare tutti i propri annunci. Inoltre viene ben evidenziata l'opzione "Nuovo Annuncio" per permettere agli utenti di creare un nuovo annuncio.
 \item \textbf{Il mio profilo} Visualizzazione e modifica dei dati del profilo. 
 \end{itemize}
 
@@ -103,26 +103,32 @@ Le funzioni per manipolare i dati sono specifiche e sono state organizzati in sc
 \end{itemize}
 
 \subsection{Struttura organizzativa}
-Le pagine di FRENT sono organizzate in modo gerarchico. La pagina di partenza \`{e} la home da cui \`{e} possibile raggiungere tutte le principali funzioni del sito. Per ciascun livello si \`{e} cercato di elencare funzioni mutualmente esclusive. Ad esempio la home porta alle pagine "Le mie prenotazioni" e "I miei annunci" per gestire prenotazioni e annunci. Inoltre le relazioni padre-figlio fra pagine sono state pensate per essere naturali. Ad esempio dalla pagina "I miei annunci" si arriva all'elenco degli annunci pubblicati da un host. Per ciascun annuncio si pu\`{o} andare ad una pagina specifica di gestione che riporta tutte le funzioni specifiche per un singolo annuncio. In modo analogo, la pagina "Le mie prenotazioni" riporta tutte le prenotazioni fatte dal guest. Per ciascuna prenotazione si pu\`{o} andare a vederne i dettagli. \\
-Per motivi di semplicit\`{a} FRENT utilizza alcuni elementi di ipertesto. Le pagine di "Accesso" e "Registrazione" sono collegate fra di loro. In questo modo un utente che sbaglia ad accedere ad una funzione (ad esempio un utente non registrato prova a fare l'accesso) viene reindirizzato alla pagina corretta.
-La pagina per i dettagli di un annuncio che un host pu\`{o} visualizzare \`{e} la stessa dei risultati di ricerca. In questo l'host pu\`{o} vedere la pagina come appare ad un guest dopo la ricerca. Mancano le funzioni per effettuare la prenotazione (un host non pu\`{o} essere guest di se stesso). Inoltre vi \`{e} un pulsante che permette di andare alla pagina per la modifica dei dati dell'annuncio.
+Le pagine di FRENT sono organizzate in modo gerarchico. La pagina di partenza \`{e} la home da cui \`{e} possibile raggiungere tutte le principali funzioni del sito. Per ciascun livello si \`{e} cercato di elencare funzioni mutualmente esclusive. Ad esempio la home porta alle pagine "Le mie prenotazioni" e "I miei annunci" per gestire prenotazioni e annunci. Inoltre le relazioni padre-figlio fra pagine sono state pensate per essere naturali. Ad esempio dalla pagina "I miei annunci" si arriva all'elenco degli annunci pubblicati da un host. Per ciascun annuncio si pu\`{o} andare alla pagina per la sua gestione che riporta tutte le funzioni specifiche per il singolo annuncio.\\In modo analogo, la pagina "Le mie prenotazioni" riporta tutte le prenotazioni fatte dal guest. Per ciascuna prenotazione si pu\`{o} andare a vederne i dettagli. \\
+Per motivi di semplicit\`{a} FRENT utilizza alcuni elementi di ipertesto. Le pagine di "Accesso" e "Registrazione" sono collegate fra di loro. In questo modo un utente che sbaglia ad accedere ad una funzione (ad esempio un utente non registrato prova a fare l'accesso) può sempre raggiungere la pagina alla quale era interessato.\\
+La pagina per i dettagli di un annuncio che un host pu\`{o} visualizzare \`{e} la stessa dei risultati di ricerca. In questo modo l'host pu\`{o} vedere la pagina come appare ad un guest dopo la ricerca; in questo caso le funzioni per effettuare la prenotazione non vengono visualizzate (un host non pu\`{o} essere guest di se stesso). Inoltre vi \`{e} un pulsante che permette di andare alla pagina per la modifica dei dati dell'annuncio.
 
 \subsection{Web design}
-Per impostare il layout delle pagine abbiamo cercato di utilizzare degli schemi quanto pi\`{u} semplici possibile. Per aiutare la navigazione tutte le pagine riportano il breadcrumb con il percorso completo per arrivare alla pagina. In questo modo l'utente pu\`{o} ricostruire in maniera intuitiva il percorso che ha fatto. Per non creare confusione, nei menu con link alle pagine abbiamo evitato di inserire link circolari. \\
+Per impostare il layout delle pagine abbiamo cercato di utilizzare degli schemi quanto pi\`{u} semplici possibile. Per aiutare la navigazione tutte le pagine riportano il breadcrumb con il percorso completo per arrivare alla pagina. In questo modo l'utente pu\`{o} ricostruire in maniera intuitiva il percorso che ha fatto.\\ Per non creare confusione, nei menu con link non abbiamo inserito link circolari. \\
 Per organizzare le pagine abbiamo utilizzato un interfaccia a schede e un layout a tre pannelli per alcune pagine.
 
 \subsubsection{Interfaccia a schede} 
-La maggior parte delle pagine sono organizzate con interfaccia a schede che rispetta la gerarchia. Sono presenti della etichette con dei link che permettono di navigare il sito e raggiungere tutte le componenti principali.
+Le pagine sono organizzate con interfaccia a schede che rispetta la gerarchia. Sono presenti della etichette con dei link che permettono di navigare il sito e raggiungere tutte le componenti principali.
 \subsubsection{Layout a tre pannelli} 
 Per la pagina con i risultati delle ricerca e gestione annuncio abbiamo utilizzato un layout a tre panelli. L'header \`{e} lo stesso delle pagine con interfaccia a schede. Il menu laterale cambia per offrire un supporto specifico per la pagina.
 
 \begin{itemize}
-\item \textbf{Risultati di ricerca} Il men\`{u} laterale riassume i parametri utilizzati dall'utente per la ricerca e la possibilit\`{a} di fare nuove ricerche. In questo modo l'utente non deve tornare alla home per eseguire una nuova ricerca (ad esempio se non ci sono risultati o ha inserito i campi in modo sbagliato)
+\item \textbf{Risultati di ricerca} Il men\`{u} laterale riassume i parametri utilizzati dall'utente per la ricerca e la possibilit\`{a} di fare nuove ricerche. In questo modo l'utente non deve tornare alla home per eseguire una nuova ricerca (ad esempio se non ci sono risultati o ha inserito i campi in modo sbagliato).
 \item \textbf{Gestione annuncio} Il menu laterale riporta tutte le funzioni per gestire un annuncio. 
 \end{itemize}
 
 \subsection{Mobile}
-La versione mobile del sito riporta nella home la ricerca di annunci. Il menu \`{e} posizionato in alto a destra, in modo da poter essere usato facilmente dagli utenti con il pollice. Il pulsante \`{e} un link al fondo della pagina dove si trovano tutte le opzioni del menu.
+L'accorgimento principale per la versione mobile è la riorganizzazione delle comnponenti della pagina.\\
+\begin{itemize}
+    \item \`{E} Stato eliminato il breadcrumb per dare maggior spazio alle altre informazioni.
+    \item Il menù è stato spostato in fondo alla pagina e viene visualizzato un pulsante in alto a destra, in modo da essere facilmente raggiungibile con il pollice. Tale pulsante è un link al menù.
+\end{itemize}
+
+
 
 \subsection{Emozioni}
 Abbiamo cercato di introdurre alcune componenti emotive nella realizzazione del sito.
@@ -133,6 +139,6 @@ Abbiamo cercato di introdurre alcune componenti emotive nella realizzazione del 
 \item \textbf{Buon compleanno} Come forma di sorpresa, inseriamo gli auguri di buon compleanno all'utente nell'header della pagina. Tra le informazioni che dobbiamo necessariamente raccogliere c'e' anche la data di nascita e quindi possiamo usarla per questo scopo.  
 \end{itemize}
 
-Fra le emozioni che si possono sfruttare per sviluppi futuri sono la reward e l'esclusivit\`{a}. Come reward si possono inserire sconti ed offerte per gli utenti di lungo periodo. Come esclusivit\`{a} avevamo pensato ad inserire una forma di status per il guest sulla base del numero di prenotazioni fatte. Le prenotazioni possono essere associate ai viaggi e l'utente ricevere uno status come ad esempio "Viaggiatore Esperto" o "Viaggiatore di Livello X". Questo campo verrebbe visualizzato nei commenti e nel profilo dell'utente.
+Fra le emozioni che si possono sfruttare per sviluppi futuri sono la reward e l'esclusivit\`{a}. Come reward si possono inserire sconti ed offerte per gli utenti di lungo periodo. Come esclusivit\`{a} avevamo pensato ad inserire una forma di status per il guest sulla base del numero di prenotazioni fatte. Le prenotazioni possono essere associate ai viaggi e l'utente riceverebbe uno status come ad esempio "Viaggiatore Esperto" o "Viaggiatore di Livello X". Questo campo verrebbe visualizzato nei commenti e nel profilo dell'utente.
 
 \end{document}
