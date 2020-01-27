@@ -42,8 +42,28 @@ Per scegliere i colori abbiamo utilizzato un pallete messa a disposizione dalla 
 Per gestire il comportamento abbiamo usato due tecnologie, PHP e JavaScript.
 
 \subsubsection{PHP}
-Le pagine in formato html sono state utlizz
+Per la rendere il sito dinamica \`{e} stato utilizzato il linguaggio PHP.
+La struttura del sistema \`{e} composta da:
+\begin{itemize}
+    \item Class_Database.php: che permette, dato un comando SQL, di interagire con il database;
+    \item Class_Frent.php: che permette di effettuare le chiamate alle procedure o funzioni presenti nel Database;
+    \item Classi Entit\`{a}: sono delle classi che rappresentano le entit\`{a} del database, simile a Java Beans permettono di contenere i dati in modo compatto.
+    \item Classe CredenzialiDB.php viene usato per salvare i dati di accesso al Database del server;
+    \item Classe DataConstraints.php: \`{e} una classe di raccolta che viene usato per salvare i limiti di lunghezza dei dati di database, permettendo cos\`{i} la gestione centrale. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito.
+    \item Classe ImageManager: % todo
+    \item Pagine: le pagine PHP vengono create prendendo in input la pagina html statica corrispondente, e  sostituendo i vari FLAG di posizione con le informazioni reperite dal database. Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent.php. Anche questa scelta \`{e} dettata dalla scelta di tenere in modo centralizzato le parti che nei futuri sviluppi potrebbero subire modifiche.
+    \item  Script: sono dei script php che servono per effettuare delle operazioni, una queste operazioni \`{e} il logout.
+    \item classi loader: sono due load_frent.php e load_header sono delle classi contengono dei codici php ripetute in quasi tutte le pagine o script, per cui si \`{e} deciso di raccoglierli e di inserirlo in queste classi.
+\end{itemize}
 
+Le pagine PHP sono state create utilizzando meno possibile il codice HTML nei file PHP, per esempio, nella pagina miei_annunci.php la definizione dei singoli annunci \`{e} stata fatta nel file \textit{components/item_mio_annuncio.html}, in questo modo \`{e} stata garantita la pulizia del codice PHP senza inquinarla con codice HTML ad eccezione della \textit{classe load_header.php}. Nei casi in cui il codice HTML richiesto \`{e} di una sola riga, si \`{e} deciso di inserirlo direttamente.
+
+Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Frent.php, se l'errore \`{e} stato causato dall'inserimento errato di un valore, viene mostrato il messaggio di errore, mentre se non \`{e} stato causato dall'utente, la pagina reagisce in uno dei seguenti modi:
+\begin{enumerate}
+    \item l'utente viene re-indirizzato alla pagina error_page.php con eventuale messaggio di errore;
+    \item l'utente viene re-indirizzato alla pagina 404.php;
+    \item interviene il server e mostra l'eventuale errore. 
+\end{enumerate}
 
 \subsubsection{Javascript}
 Il linguaggio JavaScript è stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
