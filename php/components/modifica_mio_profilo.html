@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
     <title>Modifica il mio profilo | Frent</title>
-
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
     <meta name="author" content="Tommaso Azzalin, Marco Ferrati, Giulio Umbrella, Xiaowei Wen"/>
     <meta name="description" content="Modifica le informazioni relative al tuo profilo o eliminalo"/>
     <script src="./form_validator.js" type="text/javascript"></script>
@@ -36,7 +36,7 @@
                 <label for="nuova_img_profilo">Sono accettati file in formato <span xml:lang="en">JPG</span>, <span
                         xml:lang="en">JPEG</span>, <span xml:lang="en">PNG</span>, dalla dimensione massima di 2
                     MB.</label>
-                <input type="file" accept=".png, .jpg, .jpeg" id="nuova_img_profilo" name="nuova_img_profilo"/>
+                <input type="file" accept=".png,.jpg,.jpeg" id="nuova_img_profilo" name="nuova_img_profilo"/>
                 <div class="confirm_delete_buttons">
                     <input type="submit" value="Conferma" name="modifica_img_profilo"/>
                     <input type="reset" value="Annulla"/>
@@ -115,6 +115,7 @@
             </div>
         </fieldset>
         <fieldset>
+            <legend>Modifica Profilo</legend>
             <label class="aiuti_alla_navigazione" for="modifica_dati_personali">Modifica</label>
             <input type="submit" id="modifica_dati_personali" name="modifica_dati_personali" value="Modifica dati"/>
         </fieldset>
