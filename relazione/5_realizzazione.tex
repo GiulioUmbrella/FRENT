@@ -67,7 +67,7 @@ Quando vengono lanciati degli errori dalle chiamate ai metodi delle classi sopra
     \item \`{E} stato causato dall'inserimento errato di un valore, viene mostrato un messaggio di errore;
     \item Se non \`{e} stato causato dall'utente, ma ad esempio da una richiesta al database fallita o di una pagina inesistente, la pagina reagisce in uno dei seguenti modi:
     \begin{enumerate}
-        \item L'utente viene reindirizzato alla pagina \textbf{php/error\_page.php} con un eventuale messaggio di errore il più possibile esplicativo;
+        \item L'utente viene re-indirizzato alla pagina \textbf{php/error\_page.php} con un eventuale messaggio di errore il più possibile esplicativo;
         \item L'utente viene re-indirizzato alla pagina \textbf{php/404.php};
         \item Interviene il server e mostra l'eventuale errore. In questo particolare caso non è stato possibile per noi (data la configurazione del server ospitante il progetto) modificarne il comportamento.
     \end{enumerate}
@@ -78,7 +78,7 @@ Il linguaggio JavaScript \`{e} stato impiegato come complemento al sito e non co
 Infatti, alcuni utenti potrebbero aver scelto di disabilitare JavaScript all'interno del browser oppure avere un browser obsoleto. Entrambi i casi sono stati considerati da noi molto rari, ma non impossibili.
 Per questo motivo abbiamo ridotto al solo essenziale le funzionalità svolte dallo script JavaScript \textbf{php/form\_validator.js}.
 Questo file ha il solo compito di contenere le funzioni che vengono invocate dai form alla pressione del pulsante di submit di un form, le quali si occupano di controllare l'input dell'utente prima dell'invio al server (ovvero all'esecuzione di codice PHP).
-Le funzioni chiamate dai form HTML sono quelle con il nome che comincia con \textit{validazione\_form}. Saranno queste funzioni a richiamare le singole funzioni per controllare la validit\`{a} dei valori inseriti dall'utente.
+Le funzioni chiamate dai form HTML sono quelle con il nome che comincia con \textit{validazione\_form}. Saranno queste funzioni a richiamare le singole funzioni, \textit{check_nome_campo}, per controllare la validit\`{a} dei valori inseriti dall'utente.
 Se il controllo effettuato ha successo viene restituito \textbf{true}, altrimenti viene visualizzato un messaggio di errore informativo implementato con un elemento \textit{strong} e successivamente restituito \textbf{false}.
 
 \end{document}
