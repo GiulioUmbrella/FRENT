@@ -81,7 +81,7 @@ try {
                         <p>Punteggio: $punteggio - Num Recensioni: $numeroRecensione </p>
                     </div>
                     <div class=\"corpo_lista\">
-                        <img src =\"$path\" alt=\"".$annuncio->getDescAnteprima()."\" />
+                        <img src =\"$path\" alt=\"Immagine di ". $Titolo . "\" longdesc=\"get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio()."\"/>
                         <div class=\"descrizione_annuncio\">
                         <p class=\"testo_descrizione_annuncio\">$descrizione</p>
                         <p class=\"prezzo_totale\">Prezzo: &euro; $prezzoNotte persona/notte</p>
