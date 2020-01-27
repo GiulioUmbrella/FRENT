@@ -42,28 +42,38 @@ Per gestire il comportamento del sito abbiamo usato due tecnologie, PHP (lato se
 Per rendere il sito dinamico \`{e} stato utilizzato il linguaggio PHP.
 La struttura del sistema \`{e} composta da:
 \begin{itemize}
-    \item classe \textbf{Database}: permette l'apertura e la chiusura di connessioni con il database MySQL realizzato e illustrato nella sezione Progettazione.
+    \item classe \textbf{Database} permette l'apertura e la chiusura di connessioni con il database MySQL realizzato e illustrato nella sezione Progettazione.
     Avendo realizzato una funzione o una procedura SQL per ogni funzionalit\`{a} offerta dal sito, sono presenti due metodi queryProcedure e queryFunction ottimizzati per l'interrogazione del database rispettivamente con procedure e funzioni.
-    \item classe \textbf{Frent}: permette di effettuare le chiamate alle procedure o funzioni presenti nel database. Si interfaccia con la classe Database per le interrogazioni e si occupa di controllare gli input inseriti dall'utente e di segnalare violazioni di precondizioni sui dati;
-    \item classi \textbf{Amministratore}, \textbf{Annuncio}, \textbf{Commento}, \textbf{Prenotazione}, \textbf{Utente}: sono delle classi che rappresentano le entit\`{a} del database. Contengono metodi set e get per ogni attributo presente nella rispettiva tabella del database e si occupano anche del controllo di validit\`{a} degli input;
-    \item classe \textbf{CredenzialiDB}: viene usata per salvare i dati di accesso al database MySQL;
-    \item classe \textbf{DataConstraints}: \`{e} una classe di raccolta che viene usata per salvare i limiti di lunghezza dei dati impostati nel database, permettendo cos\`{i} la gestione centralizzata. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito;
-    \item Classe ImageManager: % todo
-    \item pagine: le pagine PHP vengono create prendendo in input la pagina html statica corrispondente, e sostituendo i vari FLAG di posizione con le informazioni reperite dal database. Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent. Anche questa scelta \`{e} dettata di tenere in modo centralizzato le parti che nei futuri sviluppi potrebbero subire modifiche.
-    \item  Script: sono dei script php che servono per effettuare delle operazioni, una queste operazioni \`{e} il logout.
-    \item classi loader: sono due load\_frent.php e load\_header sono delle classi contengono dei codici php ripetute in quasi tutte le pagine o script, per cui si \`{e} deciso di raccoglierli e di inserirlo in queste classi.
+    \item Classe \textbf{Frent} permette di effettuare le chiamate alle procedure o funzioni presenti nel database. Si interfaccia con la classe Database per le interrogazioni e si occupa di controllare gli input inseriti dall'utente e di segnalare violazioni di precondizioni sui dati;
+    \item Classi \textbf{Amministratore}, \textbf{Annuncio}, \textbf{Commento}, \textbf{Prenotazione}, \textbf{Utente} sono delle classi che rappresentano le entit\`{a} del database. Contengono metodi set e get per ogni attributo presente nella rispettiva tabella del database e si occupano anche del controllo di validit\`{a} degli input;
+    \item Classe \textbf{CredenzialiDB} viene usata per salvare le credenziali di accesso al database MySQL del progetto;
+    \item Classe \textbf{DataConstraints} \`{e} una classe di raccolta che viene usata per salvare i limiti di lunghezza dei dati impostati nel database, permettendo cos\`{i} la gestione centralizzata. In questo modo, le eventuali modifiche alla dimensione di un campo di una determinata tabella pu\`{o} essere propagata facilmente a tutto il sito;
+    \item Classe \textbf{ImageManager} libreria molto semplice sviluppata per il caricamento dei file immagine (singoli o multipli) da form HTML con salvataggio in una directory scelta dall'utente. Nel nostro progetto, questa directory è \textbf{uploads/};
+    \item Classe \textbf{Eccezione} ridefinisce la classe Exception di PHP;
+    \item \textbf{pagine} le pagine PHP vengono create prendendo in input la pagina HTML statica corrispondente, che è stata modificata aggiungendo delle stringhe placeholder, che gli script PHP cercano e sostituiscono con le informazioni che reperiscono dal database.
+    Queste pagine non interagiscono direttamente con il database, ma lo fanno chiamando i metodi della classe Frent.
+    Questa scelta \`{e} stata presa per tenere separata la struttura (che non cambia), dal comportamento.
+    \item \textbf{script}: sono dei file PHP con al loro interno degli script che ricevono dei dati da elaborare (tipicamente dai form HTML o dalla sessione) per effettuare delle operazioni lato server, senza mostrare direttamente il processo all'utente, ma solo il risultato finale reindirizzando l'utente ad un'altra pagina.
+    Esempi di questi script sono quelli per il logout, l'eliminazione di un profilo e il controllo di validità dei dati di una prenotazione.
+    \item \textbf{loader}: sono dei file PHP con al loro interno insiemi di istruzioni che compiono un determinato procedimento. Ne sono stati creati due, uno per il caricamento delle classi fin qui illustrate (\textbf{php/load\_Frent.php}) e uno per la selezione dell'header da mostrare all'utente (\textbf{php/load\_header.php}) in base alla pagina in cui si trova e alla categoria di utenza.
+\end{itemize}
+Le pagine PHP sono state create utilizzando meno possibile il codice HTML nei file PHP.
+Ad esempio, nella pagina \textbf{php/miei\_annunci.php} la definizione della struttura del singolo annuncio \`{e} stata delegata al file \textit{php/components/item\_mio\_annuncio.html}, così da garantire la separazione della struttura dal comportamento.
+L'unico file che non rispetta la separazione in maniera abbastanza importante è il file \textit{php/load\_header.php}.\\
+
+Si è deciso inoltre di gestire la maggior parte degli errori attraverso il lancio di eccezioni (del tipo Eccezione definito sopra), in quanto questi errori sono tipicamente fatali.
+Quando vengono lanciati degli errori dalle chiamate ai metodi delle classi sopra definite, se l'errore:
+\begin{itemize}
+    \item \`{E} stato causato dall'inserimento errato di un valore, viene mostrato un messaggio di errore;
+    \item Se non \`{e} stato causato dall'utente, ma ad esempio da una richiesta al database fallita o di una pagina inesistente, la pagina reagisce in uno dei seguenti modi:
+    \begin{enumerate}
+        \item L'utente viene reindirizzato alla pagina \textbf{php/error\_page.php} con un eventuale messaggio di errore il più possibile esplicativo;
+        \item L'utente viene re-indirizzato alla pagina \textbf{php/404.php};
+        \item Interviene il server e mostra l'eventuale errore. In questo particolare caso non è stato possibile per noi (data la configurazione del server ospitante il progetto) modificarne il comportamento.
+    \end{enumerate}
 \end{itemize}
 
-Le pagine PHP sono state create utilizzando meno possibile il codice HTML nei file PHP, per esempio, nella pagina miei\_annunci.php la definizione dei singoli annunci \`{e} stata fatta nel file \textit{components/item\_mio\_annuncio.html}, in questo modo \`{e} stata garantita la pulizia del codice PHP senza inquinarla con codice HTML ad eccezione della \textit{classe load\_header.php}. Nei casi in cui il codice HTML richiesto \`{e} di una sola riga, si \`{e} deciso di inserirlo direttamente.
-
-Quando vengono lanciati degli errori dalle chiamate alle funzioni dela classe Frent.php, se l'errore \`{e} stato causato dall'inserimento errato di un valore, viene mostrato il messaggio di errore, mentre se non \`{e} stato causato dall'utente, la pagina reagisce in uno dei seguenti modi:
-\begin{enumerate}
-    \item l'utente viene re-indirizzato alla pagina error\_page.php con eventuale messaggio di errore;
-    \item l'utente viene re-indirizzato alla pagina 404.php;
-    \item interviene il server e mostra l'eventuale errore. 
-\end{enumerate}
-
-\subsubsection{Javascript}
+\subsubsection{JavaScript}
 Il linguaggio JavaScript \`{e} stato impiegato per effettuare i controlli lato client (direttamente dal browser) sull'input inserito dall'utente nei diversi form.
 Il file \textit{form\_validator.js} contiene i metodi che vengono richiamati dai form nell'attributo \textit{onsubmit}.\\
 I metodi direttamente chiamati sono i metodi che cominciano con \textit{validazione\_nome\_form}, ed sar\`{a} quest'ultimo che richiama i singoli metodi per controllare la validit\`{a} dei valori inseriti dall'utente.
