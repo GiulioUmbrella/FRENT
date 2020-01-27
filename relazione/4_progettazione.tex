@@ -26,21 +26,17 @@ In questa fase abbiamo anche pensato a che informazioni chiedere all'utente per 
 Una volta definiti gli utenti, abbiamo pensato a come facilitare il pi\`{u} possibile l'utilizzo del sito. Come scelta preliminare abbiamo localizzato gli utenti come cittadini italiani che cercano alloggi in Italia. Eventuali internazionalizzazioni sarebbero state troppo complesse da gestire. Abbiamo quindi pensato agli obbiettivi degli utenti di FRENT.  Il punto di partenza \`{e} quindi capire \textit{cosa} vogliono di utenti:
 
 \begin{itemize}
-\item Guest: facile fare una ricerca, facile gestire le prenotazioni.
-\item Host: facile inserire un annuncio, facile gestire annunci.
+\item Guest: fare una ricerca, gestire le prenotazioni.
+\item Host: inserire un annuncio, gestire gli annunci.
 \end{itemize}
 
-A questo punto abiamo definito \textit{dove} gli utenti possono trovare ciò di cui hanno bisogno.\\ Abbiamo utilizzato la metafora della pesca vista a lezione per capire come offrire agli utenti una esperienza piacevole e ridurre al minimo la complessità delle ricerche. Questo ha fornito gli elementi di base per organizzare la home del sito. Tutte le altre pagine gravitano a partire da questa.
+A questo punto abbiamo definito \textit{dove} gli utenti possono trovare ciò di cui hanno bisogno. Abbiamo utilizzato la metafora della pesca vista a lezione per capire come offrire agli utenti una esperienza piacevole e ridurre al minimo la complessità delle ricerche. Questo ha fornito gli elementi di base per organizzare la home del sito. Tutte le altre pagine gravitano a partire da questa.
 
 \subsubsection{Tiro Perfetto} 
 Il tiro perfetto è la metafora per indicare gli utenti che sanno cosa stanno cercando. Per questo motivo nella home page del sito abbiamo inserito un form orizzontale per effettuare la ricerca di annunci che ne soddisfino i parametri. In questo modo la funzione di ricerca è immediatamente disponibile e gli utenti possono sia ottenere delle informazioni velocemente che sperimentare direttamente che tipo di servizi offre FRENT.
  
 \subsubsection{Trappola per aragoste} 
-Per catturare l'attenzione degli utenti che stanno esplorando il sito, abbiamo inserito nel corpo centrale della home una sezione con gli ultimi annunci pubblicati. Il destinatario di questa sezione è un utente che esplora il sito nei tempi morti o vuole capire che tipo di servizi offre. Gli annunci sono la base del servizio offerto da FRENT ed è bene che gli utenti siano familiari con la loro struttura. Se un utente clicca sull'immagine di un annuncio viene inviato direttamente all'anuncio selezionato. Lo scopo è far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
-Questo vale sia per i guest che per gli host. I guest possono capire come è strutturato un annuncio e che informazioni sono disponibili. Gli host possono capire com'è strutturato un annuncio e quindi risulterà più facile compilare i campi del form per l'aggiunta di un annuncio. \\
-Un possibile sviluppo futuro potrebbe essere quello di inserire nella home altre sezione simili, ad esempio gli annunci più votati o le offerte last minute. Abbiamo inserito gli ultimi annunci approvati per fornire un incentivo agli host a pubblicare nuovi annunci. Per semplicità, abbiamo inserito solo questa sezione. \\
-
-Lo scopo \`{e} far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
+Per catturare l'attenzione degli utenti che stanno esplorando il sito, abbiamo inserito nel corpo centrale della home una sezione con gli ultimi annunci pubblicati. Il destinatario di questa sezione è un utente che esplora il sito nei tempi morti o vuole capire che tipo di servizi offre. Gli annunci sono la base del servizio offerto da FRENT ed è bene che gli utenti siano familiari con la loro struttura. Se un utente clicca sull'immagine di un annuncio viene inviato direttamente all'annuncio selezionato. Lo scopo \`{e} far creare all'utente tramite l'esperienza diretta una mappa mentale dal sito da utilizzare per scopi futuri. \\
 Questo vale sia per i guest che per gli host. I guest possono capire com'\`{e} strutturato un annuncio e che informazioni sono disponibili. Gli host possono capire com'\`{e} strutturato un annuncio e quindi risulter\`{a} pi\`{u} facile compilare i campi del form per l'aggiunta di un annuncio. \\
 Un possibile sviluppo futuro potrebbe essere inserire nella home altre sezione simili, ad esempio gli annunci pi\`{u} votati o le offerte last minute.\\ Abbiamo inserito gli ultimi annunci approvati per fornire un incentivo agli host a pubblicare nuovi annunci. \\
 
@@ -104,7 +100,7 @@ Le funzioni per manipolare i dati sono specifiche e sono state organizzati in sc
 
 \subsection{Struttura organizzativa}
 Le pagine di FRENT sono organizzate in modo gerarchico. La pagina di partenza \`{e} la home da cui \`{e} possibile raggiungere tutte le principali funzioni del sito. Per ciascun livello si \`{e} cercato di elencare funzioni mutualmente esclusive. Ad esempio la home porta alle pagine "Le mie prenotazioni" e "I miei annunci" per gestire prenotazioni e annunci. Inoltre le relazioni padre-figlio fra pagine sono state pensate per essere naturali. Ad esempio dalla pagina "I miei annunci" si arriva all'elenco degli annunci pubblicati da un host. Per ciascun annuncio si pu\`{o} andare alla pagina per la sua gestione che riporta tutte le funzioni specifiche per il singolo annuncio.\\In modo analogo, la pagina "Le mie prenotazioni" riporta tutte le prenotazioni fatte dal guest. Per ciascuna prenotazione si pu\`{o} andare a vederne i dettagli. \\
-Per motivi di semplicit\`{a} FRENT utilizza alcuni elementi di ipertesto. Le pagine di "Accesso" e "Registrazione" sono collegate fra di loro. In questo modo un utente che sbaglia ad accedere ad una funzione (ad esempio un utente non registrato prova a fare l'accesso) può sempre raggiungere la pagina alla quale era interessato.\\
+Per motivi di semplicit\`{a} FRENT utilizza alcuni elementi di ipertesto. Le pagine di "Accesso" e "Registrazione" sono collegate fra di loro. In questo modo un utente che sbaglia ad accedere ad una funzione (ad esempio un utente non registrato prova a fare l'accesso) può sempre raggiungere la pagina alla quale era interessato. La pagina FAQ rimanda alla pagine del sito che trattano la domanda trattata. \\
 La pagina per i dettagli di un annuncio che un host pu\`{o} visualizzare \`{e} la stessa dei risultati di ricerca. In questo modo l'host pu\`{o} vedere la pagina come appare ad un guest dopo la ricerca; in questo caso le funzioni per effettuare la prenotazione non vengono visualizzate (un host non pu\`{o} essere guest di se stesso). Inoltre vi \`{e} un pulsante che permette di andare alla pagina per la modifica dei dati dell'annuncio.
 
 \subsection{Web design}
