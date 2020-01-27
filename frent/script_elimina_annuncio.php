@@ -25,6 +25,9 @@ try {
             $_SESSION["msg"] = htmlentities("Eliminazione fallita!");
             header("Location: ./error_page.php");
         }
+    } else {
+        $_SESSION["msg"] = htmlentities("Non è stato fornito un ID di un annuncio.");
+        header("Location: ./error_page.php");  
     }
 } catch (Eccezione $e) {
     $_SESSION["msg"] = $e->getMessage();
