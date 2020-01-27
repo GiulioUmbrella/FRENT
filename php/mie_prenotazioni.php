@@ -103,7 +103,7 @@ if (isset($_SESSION["user"])) {
         
        }else{
            $pagina = str_replace("<LINKCOR/>", "", $pagina);
-           $pagina = str_replace("<PRENOTAZIONIPASSATE/>","" , $pagina);
+           $pagina = str_replace("<PRENOTAZIONICORRENTI/>","" , $pagina);
        }
        if ($numPrenotazioniFuture > 0) {
            $prenotazioni_future .= "</ul>";
