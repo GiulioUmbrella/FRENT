@@ -12,7 +12,7 @@ class Annuncio {
     private $indirizzo;
     private $citta;
     private $host;
-    private $stato_approvazione; // 0 = NVNA / VA = 1 / VNA = 2 (per le sigle guardare analisirequisiti.md)
+    private $stato_approvazione; // 0 = NVNA / VA = 1 / VNA = 2 (per le sigle guardare analisi requisiti.md)
     private $max_ospiti;
     private $prezzo_notte;
     

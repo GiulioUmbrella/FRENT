@@ -5,7 +5,7 @@ define("ANTEPRIMA_ANNUNCIO_DEFAULT", "defaultImages/imgAnteprimaAnnuncioDefault.
 
 /**
  * Aggiorna la pagina aggiungendo un messaggio per avvisare l'utente, che sia un semplice avviso oppure un messaggio di errore.
- * @param string $pageContent corrisponde al file HTML della pagina da mostrare, sottoforma di stringa
+ * @param string $pageContent corrisponde al file HTML della pagina da mostrare, sotto forma di stringa
  * @param string $contentToShow corrisponde all'avviso o errore da mostrare all'utente all'interno di un paragrafo (non usa htmlentities, farlo nella chiamata se necessario)
  * @param string $divId corrisponde all'id del tag div che conterrà il messaggio
  * @param string $divClasses corrisponde alla/e classe/i da aggiungere (se necessario, di default è vuoto come parametro) per stilizzare il contenuto mostrato

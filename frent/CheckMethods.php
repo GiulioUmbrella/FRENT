@@ -66,7 +66,7 @@ function checkStringNoNumber($str): bool {
  * Verifica che $dataI sia una data precedente a $dataF (che avviene prima).
  * @param string $dataI prima string contenente una data da verificare che sia inferiore a $dataF
  * @param string $dataF seconda string contenente una data da verificare che sia superiore a $dataF
- * @return bool restuisce true sse la dataI è antecedente alla dataF
+ * @return bool restituisce true sse la dataI è antecedente alla dataF
  */
 function checkDateBeginAndEnd($dataI, $dataF): bool {
     return checkIsValidDate($dataI) and checkIsValidDate($dataF) and strtotime($dataI) <= strtotime($dataF);

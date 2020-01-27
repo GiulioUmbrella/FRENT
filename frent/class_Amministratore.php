@@ -13,7 +13,11 @@ class Amministratore {
     public static function build(): Amministratore {
         return new Amministratore();
     }
-
+    
+    /**
+     * @param $id
+     * @throws Eccezione
+     */
     public function setIdAmministratore($id) {
         if (is_int($id) and $id > 0) {
             $this->id_amministratore = $id;
@@ -22,6 +26,10 @@ class Amministratore {
         }
     }
     
+    /**
+     * @param $username
+     * @throws Eccezione
+     */
     public function setUsername($username) {
         $trim_un = trim($username);
         if (checkStringContainsNoSpace($trim_un) &&

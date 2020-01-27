@@ -10,8 +10,13 @@ if (isset($_SESSION["user"])) {
     
     $content = "";
     // pescare le prenotazioni correnti
-    
-    $prenotazioni = $frent->getPrenotazioniGuest();
+    $prenotazioni =null;
+    try {
+        $prenotazioni = $frent->getPrenotazioniGuest();
+    } catch (Eccezione $e) {
+        $_SESSION["msg"] = $e->getMessage();
+        header("Location: ./error_page.php");
+    }
     $prenotazioni_future = "<h1>Le mie prenotazioni future</h1><ul id=\"prenotazioni_future\"> ";
     $prenotazioni_passate = "<h1>Le mie prenotazioni passate</h1><ul id=\"prenotazioni_passate\">";
     $prenotazioni_correnti = "<h1>Le mie prenotazioni correnti</h1><ul id=\"prenotazioni_correnti\">";
@@ -22,8 +27,15 @@ if (isset($_SESSION["user"])) {
     $numPrenotazioniFuture = 0;
     foreach ($prenotazioni as $prenotazione) {
         $id_prenotazione = $prenotazione->getIdPrenotazione();
-        $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
-        $host = $frent->getUser($annuncio->getIdHost());
+        $annuncio= null;
+        $host = null;
+        try {
+            $annuncio = $frent->getAnnuncio($prenotazione->getIdAnnuncio());
+            $host = $frent->getUser($annuncio->getIdHost());
+        } catch (Eccezione $e) {
+            $_SESSION["msg"] = $e->getMessage();
+            header("Location: ./error_page.php");
+        }
         $mail = $host->getMail();
         $nomeAnnuncio = $annuncio->getTitolo();
         $descrizionefoto = $annuncio->getDescAnteprima();

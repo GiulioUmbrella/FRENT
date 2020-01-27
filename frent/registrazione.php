@@ -36,7 +36,7 @@ function placeholder_replacement_with_empty(&$pagina) {
 
 // REGISTRAZIONE
 
-// verifico che l'utente abbia effettuato l'accesso poiché in quel caso lo reindirizzo alla homepage
+// verifico che l'utente abbia effettuato l'accesso poiché in quel caso lo re-indirizzo alla homepage
 if (isset($_SESSION["user"])) {
     header("Location: index.php");
 }

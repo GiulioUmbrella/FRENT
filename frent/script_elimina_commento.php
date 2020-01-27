@@ -4,6 +4,8 @@ require_once "load_Frent.php";
 if (!isset($_SESSION["user"])){
     header("Location: ./login.php");
 }
+try{
+
 
 if (isset($_GET["id"])){
     $idCommento = intval($_GET["id"]);
@@ -20,6 +22,9 @@ if (isset($_GET["id"])){
         $_SESSION["msg"] = htmlentities("L'annuncio non è stato eliminato poiché si è verificato un errore.");
         header("Location: ./error_page.php");
     }
+}}catch (Eccezione $e){
+    $_SESSION["msg"] = $e->getMessage();
+    header("Location: ./error_page.php");
 }
 
     

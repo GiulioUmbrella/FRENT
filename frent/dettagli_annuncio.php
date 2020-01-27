@@ -4,7 +4,7 @@ require_once "./components/form_functions.php";
 // valida, e dovrebbe funzionare sempre, forse ho mancato qualche test case
 /**
  * quando l'annuncio non approvato è visualizzato dal proprietario, il pulsante "Prenota" deve sparire, e deve
- * essere visualizza il pulsante "Modifica", reindirizzandolo verso la pagina della modifica dell'annuncio
+ * essere visualizza il pulsante "Modifica", re-indirizzandolo verso la pagina della modifica dell'annuncio
  * e quindi sparisce anche i due form di data.
  */
 

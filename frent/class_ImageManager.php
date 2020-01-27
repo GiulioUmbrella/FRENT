@@ -79,7 +79,7 @@ class ImageManager {
             throw new Eccezione("Il file immagine caricato non ha un'estensione valida.");
         }
         
-        // verifico che il file caricato sia effetivamente un file imamgine (verifica i metadati)
+        // verifico che il file caricato sia effettivamente un file immagine (verifica i meta dati)
         if (getimagesize($this->tempFileName) === false) {
             throw new Eccezione("Il file caricato non è un'immagine.");
         }
@@ -109,7 +109,7 @@ class ImageManager {
 
     /**
      * Sposta il file caricato nella posizione richiesta durante la creazione dell'istanza di ImageManager.
-     * @return bool TRUE se è stato salvato nella posizzione corretta il file, FALSE altrimenti
+     * @return bool TRUE se è stato salvato nella posizione corretta il file, FALSE altrimenti
      * @throws Eccezione se il file non è stato ancora impostato
      */
     public function saveFile(): bool {

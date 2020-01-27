@@ -16,7 +16,7 @@ try {
     $annunci = $frent->adminGetAnnunci();
     $content = "<h2>Ci sono " . count($annunci) . " annunci da controllare</h2>";
     
-    // stampa lista annunci da approvare/rifituare
+    // stampa lista annunci da approvare/rifiutare
     $content .= "<ul>";
     foreach ($annunci as $annuncio) {
         $id = $annuncio->getIdAnnuncio();

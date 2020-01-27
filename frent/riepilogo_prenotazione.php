@@ -9,7 +9,7 @@ require_once "./components/form_functions.php";
 
 /**
  * Sostituisce i placeholder.
- * @param array $post corrisponde all'array $_POST, da passare come parametor
+ * @param array $post corrisponde all'array $_POST, da passare come parametro
  * @param string $pagina aggiornata per riferimento con i valori dei placeholder presi da $_POST
  */
 function placeholder_replacement_with_content($post, &$pagina) {

@@ -5,7 +5,7 @@
  * - caricamento classi
  * - apertura di un'istanza con il database (variabile $db) reperendo le credenziali dal file apposito
  * - apertura di un'istanza con le funzionalità di Frent offerte dall'omonimima classe (variabile $frent)
- * - apertura della sessione php e conseguemente reperimento dell'utente o dell'amministratore, se presente
+ * - apertura della sessione php e conseguentemente reperimento dell'utente o dell'amministratore, se presente
  */
 require_once "./class_Database.php";
 require_once "./class_CredenzialiDB.php";
