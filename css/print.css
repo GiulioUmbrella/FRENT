@@ -127,3 +127,25 @@ h1 {
 .menu_gestione_annuncio {
 	display: none;
 }
+
+.aiuti_alla_navigazione {
+	display: none;
+}
+
+img {
+	width: 3cm;
+	height: 3cm;
+}
+
+#commenti .corpo_commento h1{
+	text-align: left;
+	font-size: 1em;
+}	
+
+#commenti .corpo_commento {
+	border-bottom: 1px solid black;
+}
+
+.intestazione_commento img {
+	display: none;
+}
