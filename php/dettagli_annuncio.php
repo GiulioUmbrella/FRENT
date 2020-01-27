@@ -16,7 +16,7 @@ try {
      */
     
     if (!isset($_GET["id"])) {
-//        header("Location: ./404.php");
+        header("Location: ./404.php");
     }
     
     $id = intval($_GET["id"]);
