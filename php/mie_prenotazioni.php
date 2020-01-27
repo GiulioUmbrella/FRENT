@@ -46,7 +46,7 @@ if (isset($_SESSION["user"])) {
             $item = str_replace("<DF/>",$dataFine,$item);
             $item = str_replace("<PREZZO/>",$prezzo,$item);
             $item = str_replace("<NO/>",$numeroOspiti,$item);
-            $item = str_replace("<DESC/>", $descrizionefoto,$item);
+            $item = str_replace("<DESC/>", "./get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio(),$item);
             $prenotazioni_passate .= $item;
         } elseif ($data_corrente <= $prenotazione->getDataFine() and $data_corrente >= $prenotazione->getDataInizio()) { //prenotazioni correnti
             
@@ -61,7 +61,7 @@ if (isset($_SESSION["user"])) {
             $item = str_replace("<DF/>",$dataFine,$item);
             $item = str_replace("<PREZZO/>",$prezzo,$item);
             $item = str_replace("<NO/>",$numeroOspiti,$item);
-            $item = str_replace("<DESC/>", $descrizionefoto,$item);
+            $item = str_replace("<DESC/>", "./get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio(),$item);
             $prenotazioni_correnti .= $item;
         
         } else if ($data_corrente < $prenotazione->getDataInizio()) { //prenotazioni future
@@ -77,7 +77,7 @@ if (isset($_SESSION["user"])) {
             $item = str_replace("<DF/>",$dataFine,$item);
             $item = str_replace("<PREZZO/>",$prezzo,$item);
             $item = str_replace("<NO/>",$numeroOspiti,$item);
-            $item = str_replace("<DESC/>", $descrizionefoto,$item);
+            $item = str_replace("<DESC/>", "./get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio(),$item);
             $prenotazioni_future .=$item;
         }
     }
