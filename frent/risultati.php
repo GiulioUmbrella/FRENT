@@ -61,8 +61,6 @@ try {
     if (count($risultati) ==0) throw new Eccezione("Non ci sono annunci con questi parametri di ricerca.");
     foreach ($risultati as $annuncio) {
         $id = $annuncio->getIdAnnuncio();
-        $Titolo = $annuncio->getTitolo();
-        $descrizione=$annuncio->getDescrizione();
         $prezzoNotte=$annuncio->getPrezzoNotte();
         $path= uploadsFolder() . $annuncio->getImgAnteprima();
         $recensioni=$frent->getCommentiAnnuncio($annuncio->getIdAnnuncio());
@@ -73,21 +71,16 @@ try {
                 $punteggio=$recensione->getValutazione()+$punteggio;
             $punteggio=$punteggio/$numeroRecensione;
         }
-        $content .= "
-                <li>
-                    <div class=\"intestazione_lista\">
-                        <a href=\"dettagli_annuncio.php?id=$id&dataInizio=$dataInizio&dataFine=$dataFine&numOspiti=$numOspiti\"
-                                >$Titolo</a>
-                        <p>Punteggio: $punteggio - Num Recensioni: $numeroRecensione </p>
-                    </div>
-                    <div class=\"corpo_lista\">
-                        <img src =\"$path\" alt=\"Immagine di ". $Titolo . "\" longdesc=\"get_desc_anteprima_annuncio.php?id_annuncio=".$annuncio->getIdAnnuncio()."\"/>
-                        <div class=\"descrizione_annuncio\">
-                        <p class=\"testo_descrizione_annuncio\">$descrizione</p>
-                        <p class=\"prezzo_totale\">Prezzo: &euro; $prezzoNotte persona/notte</p>
-                        </div>
-                    </div>
-                </li>";
+        $item = file_get_contents("./components/item_annuncio_risultato.html");
+        $item = str_replace("<TITOLO/>",$annuncio->getTitolo(),$item);
+        $item = str_replace("<ID/>",$annuncio->getIdAnnuncio(),$item);
+        $item = str_replace("<PUNTEGGIO/>", $punteggio,$item);
+        $item = str_replace("<PATH/>", $path,$item);
+        $item = str_replace("<DES/>", $annuncio->getDescrizione(),$item);
+        $item = str_replace("<PREZZO/>", $annuncio->getPrezzoNotte(),$item);
+        $item = str_replace("<NUMRECENSIONE/>",$numeroRecensione,$item);
+        
+        $content .= $item ;
     }
 } catch (Eccezione $e) {
     $content="<h1>" . $e->getMessage() . "</h1>";
