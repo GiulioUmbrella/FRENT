@@ -29,6 +29,18 @@ Per organizzare gli elementi nella pagina abbiamo utilizzato i grid layout. L'us
 \item \textbf{Layout centrale} La pagina è formata da un'unica colonna, ma viene data maggiore enfasi alla zona centrale. Tutti i form utilizzano questo layout
 \end{itemize}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.3]{immagini/LayoutCentrale.png}
+    \caption{Esmepio di layout centrale}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.3]{immagini/LayoutTrePannelli.png}
+    \caption{Esmepio di layout a tre pannelli}
+\end{figure}
+
 \subsubsection{Form}
 Tutti i form rispettano le stesse convenzioni interne per non creare disorientamento nell'utente. Per modificare e inserire i dati abbiamo utilizzato dei form posizionati al centro della pagina. Nel momento in cui l'utente modifica i dati non ha bisogno di accedere ad altre tipologie di informazioni all'interno della pagina.\\ Fanno eccezione i form orizzontali e verticali di ricerca annunci che per\`{o} devono essere integrati nella pagina come abbiamo spiegato nella sezione sulla progettazione.
 
@@ -39,6 +51,12 @@ Per scegliere i colori abbiamo utilizzato un palette messa a disposizione dalla 
 L'interfaccia mobile è stata realizzata principalmente sviluppando su dispositivi reali (Android e iOS) in quanto abbiamo trovato molto poco affidabili gli strumenti offerti dai diversi browser.\\
 Sfruttando i grid layout descritti sopra è stato molto semplice riorganizzare i contenuti delle pagine tramite la ridefinizione dell'attributo \textit{gird-template-areas}.\\
 Principalmente abbiamo verticalizzato tutti i componenti a partire dagli elementi del menù e del footer; questa scelta è stata fatta per evitare un possibile scroll orizzontale ritenuto molto scomodo per tutti gli utenti del sito.\\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{immagini/ricercaMobile.png}
+    \caption{Esmepio di ricerca di un annuncio visto da mobile con verticalizzazione degli elementi di una lista}
+\end{figure}
 
 \subsubsection{Versione per browser obsoleti}
 Siccome facciamo ampio uso del \textit{grid-layout} è sorto il problema della retro-compatibilità con browser che non supportano tale feature di CSS3. Siccome tra i browser che siamo interessati a supportare c'è Internet Explorer 10/11 abbiamo introdotto delle specifiche regole per queste versioni che hanno lo scopo di riorganizzare il contenuto in modo che sia fruibile anche dagli utenti di questo browser.
