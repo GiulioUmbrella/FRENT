@@ -1,0 +1,16 @@
+id_utente,nome,cognome,mail,user_name,password,data_nascita,img_profilo,telefono
+1,Jolanda,Rossi,jolanda.rossi@mail.it,jolanda.rossi,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+2,Melchiorre,Ferrari,melchiorre.ferrari@mail.it,melchiorre.ferrari,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+3,Cirino,Russo,cirino.russo@mail.it,cirino.russo,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+4,Ignazio,Bianchi,ignazio.bianchi@mail.it,ignazio.bianchi,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+5,Elio,Romano,elio.romano@mail.it,elio.romano,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+6,Gianni,Gallo,gianni.gallo@mail.it,gianni.gallo,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+7,Amore,Costa,amore.costa@mail.it,amore.costa,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+8,Marisa,Fontana,marisa.fontana@mail.it,marisa.fontana,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+9,Dania,Conti,dania.conti@mail.it,dania.conti,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+10,Alberico,Esposito,alberico.esposito@mail.it,alberico.esposito,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+11,Lodovico,Ricci,lodovico.ricci@mail.it,lodovico.ricci,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+12,Marino,Bruno,marino.bruno@mail.it,marino.bruno,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+13,Nella,Rizzo,nella.rizzo@mail.it,nella.rizzo,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+14,Pompeo,Moretti,pompeo.moretti@mail.it,pompeo.moretti,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
+15,Alfonso,Marino,alfonso.marino@mail.it,alfonso.marino,password,1998-01-01,defaultImages/imgProfiloDefault.png,+390000000000
