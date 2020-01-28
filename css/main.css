@@ -949,6 +949,12 @@ fieldset {
     #data_di_nascita select {
         margin-left: 5%;
     }
+
+    /*----FAQ E CONDIZIONI mobile*/
+    .list_pagina_statica dt {
+	line-height: 1.3em;
+    }
+
     /*----MODIFICA ANNUNCIO mobile*/
     .menu_gestione_annuncio {
         margin-top: 0em;
