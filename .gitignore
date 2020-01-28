@@ -8,6 +8,7 @@
 *.fdb_latexmk
 *.fls
 *.out
+*.toc
 *.synctex(busy)
 .vscode/
 Database/data_builder/*.csv
